@@ -1,0 +1,757 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Queues &mdash; Laravel 5 Documentation 1.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Laravel 5 Documentation 1.0 documentation" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Laravel 5 Documentation
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <!-- Local TOC -->
+                <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Queues</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a><ul>
+<li><a class="reference internal" href="#configuration">Configuration</a></li>
+<li><a class="reference internal" href="#driver-prerequisites">Driver Prerequisites</a><ul>
+<li><a class="reference internal" href="#database">Database</a></li>
+<li><a class="reference internal" href="#other-queue-dependencies">Other Queue Dependencies</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#writing-job-classes">Writing Job Classes</a><ul>
+<li><a class="reference internal" href="#generating-job-classes">Generating Job Classes</a></li>
+<li><a class="reference internal" href="#job-class-structure">Job Class Structure</a><ul>
+<li><a class="reference internal" href="#when-things-go-wrong">When Things Go Wrong</a></li>
+<li><a class="reference internal" href="#manually-releasing-jobs">Manually Releasing Jobs</a></li>
+<li><a class="reference internal" href="#checking-the-number-of-run-attempts">Checking The Number Of Run Attempts</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pushing-jobs-onto-the-queue">Pushing Jobs Onto The Queue</a><ul>
+<li><a class="reference internal" href="#specifying-the-queue-for-a-job">Specifying The Queue For A Job</a></li>
+<li><a class="reference internal" href="#delayed-jobs">Delayed Jobs</a></li>
+<li><a class="reference internal" href="#dispatching-jobs-from-requests">Dispatching Jobs From Requests</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#running-the-queue-listener">Running The Queue Listener</a><ul>
+<li><a class="reference internal" href="#starting-the-queue-listener">Starting The Queue Listener</a></li>
+<li><a class="reference internal" href="#queue-priorities">Queue Priorities</a></li>
+<li><a class="reference internal" href="#specifying-the-job-timeout-parameter">Specifying The Job Timeout Parameter</a></li>
+<li><a class="reference internal" href="#specifying-queue-sleep-duration">Specifying Queue Sleep Duration</a></li>
+<li><a class="reference internal" href="#supervisor-configuration">Supervisor Configuration</a></li>
+<li><a class="reference internal" href="#daemon-queue-listener">Daemon Queue Listener</a><ul>
+<li><a class="reference internal" href="#coding-considerations-for-daemon-queue-listeners">Coding Considerations For Daemon Queue Listeners</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#deploying-with-daemon-queue-listeners">Deploying With Daemon Queue Listeners</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#dealing-with-failed-jobs">Dealing With Failed Jobs</a><ul>
+<li><a class="reference internal" href="#failed-job-events">Failed Job Events</a><ul>
+<li><a class="reference internal" href="#failed-method-on-job-classes">Failed Method On Job Classes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#retrying-failed-jobs">Retrying Failed Jobs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Laravel 5 Documentation</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Queues</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/queues.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="queues">
+<span id="queues"></span><h1>Queues<a class="headerlink" href="#queues" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference external" href="#introduction">Introduction</a></li>
+<li><a class="reference external" href="#writing-job-classes">Writing Job Classes</a><ul>
+<li><a class="reference external" href="#generating-job-classes">Generating Job Classes</a></li>
+<li><a class="reference external" href="#job-class-structure">Job Class Structure</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#pushing-jobs-onto-the-queue">Pushing Jobs Onto The Queue</a><ul>
+<li><a class="reference external" href="#delayed-jobs">Delayed Jobs</a></li>
+<li><a class="reference external" href="#dispatching-jobs-from-requests">Dispatching Jobs From Requests</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#running-the-queue-listener">Running The Queue Listener</a><ul>
+<li><a class="reference external" href="#supervisor-configuration">Supervisor Configuration</a></li>
+<li><a class="reference external" href="#daemon-queue-listener">Daemon Queue Listener</a></li>
+<li><a class="reference external" href="#deploying-with-daemon-queue-listeners">Deploying With Daemon Queue Listeners</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#dealing-with-failed-jobs">Dealing With Failed Jobs</a><ul>
+<li><a class="reference external" href="#failed-job-events">Failed Job Events</a></li>
+<li><a class="reference external" href="#retrying-failed-jobs">Retrying Failed Jobs</a></li>
+</ul>
+</li>
+</ul>
+<p><a name="introduction"></a></p>
+<div class="section" id="introduction">
+<span id="introduction"></span><h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>The Laravel queue service provides a unified API across a variety of different queue back-ends. Queues allow you to defer the processing of a time consuming task, such as sending an e-mail, until a later time which drastically speeds up web requests to your application.</p>
+<p><a name="configuration"></a></p>
+<div class="section" id="configuration">
+<span id="configuration"></span><h3>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h3>
+<p>The queue configuration file is stored in <code class="docutils literal"><span class="pre">config/queue.php</span></code>. In this file you will find connection configurations for each of the queue drivers that are included with the framework, which includes a database, <a class="reference external" href="http://kr.github.com/beanstalkd">Beanstalkd</a>, <a class="reference external" href="http://iron.io">IronMQ</a>, <a class="reference external" href="http://aws.amazon.com/sqs">Amazon SQS</a>, <a class="reference external" href="http://redis.io">Redis</a>,  and synchronous (for local use) driver.</p>
+<p>A <code class="docutils literal"><span class="pre">null</span></code> queue driver is also included which simply discards queued jobs.</p>
+</div>
+<div class="section" id="driver-prerequisites">
+<span id="driver-prerequisites"></span><h3>Driver Prerequisites<a class="headerlink" href="#driver-prerequisites" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="database">
+<span id="database"></span><h4>Database<a class="headerlink" href="#database" title="Permalink to this headline">¶</a></h4>
+<p>In order to use the <code class="docutils literal"><span class="pre">database</span></code> queue driver, you will need a database table to hold the jobs. To generate a migration that creates this table, run the <code class="docutils literal"><span class="pre">queue:table</span></code> Artisan command. Once the migration is created, you may migrate your database using the <code class="docutils literal"><span class="pre">migrate</span></code> command:</p>
+<pre class="literal-block">
+php artisan queue:table
+
+php artisan migrate
+</pre>
+</div>
+<div class="section" id="other-queue-dependencies">
+<span id="other-queue-dependencies"></span><h4>Other Queue Dependencies<a class="headerlink" href="#other-queue-dependencies" title="Permalink to this headline">¶</a></h4>
+<p>The following dependencies are needed for the listed queue drivers:</p>
+<ul class="simple">
+<li>Amazon SQS: <code class="docutils literal"><span class="pre">aws/aws-sdk-php</span> <span class="pre">~3.0</span></code></li>
+<li>Beanstalkd: <code class="docutils literal"><span class="pre">pda/pheanstalk</span> <span class="pre">~3.0</span></code></li>
+<li>IronMQ: <code class="docutils literal"><span class="pre">iron-io/iron_mq</span> <span class="pre">~2.0</span></code></li>
+<li>Redis: <code class="docutils literal"><span class="pre">predis/predis</span> <span class="pre">~1.0</span></code></li>
+</ul>
+<p><a name="writing-job-classes"></a></p>
+</div>
+</div>
+</div>
+<div class="section" id="writing-job-classes">
+<span id="writing-job-classes"></span><h2>Writing Job Classes<a class="headerlink" href="#writing-job-classes" title="Permalink to this headline">¶</a></h2>
+<p><a name="generating-job-classes"></a></p>
+<div class="section" id="generating-job-classes">
+<span id="generating-job-classes"></span><h3>Generating Job Classes<a class="headerlink" href="#generating-job-classes" title="Permalink to this headline">¶</a></h3>
+<p>By default, all of the queueable jobs for your application are stored in the <code class="docutils literal"><span class="pre">app/Jobs</span></code> directory. You may generate a new queued job using the Artisan CLI:</p>
+<pre class="literal-block">
+php artisan make:job SendReminderEmail --queued
+</pre>
+<p>This command will generate a new class in the <code class="docutils literal"><span class="pre">app/Jobs</span></code> directory, and the class will implement the <code class="docutils literal"><span class="pre">Illuminate\Contracts\Queue\ShouldQueue</span></code> interface, indicating to Laravel that the job should be pushed onto the queue instead of run synchronously.</p>
+<p><a name="job-class-structure"></a></p>
+</div>
+<div class="section" id="job-class-structure">
+<span id="job-class-structure"></span><h3>Job Class Structure<a class="headerlink" href="#job-class-structure" title="Permalink to this headline">¶</a></h3>
+<p>Job classes are very simple, normally containing only a <code class="docutils literal"><span class="pre">handle</span></code> method which is called when the job is processed by the queue. To get started, let&#8217;s take a look at an example job class:</p>
+<pre class="literal-block">
+&lt;?php
+
+namespace App\Jobs;
+
+use App\User;
+use App\Jobs\Job;
+use Illuminate\Contracts\Mail\Mailer;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Contracts\Bus\SelfHandling;
+use Illuminate\Contracts\Queue\ShouldQueue;
+
+class SendReminderEmail extends Job implements SelfHandling, ShouldQueue
+{
+    use InteractsWithQueue, SerializesModels;
+
+    protected $user;
+
+    /**
+     * Create a new job instance.
+     *
+     * &#64;param  User  $user
+     * &#64;return void
+     */
+    public function __construct(User $user)
+    {
+        $this-&gt;user = $user;
+    }
+
+    /**
+     * Execute the job.
+     *
+     * &#64;param  Mailer  $mailer
+     * &#64;return void
+     */
+    public function handle(Mailer $mailer)
+    {
+        $mailer-&gt;send('emails.reminder', ['user' =&gt; $this-&gt;user], function ($m) {
+            //
+        });
+
+        $this-&gt;user-&gt;reminders()-&gt;create(...);
+    }
+}
+</pre>
+<p>In this example, note that we were able to pass an <a class="reference external" href="/docs/{{version}}/eloquent">Eloquent model</a> directly into the queued job&#8217;s constructor. Because of the <code class="docutils literal"><span class="pre">SerializesModels</span></code> trait that the job is using, Eloquent models will be gracefully serialized and unserialized when the job is processing. If your queued job accepts an Eloquent model in its constructor, only the identifier for the model will be serialized onto the queue. When the job is actually handled, the queue system will automatically re-retrieve the full model instance from the database. It&#8217;s all totally transparent to your application and prevents issues that can arise from serializing full Eloquent model instances.</p>
+<p>The <code class="docutils literal"><span class="pre">handle</span></code> method is called when the job is processed by the queue. Note that we are able to type-hint dependencies on the <code class="docutils literal"><span class="pre">handle</span></code> method of the job. The Laravel <a class="reference external" href="/docs/{{version}}/container">service container</a> automatically injects these dependencies.</p>
+<div class="section" id="when-things-go-wrong">
+<span id="when-things-go-wrong"></span><h4>When Things Go Wrong<a class="headerlink" href="#when-things-go-wrong" title="Permalink to this headline">¶</a></h4>
+<p>If an exception is thrown while the job is being processed, it will automatically be released back onto the queue so it may be attempted again. The job will continue to be released until it has been attempted the maximum number of times allowed by your application. The number of maximum attempts is defined by the <code class="docutils literal"><span class="pre">--tries</span></code> switch used on the <code class="docutils literal"><span class="pre">queue:listen</span></code> or <code class="docutils literal"><span class="pre">queue:work</span></code> Artisan jobs. More information on running the queue listener <a class="reference external" href="#running-the-queue-listener">can be found below</a>.</p>
+</div>
+<div class="section" id="manually-releasing-jobs">
+<span id="manually-releasing-jobs"></span><h4>Manually Releasing Jobs<a class="headerlink" href="#manually-releasing-jobs" title="Permalink to this headline">¶</a></h4>
+<p>If you would like to <code class="docutils literal"><span class="pre">release</span></code> the job manually, the <code class="docutils literal"><span class="pre">InteractsWithQueue</span></code> trait, which is already included in your generated job class, provides access to the queue job <code class="docutils literal"><span class="pre">release</span></code> method. The <code class="docutils literal"><span class="pre">release</span></code> method accepts one argument: the number of seconds you wish to wait until the job is made available again:</p>
+<pre class="literal-block">
+public function handle(Mailer $mailer)
+{
+    if (condition) {
+        $this-&gt;release(10);
+    }
+}
+</pre>
+</div>
+<div class="section" id="checking-the-number-of-run-attempts">
+<span id="checking-the-number-of-run-attempts"></span><h4>Checking The Number Of Run Attempts<a class="headerlink" href="#checking-the-number-of-run-attempts" title="Permalink to this headline">¶</a></h4>
+<p>As noted above, if an exception occurs while the job is being processed, it will automatically be released back onto the queue. You may check the number of attempts that have been made to run the job using the <code class="docutils literal"><span class="pre">attempts</span></code> method:</p>
+<pre class="literal-block">
+public function handle(Mailer $mailer)
+{
+    if ($this-&gt;attempts() &gt; 3) {
+        //
+    }
+}
+</pre>
+<p><a name="pushing-jobs-onto-the-queue"></a></p>
+</div>
+</div>
+</div>
+<div class="section" id="pushing-jobs-onto-the-queue">
+<span id="pushing-jobs-onto-the-queue"></span><h2>Pushing Jobs Onto The Queue<a class="headerlink" href="#pushing-jobs-onto-the-queue" title="Permalink to this headline">¶</a></h2>
+<p>The default Laravel controller located in <code class="docutils literal"><span class="pre">app/Http/Controllers/Controller.php</span></code> uses a <code class="docutils literal"><span class="pre">DispatchesJobs</span></code> trait. This trait provides several methods allowing you to conveniently push jobs onto the queue, such as the <code class="docutils literal"><span class="pre">dispatch</span></code> method:</p>
+<pre class="literal-block">
+&lt;?php
+
+namespace App\Http\Controllers;
+
+use App\User;
+use Illuminate\Http\Request;
+use App\Jobs\SendReminderEmail;
+use App\Http\Controllers\Controller;
+
+class UserController extends Controller
+{
+    /**
+     * Send a reminder e-mail to a given user.
+     *
+     * &#64;param  Request  $request
+     * &#64;param  int  $id
+     * &#64;return Response
+     */
+    public function sendReminderEmail(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+
+        $this-&gt;dispatch(new SendReminderEmail($user));
+    }
+}
+</pre>
+<p>Of course, sometimes you may wish to dispatch a job from somewhere in your application besides a route or controller. For that reason, you can include the <code class="docutils literal"><span class="pre">DispatchesJobs</span></code> trait on any of the classes in your application to gain access to its various dispatch methods. For example, here is a sample class that uses the trait:</p>
+<pre class="literal-block">
+&lt;?php
+
+namespace App;
+
+use Illuminate\Foundation\Bus\DispatchesJobs;
+
+class ExampleClass
+{
+    use DispatchesJobs;
+}
+</pre>
+<div class="section" id="specifying-the-queue-for-a-job">
+<span id="specifying-the-queue-for-a-job"></span><h3>Specifying The Queue For A Job<a class="headerlink" href="#specifying-the-queue-for-a-job" title="Permalink to this headline">¶</a></h3>
+<p>You may also specify the queue a job should be sent to.</p>
+<p>By pushing jobs to different queues, you may &#8220;categorize&#8221; your queued jobs, and even prioritize how many workers you assign to various queues. This does not push jobs to different queue &#8220;connections&#8221; as defined by your queue configuration file, but only to specific queues within a single connection. To specify the queue, use the <code class="docutils literal"><span class="pre">onQueue</span></code> method on the job instance. The <code class="docutils literal"><span class="pre">onQueue</span></code> method is provided by the base <code class="docutils literal"><span class="pre">App\Jobs\Job</span></code> class included with Laravel:</p>
+<pre class="literal-block">
+&lt;?php
+
+namespace App\Http\Controllers;
+
+use App\User;
+use Illuminate\Http\Request;
+use App\Jobs\SendReminderEmail;
+use App\Http\Controllers\Controller;
+
+class UserController extends Controller
+{
+    /**
+     * Send a reminder e-mail to a given user.
+     *
+     * &#64;param  Request  $request
+     * &#64;param  int  $id
+     * &#64;return Response
+     */
+    public function sendReminderEmail(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+
+        $job = (new SendReminderEmail($user))-&gt;onQueue('emails');
+
+        $this-&gt;dispatch($job);
+    }
+}
+</pre>
+<p><a name="delayed-jobs"></a></p>
+</div>
+<div class="section" id="delayed-jobs">
+<span id="delayed-jobs"></span><h3>Delayed Jobs<a class="headerlink" href="#delayed-jobs" title="Permalink to this headline">¶</a></h3>
+<p>Sometimes you may wish to delay the execution of a queued job. For instance, you may wish to queue a job that sends a customer a reminder e-mail 15 minutes after sign-up. You may accomplish this using the <code class="docutils literal"><span class="pre">delay</span></code> method on your job class, which is provided by the <code class="docutils literal"><span class="pre">Illuminate\Bus\Queueable</span></code> trait:</p>
+<pre class="literal-block">
+&lt;?php
+
+namespace App\Http\Controllers;
+
+use App\User;
+use Illuminate\Http\Request;
+use App\Jobs\SendReminderEmail;
+use App\Http\Controllers\Controller;
+
+class UserController extends Controller
+{
+    /**
+     * Send a reminder e-mail to a given user.
+     *
+     * &#64;param  Request  $request
+     * &#64;param  int  $id
+     * &#64;return Response
+     */
+    public function sendReminderEmail(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+
+        $job = (new SendReminderEmail($user))-&gt;delay(60);
+
+        $this-&gt;dispatch($job);
+    }
+}
+</pre>
+<p>In this example, we&#8217;re specifying that the job should be delayed in the queue for 60 seconds before being made available to workers.</p>
+<blockquote>
+<div><strong>Note:</strong> The Amazon SQS service has a maximum delay time of 15 minutes.</div></blockquote>
+<p><a name="dispatching-jobs-from-requests"></a></p>
+</div>
+<div class="section" id="dispatching-jobs-from-requests">
+<span id="dispatching-jobs-from-requests"></span><h3>Dispatching Jobs From Requests<a class="headerlink" href="#dispatching-jobs-from-requests" title="Permalink to this headline">¶</a></h3>
+<p>It is very common to map HTTP request variables into jobs. So, instead of forcing you to do this manually for each request, Laravel provides some helper methods to make it a cinch. Let&#8217;s take a look at the <code class="docutils literal"><span class="pre">dispatchFrom</span></code> method available on the <code class="docutils literal"><span class="pre">DispatchesJobs</span></code> trait. By default, this trait is included on the base Laravel controller class:</p>
+<pre class="literal-block">
+&lt;?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+
+class CommerceController extends Controller
+{
+    /**
+     * Process the given order.
+     *
+     * &#64;param  Request  $request
+     * &#64;param  int  $id
+     * &#64;return Response
+     */
+    public function processOrder(Request $request, $id)
+    {
+        // Process the request...
+
+        $this-&gt;dispatchFrom('App\Jobs\ProcessOrder', $request);
+    }
+}
+</pre>
+<p>This method will examine the constructor of the given job class and extract variables from the HTTP request (or any other <code class="docutils literal"><span class="pre">ArrayAccess</span></code> object) to fill the needed constructor parameters of the job. So, if our job class accepts a <code class="docutils literal"><span class="pre">productId</span></code> variable in its constructor, the job bus will attempt to pull the <code class="docutils literal"><span class="pre">productId</span></code> parameter from the HTTP request.</p>
+<p>You may also pass an array as the third argument to the <code class="docutils literal"><span class="pre">dispatchFrom</span></code> method. This array will be used to fill any constructor parameters that are not available on the request:</p>
+<pre class="literal-block">
+$this-&gt;dispatchFrom('App\Jobs\ProcessOrder', $request, [
+    'taxPercentage' =&gt; 20,
+]);
+</pre>
+<p><a name="running-the-queue-listener"></a></p>
+</div>
+</div>
+<div class="section" id="running-the-queue-listener">
+<span id="running-the-queue-listener"></span><h2>Running The Queue Listener<a class="headerlink" href="#running-the-queue-listener" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="starting-the-queue-listener">
+<span id="starting-the-queue-listener"></span><h3>Starting The Queue Listener<a class="headerlink" href="#starting-the-queue-listener" title="Permalink to this headline">¶</a></h3>
+<p>Laravel includes an Artisan command that will run new jobs as they are pushed onto the queue. You may run the listener using the <code class="docutils literal"><span class="pre">queue:listen</span></code> command:</p>
+<pre class="literal-block">
+php artisan queue:listen
+</pre>
+<p>You may also specify which queue connection the listener should utilize:</p>
+<pre class="literal-block">
+php artisan queue:listen connection
+</pre>
+<p>Note that once this task has started, it will continue to run until it is manually stopped. You may use a process monitor such as <a class="reference external" href="http://supervisord.org/">Supervisor</a> to ensure that the queue listener does not stop running.</p>
+</div>
+<div class="section" id="queue-priorities">
+<span id="queue-priorities"></span><h3>Queue Priorities<a class="headerlink" href="#queue-priorities" title="Permalink to this headline">¶</a></h3>
+<p>You may pass a comma-delimited list of queue connections to the <code class="docutils literal"><span class="pre">listen</span></code> job to set queue priorities:</p>
+<pre class="literal-block">
+php artisan queue:listen --queue=high,low
+</pre>
+<p>In this example, jobs on the <code class="docutils literal"><span class="pre">high</span></code> queue will always be processed before moving onto jobs from the <code class="docutils literal"><span class="pre">low</span></code> queue.</p>
+</div>
+<div class="section" id="specifying-the-job-timeout-parameter">
+<span id="specifying-the-job-timeout-parameter"></span><h3>Specifying The Job Timeout Parameter<a class="headerlink" href="#specifying-the-job-timeout-parameter" title="Permalink to this headline">¶</a></h3>
+<p>You may also set the length of time (in seconds) each job should be allowed to run:</p>
+<pre class="literal-block">
+php artisan queue:listen --timeout=60
+</pre>
+</div>
+<div class="section" id="specifying-queue-sleep-duration">
+<span id="specifying-queue-sleep-duration"></span><h3>Specifying Queue Sleep Duration<a class="headerlink" href="#specifying-queue-sleep-duration" title="Permalink to this headline">¶</a></h3>
+<p>In addition, you may specify the number of seconds to wait before polling for new jobs:</p>
+<pre class="literal-block">
+php artisan queue:listen --sleep=5
+</pre>
+<p>Note that the queue only &#8220;sleeps&#8221; if no jobs are on the queue. If more jobs are available, the queue will continue to work them without sleeping.</p>
+<p><a name="supervisor-configuration"></a></p>
+</div>
+<div class="section" id="supervisor-configuration">
+<span id="supervisor-configuration"></span><h3>Supervisor Configuration<a class="headerlink" href="#supervisor-configuration" title="Permalink to this headline">¶</a></h3>
+<p>Supervisor is a process monitor for the Linux operating system, and will automatically restart your <code class="docutils literal"><span class="pre">queue:listen</span></code> or <code class="docutils literal"><span class="pre">queue:work</span></code> commands if they fail. To install Supervisor on Ubuntu, you may use the following command:</p>
+<pre class="literal-block">
+sudo apt-get install supervisor
+</pre>
+<p>Supervisor configuration files are typically stored in the <code class="docutils literal"><span class="pre">/etc/supervisor/conf.d</span></code> directory. Within this directory, you may create any number of configuration files that instruct supervisor how your processes should be monitored. For example, let&#8217;s create a <code class="docutils literal"><span class="pre">laravel-worker.conf</span></code> file that starts and monitors a <code class="docutils literal"><span class="pre">queue:work</span></code> process:</p>
+<pre class="literal-block">
+[program:laravel-worker]
+process_name=%(program_name)s_%(process_num)02d
+command=php /home/forge/app.com/artisan queue:work sqs --sleep=3 --tries=3 --daemon
+autostart=true
+autorestart=true
+user=forge
+numprocs=8
+redirect_stderr=true
+stdout_logfile=/home/forge/app.com/worker.log
+</pre>
+<p>In this example, the <code class="docutils literal"><span class="pre">numprocs</span></code> directive will instruct Supervisor to run 8 <code class="docutils literal"><span class="pre">queue:work</span></code> processes and monitor all of them, automatically restarting them if they fail. Of course, you should change the <code class="docutils literal"><span class="pre">queue:work</span> <span class="pre">sqs</span></code> portion of the <code class="docutils literal"><span class="pre">command</span></code> directive to reflect your chosen queue driver.</p>
+<p>Once the configuration file has been created, you may update the Supervisor configuration and start the processes using the following commands:</p>
+<pre class="literal-block">
+sudo supervisorctl reread
+
+sudo supervisorctl update
+
+sudo supervisorctl start laravel-worker:*
+</pre>
+<p>For more information on configuring and using Supervisor, consult the <a class="reference external" href="http://supervisord.org/index.html">Supervisor documentation</a>. Alternatively, you may use <a class="reference external" href="https://forge.laravel.com">Laravel Forge</a> to automatically configure and manage your Supervisor configuration from a convenient web interface.</p>
+<p><a name="daemon-queue-listener"></a></p>
+</div>
+<div class="section" id="daemon-queue-listener">
+<span id="daemon-queue-listener"></span><h3>Daemon Queue Listener<a class="headerlink" href="#daemon-queue-listener" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">queue:work</span></code> Artisan command includes a <code class="docutils literal"><span class="pre">--daemon</span></code> option for forcing the queue worker to continue processing jobs without ever re-booting the framework. This results in a significant reduction of CPU usage when compared to the <code class="docutils literal"><span class="pre">queue:listen</span></code> command:</p>
+<p>To start a queue worker in daemon mode, use the <code class="docutils literal"><span class="pre">--daemon</span></code> flag:</p>
+<pre class="literal-block">
+php artisan queue:work connection --daemon
+
+php artisan queue:work connection --daemon --sleep=3
+
+php artisan queue:work connection --daemon --sleep=3 --tries=3
+</pre>
+<p>As you can see, the <code class="docutils literal"><span class="pre">queue:work</span></code> job supports most of the same options available to <code class="docutils literal"><span class="pre">queue:listen</span></code>. You may use the <code class="docutils literal"><span class="pre">php</span> <span class="pre">artisan</span> <span class="pre">help</span> <span class="pre">queue:work</span></code> job to view all of the available options.</p>
+<div class="section" id="coding-considerations-for-daemon-queue-listeners">
+<span id="coding-considerations-for-daemon-queue-listeners"></span><h4>Coding Considerations For Daemon Queue Listeners<a class="headerlink" href="#coding-considerations-for-daemon-queue-listeners" title="Permalink to this headline">¶</a></h4>
+<p>Daemon queue workers do not restart the framework before processing each job. Therefore, you should be careful to free any heavy resources before your job finishes. For example, if you are doing image manipulation with the GD library, you should free the memory with <code class="docutils literal"><span class="pre">imagedestroy</span></code> when you are done.</p>
+<p>Similarly, your database connection may disconnect when being used by a long-running daemon. You may use the <code class="docutils literal"><span class="pre">DB::reconnect</span></code> method to ensure you have a fresh connection.</p>
+<p><a name="deploying-with-daemon-queue-listeners"></a></p>
+</div>
+</div>
+<div class="section" id="deploying-with-daemon-queue-listeners">
+<span id="deploying-with-daemon-queue-listeners"></span><h3>Deploying With Daemon Queue Listeners<a class="headerlink" href="#deploying-with-daemon-queue-listeners" title="Permalink to this headline">¶</a></h3>
+<p>Since daemon queue workers are long-lived processes, they will not pick up changes in your code without being restarted. So, the simplest way to deploy an application using daemon queue workers is to restart the workers during your deployment script. You may gracefully restart all of the workers by including the following command in your deployment script:</p>
+<pre class="literal-block">
+php artisan queue:restart
+</pre>
+<p>This command will gracefully instruct all queue workers to restart after they finish processing their current job so that no existing jobs are lost.</p>
+<blockquote>
+<div><strong>Note:</strong> This command relies on the cache system to schedule the restart. By default, APCu does not work for CLI jobs. If you are using APCu, add <code class="docutils literal"><span class="pre">apc.enable_cli=1</span></code> to your APCu configuration.</div></blockquote>
+<p><a name="dealing-with-failed-jobs"></a></p>
+</div>
+</div>
+<div class="section" id="dealing-with-failed-jobs">
+<span id="dealing-with-failed-jobs"></span><h2>Dealing With Failed Jobs<a class="headerlink" href="#dealing-with-failed-jobs" title="Permalink to this headline">¶</a></h2>
+<p>Since things don&#8217;t always go as planned, sometimes your queued jobs will fail. Don&#8217;t worry, it happens to the best of us! Laravel includes a convenient way to specify the maximum number of times a job should be attempted. After a job has exceeded this amount of attempts, it will be inserted into a <code class="docutils literal"><span class="pre">failed_jobs</span></code> table. The name of the failed jobs can be configured via the <code class="docutils literal"><span class="pre">config/queue.php</span></code> configuration file.</p>
+<p>To create a migration for the <code class="docutils literal"><span class="pre">failed_jobs</span></code> table, you may use the <code class="docutils literal"><span class="pre">queue:failed-table</span></code> command:</p>
+<pre class="literal-block">
+php artisan queue:failed-table
+</pre>
+<p>When running your <a class="reference external" href="#running-the-queue-listener">queue listener</a>, you may specify the maximum number of times a job should be attempted using the <code class="docutils literal"><span class="pre">--tries</span></code> switch on the <code class="docutils literal"><span class="pre">queue:listen</span></code> command:</p>
+<pre class="literal-block">
+php artisan queue:listen connection-name --tries=3
+</pre>
+<p><a name="failed-job-events"></a></p>
+<div class="section" id="failed-job-events">
+<span id="failed-job-events"></span><h3>Failed Job Events<a class="headerlink" href="#failed-job-events" title="Permalink to this headline">¶</a></h3>
+<p>If you would like to register an event that will be called when a queued job fails, you may use the <code class="docutils literal"><span class="pre">Queue::failing</span></code> method. This event is a great opportunity to notify your team via e-mail or <a class="reference external" href="https://www.hipchat.com">HipChat</a>. For example, we may attach a callback to this event from the <code class="docutils literal"><span class="pre">AppServiceProvider</span></code> that is included with Laravel:</p>
+<pre class="literal-block">
+&lt;?php
+
+namespace App\Providers;
+
+use Queue;
+use Illuminate\Support\ServiceProvider;
+
+class AppServiceProvider extends ServiceProvider
+{
+    /**
+     * Bootstrap any application services.
+     *
+     * &#64;return void
+     */
+    public function boot()
+    {
+        Queue::failing(function ($connection, $job, $data) {
+            // Notify team of failing job...
+        });
+    }
+
+    /**
+     * Register the service provider.
+     *
+     * &#64;return void
+     */
+    public function register()
+    {
+        //
+    }
+}
+</pre>
+<div class="section" id="failed-method-on-job-classes">
+<span id="failed-method-on-job-classes"></span><h4>Failed Method On Job Classes<a class="headerlink" href="#failed-method-on-job-classes" title="Permalink to this headline">¶</a></h4>
+<p>For more granular control, you may define a <code class="docutils literal"><span class="pre">failed</span></code> method directly on a queue job class, allowing you to perform job specific actions when a failure occurs:</p>
+<pre class="literal-block">
+&lt;?php
+
+namespace App\Jobs;
+
+use App\Jobs\Job;
+use Illuminate\Contracts\Mail\Mailer;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Contracts\Bus\SelfHandling;
+use Illuminate\Contracts\Queue\ShouldQueue;
+
+class SendReminderEmail extends Job implements SelfHandling, ShouldQueue
+{
+    use InteractsWithQueue, SerializesModels;
+
+    /**
+     * Execute the job.
+     *
+     * &#64;param  Mailer  $mailer
+     * &#64;return void
+     */
+    public function handle(Mailer $mailer)
+    {
+        //
+    }
+
+    /**
+     * Handle a job failure.
+     *
+     * &#64;return void
+     */
+    public function failed()
+    {
+        // Called when the job is failing...
+    }
+}
+</pre>
+<p><a name="retrying-failed-jobs"></a></p>
+</div>
+</div>
+<div class="section" id="retrying-failed-jobs">
+<span id="retrying-failed-jobs"></span><h3>Retrying Failed Jobs<a class="headerlink" href="#retrying-failed-jobs" title="Permalink to this headline">¶</a></h3>
+<p>To view all of your failed jobs that have been inserted into your <code class="docutils literal"><span class="pre">failed_jobs</span></code> database table, you may use the <code class="docutils literal"><span class="pre">queue:failed</span></code> Artisan command:</p>
+<pre class="literal-block">
+php artisan queue:failed
+</pre>
+<p>The <code class="docutils literal"><span class="pre">queue:failed</span></code> command will list the job ID, connection, queue, and failure time. The job ID may be used to retry the failed job. For instance, to retry a failed job that has an ID of 5, the following command should be issued:</p>
+<pre class="literal-block">
+php artisan queue:retry 5
+</pre>
+<p>If you would like to delete a failed job, you may use the <code class="docutils literal"><span class="pre">queue:forget</span></code> command:</p>
+<pre class="literal-block">
+php artisan queue:forget 5
+</pre>
+<p>To delete all of your failed jobs, you may use the <code class="docutils literal"><span class="pre">queue:flush</span></code> command:</p>
+<pre class="literal-block">
+php artisan queue:flush
+</pre>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, The Weezqyd.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

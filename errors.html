@@ -1,0 +1,394 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Errors &amp; Logging &mdash; Laravel 5 Documentation 1.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Laravel 5 Documentation 1.0 documentation" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Laravel 5 Documentation
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <!-- Local TOC -->
+                <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Errors &amp; Logging</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#configuration">Configuration</a><ul>
+<li><a class="reference internal" href="#error-detail">Error Detail</a></li>
+<li><a class="reference internal" href="#log-modes">Log Modes</a></li>
+<li><a class="reference internal" href="#custom-monolog-configuration">Custom Monolog Configuration</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-exception-handler">The Exception Handler</a><ul>
+<li><a class="reference internal" href="#the-report-method">The Report Method</a><ul>
+<li><a class="reference internal" href="#ignoring-exceptions-by-type">Ignoring Exceptions By Type</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-render-method">The Render Method</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#http-exceptions">HTTP Exceptions</a><ul>
+<li><a class="reference internal" href="#custom-http-error-pages">Custom HTTP Error Pages</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#logging">Logging</a><ul>
+<li><a class="reference internal" href="#contextual-information">Contextual Information</a></li>
+<li><a class="reference internal" href="#accessing-the-underlying-monolog-instance">Accessing The Underlying Monolog Instance</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Laravel 5 Documentation</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Errors &amp; Logging</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/errors.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="errors-logging">
+<span id="errors-logging"></span><h1>Errors &amp; Logging<a class="headerlink" href="#errors-logging" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference external" href="#introduction">Introduction</a></li>
+<li><a class="reference external" href="#configuration">Configuration</a></li>
+<li><a class="reference external" href="#the-exception-handler">The Exception Handler</a><ul>
+<li><a class="reference external" href="#report-method">Report Method</a></li>
+<li><a class="reference external" href="#render-method">Render Method</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#http-exceptions">HTTP Exceptions</a><ul>
+<li><a class="reference external" href="#custom-http-error-pages">Custom HTTP Error Pages</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#logging">Logging</a></li>
+</ul>
+<p><a name="introduction"></a></p>
+<div class="section" id="introduction">
+<span id="introduction"></span><h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>When you start a new Laravel project, error and exception handling is already configured for you. In addition, Laravel is integrated with the <a class="reference external" href="https://github.com/Seldaek/monolog">Monolog</a> logging library, which provides support for a variety of powerful log handlers.</p>
+<p><a name="configuration"></a></p>
+</div>
+<div class="section" id="configuration">
+<span id="configuration"></span><h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="error-detail">
+<span id="error-detail"></span><h3>Error Detail<a class="headerlink" href="#error-detail" title="Permalink to this headline">¶</a></h3>
+<p>The amount of error detail your application displays through the browser is controlled by the <code class="docutils literal"><span class="pre">debug</span></code> configuration option in your <code class="docutils literal"><span class="pre">config/app.php</span></code> configuration file. By default, this configuration option is set to respect the <code class="docutils literal"><span class="pre">APP_DEBUG</span></code> environment variable, which is stored in your <code class="docutils literal"><span class="pre">.env</span></code> file.</p>
+<p>For local development, you should set the <code class="docutils literal"><span class="pre">APP_DEBUG</span></code> environment variable to <code class="docutils literal"><span class="pre">true</span></code>. In your production environment, this value should always be <code class="docutils literal"><span class="pre">false</span></code>.</p>
+</div>
+<div class="section" id="log-modes">
+<span id="log-modes"></span><h3>Log Modes<a class="headerlink" href="#log-modes" title="Permalink to this headline">¶</a></h3>
+<p>Out of the box, Laravel supports <code class="docutils literal"><span class="pre">single</span></code>, <code class="docutils literal"><span class="pre">daily</span></code>, <code class="docutils literal"><span class="pre">syslog</span></code> and <code class="docutils literal"><span class="pre">errorlog</span></code> logging modes. For example, if you wish to use daily log files instead of a single file, you should simply set the <code class="docutils literal"><span class="pre">log</span></code> value in your <code class="docutils literal"><span class="pre">config/app.php</span></code> configuration file:</p>
+<pre class="literal-block">
+'log' =&gt; 'daily'
+</pre>
+</div>
+<div class="section" id="custom-monolog-configuration">
+<span id="custom-monolog-configuration"></span><h3>Custom Monolog Configuration<a class="headerlink" href="#custom-monolog-configuration" title="Permalink to this headline">¶</a></h3>
+<p>If you would like to have complete control over how Monolog is configured for your application, you may use the application&#8217;s <code class="docutils literal"><span class="pre">configureMonologUsing</span></code> method. You should place a call to this method in your <code class="docutils literal"><span class="pre">bootstrap/app.php</span></code> file right before the <code class="docutils literal"><span class="pre">$app</span></code> variable is returned by the file:</p>
+<pre class="literal-block">
+$app-&gt;configureMonologUsing(function($monolog) {
+    $monolog-&gt;pushHandler(...);
+});
+
+return $app;
+</pre>
+<p><a name="the-exception-handler"></a></p>
+</div>
+</div>
+<div class="section" id="the-exception-handler">
+<span id="the-exception-handler"></span><h2>The Exception Handler<a class="headerlink" href="#the-exception-handler" title="Permalink to this headline">¶</a></h2>
+<p>All exceptions are handled by the <code class="docutils literal"><span class="pre">App\Exceptions\Handler</span></code> class. This class contains two methods: <code class="docutils literal"><span class="pre">report</span></code> and <code class="docutils literal"><span class="pre">render</span></code>. We&#8217;ll examine each of these methods in detail.</p>
+<p><a name="report-method"></a></p>
+<div class="section" id="the-report-method">
+<span id="the-report-method"></span><h3>The Report Method<a class="headerlink" href="#the-report-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">report</span></code> method is used to log exceptions or send them to an external service like <a class="reference external" href="https://bugsnag.com">BugSnag</a>. By default, the <code class="docutils literal"><span class="pre">report</span></code> method simply passes the exception to the base class where the exception is logged. However, you are free to log exceptions however you wish.</p>
+<p>For example, if you need to report different types of exceptions in different ways, you may use the PHP <code class="docutils literal"><span class="pre">instanceof</span></code> comparison operator:</p>
+<pre class="literal-block">
+/**
+ * Report or log an exception.
+ *
+ * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
+ *
+ * &#64;param  \Exception  $e
+ * &#64;return void
+ */
+public function report(Exception $e)
+{
+    if ($e instanceof CustomException) {
+        //
+    }
+
+    return parent::report($e);
+}
+</pre>
+<div class="section" id="ignoring-exceptions-by-type">
+<span id="ignoring-exceptions-by-type"></span><h4>Ignoring Exceptions By Type<a class="headerlink" href="#ignoring-exceptions-by-type" title="Permalink to this headline">¶</a></h4>
+<p>The <code class="docutils literal"><span class="pre">$dontReport</span></code> property of the exception handler contains an array of exception types that will not be logged. By default, exceptions resulting from 404 errors are not written to your log files. You may add other exception types to this array as needed.</p>
+<p><a name="render-method"></a></p>
+</div>
+</div>
+<div class="section" id="the-render-method">
+<span id="the-render-method"></span><h3>The Render Method<a class="headerlink" href="#the-render-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">render</span></code> method is responsible for converting a given exception into an HTTP response that should be sent back to the browser. By default, the exception is passed to the base class which generates a response for you. However, you are free to check the exception type or return your own custom response:</p>
+<pre class="literal-block">
+/**
+ * Render an exception into an HTTP response.
+ *
+ * &#64;param  \Illuminate\Http\Request  $request
+ * &#64;param  \Exception  $e
+ * &#64;return \Illuminate\Http\Response
+ */
+public function render($request, Exception $e)
+{
+    if ($e instanceof CustomException) {
+        return response()-&gt;view('errors.custom', [], 500);
+    }
+
+    return parent::render($request, $e);
+}
+</pre>
+<p><a name="http-exceptions"></a></p>
+</div>
+</div>
+<div class="section" id="http-exceptions">
+<span id="http-exceptions"></span><h2>HTTP Exceptions<a class="headerlink" href="#http-exceptions" title="Permalink to this headline">¶</a></h2>
+<p>Some exceptions describe HTTP error codes from the server. For example, this may be a &#8220;page not found&#8221; error (404), an &#8220;unauthorized error&#8221; (401) or even a developer generated 500 error. In order to generate such a response from anywhere in your application, use the following:</p>
+<pre class="literal-block">
+abort(404);
+</pre>
+<p>The <code class="docutils literal"><span class="pre">abort</span></code> method will immediately raise an exception which will be rendered by the exception handler. Optionally, you may provide the response text:</p>
+<pre class="literal-block">
+abort(403, 'Unauthorized action.');
+</pre>
+<p>This method may be used at any time during the request&#8217;s lifecycle.</p>
+<p><a name="custom-http-error-pages"></a></p>
+<div class="section" id="custom-http-error-pages">
+<span id="custom-http-error-pages"></span><h3>Custom HTTP Error Pages<a class="headerlink" href="#custom-http-error-pages" title="Permalink to this headline">¶</a></h3>
+<p>Laravel makes it easy to return custom error pages for various HTTP status codes. For example, if you wish to customize the error page for 404 HTTP status codes, create a <code class="docutils literal"><span class="pre">resources/views/errors/404.blade.php</span></code>. This file will be served on all 404 errors generated by your application.</p>
+<p>The views within this directory should be named to match the HTTP status code they correspond to.</p>
+<p><a name="logging"></a></p>
+</div>
+</div>
+<div class="section" id="logging">
+<span id="logging"></span><h2>Logging<a class="headerlink" href="#logging" title="Permalink to this headline">¶</a></h2>
+<p>The Laravel logging facilities provide a simple layer on top of the powerful <a class="reference external" href="http://github.com/seldaek/monolog">Monolog</a> library. By default, Laravel is configured to create daily log files for your application which are stored in the <code class="docutils literal"><span class="pre">storage/logs</span></code> directory. You may write information to the logs using the <code class="docutils literal"><span class="pre">Log</span></code> <a class="reference external" href="facades.html">facade</a>:</p>
+<pre class="literal-block">
+&lt;?php
+
+namespace App\Http\Controllers;
+
+use Log;
+use App\User;
+use App\Http\Controllers\Controller;
+
+class UserController extends Controller
+{
+    /**
+     * Show the profile for the given user.
+     *
+     * &#64;param  int  $id
+     * &#64;return Response
+     */
+    public function showProfile($id)
+    {
+        Log::info('Showing user profile for user: '.$id);
+
+        return view('user.profile', ['user' =&gt; User::findOrFail($id)]);
+    }
+}
+</pre>
+<p>The logger provides the eight logging levels defined in <a class="reference external" href="http://tools.ietf.org/html/rfc5424">RFC 5424</a>: <strong>emergency</strong>, <strong>alert</strong>, <strong>critical</strong>, <strong>error</strong>, <strong>warning</strong>, <strong>notice</strong>, <strong>info</strong> and <strong>debug</strong>.</p>
+<pre class="literal-block">
+Log::emergency($error);
+Log::alert($error);
+Log::critical($error);
+Log::error($error);
+Log::warning($error);
+Log::notice($error);
+Log::info($error);
+Log::debug($error);
+</pre>
+<div class="section" id="contextual-information">
+<span id="contextual-information"></span><h3>Contextual Information<a class="headerlink" href="#contextual-information" title="Permalink to this headline">¶</a></h3>
+<p>An array of contextual data may also be passed to the log methods. This contextual data will be formatted and displayed with the log message:</p>
+<pre class="literal-block">
+Log::info('User failed to login.', ['id' =&gt; $user-&gt;id]);
+</pre>
+</div>
+<div class="section" id="accessing-the-underlying-monolog-instance">
+<span id="accessing-the-underlying-monolog-instance"></span><h3>Accessing The Underlying Monolog Instance<a class="headerlink" href="#accessing-the-underlying-monolog-instance" title="Permalink to this headline">¶</a></h3>
+<p>Monolog has a variety of additional handlers you may use for logging. If needed, you may access the underlying Monolog instance being used by Laravel:</p>
+<pre class="literal-block">
+$monolog = Log::getMonolog();
+</pre>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, The Weezqyd.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

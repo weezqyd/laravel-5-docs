@@ -1,0 +1,371 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Redis &mdash; Laravel 5 Documentation 1.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Laravel 5 Documentation 1.0 documentation" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Laravel 5 Documentation
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <!-- Local TOC -->
+                <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Redis</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a><ul>
+<li><a class="reference internal" href="#configuration">Configuration</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#basic-usage">Basic Usage</a><ul>
+<li><a class="reference internal" href="#using-multiple-redis-connections">Using Multiple Redis Connections</a></li>
+<li><a class="reference internal" href="#pipelining-commands">Pipelining Commands</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pub-sub">Pub / Sub</a><ul>
+<li><a class="reference internal" href="#wildcard-subscriptions">Wildcard Subscriptions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Laravel 5 Documentation</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Redis</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/redis.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="redis">
+<span id="redis"></span><h1>Redis<a class="headerlink" href="#redis" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference external" href="#introduction">Introduction</a></li>
+<li><a class="reference external" href="#basic-usage">Basic Usage</a><ul>
+<li><a class="reference external" href="#pipelining-commands">Pipelining Commands</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#pubsub">Pub / Sub</a></li>
+</ul>
+<p><a name="introduction"></a></p>
+<div class="section" id="introduction">
+<span id="introduction"></span><h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://redis.io">Redis</a> is an open source, advanced key-value store. It is often referred to as a data structure server since keys can contain <a class="reference external" href="http://redis.io/topics/data-types#strings">strings</a>, <a class="reference external" href="http://redis.io/topics/data-types#hashes">hashes</a>, <a class="reference external" href="http://redis.io/topics/data-types#lists">lists</a>, <a class="reference external" href="http://redis.io/topics/data-types#sets">sets</a>, and <a class="reference external" href="http://redis.io/topics/data-types#sorted-sets">sorted sets</a>. Before using Redis with Laravel, you will need to install the <code class="docutils literal"><span class="pre">predis/predis</span></code> package (~1.0) via Composer.</p>
+<p><a name="configuration"></a></p>
+<div class="section" id="configuration">
+<span id="configuration"></span><h3>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h3>
+<p>The Redis configuration for your application is located in the <code class="docutils literal"><span class="pre">config/database.php</span></code> configuration file. Within this file, you will see a <code class="docutils literal"><span class="pre">redis</span></code> array containing the Redis servers used by your application:</p>
+<pre class="literal-block">
+'redis' =&gt; [
+
+    'cluster' =&gt; false,
+
+    'default' =&gt; [
+        'host'     =&gt; '127.0.0.1',
+        'port'     =&gt; 6379,
+        'database' =&gt; 0,
+    ],
+
+],
+</pre>
+<p>The default server configuration should suffice for development. However, you are free to modify this array based on your environment. Simply give each Redis server a name, and specify the host and port used by the server.</p>
+<p>The <code class="docutils literal"><span class="pre">cluster</span></code> option will tell the Laravel Redis client to perform client-side sharding across your Redis nodes, allowing you to pool nodes and create a large amount of available RAM. However, note that client-side sharding does not handle failover; therefore, is primarily suited for cached data that is available from another primary data store.</p>
+<p>Additionally, you may define an <code class="docutils literal"><span class="pre">options</span></code> array value in your Redis connection definition, allowing you to specify a set of Predis <a class="reference external" href="https://github.com/nrk/predis/wiki/Client-Options">client options</a>.</p>
+<p>If your Redis server requires authentication, you may supply a password by adding a <code class="docutils literal"><span class="pre">password</span></code> configuration item to your Redis server configuration array.</p>
+<blockquote>
+<div><strong>Note:</strong> If you have the Redis PHP extension installed via PECL, you will need to rename the alias for Redis in your <code class="docutils literal"><span class="pre">config/app.php</span></code> file.</div></blockquote>
+<p><a name="basic-usage"></a></p>
+</div>
+</div>
+<div class="section" id="basic-usage">
+<span id="basic-usage"></span><h2>Basic Usage<a class="headerlink" href="#basic-usage" title="Permalink to this headline">¶</a></h2>
+<p>You may interact with Redis by calling various methods on the <code class="docutils literal"><span class="pre">Redis</span></code> <a class="reference external" href="/docs/{{version}}/facades">facade</a>. The <code class="docutils literal"><span class="pre">Redis</span></code> facade supports dynamic methods, meaning you may call any <a class="reference external" href="http://redis.io/commands">Redis command</a> on the facade and the command will be passed directly to Redis. In this example, we will call the <code class="docutils literal"><span class="pre">GET</span></code> command on Redis by calling the <code class="docutils literal"><span class="pre">get</span></code> method on the <code class="docutils literal"><span class="pre">Redis</span></code> facade:</p>
+<pre class="literal-block">
+&lt;?php
+
+namespace App\Http\Controllers;
+
+use Redis;
+use App\Http\Controllers\Controller;
+
+class UserController extends Controller
+{
+    /**
+     * Show the profile for the given user.
+     *
+     * &#64;param  int  $id
+     * &#64;return Response
+     */
+    public function showProfile($id)
+    {
+        $user = Redis::get('user:profile:'.$id);
+
+        return view('user.profile', ['user' =&gt; $user]);
+    }
+}
+</pre>
+<p>Of course, as mentioned above, you may call any of the Redis commands on the <code class="docutils literal"><span class="pre">Redis</span></code> facade. Laravel uses magic methods to pass the commands to the Redis server, so simply pass the arguments the Redis command expects:</p>
+<pre class="literal-block">
+Redis::set('name', 'Taylor');
+
+$values = Redis::lrange('names', 5, 10);
+</pre>
+<p>Alternatively, you may also pass commands to the server using the <code class="docutils literal"><span class="pre">command</span></code> method, which accepts the name of the command as its first argument, and an array of values as its second argument:</p>
+<pre class="literal-block">
+$values = Redis::command('lrange', ['name', 5, 10]);
+</pre>
+<div class="section" id="using-multiple-redis-connections">
+<span id="using-multiple-redis-connections"></span><h3>Using Multiple Redis Connections<a class="headerlink" href="#using-multiple-redis-connections" title="Permalink to this headline">¶</a></h3>
+<p>You may get a Redis instance by calling the <code class="docutils literal"><span class="pre">Redis::connection</span></code> method:</p>
+<pre class="literal-block">
+$redis = Redis::connection();
+</pre>
+<p>This will give you an instance of the default Redis server. If you are not using server clustering, you may pass the server name to the <code class="docutils literal"><span class="pre">connection</span></code> method to get a specific server as defined in your Redis configuration:</p>
+<pre class="literal-block">
+$redis = Redis::connection('other');
+</pre>
+<p><a name="pipelining-commands"></a></p>
+</div>
+<div class="section" id="pipelining-commands">
+<span id="pipelining-commands"></span><h3>Pipelining Commands<a class="headerlink" href="#pipelining-commands" title="Permalink to this headline">¶</a></h3>
+<p>Pipelining should be used when you need to send many commands to the server in one operation. The <code class="docutils literal"><span class="pre">pipeline</span></code> method accepts one argument: a <code class="docutils literal"><span class="pre">Closure</span></code> that receives a Redis instance. You may issue all of your commands to this Redis instance and they will all be executed within a single operation:</p>
+<pre class="literal-block">
+Redis::pipeline(function ($pipe) {
+    for ($i = 0; $i &lt; 1000; $i++) {
+        $pipe-&gt;set(&quot;key:$i&quot;, $i);
+    }
+});
+</pre>
+<p><a name="pubsub"></a></p>
+</div>
+</div>
+<div class="section" id="pub-sub">
+<span id="pub-sub"></span><h2>Pub / Sub<a class="headerlink" href="#pub-sub" title="Permalink to this headline">¶</a></h2>
+<p>Laravel also provides a convenient interface to the Redis <code class="docutils literal"><span class="pre">publish</span></code> and <code class="docutils literal"><span class="pre">subscribe</span></code> commands. These Redis commands allow you to listen for messages on a given &#8220;channel&#8221;. You may publish messages to the channel from another application, or even using another programming language, allowing easy communication between applications / processes.</p>
+<p>First, let&#8217;s setup a listener on a channel via Redis using the <code class="docutils literal"><span class="pre">subscribe</span></code> method. We will place this method call within an <a class="reference external" href="/docs/{{version}}/artisan">Artisan command</a> since calling the <code class="docutils literal"><span class="pre">subscribe</span></code> method begins a long-running process:</p>
+<pre class="literal-block">
+&lt;?php
+
+namespace App\Console\Commands;
+
+use Redis;
+use Illuminate\Console\Command;
+
+class RedisSubscribe extends Command
+{
+    /**
+     * The name and signature of the console command.
+     *
+     * &#64;var string
+     */
+    protected $signature = 'redis:subscribe';
+
+    /**
+     * The console command description.
+     *
+     * &#64;var string
+     */
+    protected $description = 'Subscribe to a Redis channel';
+
+    /**
+     * Execute the console command.
+     *
+     * &#64;return mixed
+     */
+    public function handle()
+    {
+        Redis::subscribe(['test-channel'], function($message) {
+            echo $message;
+        });
+    }
+}
+</pre>
+<p>Now, we may publish messages to the channel using the <code class="docutils literal"><span class="pre">publish</span></code> method:</p>
+<pre class="literal-block">
+Route::get('publish', function () {
+    // Route logic...
+
+    Redis::publish('test-channel', json_encode(['foo' =&gt; 'bar']));
+});
+</pre>
+<div class="section" id="wildcard-subscriptions">
+<span id="wildcard-subscriptions"></span><h3>Wildcard Subscriptions<a class="headerlink" href="#wildcard-subscriptions" title="Permalink to this headline">¶</a></h3>
+<p>Using the <code class="docutils literal"><span class="pre">psubscribe</span></code> method, you may subscribe to a wildcard channel, which is useful for catching all messages on all channels. The <code class="docutils literal"><span class="pre">$channel</span></code> name will be passed as the second argument to the provided callback <code class="docutils literal"><span class="pre">Closure</span></code>:</p>
+<pre class="literal-block">
+Redis::psubscribe(['*'], function($message, $channel) {
+    echo $message;
+});
+
+Redis::psubscribe(['users.*'], function($message, $channel) {
+    echo $message;
+});
+</pre>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, The Weezqyd.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

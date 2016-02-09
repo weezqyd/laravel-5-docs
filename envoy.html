@@ -1,0 +1,419 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Envoy Task Runner &mdash; Laravel 5 Documentation 1.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Laravel 5 Documentation 1.0 documentation" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Laravel 5 Documentation
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <!-- Local TOC -->
+                <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Envoy Task Runner</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a><ul>
+<li><a class="reference internal" href="#installation">Installation</a><ul>
+<li><a class="reference internal" href="#updating-envoy">Updating Envoy</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#writing-tasks">Writing Tasks</a><ul>
+<li><a class="reference internal" href="#bootstrapping">Bootstrapping</a></li>
+<li><a class="reference internal" href="#confirming-tasks">Confirming Tasks</a></li>
+<li><a class="reference internal" href="#task-variables">Task Variables</a></li>
+<li><a class="reference internal" href="#multiple-servers">Multiple Servers</a><ul>
+<li><a class="reference internal" href="#parallel-execution">Parallel Execution</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#task-macros">Task Macros</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#running-tasks">Running Tasks</a></li>
+<li><a class="reference internal" href="#notifications">Notifications</a><ul>
+<li><a class="reference internal" href="#hipchat">HipChat</a></li>
+<li><a class="reference internal" href="#slack">Slack</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Laravel 5 Documentation</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Envoy Task Runner</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/envoy.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="envoy-task-runner">
+<span id="envoy-task-runner"></span><h1>Envoy Task Runner<a class="headerlink" href="#envoy-task-runner" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference external" href="#introduction">Introduction</a></li>
+<li><a class="reference external" href="#writing-tasks">Writing Tasks</a><ul>
+<li><a class="reference external" href="#task-variables">Task Variables</a></li>
+<li><a class="reference external" href="#envoy-multiple-servers">Multiple Servers</a></li>
+<li><a class="reference external" href="#envoy-task-macros">Task Macros</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#envoy-running-tasks">Running Tasks</a></li>
+<li><a class="reference external" href="#envoy-notifications">Notifications</a><ul>
+<li><a class="reference external" href="#hipchat">HipChat</a></li>
+<li><a class="reference external" href="#slack">Slack</a></li>
+</ul>
+</li>
+</ul>
+<p><a name="introduction"></a></p>
+<div class="section" id="introduction">
+<span id="introduction"></span><h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://github.com/laravel/envoy">Laravel Envoy</a> provides a clean, minimal syntax for defining common tasks you run on your remote servers. Using a Blade style syntax, you can easily setup tasks for deployment, Artisan commands, and more. Currently, Envoy only supports the Mac and Linux operating systems.</p>
+<p><a name="envoy-installation"></a></p>
+<div class="section" id="installation">
+<span id="installation"></span><h3>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h3>
+<p>First, install Envoy using the Composer <code class="docutils literal"><span class="pre">global</span></code> command:</p>
+<pre class="literal-block">
+composer global require &quot;laravel/envoy=~1.0&quot;
+</pre>
+<p>Make sure to place the <code class="docutils literal"><span class="pre">~/.composer/vendor/bin</span></code> directory in your PATH so the <code class="docutils literal"><span class="pre">envoy</span></code> executable is found when you run the <code class="docutils literal"><span class="pre">envoy</span></code> command in your terminal.</p>
+<div class="section" id="updating-envoy">
+<span id="updating-envoy"></span><h4>Updating Envoy<a class="headerlink" href="#updating-envoy" title="Permalink to this headline">¶</a></h4>
+<p>You may also use Composer to keep your Envoy installation up to date:</p>
+<pre class="literal-block">
+composer global update
+</pre>
+<p><a name="writing-tasks"></a></p>
+</div>
+</div>
+</div>
+<div class="section" id="writing-tasks">
+<span id="writing-tasks"></span><h2>Writing Tasks<a class="headerlink" href="#writing-tasks" title="Permalink to this headline">¶</a></h2>
+<p>All of your Envoy tasks should be defined in an <code class="docutils literal"><span class="pre">Envoy.blade.php</span></code> file in the root of your project. Here&#8217;s an example to get you started:</p>
+<pre class="literal-block">
+&#64;servers(['web' =&gt; 'user&#64;192.168.1.1'])
+
+&#64;task('foo', ['on' =&gt; 'web'])
+    ls -la
+&#64;endtask
+</pre>
+<p>As you can see, an array of <code class="docutils literal"><span class="pre">&#64;servers</span></code> is defined at the top of the file, allowing you to reference these servers in the <code class="docutils literal"><span class="pre">on</span></code> option of your task declarations. Within your <code class="docutils literal"><span class="pre">&#64;task</span></code> declarations, you should place the Bash code that will be run on your server when the task is executed.</p>
+<div class="section" id="bootstrapping">
+<span id="bootstrapping"></span><h3>Bootstrapping<a class="headerlink" href="#bootstrapping" title="Permalink to this headline">¶</a></h3>
+<p>Sometimes, you may need to execute some PHP code before evaluating your Envoy tasks. You may use the <code class="docutils literal"><span class="pre">&#64;setup</span></code> directive to declare variables and do general PHP work inside the Envoy file:</p>
+<pre class="literal-block">
+&#64;setup
+    $now = new DateTime();
+
+    $environment = isset($env) ? $env : &quot;testing&quot;;
+&#64;endsetup
+</pre>
+<p>You may also use <code class="docutils literal"><span class="pre">&#64;include</span></code> to include any outside PHP files:</p>
+<pre class="literal-block">
+&#64;include('vendor/autoload.php');
+</pre>
+</div>
+<div class="section" id="confirming-tasks">
+<span id="confirming-tasks"></span><h3>Confirming Tasks<a class="headerlink" href="#confirming-tasks" title="Permalink to this headline">¶</a></h3>
+<p>If you would like to be prompted for confirmation before running a given task on your servers, you may add the <code class="docutils literal"><span class="pre">confirm</span></code> directive to your task declaration:</p>
+<pre class="literal-block">
+&#64;task('deploy', ['on' =&gt; 'web', 'confirm' =&gt; true])
+    cd site
+    git pull origin {{ $branch }}
+    php artisan migrate
+&#64;endtask
+</pre>
+<p><a name="task-variables"></a></p>
+</div>
+<div class="section" id="task-variables">
+<span id="task-variables"></span><h3>Task Variables<a class="headerlink" href="#task-variables" title="Permalink to this headline">¶</a></h3>
+<p>If needed, you may pass variables into the Envoy file using command line switches, allowing you to customize your tasks:</p>
+<pre class="literal-block">
+envoy run deploy --branch=master
+</pre>
+<p>You may use the options in your tasks via Blade&#8217;s &#8220;echo&#8221; syntax:</p>
+<pre class="literal-block">
+&#64;servers(['web' =&gt; '192.168.1.1'])
+
+&#64;task('deploy', ['on' =&gt; 'web'])
+    cd site
+    git pull origin {{ $branch }}
+    php artisan migrate
+&#64;endtask
+</pre>
+<p><a name="envoy-multiple-servers"></a></p>
+</div>
+<div class="section" id="multiple-servers">
+<span id="multiple-servers"></span><h3>Multiple Servers<a class="headerlink" href="#multiple-servers" title="Permalink to this headline">¶</a></h3>
+<p>You may easily run a task across multiple servers. First, add additional servers to your <code class="docutils literal"><span class="pre">&#64;servers</span></code> declaration. Each server should be assigned a unique name. Once you have defined your additional servers, simply list the servers in the task declaration&#8217;s <code class="docutils literal"><span class="pre">on</span></code> array:</p>
+<pre class="literal-block">
+&#64;servers(['web-1' =&gt; '192.168.1.1', 'web-2' =&gt; '192.168.1.2'])
+
+&#64;task('deploy', ['on' =&gt; ['web-1', 'web-2']])
+    cd site
+    git pull origin {{ $branch }}
+    php artisan migrate
+&#64;endtask
+</pre>
+<p>By default, the task will be executed on each server serially. Meaning, the task will finish running on the first server before proceeding to execute on the next server.</p>
+<div class="section" id="parallel-execution">
+<span id="parallel-execution"></span><h4>Parallel Execution<a class="headerlink" href="#parallel-execution" title="Permalink to this headline">¶</a></h4>
+<p>If you would like to run a task across multiple servers in parallel, add the <code class="docutils literal"><span class="pre">parallel</span></code> option to your task declaration:</p>
+<pre class="literal-block">
+&#64;servers(['web-1' =&gt; '192.168.1.1', 'web-2' =&gt; '192.168.1.2'])
+
+&#64;task('deploy', ['on' =&gt; ['web-1', 'web-2'], 'parallel' =&gt; true])
+    cd site
+    git pull origin {{ $branch }}
+    php artisan migrate
+&#64;endtask
+</pre>
+<p><a name="envoy-task-macros"></a></p>
+</div>
+</div>
+<div class="section" id="task-macros">
+<span id="task-macros"></span><h3>Task Macros<a class="headerlink" href="#task-macros" title="Permalink to this headline">¶</a></h3>
+<p>Macros allow you to define a set of tasks to be run in sequence using a single command. For instance, a <code class="docutils literal"><span class="pre">deploy</span></code> macro may run the <code class="docutils literal"><span class="pre">git</span></code> and <code class="docutils literal"><span class="pre">composer</span></code> tasks:</p>
+<pre class="literal-block">
+&#64;servers(['web' =&gt; '192.168.1.1'])
+
+&#64;macro('deploy')
+    git
+    composer
+&#64;endmacro
+
+&#64;task('git')
+    git pull origin master
+&#64;endtask
+
+&#64;task('composer')
+    composer install
+&#64;endtask
+</pre>
+<p>Once the macro has been defined, you may run it via single, simple command:</p>
+<pre class="literal-block">
+envoy run deploy
+</pre>
+<p><a name="envoy-running-tasks"></a></p>
+</div>
+</div>
+<div class="section" id="running-tasks">
+<span id="running-tasks"></span><h2>Running Tasks<a class="headerlink" href="#running-tasks" title="Permalink to this headline">¶</a></h2>
+<p>To run a task from your <code class="docutils literal"><span class="pre">Envoy.blade.php</span></code> file, execute Envoy&#8217;s <code class="docutils literal"><span class="pre">run</span></code> command, passing the command the name of the task or macro you would like to execute. Envoy will run the task and display the output from the servers as the task is running:</p>
+<pre class="literal-block">
+envoy run task
+</pre>
+<p><a name="envoy-notifications"></a>
+<a name="envoy-hipchat-notifications"></a></p>
+</div>
+<div class="section" id="notifications">
+<span id="notifications"></span><h2>Notifications<a class="headerlink" href="#notifications" title="Permalink to this headline">¶</a></h2>
+<p><a name="hipchat"></a></p>
+<div class="section" id="hipchat">
+<span id="hipchat"></span><h3>HipChat<a class="headerlink" href="#hipchat" title="Permalink to this headline">¶</a></h3>
+<p>After running a task, you may send a notification to your team&#8217;s HipChat room using Envoy&#8217;s <code class="docutils literal"><span class="pre">&#64;hipchat</span></code> directive. The directive accepts an API token, the name of the room, and the username to be displayed as the sender of the message:</p>
+<pre class="literal-block">
+&#64;servers(['web' =&gt; '192.168.1.1'])
+
+&#64;task('foo', ['on' =&gt; 'web'])
+    ls -la
+&#64;endtask
+
+&#64;after
+    &#64;hipchat('token', 'room', 'Envoy')
+&#64;endafter
+</pre>
+<p>If you wish, you may also pass a custom message to send to the HipChat room. Any variables available to your Envoy tasks will also be available when constructing the message:</p>
+<pre class="literal-block">
+&#64;after
+    &#64;hipchat('token', 'room', 'Envoy', &quot;{$task} ran in the {$env} environment.&quot;)
+&#64;endafter
+</pre>
+<p><a name="slack"></a></p>
+</div>
+<div class="section" id="slack">
+<span id="slack"></span><h3>Slack<a class="headerlink" href="#slack" title="Permalink to this headline">¶</a></h3>
+<p>In addition to HipChat, Envoy also supports sending notifications to <a class="reference external" href="https://slack.com">Slack</a>. The <code class="docutils literal"><span class="pre">&#64;slack</span></code> directive accepts a Slack hook URL, a channel name, and the message you wish to send to the channel:</p>
+<pre class="literal-block">
+&#64;after
+    &#64;slack('hook', 'channel', 'message')
+&#64;endafter
+</pre>
+<p>You may retrieve your webhook URL by creating an <code class="docutils literal"><span class="pre">Incoming</span> <span class="pre">WebHooks</span></code> integration on Slack&#8217;s website. The <code class="docutils literal"><span class="pre">hook</span></code> argument should be the entire webhook URL provided by the Incoming Webhooks Slack Integration. For example:</p>
+<pre class="literal-block">
+https://hooks.slack.com/services/ZZZZZZZZZ/YYYYYYYYY/XXXXXXXXXXXXXXX
+</pre>
+<p>You may provide one of the following as the channel argument:</p>
+<ul class="simple">
+<li>To send the notification to a channel: <code class="docutils literal"><span class="pre">#channel</span></code></li>
+<li>To send the notification to a user: <code class="docutils literal"><span class="pre">&#64;user</span></code></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, The Weezqyd.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

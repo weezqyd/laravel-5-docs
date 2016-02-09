@@ -1,0 +1,1445 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Collections &mdash; Laravel 5 Documentation 1.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Laravel 5 Documentation 1.0 documentation" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Laravel 5 Documentation
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <!-- Local TOC -->
+                <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Collections</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#creating-collections">Creating Collections</a></li>
+<li><a class="reference internal" href="#available-methods">Available Methods</a></li>
+<li><a class="reference internal" href="#method-listing">Method Listing</a><ul>
+<li><a class="reference internal" href="#all-collection-method-first-collection-method"><code class="docutils literal"><span class="pre">all()</span></code> {#collection-method .first-collection-method}</a></li>
+<li><a class="reference internal" href="#chunk-collection-method"><code class="docutils literal"><span class="pre">chunk()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#collapse-collection-method"><code class="docutils literal"><span class="pre">collapse()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#contains-collection-method"><code class="docutils literal"><span class="pre">contains()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#count-collection-method"><code class="docutils literal"><span class="pre">count()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#diff-collection-method"><code class="docutils literal"><span class="pre">diff()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#each-collection-method"><code class="docutils literal"><span class="pre">each()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#every-collection-method"><code class="docutils literal"><span class="pre">every()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#filter-collection-method"><code class="docutils literal"><span class="pre">filter()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#first-collection-method"><code class="docutils literal"><span class="pre">first()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#flatten-collection-method"><code class="docutils literal"><span class="pre">flatten()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#flip-collection-method"><code class="docutils literal"><span class="pre">flip()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#forget-collection-method"><code class="docutils literal"><span class="pre">forget()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#forpage-collection-method"><code class="docutils literal"><span class="pre">forPage()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#get-collection-method"><code class="docutils literal"><span class="pre">get()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#groupby-collection-method"><code class="docutils literal"><span class="pre">groupBy()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#has-collection-method"><code class="docutils literal"><span class="pre">has()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#implode-collection-method"><code class="docutils literal"><span class="pre">implode()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#intersect-collection-method"><code class="docutils literal"><span class="pre">intersect()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#isempty-collection-method"><code class="docutils literal"><span class="pre">isEmpty()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#keyby-collection-method"><code class="docutils literal"><span class="pre">keyBy()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#keys-collection-method"><code class="docutils literal"><span class="pre">keys()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#last-collection-method"><code class="docutils literal"><span class="pre">last()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#map-collection-method"><code class="docutils literal"><span class="pre">map()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#merge-collection-method"><code class="docutils literal"><span class="pre">merge()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#pluck-collection-method"><code class="docutils literal"><span class="pre">pluck()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#pop-collection-method"><code class="docutils literal"><span class="pre">pop()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#prepend-collection-method"><code class="docutils literal"><span class="pre">prepend()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#pull-collection-method"><code class="docutils literal"><span class="pre">pull()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#push-collection-method"><code class="docutils literal"><span class="pre">push()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#put-collection-method"><code class="docutils literal"><span class="pre">put()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#random-collection-method"><code class="docutils literal"><span class="pre">random()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#reduce-collection-method"><code class="docutils literal"><span class="pre">reduce()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#reject-collection-method"><code class="docutils literal"><span class="pre">reject()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#reverse-collection-method"><code class="docutils literal"><span class="pre">reverse()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#search-collection-method"><code class="docutils literal"><span class="pre">search()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#shift-collection-method"><code class="docutils literal"><span class="pre">shift()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#shuffle-collection-method"><code class="docutils literal"><span class="pre">shuffle()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#slice-collection-method"><code class="docutils literal"><span class="pre">slice()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#sort-collection-method"><code class="docutils literal"><span class="pre">sort()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#sortby-collection-method"><code class="docutils literal"><span class="pre">sortBy()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#sortbydesc-collection-method"><code class="docutils literal"><span class="pre">sortByDesc()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#splice-collection-method"><code class="docutils literal"><span class="pre">splice()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#sum-collection-method"><code class="docutils literal"><span class="pre">sum()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#take-collection-method"><code class="docutils literal"><span class="pre">take()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#toarray-collection-method"><code class="docutils literal"><span class="pre">toArray()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#tojson-collection-method"><code class="docutils literal"><span class="pre">toJson()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#transform-collection-method"><code class="docutils literal"><span class="pre">transform()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#unique-collection-method"><code class="docutils literal"><span class="pre">unique()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#values-collection-method"><code class="docutils literal"><span class="pre">values()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#where-collection-method"><code class="docutils literal"><span class="pre">where()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#whereloose-collection-method"><code class="docutils literal"><span class="pre">whereLoose()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#zip-collection-method"><code class="docutils literal"><span class="pre">zip()</span></code> {#collection-method}</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Laravel 5 Documentation</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Collections</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/collections.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="collections">
+<span id="collections"></span><h1>Collections<a class="headerlink" href="#collections" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference external" href="#introduction">Introduction</a></li>
+<li><a class="reference external" href="#creating-collections">Creating Collections</a></li>
+<li><a class="reference external" href="#available-methods">Available Methods</a></li>
+</ul>
+<p><a name="introduction"></a></p>
+<div class="section" id="introduction">
+<span id="introduction"></span><h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal"><span class="pre">Illuminate\Support\Collection</span></code> class provides a fluent, convenient wrapper for working with arrays of data. For example, check out the following code. We&#8217;ll use the <code class="docutils literal"><span class="pre">collect</span></code> helper to create a new collection instance from the array, run the <code class="docutils literal"><span class="pre">strtoupper</span></code> function on each element, and then remove all empty elements:</p>
+<pre class="literal-block">
+$collection = collect(['taylor', 'abigail', null])-&gt;map(function ($name) {
+    return strtoupper($name);
+})
+-&gt;reject(function ($name) {
+    return empty($name);
+});
+</pre>
+<p>As you can see, the <code class="docutils literal"><span class="pre">Collection</span></code> class allows you to chain its methods to perform fluent mapping and reducing of the underlying array. In general, every <code class="docutils literal"><span class="pre">Collection</span></code> method returns an entirely new <code class="docutils literal"><span class="pre">Collection</span></code> instance.</p>
+<p><a name="creating-collections"></a></p>
+</div>
+<div class="section" id="creating-collections">
+<span id="creating-collections"></span><h2>Creating Collections<a class="headerlink" href="#creating-collections" title="Permalink to this headline">¶</a></h2>
+<p>As mentioned above, the <code class="docutils literal"><span class="pre">collect</span></code> helper returns a new <code class="docutils literal"><span class="pre">Illuminate\Support\Collection</span></code> instance for the given array. So, creating a collection is as simple as:</p>
+<pre class="literal-block">
+$collection = collect([1, 2, 3]);
+</pre>
+<p>By default, collections of <a class="reference external" href="eloquent.html">Eloquent</a> models are always returned as <code class="docutils literal"><span class="pre">Collection</span></code> instances; however, feel free to use the <code class="docutils literal"><span class="pre">Collection</span></code> class wherever it is convenient for your application.</p>
+<p><a name="available-methods"></a></p>
+</div>
+<div class="section" id="available-methods">
+<span id="available-methods"></span><h2>Available Methods<a class="headerlink" href="#available-methods" title="Permalink to this headline">¶</a></h2>
+<p>For the remainder of this documentation, we&#8217;ll discuss each method available on the <code class="docutils literal"><span class="pre">Collection</span></code> class. Remember, all of these methods may be chained for fluently manipulating the underlying array. Furthermore, almost every method returns a new <code class="docutils literal"><span class="pre">Collection</span></code> instance, allowing you to preserve the original copy of the collection when necessary.</p>
+<p>You may select any method from this table to see an example of its usage:</p>
+<style>
+    #collection-method-list > p {
+        column-count: 3; -moz-column-count: 3; -webkit-column-count: 3;
+        column-gap: 2em; -moz-column-gap: 2em; -webkit-column-gap: 2em;
+    }<pre class="literal-block">
+#collection-method-list a {
+    display: block;
+}
+</style>
+</pre>
+</style><div id="collection-method-list" markdown="1">
+[all](#method-all)
+[chunk](#method-chunk)
+[collapse](#method-collapse)
+[contains](#method-contains)
+[count](#method-count)
+[diff](#method-diff)
+[each](#method-each)
+[filter](#method-filter)
+[first](#method-first)
+[flatten](#method-flatten)
+[flip](#method-flip)
+[forget](#method-forget)
+[forPage](#method-forpage)
+[get](#method-get)
+[groupBy](#method-groupby)
+[has](#method-has)
+[implode](#method-implode)
+[intersect](#method-intersect)
+[isEmpty](#method-isempty)
+[keyBy](#method-keyby)
+[keys](#method-keys)
+[last](#method-last)
+[map](#method-map)
+[merge](#method-merge)
+[pluck](#method-pluck)
+[pop](#method-pop)
+[prepend](#method-prepend)
+[pull](#method-pull)
+[push](#method-push)
+[put](#method-put)
+[random](#method-random)
+[reduce](#method-reduce)
+[reject](#method-reject)
+[reverse](#method-reverse)
+[search](#method-search)
+[shift](#method-shift)
+[shuffle](#method-shuffle)
+[slice](#method-slice)
+[sort](#method-sort)
+[sortBy](#method-sortby)
+[sortByDesc](#method-sortbydesc)
+[splice](#method-splice)
+[sum](#method-sum)
+[take](#method-take)
+[toArray](#method-toarray)
+[toJson](#method-tojson)
+[transform](#method-transform)
+[unique](#method-unique)
+[values](#method-values)
+[where](#method-where)
+[whereLoose](#method-whereloose)
+[zip](#method-zip)
+</div><p><a name="method-listing"></a></p>
+</div>
+<div class="section" id="method-listing">
+<span id="method-listing"></span><h2>Method Listing<a class="headerlink" href="#method-listing" title="Permalink to this headline">¶</a></h2>
+<style>
+    #collection-method code {
+        font-size: 14px;
+    }<pre class="literal-block">
+#collection-method:not(.first-collection-method) {
+    margin-top: 50px;
+}
+</style>
+</pre>
+</style><p><a name="method-all"></a></p>
+<div class="section" id="all-collection-method-first-collection-method">
+<span id="all-collection-method-first-collection-method"></span><h3><code class="docutils literal"><span class="pre">all()</span></code> {#collection-method .first-collection-method}<a class="headerlink" href="#all-collection-method-first-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">all</span></code> method simply returns the underlying array represented by the collection:</p>
+<pre class="literal-block">
+collect([1, 2, 3])-&gt;all();
+
+// [1, 2, 3]
+</pre>
+<p><a name="method-chunk"></a></p>
+</div>
+<div class="section" id="chunk-collection-method">
+<span id="chunk-collection-method"></span><h3><code class="docutils literal"><span class="pre">chunk()</span></code> {#collection-method}<a class="headerlink" href="#chunk-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">chunk</span></code> method breaks the collection into multiple, smaller collections of a given size:</p>
+<pre class="literal-block">
+$collection = collect([1, 2, 3, 4, 5, 6, 7]);
+
+$chunks = $collection-&gt;chunk(4);
+
+$chunks-&gt;toArray();
+
+// [[1, 2, 3, 4], [5, 6, 7]]
+</pre>
+<p>This method is especially useful in <a class="reference external" href="views.html">views</a> when working with a grid system such as <a class="reference external" href="http://getbootstrap.com/css/#grid">Bootstrap</a>. Imagine you have a collection of <a class="reference external" href="eloquen.html">Eloquent</a> models you want to display in a grid:</p>
+<pre class="literal-block">
+&#64;foreach ($products-&gt;chunk(3) as $chunk)
+    &lt;div class=&quot;row&quot;&gt;
+        &#64;foreach ($chunk as $product)
+            &lt;div class=&quot;col-xs-4&quot;&gt;{{ $product-&gt;name }}&lt;/div&gt;
+        &#64;endforeach
+    &lt;/div&gt;
+&#64;endforeach
+</pre>
+<p><a name="method-collapse"></a></p>
+</div>
+<div class="section" id="collapse-collection-method">
+<span id="collapse-collection-method"></span><h3><code class="docutils literal"><span class="pre">collapse()</span></code> {#collection-method}<a class="headerlink" href="#collapse-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">collapse</span></code> method collapses a collection of arrays into a flat collection:</p>
+<pre class="literal-block">
+$collection = collect([[1, 2, 3], [4, 5, 6], [7, 8, 9]]);
+
+$collapsed = $collection-&gt;collapse();
+
+$collapsed-&gt;all();
+
+// [1, 2, 3, 4, 5, 6, 7, 8, 9]
+</pre>
+<p><a name="method-contains"></a></p>
+</div>
+<div class="section" id="contains-collection-method">
+<span id="contains-collection-method"></span><h3><code class="docutils literal"><span class="pre">contains()</span></code> {#collection-method}<a class="headerlink" href="#contains-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">contains</span></code> method determines whether the collection contains a given item:</p>
+<pre class="literal-block">
+$collection = collect(['name' =&gt; 'Desk', 'price' =&gt; 100]);
+
+$collection-&gt;contains('Desk');
+
+// true
+
+$collection-&gt;contains('New York');
+
+// false
+</pre>
+<p>You may also pass a key / value pair to the <code class="docutils literal"><span class="pre">contains</span></code> method, which will determine if the given pair exists in the collection:</p>
+<pre class="literal-block">
+$collection = collect([
+    ['product' =&gt; 'Desk', 'price' =&gt; 200],
+    ['product' =&gt; 'Chair', 'price' =&gt; 100],
+]);
+
+$collection-&gt;contains('product', 'Bookcase');
+
+// false
+</pre>
+<p>Finally, you may also pass a callback to the <code class="docutils literal"><span class="pre">contains</span></code> method to perform your own truth test:</p>
+<pre class="literal-block">
+$collection = collect([1, 2, 3, 4, 5]);
+
+$collection-&gt;contains(function ($key, $value) {
+    return $value &gt; 5;
+});
+
+// false
+</pre>
+<p><a name="method-count"></a></p>
+</div>
+<div class="section" id="count-collection-method">
+<span id="count-collection-method"></span><h3><code class="docutils literal"><span class="pre">count()</span></code> {#collection-method}<a class="headerlink" href="#count-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">count</span></code> method returns the total number of items in the collection:</p>
+<pre class="literal-block">
+$collection = collect([1, 2, 3, 4]);
+
+$collection-&gt;count();
+
+// 4
+</pre>
+<p><a name="method-diff"></a></p>
+</div>
+<div class="section" id="diff-collection-method">
+<span id="diff-collection-method"></span><h3><code class="docutils literal"><span class="pre">diff()</span></code> {#collection-method}<a class="headerlink" href="#diff-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">diff</span></code> method compares the collection against another collection or a plain PHP <code class="docutils literal"><span class="pre">array</span></code>:</p>
+<pre class="literal-block">
+$collection = collect([1, 2, 3, 4, 5]);
+
+$diff = $collection-&gt;diff([2, 4, 6, 8]);
+
+$diff-&gt;all();
+
+// [1, 3, 5]
+</pre>
+<p><a name="method-each"></a></p>
+</div>
+<div class="section" id="each-collection-method">
+<span id="each-collection-method"></span><h3><code class="docutils literal"><span class="pre">each()</span></code> {#collection-method}<a class="headerlink" href="#each-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">each</span></code> method iterates over the items in the collection and passes each item to a given callback:</p>
+<pre class="literal-block">
+$collection = $collection-&gt;each(function ($item, $key) {
+    //
+});
+</pre>
+<p>Return <code class="docutils literal"><span class="pre">false</span></code> from your callback to break out of the loop:</p>
+<pre class="literal-block">
+$collection = $collection-&gt;each(function ($item, $key) {
+    if (/* some condition */) {
+        return false;
+    }
+});
+</pre>
+<p><a name="method-every"></a></p>
+</div>
+<div class="section" id="every-collection-method">
+<span id="every-collection-method"></span><h3><code class="docutils literal"><span class="pre">every()</span></code> {#collection-method}<a class="headerlink" href="#every-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">every</span></code> method creates a new collection consisting of every n-th element:</p>
+<pre class="literal-block">
+$collection = collect(['a', 'b', 'c', 'd', 'e', 'f']);
+
+$collection-&gt;every(4);
+
+// ['a', 'e']
+</pre>
+<p>You may optionally pass offset as the second argument:</p>
+<pre class="literal-block">
+$collection-&gt;every(4, 1);
+
+// ['b', 'f']
+</pre>
+<p><a name="method-filter"></a></p>
+</div>
+<div class="section" id="filter-collection-method">
+<span id="filter-collection-method"></span><h3><code class="docutils literal"><span class="pre">filter()</span></code> {#collection-method}<a class="headerlink" href="#filter-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">filter</span></code> method filters the collection by a given callback, keeping only those items that pass a given truth test:</p>
+<pre class="literal-block">
+$collection = collect([1, 2, 3, 4]);
+
+$filtered = $collection-&gt;filter(function ($item) {
+    return $item &gt; 2;
+});
+
+$filtered-&gt;all();
+
+// [3, 4]
+</pre>
+<p>For the inverse of <code class="docutils literal"><span class="pre">filter</span></code>, see the <a class="reference external" href="#method-reject">reject</a> method.</p>
+<p><a name="method-first"></a></p>
+</div>
+<div class="section" id="first-collection-method">
+<span id="first-collection-method"></span><h3><code class="docutils literal"><span class="pre">first()</span></code> {#collection-method}<a class="headerlink" href="#first-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">first</span></code> method returns the first element in the collection that passes a given truth test:</p>
+<pre class="literal-block">
+collect([1, 2, 3, 4])-&gt;first(function ($key, $value) {
+    return $value &gt; 2;
+});
+
+// 3
+</pre>
+<p>You may also call the <code class="docutils literal"><span class="pre">first</span></code> method with no arguments to get the first element in the collection. If the collection is empty, <code class="docutils literal"><span class="pre">null</span></code> is returned:</p>
+<pre class="literal-block">
+collect([1, 2, 3, 4])-&gt;first();
+
+// 1
+</pre>
+<p><a name="method-flatten"></a></p>
+</div>
+<div class="section" id="flatten-collection-method">
+<span id="flatten-collection-method"></span><h3><code class="docutils literal"><span class="pre">flatten()</span></code> {#collection-method}<a class="headerlink" href="#flatten-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">flatten</span></code> method flattens a multi-dimensional collection into a single dimension:</p>
+<pre class="literal-block">
+$collection = collect(['name' =&gt; 'taylor', 'languages' =&gt; ['php', 'javascript']]);
+
+$flattened = $collection-&gt;flatten();
+
+$flattened-&gt;all();
+
+// ['taylor', 'php', 'javascript'];
+</pre>
+<p><a name="method-flip"></a></p>
+</div>
+<div class="section" id="flip-collection-method">
+<span id="flip-collection-method"></span><h3><code class="docutils literal"><span class="pre">flip()</span></code> {#collection-method}<a class="headerlink" href="#flip-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">flip</span></code> method swaps the collection&#8217;s keys with their corresponding values:</p>
+<pre class="literal-block">
+$collection = collect(['name' =&gt; 'taylor', 'framework' =&gt; 'laravel']);
+
+$flipped = $collection-&gt;flip();
+
+$flipped-&gt;all();
+
+// ['taylor' =&gt; 'name', 'laravel' =&gt; 'framework']
+</pre>
+<p><a name="method-forget"></a></p>
+</div>
+<div class="section" id="forget-collection-method">
+<span id="forget-collection-method"></span><h3><code class="docutils literal"><span class="pre">forget()</span></code> {#collection-method}<a class="headerlink" href="#forget-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">forget</span></code> method removes an item from the collection by its key:</p>
+<pre class="literal-block">
+$collection = collect(['name' =&gt; 'taylor', 'framework' =&gt; 'laravel']);
+
+$collection-&gt;forget('name');
+
+$collection-&gt;all();
+
+// [framework' =&gt; 'laravel']
+</pre>
+<blockquote>
+<div><strong>Note:</strong> Unlike most other collection methods, <code class="docutils literal"><span class="pre">forget</span></code> does not return a new modified collection; it modifies the collection it is called on.</div></blockquote>
+<p><a name="method-forpage"></a></p>
+</div>
+<div class="section" id="forpage-collection-method">
+<span id="forpage-collection-method"></span><h3><code class="docutils literal"><span class="pre">forPage()</span></code> {#collection-method}<a class="headerlink" href="#forpage-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">forPage</span></code> method returns a new collection containing the items that would be present on a given page number:</p>
+<pre class="literal-block">
+$collection = collect([1, 2, 3, 4, 5, 6, 7, 8, 9])-&gt;forPage(2, 3);
+
+$collection-&gt;all();
+
+// [4, 5, 6]
+</pre>
+<p>The method requires the page number and the number of items to show per page, respectively.</p>
+<p><a name="method-get"></a></p>
+</div>
+<div class="section" id="get-collection-method">
+<span id="get-collection-method"></span><h3><code class="docutils literal"><span class="pre">get()</span></code> {#collection-method}<a class="headerlink" href="#get-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">get</span></code> method returns the item at a given key. If the key does not exist, <code class="docutils literal"><span class="pre">null</span></code> is returned:</p>
+<pre class="literal-block">
+$collection = collect(['name' =&gt; 'taylor', 'framework' =&gt; 'laravel']);
+
+$value = $collection-&gt;get('name');
+
+// taylor
+</pre>
+<p>You may optionally pass a default value as the second argument:</p>
+<pre class="literal-block">
+$collection = collect(['name' =&gt; 'taylor', 'framework' =&gt; 'laravel']);
+
+$value = $collection-&gt;get('foo', 'default-value');
+
+// default-value
+</pre>
+<p>You may even pass a callback as the default value. The result of the callback will be returned if the specified key does not exist:</p>
+<pre class="literal-block">
+$collection-&gt;get('email', function () {
+    return 'default-value';
+});
+
+// default-value
+</pre>
+<p><a name="method-groupby"></a></p>
+</div>
+<div class="section" id="groupby-collection-method">
+<span id="groupby-collection-method"></span><h3><code class="docutils literal"><span class="pre">groupBy()</span></code> {#collection-method}<a class="headerlink" href="#groupby-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">groupBy</span></code> method groups the collection&#8217;s items by a given key:</p>
+<pre class="literal-block">
+$collection = collect([
+    ['account_id' =&gt; 'account-x10', 'product' =&gt; 'Chair'],
+    ['account_id' =&gt; 'account-x10', 'product' =&gt; 'Bookcase'],
+    ['account_id' =&gt; 'account-x11', 'product' =&gt; 'Desk'],
+]);
+
+$grouped = $collection-&gt;groupBy('account_id');
+
+$grouped-&gt;toArray();
+
+/*
+    [
+        'account-x10' =&gt; [
+            ['account_id' =&gt; 'account-x10', 'product' =&gt; 'Chair'],
+            ['account_id' =&gt; 'account-x10', 'product' =&gt; 'Bookcase'],
+        ],
+        'account-x11' =&gt; [
+            ['account_id' =&gt; 'account-x11', 'product' =&gt; 'Desk'],
+        ],
+    ]
+*/
+</pre>
+<p>In addition to passing a string <code class="docutils literal"><span class="pre">key</span></code>, you may also pass a callback. The callback should return the value you wish to key the group by:</p>
+<pre class="literal-block">
+$grouped = $collection-&gt;groupBy(function ($item, $key) {
+    return substr($item['account_id'], -3);
+});
+
+$grouped-&gt;toArray();
+
+/*
+    [
+        'x10' =&gt; [
+            ['account_id' =&gt; 'account-x10', 'product' =&gt; 'Chair'],
+            ['account_id' =&gt; 'account-x10', 'product' =&gt; 'Bookcase'],
+        ],
+        'x11' =&gt; [
+            ['account_id' =&gt; 'account-x11', 'product' =&gt; 'Desk'],
+        ],
+    ]
+*/
+</pre>
+<p><a name="method-has"></a></p>
+</div>
+<div class="section" id="has-collection-method">
+<span id="has-collection-method"></span><h3><code class="docutils literal"><span class="pre">has()</span></code> {#collection-method}<a class="headerlink" href="#has-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">has</span></code> method determines if a given key exists in the collection:</p>
+<pre class="literal-block">
+$collection = collect(['account_id' =&gt; 1, 'product' =&gt; 'Desk']);
+
+$collection-&gt;has('email');
+
+// false
+</pre>
+<p><a name="method-implode"></a></p>
+</div>
+<div class="section" id="implode-collection-method">
+<span id="implode-collection-method"></span><h3><code class="docutils literal"><span class="pre">implode()</span></code> {#collection-method}<a class="headerlink" href="#implode-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">implode</span></code> method joins the items in a collection. Its arguments depend on the type of items in the collection.</p>
+<p>If the collection contains arrays or objects, you should pass the key of the attributes you wish to join, and the &#8220;glue&#8221; string you wish to place between the values:</p>
+<pre class="literal-block">
+$collection = collect([
+    ['account_id' =&gt; 1, 'product' =&gt; 'Desk'],
+    ['account_id' =&gt; 2, 'product' =&gt; 'Chair'],
+]);
+
+$collection-&gt;implode('product', ', ');
+
+// Desk, Chair
+</pre>
+<p>If the collection contains simple strings or numeric values, simply pass the &#8220;glue&#8221; as the only argument to the method:</p>
+<pre class="literal-block">
+collect([1, 2, 3, 4, 5])-&gt;implode('-');
+
+// '1-2-3-4-5'
+</pre>
+<p><a name="method-intersect"></a></p>
+</div>
+<div class="section" id="intersect-collection-method">
+<span id="intersect-collection-method"></span><h3><code class="docutils literal"><span class="pre">intersect()</span></code> {#collection-method}<a class="headerlink" href="#intersect-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">intersect</span></code> method removes any values that are not present in the given <code class="docutils literal"><span class="pre">array</span></code> or collection:</p>
+<pre class="literal-block">
+$collection = collect(['Desk', 'Sofa', 'Chair']);
+
+$intersect = $collection-&gt;intersect(['Desk', 'Chair', 'Bookcase']);
+
+$intersect-&gt;all();
+
+// [0 =&gt; 'Desk', 2 =&gt; 'Chair']
+</pre>
+<p>As you can see, the resulting collection will preserve the original collection&#8217;s keys.</p>
+<p><a name="method-isempty"></a></p>
+</div>
+<div class="section" id="isempty-collection-method">
+<span id="isempty-collection-method"></span><h3><code class="docutils literal"><span class="pre">isEmpty()</span></code> {#collection-method}<a class="headerlink" href="#isempty-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">isEmpty</span></code> method returns <code class="docutils literal"><span class="pre">true</span></code> if the collection is empty; otherwise, <code class="docutils literal"><span class="pre">false</span></code> is returned:</p>
+<pre class="literal-block">
+collect([])-&gt;isEmpty();
+
+// true
+</pre>
+<p><a name="method-keyby"></a></p>
+</div>
+<div class="section" id="keyby-collection-method">
+<span id="keyby-collection-method"></span><h3><code class="docutils literal"><span class="pre">keyBy()</span></code> {#collection-method}<a class="headerlink" href="#keyby-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>Keys the collection by the given key:</p>
+<pre class="literal-block">
+$collection = collect([
+    ['product_id' =&gt; 'prod-100', 'name' =&gt; 'desk'],
+    ['product_id' =&gt; 'prod-200', 'name' =&gt; 'chair'],
+]);
+
+$keyed = $collection-&gt;keyBy('product_id');
+
+$keyed-&gt;all();
+
+/*
+    [
+        'prod-100' =&gt; ['product_id' =&gt; 'prod-100', 'name' =&gt; 'Desk'],
+        'prod-200' =&gt; ['product_id' =&gt; 'prod-200', 'name' =&gt; 'Chair'],
+    ]
+*/
+</pre>
+<p>If multiple items have the same key, only the last one will appear in the new collection.</p>
+<p>You may also pass your own callback, which should return the value to key the collection by:</p>
+<pre class="literal-block">
+$keyed = $collection-&gt;keyBy(function ($item) {
+    return strtoupper($item['product_id']);
+});
+
+$keyed-&gt;all();
+
+/*
+    [
+        'PROD-100' =&gt; ['product_id' =&gt; 'prod-100', 'name' =&gt; 'Desk'],
+        'PROD-200' =&gt; ['product_id' =&gt; 'prod-200', 'name' =&gt; 'Chair'],
+    ]
+*/
+</pre>
+<p><a name="method-keys"></a></p>
+</div>
+<div class="section" id="keys-collection-method">
+<span id="keys-collection-method"></span><h3><code class="docutils literal"><span class="pre">keys()</span></code> {#collection-method}<a class="headerlink" href="#keys-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">keys</span></code> method returns all of the collection&#8217;s keys:</p>
+<pre class="literal-block">
+$collection = collect([
+    'prod-100' =&gt; ['product_id' =&gt; 'prod-100', 'name' =&gt; 'Desk'],
+    'prod-200' =&gt; ['product_id' =&gt; 'prod-200', 'name' =&gt; 'Chair'],
+]);
+
+$keys = $collection-&gt;keys();
+
+$keys-&gt;all();
+
+// ['prod-100', 'prod-200']
+</pre>
+<p><a name="method-last"></a></p>
+</div>
+<div class="section" id="last-collection-method">
+<span id="last-collection-method"></span><h3><code class="docutils literal"><span class="pre">last()</span></code> {#collection-method}<a class="headerlink" href="#last-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">last</span></code> method returns the last element in the collection that passes a given truth test:</p>
+<pre class="literal-block">
+collect([1, 2, 3, 4])-&gt;last(function ($key, $value) {
+    return $value &lt; 3;
+});
+
+// 2
+</pre>
+<p>You may also call the <code class="docutils literal"><span class="pre">last</span></code> method with no arguments to get the last element in the collection. If the collection is empty, <code class="docutils literal"><span class="pre">null</span></code> is returned:</p>
+<pre class="literal-block">
+collect([1, 2, 3, 4])-&gt;last();
+
+// 4
+</pre>
+<p><a name="method-map"></a></p>
+</div>
+<div class="section" id="map-collection-method">
+<span id="map-collection-method"></span><h3><code class="docutils literal"><span class="pre">map()</span></code> {#collection-method}<a class="headerlink" href="#map-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">map</span></code> method iterates through the collection and passes each value to the given callback. The callback is free to modify the item and return it, thus forming a new collection of modified items:</p>
+<pre class="literal-block">
+$collection = collect([1, 2, 3, 4, 5]);
+
+$multiplied = $collection-&gt;map(function ($item, $key) {
+    return $item * 2;
+});
+
+$multiplied-&gt;all();
+
+// [2, 4, 6, 8, 10]
+</pre>
+<blockquote>
+<div><strong>Note:</strong> Like most other collection methods, <code class="docutils literal"><span class="pre">map</span></code> returns a new collection instance; it does not modify the collection it is called on. If you want to transform the original collection, use the <a class="reference external" href="#method-transform"><code class="docutils literal"><span class="pre">transform</span></code></a> method.</div></blockquote>
+<p><a name="method-merge"></a></p>
+</div>
+<div class="section" id="merge-collection-method">
+<span id="merge-collection-method"></span><h3><code class="docutils literal"><span class="pre">merge()</span></code> {#collection-method}<a class="headerlink" href="#merge-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">merge</span></code> method merges the given array into the collection. Any string key in the array matching a string key in the collection will overwrite the value in the collection:</p>
+<pre class="literal-block">
+$collection = collect(['product_id' =&gt; 1, 'name' =&gt; 'Desk']);
+
+$merged = $collection-&gt;merge(['price' =&gt; 100, 'discount' =&gt; false]);
+
+$merged-&gt;all();
+
+// ['product_id' =&gt; 1, 'name' =&gt; 'Desk', 'price' =&gt; 100, 'discount' =&gt; false]
+</pre>
+<p>If the given array&#8217;s keys are numeric, the values will be appended to the end of the collection:</p>
+<pre class="literal-block">
+$collection = collect(['Desk', 'Chair']);
+
+$merged = $collection-&gt;merge(['Bookcase', 'Door']);
+
+$merged-&gt;all();
+
+// ['Desk', 'Chair', 'Bookcase', 'Door']
+</pre>
+<p><a name="method-pluck"></a></p>
+</div>
+<div class="section" id="pluck-collection-method">
+<span id="pluck-collection-method"></span><h3><code class="docutils literal"><span class="pre">pluck()</span></code> {#collection-method}<a class="headerlink" href="#pluck-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">pluck</span></code> method retrieves all of the collection values for a given key:</p>
+<pre class="literal-block">
+$collection = collect([
+    ['product_id' =&gt; 'prod-100', 'name' =&gt; 'Desk'],
+    ['product_id' =&gt; 'prod-200', 'name' =&gt; 'Chair'],
+]);
+
+$plucked = $collection-&gt;pluck('name');
+
+$plucked-&gt;all();
+
+// ['Desk', 'Chair']
+</pre>
+<p>You may also specify how you wish the resulting collection to be keyed:</p>
+<pre class="literal-block">
+$plucked = $collection-&gt;pluck('name', 'product_id');
+
+$plucked-&gt;all();
+
+// ['prod-100' =&gt; 'Desk', 'prod-200' =&gt; 'Chair']
+</pre>
+<p><a name="method-pop"></a></p>
+</div>
+<div class="section" id="pop-collection-method">
+<span id="pop-collection-method"></span><h3><code class="docutils literal"><span class="pre">pop()</span></code> {#collection-method}<a class="headerlink" href="#pop-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">pop</span></code> method removes and returns the last item from the collection:</p>
+<pre class="literal-block">
+$collection = collect([1, 2, 3, 4, 5]);
+
+$collection-&gt;pop();
+
+// 5
+
+$collection-&gt;all();
+
+// [1, 2, 3, 4]
+</pre>
+<p><a name="method-prepend"></a></p>
+</div>
+<div class="section" id="prepend-collection-method">
+<span id="prepend-collection-method"></span><h3><code class="docutils literal"><span class="pre">prepend()</span></code> {#collection-method}<a class="headerlink" href="#prepend-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">prepend</span></code> method adds an item to the beginning of the collection:</p>
+<pre class="literal-block">
+$collection = collect([1, 2, 3, 4, 5]);
+
+$collection-&gt;prepend(0);
+
+$collection-&gt;all();
+
+// [0, 1, 2, 3, 4, 5]
+</pre>
+<p><a name="method-pull"></a></p>
+</div>
+<div class="section" id="pull-collection-method">
+<span id="pull-collection-method"></span><h3><code class="docutils literal"><span class="pre">pull()</span></code> {#collection-method}<a class="headerlink" href="#pull-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">pull</span></code> method removes and returns an item from the collection by its key:</p>
+<pre class="literal-block">
+$collection = collect(['product_id' =&gt; 'prod-100', 'name' =&gt; 'Desk']);
+
+$collection-&gt;pull('name');
+
+// 'Desk'
+
+$collection-&gt;all();
+
+// ['product_id' =&gt; 'prod-100']
+</pre>
+<p><a name="method-push"></a></p>
+</div>
+<div class="section" id="push-collection-method">
+<span id="push-collection-method"></span><h3><code class="docutils literal"><span class="pre">push()</span></code> {#collection-method}<a class="headerlink" href="#push-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">push</span></code> method appends an item to the end of the collection:</p>
+<pre class="literal-block">
+$collection = collect([1, 2, 3, 4]);
+
+$collection-&gt;push(5);
+
+$collection-&gt;all();
+
+// [1, 2, 3, 4, 5]
+</pre>
+<p><a name="method-put"></a></p>
+</div>
+<div class="section" id="put-collection-method">
+<span id="put-collection-method"></span><h3><code class="docutils literal"><span class="pre">put()</span></code> {#collection-method}<a class="headerlink" href="#put-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">put</span></code> method sets the given key and value in the collection:</p>
+<pre class="literal-block">
+$collection = collect(['product_id' =&gt; 1, 'name' =&gt; 'Desk']);
+
+$collection-&gt;put('price', 100);
+
+$collection-&gt;all();
+
+// ['product_id' =&gt; 1, 'name' =&gt; 'Desk', 'price' =&gt; 100]
+</pre>
+<p><a name="method-random"></a></p>
+</div>
+<div class="section" id="random-collection-method">
+<span id="random-collection-method"></span><h3><code class="docutils literal"><span class="pre">random()</span></code> {#collection-method}<a class="headerlink" href="#random-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">random</span></code> method returns a random item from the collection:</p>
+<pre class="literal-block">
+$collection = collect([1, 2, 3, 4, 5]);
+
+$collection-&gt;random();
+
+// 4 - (retrieved randomly)
+</pre>
+<p>You may optionally pass an integer to <code class="docutils literal"><span class="pre">random</span></code>. If that integer is more than <code class="docutils literal"><span class="pre">1</span></code>, a collection of items is returned:</p>
+<pre class="literal-block">
+$random = $collection-&gt;random(3);
+
+$random-&gt;all();
+
+// [2, 4, 5] - (retrieved randomly)
+</pre>
+<p><a name="method-reduce"></a></p>
+</div>
+<div class="section" id="reduce-collection-method">
+<span id="reduce-collection-method"></span><h3><code class="docutils literal"><span class="pre">reduce()</span></code> {#collection-method}<a class="headerlink" href="#reduce-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">reduce</span></code> method reduces the collection to a single value, passing the result of each iteration into the subsequent iteration:</p>
+<pre class="literal-block">
+$collection = collect([1, 2, 3]);
+
+$total = $collection-&gt;reduce(function ($carry, $item) {
+    return $carry + $item;
+});
+
+// 6
+</pre>
+<p>The value for <code class="docutils literal"><span class="pre">$carry</span></code> on the first iteration is <code class="docutils literal"><span class="pre">null</span></code>; however, you may specify its initial value by passing a second argument to <code class="docutils literal"><span class="pre">reduce</span></code>:</p>
+<pre class="literal-block">
+$collection-&gt;reduce(function ($carry, $item) {
+    return $carry + $item;
+}, 4);
+
+// 10
+</pre>
+<p><a name="method-reject"></a></p>
+</div>
+<div class="section" id="reject-collection-method">
+<span id="reject-collection-method"></span><h3><code class="docutils literal"><span class="pre">reject()</span></code> {#collection-method}<a class="headerlink" href="#reject-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">reject</span></code> method filters the collection using the given callback. The callback should return <code class="docutils literal"><span class="pre">true</span></code> for any items it wishes to remove from the resulting collection:</p>
+<pre class="literal-block">
+$collection = collect([1, 2, 3, 4]);
+
+$filtered = $collection-&gt;reject(function ($item) {
+    return $item &gt; 2;
+});
+
+$filtered-&gt;all();
+
+// [1, 2]
+</pre>
+<p>For the inverse of the <code class="docutils literal"><span class="pre">reject</span></code> method, see the <a class="reference external" href="#method-filter"><code class="docutils literal"><span class="pre">filter</span></code></a> method.</p>
+<p><a name="method-reverse"></a></p>
+</div>
+<div class="section" id="reverse-collection-method">
+<span id="reverse-collection-method"></span><h3><code class="docutils literal"><span class="pre">reverse()</span></code> {#collection-method}<a class="headerlink" href="#reverse-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">reverse</span></code> method reverses the order of the collection&#8217;s items:</p>
+<pre class="literal-block">
+$collection = collect([1, 2, 3, 4, 5]);
+
+$reversed = $collection-&gt;reverse();
+
+$reversed-&gt;all();
+
+// [5, 4, 3, 2, 1]
+</pre>
+<p><a name="method-search"></a></p>
+</div>
+<div class="section" id="search-collection-method">
+<span id="search-collection-method"></span><h3><code class="docutils literal"><span class="pre">search()</span></code> {#collection-method}<a class="headerlink" href="#search-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">search</span></code> method searches the collection for the given value and returns its key if found. If the item is not found, <code class="docutils literal"><span class="pre">false</span></code> is returned.</p>
+<pre class="literal-block">
+$collection = collect([2, 4, 6, 8]);
+
+$collection-&gt;search(4);
+
+// 1
+</pre>
+<p>The search is done using a &#8220;loose&#8221; comparison. To use strict comparison, pass <code class="docutils literal"><span class="pre">true</span></code> as the second argument to the method:</p>
+<pre class="literal-block">
+$collection-&gt;search('4', true);
+
+// false
+</pre>
+<p>Alternatively, you may pass in your own callback to search for the first item that passes your truth test:</p>
+<pre class="literal-block">
+$collection-&gt;search(function ($item, $key) {
+    return $item &gt; 5;
+});
+
+// 2
+</pre>
+<p><a name="method-shift"></a></p>
+</div>
+<div class="section" id="shift-collection-method">
+<span id="shift-collection-method"></span><h3><code class="docutils literal"><span class="pre">shift()</span></code> {#collection-method}<a class="headerlink" href="#shift-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">shift</span></code> method removes and returns the first item from the collection:</p>
+<pre class="literal-block">
+$collection = collect([1, 2, 3, 4, 5]);
+
+$collection-&gt;shift();
+
+// 1
+
+$collection-&gt;all();
+
+// [2, 3, 4, 5]
+</pre>
+<p><a name="method-shuffle"></a></p>
+</div>
+<div class="section" id="shuffle-collection-method">
+<span id="shuffle-collection-method"></span><h3><code class="docutils literal"><span class="pre">shuffle()</span></code> {#collection-method}<a class="headerlink" href="#shuffle-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">shuffle</span></code> method randomly shuffles the items in the collection:</p>
+<pre class="literal-block">
+$collection = collect([1, 2, 3, 4, 5]);
+
+$shuffled = $collection-&gt;shuffle();
+
+$shuffled-&gt;all();
+
+// [3, 2, 5, 1, 4] // (generated randomly)
+</pre>
+<p><a name="method-slice"></a></p>
+</div>
+<div class="section" id="slice-collection-method">
+<span id="slice-collection-method"></span><h3><code class="docutils literal"><span class="pre">slice()</span></code> {#collection-method}<a class="headerlink" href="#slice-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">slice</span></code> method returns a slice of the collection starting at the given index:</p>
+<pre class="literal-block">
+$collection = collect([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+
+$slice = $collection-&gt;slice(4);
+
+$slice-&gt;all();
+
+// [5, 6, 7, 8, 9, 10]
+</pre>
+<p>If you would like to limit the size of the returned slice, pass the desired size as the second argument to the method:</p>
+<pre class="literal-block">
+$slice = $collection-&gt;slice(4, 2);
+
+$slice-&gt;all();
+
+// [5, 6]
+</pre>
+<p>The returned slice will have new, numerically indexed keys. If you wish to preserve the original keys, pass <code class="docutils literal"><span class="pre">true</span></code> as the third argument to the method.</p>
+<p><a name="method-sort"></a></p>
+</div>
+<div class="section" id="sort-collection-method">
+<span id="sort-collection-method"></span><h3><code class="docutils literal"><span class="pre">sort()</span></code> {#collection-method}<a class="headerlink" href="#sort-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">sort</span></code> method sorts the collection:</p>
+<pre class="literal-block">
+$collection = collect([5, 3, 1, 2, 4]);
+
+$sorted = $collection-&gt;sort();
+
+$sorted-&gt;values()-&gt;all();
+
+// [1, 2, 3, 4, 5]
+</pre>
+<p>The sorted collection keeps the original array keys. In this example we used the <a class="reference external" href="#method-values"><code class="docutils literal"><span class="pre">values</span></code></a> method to reset the keys to consecutively numbered indexes.</p>
+<p>For sorting a collection of nested arrays or objects, see the <a class="reference external" href="#method-sortby"><code class="docutils literal"><span class="pre">sortBy</span></code></a> and <a class="reference external" href="#method-sortbydesc"><code class="docutils literal"><span class="pre">sortByDesc</span></code></a> methods.</p>
+<p>If your sorting needs are more advanced, you may pass a callback to <code class="docutils literal"><span class="pre">sort</span></code> with your own algorithm. Refer to the PHP documentation on <a class="reference external" href="http://php.net/manual/en/function.usort.php#refsect1-function.usort-parameters"><code class="docutils literal"><span class="pre">usort</span></code></a>, which is what the collection&#8217;s <code class="docutils literal"><span class="pre">sort</span></code> method calls under the hood.</p>
+<p><a name="method-sortby"></a></p>
+</div>
+<div class="section" id="sortby-collection-method">
+<span id="sortby-collection-method"></span><h3><code class="docutils literal"><span class="pre">sortBy()</span></code> {#collection-method}<a class="headerlink" href="#sortby-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">sortBy</span></code> method sorts the collection by the given key:</p>
+<pre class="literal-block">
+$collection = collect([
+    ['name' =&gt; 'Desk', 'price' =&gt; 200],
+    ['name' =&gt; 'Chair', 'price' =&gt; 100],
+    ['name' =&gt; 'Bookcase', 'price' =&gt; 150],
+]);
+
+$sorted = $collection-&gt;sortBy('price');
+
+$sorted-&gt;values()-&gt;all();
+
+/*
+    [
+        ['name' =&gt; 'Chair', 'price' =&gt; 100],
+        ['name' =&gt; 'Bookcase', 'price' =&gt; 150],
+        ['name' =&gt; 'Desk', 'price' =&gt; 200],
+    ]
+*/
+</pre>
+<p>The sorted collection keeps the original array keys. In this example we used the <a class="reference external" href="#method-values"><code class="docutils literal"><span class="pre">values</span></code></a> method to reset the keys to consecutively numbered indexes.</p>
+<p>You can also pass your own callback to determine how to sort the collection values:</p>
+<pre class="literal-block">
+$collection = collect([
+    ['name' =&gt; 'Desk', 'colors' =&gt; ['Black', 'Mahogany']],
+    ['name' =&gt; 'Chair', 'colors' =&gt; ['Black']],
+    ['name' =&gt; 'Bookcase', 'colors' =&gt; ['Red', 'Beige', 'Brown']],
+]);
+
+$sorted = $collection-&gt;sortBy(function ($product, $key) {
+    return count($product['colors']);
+});
+
+$sorted-&gt;values()-&gt;all();
+
+/*
+    [
+        ['name' =&gt; 'Chair', 'colors' =&gt; ['Black']],
+        ['name' =&gt; 'Desk', 'colors' =&gt; ['Black', 'Mahogany']],
+        ['name' =&gt; 'Bookcase', 'colors' =&gt; ['Red', 'Beige', 'Brown']],
+    ]
+*/
+</pre>
+<p><a name="method-sortbydesc"></a></p>
+</div>
+<div class="section" id="sortbydesc-collection-method">
+<span id="sortbydesc-collection-method"></span><h3><code class="docutils literal"><span class="pre">sortByDesc()</span></code> {#collection-method}<a class="headerlink" href="#sortbydesc-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>This method has the same signature as the <a class="reference external" href="#method-sortby"><code class="docutils literal"><span class="pre">sortBy</span></code></a> method, but will sort the collection in the opposite order.</p>
+<p><a name="method-splice"></a></p>
+</div>
+<div class="section" id="splice-collection-method">
+<span id="splice-collection-method"></span><h3><code class="docutils literal"><span class="pre">splice()</span></code> {#collection-method}<a class="headerlink" href="#splice-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">splice</span></code> method removes and returns a slice of items starting at the specified index:</p>
+<pre class="literal-block">
+$collection = collect([1, 2, 3, 4, 5]);
+
+$chunk = $collection-&gt;splice(2);
+
+$chunk-&gt;all();
+
+// [3, 4, 5]
+
+$collection-&gt;all();
+
+// [1, 2]
+</pre>
+<p>You may pass a second argument to limit the size of the resulting chunk:</p>
+<pre class="literal-block">
+$collection = collect([1, 2, 3, 4, 5]);
+
+$chunk = $collection-&gt;splice(2, 1);
+
+$chunk-&gt;all();
+
+// [3]
+
+$collection-&gt;all();
+
+// [1, 2, 4, 5]
+</pre>
+<p>In addition, you can pass a third argument containing the new items to replace the items removed from the collection:</p>
+<pre class="literal-block">
+$collection = collect([1, 2, 3, 4, 5]);
+
+$chunk = $collection-&gt;splice(2, 1, [10, 11]);
+
+$chunk-&gt;all();
+
+// [3]
+
+$collection-&gt;all();
+
+// [1, 2, 10, 11, 4, 5]
+</pre>
+<p><a name="method-sum"></a></p>
+</div>
+<div class="section" id="sum-collection-method">
+<span id="sum-collection-method"></span><h3><code class="docutils literal"><span class="pre">sum()</span></code> {#collection-method}<a class="headerlink" href="#sum-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">sum</span></code> method returns the sum of all items in the collection:</p>
+<pre class="literal-block">
+collect([1, 2, 3, 4, 5])-&gt;sum();
+
+// 15
+</pre>
+<p>If the collection contains nested arrays or objects, you should pass a key to use for determining which values to sum:</p>
+<pre class="literal-block">
+$collection = collect([
+    ['name' =&gt; 'JavaScript: The Good Parts', 'pages' =&gt; 176],
+    ['name' =&gt; 'JavaScript: The Definitive Guide', 'pages' =&gt; 1096],
+]);
+
+$collection-&gt;sum('pages');
+
+// 1272
+</pre>
+<p>In addition, you may pass your own callback to determine which values of the collection to sum:</p>
+<pre class="literal-block">
+$collection = collect([
+    ['name' =&gt; 'Chair', 'colors' =&gt; ['Black']],
+    ['name' =&gt; 'Desk', 'colors' =&gt; ['Black', 'Mahogany']],
+    ['name' =&gt; 'Bookcase', 'colors' =&gt; ['Red', 'Beige', 'Brown']],
+]);
+
+$collection-&gt;sum(function ($product) {
+    return count($product['colors']);
+});
+
+// 6
+</pre>
+<p><a name="method-take"></a></p>
+</div>
+<div class="section" id="take-collection-method">
+<span id="take-collection-method"></span><h3><code class="docutils literal"><span class="pre">take()</span></code> {#collection-method}<a class="headerlink" href="#take-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">take</span></code> method returns a new collection with the specified number of items:</p>
+<pre class="literal-block">
+$collection = collect([0, 1, 2, 3, 4, 5]);
+
+$chunk = $collection-&gt;take(3);
+
+$chunk-&gt;all();
+
+// [0, 1, 2]
+</pre>
+<p>You may also pass a negative integer to take the specified amount of items from the end of the collection:</p>
+<pre class="literal-block">
+$collection = collect([0, 1, 2, 3, 4, 5]);
+
+$chunk = $collection-&gt;take(-2);
+
+$chunk-&gt;all();
+
+// [4, 5]
+</pre>
+<p><a name="method-toarray"></a></p>
+</div>
+<div class="section" id="toarray-collection-method">
+<span id="toarray-collection-method"></span><h3><code class="docutils literal"><span class="pre">toArray()</span></code> {#collection-method}<a class="headerlink" href="#toarray-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">toArray</span></code> method converts the collection into a plain PHP <code class="docutils literal"><span class="pre">array</span></code>. If the collection&#8217;s values are <a class="reference external" href="eloquent.html">Eloquent</a> models, the models will also be converted to arrays:</p>
+<pre class="literal-block">
+$collection = collect(['name' =&gt; 'Desk', 'price' =&gt; 200]);
+
+$collection-&gt;toArray();
+
+/*
+    [
+        ['name' =&gt; 'Desk', 'price' =&gt; 200],
+    ]
+*/
+</pre>
+<blockquote>
+<div><strong>Note:</strong> <code class="docutils literal"><span class="pre">toArray</span></code> also converts all of its nested objects to an array. If you want to get the underlying array as is, use the <a class="reference external" href="#method-all"><code class="docutils literal"><span class="pre">all</span></code></a> method instead.</div></blockquote>
+<p><a name="method-tojson"></a></p>
+</div>
+<div class="section" id="tojson-collection-method">
+<span id="tojson-collection-method"></span><h3><code class="docutils literal"><span class="pre">toJson()</span></code> {#collection-method}<a class="headerlink" href="#tojson-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">toJson</span></code> method converts the collection into JSON:</p>
+<pre class="literal-block">
+$collection = collect(['name' =&gt; 'Desk', 'price' =&gt; 200]);
+
+$collection-&gt;toJson();
+
+// '{&quot;name&quot;:&quot;Desk&quot;,&quot;price&quot;:200}'
+</pre>
+<p><a name="method-transform"></a></p>
+</div>
+<div class="section" id="transform-collection-method">
+<span id="transform-collection-method"></span><h3><code class="docutils literal"><span class="pre">transform()</span></code> {#collection-method}<a class="headerlink" href="#transform-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">transform</span></code> method iterates over the collection and calls the given callback with each item in the collection. The items in the collection will be replaced by the values returned by the callback:</p>
+<pre class="literal-block">
+$collection = collect([1, 2, 3, 4, 5]);
+
+$collection-&gt;transform(function ($item, $key) {
+    return $item * 2;
+});
+
+$collection-&gt;all();
+
+// [2, 4, 6, 8, 10]
+</pre>
+<blockquote>
+<div><strong>Note:</strong> Unlike most other collection methods, <code class="docutils literal"><span class="pre">transform</span></code> modifies the collection itself. If you wish to create a new collection instead, use the <a class="reference external" href="#method-map"><code class="docutils literal"><span class="pre">map</span></code></a> method.</div></blockquote>
+<p><a name="method-unique"></a></p>
+</div>
+<div class="section" id="unique-collection-method">
+<span id="unique-collection-method"></span><h3><code class="docutils literal"><span class="pre">unique()</span></code> {#collection-method}<a class="headerlink" href="#unique-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">unique</span></code> method returns all of the unique items in the collection:</p>
+<pre class="literal-block">
+$collection = collect([1, 1, 2, 2, 3, 4, 2]);
+
+$unique = $collection-&gt;unique();
+
+$unique-&gt;values()-&gt;all();
+
+// [1, 2, 3, 4]
+</pre>
+<p>The returned collection keeps the original array keys. In this example we used the <a class="reference external" href="#method-values"><code class="docutils literal"><span class="pre">values</span></code></a> method to reset the keys to consecutively numbered indexes.</p>
+<p>When dealing with nested arrays or objects, you may specify the key used to determine uniqueness:</p>
+<pre class="literal-block">
+$collection = collect([
+    ['name' =&gt; 'iPhone 6', 'brand' =&gt; 'Apple', 'type' =&gt; 'phone'],
+    ['name' =&gt; 'iPhone 5', 'brand' =&gt; 'Apple', 'type' =&gt; 'phone'],
+    ['name' =&gt; 'Apple Watch', 'brand' =&gt; 'Apple', 'type' =&gt; 'watch'],
+    ['name' =&gt; 'Galaxy S6', 'brand' =&gt; 'Samsung', 'type' =&gt; 'phone'],
+    ['name' =&gt; 'Galaxy Gear', 'brand' =&gt; 'Samsung', 'type' =&gt; 'watch'],
+]);
+
+$unique = $collection-&gt;unique('brand');
+
+$unique-&gt;values()-&gt;all();
+
+/*
+    [
+        ['name' =&gt; 'iPhone 6', 'brand' =&gt; 'Apple', 'type' =&gt; 'phone'],
+        ['name' =&gt; 'Galaxy S6', 'brand' =&gt; 'Samsung', 'type' =&gt; 'phone'],
+    ]
+*/
+</pre>
+<p>You may also pass your own callback to determine item uniqueness:</p>
+<pre class="literal-block">
+$unique = $collection-&gt;unique(function ($item) {
+    return $item['brand'].$item['type'];
+});
+
+$unique-&gt;values()-&gt;all();
+
+/*
+    [
+        ['name' =&gt; 'iPhone 6', 'brand' =&gt; 'Apple', 'type' =&gt; 'phone'],
+        ['name' =&gt; 'Apple Watch', 'brand' =&gt; 'Apple', 'type' =&gt; 'watch'],
+        ['name' =&gt; 'Galaxy S6', 'brand' =&gt; 'Samsung', 'type' =&gt; 'phone'],
+        ['name' =&gt; 'Galaxy Gear', 'brand' =&gt; 'Samsung', 'type' =&gt; 'watch'],
+    ]
+*/
+</pre>
+<p><a name="method-values"></a></p>
+</div>
+<div class="section" id="values-collection-method">
+<span id="values-collection-method"></span><h3><code class="docutils literal"><span class="pre">values()</span></code> {#collection-method}<a class="headerlink" href="#values-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">values</span></code> method returns a new collection with the keys reset to consecutive integers:</p>
+<pre class="literal-block">
+$collection = collect([
+    10 =&gt; ['product' =&gt; 'Desk', 'price' =&gt; 200],
+    11 =&gt; ['product' =&gt; 'Desk', 'price' =&gt; 200]
+]);
+
+$values = $collection-&gt;values();
+
+$values-&gt;all();
+
+/*
+    [
+        0 =&gt; ['product' =&gt; 'Desk', 'price' =&gt; 200],
+        1 =&gt; ['product' =&gt; 'Desk', 'price' =&gt; 200],
+    ]
+*/
+</pre>
+<p><a name="method-where"></a></p>
+</div>
+<div class="section" id="where-collection-method">
+<span id="where-collection-method"></span><h3><code class="docutils literal"><span class="pre">where()</span></code> {#collection-method}<a class="headerlink" href="#where-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">where</span></code> method filters the collection by a given key / value pair:</p>
+<pre class="literal-block">
+$collection = collect([
+    ['product' =&gt; 'Desk', 'price' =&gt; 200],
+    ['product' =&gt; 'Chair', 'price' =&gt; 100],
+    ['product' =&gt; 'Bookcase', 'price' =&gt; 150],
+    ['product' =&gt; 'Door', 'price' =&gt; 100],
+]);
+
+$filtered = $collection-&gt;where('price', 100);
+
+$filtered-&gt;all();
+
+/*
+[
+    ['product' =&gt; 'Chair', 'price' =&gt; 100],
+    ['product' =&gt; 'Door', 'price' =&gt; 100],
+]
+*/
+</pre>
+<p>The <code class="docutils literal"><span class="pre">where</span></code> method uses strict comparisons when checking item values. Use the <a class="reference external" href="#where-loose"><code class="docutils literal"><span class="pre">whereLoose</span></code></a> method to filter using &#8220;loose&#8221; comparisons.</p>
+<p><a name="method-whereloose"></a></p>
+</div>
+<div class="section" id="whereloose-collection-method">
+<span id="whereloose-collection-method"></span><h3><code class="docutils literal"><span class="pre">whereLoose()</span></code> {#collection-method}<a class="headerlink" href="#whereloose-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>This method has the same signature as the <a class="reference external" href="#method-where"><code class="docutils literal"><span class="pre">where</span></code></a> method; however, all values are compared using &#8220;loose&#8221; comparisons.</p>
+<p><a name="method-zip"></a></p>
+</div>
+<div class="section" id="zip-collection-method">
+<span id="zip-collection-method"></span><h3><code class="docutils literal"><span class="pre">zip()</span></code> {#collection-method}<a class="headerlink" href="#zip-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">zip</span></code> method merges together the values of the given array with the values of the collection at the corresponding index:</p>
+<pre class="literal-block">
+$collection = collect(['Chair', 'Desk']);
+
+$zipped = $collection-&gt;zip([100, 200]);
+
+$zipped-&gt;all();
+
+// [['Chair', 100], ['Desk', 200]]
+</pre>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, The Weezqyd.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

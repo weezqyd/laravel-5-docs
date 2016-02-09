@@ -1,0 +1,604 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Laravel Elixir &mdash; Laravel 5 Documentation 1.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Laravel 5 Documentation 1.0 documentation" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Laravel 5 Documentation
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <!-- Local TOC -->
+                <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Laravel Elixir</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#installation-setup">Installation &amp; Setup</a><ul>
+<li><a class="reference internal" href="#installing-node">Installing Node</a></li>
+<li><a class="reference internal" href="#gulp">Gulp</a></li>
+<li><a class="reference internal" href="#laravel-elixir">Laravel Elixir</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#running-elixir">Running Elixir</a><ul>
+<li><a class="reference internal" href="#watching-assets-for-changes">Watching Assets For Changes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#working-with-stylesheets">Working With Stylesheets</a><ul>
+<li><a class="reference internal" href="#less">Less</a></li>
+<li><a class="reference internal" href="#sass">Sass</a></li>
+<li><a class="reference internal" href="#plain-css">Plain CSS</a></li>
+<li><a class="reference internal" href="#source-maps">Source Maps</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#working-with-scripts">Working With Scripts</a><ul>
+<li><a class="reference internal" href="#coffeescript">CoffeeScript</a></li>
+<li><a class="reference internal" href="#browserify">Browserify</a></li>
+<li><a class="reference internal" href="#babel">Babel</a></li>
+<li><a class="reference internal" href="#scripts">Scripts</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#copying-files-directories">Copying Files &amp; Directories</a></li>
+<li><a class="reference internal" href="#versioning-cache-busting">Versioning / Cache Busting</a><ul>
+<li><a class="reference internal" href="#versioning-multiple-files">Versioning Multiple Files</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#calling-existing-gulp-tasks">Calling Existing Gulp Tasks</a><ul>
+<li><a class="reference internal" href="#custom-watchers">Custom Watchers</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#writing-elixir-extensions">Writing Elixir Extensions</a><ul>
+<li><a class="reference internal" href="#custom-watchers">Custom Watchers</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Laravel 5 Documentation</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Laravel Elixir</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/elixir.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="laravel-elixir">
+<span id="laravel-elixir"></span><h1>Laravel Elixir<a class="headerlink" href="#laravel-elixir" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference external" href="#introduction">Introduction</a></li>
+<li><a class="reference external" href="#installation">Installation &amp; Setup</a></li>
+<li><a class="reference external" href="#running-elixir">Running Elixir</a></li>
+<li><a class="reference external" href="#working-with-stylesheets">Working With Stylesheets</a><ul>
+<li><a class="reference external" href="#less">Less</a></li>
+<li><a class="reference external" href="#sass">Sass</a></li>
+<li><a class="reference external" href="#plain-css">Plain CSS</a></li>
+<li><a class="reference external" href="#css-source-maps">Source Maps</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#working-with-scripts">Working With Scripts</a><ul>
+<li><a class="reference external" href="#coffeescript">CoffeeScript</a></li>
+<li><a class="reference external" href="#browserify">Browserify</a></li>
+<li><a class="reference external" href="#babel">Babel</a></li>
+<li><a class="reference external" href="#javascript">Scripts</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#copying-files-and-directories">Copying Files &amp; Directories</a></li>
+<li><a class="reference external" href="#versioning-and-cache-busting">Versioning / Cache Busting</a></li>
+<li><a class="reference external" href="#calling-existing-gulp-tasks">Calling Existing Gulp Tasks</a></li>
+<li><a class="reference external" href="#writing-elixir-extensions">Writing Elixir Extensions</a></li>
+</ul>
+<p><a name="introduction"></a></p>
+<div class="section" id="introduction">
+<span id="introduction"></span><h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>Laravel Elixir provides a clean, fluent API for defining basic <a class="reference external" href="http://gulpjs.com">Gulp</a> tasks for your Laravel application. Elixir supports several common CSS and JavaScript pre-processors, and even testing tools. Using method chaining, Elixir allows you to fluently define your asset pipeline. For example:</p>
+<pre class="code highlight javascript literal-block">
+<span class="nx">elixir</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">mix</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">mix</span><span class="p">.</span><span class="nx">sass</span><span class="p">(</span><span class="s1">'app.scss'</span><span class="p">)</span>
+       <span class="p">.</span><span class="nx">coffee</span><span class="p">(</span><span class="s1">'app.coffee'</span><span class="p">);</span>
+<span class="p">});</span>
+</pre>
+<p>If you&#8217;ve ever been confused about how to get started with Gulp and asset compilation, you will love Laravel Elixir. However, you are not required to use it while developing your application. You are free to use any asset pipeline tool you wish, or even none at all.</p>
+<p><a name="installation"></a></p>
+</div>
+<div class="section" id="installation-setup">
+<span id="installation-setup"></span><h2>Installation &amp; Setup<a class="headerlink" href="#installation-setup" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="installing-node">
+<span id="installing-node"></span><h3>Installing Node<a class="headerlink" href="#installing-node" title="Permalink to this headline">¶</a></h3>
+<p>Before triggering Elixir, you must first ensure that Node.js is installed on your machine.</p>
+<pre class="literal-block">
+node -v
+</pre>
+<p>By default, Laravel Homestead includes everything you need; however, if you aren&#8217;t using Vagrant, then you can easily install Node by visiting <a class="reference external" href="http://nodejs.org/download/">their download page</a>.</p>
+</div>
+<div class="section" id="gulp">
+<span id="gulp"></span><h3>Gulp<a class="headerlink" href="#gulp" title="Permalink to this headline">¶</a></h3>
+<p>Next, you&#8217;ll want to pull in <a class="reference external" href="http://gulpjs.com">Gulp</a> as a global NPM package:</p>
+<pre class="literal-block">
+npm install --global gulp
+</pre>
+</div>
+<div class="section" id="laravel-elixir">
+<span id="id1"></span><h3>Laravel Elixir<a class="headerlink" href="#laravel-elixir" title="Permalink to this headline">¶</a></h3>
+<p>The only remaining step is to install Elixir! Within a fresh installation of Laravel, you&#8217;ll find a <code class="docutils literal"><span class="pre">package.json</span></code> file in the root. Think of this like your <code class="docutils literal"><span class="pre">composer.json</span></code> file, except it defines Node dependencies instead of PHP. You may install the dependencies it references by running:</p>
+<pre class="literal-block">
+npm install
+</pre>
+<p>If you are developing on a Windows system, you may need to run the <code class="docutils literal"><span class="pre">npm</span> <span class="pre">install</span></code> command with the <code class="docutils literal"><span class="pre">--no-bin-links</span></code> switch enabled:</p>
+<pre class="literal-block">
+npm install --no-bin-links
+</pre>
+<p><a name="running-elixir"></a></p>
+</div>
+</div>
+<div class="section" id="running-elixir">
+<span id="running-elixir"></span><h2>Running Elixir<a class="headerlink" href="#running-elixir" title="Permalink to this headline">¶</a></h2>
+<p>Elixir is built on top of <a class="reference external" href="http://gulpjs.com">Gulp</a>, so to run your Elixir tasks you only need to run the <code class="docutils literal"><span class="pre">gulp</span></code> command in your terminal. Adding the <code class="docutils literal"><span class="pre">--production</span></code> flag to the command will instruct Elixir to minify your CSS and JavaScript files:</p>
+<pre class="literal-block">
+// Run all tasks...
+gulp
+
+// Run all tasks and minify all CSS and JavaScript...
+gulp --production
+</pre>
+<div class="section" id="watching-assets-for-changes">
+<span id="watching-assets-for-changes"></span><h3>Watching Assets For Changes<a class="headerlink" href="#watching-assets-for-changes" title="Permalink to this headline">¶</a></h3>
+<p>Since it is inconvenient to run the <code class="docutils literal"><span class="pre">gulp</span></code> command on your terminal after every change to your assets, you may use the <code class="docutils literal"><span class="pre">gulp</span> <span class="pre">watch</span></code> command. This command will continue running in your terminal and watch your assets for any changes. When changes occur, new files will automatically be compiled:</p>
+<pre class="literal-block">
+gulp watch
+</pre>
+<p><a name="working-with-stylesheets"></a></p>
+</div>
+</div>
+<div class="section" id="working-with-stylesheets">
+<span id="working-with-stylesheets"></span><h2>Working With Stylesheets<a class="headerlink" href="#working-with-stylesheets" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal"><span class="pre">gulpfile.js</span></code> file in your project&#8217;s root directory contains all of your Elixir tasks. Elixir tasks can be chained together to define exactly how your assets should be compiled.</p>
+<p><a name="less"></a></p>
+<div class="section" id="less">
+<span id="less"></span><h3>Less<a class="headerlink" href="#less" title="Permalink to this headline">¶</a></h3>
+<p>To compile <a class="reference external" href="http://lesscss.org/">Less</a> into CSS, you may use the <code class="docutils literal"><span class="pre">less</span></code> method. The <code class="docutils literal"><span class="pre">less</span></code> method assumes that your Less files are stored in <code class="docutils literal"><span class="pre">resources/assets/less</span></code>. By default, the task will place the compiled CSS for this example in <code class="docutils literal"><span class="pre">public/css/app.css</span></code>:</p>
+<pre class="code highlight javascript literal-block">
+<span class="nx">elixir</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">mix</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">mix</span><span class="p">.</span><span class="nx">less</span><span class="p">(</span><span class="s1">'app.less'</span><span class="p">);</span>
+<span class="p">});</span>
+</pre>
+<p>You may also combine multiple Less files into a single CSS file. Again, the resulting CSS will be placed in <code class="docutils literal"><span class="pre">public/css/app.css</span></code>:</p>
+<pre class="code highlight javascript literal-block">
+<span class="nx">elixir</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">mix</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">mix</span><span class="p">.</span><span class="nx">less</span><span class="p">([</span>
+        <span class="s1">'app.less'</span><span class="p">,</span>
+        <span class="s1">'controllers.less'</span>
+    <span class="p">]);</span>
+<span class="p">});</span>
+</pre>
+<p>If you wish to customize the output location of the compiled CSS, you may pass a second argument to the <code class="docutils literal"><span class="pre">less</span></code> method:</p>
+<pre class="code highlight javascript literal-block">
+<span class="nx">elixir</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">mix</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">mix</span><span class="p">.</span><span class="nx">less</span><span class="p">(</span><span class="s1">'app.less'</span><span class="p">,</span> <span class="s1">'public/stylesheets'</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="c1">// Specifying a specific output filename...
+</span><span class="nx">elixir</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">mix</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">mix</span><span class="p">.</span><span class="nx">less</span><span class="p">(</span><span class="s1">'app.less'</span><span class="p">,</span> <span class="s1">'public/stylesheets/style.css'</span><span class="p">);</span>
+<span class="p">});</span>
+</pre>
+<p><a name="sass"></a></p>
+</div>
+<div class="section" id="sass">
+<span id="sass"></span><h3>Sass<a class="headerlink" href="#sass" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">sass</span></code> method allows you to compile <a class="reference external" href="http://sass-lang.com/">Sass</a> into CSS. Assuming your Sass files are stored at <code class="docutils literal"><span class="pre">resources/assets/sass</span></code>, you may use the method like so:</p>
+<pre class="code highlight javascript literal-block">
+<span class="nx">elixir</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">mix</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">mix</span><span class="p">.</span><span class="nx">sass</span><span class="p">(</span><span class="s1">'app.scss'</span><span class="p">);</span>
+<span class="p">});</span>
+</pre>
+<p>Again, like the <code class="docutils literal"><span class="pre">less</span></code> method, you may compile multiple scripts into a single CSS file, and even customize the output directory of the resulting CSS:</p>
+<pre class="code highlight javascript literal-block">
+<span class="nx">elixir</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">mix</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">mix</span><span class="p">.</span><span class="nx">sass</span><span class="p">([</span>
+        <span class="s1">'app.scss'</span><span class="p">,</span>
+        <span class="s1">'controllers.scss'</span>
+    <span class="p">],</span> <span class="s1">'public/assets/css'</span><span class="p">);</span>
+<span class="p">});</span>
+</pre>
+<p><a name="plain-css"></a></p>
+</div>
+<div class="section" id="plain-css">
+<span id="plain-css"></span><h3>Plain CSS<a class="headerlink" href="#plain-css" title="Permalink to this headline">¶</a></h3>
+<p>If you would just like to combine some plain CSS stylesheets into a single file, you may use the <code class="docutils literal"><span class="pre">styles</span></code> method. Paths passed to this method are relative to the <code class="docutils literal"><span class="pre">resources/assets/css</span></code> directory and the resulting CSS will be placed in <code class="docutils literal"><span class="pre">public/css/all.css</span></code>:</p>
+<pre class="code highlight javascript literal-block">
+<span class="nx">elixir</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">mix</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">mix</span><span class="p">.</span><span class="nx">styles</span><span class="p">([</span>
+        <span class="s1">'normalize.css'</span><span class="p">,</span>
+        <span class="s1">'main.css'</span>
+    <span class="p">]);</span>
+<span class="p">});</span>
+</pre>
+<p>Of course, you may also output the resulting file to a custom location by passing a second argument to the <code class="docutils literal"><span class="pre">styles</span></code> method:</p>
+<pre class="code highlight javascript literal-block">
+<span class="nx">elixir</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">mix</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">mix</span><span class="p">.</span><span class="nx">styles</span><span class="p">([</span>
+        <span class="s1">'normalize.css'</span><span class="p">,</span>
+        <span class="s1">'main.css'</span>
+    <span class="p">],</span> <span class="s1">'public/assets/css'</span><span class="p">);</span>
+<span class="p">});</span>
+</pre>
+<p><a name="css-source-maps"></a></p>
+</div>
+<div class="section" id="source-maps">
+<span id="source-maps"></span><h3>Source Maps<a class="headerlink" href="#source-maps" title="Permalink to this headline">¶</a></h3>
+<p>Source maps are enabled out of the box. So, for each file that is compiled you will find a companion <code class="docutils literal"><span class="pre">*.css.map</span></code> file in the same directory. This mapping allows you to trace your compiled stylesheet selectors back to your original Sass or Less while debugging in your browser.</p>
+<p>If you do not want source maps generated for your CSS, you may disable them using a simple configuration option:</p>
+<pre class="code highlight javascript literal-block">
+<span class="nx">elixir</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">sourcemaps</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+
+<span class="nx">elixir</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">mix</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">mix</span><span class="p">.</span><span class="nx">sass</span><span class="p">(</span><span class="s1">'app.scss'</span><span class="p">);</span>
+<span class="p">});</span>
+</pre>
+<p><a name="working-with-scripts"></a></p>
+</div>
+</div>
+<div class="section" id="working-with-scripts">
+<span id="working-with-scripts"></span><h2>Working With Scripts<a class="headerlink" href="#working-with-scripts" title="Permalink to this headline">¶</a></h2>
+<p>Elixir also provides several functions to help you work with your JavaScript files, such as compiling ECMAScript 6, compiling CoffeeScript, Browserify, minification, and simply concatenating plain JavaScript files.</p>
+<p><a name="coffeescript"></a></p>
+<div class="section" id="coffeescript">
+<span id="coffeescript"></span><h3>CoffeeScript<a class="headerlink" href="#coffeescript" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">coffee</span></code> method may be used to compile <a class="reference external" href="http://coffeescript.org/">CoffeeScript</a> into plain JavaScript. The <code class="docutils literal"><span class="pre">coffee</span></code> function accepts a string or array of CoffeeScript files relative to the <code class="docutils literal"><span class="pre">resources/assets/coffee</span></code> directory and generates a single <code class="docutils literal"><span class="pre">app.js</span></code> file in the <code class="docutils literal"><span class="pre">public/js</span></code> directory:</p>
+<pre class="code highlight javascript literal-block">
+<span class="nx">elixir</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">mix</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">mix</span><span class="p">.</span><span class="nx">coffee</span><span class="p">([</span><span class="s1">'app.coffee'</span><span class="p">,</span> <span class="s1">'controllers.coffee'</span><span class="p">]);</span>
+<span class="p">});</span>
+</pre>
+<p><a name="browserify"></a></p>
+</div>
+<div class="section" id="browserify">
+<span id="browserify"></span><h3>Browserify<a class="headerlink" href="#browserify" title="Permalink to this headline">¶</a></h3>
+<p>Elixir also ships with a <code class="docutils literal"><span class="pre">browserify</span></code> method, which gives you all the benefits of requiring modules in the browser and using ECMAScript 6.</p>
+<p>This task assumes that your scripts are stored in <code class="docutils literal"><span class="pre">resources/assets/js</span></code> and will place the resulting file in <code class="docutils literal"><span class="pre">public/js/main.js</span></code>:</p>
+<pre class="code highlight javascript literal-block">
+<span class="nx">elixir</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">mix</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">mix</span><span class="p">.</span><span class="nx">browserify</span><span class="p">(</span><span class="s1">'main.js'</span><span class="p">);</span>
+<span class="p">});</span>
+</pre>
+<p>While Browserify ships with the Partialify and Babelify transformers, you&#8217;re free to install and add more if you wish:</p>
+<pre class="literal-block">
+npm install vueify --save-dev
+</pre>
+<pre class="code highlight javascript literal-block">
+<span class="nx">elixir</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">js</span><span class="p">.</span><span class="nx">browserify</span><span class="p">.</span><span class="nx">transformers</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="s1">'vueify'</span><span class="p">,</span>
+    <span class="nx">options</span><span class="o">:</span> <span class="p">{}</span>
+<span class="p">});</span>
+
+<span class="nx">elixir</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">mix</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">mix</span><span class="p">.</span><span class="nx">browserify</span><span class="p">(</span><span class="s1">'main.js'</span><span class="p">);</span>
+<span class="p">});</span>
+</pre>
+<p><a name="babel"></a></p>
+</div>
+<div class="section" id="babel">
+<span id="babel"></span><h3>Babel<a class="headerlink" href="#babel" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">babel</span></code> method may be used to compile <a class="reference external" href="https://babeljs.io/docs/learn-es2015/">ECMAScript 6 and 7</a> into plain JavaScript. This function accepts an array of files relative to the <code class="docutils literal"><span class="pre">resources/assets/js</span></code> directory, and generates a single <code class="docutils literal"><span class="pre">all.js</span></code> file in the <code class="docutils literal"><span class="pre">public/js</span></code> directory:</p>
+<pre class="code highlight javascript literal-block">
+<span class="nx">elixir</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">mix</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">mix</span><span class="p">.</span><span class="nx">babel</span><span class="p">([</span>
+        <span class="s1">'order.js'</span><span class="p">,</span>
+        <span class="s1">'product.js'</span>
+    <span class="p">]);</span>
+<span class="p">});</span>
+</pre>
+<p>To choose a different output location, simply specify your desired path as the second argument. The signature and functionality of this method are identical to <code class="docutils literal"><span class="pre">mix.scripts()</span></code>, excluding the Babel compilation.</p>
+<p><a name="javascript"></a></p>
+</div>
+<div class="section" id="scripts">
+<span id="scripts"></span><h3>Scripts<a class="headerlink" href="#scripts" title="Permalink to this headline">¶</a></h3>
+<p>If you have multiple JavaScript files that you would like to combine into a single file, you may use the <code class="docutils literal"><span class="pre">scripts</span></code> method.</p>
+<p>The <code class="docutils literal"><span class="pre">scripts</span></code> method assumes all paths are relative to the <code class="docutils literal"><span class="pre">resources/assets/js</span></code> directory, and will place the resulting JavaScript in <code class="docutils literal"><span class="pre">public/js/all.js</span></code> by default:</p>
+<pre class="code highlight javascript literal-block">
+<span class="nx">elixir</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">mix</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">mix</span><span class="p">.</span><span class="nx">scripts</span><span class="p">([</span>
+        <span class="s1">'jquery.js'</span><span class="p">,</span>
+        <span class="s1">'app.js'</span>
+    <span class="p">]);</span>
+<span class="p">});</span>
+</pre>
+<p>If you need to combine multiple sets of scripts into different files, you may make multiple calls to the <code class="docutils literal"><span class="pre">scripts</span></code> method. The second argument given to the method determines the resulting file name for each concatenation:</p>
+<pre class="code highlight javascript literal-block">
+<span class="nx">elixir</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">mix</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">mix</span><span class="p">.</span><span class="nx">scripts</span><span class="p">([</span><span class="s1">'app.js'</span><span class="p">,</span> <span class="s1">'controllers.js'</span><span class="p">],</span> <span class="s1">'public/js/app.js'</span><span class="p">)</span>
+       <span class="p">.</span><span class="nx">scripts</span><span class="p">([</span><span class="s1">'forum.js'</span><span class="p">,</span> <span class="s1">'threads.js'</span><span class="p">],</span> <span class="s1">'public/js/forum.js'</span><span class="p">);</span>
+<span class="p">});</span>
+</pre>
+<p>If you need to combine all of the scripts in a given directory, you may use the <code class="docutils literal"><span class="pre">scriptsIn</span></code> method. The resulting JavaScript will be placed in <code class="docutils literal"><span class="pre">public/js/all.js</span></code>:</p>
+<pre class="code highlight javascript literal-block">
+<span class="nx">elixir</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">mix</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">mix</span><span class="p">.</span><span class="nx">scriptsIn</span><span class="p">(</span><span class="s1">'public/js/some/directory'</span><span class="p">);</span>
+<span class="p">});</span>
+</pre>
+<p><a name="copying-files-and-directories"></a></p>
+</div>
+</div>
+<div class="section" id="copying-files-directories">
+<span id="copying-files-directories"></span><h2>Copying Files &amp; Directories<a class="headerlink" href="#copying-files-directories" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal"><span class="pre">copy</span></code> method may be used to copy files and directories to new locations. All operations are relative to the project&#8217;s root directory:</p>
+<pre class="code highlight javascript literal-block">
+<span class="nx">elixir</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">mix</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">mix</span><span class="p">.</span><span class="nx">copy</span><span class="p">(</span><span class="s1">'vendor/foo/bar.css'</span><span class="p">,</span> <span class="s1">'public/css/bar.css'</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">elixir</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">mix</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">mix</span><span class="p">.</span><span class="nx">copy</span><span class="p">(</span><span class="s1">'vendor/package/views'</span><span class="p">,</span> <span class="s1">'resources/views'</span><span class="p">);</span>
+<span class="p">});</span>
+</pre>
+<p><a name="versioning-and-cache-busting"></a></p>
+</div>
+<div class="section" id="versioning-cache-busting">
+<span id="versioning-cache-busting"></span><h2>Versioning / Cache Busting<a class="headerlink" href="#versioning-cache-busting" title="Permalink to this headline">¶</a></h2>
+<p>Many developers suffix their compiled assets with a timestamp or unique token to force browsers to load the fresh assets instead of serving stale copies of the code. Elixir can handle this for you using the <code class="docutils literal"><span class="pre">version</span></code> method.</p>
+<p>The <code class="docutils literal"><span class="pre">version</span></code> method accepts a file name relative to the <code class="docutils literal"><span class="pre">public</span></code> directory, and will append a unique hash to the filename, allowing for cache-busting. For example, the generated file name will look something like: <code class="docutils literal"><span class="pre">all-16d570a7.css</span></code>:</p>
+<pre class="code highlight javascript literal-block">
+<span class="nx">elixir</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">mix</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">mix</span><span class="p">.</span><span class="nx">version</span><span class="p">(</span><span class="s1">'css/all.css'</span><span class="p">);</span>
+<span class="p">});</span>
+</pre>
+<p>After generating the versioned file, you may use Laravel&#8217;s global <code class="docutils literal"><span class="pre">elixir</span></code> PHP helper function within your <a class="reference external" href="views.html">views</a> to load the appropriately hashed asset. The <code class="docutils literal"><span class="pre">elixir</span></code> function will automatically determine the name of the hashed file:</p>
+<pre class="literal-block">
+&lt;link rel=&quot;stylesheet&quot; href=&quot;{{ elixir('css/all.css') }}&quot;&gt;
+</pre>
+<div class="section" id="versioning-multiple-files">
+<span id="versioning-multiple-files"></span><h3>Versioning Multiple Files<a class="headerlink" href="#versioning-multiple-files" title="Permalink to this headline">¶</a></h3>
+<p>You may pass an array to the <code class="docutils literal"><span class="pre">version</span></code> method to version multiple files:</p>
+<pre class="code highlight javascript literal-block">
+<span class="nx">elixir</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">mix</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">mix</span><span class="p">.</span><span class="nx">version</span><span class="p">([</span><span class="s1">'css/all.css'</span><span class="p">,</span> <span class="s1">'js/app.js'</span><span class="p">]);</span>
+<span class="p">});</span>
+</pre>
+<p>Once the files have been versioned, you may use the <code class="docutils literal"><span class="pre">elixir</span></code> helper function to generate links to the proper hashed files. Remember, you only need to pass the name of the un-hashed file to the <code class="docutils literal"><span class="pre">elixir</span></code> helper function. The helper will use the un-hashed name to determine the current hashed version of the file:</p>
+<pre class="literal-block">
+&lt;link rel=&quot;stylesheet&quot; href=&quot;{{ elixir('css/all.css') }}&quot;&gt;
+
+&lt;script src=&quot;{{ elixir('js/app.js') }}&quot;&gt;&lt;/script&gt;
+</pre>
+<p><a name="calling-existing-gulp-tasks"></a></p>
+</div>
+</div>
+<div class="section" id="calling-existing-gulp-tasks">
+<span id="calling-existing-gulp-tasks"></span><h2>Calling Existing Gulp Tasks<a class="headerlink" href="#calling-existing-gulp-tasks" title="Permalink to this headline">¶</a></h2>
+<p>If you need to call an existing Gulp task from Elixir, you may use the <code class="docutils literal"><span class="pre">task</span></code> method. As an example, imagine that you have a Gulp task that simply speaks a bit of text when called:</p>
+<pre class="code highlight javascript literal-block">
+<span class="nx">gulp</span><span class="p">.</span><span class="nx">task</span><span class="p">(</span><span class="s1">'speak'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">message</span> <span class="o">=</span> <span class="s1">'Tea...Earl Grey...Hot'</span><span class="p">;</span>
+
+    <span class="nx">gulp</span><span class="p">.</span><span class="nx">src</span><span class="p">(</span><span class="s1">''</span><span class="p">).</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">shell</span><span class="p">(</span><span class="s1">'say '</span> <span class="o">+</span> <span class="nx">message</span><span class="p">));</span>
+<span class="p">});</span>
+</pre>
+<p>If you wish to call this task from Elixir, use the <code class="docutils literal"><span class="pre">mix.task</span></code> method and pass the name of the task as the only argument to the method:</p>
+<pre class="code highlight javascript literal-block">
+<span class="nx">elixir</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">mix</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">mix</span><span class="p">.</span><span class="nx">task</span><span class="p">(</span><span class="s1">'speak'</span><span class="p">);</span>
+<span class="p">});</span>
+</pre>
+<div class="section" id="custom-watchers">
+<span id="custom-watchers"></span><h3>Custom Watchers<a class="headerlink" href="#custom-watchers" title="Permalink to this headline">¶</a></h3>
+<p>If you need to register a watcher to run your custom task each time some files are modified, pass a regular expression as the second argument to the <code class="docutils literal"><span class="pre">task</span></code> method:</p>
+<pre class="code highlight javascript literal-block">
+<span class="nx">elixir</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">mix</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">mix</span><span class="p">.</span><span class="nx">task</span><span class="p">(</span><span class="s1">'speak'</span><span class="p">,</span> <span class="s1">'app/**/*.php'</span><span class="p">);</span>
+<span class="p">});</span>
+</pre>
+<p><a name="writing-elixir-extensions"></a></p>
+</div>
+</div>
+<div class="section" id="writing-elixir-extensions">
+<span id="writing-elixir-extensions"></span><h2>Writing Elixir Extensions<a class="headerlink" href="#writing-elixir-extensions" title="Permalink to this headline">¶</a></h2>
+<p>If you need more flexibility than Elixir&#8217;s <code class="docutils literal"><span class="pre">task</span></code> method can provide, you may create custom Elixir extensions. Elixir extensions allow you to pass arguments to your custom tasks. For example, you could write an extension like so:</p>
+<pre class="code highlight javascript literal-block">
+<span class="c1">// File: elixir-extensions.js
+</span>
+<span class="kd">var</span> <span class="nx">gulp</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'gulp'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">shell</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'gulp-shell'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">Elixir</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'laravel-elixir'</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">Task</span> <span class="o">=</span> <span class="nx">Elixir</span><span class="p">.</span><span class="nx">Task</span><span class="p">;</span>
+
+<span class="nx">Elixir</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span><span class="s1">'speak'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">message</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="k">new</span> <span class="nx">Task</span><span class="p">(</span><span class="s1">'speak'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">gulp</span><span class="p">.</span><span class="nx">src</span><span class="p">(</span><span class="s1">''</span><span class="p">).</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">shell</span><span class="p">(</span><span class="s1">'say '</span> <span class="o">+</span> <span class="nx">message</span><span class="p">));</span>
+    <span class="p">});</span>
+
+<span class="p">});</span>
+
+<span class="c1">// mix.speak('Hello World');</span>
+</pre>
+<p>That&#8217;s it! Notice that your Gulp-specific logic should be placed within the function passed as the second argument to the <code class="docutils literal"><span class="pre">Task</span></code> constructor. You may either place this at the top of your Gulpfile, or instead extract it to a custom tasks file. For example, if you place your extensions in <code class="docutils literal"><span class="pre">elixir-extensions.js</span></code>, you may require the file from your main <code class="docutils literal"><span class="pre">Gulpfile</span></code> like so:</p>
+<pre class="code highlight javascript literal-block">
+<span class="c1">// File: Gulpfile.js
+</span>
+<span class="kd">var</span> <span class="nx">elixir</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'laravel-elixir'</span><span class="p">);</span>
+
+<span class="nx">require</span><span class="p">(</span><span class="s1">'./elixir-extensions'</span><span class="p">)</span>
+
+<span class="nx">elixir</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">mix</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">mix</span><span class="p">.</span><span class="nx">speak</span><span class="p">(</span><span class="s1">'Tea, Earl Grey, Hot'</span><span class="p">);</span>
+<span class="p">});</span>
+</pre>
+<div class="section" id="custom-watchers">
+<span id="id2"></span><h3>Custom Watchers<a class="headerlink" href="#custom-watchers" title="Permalink to this headline">¶</a></h3>
+<p>If you would like your custom task to be re-triggered while running <code class="docutils literal"><span class="pre">gulp</span> <span class="pre">watch</span></code>, you may register a watcher:</p>
+<pre class="code highlight javascript literal-block">
+<span class="k">new</span> <span class="nx">Task</span><span class="p">(</span><span class="s1">'speak'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">gulp</span><span class="p">.</span><span class="nx">src</span><span class="p">(</span><span class="s1">''</span><span class="p">).</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">shell</span><span class="p">(</span><span class="s1">'say '</span> <span class="o">+</span> <span class="nx">message</span><span class="p">));</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">watch</span><span class="p">(</span><span class="s1">'./app/**'</span><span class="p">);</span>
+</pre>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, The Weezqyd.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,477 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Mail &mdash; Laravel 5 Documentation 1.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Laravel 5 Documentation 1.0 documentation" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Laravel 5 Documentation
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <!-- Local TOC -->
+                <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Mail</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a><ul>
+<li><a class="reference internal" href="#driver-prerequisites">Driver Prerequisites</a><ul>
+<li><a class="reference internal" href="#mailgun-driver">Mailgun Driver</a></li>
+<li><a class="reference internal" href="#mandrill-driver">Mandrill Driver</a></li>
+<li><a class="reference internal" href="#ses-driver">SES Driver</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#sending-mail">Sending Mail</a><ul>
+<li><a class="reference internal" href="#building-the-message">Building The Message</a></li>
+<li><a class="reference internal" href="#mailing-plain-text">Mailing Plain Text</a></li>
+<li><a class="reference internal" href="#mailing-raw-strings">Mailing Raw Strings</a></li>
+<li><a class="reference internal" href="#attachments">Attachments</a></li>
+<li><a class="reference internal" href="#inline-attachments">Inline Attachments</a><ul>
+<li><a class="reference internal" href="#embedding-an-image-in-an-e-mail-view">Embedding An Image In An E-Mail View</a></li>
+<li><a class="reference internal" href="#embedding-raw-data-in-an-e-mail-view">Embedding Raw Data In An E-Mail View</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#queueing-mail">Queueing Mail</a><ul>
+<li><a class="reference internal" href="#queueing-a-mail-message">Queueing A Mail Message</a></li>
+<li><a class="reference internal" href="#delayed-message-queueing">Delayed Message Queueing</a></li>
+<li><a class="reference internal" href="#pushing-to-specific-queues">Pushing To Specific Queues</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#mail-local-development">Mail &amp; Local Development</a><ul>
+<li><a class="reference internal" href="#log-driver">Log Driver</a></li>
+<li><a class="reference internal" href="#universal-to">Universal To</a></li>
+<li><a class="reference internal" href="#mailtrap">Mailtrap</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Laravel 5 Documentation</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Mail</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/mail.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="mail">
+<span id="mail"></span><h1>Mail<a class="headerlink" href="#mail" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference external" href="#introduction">Introduction</a></li>
+<li><a class="reference external" href="#sending-mail">Sending Mail</a><ul>
+<li><a class="reference external" href="#attachments">Attachments</a></li>
+<li><a class="reference external" href="#inline-attachments">Inline Attachments</a></li>
+<li><a class="reference external" href="#queueing-mail">Queueing Mail</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#mail-and-local-development">Mail &amp; Local Development</a></li>
+</ul>
+<p><a name="introduction"></a></p>
+<div class="section" id="introduction">
+<span id="introduction"></span><h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>Laravel provides a clean, simple API over the popular <a class="reference external" href="http://swiftmailer.org">SwiftMailer</a> library. Laravel provides drivers for SMTP, Mailgun, Mandrill, Amazon SES, PHP&#8217;s <code class="docutils literal"><span class="pre">mail</span></code> function, and <code class="docutils literal"><span class="pre">sendmail</span></code>, allowing you to quickly get started sending mail through a local or cloud based service of your choice.</p>
+<div class="section" id="driver-prerequisites">
+<span id="driver-prerequisites"></span><h3>Driver Prerequisites<a class="headerlink" href="#driver-prerequisites" title="Permalink to this headline">¶</a></h3>
+<p>The API based drivers such as Mailgun and Mandrill are often simpler and faster than SMTP servers. All of the API drivers require that the Guzzle HTTP library be installed for your application. You may install Guzzle to your project by adding the following line to your <code class="docutils literal"><span class="pre">composer.json</span></code> file:</p>
+<pre class="literal-block">
+&quot;guzzlehttp/guzzle&quot;: &quot;~5.3|~6.0&quot;
+</pre>
+<div class="section" id="mailgun-driver">
+<span id="mailgun-driver"></span><h4>Mailgun Driver<a class="headerlink" href="#mailgun-driver" title="Permalink to this headline">¶</a></h4>
+<p>To use the Mailgun driver, first install Guzzle, then set the <code class="docutils literal"><span class="pre">driver</span></code> option in your <code class="docutils literal"><span class="pre">config/mail.php</span></code> configuration file to <code class="docutils literal"><span class="pre">mailgun</span></code>. Next, verify that your <code class="docutils literal"><span class="pre">config/services.php</span></code> configuration file contains the following options:</p>
+<pre class="literal-block">
+'mailgun' =&gt; [
+    'domain' =&gt; 'your-mailgun-domain',
+    'secret' =&gt; 'your-mailgun-key',
+],
+</pre>
+</div>
+<div class="section" id="mandrill-driver">
+<span id="mandrill-driver"></span><h4>Mandrill Driver<a class="headerlink" href="#mandrill-driver" title="Permalink to this headline">¶</a></h4>
+<p>To use the Mandrill driver, first install Guzzle, then set the <code class="docutils literal"><span class="pre">driver</span></code> option in your <code class="docutils literal"><span class="pre">config/mail.php</span></code> configuration file to <code class="docutils literal"><span class="pre">mandrill</span></code>. Next, verify that your <code class="docutils literal"><span class="pre">config/services.php</span></code> configuration file contains the following options:</p>
+<pre class="literal-block">
+'mandrill' =&gt; [
+    'secret' =&gt; 'your-mandrill-key',
+],
+</pre>
+</div>
+<div class="section" id="ses-driver">
+<span id="ses-driver"></span><h4>SES Driver<a class="headerlink" href="#ses-driver" title="Permalink to this headline">¶</a></h4>
+<p>To use the Amazon SES driver, install the Amazon AWS SDK for PHP. You may install this library by adding the following line to your <code class="docutils literal"><span class="pre">composer.json</span></code> file&#8217;s <code class="docutils literal"><span class="pre">require</span></code> section:</p>
+<pre class="literal-block">
+&quot;aws/aws-sdk-php&quot;: &quot;~3.0&quot;
+</pre>
+<p>Next, set the <code class="docutils literal"><span class="pre">driver</span></code> option in your <code class="docutils literal"><span class="pre">config/mail.php</span></code> configuration file to <code class="docutils literal"><span class="pre">ses</span></code>. Then, verify that your <code class="docutils literal"><span class="pre">config/services.php</span></code> configuration file contains the following options:</p>
+<pre class="literal-block">
+'ses' =&gt; [
+    'key' =&gt; 'your-ses-key',
+    'secret' =&gt; 'your-ses-secret',
+    'region' =&gt; 'ses-region',  // e.g. us-east-1
+],
+</pre>
+<p><a name="sending-mail"></a></p>
+</div>
+</div>
+</div>
+<div class="section" id="sending-mail">
+<span id="sending-mail"></span><h2>Sending Mail<a class="headerlink" href="#sending-mail" title="Permalink to this headline">¶</a></h2>
+<p>Laravel allows you to store your e-mail messages in <a class="reference external" href="/docs/{{version}}/views">views</a>. For example, to organize your e-mails, you could create an <code class="docutils literal"><span class="pre">emails</span></code> directory within your <code class="docutils literal"><span class="pre">resources/views</span></code> directory:</p>
+<p>To send a message, use the <code class="docutils literal"><span class="pre">send</span></code> method on the <code class="docutils literal"><span class="pre">Mail</span></code> <a class="reference external" href="/docs/{{version}}/facades">facade</a>. The <code class="docutils literal"><span class="pre">send</span></code> method accepts three arguments. First, the name of a <a class="reference external" href="/docs/{{version}}/views">view</a> that contains the e-mail message. Secondly, an array of data you wish to pass to the view. Lastly, a <code class="docutils literal"><span class="pre">Closure</span></code> callback which receives a message instance, allowing you to customize the recipients, subject, and other aspects of the mail message:</p>
+<pre class="literal-block">
+&lt;?php
+
+namespace App\Http\Controllers;
+
+use Mail;
+use App\User;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+
+class UserController extends Controller
+{
+    /**
+     * Send an e-mail reminder to the user.
+     *
+     * &#64;param  Request  $request
+     * &#64;param  int  $id
+     * &#64;return Response
+     */
+    public function sendEmailReminder(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+
+        Mail::send('emails.reminder', ['user' =&gt; $user], function ($m) use ($user) {
+            $m-&gt;to($user-&gt;email, $user-&gt;name)-&gt;subject('Your Reminder!');
+        });
+    }
+}
+</pre>
+<p>Since we are passing an array containing the <code class="docutils literal"><span class="pre">user</span></code> key in the example above, we could display the user&#8217;s name within our e-mail view using the following PHP code:</p>
+<pre class="literal-block">
+&lt;?php echo $user-&gt;name; ?&gt;
+</pre>
+<blockquote>
+<div><strong>Note:</strong> A <code class="docutils literal"><span class="pre">$message</span></code> variable is always passed to e-mail views, and allows the <a class="reference external" href="#attachments">inline embedding of attachments</a>. So, you should avoid passing a <code class="docutils literal"><span class="pre">message</span></code> variable in your view payload.</div></blockquote>
+<div class="section" id="building-the-message">
+<span id="building-the-message"></span><h3>Building The Message<a class="headerlink" href="#building-the-message" title="Permalink to this headline">¶</a></h3>
+<p>As previously discussed, the third argument given to the <code class="docutils literal"><span class="pre">send</span></code> method is a <code class="docutils literal"><span class="pre">Closure</span></code> allowing you to specify various options on the e-mail message itself. Using this Closure you may specify other attributes of the message, such as carbon copies, blind carbon copies, etc:</p>
+<pre class="literal-block">
+Mail::send('emails.welcome', $data, function ($message) {
+    $message-&gt;from('us&#64;example.com', 'Laravel');
+
+    $message-&gt;to('foo&#64;example.com')-&gt;cc('bar&#64;example.com');
+});
+</pre>
+<p>Here is a list of the available methods on the <code class="docutils literal"><span class="pre">$message</span></code> message builder instance:</p>
+<pre class="literal-block">
+$message-&gt;from($address, $name = null);
+$message-&gt;sender($address, $name = null);
+$message-&gt;to($address, $name = null);
+$message-&gt;cc($address, $name = null);
+$message-&gt;bcc($address, $name = null);
+$message-&gt;replyTo($address, $name = null);
+$message-&gt;subject($subject);
+$message-&gt;priority($level);
+$message-&gt;attach($pathToFile, array $options = []);
+
+// Attach a file from a raw $data string...
+$message-&gt;attachData($data, $name, array $options = []);
+
+// Get the underlying SwiftMailer message instance...
+$message-&gt;getSwiftMessage();
+</pre>
+<blockquote>
+<div><strong>Note:</strong> The message instance passed to a <code class="docutils literal"><span class="pre">Mail::send</span></code> Closure extends the SwiftMailer message class, allowing you to call any method on that class to build your e-mail messages.</div></blockquote>
+</div>
+<div class="section" id="mailing-plain-text">
+<span id="mailing-plain-text"></span><h3>Mailing Plain Text<a class="headerlink" href="#mailing-plain-text" title="Permalink to this headline">¶</a></h3>
+<p>By default, the view given to the <code class="docutils literal"><span class="pre">send</span></code> method is assumed to contain HTML. However, by passing an array as the first argument to the <code class="docutils literal"><span class="pre">send</span></code> method, you may specify a plain text view to send in addition to the HTML view:</p>
+<pre class="literal-block">
+Mail::send(['html.view', 'text.view'], $data, $callback);
+</pre>
+<p>Or, if you only need to send a plain text e-mail, you may specify this using the <code class="docutils literal"><span class="pre">text</span></code> key in the array:</p>
+<pre class="literal-block">
+Mail::send(['text' =&gt; 'view'], $data, $callback);
+</pre>
+</div>
+<div class="section" id="mailing-raw-strings">
+<span id="mailing-raw-strings"></span><h3>Mailing Raw Strings<a class="headerlink" href="#mailing-raw-strings" title="Permalink to this headline">¶</a></h3>
+<p>You may use the <code class="docutils literal"><span class="pre">raw</span></code> method if you wish to e-mail a raw string directly:</p>
+<pre class="literal-block">
+Mail::raw('Text to e-mail', function ($message) {
+    //
+});
+</pre>
+<p><a name="attachments"></a></p>
+</div>
+<div class="section" id="attachments">
+<span id="attachments"></span><h3>Attachments<a class="headerlink" href="#attachments" title="Permalink to this headline">¶</a></h3>
+<p>To add attachments to an e-mail, use the <code class="docutils literal"><span class="pre">attach</span></code> method on the <code class="docutils literal"><span class="pre">$message</span></code> object passed to your Closure. The <code class="docutils literal"><span class="pre">attach</span></code> method accepts the full path to the file as its first argument:</p>
+<pre class="literal-block">
+Mail::send('emails.welcome', $data, function ($message) {
+    //
+
+    $message-&gt;attach($pathToFile);
+});
+</pre>
+<p>When attaching files to a message, you may also specify the display name and / or MIME type by passing an <code class="docutils literal"><span class="pre">array</span></code> as the second argument to the <code class="docutils literal"><span class="pre">attach</span></code> method:</p>
+<pre class="literal-block">
+$message-&gt;attach($pathToFile, ['as' =&gt; $display, 'mime' =&gt; $mime]);
+</pre>
+<p><a name="inline-attachments"></a></p>
+</div>
+<div class="section" id="inline-attachments">
+<span id="inline-attachments"></span><h3>Inline Attachments<a class="headerlink" href="#inline-attachments" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="embedding-an-image-in-an-e-mail-view">
+<span id="embedding-an-image-in-an-e-mail-view"></span><h4>Embedding An Image In An E-Mail View<a class="headerlink" href="#embedding-an-image-in-an-e-mail-view" title="Permalink to this headline">¶</a></h4>
+<p>Embedding inline images into your e-mails is typically cumbersome; however, Laravel provides a convenient way to attach images to your e-mails and retrieving the appropriate CID. To embed an inline image, use the <code class="docutils literal"><span class="pre">embed</span></code> method on the <code class="docutils literal"><span class="pre">$message</span></code> variable within your e-mail view. Remember, Laravel automatically makes the <code class="docutils literal"><span class="pre">$message</span></code> variable available to all of your e-mail views:</p>
+<pre class="literal-block">
+&lt;body&gt;
+    Here is an image:
+
+    &lt;img src=&quot;&lt;?php echo $message-&gt;embed($pathToFile); ?&gt;&quot;&gt;
+&lt;/body&gt;
+</pre>
+</div>
+<div class="section" id="embedding-raw-data-in-an-e-mail-view">
+<span id="embedding-raw-data-in-an-e-mail-view"></span><h4>Embedding Raw Data In An E-Mail View<a class="headerlink" href="#embedding-raw-data-in-an-e-mail-view" title="Permalink to this headline">¶</a></h4>
+<p>If you already have a raw data string you wish to embed into an e-mail message, you may use the <code class="docutils literal"><span class="pre">embedData</span></code> method on the <code class="docutils literal"><span class="pre">$message</span></code> variable:</p>
+<pre class="literal-block">
+&lt;body&gt;
+    Here is an image from raw data:
+
+    &lt;img src=&quot;&lt;?php echo $message-&gt;embedData($data, $name); ?&gt;&quot;&gt;
+&lt;/body&gt;
+</pre>
+<p><a name="queueing-mail"></a></p>
+</div>
+</div>
+<div class="section" id="queueing-mail">
+<span id="queueing-mail"></span><h3>Queueing Mail<a class="headerlink" href="#queueing-mail" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="queueing-a-mail-message">
+<span id="queueing-a-mail-message"></span><h4>Queueing A Mail Message<a class="headerlink" href="#queueing-a-mail-message" title="Permalink to this headline">¶</a></h4>
+<p>Since sending e-mail messages can drastically lengthen the response time of your application, many developers choose to queue e-mail messages for background sending. Laravel makes this easy using its built-in <a class="reference external" href="/docs/{{version}}/queues">unified queue API</a>. To queue a mail message, use the <code class="docutils literal"><span class="pre">queue</span></code> method on the <code class="docutils literal"><span class="pre">Mail</span></code> facade:</p>
+<pre class="literal-block">
+Mail::queue('emails.welcome', $data, function ($message) {
+    //
+});
+</pre>
+<p>This method will automatically take care of pushing a job onto the queue to send the mail message in the background. Of course, you will need to <a class="reference external" href="/docs/{{version}}/queues">configure your queues</a> before using this feature.</p>
+</div>
+<div class="section" id="delayed-message-queueing">
+<span id="delayed-message-queueing"></span><h4>Delayed Message Queueing<a class="headerlink" href="#delayed-message-queueing" title="Permalink to this headline">¶</a></h4>
+<p>If you wish to delay the delivery of a queued e-mail message, you may use the <code class="docutils literal"><span class="pre">later</span></code> method. To get started, simply pass the number of seconds by which you wish to delay the sending of the message as the first argument to the method:</p>
+<pre class="literal-block">
+Mail::later(5, 'emails.welcome', $data, function ($message) {
+    //
+});
+</pre>
+</div>
+<div class="section" id="pushing-to-specific-queues">
+<span id="pushing-to-specific-queues"></span><h4>Pushing To Specific Queues<a class="headerlink" href="#pushing-to-specific-queues" title="Permalink to this headline">¶</a></h4>
+<p>If you wish to specify a specific queue on which to push the message, you may do so using the <code class="docutils literal"><span class="pre">queueOn</span></code> and <code class="docutils literal"><span class="pre">laterOn</span></code> methods:</p>
+<pre class="literal-block">
+Mail::queueOn('queue-name', 'emails.welcome', $data, function ($message) {
+    //
+});
+
+Mail::laterOn('queue-name', 5, 'emails.welcome', $data, function ($message) {
+    //
+});
+</pre>
+<p><a name="mail-and-local-development"></a></p>
+</div>
+</div>
+</div>
+<div class="section" id="mail-local-development">
+<span id="mail-local-development"></span><h2>Mail &amp; Local Development<a class="headerlink" href="#mail-local-development" title="Permalink to this headline">¶</a></h2>
+<p>When developing an application that sends e-mail, you probably don&#8217;t want to actually send e-mails to live e-mail addresses. Laravel provides several ways to &#8220;disable&#8221; the actual sending of e-mail messages.</p>
+<div class="section" id="log-driver">
+<span id="log-driver"></span><h3>Log Driver<a class="headerlink" href="#log-driver" title="Permalink to this headline">¶</a></h3>
+<p>One solution is to use the <code class="docutils literal"><span class="pre">log</span></code> mail driver during local development. This driver will write all e-mail messages to your log files for inspection. For more information on configuring your application per environment, check out the <a class="reference external" href="/docs/{{version}}/installation#environment-configuration">configuration documentation</a>.</p>
+</div>
+<div class="section" id="universal-to">
+<span id="universal-to"></span><h3>Universal To<a class="headerlink" href="#universal-to" title="Permalink to this headline">¶</a></h3>
+<p>Another solution provided by Laravel is to set a universal recipient of all e-mails sent by the framework. This way, all the emails generated by your application will be sent to a specific address, instead of the address actually specified when sending the message. This can be done via the <code class="docutils literal"><span class="pre">to</span></code> option in your <code class="docutils literal"><span class="pre">config/mail.php</span></code> configuration file:</p>
+<pre class="literal-block">
+'to' =&gt; [
+    'address' =&gt; 'dev&#64;domain.com',
+    'name' =&gt; 'Dev Example'
+],
+</pre>
+</div>
+<div class="section" id="mailtrap">
+<span id="mailtrap"></span><h3>Mailtrap<a class="headerlink" href="#mailtrap" title="Permalink to this headline">¶</a></h3>
+<p>Finally, you may use a service like <a class="reference external" href="https://mailtrap.io">Mailtrap</a> and the <code class="docutils literal"><span class="pre">smtp</span></code> driver to send your e-mail messages to a &#8220;dummy&#8221; mailbox where you may view them in a true e-mail client. This approach has the benefit of allowing you to actually inspect the final e-mails in Mailtrap&#8217;s message viewer.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, The Weezqyd.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

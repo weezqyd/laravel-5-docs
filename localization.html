@@ -1,0 +1,296 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Localization &mdash; Laravel 5 Documentation 1.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Laravel 5 Documentation 1.0 documentation" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Laravel 5 Documentation
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <!-- Local TOC -->
+                <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Localization</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a><ul>
+<li><a class="reference internal" href="#configuring-the-locale">Configuring The Locale</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#basic-usage">Basic Usage</a><ul>
+<li><a class="reference internal" href="#replacing-parameters-in-language-lines">Replacing Parameters In Language Lines</a></li>
+<li><a class="reference internal" href="#pluralization">Pluralization</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#overriding-vendor-language-files">Overriding Vendor Language Files</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Laravel 5 Documentation</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Localization</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/localization.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="localization">
+<span id="localization"></span><h1>Localization<a class="headerlink" href="#localization" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference external" href="#introduction">Introduction</a></li>
+<li><a class="reference external" href="#basic-usage">Basic Usage</a><ul>
+<li><a class="reference external" href="#pluralization">Pluralization</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#overriding-vendor-language-files">Overriding Vendor Language Files</a></li>
+</ul>
+<p><a name="introduction"></a></p>
+<div class="section" id="introduction">
+<span id="introduction"></span><h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>Laravel&#8217;s localization features provide a convenient way to retrieve strings in various languages, allowing you to easily support multiple languages within your application.</p>
+<p>Language strings are stored in files within the <code class="docutils literal"><span class="pre">resources/lang</span></code> directory. Within this directory there should be a subdirectory for each language supported by the application:</p>
+<pre class="literal-block">
+/resources
+    /lang
+        /en
+            messages.php
+        /es
+            messages.php
+</pre>
+<p>All language files simply return an array of keyed strings. For example:</p>
+<pre class="literal-block">
+&lt;?php
+
+return [
+    'welcome' =&gt; 'Welcome to our application'
+];
+</pre>
+<div class="section" id="configuring-the-locale">
+<span id="configuring-the-locale"></span><h3>Configuring The Locale<a class="headerlink" href="#configuring-the-locale" title="Permalink to this headline">¶</a></h3>
+<p>The default language for your application is stored in the <code class="docutils literal"><span class="pre">config/app.php</span></code> configuration file. Of course, you may modify this value to suit the needs of your application. You may also change the active language at runtime using the <code class="docutils literal"><span class="pre">setLocale</span></code> method on the <code class="docutils literal"><span class="pre">App</span></code> facade:</p>
+<pre class="literal-block">
+Route::get('welcome/{locale}', function ($locale) {
+    App::setLocale($locale);
+
+    //
+});
+</pre>
+<p>You may also configure a &#8220;fallback language&#8221;, which will be used when the active language does not contain a given language line. Like the default language, the fallback language is also configured in the <code class="docutils literal"><span class="pre">config/app.php</span></code> configuration file:</p>
+<pre class="literal-block">
+'fallback_locale' =&gt; 'en',
+</pre>
+<p><a name="basic-usage"></a></p>
+</div>
+</div>
+<div class="section" id="basic-usage">
+<span id="basic-usage"></span><h2>Basic Usage<a class="headerlink" href="#basic-usage" title="Permalink to this headline">¶</a></h2>
+<p>You may retrieve lines from language files using the <code class="docutils literal"><span class="pre">trans</span></code> helper function. The <code class="docutils literal"><span class="pre">trans</span></code> method accepts the file and key of the language line as its first argument. For example, let&#8217;s retrieve the language line <code class="docutils literal"><span class="pre">welcome</span></code> in the <code class="docutils literal"><span class="pre">resources/lang/messages.php</span></code> language file:</p>
+<pre class="literal-block">
+echo trans('messages.welcome');
+</pre>
+<p>Of course if you are using the <a class="reference external" href="/docs/{{version}}/blade">Blade templating engine</a>, you may use the <code class="docutils literal"><span class="pre">{{</span> <span class="pre">}}</span></code> syntax to echo the language line:</p>
+<pre class="literal-block">
+{{ trans('messages.welcome') }}
+</pre>
+<p>If the specified language line does not exist, the <code class="docutils literal"><span class="pre">trans</span></code> function will simply return the language line key. So, using the example above, the <code class="docutils literal"><span class="pre">trans</span></code> function would return <code class="docutils literal"><span class="pre">messages.welcome</span></code> if the language line does not exist.</p>
+<div class="section" id="replacing-parameters-in-language-lines">
+<span id="replacing-parameters-in-language-lines"></span><h3>Replacing Parameters In Language Lines<a class="headerlink" href="#replacing-parameters-in-language-lines" title="Permalink to this headline">¶</a></h3>
+<p>If you wish, you may define place-holders in your language lines. All place-holders are prefixed with a <code class="docutils literal"><span class="pre">:</span></code>. For example, you may define a welcome message with a place-holder name:</p>
+<pre class="literal-block">
+'welcome' =&gt; 'Welcome, :name',
+</pre>
+<p>To replace the place-holders when retrieving a language line, pass an array of replacements as the second argument to the <code class="docutils literal"><span class="pre">trans</span></code> function:</p>
+<pre class="literal-block">
+echo trans('messages.welcome', ['name' =&gt; 'Dayle']);
+</pre>
+<p><a name="pluralization"></a></p>
+</div>
+<div class="section" id="pluralization">
+<span id="pluralization"></span><h3>Pluralization<a class="headerlink" href="#pluralization" title="Permalink to this headline">¶</a></h3>
+<p>Pluralization is a complex problem, as different languages have a variety of complex rules for pluralization. By using a &#8220;pipe&#8221; character, you may distinguish a singular and plural form of a string:</p>
+<pre class="literal-block">
+'apples' =&gt; 'There is one apple|There are many apples',
+</pre>
+<p>Then, you may then use the <code class="docutils literal"><span class="pre">trans_choice</span></code> function to retrieve the line for a given &#8220;count&#8221;. In this example, since the count is greater than one, the plural form of the language line is returned:</p>
+<pre class="literal-block">
+echo trans_choice('messages.apples', 10);
+</pre>
+<p>Since the Laravel translator is powered by the Symfony Translation component, you may create even more complex pluralization rules:</p>
+<pre class="literal-block">
+'apples' =&gt; '{0} There are none|[1,19] There are some|[20,Inf] There are many',
+</pre>
+<p><a name="overriding-vendor-language-files"></a></p>
+</div>
+</div>
+<div class="section" id="overriding-vendor-language-files">
+<span id="overriding-vendor-language-files"></span><h2>Overriding Vendor Language Files<a class="headerlink" href="#overriding-vendor-language-files" title="Permalink to this headline">¶</a></h2>
+<p>Some packages may ship with their own language files. Instead of hacking the package&#8217;s core files to tweak these lines, you may override them by placing your own files in the <code class="docutils literal"><span class="pre">resources/lang/vendor/{package}/{locale}</span></code> directory.</p>
+<p>So, for example, if you need to override the English language lines in <code class="docutils literal"><span class="pre">messages.php</span></code> for a package named <code class="docutils literal"><span class="pre">skyrim/hearthfire</span></code>, you would place a language file at: <code class="docutils literal"><span class="pre">resources/lang/vendor/hearthfire/en/messages.php</span></code>. In this file you should only define the language lines you wish to override. Any language lines you don&#8217;t override will still be loaded from the package&#8217;s original language files.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, The Weezqyd.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

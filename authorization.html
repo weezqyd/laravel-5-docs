@@ -1,0 +1,675 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Authorization &mdash; Laravel 5 Documentation 1.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Laravel 5 Documentation 1.0 documentation" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Laravel 5 Documentation
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <!-- Local TOC -->
+                <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Authorization</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#defining-abilities">Defining Abilities</a><ul>
+<li><a class="reference internal" href="#class-based-abilities">Class Based Abilities</a></li>
+<li><a class="reference internal" href="#intercepting-all-checks">Intercepting All Checks</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#checking-abilities">Checking Abilities</a><ul>
+<li><a class="reference internal" href="#via-the-gate-facade">Via The Gate Facade</a><ul>
+<li><a class="reference internal" href="#checking-abilities-for-specific-users">Checking Abilities For Specific Users</a></li>
+<li><a class="reference internal" href="#passing-multiple-arguments">Passing Multiple Arguments</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#via-the-user-model">Via The User Model</a></li>
+<li><a class="reference internal" href="#within-blade-templates">Within Blade Templates</a></li>
+<li><a class="reference internal" href="#within-form-requests">Within Form Requests</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#policies">Policies</a><ul>
+<li><a class="reference internal" href="#creating-policies">Creating Policies</a><ul>
+<li><a class="reference internal" href="#registering-policies">Registering Policies</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#writing-policies">Writing Policies</a><ul>
+<li><a class="reference internal" href="#intercepting-all-checks">Intercepting All Checks</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#checking-policies">Checking Policies</a><ul>
+<li><a class="reference internal" href="#via-the-gate-facade">Via The Gate Facade</a></li>
+<li><a class="reference internal" href="#via-the-user-model">Via The User Model</a></li>
+<li><a class="reference internal" href="#within-blade-templates">Within Blade Templates</a></li>
+<li><a class="reference internal" href="#via-the-policy-helper">Via The Policy Helper</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#controller-authorization">Controller Authorization</a><ul>
+<li><a class="reference internal" href="#automatically-determining-policy-methods">Automatically Determining Policy Methods</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Laravel 5 Documentation</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Authorization</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/authorization.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="authorization">
+<span id="authorization"></span><h1>Authorization<a class="headerlink" href="#authorization" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference external" href="#introduction">Introduction</a></li>
+<li><a class="reference external" href="#defining-abilities">Defining Abilities</a></li>
+<li><a class="reference external" href="#checking-abilities">Checking Abilities</a><ul>
+<li><a class="reference external" href="#via-the-gate-facade">Via The Gate Facade</a></li>
+<li><a class="reference external" href="#via-the-user-model">Via The User Model</a></li>
+<li><a class="reference external" href="#within-blade-templates">Within Blade Templates</a></li>
+<li><a class="reference external" href="#within-form-requests">Within Form Requests</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#policies">Policies</a><ul>
+<li><a class="reference external" href="#creating-policies">Creating Policies</a></li>
+<li><a class="reference external" href="#writing-policies">Writing Policies</a></li>
+<li><a class="reference external" href="#checking-policies">Checking Policies</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#controller-authorization">Controller Authorization</a></li>
+</ul>
+<p><a name="introduction"></a></p>
+<div class="section" id="introduction">
+<span id="introduction"></span><h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>In addition to providing <a class="reference external" href="authentication.html">authentication</a> services out of the box, Laravel also provides a simple way to organize authorization logic and control access to resources. There are a variety of methods and helpers to assist you in organizing your authorization logic, and we&#8217;ll cover each of them in this document.</p>
+<blockquote>
+<div><strong>Note:</strong> Authorization was added in Laravel 5.1.11, please refer to the <a class="reference external" href="upgrade.html">upgrade guide</a> before integrating these features into your application.</div></blockquote>
+<p><a name="defining-abilities"></a></p>
+</div>
+<div class="section" id="defining-abilities">
+<span id="defining-abilities"></span><h2>Defining Abilities<a class="headerlink" href="#defining-abilities" title="Permalink to this headline">¶</a></h2>
+<p>The simplest way to determine if a user may perform a given action is to define an &#8220;ability&#8221; using the <code class="docutils literal"><span class="pre">Illuminate\Auth\Access\Gate</span></code> class. The <code class="docutils literal"><span class="pre">AuthServiceProvider</span></code> which ships with Laravel serves as a convenient location to define all of the abilities for your application. For example, let&#8217;s define an <code class="docutils literal"><span class="pre">update-post</span></code> ability which receives the current <code class="docutils literal"><span class="pre">User</span></code> and a <code class="docutils literal"><span class="pre">Post</span></code> <a class="reference external" href="eloquent.html">model</a>. Within our ability, we will determine if the user&#8217;s <code class="docutils literal"><span class="pre">id</span></code> matches the post&#8217;s <code class="docutils literal"><span class="pre">user_id</span></code>:</p>
+<pre class="literal-block">
+&lt;?php
+
+namespace App\Providers;
+
+use Illuminate\Contracts\Auth\Access\Gate as GateContract;
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+
+class AuthServiceProvider extends ServiceProvider
+{
+    /**
+     * Register any application authentication / authorization services.
+     *
+     * &#64;param  \Illuminate\Contracts\Auth\Access\Gate  $gate
+     * &#64;return void
+     */
+    public function boot(GateContract $gate)
+    {
+        parent::registerPolicies($gate);
+
+        $gate-&gt;define('update-post', function ($user, $post) {
+            return $user-&gt;id === $post-&gt;user_id;
+        });
+    }
+}
+</pre>
+<p>Note that we did not check if the given <code class="docutils literal"><span class="pre">$user</span></code> is not <code class="docutils literal"><span class="pre">NULL</span></code>. The <code class="docutils literal"><span class="pre">Gate</span></code> will automatically return <code class="docutils literal"><span class="pre">false</span></code> for <strong>all abilities</strong> when there is not an authenticated user or a specific user has not been specified using the <code class="docutils literal"><span class="pre">forUser</span></code> method.</p>
+<div class="section" id="class-based-abilities">
+<span id="class-based-abilities"></span><h3>Class Based Abilities<a class="headerlink" href="#class-based-abilities" title="Permalink to this headline">¶</a></h3>
+<p>In addition to registering <code class="docutils literal"><span class="pre">Closures</span></code> as authorization callbacks, you may register class methods by passing a string containing the class name and the method. When needed, the class will be resolved via the <a class="reference external" href="container.html">service container</a>:</p>
+<pre class="literal-block">
+$gate-&gt;define('update-post', 'Class&#64;method');
+</pre>
+<p><a name="intercepting-all-checks"></a></p>
+</div>
+<div class="section" id="intercepting-all-checks">
+<span id="intercepting-all-checks"></span><h3>Intercepting All Checks<a class="headerlink" href="#intercepting-all-checks" title="Permalink to this headline">¶</a></h3>
+<p>Sometimes, you may wish to grant all abilities to a specific user. For this situation, use the <code class="docutils literal"><span class="pre">before</span></code> method to define a callback that is run before all other authorization checks:</p>
+<pre class="literal-block">
+$gate-&gt;before(function ($user, $ability) {
+    if ($user-&gt;isSuperAdmin()) {
+        return true;
+    }
+});
+</pre>
+<p>If the <code class="docutils literal"><span class="pre">before</span></code> callback returns a non-null result that result will be considered the result of the check.</p>
+<p><a name="checking-abilities"></a></p>
+</div>
+</div>
+<div class="section" id="checking-abilities">
+<span id="checking-abilities"></span><h2>Checking Abilities<a class="headerlink" href="#checking-abilities" title="Permalink to this headline">¶</a></h2>
+<p><a name="via-the-gate-facade"></a></p>
+<div class="section" id="via-the-gate-facade">
+<span id="via-the-gate-facade"></span><h3>Via The Gate Facade<a class="headerlink" href="#via-the-gate-facade" title="Permalink to this headline">¶</a></h3>
+<p>Once an ability has been defined, we may &#8220;check&#8221; it in a variety of ways. First, we may use the <code class="docutils literal"><span class="pre">check</span></code>, <code class="docutils literal"><span class="pre">allows</span></code>, or <code class="docutils literal"><span class="pre">denies</span></code> methods on the <code class="docutils literal"><span class="pre">Gate</span></code> <a class="reference external" href="facades.html">facade</a>. All of these methods receive the name of the ability and the arguments that should be passed to the ability&#8217;s callback. You do <strong>not</strong> need to pass the current user to these methods, since the <code class="docutils literal"><span class="pre">Gate</span></code> will automatically prepend the current user to the arguments passed to the callback. So, when checking the <code class="docutils literal"><span class="pre">update-post</span></code> ability we defined earlier, we only need to pass a <code class="docutils literal"><span class="pre">Post</span></code> instance to the <code class="docutils literal"><span class="pre">denies</span></code> method:</p>
+<pre class="literal-block">
+&lt;?php
+
+namespace App\Http\Controllers;
+
+use Gate;
+use App\User;
+use App\Post;
+use App\Http\Controllers\Controller;
+
+class PostController extends Controller
+{
+    /**
+     * Update the given post.
+     *
+     * &#64;param  int  $id
+     * &#64;return Response
+     */
+    public function update($id)
+    {
+        $post = Post::findOrFail($id);
+
+        if (Gate::denies('update-post', $post)) {
+            abort(403);
+        }
+
+        // Update Post...
+    }
+}
+</pre>
+<p>Of course, the <code class="docutils literal"><span class="pre">allows</span></code> method is simply the inverse of the <code class="docutils literal"><span class="pre">denies</span></code> method, and returns <code class="docutils literal"><span class="pre">true</span></code> if the action is authorized. The <code class="docutils literal"><span class="pre">check</span></code> method is an alias of the <code class="docutils literal"><span class="pre">allows</span></code> method.</p>
+<div class="section" id="checking-abilities-for-specific-users">
+<span id="checking-abilities-for-specific-users"></span><h4>Checking Abilities For Specific Users<a class="headerlink" href="#checking-abilities-for-specific-users" title="Permalink to this headline">¶</a></h4>
+<p>If you would like to use the <code class="docutils literal"><span class="pre">Gate</span></code> facade to check if a user <strong>other than the currently authenticated user</strong> has a given ability, you may use the <code class="docutils literal"><span class="pre">forUser</span></code> method:</p>
+<pre class="literal-block">
+if (Gate::forUser($user)-&gt;allows('update-post', $post)) {
+    //
+}
+</pre>
+</div>
+<div class="section" id="passing-multiple-arguments">
+<span id="passing-multiple-arguments"></span><h4>Passing Multiple Arguments<a class="headerlink" href="#passing-multiple-arguments" title="Permalink to this headline">¶</a></h4>
+<p>Of course, ability callbacks may receive multiple arguments:</p>
+<pre class="literal-block">
+Gate::define('delete-comment', function ($user, $post, $comment) {
+    //
+});
+</pre>
+<p>If your ability needs multiple arguments, simply pass an array of arguments to the <code class="docutils literal"><span class="pre">Gate</span></code> methods:</p>
+<pre class="literal-block">
+if (Gate::allows('delete-comment', [$post, $comment])) {
+    //
+}
+</pre>
+<p><a name="via-the-user-model"></a></p>
+</div>
+</div>
+<div class="section" id="via-the-user-model">
+<span id="via-the-user-model"></span><h3>Via The User Model<a class="headerlink" href="#via-the-user-model" title="Permalink to this headline">¶</a></h3>
+<p>Alternatively, you may check abilities via the <code class="docutils literal"><span class="pre">User</span></code> model instance. By default, Laravel&#8217;s <code class="docutils literal"><span class="pre">App\User</span></code> model uses an <code class="docutils literal"><span class="pre">Authorizable</span></code> trait which provides two methods: <code class="docutils literal"><span class="pre">can</span></code> and <code class="docutils literal"><span class="pre">cannot</span></code>. These methods may be used similarly to the <code class="docutils literal"><span class="pre">allows</span></code> and <code class="docutils literal"><span class="pre">denies</span></code> methods present on the <code class="docutils literal"><span class="pre">Gate</span></code> facade. So, using our previous example, we may modify our code like so:</p>
+<pre class="literal-block">
+&lt;?php
+
+namespace App\Http\Controllers;
+
+use App\Post;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+
+class PostController extends Controller
+{
+    /**
+     * Update the given post.
+     *
+     * &#64;param  \Illuminate\Http\Request  $request
+     * &#64;param  int  $id
+     * &#64;return Response
+     */
+    public function update(Request $request, $id)
+    {
+        $post = Post::findOrFail($id);
+
+        if ($request-&gt;user()-&gt;cannot('update-post', $post)) {
+            abort(403);
+        }
+
+        // Update Post...
+    }
+}
+</pre>
+<p>Of course, the <code class="docutils literal"><span class="pre">can</span></code> method is simply the inverse of the <code class="docutils literal"><span class="pre">cannot</span></code> method:</p>
+<pre class="literal-block">
+if ($request-&gt;user()-&gt;can('update-post', $post)) {
+    // Update Post...
+}
+</pre>
+<p><a name="within-blade-templates"></a></p>
+</div>
+<div class="section" id="within-blade-templates">
+<span id="within-blade-templates"></span><h3>Within Blade Templates<a class="headerlink" href="#within-blade-templates" title="Permalink to this headline">¶</a></h3>
+<p>For convenience, Laravel provides the <code class="docutils literal"><span class="pre">&#64;can</span></code> Blade directive to quickly check if the currently authenticated user has a given ability. For example:</p>
+<pre class="literal-block">
+&lt;a href=&quot;/post/{{ $post-&gt;id }}&quot;&gt;View Post&lt;/a&gt;
+
+&#64;can('update-post', $post)
+    &lt;a href=&quot;/post/{{ $post-&gt;id }}/edit&quot;&gt;Edit Post&lt;/a&gt;
+&#64;endcan
+</pre>
+<p>You may also combine the <code class="docutils literal"><span class="pre">&#64;can</span></code> directive with <code class="docutils literal"><span class="pre">&#64;else</span></code> directive:</p>
+<pre class="literal-block">
+&#64;can('update-post', $post)
+    &lt;!-- The Current User Can Update The Post --&gt;
+&#64;else
+    &lt;!-- The Current User Can't Update The Post --&gt;
+&#64;endcan
+</pre>
+<p><a name="within-form-requests"></a></p>
+</div>
+<div class="section" id="within-form-requests">
+<span id="within-form-requests"></span><h3>Within Form Requests<a class="headerlink" href="#within-form-requests" title="Permalink to this headline">¶</a></h3>
+<p>You may also choose to utilize your <code class="docutils literal"><span class="pre">Gate</span></code> defined abilities from a <a class="reference external" href="validation.html#form-request-validation">form request&#8217;s</a> <code class="docutils literal"><span class="pre">authorize</span></code> method. For example, you may simply defer to the <code class="docutils literal"><span class="pre">Gate</span></code> within the form request&#8217;s <code class="docutils literal"><span class="pre">authorize</span></code> method:</p>
+<pre class="literal-block">
+/**
+ * Determine if the user is authorized to make this request.
+ *
+ * &#64;return bool
+ */
+public function authorize()
+{
+    $postId = $this-&gt;route('post');
+
+    return Gate::allows('update', Post::findOrFail($postId));
+}
+</pre>
+<p><a name="policies"></a></p>
+</div>
+</div>
+<div class="section" id="policies">
+<span id="policies"></span><h2>Policies<a class="headerlink" href="#policies" title="Permalink to this headline">¶</a></h2>
+<p><a name="creating-policies"></a></p>
+<div class="section" id="creating-policies">
+<span id="creating-policies"></span><h3>Creating Policies<a class="headerlink" href="#creating-policies" title="Permalink to this headline">¶</a></h3>
+<p>Since defining all of your authorization logic in the <code class="docutils literal"><span class="pre">AuthServiceProvider</span></code> could become cumbersome in large applications, Laravel allows you to split your authorization logic into &#8220;Policy&#8221; classes. Policies are plain PHP classes that group authorization logic based on the resource they authorize.</p>
+<p>First, let&#8217;s generate a policy to manage authorization for our <code class="docutils literal"><span class="pre">Post</span></code> model. You may generate a policy using the <code class="docutils literal"><span class="pre">make:policy</span></code> <a class="reference external" href="artisan.html">artisan command</a>. The generated policy will be placed in the <code class="docutils literal"><span class="pre">app/Policies</span></code> directory:</p>
+<pre class="literal-block">
+php artisan make:policy PostPolicy
+</pre>
+<div class="section" id="registering-policies">
+<span id="registering-policies"></span><h4>Registering Policies<a class="headerlink" href="#registering-policies" title="Permalink to this headline">¶</a></h4>
+<p>Once the policy exists, we need to register it with the <code class="docutils literal"><span class="pre">Gate</span></code> class. The <code class="docutils literal"><span class="pre">AuthServiceProvider</span></code> contains a <code class="docutils literal"><span class="pre">policies</span></code> property which maps various entities to the policies that manage them. So, we will specify that the <code class="docutils literal"><span class="pre">Post</span></code> model&#8217;s policy is the <code class="docutils literal"><span class="pre">PostPolicy</span></code> class:</p>
+<pre class="literal-block">
+&lt;?php
+
+namespace App\Providers;
+
+use App\Post;
+use App\Policies\PostPolicy;
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+
+class AuthServiceProvider extends ServiceProvider
+{
+    /**
+     * The policy mappings for the application.
+     *
+     * &#64;var array
+     */
+    protected $policies = [
+        Post::class =&gt; PostPolicy::class,
+    ];
+
+    /**
+     * Register any application authentication / authorization services.
+     *
+     * &#64;param  \Illuminate\Contracts\Auth\Access\Gate  $gate
+     * &#64;return void
+     */
+    public function boot(GateContract $gate)
+    {
+        parent::registerPolicies($gate);
+    }
+}
+</pre>
+<p><a name="writing-policies"></a></p>
+</div>
+</div>
+<div class="section" id="writing-policies">
+<span id="writing-policies"></span><h3>Writing Policies<a class="headerlink" href="#writing-policies" title="Permalink to this headline">¶</a></h3>
+<p>Once the policy has been generated and registered, we can add methods for each ability it authorizes. For example, let&#8217;s define an <code class="docutils literal"><span class="pre">update</span></code> method on our <code class="docutils literal"><span class="pre">PostPolicy</span></code>, which will determine if the given <code class="docutils literal"><span class="pre">User</span></code> can &#8220;update&#8221; a <code class="docutils literal"><span class="pre">Post</span></code>:</p>
+<pre class="literal-block">
+&lt;?php
+
+namespace App\Policies;
+
+use App\User;
+use App\Post;
+
+class PostPolicy
+{
+    /**
+     * Determine if the given post can be updated by the user.
+     *
+     * &#64;param  \App\User  $user
+     * &#64;param  \App\Post  $post
+     * &#64;return bool
+     */
+    public function update(User $user, Post $post)
+    {
+        return $user-&gt;id === $post-&gt;user_id;
+    }
+}
+</pre>
+<p>You may continue to define additional methods on the policy as needed for the various abilities it authorizes. For example, you might define <code class="docutils literal"><span class="pre">show</span></code>, <code class="docutils literal"><span class="pre">destroy</span></code>, or <code class="docutils literal"><span class="pre">addComment</span></code> methods to authorize various <code class="docutils literal"><span class="pre">Post</span></code> actions.</p>
+<blockquote>
+<div><strong>Note:</strong> All policies are resolved via the Laravel <a class="reference external" href="container.html">service container</a>, meaning you may type-hint any needed dependencies in the policy&#8217;s constructor and they will be automatically injected.</div></blockquote>
+<div class="section" id="intercepting-all-checks">
+<span id="id1"></span><h4>Intercepting All Checks<a class="headerlink" href="#intercepting-all-checks" title="Permalink to this headline">¶</a></h4>
+<p>Sometimes, you may wish to grant all abilities to a specific user on a policy. For this situation, define a <code class="docutils literal"><span class="pre">before</span></code> method on the policy. This method will be run before all other authorization checks on the policy:</p>
+<pre class="literal-block">
+public function before($user, $ability)
+{
+    if ($user-&gt;isSuperAdmin()) {
+        return true;
+    }
+}
+</pre>
+<p>If the <code class="docutils literal"><span class="pre">before</span></code> method returns a non-null result that result will be considered the result of the check.</p>
+<p><a name="checking-policies"></a></p>
+</div>
+</div>
+<div class="section" id="checking-policies">
+<span id="checking-policies"></span><h3>Checking Policies<a class="headerlink" href="#checking-policies" title="Permalink to this headline">¶</a></h3>
+<p>Policy methods are called in exactly the same way as <code class="docutils literal"><span class="pre">Closure</span></code> based authorization callbacks. You may use the <code class="docutils literal"><span class="pre">Gate</span></code> facade, the <code class="docutils literal"><span class="pre">User</span></code> model, the <code class="docutils literal"><span class="pre">&#64;can</span></code> Blade directive, or the <code class="docutils literal"><span class="pre">policy</span></code> helper.</p>
+<div class="section" id="via-the-gate-facade">
+<span id="id2"></span><h4>Via The Gate Facade<a class="headerlink" href="#via-the-gate-facade" title="Permalink to this headline">¶</a></h4>
+<p>The <code class="docutils literal"><span class="pre">Gate</span></code> will automatically determine which policy to use by examining the class of the arguments passed to its methods. So, if we pass a <code class="docutils literal"><span class="pre">Post</span></code> instance to the <code class="docutils literal"><span class="pre">denies</span></code> method, the <code class="docutils literal"><span class="pre">Gate</span></code> will utilize the corresponding <code class="docutils literal"><span class="pre">PostPolicy</span></code> to authorize actions:</p>
+<pre class="literal-block">
+&lt;?php
+
+namespace App\Http\Controllers;
+
+use Gate;
+use App\User;
+use App\Post;
+use App\Http\Controllers\Controller;
+
+class PostController extends Controller
+{
+    /**
+     * Update the given post.
+     *
+     * &#64;param  int  $id
+     * &#64;return Response
+     */
+    public function update($id)
+    {
+        $post = Post::findOrFail($id);
+
+        if (Gate::denies('update', $post)) {
+            abort(403);
+        }
+
+        // Update Post...
+    }
+}
+</pre>
+</div>
+<div class="section" id="via-the-user-model">
+<span id="id3"></span><h4>Via The User Model<a class="headerlink" href="#via-the-user-model" title="Permalink to this headline">¶</a></h4>
+<p>The <code class="docutils literal"><span class="pre">User</span></code> model&#8217;s <code class="docutils literal"><span class="pre">can</span></code> and <code class="docutils literal"><span class="pre">cannot</span></code> methods will also automatically utilize policies when they are available for the given arguments. These methods provide a convenient way to authorize actions for any <code class="docutils literal"><span class="pre">User</span></code> instance retrieved by your application:</p>
+<pre class="literal-block">
+if ($user-&gt;can('update', $post)) {
+    //
+}
+
+if ($user-&gt;cannot('update', $post)) {
+    //
+}
+</pre>
+</div>
+<div class="section" id="within-blade-templates">
+<span id="id4"></span><h4>Within Blade Templates<a class="headerlink" href="#within-blade-templates" title="Permalink to this headline">¶</a></h4>
+<p>Likewise, the <code class="docutils literal"><span class="pre">&#64;can</span></code> Blade directive will utilize policies when they are available for the given arguments:</p>
+<pre class="literal-block">
+&#64;can('update', $post)
+    &lt;!-- The Current User Can Update The Post --&gt;
+&#64;endcan
+</pre>
+</div>
+<div class="section" id="via-the-policy-helper">
+<span id="via-the-policy-helper"></span><h4>Via The Policy Helper<a class="headerlink" href="#via-the-policy-helper" title="Permalink to this headline">¶</a></h4>
+<p>The global <code class="docutils literal"><span class="pre">policy</span></code> helper function may be used to retrieve the <code class="docutils literal"><span class="pre">Policy</span></code> class for a given class instance. For example, we may pass a <code class="docutils literal"><span class="pre">Post</span></code> instance to the <code class="docutils literal"><span class="pre">policy</span></code> helper to get an instance of our corresponding <code class="docutils literal"><span class="pre">PostPolicy</span></code> class:</p>
+<pre class="literal-block">
+if (policy($post)-&gt;update($user, $post)) {
+    //
+}
+</pre>
+<p><a name="controller-authorization"></a></p>
+</div>
+</div>
+</div>
+<div class="section" id="controller-authorization">
+<span id="controller-authorization"></span><h2>Controller Authorization<a class="headerlink" href="#controller-authorization" title="Permalink to this headline">¶</a></h2>
+<p>By default, the base <code class="docutils literal"><span class="pre">App\Http\Controllers\Controller</span></code> class included with Laravel uses the <code class="docutils literal"><span class="pre">AuthorizesRequests</span></code> trait. This trait provides the <code class="docutils literal"><span class="pre">authorize</span></code> method, which may be used to quickly authorize a given action and throw a <code class="docutils literal"><span class="pre">HttpException</span></code> if the action is not authorized.</p>
+<p>The <code class="docutils literal"><span class="pre">authorize</span></code> method shares the same signature as the various other authorization methods such as <code class="docutils literal"><span class="pre">Gate::allows</span></code> and <code class="docutils literal"><span class="pre">$user-&gt;can()</span></code>. So, let&#8217;s use the <code class="docutils literal"><span class="pre">authorize</span></code> method to quickly authorize a request to update a <code class="docutils literal"><span class="pre">Post</span></code>:</p>
+<pre class="literal-block">
+&lt;?php
+
+namespace App\Http\Controllers;
+
+use App\Post;
+use App\Http\Controllers\Controller;
+
+class PostController extends Controller
+{
+    /**
+     * Update the given post.
+     *
+     * &#64;param  int  $id
+     * &#64;return Response
+     */
+    public function update($id)
+    {
+        $post = Post::findOrFail($id);
+
+        $this-&gt;authorize('update', $post);
+
+        // Update Post...
+    }
+}
+</pre>
+<p>If the action is authorized, the controller will continue executing normally; however, if the <code class="docutils literal"><span class="pre">authorize</span></code> method determines that the action is not authorized, a <code class="docutils literal"><span class="pre">HttpException</span></code> will automatically be thrown which generates a HTTP response with a <code class="docutils literal"><span class="pre">403</span> <span class="pre">Not</span> <span class="pre">Authorized</span></code> status code. As you can see, the <code class="docutils literal"><span class="pre">authorize</span></code> method is a convenient, fast way to authorize an action or throw an exception with a single line of code.</p>
+<p>The <code class="docutils literal"><span class="pre">AuthorizesRequests</span></code> trait also provides the <code class="docutils literal"><span class="pre">authorizeForUser</span></code> method to authorize an action on a user that is not the currently authenticated user:</p>
+<pre class="literal-block">
+$this-&gt;authorizeForUser($user, 'update', $post);
+</pre>
+<div class="section" id="automatically-determining-policy-methods">
+<span id="automatically-determining-policy-methods"></span><h3>Automatically Determining Policy Methods<a class="headerlink" href="#automatically-determining-policy-methods" title="Permalink to this headline">¶</a></h3>
+<p>Frequently, a policy&#8217;s methods will correspond to the methods on a controller. For example, in the <code class="docutils literal"><span class="pre">update</span></code> method above, the controller method and the policy method share the same name: <code class="docutils literal"><span class="pre">update</span></code>.</p>
+<p>For this reason, Laravel allows you to simply pass the instance arguments to the <code class="docutils literal"><span class="pre">authorize</span></code> method, and the ability being authorized will automatically be determined based on the name of the calling function. In this example, since <code class="docutils literal"><span class="pre">authorize</span></code> is called from the controller&#8217;s <code class="docutils literal"><span class="pre">update</span></code> method, the <code class="docutils literal"><span class="pre">update</span></code> method will also be called on the <code class="docutils literal"><span class="pre">PostPolicy</span></code>:</p>
+<pre class="literal-block">
+/**
+ * Update the given post.
+ *
+ * &#64;param  int  $id
+ * &#64;return Response
+ */
+public function update($id)
+{
+    $post = Post::findOrFail($id);
+
+    $this-&gt;authorize($post);
+
+    // Update Post...
+}
+</pre>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, The Weezqyd.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

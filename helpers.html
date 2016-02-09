@@ -1,0 +1,1111 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Helper Functions &mdash; Laravel 5 Documentation 1.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Laravel 5 Documentation 1.0 documentation" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Laravel 5 Documentation
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <!-- Local TOC -->
+                <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Helper Functions</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#available-methods">Available Methods</a><ul>
+<li><a class="reference internal" href="#arrays">Arrays</a></li>
+<li><a class="reference internal" href="#paths">Paths</a></li>
+<li><a class="reference internal" href="#strings">Strings</a></li>
+<li><a class="reference internal" href="#urls">URLs</a></li>
+<li><a class="reference internal" href="#miscellaneous">Miscellaneous</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#method-listing">Method Listing</a></li>
+<li><a class="reference internal" href="#arrays">Arrays</a><ul>
+<li><a class="reference internal" href="#array-add-collection-method-first-collection-method"><code class="docutils literal"><span class="pre">array_add()</span></code> {#collection-method .first-collection-method}</a></li>
+<li><a class="reference internal" href="#array-divide-collection-method"><code class="docutils literal"><span class="pre">array_divide()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#array-dot-collection-method"><code class="docutils literal"><span class="pre">array_dot()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#array-except-collection-method"><code class="docutils literal"><span class="pre">array_except()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#array-first-collection-method"><code class="docutils literal"><span class="pre">array_first()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#array-flatten-collection-method"><code class="docutils literal"><span class="pre">array_flatten()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#array-forget-collection-method"><code class="docutils literal"><span class="pre">array_forget()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#array-get-collection-method"><code class="docutils literal"><span class="pre">array_get()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#array-only-collection-method"><code class="docutils literal"><span class="pre">array_only()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#array-pluck-collection-method"><code class="docutils literal"><span class="pre">array_pluck()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#array-pull-collection-method"><code class="docutils literal"><span class="pre">array_pull()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#array-set-collection-method"><code class="docutils literal"><span class="pre">array_set()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#array-sort-collection-method"><code class="docutils literal"><span class="pre">array_sort()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#array-sort-recursive-collection-method"><code class="docutils literal"><span class="pre">array_sort_recursive()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#array-where-collection-method"><code class="docutils literal"><span class="pre">array_where()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#head-collection-method"><code class="docutils literal"><span class="pre">head()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#last-collection-method"><code class="docutils literal"><span class="pre">last()</span></code> {#collection-method}</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#paths">Paths</a><ul>
+<li><a class="reference internal" href="#app-path-collection-method"><code class="docutils literal"><span class="pre">app_path()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#base-path-collection-method"><code class="docutils literal"><span class="pre">base_path()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#config-path-collection-method"><code class="docutils literal"><span class="pre">config_path()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#database-path-collection-method"><code class="docutils literal"><span class="pre">database_path()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#elixir-collection-method"><code class="docutils literal"><span class="pre">elixir()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#public-path-collection-method"><code class="docutils literal"><span class="pre">public_path()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#storage-path-collection-method"><code class="docutils literal"><span class="pre">storage_path()</span></code> {#collection-method}</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#strings">Strings</a><ul>
+<li><a class="reference internal" href="#camel-case-collection-method"><code class="docutils literal"><span class="pre">camel_case()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#class-basename-collection-method"><code class="docutils literal"><span class="pre">class_basename()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#e-collection-method"><code class="docutils literal"><span class="pre">e()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#ends-with-collection-method"><code class="docutils literal"><span class="pre">ends_with()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#snake-case-collection-method"><code class="docutils literal"><span class="pre">snake_case()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#str-limit-collection-method"><code class="docutils literal"><span class="pre">str_limit()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#starts-with-collection-method"><code class="docutils literal"><span class="pre">starts_with()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#str-contains-collection-method"><code class="docutils literal"><span class="pre">str_contains()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#str-finish-collection-method"><code class="docutils literal"><span class="pre">str_finish()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#str-is-collection-method"><code class="docutils literal"><span class="pre">str_is()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#str-plural-collection-method"><code class="docutils literal"><span class="pre">str_plural()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#str-random-collection-method"><code class="docutils literal"><span class="pre">str_random()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#str-singular-collection-method"><code class="docutils literal"><span class="pre">str_singular()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#str-slug-collection-method"><code class="docutils literal"><span class="pre">str_slug()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#studly-case-collection-method"><code class="docutils literal"><span class="pre">studly_case()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#trans-collection-method"><code class="docutils literal"><span class="pre">trans()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#trans-choice-collection-method"><code class="docutils literal"><span class="pre">trans_choice()</span></code> {#collection-method}</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#urls">URLs</a><ul>
+<li><a class="reference internal" href="#action-collection-method"><code class="docutils literal"><span class="pre">action()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#asset-collection-method"><code class="docutils literal"><span class="pre">asset()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#secure-asset-collection-method"><code class="docutils literal"><span class="pre">secure_asset()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#route-collection-method"><code class="docutils literal"><span class="pre">route()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#url-collection-method"><code class="docutils literal"><span class="pre">url()</span></code> {#collection-method}</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#miscellaneous">Miscellaneous</a><ul>
+<li><a class="reference internal" href="#auth-collection-method"><code class="docutils literal"><span class="pre">auth()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#back-collection-method"><code class="docutils literal"><span class="pre">back()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#bcrypt-collection-method"><code class="docutils literal"><span class="pre">bcrypt()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#config-collection-method"><code class="docutils literal"><span class="pre">config()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#csrf-field-collection-method"><code class="docutils literal"><span class="pre">csrf_field()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#csrf-token-collection-method"><code class="docutils literal"><span class="pre">csrf_token()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#dd-collection-method"><code class="docutils literal"><span class="pre">dd()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#env-collection-method"><code class="docutils literal"><span class="pre">env()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#event-collection-method"><code class="docutils literal"><span class="pre">event()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#factory-collection-method"><code class="docutils literal"><span class="pre">factory()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#method-field-collection-method"><code class="docutils literal"><span class="pre">method_field()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#old-collection-method"><code class="docutils literal"><span class="pre">old()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#redirect-collection-method"><code class="docutils literal"><span class="pre">redirect()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#response-collection-method"><code class="docutils literal"><span class="pre">response()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#value-collection-method"><code class="docutils literal"><span class="pre">value()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#view-collection-method"><code class="docutils literal"><span class="pre">view()</span></code> {#collection-method}</a></li>
+<li><a class="reference internal" href="#with-collection-method"><code class="docutils literal"><span class="pre">with()</span></code> {#collection-method}</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Laravel 5 Documentation</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Helper Functions</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/helpers.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="helper-functions">
+<span id="helper-functions"></span><h1>Helper Functions<a class="headerlink" href="#helper-functions" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference external" href="#introduction">Introduction</a></li>
+<li><a class="reference external" href="#available-methods">Available Methods</a></li>
+</ul>
+<p><a name="introduction"></a></p>
+<div class="section" id="introduction">
+<span id="introduction"></span><h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>Laravel includes a variety of &#8220;helper&#8221; PHP functions. Many of these functions are used by the framework itself; however, you are free to use them in your own applications if you find them convenient.</p>
+<p><a name="available-methods"></a></p>
+</div>
+<div class="section" id="available-methods">
+<span id="available-methods"></span><h2>Available Methods<a class="headerlink" href="#available-methods" title="Permalink to this headline">¶</a></h2>
+<style>
+    .collection-method-list > p {
+        column-count: 3; -moz-column-count: 3; -webkit-column-count: 3;
+        column-gap: 2em; -moz-column-gap: 2em; -webkit-column-gap: 2em;
+    }<pre class="literal-block">
+.collection-method-list a {
+    display: block;
+}
+</style>
+</pre>
+</style><div class="section" id="arrays">
+<span id="arrays"></span><h3>Arrays<a class="headerlink" href="#arrays" title="Permalink to this headline">¶</a></h3>
+<div class="collection-method-list" markdown="1">
+<p><a href="#method-array-add" class="reference internal"> array_add()</a></p>
+<p><a href="#method-array-divide" class="reference internal"> array_divide()</a></p>
+<p><a href="#method-array-dot" class="reference internal"> array_dot()</a></p>
+<p><a href="#method-array-except" class="reference internal"> array_except()</a></p>
+<p><a href="#method-array-first" class="reference internal"> array_first()</a></p>
+<p><a href="#method-array-flatten" class="reference internal"> array_flatten()</a></p>
+<p><a href="#method-array-forget" class="reference internal"> array_forget()</a></p>
+<p><a href="#method-array-get" class="reference internal"> array_get()</a></p>
+<p><a href="#method-array-only" class="reference internal"> array_only()</a></p>
+<p><a href="#method-array-pluck" class="reference internal"> array_pluck()</a></p>
+<p><a href="#method-array-pull" class="reference internal"> array_pull()</a></p>
+<p><a href="#method-array-set" class="reference internal"> array_set()</a></p>
+<p><a href="#method-array-sort" class="reference internal"> array_sort()</a></p>
+<p><a href="#method-array-recursive" class="reference internal"> array_sort_recursive()</a></p>
+<p><a href="#method-array-where" class="reference internal"> array_where()</a></p>
+<p><a href="#method-last" class="reference internal"> last()</a></p>
+</div></div>
+<div class="section" id="paths">
+<span id="paths"></span><h3>Paths<a class="headerlink" href="#paths" title="Permalink to this headline">¶</a></h3>
+<div class="collection-method-list" markdown="1">
+<p><a href="#method-app-path" class="reference interval">app_path()</a></p>
+<p><a href="#method-base-path" class="reference interval">base_path()</a></p>
+<p><a href="#method-config-path" class="reference interval">config_path()</a></p>
+<p><a href="#method-database-path" class="reference interval">database_path()</a></p>
+<p><a href="#method-elixir" class="reference interval">elixir()</a></p>
+<p><a href="#method-public-path" class="reference interval">public_path()</a></p>
+<p><a href="#method-storage-path" class="reference interval">storage_path()</a></p>
+</div></div>
+<div class="section" id="strings">
+<span id="strings"></span><h3>Strings<a class="headerlink" href="#strings" title="Permalink to this headline">¶</a></h3>
+<div class="collection-method-list" markdown="1">
+<p><a href="#method-camel-case" class="reference internal"> camel_case()</a></p>
+<p><a href="#method-class-basename" class="reference internal"> class_basename()</a></p>
+<p><a href="#method-e" class="reference internal"> e()</a></p>
+<p><a href="#method-ends-with" class="reference internal"> ends_with()</a></p>
+<p><a href="#method-snake-case" class="reference internal"> snake_case()</a></p>
+<p><a href="#method-str-limit" class="reference internal"> str_limit()</a></p>
+<p><a href="#method-starts-with" class="reference internal"> starts_with()</a></p>
+<p><a href="#method-str-contains" class="reference internal"> str_contains()</a></p>
+<p><a href="#method-str-finish" class="reference internal"> str_finish()</a></p>
+<p><a href="#method-str-is" class="reference internal"> str_is()</a></p>
+<p><a href="#method-str-plural" class="reference internal"> str_plural()</a></p>
+<p><a href="#method-str-random" class="reference internal"> str_random()</a></p>
+<p><a href="#method-str-singular" class="reference internal"> str_singular()</a></p>
+<p><a href="#method-str-slug" class="reference internal"> str_slug()</a></p>
+<p><a href="#method-studly-case" class="reference internal"> studly_case()</a></p>
+<p><a href="#method-trans" class="reference internal"> trans()</a></p>
+<p><a href="#method-trans-choice" class="reference internal"> trans_choice()</a></p>
+</div></div>
+<div class="section" id="urls">
+<span id="urls"></span><h3>URLs<a class="headerlink" href="#urls" title="Permalink to this headline">¶</a></h3>
+<div class="collection-method-list" markdown="1">
+<p><a href=="#method-action" class="reference internal">action()</a></p>
+<p><a href=="#method-asset" class="reference internal">asset()</a></p>
+<p><a href=="#method-secure-asset" class="reference internal">secure_asset()</a></p>
+<p><a href=="#method-route" class="reference internal">route()</a></p>
+<p><a href=="#method-url" class="reference internal">url()</a></p>
+</div></div>
+<div class="section" id="miscellaneous">
+<span id="miscellaneous"></span><h3>Miscellaneous<a class="headerlink" href="#miscellaneous" title="Permalink to this headline">¶</a></h3>
+<div class="collection-method-list" markdown="1">
+<p><a href=="#method-auth" class="reference internal">auth()</a></p>
+<p><a href=="#method-back" class="reference internal">back()</a></p>
+<p><a href=="#method-bcrypt" class="reference internal">bcrypt()</a></p>
+<p><a href=="#method-config" class="reference internal">config()</a></p>
+<p><a href=="#method-csrf-field" class="reference internal">csrf_field()</a></p>
+<p><a href=="#method-csrf-token" class="reference internal">csrf_token()</a></p>
+<p><a href=="#method-dd" class="reference internal">dd()</a></p>
+<p><a href=="#method-env" class="reference internal">env()</a></p>
+<p><a href=="#method-event" class="reference internal">event()</a></p>
+<p><a href=="#method-factory" class="reference internal">factory()</a></p>
+<p><a href=="#method-method-field" class="reference internal">method_field()</a></p>
+<p><a href=="#method-old" class="reference internal">old()</a></p>
+<p><a href=="#method-redirect" class="reference internal">redirect()</a></p>
+<p><a href=="#method-response" class="reference internal">response()</a></p>
+<p><a href=="#method-value" class="reference internal">value()</a></p>
+<p><a href=="#method-view" class="reference internal">view()</a></p>
+<p><a href=="#method-with" class="reference internal">with()</a></p>
+</div><p><a name="method-listing"></a></p>
+</div>
+</div>
+<div class="section" id="method-listing">
+<span id="method-listing"></span><h2>Method Listing<a class="headerlink" href="#method-listing" title="Permalink to this headline">¶</a></h2>
+<style>
+    #collection-method code {
+        font-size: 14px;
+    }<pre class="literal-block">
+#collection-method:not(.first-collection-method) {
+    margin-top: 50px;
+}
+</style>
+</pre>
+</style><p><a name="arrays"></a></p>
+</div>
+<div class="section" id="arrays">
+<span id="id1"></span><h2>Arrays<a class="headerlink" href="#arrays" title="Permalink to this headline">¶</a></h2>
+<p><a name="method-array-add"></a></p>
+<div class="section" id="array-add-collection-method-first-collection-method">
+<span id="array-add-collection-method-first-collection-method"></span><h3><code class="docutils literal"><span class="pre">array_add()</span></code> {#collection-method .first-collection-method}<a class="headerlink" href="#array-add-collection-method-first-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">array_add</span></code> function adds a given key / value pair to the array if the given key doesn&#8217;t already exist in the array:</p>
+<pre class="literal-block">
+$array = array_add(['name' =&gt; 'Desk'], 'price', 100);
+
+// ['name' =&gt; 'Desk', 'price' =&gt; 100]
+</pre>
+<p><a name="method-array-divide"></a></p>
+</div>
+<div class="section" id="array-divide-collection-method">
+<span id="array-divide-collection-method"></span><h3><code class="docutils literal"><span class="pre">array_divide()</span></code> {#collection-method}<a class="headerlink" href="#array-divide-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">array_divide</span></code> function returns two arrays, one containing the keys, and the other containing the values of the original array:</p>
+<pre class="literal-block">
+list($keys, $values) = array_divide(['name' =&gt; 'Desk']);
+
+// $keys: ['name']
+
+// $values: ['Desk']
+</pre>
+<p><a name="method-array-dot"></a></p>
+</div>
+<div class="section" id="array-dot-collection-method">
+<span id="array-dot-collection-method"></span><h3><code class="docutils literal"><span class="pre">array_dot()</span></code> {#collection-method}<a class="headerlink" href="#array-dot-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">array_dot</span></code> function flattens a multi-dimensional array into a single level array that uses &#8220;dot&#8221; notation to indicate depth:</p>
+<pre class="literal-block">
+$array = array_dot(['foo' =&gt; ['bar' =&gt; 'baz']]);
+
+// ['foo.bar' =&gt; 'baz'];
+</pre>
+<p><a name="method-array-except"></a></p>
+</div>
+<div class="section" id="array-except-collection-method">
+<span id="array-except-collection-method"></span><h3><code class="docutils literal"><span class="pre">array_except()</span></code> {#collection-method}<a class="headerlink" href="#array-except-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">array_except</span></code> method removes the given key / value pairs from the array:</p>
+<pre class="literal-block">
+$array = ['name' =&gt; 'Desk', 'price' =&gt; 100];
+
+$array = array_except($array, ['price']);
+
+// ['name' =&gt; 'Desk']
+</pre>
+<p><a name="method-array-first"></a></p>
+</div>
+<div class="section" id="array-first-collection-method">
+<span id="array-first-collection-method"></span><h3><code class="docutils literal"><span class="pre">array_first()</span></code> {#collection-method}<a class="headerlink" href="#array-first-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">array_first</span></code> method returns the first element of an array passing a given truth test:</p>
+<pre class="literal-block">
+$array = [100, 200, 300];
+
+$value = array_first($array, function ($key, $value) {
+    return $value &gt;= 150;
+});
+
+// 200
+</pre>
+<p>A default value may also be passed as the third parameter to the method. This value will be returned if no value passes the truth test:</p>
+<pre class="literal-block">
+$value = array_first($array, $callback, $default);
+</pre>
+<p><a name="method-array-flatten"></a></p>
+</div>
+<div class="section" id="array-flatten-collection-method">
+<span id="array-flatten-collection-method"></span><h3><code class="docutils literal"><span class="pre">array_flatten()</span></code> {#collection-method}<a class="headerlink" href="#array-flatten-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">array_flatten</span></code> method will flatten a multi-dimensional array into a single level.</p>
+<pre class="literal-block">
+$array = ['name' =&gt; 'Joe', 'languages' =&gt; ['PHP', 'Ruby']];
+
+$array = array_flatten($array);
+
+// ['Joe', 'PHP', 'Ruby'];
+</pre>
+<p><a name="method-array-forget"></a></p>
+</div>
+<div class="section" id="array-forget-collection-method">
+<span id="array-forget-collection-method"></span><h3><code class="docutils literal"><span class="pre">array_forget()</span></code> {#collection-method}<a class="headerlink" href="#array-forget-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">array_forget</span></code> method removes a given key / value pair from a deeply nested array using &#8220;dot&#8221; notation:</p>
+<pre class="literal-block">
+$array = ['products' =&gt; ['desk' =&gt; ['price' =&gt; 100]]];
+
+array_forget($array, 'products.desk');
+
+// ['products' =&gt; []]
+</pre>
+<p><a name="method-array-get"></a></p>
+</div>
+<div class="section" id="array-get-collection-method">
+<span id="array-get-collection-method"></span><h3><code class="docutils literal"><span class="pre">array_get()</span></code> {#collection-method}<a class="headerlink" href="#array-get-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">array_get</span></code> method retrieves a value from a deeply nested array using &#8220;dot&#8221; notation:</p>
+<pre class="literal-block">
+$array = ['products' =&gt; ['desk' =&gt; ['price' =&gt; 100]]];
+
+$value = array_get($array, 'products.desk');
+
+// ['price' =&gt; 100]
+</pre>
+<p>The <code class="docutils literal"><span class="pre">array_get</span></code> function also accepts a default value, which will be returned if the specific key is not found:</p>
+<pre class="literal-block">
+$value = array_get($array, 'names.john', 'default');
+</pre>
+<p><a name="method-array-only"></a></p>
+</div>
+<div class="section" id="array-only-collection-method">
+<span id="array-only-collection-method"></span><h3><code class="docutils literal"><span class="pre">array_only()</span></code> {#collection-method}<a class="headerlink" href="#array-only-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">array_only</span></code> method will return only the specified key / value pairs from the given array:</p>
+<pre class="literal-block">
+$array = ['name' =&gt; 'Desk', 'price' =&gt; 100, 'orders' =&gt; 10];
+
+$array = array_only($array, ['name', 'price']);
+
+// ['name' =&gt; 'Desk', 'price' =&gt; 100]
+</pre>
+<p><a name="method-array-pluck"></a></p>
+</div>
+<div class="section" id="array-pluck-collection-method">
+<span id="array-pluck-collection-method"></span><h3><code class="docutils literal"><span class="pre">array_pluck()</span></code> {#collection-method}<a class="headerlink" href="#array-pluck-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">array_pluck</span></code> method will pluck a list of the given key / value pairs from the array:</p>
+<pre class="literal-block">
+$array = [
+    ['developer' =&gt; ['name' =&gt; 'Taylor']],
+    ['developer' =&gt; ['name' =&gt; 'Abigail']]
+];
+
+$array = array_pluck($array, 'developer.name');
+
+// ['Taylor', 'Abigail'];
+</pre>
+<p><a name="method-array-pull"></a></p>
+</div>
+<div class="section" id="array-pull-collection-method">
+<span id="array-pull-collection-method"></span><h3><code class="docutils literal"><span class="pre">array_pull()</span></code> {#collection-method}<a class="headerlink" href="#array-pull-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">array_pull</span></code> method returns and removes a key / value pair from the array:</p>
+<pre class="literal-block">
+$array = ['name' =&gt; 'Desk', 'price' =&gt; 100];
+
+$name = array_pull($array, 'name');
+
+// $name: Desk
+
+// $array: ['price' =&gt; 100]
+</pre>
+<p><a name="method-array-set"></a></p>
+</div>
+<div class="section" id="array-set-collection-method">
+<span id="array-set-collection-method"></span><h3><code class="docutils literal"><span class="pre">array_set()</span></code> {#collection-method}<a class="headerlink" href="#array-set-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">array_set</span></code> method sets a value within a deeply nested array using &#8220;dot&#8221; notation:</p>
+<pre class="literal-block">
+$array = ['products' =&gt; ['desk' =&gt; ['price' =&gt; 100]]];
+
+array_set($array, 'products.desk.price', 200);
+
+// ['products' =&gt; ['desk' =&gt; ['price' =&gt; 200]]]
+</pre>
+<p><a name="method-array-sort"></a></p>
+</div>
+<div class="section" id="array-sort-collection-method">
+<span id="array-sort-collection-method"></span><h3><code class="docutils literal"><span class="pre">array_sort()</span></code> {#collection-method}<a class="headerlink" href="#array-sort-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">array_sort</span></code> method sorts the array by the results of the given Closure:</p>
+<pre class="literal-block">
+$array = [
+    ['name' =&gt; 'Desk'],
+    ['name' =&gt; 'Chair'],
+];
+
+$array = array_values(array_sort($array, function ($value) {
+    return $value['name'];
+}));
+
+/*
+    [
+        ['name' =&gt; 'Chair'],
+        ['name' =&gt; 'Desk'],
+    ]
+*/
+</pre>
+<p><a name="method-array-sort-recursive"></a></p>
+</div>
+<div class="section" id="array-sort-recursive-collection-method">
+<span id="array-sort-recursive-collection-method"></span><h3><code class="docutils literal"><span class="pre">array_sort_recursive()</span></code> {#collection-method}<a class="headerlink" href="#array-sort-recursive-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">array_sort_recursive</span></code> function recursively sorts the array using the <code class="docutils literal"><span class="pre">sort</span></code> function:</p>
+<pre class="literal-block">
+$array = [
+    [
+        'Roman',
+        'Taylor',
+        'Li',
+    ],
+    [
+        'PHP',
+        'Ruby',
+        'JavaScript',
+    ],
+];
+
+$array = array_sort_recursive($array);
+
+/*
+    [
+        [
+            'Li',
+            'Roman',
+            'Taylor',
+        ],
+        [
+            'JavaScript',
+            'PHP',
+            'Ruby',
+        ]
+    ];
+*/
+</pre>
+<p><a name="method-array-where"></a></p>
+</div>
+<div class="section" id="array-where-collection-method">
+<span id="array-where-collection-method"></span><h3><code class="docutils literal"><span class="pre">array_where()</span></code> {#collection-method}<a class="headerlink" href="#array-where-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">array_where</span></code> function filters the array using the given Closure:</p>
+<pre class="literal-block">
+$array = [100, '200', 300, '400', 500];
+
+$array = array_where($array, function ($key, $value) {
+    return is_string($value);
+});
+
+// [1 =&gt; 200, 3 =&gt; 400]
+</pre>
+<p><a name="method-head"></a></p>
+</div>
+<div class="section" id="head-collection-method">
+<span id="head-collection-method"></span><h3><code class="docutils literal"><span class="pre">head()</span></code> {#collection-method}<a class="headerlink" href="#head-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">head</span></code> function simply returns the first element in the given array:</p>
+<pre class="literal-block">
+$array = [100, 200, 300];
+
+$first = head($array);
+
+// 100
+</pre>
+<p><a name="method-last"></a></p>
+</div>
+<div class="section" id="last-collection-method">
+<span id="last-collection-method"></span><h3><code class="docutils literal"><span class="pre">last()</span></code> {#collection-method}<a class="headerlink" href="#last-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">last</span></code> function returns the last element in the given array:</p>
+<pre class="literal-block">
+$array = [100, 200, 300];
+
+$last = last($array);
+
+// 300
+</pre>
+<p><a name="paths"></a></p>
+</div>
+</div>
+<div class="section" id="paths">
+<span id="id2"></span><h2>Paths<a class="headerlink" href="#paths" title="Permalink to this headline">¶</a></h2>
+<p><a name="method-app-path"></a></p>
+<div class="section" id="app-path-collection-method">
+<span id="app-path-collection-method"></span><h3><code class="docutils literal"><span class="pre">app_path()</span></code> {#collection-method}<a class="headerlink" href="#app-path-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">app_path</span></code> function returns the fully qualified path to the <code class="docutils literal"><span class="pre">app</span></code> directory:</p>
+<pre class="literal-block">
+$path = app_path();
+</pre>
+<p>You may also use the <code class="docutils literal"><span class="pre">app_path</span></code> function to generate a fully qualified path to a given file relative to the application directory:</p>
+<pre class="literal-block">
+$path = app_path('Http/Controllers/Controller.php');
+</pre>
+<p><a name="method-base-path"></a></p>
+</div>
+<div class="section" id="base-path-collection-method">
+<span id="base-path-collection-method"></span><h3><code class="docutils literal"><span class="pre">base_path()</span></code> {#collection-method}<a class="headerlink" href="#base-path-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">base_path</span></code> function returns the fully qualified path to the project root:</p>
+<pre class="literal-block">
+$path = base_path();
+</pre>
+<p>You may also use the <code class="docutils literal"><span class="pre">base_path</span></code> function to generate a fully qualified path to a given file relative to the application directory:</p>
+<pre class="literal-block">
+$path = base_path('vendor/bin');
+</pre>
+<p><a name="method-config-path"></a></p>
+</div>
+<div class="section" id="config-path-collection-method">
+<span id="config-path-collection-method"></span><h3><code class="docutils literal"><span class="pre">config_path()</span></code> {#collection-method}<a class="headerlink" href="#config-path-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">config_path</span></code> function returns the fully qualified path to the application configuration directory:</p>
+<pre class="literal-block">
+$path = config_path();
+</pre>
+<p><a name="method-database-path"></a></p>
+</div>
+<div class="section" id="database-path-collection-method">
+<span id="database-path-collection-method"></span><h3><code class="docutils literal"><span class="pre">database_path()</span></code> {#collection-method}<a class="headerlink" href="#database-path-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">database_path</span></code> function returns the fully qualified path to the application&#8217;s database directory:</p>
+<pre class="literal-block">
+$path = database_path();
+</pre>
+<p><a name="method-elixir"></a></p>
+</div>
+<div class="section" id="elixir-collection-method">
+<span id="elixir-collection-method"></span><h3><code class="docutils literal"><span class="pre">elixir()</span></code> {#collection-method}<a class="headerlink" href="#elixir-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">elixir</span></code> function gets the path to the versioned <a class="reference external" href="/docs/{{version}}/elixir">Elixir</a> file:</p>
+<pre class="literal-block">
+elixir($file);
+</pre>
+<p><a name="method-public-path"></a></p>
+</div>
+<div class="section" id="public-path-collection-method">
+<span id="public-path-collection-method"></span><h3><code class="docutils literal"><span class="pre">public_path()</span></code> {#collection-method}<a class="headerlink" href="#public-path-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">public_path</span></code> function returns the fully qualified path to the <code class="docutils literal"><span class="pre">public</span></code> directory:</p>
+<pre class="literal-block">
+$path = public_path();
+</pre>
+<p><a name="method-storage-path"></a></p>
+</div>
+<div class="section" id="storage-path-collection-method">
+<span id="storage-path-collection-method"></span><h3><code class="docutils literal"><span class="pre">storage_path()</span></code> {#collection-method}<a class="headerlink" href="#storage-path-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">storage_path</span></code> function returns the fully qualified path to the <code class="docutils literal"><span class="pre">storage</span></code> directory:</p>
+<pre class="literal-block">
+$path = storage_path();
+</pre>
+<p>You may also use the <code class="docutils literal"><span class="pre">storage_path</span></code> function to generate a fully qualified path to a given file relative to the storage directory:</p>
+<pre class="literal-block">
+$path = storage_path('app/file.txt');
+</pre>
+<p><a name="strings"></a></p>
+</div>
+</div>
+<div class="section" id="strings">
+<span id="id3"></span><h2>Strings<a class="headerlink" href="#strings" title="Permalink to this headline">¶</a></h2>
+<p><a name="method-camel-case"></a></p>
+<div class="section" id="camel-case-collection-method">
+<span id="camel-case-collection-method"></span><h3><code class="docutils literal"><span class="pre">camel_case()</span></code> {#collection-method}<a class="headerlink" href="#camel-case-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">camel_case</span></code> function converts the given string to <code class="docutils literal"><span class="pre">camelCase</span></code>:</p>
+<pre class="literal-block">
+$camel = camel_case('foo_bar');
+
+// fooBar
+</pre>
+<p><a name="method-class-basename"></a></p>
+</div>
+<div class="section" id="class-basename-collection-method">
+<span id="class-basename-collection-method"></span><h3><code class="docutils literal"><span class="pre">class_basename()</span></code> {#collection-method}<a class="headerlink" href="#class-basename-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">class_basename</span></code> returns the class name of the given class with the class&#8217; namespace removed:</p>
+<pre class="literal-block">
+$class = class_basename('Foo\Bar\Baz');
+
+// Baz
+</pre>
+<p><a name="method-e"></a></p>
+</div>
+<div class="section" id="e-collection-method">
+<span id="e-collection-method"></span><h3><code class="docutils literal"><span class="pre">e()</span></code> {#collection-method}<a class="headerlink" href="#e-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">e</span></code> function runs <code class="docutils literal"><span class="pre">htmlentities</span></code> over the given string:</p>
+<pre class="literal-block">
+echo e('&lt;html&gt;foo&lt;/html&gt;');
+
+// &amp;lt;html&amp;gt;foo&amp;lt;/html&amp;gt;
+</pre>
+<p><a name="method-ends-with"></a></p>
+</div>
+<div class="section" id="ends-with-collection-method">
+<span id="ends-with-collection-method"></span><h3><code class="docutils literal"><span class="pre">ends_with()</span></code> {#collection-method}<a class="headerlink" href="#ends-with-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">ends_with</span></code> function determines if the given string ends with the given value:</p>
+<pre class="literal-block">
+$value = ends_with('This is my name', 'name');
+
+// true
+</pre>
+<p><a name="method-snake-case"></a></p>
+</div>
+<div class="section" id="snake-case-collection-method">
+<span id="snake-case-collection-method"></span><h3><code class="docutils literal"><span class="pre">snake_case()</span></code> {#collection-method}<a class="headerlink" href="#snake-case-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">snake_case</span></code> function converts the given string to <code class="docutils literal"><span class="pre">snake_case</span></code>:</p>
+<pre class="literal-block">
+$snake = snake_case('fooBar');
+
+// foo_bar
+</pre>
+<p><a name="method-str-limit"></a></p>
+</div>
+<div class="section" id="str-limit-collection-method">
+<span id="str-limit-collection-method"></span><h3><code class="docutils literal"><span class="pre">str_limit()</span></code> {#collection-method}<a class="headerlink" href="#str-limit-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">str_limit</span></code> function limits the number of characters in a string. The function accepts a string as its first argument and the maximum number of resulting characters as its second argument:</p>
+<pre class="literal-block">
+$value = str_limit('The PHP framework for web artisans.', 7);
+
+// The PHP...
+</pre>
+<p><a name="method-starts-with"></a></p>
+</div>
+<div class="section" id="starts-with-collection-method">
+<span id="starts-with-collection-method"></span><h3><code class="docutils literal"><span class="pre">starts_with()</span></code> {#collection-method}<a class="headerlink" href="#starts-with-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">starts_with</span></code> function determines if the given string begins with the given value:</p>
+<pre class="literal-block">
+$value = starts_with('This is my name', 'This');
+
+// true
+</pre>
+<p><a name="method-str-contains"></a></p>
+</div>
+<div class="section" id="str-contains-collection-method">
+<span id="str-contains-collection-method"></span><h3><code class="docutils literal"><span class="pre">str_contains()</span></code> {#collection-method}<a class="headerlink" href="#str-contains-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">str_contains</span></code> function determines if the given string contains the given value:</p>
+<pre class="literal-block">
+$value = str_contains('This is my name', 'my');
+
+// true
+</pre>
+<p><a name="method-str-finish"></a></p>
+</div>
+<div class="section" id="str-finish-collection-method">
+<span id="str-finish-collection-method"></span><h3><code class="docutils literal"><span class="pre">str_finish()</span></code> {#collection-method}<a class="headerlink" href="#str-finish-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">str_finish</span></code> function adds a single instance of the given value to a string:</p>
+<pre class="literal-block">
+$string = str_finish('this/string', '/');
+
+// this/string/
+</pre>
+<p><a name="method-str-is"></a></p>
+</div>
+<div class="section" id="str-is-collection-method">
+<span id="str-is-collection-method"></span><h3><code class="docutils literal"><span class="pre">str_is()</span></code> {#collection-method}<a class="headerlink" href="#str-is-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">str_is</span></code> function determines if a given string matches a given pattern. Asterisks may be used to indicate wildcards:</p>
+<pre class="literal-block">
+$value = str_is('foo*', 'foobar');
+
+// true
+
+$value = str_is('baz*', 'foobar');
+
+// false
+</pre>
+<p><a name="method-str-plural"></a></p>
+</div>
+<div class="section" id="str-plural-collection-method">
+<span id="str-plural-collection-method"></span><h3><code class="docutils literal"><span class="pre">str_plural()</span></code> {#collection-method}<a class="headerlink" href="#str-plural-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">str_plural</span></code> function converts a string to its plural form. This function currently only supports the English language:</p>
+<pre class="literal-block">
+$plural = str_plural('car');
+
+// cars
+
+$plural = str_plural('child');
+
+// children
+</pre>
+<p><a name="method-str-random"></a></p>
+</div>
+<div class="section" id="str-random-collection-method">
+<span id="str-random-collection-method"></span><h3><code class="docutils literal"><span class="pre">str_random()</span></code> {#collection-method}<a class="headerlink" href="#str-random-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">str_random</span></code> function generates a random string of the specified length:</p>
+<pre class="literal-block">
+$string = str_random(40);
+</pre>
+<p><a name="method-str-singular"></a></p>
+</div>
+<div class="section" id="str-singular-collection-method">
+<span id="str-singular-collection-method"></span><h3><code class="docutils literal"><span class="pre">str_singular()</span></code> {#collection-method}<a class="headerlink" href="#str-singular-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">str_singular</span></code> function converts a string to its singular form. This function currently only supports the English language:</p>
+<pre class="literal-block">
+$singular = str_singular('cars');
+
+// car
+</pre>
+<p><a name="method-str-slug"></a></p>
+</div>
+<div class="section" id="str-slug-collection-method">
+<span id="str-slug-collection-method"></span><h3><code class="docutils literal"><span class="pre">str_slug()</span></code> {#collection-method}<a class="headerlink" href="#str-slug-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">str_slug</span></code> function generates a URL friendly &#8220;slug&#8221; from the given string:</p>
+<pre class="literal-block">
+$title = str_slug(&quot;Laravel 5 Framework&quot;, &quot;-&quot;);
+
+// laravel-5-framework
+</pre>
+<p><a name="method-studly-case"></a></p>
+</div>
+<div class="section" id="studly-case-collection-method">
+<span id="studly-case-collection-method"></span><h3><code class="docutils literal"><span class="pre">studly_case()</span></code> {#collection-method}<a class="headerlink" href="#studly-case-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">studly_case</span></code> function converts the given string to <code class="docutils literal"><span class="pre">StudlyCase</span></code>:</p>
+<pre class="literal-block">
+$value = studly_case('foo_bar');
+
+// FooBar
+</pre>
+<p><a name="method-trans"></a></p>
+</div>
+<div class="section" id="trans-collection-method">
+<span id="trans-collection-method"></span><h3><code class="docutils literal"><span class="pre">trans()</span></code> {#collection-method}<a class="headerlink" href="#trans-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">trans</span></code> function translates the given language line using your <a class="reference external" href="/docs/{{version}}/localization">localization files</a>:</p>
+<pre class="literal-block">
+echo trans('validation.required'):
+</pre>
+<p><a name="method-trans-choice"></a></p>
+</div>
+<div class="section" id="trans-choice-collection-method">
+<span id="trans-choice-collection-method"></span><h3><code class="docutils literal"><span class="pre">trans_choice()</span></code> {#collection-method}<a class="headerlink" href="#trans-choice-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">trans_choice</span></code> function translates the given language line with inflection:</p>
+<pre class="literal-block">
+$value = trans_choice('foo.bar', $count);
+</pre>
+<p><a name="urls"></a></p>
+</div>
+</div>
+<div class="section" id="urls">
+<span id="id4"></span><h2>URLs<a class="headerlink" href="#urls" title="Permalink to this headline">¶</a></h2>
+<p><a name="method-action"></a></p>
+<div class="section" id="action-collection-method">
+<span id="action-collection-method"></span><h3><code class="docutils literal"><span class="pre">action()</span></code> {#collection-method}<a class="headerlink" href="#action-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">action</span></code> function generates a URL for the given controller action. You do not need to pass the full namespace to the controller. Instead, pass the controller class name relative to the <code class="docutils literal"><span class="pre">App\Http\Controllers</span></code> namespace:</p>
+<pre class="literal-block">
+$url = action('HomeController&#64;getIndex');
+</pre>
+<p>If the method accepts route parameters, you may pass them as the second argument to the method:</p>
+<pre class="literal-block">
+$url = action('UserController&#64;profile', ['id' =&gt; 1]);
+</pre>
+<p><a name="method-asset"></a></p>
+</div>
+<div class="section" id="asset-collection-method">
+<span id="asset-collection-method"></span><h3><code class="docutils literal"><span class="pre">asset()</span></code> {#collection-method}<a class="headerlink" href="#asset-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>Generate a URL for an asset using the current scheme of the request (HTTP or HTTPS):</p>
+<pre class="literal-block">
+$url = asset('img/photo.jpg');
+</pre>
+<p><a name="method-secure-asset"></a></p>
+</div>
+<div class="section" id="secure-asset-collection-method">
+<span id="secure-asset-collection-method"></span><h3><code class="docutils literal"><span class="pre">secure_asset()</span></code> {#collection-method}<a class="headerlink" href="#secure-asset-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>Generate a URL for an asset using HTTPS:</p>
+<pre class="literal-block">
+echo secure_asset('foo/bar.zip', $title, $attributes = []);
+</pre>
+<p><a name="method-route"></a></p>
+</div>
+<div class="section" id="route-collection-method">
+<span id="route-collection-method"></span><h3><code class="docutils literal"><span class="pre">route()</span></code> {#collection-method}<a class="headerlink" href="#route-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">route</span></code> function generates a URL for the given named route:</p>
+<pre class="literal-block">
+$url = route('routeName');
+</pre>
+<p>If the route accepts parameters, you may pass them as the second argument to the method:</p>
+<pre class="literal-block">
+$url = route('routeName', ['id' =&gt; 1]);
+</pre>
+<p><a name="method-url"></a></p>
+</div>
+<div class="section" id="url-collection-method">
+<span id="url-collection-method"></span><h3><code class="docutils literal"><span class="pre">url()</span></code> {#collection-method}<a class="headerlink" href="#url-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">url</span></code> function generates a fully qualified URL to the given path:</p>
+<pre class="literal-block">
+echo url('user/profile');
+
+echo url('user/profile', [1]);
+</pre>
+<p><a name="miscellaneous"></a></p>
+</div>
+</div>
+<div class="section" id="miscellaneous">
+<span id="id5"></span><h2>Miscellaneous<a class="headerlink" href="#miscellaneous" title="Permalink to this headline">¶</a></h2>
+<p><a name="method-auth"></a></p>
+<div class="section" id="auth-collection-method">
+<span id="auth-collection-method"></span><h3><code class="docutils literal"><span class="pre">auth()</span></code> {#collection-method}<a class="headerlink" href="#auth-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">auth</span></code> function return an authenticator instance. You may use it instead of the <code class="docutils literal"><span class="pre">Auth</span></code> facade for convenience:</p>
+<pre class="literal-block">
+$user = auth()-&gt;user();
+</pre>
+<p><a name="method-back"></a></p>
+</div>
+<div class="section" id="back-collection-method">
+<span id="back-collection-method"></span><h3><code class="docutils literal"><span class="pre">back()</span></code> {#collection-method}<a class="headerlink" href="#back-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">back()</span></code> function generates a redirect response to the user&#8217;s previous location:</p>
+<pre class="literal-block">
+return back();
+</pre>
+<p><a href="method-bcrypt"></a></p>
+</div>
+<div class="section" id="bcrypt-collection-method">
+<span id="bcrypt-collection-method"></span><h3><code class="docutils literal"><span class="pre">bcrypt()</span></code> {#collection-method}<a class="headerlink" href="#bcrypt-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">bcrypt</span></code> function hashes the given value using Bcrypt. You may use it as an alternative to the <code class="docutils literal"><span class="pre">Hash</span></code> facade:</p>
+<pre class="literal-block">
+$password = bcrypt('my-secret-password');
+</pre>
+<p><a name="method-config"></a></p>
+</div>
+<div class="section" id="config-collection-method">
+<span id="config-collection-method"></span><h3><code class="docutils literal"><span class="pre">config()</span></code> {#collection-method}<a class="headerlink" href="#config-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">config</span></code> function gets the value of a configuration variable. The configuration values may be accessed using &#8220;dot&#8221; syntax, which includes the name of the file and the option you wish to access. A default value may be specified and is returned if the configuration option does not exist:</p>
+<pre class="literal-block">
+$value = config('app.timezone');
+
+$value = config('app.timezone', $default);
+</pre>
+<p>The <code class="docutils literal"><span class="pre">config</span></code> helper may also be used to set configuration variables at runtime by passing an array of key / value pairs:</p>
+<pre class="literal-block">
+config(['app.debug' =&gt; true]);
+</pre>
+<p><a name="method-csrf-field"></a></p>
+</div>
+<div class="section" id="csrf-field-collection-method">
+<span id="csrf-field-collection-method"></span><h3><code class="docutils literal"><span class="pre">csrf_field()</span></code> {#collection-method}<a class="headerlink" href="#csrf-field-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">csrf_field</span></code> function generates an HTML <code class="docutils literal"><span class="pre">hidden</span></code> input field containing the value of the CSRF token. For example, using <a class="reference external" href="/docs/{{version}}/blade">Blade syntax</a>:</p>
+<pre class="literal-block">
+{!! csrf_field() !!}
+</pre>
+<p><a name="method-csrf-token"></a></p>
+</div>
+<div class="section" id="csrf-token-collection-method">
+<span id="csrf-token-collection-method"></span><h3><code class="docutils literal"><span class="pre">csrf_token()</span></code> {#collection-method}<a class="headerlink" href="#csrf-token-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">csrf_token</span></code> function retrieves the value of the current CSRF token:</p>
+<pre class="literal-block">
+$token = csrf_token();
+</pre>
+<p><a name="method-dd"></a></p>
+</div>
+<div class="section" id="dd-collection-method">
+<span id="dd-collection-method"></span><h3><code class="docutils literal"><span class="pre">dd()</span></code> {#collection-method}<a class="headerlink" href="#dd-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">dd</span></code> function dumps the given variable and ends execution of the script:</p>
+<pre class="literal-block">
+dd($value);
+</pre>
+<p><a name="method-env"></a></p>
+</div>
+<div class="section" id="env-collection-method">
+<span id="env-collection-method"></span><h3><code class="docutils literal"><span class="pre">env()</span></code> {#collection-method}<a class="headerlink" href="#env-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">env</span></code> function gets the value of an environment variable or returns a default value:</p>
+<pre class="literal-block">
+$env = env('APP_ENV');
+
+// Return a default value if the variable doesn't exist...
+$env = env('APP_ENV', 'production');
+</pre>
+<p><a name="method-event"></a></p>
+</div>
+<div class="section" id="event-collection-method">
+<span id="event-collection-method"></span><h3><code class="docutils literal"><span class="pre">event()</span></code> {#collection-method}<a class="headerlink" href="#event-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">event</span></code> function dispatches the given <a class="reference external" href="/docs/{{version}}/events">event</a> to its listeners:</p>
+<pre class="literal-block">
+event(new UserRegistered($user));
+</pre>
+<p><a name="method-factory"></a></p>
+</div>
+<div class="section" id="factory-collection-method">
+<span id="factory-collection-method"></span><h3><code class="docutils literal"><span class="pre">factory()</span></code> {#collection-method}<a class="headerlink" href="#factory-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">factory</span></code> function creates a model factory builder for a given class, name, and amount. It can be used while <a class="reference external" href="/docs/{{version}}/testing#model-factories">testing</a> or <a class="reference external" href="/docs/{{version}}/seeding#using-model-factories">seeding</a>:</p>
+<pre class="literal-block">
+$user = factory(App\User::class)-&gt;make();
+</pre>
+<p><a name="method-method-field"></a></p>
+</div>
+<div class="section" id="method-field-collection-method">
+<span id="method-field-collection-method"></span><h3><code class="docutils literal"><span class="pre">method_field()</span></code> {#collection-method}<a class="headerlink" href="#method-field-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">method_field</span></code> function generates an HTML <code class="docutils literal"><span class="pre">hidden</span></code> input field containing the spoofed value of the form&#8217;s HTTP verb. For example, using <a class="reference external" href="/docs/{{version}}/blade">Blade syntax</a>:</p>
+<pre class="literal-block">
+&lt;form method=&quot;POST&quot;&gt;
+    {!! method_field('delete') !!}
+&lt;/form&gt;
+</pre>
+<p><a name="method-old"></a></p>
+</div>
+<div class="section" id="old-collection-method">
+<span id="old-collection-method"></span><h3><code class="docutils literal"><span class="pre">old()</span></code> {#collection-method}<a class="headerlink" href="#old-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">old</span></code> function <a class="reference external" href="/docs/{{version}}/requests#retrieving-input">retrieves</a> an old input value flashed into the session:</p>
+<pre class="literal-block">
+$value = old('value');
+</pre>
+<p><a name="method-redirect"></a></p>
+</div>
+<div class="section" id="redirect-collection-method">
+<span id="redirect-collection-method"></span><h3><code class="docutils literal"><span class="pre">redirect()</span></code> {#collection-method}<a class="headerlink" href="#redirect-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">redirect</span></code> function return an instance of the redirector to do <a class="reference external" href="/docs/{{version}}/responses#redirects">redirects</a>:</p>
+<pre class="literal-block">
+return redirect('/home');
+</pre>
+<p><a name="method-response"></a></p>
+</div>
+<div class="section" id="response-collection-method">
+<span id="response-collection-method"></span><h3><code class="docutils literal"><span class="pre">response()</span></code> {#collection-method}<a class="headerlink" href="#response-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">response</span></code> function creates a <a class="reference external" href="/docs/{{version}}/responses">response</a> instance or obtains an instance of the response factory:</p>
+<pre class="literal-block">
+return response('Hello World', 200, $headers);
+
+return response()-&gt;json(['foo' =&gt; 'bar'], 200, $headers);
+</pre>
+<p><a name="method-value"></a></p>
+</div>
+<div class="section" id="value-collection-method">
+<span id="value-collection-method"></span><h3><code class="docutils literal"><span class="pre">value()</span></code> {#collection-method}<a class="headerlink" href="#value-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">value</span></code> function&#8217;s behavior will simply return the value it is given. However, if you pass a <code class="docutils literal"><span class="pre">Closure</span></code> to the function, the <code class="docutils literal"><span class="pre">Closure</span></code> will be executed then its result will be returned:</p>
+<pre class="literal-block">
+$value = value(function() { return 'bar'; });
+</pre>
+<p><a name="method-view"></a></p>
+</div>
+<div class="section" id="view-collection-method">
+<span id="view-collection-method"></span><h3><code class="docutils literal"><span class="pre">view()</span></code> {#collection-method}<a class="headerlink" href="#view-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">view</span></code> function retrieves a <a class="reference external" href="/docs/{{version}}/views">view</a> instance:</p>
+<pre class="literal-block">
+return view('auth.login');
+</pre>
+<p><a name="method-with"></a></p>
+</div>
+<div class="section" id="with-collection-method">
+<span id="with-collection-method"></span><h3><code class="docutils literal"><span class="pre">with()</span></code> {#collection-method}<a class="headerlink" href="#with-collection-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">with</span></code> function return the value it is given. This function is primarily useful for method chaining where it would otherwise be impossible:</p>
+<pre class="literal-block">
+$value = with(new Foo)-&gt;work();
+</pre>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, The Weezqyd.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

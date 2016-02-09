@@ -1,0 +1,340 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Eloquent: Serialization &mdash; Laravel 5 Documentation 1.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Laravel 5 Documentation 1.0 documentation" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Laravel 5 Documentation
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <!-- Local TOC -->
+                <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Eloquent: Serialization</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#basic-usage">Basic Usage</a><ul>
+<li><a class="reference internal" href="#converting-a-model-to-an-array">Converting A Model To An Array</a></li>
+<li><a class="reference internal" href="#converting-a-model-to-json">Converting A Model To JSON</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#hiding-attributes-from-json">Hiding Attributes From JSON</a></li>
+<li><a class="reference internal" href="#appending-values-to-json">Appending Values To JSON</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Laravel 5 Documentation</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Eloquent: Serialization</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/eloquent-serialization.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="eloquent-serialization">
+<span id="eloquent-serialization"></span><h1>Eloquent: Serialization<a class="headerlink" href="#eloquent-serialization" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference external" href="#introduction">Introduction</a></li>
+<li><a class="reference external" href="#basic-usage">Basic Usage</a></li>
+<li><a class="reference external" href="#hiding-attributes-from-json">Hiding Attributes From JSON</a></li>
+<li><a class="reference external" href="#appending-values-to-json">Appending Values To JSON</a></li>
+</ul>
+<p><a name="introduction"></a></p>
+<div class="section" id="introduction">
+<span id="introduction"></span><h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>When building JSON APIs, you will often need to convert your models and relationships to arrays or JSON. Eloquent includes convenient methods for making these conversions, as well as controlling which attributes are included in your serializations.</p>
+<p><a name="basic-usage"></a></p>
+</div>
+<div class="section" id="basic-usage">
+<span id="basic-usage"></span><h2>Basic Usage<a class="headerlink" href="#basic-usage" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="converting-a-model-to-an-array">
+<span id="converting-a-model-to-an-array"></span><h3>Converting A Model To An Array<a class="headerlink" href="#converting-a-model-to-an-array" title="Permalink to this headline">¶</a></h3>
+<p>To convert a model and its loaded <a class="reference external" href="eloquent-relationships.html">relationships</a> to an array, you may use the <code class="docutils literal"><span class="pre">toArray</span></code> method. This method is recursive, so all attributes and all relations (including the relations of relations) will be converted to arrays:</p>
+<pre class="literal-block">
+$user = App\User::with('roles')-&gt;first();
+
+return $user-&gt;toArray();
+</pre>
+<p>You may also convert <a class="reference external" href="eloquent-collections.html">collections</a> to arrays:</p>
+<pre class="literal-block">
+$users = App\User::all();
+
+return $users-&gt;toArray();
+</pre>
+</div>
+<div class="section" id="converting-a-model-to-json">
+<span id="converting-a-model-to-json"></span><h3>Converting A Model To JSON<a class="headerlink" href="#converting-a-model-to-json" title="Permalink to this headline">¶</a></h3>
+<p>To convert a model to JSON, you may use the <code class="docutils literal"><span class="pre">toJson</span></code> method. Like <code class="docutils literal"><span class="pre">toArray</span></code>, the <code class="docutils literal"><span class="pre">toJson</span></code> method is recursive, so all attributes and relations will be converted to JSON:</p>
+<pre class="literal-block">
+$user = App\User::find(1);
+
+return $user-&gt;toJson();
+</pre>
+<p>Alternatively, you may cast a model or collection to a string, which will automatically call the <code class="docutils literal"><span class="pre">toJson</span></code> method:</p>
+<pre class="literal-block">
+$user = App\User::find(1);
+
+return (string) $user;
+</pre>
+<p>Since models and collections are converted to JSON when cast to a string, you can return Eloquent objects directly from your application&#8217;s routes or controllers:</p>
+<pre class="literal-block">
+Route::get('users', function () {
+    return App\User::all();
+});
+</pre>
+<p><a name="hiding-attributes-from-json"></a></p>
+</div>
+</div>
+<div class="section" id="hiding-attributes-from-json">
+<span id="hiding-attributes-from-json"></span><h2>Hiding Attributes From JSON<a class="headerlink" href="#hiding-attributes-from-json" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes you may wish to limit the attributes, such as passwords, that are included in your model&#8217;s array or JSON representation. To do so, add a <code class="docutils literal"><span class="pre">$hidden</span></code> property definition to your model:</p>
+<pre class="literal-block">
+&lt;?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class User extends Model
+{
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * &#64;var array
+     */
+    protected $hidden = ['password'];
+}
+</pre>
+<blockquote>
+<div><strong>Note:</strong> When hiding relationships, use the relationship&#8217;s <strong>method</strong> name, not its dynamic property name.</div></blockquote>
+<p>Alternatively, you may use the <code class="docutils literal"><span class="pre">visible</span></code> property to define a white-list of attributes that should be included in your model&#8217;s array and JSON representation:</p>
+<pre class="literal-block">
+&lt;?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class User extends Model
+{
+    /**
+     * The attributes that should be visible in arrays.
+     *
+     * &#64;var array
+     */
+    protected $visible = ['first_name', 'last_name'];
+}
+</pre>
+<p><a name="appending-values-to-json"></a></p>
+</div>
+<div class="section" id="appending-values-to-json">
+<span id="appending-values-to-json"></span><h2>Appending Values To JSON<a class="headerlink" href="#appending-values-to-json" title="Permalink to this headline">¶</a></h2>
+<p>Occasionally, you may need to add array attributes that do not have a corresponding column in your database. To do so, first define an <a class="reference external" href="eloquent-mutators.html">accessor</a> for the value:</p>
+<pre class="literal-block">
+&lt;?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class User extends Model
+{
+    /**
+     * Get the administrator flag for the user.
+     *
+     * &#64;return bool
+     */
+    public function getIsAdminAttribute()
+    {
+        return $this-&gt;attributes['admin'] == 'yes';
+    }
+}
+</pre>
+<p>Once you have created the accessor, add the attribute name to the <code class="docutils literal"><span class="pre">appends</span></code> property on the model:</p>
+<pre class="literal-block">
+&lt;?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class User extends Model
+{
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * &#64;var array
+     */
+    protected $appends = ['is_admin'];
+}
+</pre>
+<p>Once the attribute has been added to the <code class="docutils literal"><span class="pre">appends</span></code> list, it will be included in both the model&#8217;s array and JSON forms. Attributes in the <code class="docutils literal"><span class="pre">appends</span></code> array will also respect the <code class="docutils literal"><span class="pre">visible</span></code> and <code class="docutils literal"><span class="pre">hidden</span></code> settings configured on the model.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, The Weezqyd.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
