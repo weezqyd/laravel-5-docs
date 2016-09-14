@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="no-js ie6"><![endif]-->
+<!--[if IE 7 ]><html class="no-js ie7"><![endif]-->
+<!--[if IE 8 ]><html class="no-js ie8"><![endif]-->
+<!--[if IE 9 ]><html class="no-js ie9"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
+    
+      
+        <title>Container - Laravel 5.3 official documentation</title>
+      
+      
+      
+      
+    
+    <meta property="og:url" content="None">
+    <meta property="og:title" content="Laravel 5.3 official documentation">
+    <meta property="og:image" content="None/../">
+    <meta name="apple-mobile-web-app-title" content="Laravel 5.3 official documentation">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    
+    <link rel="shortcut icon" type="image/x-icon" href="../assets/images/favicon-e565ddfa3b.ico">
+    <link rel="icon" type="image/x-icon" href="../assets/images/favicon-e565ddfa3b.ico">
+    <style>
+      @font-face {
+      	font-family: 'Icon';
+      	src: url('../assets/fonts/icon.eot?52m981');
+      	src: url('../assets/fonts/icon.eot?#iefix52m981')
+               format('embedded-opentype'),
+      		   url('../assets/fonts/icon.woff?52m981')
+               format('woff'),
+      		   url('../assets/fonts/icon.ttf?52m981')
+               format('truetype'),
+      		   url('../assets/fonts/icon.svg?52m981#icon')
+               format('svg');
+      	font-weight: normal;
+      	font-style: normal;
+      }
+    </style>
+    <link rel="stylesheet" href="../assets/stylesheets/application-a422ff04cc.css">
+    
+      <link rel="stylesheet" href="../assets/stylesheets/palettes-05ab2406df.css">
+    
+    
+      
+      
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,700|Ubuntu+Mono">
+      <style>
+        body, input {
+          font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
+        }
+        pre, code {
+          font-family: 'Ubuntu Mono', 'Courier New', 'Courier', monospace;
+        }
+      </style>
+    
+    
+      <link rel="stylesheet" href="../assets/prism.css">
+    
+    <script src="../assets/javascripts/modernizr-4ab42b99fd.js"></script>
+    
+  </head>
+  
+  
+  
+  <body class="palette-primary-teal palette-accent-pink">
+    
+    <div class="backdrop">
+      <div class="backdrop-paper"></div>
+    </div>
+    <input class="toggle" type="checkbox" id="toggle-drawer">
+    <input class="toggle" type="checkbox" id="toggle-search">
+    <label class="toggle-button overlay" for="toggle-drawer"></label>
+    <header class="header">
+      <nav aria-label="Header">
+  <div class="bar default">
+    <div class="button button-menu" role="button" aria-label="Menu">
+      <label class="toggle-button icon icon-menu" for="toggle-drawer">
+        <span></span>
+      </label>
+    </div>
+    <div class="stretch">
+      <div class="title">
+        
+          <span class="path">
+            
+          </span>
+        
+        Container
+      </div>
+    </div>
+    
+    
+    <div class="button button-search" role="button" aria-label="Search">
+      <label class="toggle-button icon icon-search" title="Search" for="toggle-search"></label>
+    </div>
+  </div>
+  <div class="bar search">
+    <div class="button button-close" role="button" aria-label="Close">
+      <label class="toggle-button icon icon-back" for="toggle-search"></label>
+    </div>
+    <div class="stretch">
+      <div class="field">
+        <input class="query" type="text" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck>
+      </div>
+    </div>
+    <div class="button button-reset" role="button" aria-label="Search">
+      <button class="toggle-button icon icon-close" id="reset-search"></button>
+    </div>
+  </div>
+</nav>
+    </header>
+    <main class="main">
+      
+      <div class="drawer">
+        <nav aria-label="Navigation">
+  
+  <a href="/" class="project">
+    <div class="banner">
+      
+      <div class="name">
+        <strong>
+          Laravel 5.3 official documentation
+          <span class="version">
+            
+          </span>
+        </strong>
+        
+      </div>
+    </div>
+  </a>
+  <div class="scrollable">
+    <div class="wrapper">
+      
+      <div class="toc">
+        <ul>
+          
+            
+  <li>
+    <a class="" title="Home" href="..">
+      Home
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Apis" href="../apis/">
+      Apis
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Application testing" href="../application-testing/">
+      Application testing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Artisan" href="../artisan/">
+      Artisan
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Authentication" href="../authentication/">
+      Authentication
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Authorization" href="../authorization/">
+      Authorization
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Billing" href="../billing/">
+      Billing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Blade" href="../blade/">
+      Blade
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Broadcasting" href="../broadcasting/">
+      Broadcasting
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Cache" href="../cache/">
+      Cache
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Collections" href="../collections/">
+      Collections
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Configuration" href="../configuration/">
+      Configuration
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="current" title="Container" href="./">
+      Container
+    </a>
+    
+      
+        
+      
+      
+        <ul>
+          
+            <li class="anchor">
+              <a title="Introduction" href="#introduction">
+                Introduction
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Binding" href="#binding">
+                Binding
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Resolving" href="#resolving">
+                Resolving
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Container Events" href="#container-events">
+                Container Events
+              </a>
+            </li>
+          
+        </ul>
+      
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Contracts" href="../contracts/">
+      Contracts
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Contributing" href="../contributing/">
+      Contributing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Contributions" href="../contributions/">
+      Contributions
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Controllers" href="../controllers/">
+      Controllers
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Csrf" href="../csrf/">
+      Csrf
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Database testing" href="../database-testing/">
+      Database testing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Database" href="../database/">
+      Database
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Documentation" href="../documentation/">
+      Documentation
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Elixir" href="../elixir/">
+      Elixir
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent collections" href="../eloquent-collections/">
+      Eloquent collections
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent mutators" href="../eloquent-mutators/">
+      Eloquent mutators
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent relationships" href="../eloquent-relationships/">
+      Eloquent relationships
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent serialization" href="../eloquent-serialization/">
+      Eloquent serialization
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent" href="../eloquent/">
+      Eloquent
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Encryption" href="../encryption/">
+      Encryption
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Envoy" href="../envoy/">
+      Envoy
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Errors" href="../errors/">
+      Errors
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Events" href="../events/">
+      Events
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Facades" href="../facades/">
+      Facades
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Filesystem" href="../filesystem/">
+      Filesystem
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Frontend" href="../frontend/">
+      Frontend
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Hashing" href="../hashing/">
+      Hashing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Helpers" href="../helpers/">
+      Helpers
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Homestead" href="../homestead/">
+      Homestead
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Installation" href="../installation/">
+      Installation
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="License" href="../license/">
+      License
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Lifecycle" href="../lifecycle/">
+      Lifecycle
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Localization" href="../localization/">
+      Localization
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Mail" href="../mail/">
+      Mail
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Middleware" href="../middleware/">
+      Middleware
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Migrations" href="../migrations/">
+      Migrations
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Mocking" href="../mocking/">
+      Mocking
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Notifications" href="../notifications/">
+      Notifications
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Packages" href="../packages/">
+      Packages
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Pagination" href="../pagination/">
+      Pagination
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Passport" href="../passport/">
+      Passport
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Passwords" href="../passwords/">
+      Passwords
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Providers" href="../providers/">
+      Providers
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Queries" href="../queries/">
+      Queries
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Queues" href="../queues/">
+      Queues
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Readme" href="../readme/">
+      Readme
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Redirects" href="../redirects/">
+      Redirects
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Redis" href="../redis/">
+      Redis
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Releases" href="../releases/">
+      Releases
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Requests" href="../requests/">
+      Requests
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Responses" href="../responses/">
+      Responses
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Routing" href="../routing/">
+      Routing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Scheduling" href="../scheduling/">
+      Scheduling
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Scout" href="../scout/">
+      Scout
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Seeding" href="../seeding/">
+      Seeding
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Session" href="../session/">
+      Session
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Structure" href="../structure/">
+      Structure
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Testing" href="../testing/">
+      Testing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Upgrade" href="../upgrade/">
+      Upgrade
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Valet" href="../valet/">
+      Valet
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Validation" href="../validation/">
+      Validation
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Views" href="../views/">
+      Views
+    </a>
+    
+  </li>
+
+          
+        </ul>
+        
+      </div>
+    </div>
+  </div>
+</nav>
+      </div>
+      <article class="article">
+        <div class="wrapper">
+          
+          <h1 id="service-container">Service Container</h1>
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#binding">Binding</a><ul>
+<li><a href="#binding-basics">Binding Basics</a></li>
+<li><a href="#binding-interfaces-to-implementations">Binding Interfaces To Implementations</a></li>
+<li><a href="#contextual-binding">Contextual Binding</a></li>
+<li><a href="#tagging">Tagging</a></li>
+</ul>
+</li>
+<li><a href="#resolving">Resolving</a><ul>
+<li><a href="#the-make-method">The Make Method</a></li>
+<li><a href="#automatic-injection">Automatic Injection</a></li>
+</ul>
+</li>
+<li><a href="#container-events">Container Events</a></li>
+</ul>
+<p><a name="introduction"></a></p>
+<h2 id="introduction">Introduction</h2>
+<p>The Laravel service container is a powerful tool for managing class dependencies and performing dependency injection. Dependency injection is a fancy phrase that essentially means this: class dependencies are "injected" into the class via the constructor or, in some cases, "setter" methods.</p>
+<p>Let's look at a simple example:</p>
+<pre><code>&lt;?php
+
+namespace App\Http\Controllers;
+
+use App\User;
+use App\Repositories\UserRepository;
+use App\Http\Controllers\Controller;
+
+class UserController extends Controller
+{
+    /**
+     * The user repository implementation.
+     *
+     * @var UserRepository
+     */
+    protected $users;
+
+    /**
+     * Create a new controller instance.
+     *
+     * @param  UserRepository  $users
+     * @return void
+     */
+    public function __construct(UserRepository $users)
+    {
+        $this-&gt;users = $users;
+    }
+
+    /**
+     * Show the profile for the given user.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function show($id)
+    {
+        $user = $this-&gt;users-&gt;find($id);
+
+        return view('user.profile', ['user' =&gt; $user]);
+    }
+}
+</code></pre>
+<p>In this example, the <code>UserController</code> needs to retrieve users from a data source. So, we will <strong>inject</strong> a service that is able to retrieve users. In this context, our <code>UserRepository</code> most likely uses <a href="../docs/{{version}}/eloquent">Eloquent</a> to retrieve user information from the database. However, since the repository is injected, we are able to easily swap it out with another implementation. We are also able to easily "mock", or create a dummy implementation of the <code>UserRepository</code> when testing our application.</p>
+<p>A deep understanding of the Laravel service container is essential to building a powerful, large application, as well as for contributing to the Laravel core itself.</p>
+<p><a name="binding"></a></p>
+<h2 id="binding">Binding</h2>
+<p><a name="binding-basics"></a></p>
+<h3 id="binding-basics">Binding Basics</h3>
+<p>Almost all of your service container bindings will be registered within <a href="../docs/{{version}}/providers">service providers</a>, so most of these examples will demonstrate using the container in that context.</p>
+<blockquote>
+<p>{tip} There is no need to bind classes into the container if they do not depend on any interfaces. The container does not need to be instructed on how to build these objects, since it can automatically resolve these objects using reflection.</p>
+</blockquote>
+<h4 id="simple-bindings">Simple Bindings</h4>
+<p>Within a service provider, you always have access to the container via the <code>$this-&gt;app</code> property. We can register a binding using the <code>bind</code> method, passing the class or interface name that we wish to register along with a <code>Closure</code> that returns an instance of the class:</p>
+<pre><code>$this-&gt;app-&gt;bind('HelpSpot\API', function ($app) {
+    return new HelpSpot\API($app-&gt;make('HttpClient'));
+});
+</code></pre>
+<p>Note that we receive the container itself as an argument to the resolver. We can then use the container to resolve sub-dependencies of the object we are building.</p>
+<h4 id="binding-a-singleton">Binding A Singleton</h4>
+<p>The <code>singleton</code> method binds a class or interface into the container that should only be resolved one time. Once a singleton binding is resolved, the same object instance will be returned on subsequent calls into the container:</p>
+<pre><code>$this-&gt;app-&gt;singleton('HelpSpot\API', function ($app) {
+    return new HelpSpot\API($app-&gt;make('HttpClient'));
+});
+</code></pre>
+<h4 id="binding-instances">Binding Instances</h4>
+<p>You may also bind an existing object instance into the container using the <code>instance</code> method. The given instance will always be returned on subsequent calls into the container:</p>
+<pre><code>$api = new HelpSpot\API(new HttpClient);
+
+$this-&gt;app-&gt;instance('HelpSpot\Api', $api);
+</code></pre>
+<h4 id="binding-primitives">Binding Primitives</h4>
+<p>Sometimes you may have a class that receives some injected classes, but also needs an injected primitive value such as an integer. You may easily use contextual binding to inject any value your class may need:</p>
+<pre><code>$this-&gt;app-&gt;when('App\Http\Controllers\UserController')
+          -&gt;needs('$variableName')
+          -&gt;give($value);
+</code></pre>
+<p><a name="binding-interfaces-to-implementations"></a></p>
+<h3 id="binding-interfaces-to-implementations">Binding Interfaces To Implementations</h3>
+<p>A very powerful feature of the service container is its ability to bind an interface to a given implementation. For example, let's assume we have an <code>EventPusher</code> interface and a <code>RedisEventPusher</code> implementation. Once we have coded our <code>RedisEventPusher</code> implementation of this interface, we can register it with the service container like so:</p>
+<pre><code>$this-&gt;app-&gt;bind(
+    'App\Contracts\EventPusher',
+    'App\Services\RedisEventPusher'
+);
+</code></pre>
+<p>This statement tells the container that it should inject the <code>RedisEventPusher</code> when a class needs an implementation of <code>EventPusher</code>. Now we can type-hint the <code>EventPusher</code> interface in a constructor, or any other location where dependencies are injected by the service container:</p>
+<pre><code>use App\Contracts\EventPusher;
+
+/**
+ * Create a new class instance.
+ *
+ * @param  EventPusher  $pusher
+ * @return void
+ */
+public function __construct(EventPusher $pusher)
+{
+    $this-&gt;pusher = $pusher;
+}
+</code></pre>
+<p><a name="contextual-binding"></a></p>
+<h3 id="contextual-binding">Contextual Binding</h3>
+<p>Sometimes you may have two classes that utilize the same interface, but you wish to inject different implementations into each class. For example, two controllers may depend on different implementations of the <code>Illuminate\Contracts\Filesystem\Filesystem</code> <a href="../docs/{{version}}/contracts">contract</a>. Laravel provides a simple, fluent interface for defining this behavior:</p>
+<pre><code>use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\PhotoController;
+use App\Http\Controllers\VideoController;
+use Illuminate\Contracts\Filesystem\Filesystem;
+
+$this-&gt;app-&gt;when(PhotoController::class)
+          -&gt;needs(Filesystem::class)
+          -&gt;give(function () {
+              return Storage::disk('local');
+          });
+
+$this-&gt;app-&gt;when(VideoController::class)
+          -&gt;needs(Filesystem::class)
+          -&gt;give(function () {
+              return Storage::disk('s3');
+          });
+</code></pre>
+<p><a name="tagging"></a></p>
+<h3 id="tagging">Tagging</h3>
+<p>Occasionally, you may need to resolve all of a certain "category" of binding. For example, perhaps you are building a report aggregator that receives an array of many different <code>Report</code> interface implementations. After registering the <code>Report</code> implementations, you can assign them a tag using the <code>tag</code> method:</p>
+<pre><code>$this-&gt;app-&gt;bind('SpeedReport', function () {
+    //
+});
+
+$this-&gt;app-&gt;bind('MemoryReport', function () {
+    //
+});
+
+$this-&gt;app-&gt;tag(['SpeedReport', 'MemoryReport'], 'reports');
+</code></pre>
+<p>Once the services have been tagged, you may easily resolve them all via the <code>tagged</code> method:</p>
+<pre><code>$this-&gt;app-&gt;bind('ReportAggregator', function ($app) {
+    return new ReportAggregator($app-&gt;tagged('reports'));
+});
+</code></pre>
+<p><a name="resolving"></a></p>
+<h2 id="resolving">Resolving</h2>
+<p><a name="the-make-method"></a></p>
+<h4 id="the-make-method">The <code>make</code> Method</h4>
+<p>You may use the <code>make</code> method to resolve a class instance out of the container. The <code>make</code> method accepts the name of the class or interface you wish to resolve:</p>
+<pre><code>$api = $this-&gt;app-&gt;make('HelpSpot\API');
+</code></pre>
+<p>If you are in a location of your code that does not have access to the <code>$app</code> variable, you may use the global <code>resolve</code> helper:</p>
+<pre><code>$api = resolve('HelpSpot\API');
+</code></pre>
+<p><a name="automatic-injection"></a></p>
+<h4 id="automatic-injection">Automatic Injection</h4>
+<p>Alternatively, and importantly, you may simply "type-hint" the dependency in the constructor of a class that is resolved by the container, including <a href="../docs/{{version}}/controllers">controllers</a>, <a href="../docs/{{version}}/events">event listeners</a>, <a href="../docs/{{version}}/queues">queue jobs</a>, <a href="../docs/{{version}}/middleware">middleware</a>, and more. In practice, this is how most of your objects should be resolved by the container.</p>
+<p>For example, you may type-hint a repository defined by your application in a controller's constructor. The repository will automatically be resolved and injected into the class:</p>
+<pre><code>&lt;?php
+
+namespace App\Http\Controllers;
+
+use App\Users\Repository as UserRepository;
+
+class UserController extends Controller
+{
+    /**
+     * The user repository instance.
+     */
+    protected $users;
+
+    /**
+     * Create a new controller instance.
+     *
+     * @param  UserRepository  $users
+     * @return void
+     */
+    public function __construct(UserRepository $users)
+    {
+        $this-&gt;users = $users;
+    }
+
+    /**
+     * Show the user with the given ID.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function show($id)
+    {
+        //
+    }
+}
+</code></pre>
+<p><a name="container-events"></a></p>
+<h2 id="container-events">Container Events</h2>
+<p>The service container fires an event each time it resolves an object. You may listen to this event using the <code>resolving</code> method:</p>
+<pre><code>$this-&gt;app-&gt;resolving(function ($object, $app) {
+    // Called when container resolves object of any type...
+});
+
+$this-&gt;app-&gt;resolving(HelpSpot\API::class, function ($api, $app) {
+    // Called when container resolves objects of type "HelpSpot\API"...
+});
+</code></pre>
+<p>As you can see, the object being resolved will be passed to the callback, allowing you to set any additional properties on the object before it is given to its consumer.</p>
+          <aside class="copyright" role="note">
+            
+            Documentation built with
+            <a href="http://www.mkdocs.org" target="_blank">MkDocs</a>
+            using the
+            <a href="http://squidfunk.github.io/mkdocs-material/" target="_blank">
+              Material
+            </a>
+            theme.
+          </aside>
+          
+            <footer class="footer">
+              
+  <nav class="pagination" aria-label="Footer">
+    <div class="previous">
+      
+        <a href="../configuration/" title="Configuration">
+          <span class="direction">
+            Previous
+          </span>
+          <div class="page">
+            <div class="button button-previous" role="button" aria-label="Previous">
+              <i class="icon icon-back"></i>
+            </div>
+            <div class="stretch">
+              <div class="title">
+                Configuration
+              </div>
+            </div>
+          </div>
+        </a>
+      
+    </div>
+    <div class="next">
+      
+        <a href="../contracts/" title="Contracts">
+          <span class="direction">
+            Next
+          </span>
+          <div class="page">
+            <div class="stretch">
+              <div class="title">
+                Contracts
+              </div>
+            </div>
+            <div class="button button-next" role="button" aria-label="Next">
+              <i class="icon icon-forward"></i>
+            </div>
+          </div>
+        </a>
+      
+    </div>
+  </nav>
+
+            </footer>
+          
+        </div>
+      </article>
+      <div class="results" role="status" aria-live="polite">
+        <div class="scrollable">
+          <div class="wrapper">
+            <div class="meta"></div>
+            <div class="list"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script>
+      var base_url = '..';
+      var repo_id  = '';
+    </script>
+    <script src="../assets/javascripts/application-997097ee0c.js"></script>
+    
+      <script src="../assets/jquery.js"></script>
+    
+      <script src="../assets/prism.js"></script>
+    
+    
+  </body>
+</html>

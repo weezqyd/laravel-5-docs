@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="no-js ie6"><![endif]-->
+<!--[if IE 7 ]><html class="no-js ie7"><![endif]-->
+<!--[if IE 8 ]><html class="no-js ie8"><![endif]-->
+<!--[if IE 9 ]><html class="no-js ie9"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
+    
+      
+        <title>Elixir - Laravel 5.3 official documentation</title>
+      
+      
+      
+      
+    
+    <meta property="og:url" content="None">
+    <meta property="og:title" content="Laravel 5.3 official documentation">
+    <meta property="og:image" content="None/../">
+    <meta name="apple-mobile-web-app-title" content="Laravel 5.3 official documentation">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    
+    <link rel="shortcut icon" type="image/x-icon" href="../assets/images/favicon-e565ddfa3b.ico">
+    <link rel="icon" type="image/x-icon" href="../assets/images/favicon-e565ddfa3b.ico">
+    <style>
+      @font-face {
+      	font-family: 'Icon';
+      	src: url('../assets/fonts/icon.eot?52m981');
+      	src: url('../assets/fonts/icon.eot?#iefix52m981')
+               format('embedded-opentype'),
+      		   url('../assets/fonts/icon.woff?52m981')
+               format('woff'),
+      		   url('../assets/fonts/icon.ttf?52m981')
+               format('truetype'),
+      		   url('../assets/fonts/icon.svg?52m981#icon')
+               format('svg');
+      	font-weight: normal;
+      	font-style: normal;
+      }
+    </style>
+    <link rel="stylesheet" href="../assets/stylesheets/application-a422ff04cc.css">
+    
+      <link rel="stylesheet" href="../assets/stylesheets/palettes-05ab2406df.css">
+    
+    
+      
+      
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,700|Ubuntu+Mono">
+      <style>
+        body, input {
+          font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
+        }
+        pre, code {
+          font-family: 'Ubuntu Mono', 'Courier New', 'Courier', monospace;
+        }
+      </style>
+    
+    
+      <link rel="stylesheet" href="../assets/prism.css">
+    
+    <script src="../assets/javascripts/modernizr-4ab42b99fd.js"></script>
+    
+  </head>
+  
+  
+  
+  <body class="palette-primary-teal palette-accent-pink">
+    
+    <div class="backdrop">
+      <div class="backdrop-paper"></div>
+    </div>
+    <input class="toggle" type="checkbox" id="toggle-drawer">
+    <input class="toggle" type="checkbox" id="toggle-search">
+    <label class="toggle-button overlay" for="toggle-drawer"></label>
+    <header class="header">
+      <nav aria-label="Header">
+  <div class="bar default">
+    <div class="button button-menu" role="button" aria-label="Menu">
+      <label class="toggle-button icon icon-menu" for="toggle-drawer">
+        <span></span>
+      </label>
+    </div>
+    <div class="stretch">
+      <div class="title">
+        
+          <span class="path">
+            
+          </span>
+        
+        Elixir
+      </div>
+    </div>
+    
+    
+    <div class="button button-search" role="button" aria-label="Search">
+      <label class="toggle-button icon icon-search" title="Search" for="toggle-search"></label>
+    </div>
+  </div>
+  <div class="bar search">
+    <div class="button button-close" role="button" aria-label="Close">
+      <label class="toggle-button icon icon-back" for="toggle-search"></label>
+    </div>
+    <div class="stretch">
+      <div class="field">
+        <input class="query" type="text" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck>
+      </div>
+    </div>
+    <div class="button button-reset" role="button" aria-label="Search">
+      <button class="toggle-button icon icon-close" id="reset-search"></button>
+    </div>
+  </div>
+</nav>
+    </header>
+    <main class="main">
+      
+      <div class="drawer">
+        <nav aria-label="Navigation">
+  
+  <a href="/" class="project">
+    <div class="banner">
+      
+      <div class="name">
+        <strong>
+          Laravel 5.3 official documentation
+          <span class="version">
+            
+          </span>
+        </strong>
+        
+      </div>
+    </div>
+  </a>
+  <div class="scrollable">
+    <div class="wrapper">
+      
+      <div class="toc">
+        <ul>
+          
+            
+  <li>
+    <a class="" title="Home" href="..">
+      Home
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Apis" href="../apis/">
+      Apis
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Application testing" href="../application-testing/">
+      Application testing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Artisan" href="../artisan/">
+      Artisan
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Authentication" href="../authentication/">
+      Authentication
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Authorization" href="../authorization/">
+      Authorization
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Billing" href="../billing/">
+      Billing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Blade" href="../blade/">
+      Blade
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Broadcasting" href="../broadcasting/">
+      Broadcasting
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Cache" href="../cache/">
+      Cache
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Collections" href="../collections/">
+      Collections
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Configuration" href="../configuration/">
+      Configuration
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Container" href="../container/">
+      Container
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Contracts" href="../contracts/">
+      Contracts
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Contributing" href="../contributing/">
+      Contributing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Contributions" href="../contributions/">
+      Contributions
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Controllers" href="../controllers/">
+      Controllers
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Csrf" href="../csrf/">
+      Csrf
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Database testing" href="../database-testing/">
+      Database testing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Database" href="../database/">
+      Database
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Documentation" href="../documentation/">
+      Documentation
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="current" title="Elixir" href="./">
+      Elixir
+    </a>
+    
+      
+        
+      
+      
+        <ul>
+          
+            <li class="anchor">
+              <a title="Introduction" href="#introduction">
+                Introduction
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Installation &amp; Setup" href="#installation-setup">
+                Installation &amp; Setup
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Running Elixir" href="#running-elixir">
+                Running Elixir
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Working With Stylesheets" href="#working-with-stylesheets">
+                Working With Stylesheets
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Working With Scripts" href="#working-with-scripts">
+                Working With Scripts
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Copying Files &amp; Directories" href="#copying-files-directories">
+                Copying Files &amp; Directories
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Versioning / Cache Busting" href="#versioning-cache-busting">
+                Versioning / Cache Busting
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="BrowserSync" href="#browsersync">
+                BrowserSync
+              </a>
+            </li>
+          
+        </ul>
+      
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent collections" href="../eloquent-collections/">
+      Eloquent collections
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent mutators" href="../eloquent-mutators/">
+      Eloquent mutators
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent relationships" href="../eloquent-relationships/">
+      Eloquent relationships
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent serialization" href="../eloquent-serialization/">
+      Eloquent serialization
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent" href="../eloquent/">
+      Eloquent
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Encryption" href="../encryption/">
+      Encryption
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Envoy" href="../envoy/">
+      Envoy
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Errors" href="../errors/">
+      Errors
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Events" href="../events/">
+      Events
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Facades" href="../facades/">
+      Facades
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Filesystem" href="../filesystem/">
+      Filesystem
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Frontend" href="../frontend/">
+      Frontend
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Hashing" href="../hashing/">
+      Hashing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Helpers" href="../helpers/">
+      Helpers
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Homestead" href="../homestead/">
+      Homestead
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Installation" href="../installation/">
+      Installation
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="License" href="../license/">
+      License
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Lifecycle" href="../lifecycle/">
+      Lifecycle
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Localization" href="../localization/">
+      Localization
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Mail" href="../mail/">
+      Mail
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Middleware" href="../middleware/">
+      Middleware
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Migrations" href="../migrations/">
+      Migrations
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Mocking" href="../mocking/">
+      Mocking
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Notifications" href="../notifications/">
+      Notifications
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Packages" href="../packages/">
+      Packages
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Pagination" href="../pagination/">
+      Pagination
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Passport" href="../passport/">
+      Passport
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Passwords" href="../passwords/">
+      Passwords
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Providers" href="../providers/">
+      Providers
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Queries" href="../queries/">
+      Queries
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Queues" href="../queues/">
+      Queues
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Readme" href="../readme/">
+      Readme
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Redirects" href="../redirects/">
+      Redirects
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Redis" href="../redis/">
+      Redis
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Releases" href="../releases/">
+      Releases
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Requests" href="../requests/">
+      Requests
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Responses" href="../responses/">
+      Responses
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Routing" href="../routing/">
+      Routing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Scheduling" href="../scheduling/">
+      Scheduling
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Scout" href="../scout/">
+      Scout
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Seeding" href="../seeding/">
+      Seeding
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Session" href="../session/">
+      Session
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Structure" href="../structure/">
+      Structure
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Testing" href="../testing/">
+      Testing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Upgrade" href="../upgrade/">
+      Upgrade
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Valet" href="../valet/">
+      Valet
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Validation" href="../validation/">
+      Validation
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Views" href="../views/">
+      Views
+    </a>
+    
+  </li>
+
+          
+        </ul>
+        
+      </div>
+    </div>
+  </div>
+</nav>
+      </div>
+      <article class="article">
+        <div class="wrapper">
+          
+          <h1 id="compiling-assets-laravel-elixir">Compiling Assets (Laravel Elixir)</h1>
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#installation">Installation &amp; Setup</a></li>
+<li><a href="#running-elixir">Running Elixir</a></li>
+<li><a href="#working-with-stylesheets">Working With Stylesheets</a><ul>
+<li><a href="#less">Less</a></li>
+<li><a href="#sass">Sass</a></li>
+<li><a href="#stylus">Stylus</a></li>
+<li><a href="#plain-css">Plain CSS</a></li>
+<li><a href="#css-source-maps">Source Maps</a></li>
+</ul>
+</li>
+<li><a href="#working-with-scripts">Working With Scripts</a><ul>
+<li><a href="#webpack">Webpack</a></li>
+<li><a href="#rollup">Rollup</a></li>
+<li><a href="#javascript">Scripts</a></li>
+</ul>
+</li>
+<li><a href="#copying-files-and-directories">Copying Files &amp; Directories</a></li>
+<li><a href="#versioning-and-cache-busting">Versioning / Cache Busting</a></li>
+<li><a href="#browser-sync">BrowserSync</a></li>
+</ul>
+<p><a name="introduction"></a></p>
+<h2 id="introduction">Introduction</h2>
+<p>Laravel Elixir provides a clean, fluent API for defining basic <a href="http://gulpjs.com">Gulp</a> tasks for your Laravel application. Elixir supports common CSS and JavaScript pre-processors like <a href="http://sass-lang.com">Sass</a> and <a href="https://webpack.github.io/">Webpack</a>. Using method chaining, Elixir allows you to fluently define your asset pipeline. For example:</p>
+<pre><code class="javascript">elixir(function(mix) {
+    mix.sass('app.scss')
+       .webpack('app.js');
+});
+</code></pre>
+
+<p>If you've ever been confused and overwhelmed about getting started with Gulp and asset compilation, you will love Laravel Elixir. However, you are not required to use it while developing your application. You are free to use any asset pipeline tool you wish, or even none at all.</p>
+<p><a name="installation"></a></p>
+<h2 id="installation-setup">Installation &amp; Setup</h2>
+<h4 id="installing-node">Installing Node</h4>
+<p>Before triggering Elixir, you must first ensure that Node.js and NPM are installed on your machine.</p>
+<pre><code>node -v
+npm -v
+</code></pre>
+<p>By default, Laravel Homestead includes everything you need; however, if you aren't using Vagrant, then you can easily install the latest version of Node and NPM using simple graphical installers from <a href="http://nodejs.org/en/download/">their download page</a>.</p>
+<h4 id="gulp">Gulp</h4>
+<p>Next, you'll need to pull in <a href="http://gulpjs.com">Gulp</a> as a global NPM package:</p>
+<pre><code>npm install --global gulp-cli
+</code></pre>
+<h4 id="laravel-elixir">Laravel Elixir</h4>
+<p>The only remaining step is to install Laravel Elixir. Within a fresh installation of Laravel, you'll find a <code>package.json</code> file in the root of your directory structure. The default <code>package.json</code> file includes Elixir and the Webpack JavaScript module bundler. Think of this like your <code>composer.json</code> file, except it defines Node dependencies instead of PHP. You may install the dependencies it references by running:</p>
+<pre><code>npm install
+</code></pre>
+<p>If you are developing on a Windows system or you are running your VM on a Windows host system, you may need to run the <code>npm install</code> command with the <code>--no-bin-links</code> switch enabled:</p>
+<pre><code>npm install --no-bin-links
+</code></pre>
+<p><a name="running-elixir"></a></p>
+<h2 id="running-elixir">Running Elixir</h2>
+<p>Elixir is built on top of <a href="http://gulpjs.com">Gulp</a>, so to run your Elixir tasks you only need to run the <code>gulp</code> command in your terminal. Adding the <code>--production</code> flag to the command will instruct Elixir to minify your CSS and JavaScript files:</p>
+<pre><code>// Run all tasks...
+gulp
+
+// Run all tasks and minify all CSS and JavaScript...
+gulp --production
+</code></pre>
+<p>Upon running this command, you'll see a nicely formatted table that displays a summary of the events that just took place.</p>
+<h4 id="watching-assets-for-changes">Watching Assets For Changes</h4>
+<p>The <code>gulp watch</code> command will continue running in your terminal and watch your assets for any changes. Gulp will automatically recompile your assets if you modify them while the <code>watch</code> command is running:</p>
+<pre><code>gulp watch
+</code></pre>
+<p><a name="working-with-stylesheets"></a></p>
+<h2 id="working-with-stylesheets">Working With Stylesheets</h2>
+<p>The <code>gulpfile.js</code> file in your project's root directory contains all of your Elixir tasks. Elixir tasks can be chained together to define exactly how your assets should be compiled.</p>
+<p><a name="less"></a></p>
+<h3 id="less">Less</h3>
+<p>The <code>less</code> method may be used to compile <a href="http://lesscss.org/">Less</a> into CSS. The <code>less</code> method assumes that your Less files are stored in <code>resources/assets/less</code>. By default, the task will place the compiled CSS for this example in <code>public/css/app.css</code>:</p>
+<pre><code class="javascript">elixir(function(mix) {
+    mix.less('app.less');
+});
+</code></pre>
+
+<p>You may also combine multiple Less files into a single CSS file. Again, the resulting CSS will be placed in <code>public/css/app.css</code>:</p>
+<pre><code class="javascript">elixir(function(mix) {
+    mix.less([
+        'app.less',
+        'controllers.less'
+    ]);
+});
+</code></pre>
+
+<p>If you wish to customize the output location of the compiled CSS, you may pass a second argument to the <code>less</code> method:</p>
+<pre><code class="javascript">elixir(function(mix) {
+    mix.less('app.less', 'public/stylesheets');
+});
+
+// Specifying a specific output filename...
+elixir(function(mix) {
+    mix.less('app.less', 'public/stylesheets/style.css');
+});
+</code></pre>
+
+<p><a name="sass"></a></p>
+<h3 id="sass">Sass</h3>
+<p>The <code>sass</code> method allows you to compile <a href="http://sass-lang.com/">Sass</a> into CSS. Assuming your Sass files are stored at <code>resources/assets/sass</code>, you may use the method like so:</p>
+<pre><code class="javascript">elixir(function(mix) {
+    mix.sass('app.scss');
+});
+</code></pre>
+
+<p>Again, like the <code>less</code> method, you may compile multiple Sass files into a single CSS file, and even customize the output directory of the resulting CSS:</p>
+<pre><code class="javascript">elixir(function(mix) {
+    mix.sass([
+        'app.scss',
+        'controllers.scss'
+    ], 'public/assets/css');
+});
+</code></pre>
+
+<h4 id="custom-paths">Custom Paths</h4>
+<p>While it's recommended that you use Laravel's default asset directories, if you require a different base directory, you may begin any file path with <code>./</code>. This instructs Elixir to begin at the project root, rather than using the default base directory.</p>
+<p>For example, to compile a file located at <code>app/assets/sass/app.scss</code> and output the results to <code>public/css/app.css</code>, you would make the following call to the <code>sass</code> method:</p>
+<pre><code class="javascript">elixir(function(mix) {
+    mix.sass('./app/assets/sass/app.scss');
+});
+</code></pre>
+
+<p><a name="stylus"></a></p>
+<h3 id="stylus">Stylus</h3>
+<p>The <code>stylus</code> method may be used to compile <a href="http://stylus-lang.com/">Stylus</a> into CSS. Assuming that your Stylus files are stored in <code>resources/assets/stylus</code>, you may call the method like so:</p>
+<pre><code class="javascript">elixir(function(mix) {
+    mix.stylus('app.styl');
+});
+</code></pre>
+
+<blockquote>
+<p>{tip} This method's signature is identical to both <code>mix.less()</code> and <code>mix.sass()</code>.</p>
+</blockquote>
+<p><a name="plain-css"></a></p>
+<h3 id="plain-css">Plain CSS</h3>
+<p>If you would just like to combine some plain CSS stylesheets into a single file, you may use the <code>styles</code> method. Paths passed to this method are relative to the <code>resources/assets/css</code> directory and the resulting CSS will be placed in <code>public/css/all.css</code>:</p>
+<pre><code class="javascript">elixir(function(mix) {
+    mix.styles([
+        'normalize.css',
+        'main.css'
+    ]);
+});
+</code></pre>
+
+<p>You may also instruct Elixir to write the resulting file to a custom directory or file by passing a second argument to the <code>styles</code> method:</p>
+<pre><code class="javascript">elixir(function(mix) {
+    mix.styles([
+        'normalize.css',
+        'main.css'
+    ], 'public/assets/css/site.css');
+});
+</code></pre>
+
+<p><a name="css-source-maps"></a></p>
+<h3 id="source-maps">Source Maps</h3>
+<p>In Elixir, source maps are enabled by default and provide better debugging information to your browser's developer tools when using compiled assets. For each relevant file that is compiled, you will find a companion <code>*.css.map</code> or <code>*.js.map</code> file in the same directory.</p>
+<p>If you do not want source maps generated for your application, you may disable them using the <code>sourcemaps</code> configuration option:</p>
+<pre><code class="javascript">elixir.config.sourcemaps = false;
+
+elixir(function(mix) {
+    mix.sass('app.scss');
+});
+</code></pre>
+
+<p><a name="working-with-scripts"></a></p>
+<h2 id="working-with-scripts">Working With Scripts</h2>
+<p>Elixir provides several features to help you work with your JavaScript files, such as compiling ECMAScript 2015, module bundling, minification, and simply concatenating plain JavaScript files.</p>
+<p>When writing ES2015 with modules, you have your choice between <a href="http://webpack.github.io">Webpack</a> and <a href="http://rollupjs.org/">Rollup</a>. If these tools are foreign to you, don't worry, Elixir will handle all of the hard work behind the scenes. By default, the Laravel <code>gulpfile</code> uses <code>webpack</code> to compile Javascript, but you are free to use any module bundler you like.</p>
+<p><a name="webpack"></a></p>
+<h3 id="webpack">Webpack</h3>
+<p>The <code>webpack</code> method may be used to compile and bundle <a href="https://babeljs.io/docs/learn-es2015/">ECMAScript 2015</a> into plain JavaScript. This function accepts a file path relative to the <code>resources/assets/js</code> directory and generates a single bundled file in the <code>public/js</code> directory:</p>
+<pre><code class="javascript">elixir(function(mix) {
+    mix.webpack('app.js');
+});
+</code></pre>
+
+<p>To choose a different output or base directory, simply specify your desired paths with a leading <code>.</code>. Then you may specify the paths relative to the root of your application. For example, to compile <code>app/assets/js/app.js</code> to <code>public/dist/app.js</code>:</p>
+<pre><code class="javascript">elixir(function(mix) {
+    mix.webpack(
+        './resources/assets/js/app.js',
+        './public/dist'
+    );
+});
+</code></pre>
+
+<p>If you'd like to leverage more of Webpack's functionality, Elixir will read any <code>webpack.config.js</code> file that is in your project root and <a href="https://webpack.github.io/docs/configuration.html">factor its configuration</a> into the build process.</p>
+<p><a name="rollup"></a></p>
+<h3 id="rollup">Rollup</h3>
+<p>Similar to Webpack, Rollup is a next-generation bundler for ES2015. This function accepts an array of files relative to the <code>resources/assets/js</code> directory, and generates a single file in the <code>public/js</code> directory:</p>
+<pre><code class="javascript">elixir(function(mix) {
+    mix.rollup('app.js');
+});
+</code></pre>
+
+<p>Like the <code>webpack</code> method, you may customize the location of the input and output files given to the <code>rollup</code> method:</p>
+<pre><code>elixir(function(mix) {
+    mix.rollup(
+        './resources/assets/js/app.js',
+        './public/dist'
+    );
+});
+</code></pre>
+<p><a name="javascript"></a></p>
+<h3 id="scripts">Scripts</h3>
+<p>If you have multiple JavaScript files that you would like to combine into a single file, you may use the <code>scripts</code> method, which provides automatic source maps, concatenation, and minification.</p>
+<p>The <code>scripts</code> method assumes all paths are relative to the <code>resources/assets/js</code> directory, and will place the resulting JavaScript in <code>public/js/all.js</code> by default:</p>
+<pre><code class="javascript">elixir(function(mix) {
+    mix.scripts([
+        'order.js',
+        'forum.js'
+    ]);
+});
+</code></pre>
+
+<p>If you need to concatenate multiple sets of scripts into different files, you may make multiple calls to the <code>scripts</code> method. The second argument given to the method determines the resulting file name for each concatenation:</p>
+<pre><code class="javascript">elixir(function(mix) {
+    mix.scripts(['app.js', 'controllers.js'], 'public/js/app.js')
+       .scripts(['forum.js', 'threads.js'], 'public/js/forum.js');
+});
+</code></pre>
+
+<p>If you need to combine all of the scripts in a given directory, you may use the <code>scriptsIn</code> method. The resulting JavaScript will be placed in <code>public/js/all.js</code>:</p>
+<pre><code class="javascript">elixir(function(mix) {
+    mix.scriptsIn('public/js/some/directory');
+});
+</code></pre>
+
+<blockquote>
+<p>{tip} If you intend to concatenate multiple pre-minified vendor libraries, such as jQuery, instead consider using <code>mix.combine()</code>. This will combine the files, while omitting the source map and minification steps. As a result, compile times will drastically improve.</p>
+</blockquote>
+<p><a name="copying-files-and-directories"></a></p>
+<h2 id="copying-files-directories">Copying Files &amp; Directories</h2>
+<p>The <code>copy</code> method may be used to copy files and directories to new locations. All operations are relative to the project's root directory:</p>
+<pre><code class="javascript">elixir(function(mix) {
+    mix.copy('vendor/foo/bar.css', 'public/css/bar.css');
+});
+</code></pre>
+
+<p><a name="versioning-and-cache-busting"></a></p>
+<h2 id="versioning-cache-busting">Versioning / Cache Busting</h2>
+<p>Many developers suffix their compiled assets with a timestamp or unique token to force browsers to load the fresh assets instead of serving stale copies of the code. Elixir can handle this for you using the <code>version</code> method.</p>
+<p>The <code>version</code> method accepts a file name relative to the <code>public</code> directory, and will append a unique hash to the filename, allowing for cache-busting. For example, the generated file name will look something like: <code>all-16d570a7.css</code>:</p>
+<pre><code class="javascript">elixir(function(mix) {
+    mix.version('css/all.css');
+});
+</code></pre>
+
+<p>After generating the versioned file, you may use Laravel's global <code>elixir</code> helper within your <a href="../docs/{{version}}/views">views</a> to load the appropriately hashed asset. The <code>elixir</code> function will automatically determine the current name of the hashed file:</p>
+<pre><code>&lt;link rel="stylesheet" href="{{ elixir('css/all.css') }}"&gt;
+</code></pre>
+<h4 id="versioning-multiple-files">Versioning Multiple Files</h4>
+<p>You may pass an array to the <code>version</code> method to version multiple files:</p>
+<pre><code class="javascript">elixir(function(mix) {
+    mix.version(['css/all.css', 'js/app.js']);
+});
+</code></pre>
+
+<p>Once the files have been versioned, you may use the <code>elixir</code> helper function to generate links to the proper hashed files. Remember, you only need to pass the name of the un-hashed file to the <code>elixir</code> helper function. The helper will use the un-hashed name to determine the current hashed version of the file:</p>
+<pre><code>&lt;link rel="stylesheet" href="{{ elixir('css/all.css') }}"&gt;
+
+&lt;script src="{{ elixir('js/app.js') }}"&gt;&lt;/script&gt;
+</code></pre>
+<p><a name="browser-sync"></a></p>
+<h2 id="browsersync">BrowserSync</h2>
+<p>BrowserSync automatically refreshes your web browser after you make changes to your assets. The <code>browserSync</code> method accepts a JavaScript object with a <code>proxy</code> attribute containing the local URL for your application. Then, once you run <code>gulp watch</code> you may access your web application using port 3000 (<code>http://project.dev:3000</code>) to enjoy browser syncing:</p>
+<pre><code class="javascript">elixir(function(mix) {
+    mix.browserSync({
+        proxy: 'project.dev'
+    });
+});
+</code></pre>
+          <aside class="copyright" role="note">
+            
+            Documentation built with
+            <a href="http://www.mkdocs.org" target="_blank">MkDocs</a>
+            using the
+            <a href="http://squidfunk.github.io/mkdocs-material/" target="_blank">
+              Material
+            </a>
+            theme.
+          </aside>
+          
+            <footer class="footer">
+              
+  <nav class="pagination" aria-label="Footer">
+    <div class="previous">
+      
+        <a href="../documentation/" title="Documentation">
+          <span class="direction">
+            Previous
+          </span>
+          <div class="page">
+            <div class="button button-previous" role="button" aria-label="Previous">
+              <i class="icon icon-back"></i>
+            </div>
+            <div class="stretch">
+              <div class="title">
+                Documentation
+              </div>
+            </div>
+          </div>
+        </a>
+      
+    </div>
+    <div class="next">
+      
+        <a href="../eloquent-collections/" title="Eloquent collections">
+          <span class="direction">
+            Next
+          </span>
+          <div class="page">
+            <div class="stretch">
+              <div class="title">
+                Eloquent collections
+              </div>
+            </div>
+            <div class="button button-next" role="button" aria-label="Next">
+              <i class="icon icon-forward"></i>
+            </div>
+          </div>
+        </a>
+      
+    </div>
+  </nav>
+
+            </footer>
+          
+        </div>
+      </article>
+      <div class="results" role="status" aria-live="polite">
+        <div class="scrollable">
+          <div class="wrapper">
+            <div class="meta"></div>
+            <div class="list"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script>
+      var base_url = '..';
+      var repo_id  = '';
+    </script>
+    <script src="../assets/javascripts/application-997097ee0c.js"></script>
+    
+      <script src="../assets/jquery.js"></script>
+    
+      <script src="../assets/prism.js"></script>
+    
+    
+  </body>
+</html>

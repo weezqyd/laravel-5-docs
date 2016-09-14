@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="no-js ie6"><![endif]-->
+<!--[if IE 7 ]><html class="no-js ie7"><![endif]-->
+<!--[if IE 8 ]><html class="no-js ie8"><![endif]-->
+<!--[if IE 9 ]><html class="no-js ie9"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
+    
+      
+        <title>Csrf - Laravel 5.3 official documentation</title>
+      
+      
+      
+      
+    
+    <meta property="og:url" content="None">
+    <meta property="og:title" content="Laravel 5.3 official documentation">
+    <meta property="og:image" content="None/../">
+    <meta name="apple-mobile-web-app-title" content="Laravel 5.3 official documentation">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    
+    <link rel="shortcut icon" type="image/x-icon" href="../assets/images/favicon-e565ddfa3b.ico">
+    <link rel="icon" type="image/x-icon" href="../assets/images/favicon-e565ddfa3b.ico">
+    <style>
+      @font-face {
+      	font-family: 'Icon';
+      	src: url('../assets/fonts/icon.eot?52m981');
+      	src: url('../assets/fonts/icon.eot?#iefix52m981')
+               format('embedded-opentype'),
+      		   url('../assets/fonts/icon.woff?52m981')
+               format('woff'),
+      		   url('../assets/fonts/icon.ttf?52m981')
+               format('truetype'),
+      		   url('../assets/fonts/icon.svg?52m981#icon')
+               format('svg');
+      	font-weight: normal;
+      	font-style: normal;
+      }
+    </style>
+    <link rel="stylesheet" href="../assets/stylesheets/application-a422ff04cc.css">
+    
+      <link rel="stylesheet" href="../assets/stylesheets/palettes-05ab2406df.css">
+    
+    
+      
+      
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,700|Ubuntu+Mono">
+      <style>
+        body, input {
+          font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
+        }
+        pre, code {
+          font-family: 'Ubuntu Mono', 'Courier New', 'Courier', monospace;
+        }
+      </style>
+    
+    
+      <link rel="stylesheet" href="../assets/prism.css">
+    
+    <script src="../assets/javascripts/modernizr-4ab42b99fd.js"></script>
+    
+  </head>
+  
+  
+  
+  <body class="palette-primary-teal palette-accent-pink">
+    
+    <div class="backdrop">
+      <div class="backdrop-paper"></div>
+    </div>
+    <input class="toggle" type="checkbox" id="toggle-drawer">
+    <input class="toggle" type="checkbox" id="toggle-search">
+    <label class="toggle-button overlay" for="toggle-drawer"></label>
+    <header class="header">
+      <nav aria-label="Header">
+  <div class="bar default">
+    <div class="button button-menu" role="button" aria-label="Menu">
+      <label class="toggle-button icon icon-menu" for="toggle-drawer">
+        <span></span>
+      </label>
+    </div>
+    <div class="stretch">
+      <div class="title">
+        
+          <span class="path">
+            
+          </span>
+        
+        Csrf
+      </div>
+    </div>
+    
+    
+    <div class="button button-search" role="button" aria-label="Search">
+      <label class="toggle-button icon icon-search" title="Search" for="toggle-search"></label>
+    </div>
+  </div>
+  <div class="bar search">
+    <div class="button button-close" role="button" aria-label="Close">
+      <label class="toggle-button icon icon-back" for="toggle-search"></label>
+    </div>
+    <div class="stretch">
+      <div class="field">
+        <input class="query" type="text" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck>
+      </div>
+    </div>
+    <div class="button button-reset" role="button" aria-label="Search">
+      <button class="toggle-button icon icon-close" id="reset-search"></button>
+    </div>
+  </div>
+</nav>
+    </header>
+    <main class="main">
+      
+      <div class="drawer">
+        <nav aria-label="Navigation">
+  
+  <a href="/" class="project">
+    <div class="banner">
+      
+      <div class="name">
+        <strong>
+          Laravel 5.3 official documentation
+          <span class="version">
+            
+          </span>
+        </strong>
+        
+      </div>
+    </div>
+  </a>
+  <div class="scrollable">
+    <div class="wrapper">
+      
+      <div class="toc">
+        <ul>
+          
+            
+  <li>
+    <a class="" title="Home" href="..">
+      Home
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Apis" href="../apis/">
+      Apis
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Application testing" href="../application-testing/">
+      Application testing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Artisan" href="../artisan/">
+      Artisan
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Authentication" href="../authentication/">
+      Authentication
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Authorization" href="../authorization/">
+      Authorization
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Billing" href="../billing/">
+      Billing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Blade" href="../blade/">
+      Blade
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Broadcasting" href="../broadcasting/">
+      Broadcasting
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Cache" href="../cache/">
+      Cache
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Collections" href="../collections/">
+      Collections
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Configuration" href="../configuration/">
+      Configuration
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Container" href="../container/">
+      Container
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Contracts" href="../contracts/">
+      Contracts
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Contributing" href="../contributing/">
+      Contributing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Contributions" href="../contributions/">
+      Contributions
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Controllers" href="../controllers/">
+      Controllers
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="current" title="Csrf" href="./">
+      Csrf
+    </a>
+    
+      
+        
+      
+      
+        <ul>
+          
+            <li class="anchor">
+              <a title="Introduction" href="#introduction">
+                Introduction
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Excluding URIs From CSRF Protection" href="#excluding-uris-from-csrf-protection">
+                Excluding URIs From CSRF Protection
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="X-CSRF-TOKEN" href="#x-csrf-token">
+                X-CSRF-TOKEN
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="X-XSRF-TOKEN" href="#x-xsrf-token">
+                X-XSRF-TOKEN
+              </a>
+            </li>
+          
+        </ul>
+      
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Database testing" href="../database-testing/">
+      Database testing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Database" href="../database/">
+      Database
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Documentation" href="../documentation/">
+      Documentation
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Elixir" href="../elixir/">
+      Elixir
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent collections" href="../eloquent-collections/">
+      Eloquent collections
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent mutators" href="../eloquent-mutators/">
+      Eloquent mutators
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent relationships" href="../eloquent-relationships/">
+      Eloquent relationships
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent serialization" href="../eloquent-serialization/">
+      Eloquent serialization
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent" href="../eloquent/">
+      Eloquent
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Encryption" href="../encryption/">
+      Encryption
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Envoy" href="../envoy/">
+      Envoy
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Errors" href="../errors/">
+      Errors
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Events" href="../events/">
+      Events
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Facades" href="../facades/">
+      Facades
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Filesystem" href="../filesystem/">
+      Filesystem
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Frontend" href="../frontend/">
+      Frontend
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Hashing" href="../hashing/">
+      Hashing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Helpers" href="../helpers/">
+      Helpers
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Homestead" href="../homestead/">
+      Homestead
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Installation" href="../installation/">
+      Installation
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="License" href="../license/">
+      License
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Lifecycle" href="../lifecycle/">
+      Lifecycle
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Localization" href="../localization/">
+      Localization
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Mail" href="../mail/">
+      Mail
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Middleware" href="../middleware/">
+      Middleware
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Migrations" href="../migrations/">
+      Migrations
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Mocking" href="../mocking/">
+      Mocking
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Notifications" href="../notifications/">
+      Notifications
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Packages" href="../packages/">
+      Packages
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Pagination" href="../pagination/">
+      Pagination
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Passport" href="../passport/">
+      Passport
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Passwords" href="../passwords/">
+      Passwords
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Providers" href="../providers/">
+      Providers
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Queries" href="../queries/">
+      Queries
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Queues" href="../queues/">
+      Queues
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Readme" href="../readme/">
+      Readme
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Redirects" href="../redirects/">
+      Redirects
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Redis" href="../redis/">
+      Redis
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Releases" href="../releases/">
+      Releases
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Requests" href="../requests/">
+      Requests
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Responses" href="../responses/">
+      Responses
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Routing" href="../routing/">
+      Routing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Scheduling" href="../scheduling/">
+      Scheduling
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Scout" href="../scout/">
+      Scout
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Seeding" href="../seeding/">
+      Seeding
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Session" href="../session/">
+      Session
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Structure" href="../structure/">
+      Structure
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Testing" href="../testing/">
+      Testing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Upgrade" href="../upgrade/">
+      Upgrade
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Valet" href="../valet/">
+      Valet
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Validation" href="../validation/">
+      Validation
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Views" href="../views/">
+      Views
+    </a>
+    
+  </li>
+
+          
+        </ul>
+        
+      </div>
+    </div>
+  </div>
+</nav>
+      </div>
+      <article class="article">
+        <div class="wrapper">
+          
+          <h1 id="csrf-protection">CSRF Protection</h1>
+<ul>
+<li><a href="#csrf-introduction">Introduction</a></li>
+<li><a href="#csrf-excluding-uris">Excluding URIs</a></li>
+<li><a href="#csrf-x-csrf-token">X-CSRF-Token</a></li>
+<li><a href="#csrf-x-xsrf-token">X-XSRF-Token</a></li>
+</ul>
+<p><a name="csrf-introduction"></a></p>
+<h2 id="introduction">Introduction</h2>
+<p>Laravel makes it easy to protect your application from <a href="http://en.wikipedia.org/wiki/Cross-site_request_forgery">cross-site request forgery</a> (CSRF) attacks. Cross-site request forgeries are a type of malicious exploit whereby unauthorized commands are performed on behalf of an authenticated user.</p>
+<p>Laravel automatically generates a CSRF "token" for each active user session managed by the application. This token is used to verify that the authenticated user is the one actually making the requests to the application.</p>
+<p>Anytime you define a HTML form in your application, you should include a hidden CSRF token field in the form so that the CSRF protection middleware can validate the request. You may use the <code>csrf_field</code> helper to generate the token field:</p>
+<pre><code>&lt;form method="POST" action="/profile"&gt;
+    {{ csrf_field() }}
+    ...
+&lt;/form&gt;
+</code></pre>
+<p>The <code>VerifyCsrfToken</code> <a href="../docs/{{version}}/middleware">middleware</a>, which is included in the <code>web</code> middleware group, will automatically verify that the token in the request input matches the token stored in the session.</p>
+<p><a name="csrf-excluding-uris"></a></p>
+<h2 id="excluding-uris-from-csrf-protection">Excluding URIs From CSRF Protection</h2>
+<p>Sometimes you may wish to exclude a set of URIs from CSRF protection. For example, if you are using <a href="https://stripe.com">Stripe</a> to process payments and are utilizing their webhook system, you will need to exclude your Stripe webhook handler route from CSRF protection since Stripe will not know what CSRF token to send to your routes.</p>
+<p>Typically, you should place these kinds of routes outside of the <code>web</code> middleware group that the <code>RouteServiceProvider</code> applies to all routes in the <code>routes/web.php</code> file. However, you may also exclude the routes by adding their URIs to the <code>$except</code> property of the <code>VerifyCsrfToken</code> middleware:</p>
+<pre><code>&lt;?php
+
+namespace App\Http\Middleware;
+
+use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as BaseVerifier;
+
+class VerifyCsrfToken extends BaseVerifier
+{
+    /**
+     * The URIs that should be excluded from CSRF verification.
+     *
+     * @var array
+     */
+    protected $except = [
+        'stripe/*',
+    ];
+}
+</code></pre>
+<p><a name="csrf-x-csrf-token"></a></p>
+<h2 id="x-csrf-token">X-CSRF-TOKEN</h2>
+<p>In addition to checking for the CSRF token as a POST parameter, the <code>VerifyCsrfToken</code> middleware will also check for the <code>X-CSRF-TOKEN</code> request header. You could, for example, store the token in a HTML <code>meta</code> tag:</p>
+<pre><code>&lt;meta name="csrf-token" content="{{ csrf_token() }}"&gt;
+</code></pre>
+<p>Then, once you have created the <code>meta</code> tag, you can instruct a library like jQuery to automatically add the token to all request headers. This provides simple, convenient CSRF protection for your AJAX based applications:</p>
+<pre><code>$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+</code></pre>
+<p><a name="csrf-x-xsrf-token"></a></p>
+<h2 id="x-xsrf-token">X-XSRF-TOKEN</h2>
+<p>Laravel stores the current CSRF token in a <code>XSRF-TOKEN</code> cookie that is included with each response generated by the framework. You can use the cookie value to set the <code>X-XSRF-TOKEN</code> request header.</p>
+<p>This cookie is primarily sent as a convenience since some JavaScript frameworks, like Angular, automatically place its value in the <code>X-XSRF-TOKEN</code> header.</p>
+          <aside class="copyright" role="note">
+            
+            Documentation built with
+            <a href="http://www.mkdocs.org" target="_blank">MkDocs</a>
+            using the
+            <a href="http://squidfunk.github.io/mkdocs-material/" target="_blank">
+              Material
+            </a>
+            theme.
+          </aside>
+          
+            <footer class="footer">
+              
+  <nav class="pagination" aria-label="Footer">
+    <div class="previous">
+      
+        <a href="../controllers/" title="Controllers">
+          <span class="direction">
+            Previous
+          </span>
+          <div class="page">
+            <div class="button button-previous" role="button" aria-label="Previous">
+              <i class="icon icon-back"></i>
+            </div>
+            <div class="stretch">
+              <div class="title">
+                Controllers
+              </div>
+            </div>
+          </div>
+        </a>
+      
+    </div>
+    <div class="next">
+      
+        <a href="../database-testing/" title="Database testing">
+          <span class="direction">
+            Next
+          </span>
+          <div class="page">
+            <div class="stretch">
+              <div class="title">
+                Database testing
+              </div>
+            </div>
+            <div class="button button-next" role="button" aria-label="Next">
+              <i class="icon icon-forward"></i>
+            </div>
+          </div>
+        </a>
+      
+    </div>
+  </nav>
+
+            </footer>
+          
+        </div>
+      </article>
+      <div class="results" role="status" aria-live="polite">
+        <div class="scrollable">
+          <div class="wrapper">
+            <div class="meta"></div>
+            <div class="list"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script>
+      var base_url = '..';
+      var repo_id  = '';
+    </script>
+    <script src="../assets/javascripts/application-997097ee0c.js"></script>
+    
+      <script src="../assets/jquery.js"></script>
+    
+      <script src="../assets/prism.js"></script>
+    
+    
+  </body>
+</html>

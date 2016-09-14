@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="no-js ie6"><![endif]-->
+<!--[if IE 7 ]><html class="no-js ie7"><![endif]-->
+<!--[if IE 8 ]><html class="no-js ie8"><![endif]-->
+<!--[if IE 9 ]><html class="no-js ie9"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
+    
+      
+        <title>Envoy - Laravel 5.3 official documentation</title>
+      
+      
+      
+      
+    
+    <meta property="og:url" content="None">
+    <meta property="og:title" content="Laravel 5.3 official documentation">
+    <meta property="og:image" content="None/../">
+    <meta name="apple-mobile-web-app-title" content="Laravel 5.3 official documentation">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    
+    <link rel="shortcut icon" type="image/x-icon" href="../assets/images/favicon-e565ddfa3b.ico">
+    <link rel="icon" type="image/x-icon" href="../assets/images/favicon-e565ddfa3b.ico">
+    <style>
+      @font-face {
+      	font-family: 'Icon';
+      	src: url('../assets/fonts/icon.eot?52m981');
+      	src: url('../assets/fonts/icon.eot?#iefix52m981')
+               format('embedded-opentype'),
+      		   url('../assets/fonts/icon.woff?52m981')
+               format('woff'),
+      		   url('../assets/fonts/icon.ttf?52m981')
+               format('truetype'),
+      		   url('../assets/fonts/icon.svg?52m981#icon')
+               format('svg');
+      	font-weight: normal;
+      	font-style: normal;
+      }
+    </style>
+    <link rel="stylesheet" href="../assets/stylesheets/application-a422ff04cc.css">
+    
+      <link rel="stylesheet" href="../assets/stylesheets/palettes-05ab2406df.css">
+    
+    
+      
+      
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,700|Ubuntu+Mono">
+      <style>
+        body, input {
+          font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
+        }
+        pre, code {
+          font-family: 'Ubuntu Mono', 'Courier New', 'Courier', monospace;
+        }
+      </style>
+    
+    
+      <link rel="stylesheet" href="../assets/prism.css">
+    
+    <script src="../assets/javascripts/modernizr-4ab42b99fd.js"></script>
+    
+  </head>
+  
+  
+  
+  <body class="palette-primary-teal palette-accent-pink">
+    
+    <div class="backdrop">
+      <div class="backdrop-paper"></div>
+    </div>
+    <input class="toggle" type="checkbox" id="toggle-drawer">
+    <input class="toggle" type="checkbox" id="toggle-search">
+    <label class="toggle-button overlay" for="toggle-drawer"></label>
+    <header class="header">
+      <nav aria-label="Header">
+  <div class="bar default">
+    <div class="button button-menu" role="button" aria-label="Menu">
+      <label class="toggle-button icon icon-menu" for="toggle-drawer">
+        <span></span>
+      </label>
+    </div>
+    <div class="stretch">
+      <div class="title">
+        
+          <span class="path">
+            
+          </span>
+        
+        Envoy
+      </div>
+    </div>
+    
+    
+    <div class="button button-search" role="button" aria-label="Search">
+      <label class="toggle-button icon icon-search" title="Search" for="toggle-search"></label>
+    </div>
+  </div>
+  <div class="bar search">
+    <div class="button button-close" role="button" aria-label="Close">
+      <label class="toggle-button icon icon-back" for="toggle-search"></label>
+    </div>
+    <div class="stretch">
+      <div class="field">
+        <input class="query" type="text" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck>
+      </div>
+    </div>
+    <div class="button button-reset" role="button" aria-label="Search">
+      <button class="toggle-button icon icon-close" id="reset-search"></button>
+    </div>
+  </div>
+</nav>
+    </header>
+    <main class="main">
+      
+      <div class="drawer">
+        <nav aria-label="Navigation">
+  
+  <a href="/" class="project">
+    <div class="banner">
+      
+      <div class="name">
+        <strong>
+          Laravel 5.3 official documentation
+          <span class="version">
+            
+          </span>
+        </strong>
+        
+      </div>
+    </div>
+  </a>
+  <div class="scrollable">
+    <div class="wrapper">
+      
+      <div class="toc">
+        <ul>
+          
+            
+  <li>
+    <a class="" title="Home" href="..">
+      Home
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Apis" href="../apis/">
+      Apis
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Application testing" href="../application-testing/">
+      Application testing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Artisan" href="../artisan/">
+      Artisan
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Authentication" href="../authentication/">
+      Authentication
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Authorization" href="../authorization/">
+      Authorization
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Billing" href="../billing/">
+      Billing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Blade" href="../blade/">
+      Blade
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Broadcasting" href="../broadcasting/">
+      Broadcasting
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Cache" href="../cache/">
+      Cache
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Collections" href="../collections/">
+      Collections
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Configuration" href="../configuration/">
+      Configuration
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Container" href="../container/">
+      Container
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Contracts" href="../contracts/">
+      Contracts
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Contributing" href="../contributing/">
+      Contributing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Contributions" href="../contributions/">
+      Contributions
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Controllers" href="../controllers/">
+      Controllers
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Csrf" href="../csrf/">
+      Csrf
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Database testing" href="../database-testing/">
+      Database testing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Database" href="../database/">
+      Database
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Documentation" href="../documentation/">
+      Documentation
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Elixir" href="../elixir/">
+      Elixir
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent collections" href="../eloquent-collections/">
+      Eloquent collections
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent mutators" href="../eloquent-mutators/">
+      Eloquent mutators
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent relationships" href="../eloquent-relationships/">
+      Eloquent relationships
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent serialization" href="../eloquent-serialization/">
+      Eloquent serialization
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent" href="../eloquent/">
+      Eloquent
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Encryption" href="../encryption/">
+      Encryption
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="current" title="Envoy" href="./">
+      Envoy
+    </a>
+    
+      
+        
+      
+      
+        <ul>
+          
+            <li class="anchor">
+              <a title="Introduction" href="#introduction">
+                Introduction
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Writing Tasks" href="#writing-tasks">
+                Writing Tasks
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Running Tasks" href="#running-tasks">
+                Running Tasks
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Notifications" href="#notifications">
+                Notifications
+              </a>
+            </li>
+          
+        </ul>
+      
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Errors" href="../errors/">
+      Errors
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Events" href="../events/">
+      Events
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Facades" href="../facades/">
+      Facades
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Filesystem" href="../filesystem/">
+      Filesystem
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Frontend" href="../frontend/">
+      Frontend
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Hashing" href="../hashing/">
+      Hashing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Helpers" href="../helpers/">
+      Helpers
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Homestead" href="../homestead/">
+      Homestead
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Installation" href="../installation/">
+      Installation
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="License" href="../license/">
+      License
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Lifecycle" href="../lifecycle/">
+      Lifecycle
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Localization" href="../localization/">
+      Localization
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Mail" href="../mail/">
+      Mail
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Middleware" href="../middleware/">
+      Middleware
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Migrations" href="../migrations/">
+      Migrations
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Mocking" href="../mocking/">
+      Mocking
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Notifications" href="../notifications/">
+      Notifications
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Packages" href="../packages/">
+      Packages
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Pagination" href="../pagination/">
+      Pagination
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Passport" href="../passport/">
+      Passport
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Passwords" href="../passwords/">
+      Passwords
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Providers" href="../providers/">
+      Providers
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Queries" href="../queries/">
+      Queries
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Queues" href="../queues/">
+      Queues
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Readme" href="../readme/">
+      Readme
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Redirects" href="../redirects/">
+      Redirects
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Redis" href="../redis/">
+      Redis
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Releases" href="../releases/">
+      Releases
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Requests" href="../requests/">
+      Requests
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Responses" href="../responses/">
+      Responses
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Routing" href="../routing/">
+      Routing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Scheduling" href="../scheduling/">
+      Scheduling
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Scout" href="../scout/">
+      Scout
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Seeding" href="../seeding/">
+      Seeding
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Session" href="../session/">
+      Session
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Structure" href="../structure/">
+      Structure
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Testing" href="../testing/">
+      Testing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Upgrade" href="../upgrade/">
+      Upgrade
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Valet" href="../valet/">
+      Valet
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Validation" href="../validation/">
+      Validation
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Views" href="../views/">
+      Views
+    </a>
+    
+  </li>
+
+          
+        </ul>
+        
+      </div>
+    </div>
+  </div>
+</nav>
+      </div>
+      <article class="article">
+        <div class="wrapper">
+          
+          <h1 id="envoy-task-runner">Envoy Task Runner</h1>
+<ul>
+<li><a href="#introduction">Introduction</a><ul>
+<li><a href="#installation">Installation</a></li>
+</ul>
+</li>
+<li><a href="#writing-tasks">Writing Tasks</a><ul>
+<li><a href="#setup">Setup</a></li>
+<li><a href="#variables">Variables</a></li>
+<li><a href="#stories">Stories</a></li>
+<li><a href="#multiple-servers">Multiple Servers</a></li>
+</ul>
+</li>
+<li><a href="#running-tasks">Running Tasks</a><ul>
+<li><a href="#confirming-task-execution">Confirming Task Execution</a></li>
+</ul>
+</li>
+<li><a href="#notifications">Notifications</a><ul>
+<li><a href="#slack">Slack</a></li>
+</ul>
+</li>
+</ul>
+<p><a name="introduction"></a></p>
+<h2 id="introduction">Introduction</h2>
+<p><a href="https://github.com/laravel/envoy">Laravel Envoy</a> provides a clean, minimal syntax for defining common tasks you run on your remote servers. Using Blade style syntax, you can easily setup tasks for deployment, Artisan commands, and more. Currently, Envoy only supports the Mac and Linux operating systems.</p>
+<p><a name="installation"></a></p>
+<h3 id="installation">Installation</h3>
+<p>First, install Envoy using the Composer <code>global require</code> command:</p>
+<pre><code>composer global require "laravel/envoy=~1.0"
+</code></pre>
+<p>Since global Composer libraries can sometimes cause package version conflicts, you may wish to consider using <code>cgr</code>, which is a drop-in replacement for the <code>composer global require</code> command. The <code>cgr</code> library's installation instructions can be <a href="https://github.com/consolidation-org/cgr">found on GitHub</a>.</p>
+<blockquote>
+<p>{note} Make sure to place the <code>~/.composer/vendor/bin</code> directory in your PATH so the <code>envoy</code> executable is found when running the <code>envoy</code> command in your terminal.</p>
+</blockquote>
+<h4 id="updating-envoy">Updating Envoy</h4>
+<p>You may also use Composer to keep your Envoy installation up to date. Issuing the the <code>composer global update</code> command will update all of your globally installed Composer packages:</p>
+<pre><code>composer global update
+</code></pre>
+<p><a name="writing-tasks"></a></p>
+<h2 id="writing-tasks">Writing Tasks</h2>
+<p>All of your Envoy tasks should be defined in an <code>Envoy.blade.php</code> file in the root of your project. Here's an example to get you started:</p>
+<pre><code>@servers(['web' =&gt; ['user@192.168.1.1']])
+
+@task('foo', ['on' =&gt; 'web'])
+    ls -la
+@endtask
+</code></pre>
+<p>As you can see, an array of <code>@servers</code> is defined at the top of the file, allowing you to reference these servers in the <code>on</code> option of your task declarations. Within your <code>@task</code> declarations, you should place the Bash code that should run on your server when the task is executed.</p>
+<p>You can force a script to run locally by specifying the server's IP address as <code>127.0.0.1</code>:</p>
+<pre><code>@servers(['localhost' =&gt; '127.0.0.1'])
+</code></pre>
+<p><a name="setup"></a></p>
+<h3 id="setup">Setup</h3>
+<p>Sometimes, you may need to execute some PHP code before executing your Envoy tasks. You may use the <code>@setup</code> directive to declare variables and do other general PHP work before any of your other tasks are executed:</p>
+<pre><code>@setup
+    $now = new DateTime();
+
+    $environment = isset($env) ? $env : "testing";
+@endsetup
+</code></pre>
+<p>If you need to require other PHP files before your task is executed, you may use the <code>@include</code> directive at the top of your <code>Envoy.blade.php</code> file:</p>
+<pre><code>@include('vendor/autoload.php')
+
+@task('foo')
+    # ...
+@endtask
+</code></pre>
+<p><a name="variables"></a></p>
+<h3 id="variables">Variables</h3>
+<p>If needed, you may pass option values into Envoy tasks using the command line:</p>
+<pre><code>envoy run deploy --branch=master
+</code></pre>
+<p>You may use access the options in your tasks via Blade's "echo" syntax. Of course, you may also use <code>if</code> statements and loops within your tasks. For example, let's verify the presence of the <code>$branch</code> variable before executing the <code>git pull</code> command:</p>
+<pre><code>@servers(['web' =&gt; '192.168.1.1'])
+
+@task('deploy', ['on' =&gt; 'web'])
+    cd site
+
+    @if ($branch)
+        git pull origin {{ $branch }}
+    @endif
+
+    php artisan migrate
+@endtask
+</code></pre>
+<p><a name="stories"></a></p>
+<h3 id="stories">Stories</h3>
+<p>Stories group a set of tasks under a single, convenient name, allowing you to group small, focused tasks into large tasks. For instance, a <code>deploy</code> story may run the <code>git</code> and <code>composer</code> tasks by listing the task names within its definition:</p>
+<pre><code>@servers(['web' =&gt; '192.168.1.1'])
+
+@story('deploy')
+    git
+    composer
+@endstory
+
+@task('git')
+    git pull origin master
+@endtask
+
+@task('composer')
+    composer install
+@endtask
+</code></pre>
+<p>Once the story has been written, you may run it just like a typical task:</p>
+<pre><code>envoy run deploy
+</code></pre>
+<p><a name="multiple-servers"></a></p>
+<h3 id="multiple-servers">Multiple Servers</h3>
+<p>Envoy allows you to easily run a task across multiple servers. First, add additional servers to your <code>@servers</code> declaration. Each server should be assigned a unique name. Once you have defined your additional servers, list each of the servers in the task's <code>on</code> array:</p>
+<pre><code>@servers(['web-1' =&gt; '192.168.1.1', 'web-2' =&gt; '192.168.1.2'])
+
+@task('deploy', ['on' =&gt; ['web-1', 'web-2']])
+    cd site
+    git pull origin {{ $branch }}
+    php artisan migrate
+@endtask
+</code></pre>
+<h4 id="parallel-execution">Parallel Execution</h4>
+<p>By default, tasks will be executed on each server serially. In other words, a task will finish running on the first server before proceeding to execute on the second server. If you would like to run a task across multiple servers in parallel, add the <code>parallel</code> option to your task declaration:</p>
+<pre><code>@servers(['web-1' =&gt; '192.168.1.1', 'web-2' =&gt; '192.168.1.2'])
+
+@task('deploy', ['on' =&gt; ['web-1', 'web-2'], 'parallel' =&gt; true])
+    cd site
+    git pull origin {{ $branch }}
+    php artisan migrate
+@endtask
+</code></pre>
+<p><a name="running-tasks"></a></p>
+<h2 id="running-tasks">Running Tasks</h2>
+<p>To run a task or story that is defined in your <code>Envoy.blade.php</code> file, execute Envoy's <code>run</code> command, passing the name of the task or story you would like to execute. Envoy will run the task and display the output from the servers as the task is running:</p>
+<pre><code>envoy run task
+</code></pre>
+<p><a name="confirming-task-execution"></a></p>
+<h3 id="confirming-task-execution">Confirming Task Execution</h3>
+<p>If you would like to be prompted for confirmation before running a given task on your servers, you should add the <code>confirm</code> directive to your task declaration. This option is particularly useful for destructive operations:</p>
+<pre><code>@task('deploy', ['on' =&gt; 'web', 'confirm' =&gt; true])
+    cd site
+    git pull origin {{ $branch }}
+    php artisan migrate
+@endtask
+</code></pre>
+<p><a name="notifications"></a>
+<a name="hipchat-notifications"></a></p>
+<h2 id="notifications">Notifications</h2>
+<p><a name="slack"></a></p>
+<h3 id="slack">Slack</h3>
+<p>Envoy also supports sending notifications to <a href="https://slack.com">Slack</a> after each task is executed. The <code>@slack</code> directive accepts a Slack hook URL and a channel name. You may retrieve your webhook URL by creating an "Incoming WebHooks" integration in your Slack control panel. You should pass the entire webhook URL into the <code>@slack</code> directive:</p>
+<pre><code>@after
+    @slack('webhook-url', '#bots')
+@endafter
+</code></pre>
+<p>You may provide one of the following as the channel argument:</p>
+<div class="content-list" markdown="1">
+- To send the notification to a channel: `#channel`
+- To send the notification to a user: `@user`
+</div>
+          <aside class="copyright" role="note">
+            
+            Documentation built with
+            <a href="http://www.mkdocs.org" target="_blank">MkDocs</a>
+            using the
+            <a href="http://squidfunk.github.io/mkdocs-material/" target="_blank">
+              Material
+            </a>
+            theme.
+          </aside>
+          
+            <footer class="footer">
+              
+  <nav class="pagination" aria-label="Footer">
+    <div class="previous">
+      
+        <a href="../encryption/" title="Encryption">
+          <span class="direction">
+            Previous
+          </span>
+          <div class="page">
+            <div class="button button-previous" role="button" aria-label="Previous">
+              <i class="icon icon-back"></i>
+            </div>
+            <div class="stretch">
+              <div class="title">
+                Encryption
+              </div>
+            </div>
+          </div>
+        </a>
+      
+    </div>
+    <div class="next">
+      
+        <a href="../errors/" title="Errors">
+          <span class="direction">
+            Next
+          </span>
+          <div class="page">
+            <div class="stretch">
+              <div class="title">
+                Errors
+              </div>
+            </div>
+            <div class="button button-next" role="button" aria-label="Next">
+              <i class="icon icon-forward"></i>
+            </div>
+          </div>
+        </a>
+      
+    </div>
+  </nav>
+
+            </footer>
+          
+        </div>
+      </article>
+      <div class="results" role="status" aria-live="polite">
+        <div class="scrollable">
+          <div class="wrapper">
+            <div class="meta"></div>
+            <div class="list"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script>
+      var base_url = '..';
+      var repo_id  = '';
+    </script>
+    <script src="../assets/javascripts/application-997097ee0c.js"></script>
+    
+      <script src="../assets/jquery.js"></script>
+    
+      <script src="../assets/prism.js"></script>
+    
+    
+  </body>
+</html>

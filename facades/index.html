@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="no-js ie6"><![endif]-->
+<!--[if IE 7 ]><html class="no-js ie7"><![endif]-->
+<!--[if IE 8 ]><html class="no-js ie8"><![endif]-->
+<!--[if IE 9 ]><html class="no-js ie9"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
+    
+      
+        <title>Facades - Laravel 5.3 official documentation</title>
+      
+      
+      
+      
+    
+    <meta property="og:url" content="None">
+    <meta property="og:title" content="Laravel 5.3 official documentation">
+    <meta property="og:image" content="None/../">
+    <meta name="apple-mobile-web-app-title" content="Laravel 5.3 official documentation">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    
+    <link rel="shortcut icon" type="image/x-icon" href="../assets/images/favicon-e565ddfa3b.ico">
+    <link rel="icon" type="image/x-icon" href="../assets/images/favicon-e565ddfa3b.ico">
+    <style>
+      @font-face {
+      	font-family: 'Icon';
+      	src: url('../assets/fonts/icon.eot?52m981');
+      	src: url('../assets/fonts/icon.eot?#iefix52m981')
+               format('embedded-opentype'),
+      		   url('../assets/fonts/icon.woff?52m981')
+               format('woff'),
+      		   url('../assets/fonts/icon.ttf?52m981')
+               format('truetype'),
+      		   url('../assets/fonts/icon.svg?52m981#icon')
+               format('svg');
+      	font-weight: normal;
+      	font-style: normal;
+      }
+    </style>
+    <link rel="stylesheet" href="../assets/stylesheets/application-a422ff04cc.css">
+    
+      <link rel="stylesheet" href="../assets/stylesheets/palettes-05ab2406df.css">
+    
+    
+      
+      
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,700|Ubuntu+Mono">
+      <style>
+        body, input {
+          font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
+        }
+        pre, code {
+          font-family: 'Ubuntu Mono', 'Courier New', 'Courier', monospace;
+        }
+      </style>
+    
+    
+      <link rel="stylesheet" href="../assets/prism.css">
+    
+    <script src="../assets/javascripts/modernizr-4ab42b99fd.js"></script>
+    
+  </head>
+  
+  
+  
+  <body class="palette-primary-teal palette-accent-pink">
+    
+    <div class="backdrop">
+      <div class="backdrop-paper"></div>
+    </div>
+    <input class="toggle" type="checkbox" id="toggle-drawer">
+    <input class="toggle" type="checkbox" id="toggle-search">
+    <label class="toggle-button overlay" for="toggle-drawer"></label>
+    <header class="header">
+      <nav aria-label="Header">
+  <div class="bar default">
+    <div class="button button-menu" role="button" aria-label="Menu">
+      <label class="toggle-button icon icon-menu" for="toggle-drawer">
+        <span></span>
+      </label>
+    </div>
+    <div class="stretch">
+      <div class="title">
+        
+          <span class="path">
+            
+          </span>
+        
+        Facades
+      </div>
+    </div>
+    
+    
+    <div class="button button-search" role="button" aria-label="Search">
+      <label class="toggle-button icon icon-search" title="Search" for="toggle-search"></label>
+    </div>
+  </div>
+  <div class="bar search">
+    <div class="button button-close" role="button" aria-label="Close">
+      <label class="toggle-button icon icon-back" for="toggle-search"></label>
+    </div>
+    <div class="stretch">
+      <div class="field">
+        <input class="query" type="text" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck>
+      </div>
+    </div>
+    <div class="button button-reset" role="button" aria-label="Search">
+      <button class="toggle-button icon icon-close" id="reset-search"></button>
+    </div>
+  </div>
+</nav>
+    </header>
+    <main class="main">
+      
+      <div class="drawer">
+        <nav aria-label="Navigation">
+  
+  <a href="/" class="project">
+    <div class="banner">
+      
+      <div class="name">
+        <strong>
+          Laravel 5.3 official documentation
+          <span class="version">
+            
+          </span>
+        </strong>
+        
+      </div>
+    </div>
+  </a>
+  <div class="scrollable">
+    <div class="wrapper">
+      
+      <div class="toc">
+        <ul>
+          
+            
+  <li>
+    <a class="" title="Home" href="..">
+      Home
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Apis" href="../apis/">
+      Apis
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Application testing" href="../application-testing/">
+      Application testing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Artisan" href="../artisan/">
+      Artisan
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Authentication" href="../authentication/">
+      Authentication
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Authorization" href="../authorization/">
+      Authorization
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Billing" href="../billing/">
+      Billing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Blade" href="../blade/">
+      Blade
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Broadcasting" href="../broadcasting/">
+      Broadcasting
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Cache" href="../cache/">
+      Cache
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Collections" href="../collections/">
+      Collections
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Configuration" href="../configuration/">
+      Configuration
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Container" href="../container/">
+      Container
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Contracts" href="../contracts/">
+      Contracts
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Contributing" href="../contributing/">
+      Contributing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Contributions" href="../contributions/">
+      Contributions
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Controllers" href="../controllers/">
+      Controllers
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Csrf" href="../csrf/">
+      Csrf
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Database testing" href="../database-testing/">
+      Database testing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Database" href="../database/">
+      Database
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Documentation" href="../documentation/">
+      Documentation
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Elixir" href="../elixir/">
+      Elixir
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent collections" href="../eloquent-collections/">
+      Eloquent collections
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent mutators" href="../eloquent-mutators/">
+      Eloquent mutators
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent relationships" href="../eloquent-relationships/">
+      Eloquent relationships
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent serialization" href="../eloquent-serialization/">
+      Eloquent serialization
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent" href="../eloquent/">
+      Eloquent
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Encryption" href="../encryption/">
+      Encryption
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Envoy" href="../envoy/">
+      Envoy
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Errors" href="../errors/">
+      Errors
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Events" href="../events/">
+      Events
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="current" title="Facades" href="./">
+      Facades
+    </a>
+    
+      
+        
+      
+      
+        <ul>
+          
+            <li class="anchor">
+              <a title="Introduction" href="#introduction">
+                Introduction
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="When To Use Facades" href="#when-to-use-facades">
+                When To Use Facades
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="How Facades Work" href="#how-facades-work">
+                How Facades Work
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Facade Class Reference" href="#facade-class-reference">
+                Facade Class Reference
+              </a>
+            </li>
+          
+        </ul>
+      
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Filesystem" href="../filesystem/">
+      Filesystem
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Frontend" href="../frontend/">
+      Frontend
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Hashing" href="../hashing/">
+      Hashing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Helpers" href="../helpers/">
+      Helpers
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Homestead" href="../homestead/">
+      Homestead
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Installation" href="../installation/">
+      Installation
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="License" href="../license/">
+      License
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Lifecycle" href="../lifecycle/">
+      Lifecycle
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Localization" href="../localization/">
+      Localization
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Mail" href="../mail/">
+      Mail
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Middleware" href="../middleware/">
+      Middleware
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Migrations" href="../migrations/">
+      Migrations
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Mocking" href="../mocking/">
+      Mocking
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Notifications" href="../notifications/">
+      Notifications
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Packages" href="../packages/">
+      Packages
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Pagination" href="../pagination/">
+      Pagination
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Passport" href="../passport/">
+      Passport
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Passwords" href="../passwords/">
+      Passwords
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Providers" href="../providers/">
+      Providers
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Queries" href="../queries/">
+      Queries
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Queues" href="../queues/">
+      Queues
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Readme" href="../readme/">
+      Readme
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Redirects" href="../redirects/">
+      Redirects
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Redis" href="../redis/">
+      Redis
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Releases" href="../releases/">
+      Releases
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Requests" href="../requests/">
+      Requests
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Responses" href="../responses/">
+      Responses
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Routing" href="../routing/">
+      Routing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Scheduling" href="../scheduling/">
+      Scheduling
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Scout" href="../scout/">
+      Scout
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Seeding" href="../seeding/">
+      Seeding
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Session" href="../session/">
+      Session
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Structure" href="../structure/">
+      Structure
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Testing" href="../testing/">
+      Testing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Upgrade" href="../upgrade/">
+      Upgrade
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Valet" href="../valet/">
+      Valet
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Validation" href="../validation/">
+      Validation
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Views" href="../views/">
+      Views
+    </a>
+    
+  </li>
+
+          
+        </ul>
+        
+      </div>
+    </div>
+  </div>
+</nav>
+      </div>
+      <article class="article">
+        <div class="wrapper">
+          
+          <h1 id="facades">Facades</h1>
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#when-to-use-facades">When To Use Facades</a><ul>
+<li><a href="#facades-vs-dependency-injection">Facades Vs. Dependency Injection</a></li>
+<li><a href="#facades-vs-helper-functions">Facades Vs. Helper Functions</a></li>
+</ul>
+</li>
+<li><a href="#how-facades-work">How Facades Work</a></li>
+<li><a href="#facade-class-reference">Facade Class Reference</a></li>
+</ul>
+<p><a name="introduction"></a></p>
+<h2 id="introduction">Introduction</h2>
+<p>Facades provide a "static" interface to classes that are available in the application's <a href="../docs/{{version}}/container">service container</a>. Laravel ships with many facades which provide access to almost all of Laravel's features. Laravel facades serve as "static proxies" to underlying classes in the service container, providing the benefit of a terse, expressive syntax while maintaining more testability and flexibility than traditional static methods.</p>
+<p>All of Laravel's facades are defined in the <code>Illuminate\Support\Facades</code> namespace. So, we can easily access a facade like so:</p>
+<pre><code>use Illuminate\Support\Facades\Cache;
+
+Route::get('/cache', function () {
+    return Cache::get('key');
+});
+</code></pre>
+<p>Throughout the Laravel documentation, many of the examples will use facades to demonstrate various features of the framework.</p>
+<p><a name="when-to-use-facades"></a></p>
+<h2 id="when-to-use-facades">When To Use Facades</h2>
+<p>Facades have many benefits. They provide a terse, memorable syntax that allows you to use Laravel's features without remembering long class names that must be injected or configured manually. Furthermore, because of their unique usage of PHP's dynamic methods, they are easy to test.</p>
+<p>However, some care must be taken when using facades. The primary danger of facades is class scope creep. Since facades are so easy to use and do not require injection, it can be easy to let your classes continue to grow and use many facades in a single class. Using dependency injection, this potential is mitigated by the visual feedback a large constructor gives you that your class is growing too large. So, when using facades, pay special attention to the size of your class so that its scope of responsibility stays narrow.</p>
+<blockquote>
+<p>{tip} When building a third-party package that interacts with Laravel, it's better to inject <a href="../docs/{{version}}/contracts">Laravel contracts</a> instead of using facades. Since packages are built outside of Laravel itself, you will not have access to Laravel's facade testing helpers.</p>
+</blockquote>
+<p><a name="facades-vs-dependency-injection"></a></p>
+<h3 id="facades-vs-dependency-injection">Facades Vs. Dependency Injection</h3>
+<p>One of the primary benefits of dependency injection is the ability to swap implementations of the injected class. This is useful during testing since you can inject a mock or stub and assert that various methods were called on the stub.</p>
+<p>Typically, it would not be possible to mock or stub a truly static class method. However, since facades use dynamic methods to proxy method calls to objects resolved from the service container, we actually can test facades just as we would test an injected class instance. For example, given the following route:</p>
+<pre><code>use Illuminate\Support\Facades\Cache;
+
+Route::get('/cache', function () {
+    return Cache::get('key');
+});
+</code></pre>
+<p>We can write the following test to verify that the <code>Cache::get</code> method was called with the argument we expected:</p>
+<pre><code>use Illuminate\Support\Facades\Cache;
+
+/**
+ * A basic functional test example.
+ *
+ * @return void
+ */
+public function testBasicExample()
+{
+    Cache::shouldReceive('get')
+         -&gt;with('key')
+         -&gt;andReturn('value');
+
+    $this-&gt;visit('/cache')
+         -&gt;see('value');
+}
+</code></pre>
+<p><a name="facades-vs-helper-functions"></a></p>
+<h3 id="facades-vs-helper-functions">Facades Vs. Helper Functions</h3>
+<p>In addition to facades, Laravel includes a variety of "helper" functions which can perform common tasks like generating views, firing events, dispatching jobs, or sending HTTP responses. Many of these helper functions perform the same function as a corresponding facade. For example, this facade call and helper call are equivalent:</p>
+<pre><code>return View::make('profile');
+
+return view('profile');
+</code></pre>
+<p>There is absolutely no practical difference between facades and helper functions. When using helper functions, you may still test them exactly as you would the corresponding facade. For example, given the following route:</p>
+<pre><code>Route::get('/cache', function () {
+    return cache('key');
+});
+</code></pre>
+<p>Under the hood, the <code>cache</code> helper is going to call the <code>get</code> method on the class underlying the <code>Cache</code> facade. So, even though we are using the helper function, we can write the following test to verify that the method was called with the argument we expected:</p>
+<pre><code>use Illuminate\Support\Facades\Cache;
+
+/**
+ * A basic functional test example.
+ *
+ * @return void
+ */
+public function testBasicExample()
+{
+    Cache::shouldReceive('get')
+         -&gt;with('key')
+         -&gt;andReturn('value');
+
+    $this-&gt;visit('/cache')
+         -&gt;see('value');
+}
+</code></pre>
+<p><a name="how-facades-work"></a></p>
+<h2 id="how-facades-work">How Facades Work</h2>
+<p>In a Laravel application, a facade is a class that provides access to an object from the container. The machinery that makes this work is in the <code>Facade</code> class. Laravel's facades, and any custom facades you create, will extend the base <code>Illuminate\Support\Facades\Facade</code> class.</p>
+<p>The <code>Facade</code> base class makes use of the <code>__callStatic()</code> magic-method to defer calls from your facade to an object resolved from the container. In the example below, a call is made to the Laravel cache system. By glancing at this code, one might assume that the static method <code>get</code> is being called on the <code>Cache</code> class:</p>
+<pre><code>&lt;?php
+
+namespace App\Http\Controllers;
+
+use Cache;
+use App\Http\Controllers\Controller;
+
+class UserController extends Controller
+{
+    /**
+     * Show the profile for the given user.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function showProfile($id)
+    {
+        $user = Cache::get('user:'.$id);
+
+        return view('profile', ['user' =&gt; $user]);
+    }
+}
+</code></pre>
+<p>Notice that near the top of the file we are "importing" the <code>Cache</code> facade. This facade serves as a proxy to accessing the underlying implementation of the <code>Illuminate\Contracts\Cache\Factory</code> interface. Any calls we make using the facade will be passed to the underlying instance of Laravel's cache service.</p>
+<p>If we look at that <code>Illuminate\Support\Facades\Cache</code> class, you'll see that there is no static method <code>get</code>:</p>
+<pre><code>class Cache extends Facade
+{
+    /**
+     * Get the registered name of the component.
+     *
+     * @return string
+     */
+    protected static function getFacadeAccessor() { return 'cache'; }
+}
+</code></pre>
+<p>Instead, the <code>Cache</code> facade extends the base <code>Facade</code> class and defines the method <code>getFacadeAccessor()</code>. This method's job is to return the name of a service container binding. When a user references any static method on the <code>Cache</code> facade, Laravel resolves the <code>cache</code> binding from the <a href="../docs/{{version}}/container">service container</a> and runs the requested method (in this case, <code>get</code>) against that object.</p>
+<p><a name="facade-class-reference"></a></p>
+<h2 id="facade-class-reference">Facade Class Reference</h2>
+<p>Below you will find every facade and its underlying class. This is a useful tool for quickly digging into the API documentation for a given facade root. The <a href="../docs/{{version}}/container">service container binding</a> key is also included where applicable.</p>
+<table>
+<thead>
+<tr>
+<th>Facade</th>
+<th>Class</th>
+<th>Service Container Binding</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>App</td>
+<td><a href="http://laravel.com/api/{{version}}/Illuminate/Foundation/Application.html">Illuminate\Foundation\Application</a></td>
+<td><code>app</code></td>
+</tr>
+<tr>
+<td>Artisan</td>
+<td><a href="http://laravel.com/api/{{version}}/Illuminate/Contracts/Console/Kernel.html">Illuminate\Contracts\Console\Kernel</a></td>
+<td><code>artisan</code></td>
+</tr>
+<tr>
+<td>Auth</td>
+<td><a href="http://laravel.com/api/{{version}}/Illuminate/Auth/AuthManager.html">Illuminate\Auth\AuthManager</a></td>
+<td><code>auth</code></td>
+</tr>
+<tr>
+<td>Blade</td>
+<td><a href="http://laravel.com/api/{{version}}/Illuminate/View/Compilers/BladeCompiler.html">Illuminate\View\Compilers\BladeCompiler</a></td>
+<td><code>blade.compiler</code></td>
+</tr>
+<tr>
+<td>Bus</td>
+<td><a href="http://laravel.com/api/{{version}}/Illuminate/Contracts/Bus/Dispatcher.html">Illuminate\Contracts\Bus\Dispatcher</a></td>
+<td></td>
+</tr>
+<tr>
+<td>Cache</td>
+<td><a href="http://laravel.com/api/{{version}}/Illuminate/Cache/Repository.html">Illuminate\Cache\Repository</a></td>
+<td><code>cache</code></td>
+</tr>
+<tr>
+<td>Config</td>
+<td><a href="http://laravel.com/api/{{version}}/Illuminate/Config/Repository.html">Illuminate\Config\Repository</a></td>
+<td><code>config</code></td>
+</tr>
+<tr>
+<td>Cookie</td>
+<td><a href="http://laravel.com/api/{{version}}/Illuminate/Cookie/CookieJar.html">Illuminate\Cookie\CookieJar</a></td>
+<td><code>cookie</code></td>
+</tr>
+<tr>
+<td>Crypt</td>
+<td><a href="http://laravel.com/api/{{version}}/Illuminate/Encryption/Encrypter.html">Illuminate\Encryption\Encrypter</a></td>
+<td><code>encrypter</code></td>
+</tr>
+<tr>
+<td>DB</td>
+<td><a href="http://laravel.com/api/{{version}}/Illuminate/Database/DatabaseManager.html">Illuminate\Database\DatabaseManager</a></td>
+<td><code>db</code></td>
+</tr>
+<tr>
+<td>DB (Instance)</td>
+<td><a href="http://laravel.com/api/{{version}}/Illuminate/Database/Connection.html">Illuminate\Database\Connection</a></td>
+<td></td>
+</tr>
+<tr>
+<td>Event</td>
+<td><a href="http://laravel.com/api/{{version}}/Illuminate/Events/Dispatcher.html">Illuminate\Events\Dispatcher</a></td>
+<td><code>events</code></td>
+</tr>
+<tr>
+<td>File</td>
+<td><a href="http://laravel.com/api/{{version}}/Illuminate/Filesystem/Filesystem.html">Illuminate\Filesystem\Filesystem</a></td>
+<td><code>files</code></td>
+</tr>
+<tr>
+<td>Gate</td>
+<td><a href="http://laravel.com/api/{{version}}/Illuminate/Contracts/Auth/Access/Gate.html">Illuminate\Contracts\Auth\Access\Gate</a></td>
+<td></td>
+</tr>
+<tr>
+<td>Hash</td>
+<td><a href="http://laravel.com/api/{{version}}/Illuminate/Contracts/Hashing/Hasher.html">Illuminate\Contracts\Hashing\Hasher</a></td>
+<td><code>hash</code></td>
+</tr>
+<tr>
+<td>Lang</td>
+<td><a href="http://laravel.com/api/{{version}}/Illuminate/Translation/Translator.html">Illuminate\Translation\Translator</a></td>
+<td><code>translator</code></td>
+</tr>
+<tr>
+<td>Log</td>
+<td><a href="http://laravel.com/api/{{version}}/Illuminate/Log/Writer.html">Illuminate\Log\Writer</a></td>
+<td><code>log</code></td>
+</tr>
+<tr>
+<td>Mail</td>
+<td><a href="http://laravel.com/api/{{version}}/Illuminate/Mail/Mailer.html">Illuminate\Mail\Mailer</a></td>
+<td><code>mailer</code></td>
+</tr>
+<tr>
+<td>Notification</td>
+<td><a href="http://laravel.com/api/{{version}}/Illuminate/Notifications/ChannelManager.html">Illuminate\Notifications\ChannelManager</a></td>
+<td></td>
+</tr>
+<tr>
+<td>Password</td>
+<td><a href="http://laravel.com/api/{{version}}/Illuminate/Auth/Passwords/PasswordBroker.html">Illuminate\Auth\Passwords\PasswordBroker</a></td>
+<td><code>auth.password</code></td>
+</tr>
+<tr>
+<td>Queue</td>
+<td><a href="http://laravel.com/api/{{version}}/Illuminate/Queue/QueueManager.html">Illuminate\Queue\QueueManager</a></td>
+<td><code>queue</code></td>
+</tr>
+<tr>
+<td>Queue (Instance)</td>
+<td><a href="http://laravel.com/api/{{version}}/Illuminate/Contracts/Queue/Queue.html">Illuminate\Contracts\Queue\Queue</a></td>
+<td><code>queue</code></td>
+</tr>
+<tr>
+<td>Queue (Base Class)</td>
+<td><a href="http://laravel.com/api/{{version}}/Illuminate/Queue/Queue.html">Illuminate\Queue\Queue</a></td>
+<td></td>
+</tr>
+<tr>
+<td>Redirect</td>
+<td><a href="http://laravel.com/api/{{version}}/Illuminate/Routing/Redirector.html">Illuminate\Routing\Redirector</a></td>
+<td><code>redirect</code></td>
+</tr>
+<tr>
+<td>Redis</td>
+<td><a href="http://laravel.com/api/{{version}}/Illuminate/Redis/Database.html">Illuminate\Redis\Database</a></td>
+<td><code>redis</code></td>
+</tr>
+<tr>
+<td>Request</td>
+<td><a href="http://laravel.com/api/{{version}}/Illuminate/Http/Request.html">Illuminate\Http\Request</a></td>
+<td><code>request</code></td>
+</tr>
+<tr>
+<td>Response</td>
+<td><a href="http://laravel.com/api/{{version}}/Illuminate/Contracts/Routing/ResponseFactory.html">Illuminate\Contracts\Routing\ResponseFactory</a></td>
+<td></td>
+</tr>
+<tr>
+<td>Route</td>
+<td><a href="http://laravel.com/api/{{version}}/Illuminate/Routing/Router.html">Illuminate\Routing\Router</a></td>
+<td><code>router</code></td>
+</tr>
+<tr>
+<td>Schema</td>
+<td><a href="http://laravel.com/api/{{version}}/Illuminate/Database/Schema/Blueprint.html">Illuminate\Database\Schema\Blueprint</a></td>
+<td></td>
+</tr>
+<tr>
+<td>Session</td>
+<td><a href="http://laravel.com/api/{{version}}/Illuminate/Session/SessionManager.html">Illuminate\Session\SessionManager</a></td>
+<td><code>session</code></td>
+</tr>
+<tr>
+<td>Session (Instance)</td>
+<td><a href="http://laravel.com/api/{{version}}/Illuminate/Session/Store.html">Illuminate\Session\Store</a></td>
+<td></td>
+</tr>
+<tr>
+<td>Storage</td>
+<td><a href="http://laravel.com/api/{{version}}/Illuminate/Contracts/Filesystem/Factory.html">Illuminate\Contracts\Filesystem\Factory</a></td>
+<td><code>filesystem</code></td>
+</tr>
+<tr>
+<td>URL</td>
+<td><a href="http://laravel.com/api/{{version}}/Illuminate/Routing/UrlGenerator.html">Illuminate\Routing\UrlGenerator</a></td>
+<td><code>url</code></td>
+</tr>
+<tr>
+<td>Validator</td>
+<td><a href="http://laravel.com/api/{{version}}/Illuminate/Validation/Factory.html">Illuminate\Validation\Factory</a></td>
+<td><code>validator</code></td>
+</tr>
+<tr>
+<td>Validator (Instance)</td>
+<td><a href="http://laravel.com/api/{{version}}/Illuminate/Validation/Validator.html">Illuminate\Validation\Validator</a></td>
+<td></td>
+</tr>
+<tr>
+<td>View</td>
+<td><a href="http://laravel.com/api/{{version}}/Illuminate/View/Factory.html">Illuminate\View\Factory</a></td>
+<td><code>view</code></td>
+</tr>
+<tr>
+<td>View (Instance)</td>
+<td><a href="http://laravel.com/api/{{version}}/Illuminate/View/View.html">Illuminate\View\View</a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+          <aside class="copyright" role="note">
+            
+            Documentation built with
+            <a href="http://www.mkdocs.org" target="_blank">MkDocs</a>
+            using the
+            <a href="http://squidfunk.github.io/mkdocs-material/" target="_blank">
+              Material
+            </a>
+            theme.
+          </aside>
+          
+            <footer class="footer">
+              
+  <nav class="pagination" aria-label="Footer">
+    <div class="previous">
+      
+        <a href="../events/" title="Events">
+          <span class="direction">
+            Previous
+          </span>
+          <div class="page">
+            <div class="button button-previous" role="button" aria-label="Previous">
+              <i class="icon icon-back"></i>
+            </div>
+            <div class="stretch">
+              <div class="title">
+                Events
+              </div>
+            </div>
+          </div>
+        </a>
+      
+    </div>
+    <div class="next">
+      
+        <a href="../filesystem/" title="Filesystem">
+          <span class="direction">
+            Next
+          </span>
+          <div class="page">
+            <div class="stretch">
+              <div class="title">
+                Filesystem
+              </div>
+            </div>
+            <div class="button button-next" role="button" aria-label="Next">
+              <i class="icon icon-forward"></i>
+            </div>
+          </div>
+        </a>
+      
+    </div>
+  </nav>
+
+            </footer>
+          
+        </div>
+      </article>
+      <div class="results" role="status" aria-live="polite">
+        <div class="scrollable">
+          <div class="wrapper">
+            <div class="meta"></div>
+            <div class="list"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script>
+      var base_url = '..';
+      var repo_id  = '';
+    </script>
+    <script src="../assets/javascripts/application-997097ee0c.js"></script>
+    
+      <script src="../assets/jquery.js"></script>
+    
+      <script src="../assets/prism.js"></script>
+    
+    
+  </body>
+</html>

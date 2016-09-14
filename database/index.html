@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="no-js ie6"><![endif]-->
+<!--[if IE 7 ]><html class="no-js ie7"><![endif]-->
+<!--[if IE 8 ]><html class="no-js ie8"><![endif]-->
+<!--[if IE 9 ]><html class="no-js ie9"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
+    
+      
+        <title>Database - Laravel 5.3 official documentation</title>
+      
+      
+      
+      
+    
+    <meta property="og:url" content="None">
+    <meta property="og:title" content="Laravel 5.3 official documentation">
+    <meta property="og:image" content="None/../">
+    <meta name="apple-mobile-web-app-title" content="Laravel 5.3 official documentation">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    
+    <link rel="shortcut icon" type="image/x-icon" href="../assets/images/favicon-e565ddfa3b.ico">
+    <link rel="icon" type="image/x-icon" href="../assets/images/favicon-e565ddfa3b.ico">
+    <style>
+      @font-face {
+      	font-family: 'Icon';
+      	src: url('../assets/fonts/icon.eot?52m981');
+      	src: url('../assets/fonts/icon.eot?#iefix52m981')
+               format('embedded-opentype'),
+      		   url('../assets/fonts/icon.woff?52m981')
+               format('woff'),
+      		   url('../assets/fonts/icon.ttf?52m981')
+               format('truetype'),
+      		   url('../assets/fonts/icon.svg?52m981#icon')
+               format('svg');
+      	font-weight: normal;
+      	font-style: normal;
+      }
+    </style>
+    <link rel="stylesheet" href="../assets/stylesheets/application-a422ff04cc.css">
+    
+      <link rel="stylesheet" href="../assets/stylesheets/palettes-05ab2406df.css">
+    
+    
+      
+      
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,700|Ubuntu+Mono">
+      <style>
+        body, input {
+          font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
+        }
+        pre, code {
+          font-family: 'Ubuntu Mono', 'Courier New', 'Courier', monospace;
+        }
+      </style>
+    
+    
+      <link rel="stylesheet" href="../assets/prism.css">
+    
+    <script src="../assets/javascripts/modernizr-4ab42b99fd.js"></script>
+    
+  </head>
+  
+  
+  
+  <body class="palette-primary-teal palette-accent-pink">
+    
+    <div class="backdrop">
+      <div class="backdrop-paper"></div>
+    </div>
+    <input class="toggle" type="checkbox" id="toggle-drawer">
+    <input class="toggle" type="checkbox" id="toggle-search">
+    <label class="toggle-button overlay" for="toggle-drawer"></label>
+    <header class="header">
+      <nav aria-label="Header">
+  <div class="bar default">
+    <div class="button button-menu" role="button" aria-label="Menu">
+      <label class="toggle-button icon icon-menu" for="toggle-drawer">
+        <span></span>
+      </label>
+    </div>
+    <div class="stretch">
+      <div class="title">
+        
+          <span class="path">
+            
+          </span>
+        
+        Database
+      </div>
+    </div>
+    
+    
+    <div class="button button-search" role="button" aria-label="Search">
+      <label class="toggle-button icon icon-search" title="Search" for="toggle-search"></label>
+    </div>
+  </div>
+  <div class="bar search">
+    <div class="button button-close" role="button" aria-label="Close">
+      <label class="toggle-button icon icon-back" for="toggle-search"></label>
+    </div>
+    <div class="stretch">
+      <div class="field">
+        <input class="query" type="text" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck>
+      </div>
+    </div>
+    <div class="button button-reset" role="button" aria-label="Search">
+      <button class="toggle-button icon icon-close" id="reset-search"></button>
+    </div>
+  </div>
+</nav>
+    </header>
+    <main class="main">
+      
+      <div class="drawer">
+        <nav aria-label="Navigation">
+  
+  <a href="/" class="project">
+    <div class="banner">
+      
+      <div class="name">
+        <strong>
+          Laravel 5.3 official documentation
+          <span class="version">
+            
+          </span>
+        </strong>
+        
+      </div>
+    </div>
+  </a>
+  <div class="scrollable">
+    <div class="wrapper">
+      
+      <div class="toc">
+        <ul>
+          
+            
+  <li>
+    <a class="" title="Home" href="..">
+      Home
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Apis" href="../apis/">
+      Apis
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Application testing" href="../application-testing/">
+      Application testing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Artisan" href="../artisan/">
+      Artisan
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Authentication" href="../authentication/">
+      Authentication
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Authorization" href="../authorization/">
+      Authorization
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Billing" href="../billing/">
+      Billing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Blade" href="../blade/">
+      Blade
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Broadcasting" href="../broadcasting/">
+      Broadcasting
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Cache" href="../cache/">
+      Cache
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Collections" href="../collections/">
+      Collections
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Configuration" href="../configuration/">
+      Configuration
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Container" href="../container/">
+      Container
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Contracts" href="../contracts/">
+      Contracts
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Contributing" href="../contributing/">
+      Contributing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Contributions" href="../contributions/">
+      Contributions
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Controllers" href="../controllers/">
+      Controllers
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Csrf" href="../csrf/">
+      Csrf
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Database testing" href="../database-testing/">
+      Database testing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="current" title="Database" href="./">
+      Database
+    </a>
+    
+      
+        
+      
+      
+        <ul>
+          
+            <li class="anchor">
+              <a title="Introduction" href="#introduction">
+                Introduction
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Running Raw SQL Queries" href="#running-raw-sql-queries">
+                Running Raw SQL Queries
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Database Transactions" href="#database-transactions">
+                Database Transactions
+              </a>
+            </li>
+          
+        </ul>
+      
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Documentation" href="../documentation/">
+      Documentation
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Elixir" href="../elixir/">
+      Elixir
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent collections" href="../eloquent-collections/">
+      Eloquent collections
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent mutators" href="../eloquent-mutators/">
+      Eloquent mutators
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent relationships" href="../eloquent-relationships/">
+      Eloquent relationships
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent serialization" href="../eloquent-serialization/">
+      Eloquent serialization
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent" href="../eloquent/">
+      Eloquent
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Encryption" href="../encryption/">
+      Encryption
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Envoy" href="../envoy/">
+      Envoy
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Errors" href="../errors/">
+      Errors
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Events" href="../events/">
+      Events
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Facades" href="../facades/">
+      Facades
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Filesystem" href="../filesystem/">
+      Filesystem
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Frontend" href="../frontend/">
+      Frontend
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Hashing" href="../hashing/">
+      Hashing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Helpers" href="../helpers/">
+      Helpers
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Homestead" href="../homestead/">
+      Homestead
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Installation" href="../installation/">
+      Installation
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="License" href="../license/">
+      License
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Lifecycle" href="../lifecycle/">
+      Lifecycle
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Localization" href="../localization/">
+      Localization
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Mail" href="../mail/">
+      Mail
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Middleware" href="../middleware/">
+      Middleware
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Migrations" href="../migrations/">
+      Migrations
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Mocking" href="../mocking/">
+      Mocking
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Notifications" href="../notifications/">
+      Notifications
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Packages" href="../packages/">
+      Packages
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Pagination" href="../pagination/">
+      Pagination
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Passport" href="../passport/">
+      Passport
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Passwords" href="../passwords/">
+      Passwords
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Providers" href="../providers/">
+      Providers
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Queries" href="../queries/">
+      Queries
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Queues" href="../queues/">
+      Queues
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Readme" href="../readme/">
+      Readme
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Redirects" href="../redirects/">
+      Redirects
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Redis" href="../redis/">
+      Redis
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Releases" href="../releases/">
+      Releases
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Requests" href="../requests/">
+      Requests
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Responses" href="../responses/">
+      Responses
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Routing" href="../routing/">
+      Routing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Scheduling" href="../scheduling/">
+      Scheduling
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Scout" href="../scout/">
+      Scout
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Seeding" href="../seeding/">
+      Seeding
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Session" href="../session/">
+      Session
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Structure" href="../structure/">
+      Structure
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Testing" href="../testing/">
+      Testing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Upgrade" href="../upgrade/">
+      Upgrade
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Valet" href="../valet/">
+      Valet
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Validation" href="../validation/">
+      Validation
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Views" href="../views/">
+      Views
+    </a>
+    
+  </li>
+
+          
+        </ul>
+        
+      </div>
+    </div>
+  </div>
+</nav>
+      </div>
+      <article class="article">
+        <div class="wrapper">
+          
+          <h1 id="database-getting-started">Database: Getting Started</h1>
+<ul>
+<li><a href="#introduction">Introduction</a><ul>
+<li><a href="#configuration">Configuration</a></li>
+<li><a href="#read-and-write-connections">Read &amp; Write Connections</a></li>
+<li><a href="#using-multiple-database-connections">Using Multiple Database Connections</a></li>
+</ul>
+</li>
+<li><a href="#running-queries">Running Raw SQL Queries</a><ul>
+<li><a href="#listening-for-query-events">Listening For Query Events</a></li>
+</ul>
+</li>
+<li><a href="#database-transactions">Database Transactions</a></li>
+</ul>
+<p><a name="introduction"></a></p>
+<h2 id="introduction">Introduction</h2>
+<p>Laravel makes interacting with databases extremely simple across a variety of database backends using either raw SQL, the <a href="../docs/{{version}}/queries">fluent query builder</a>, and the <a href="../docs/{{version}}/eloquent">Eloquent ORM</a>. Currently, Laravel supports four databases:</p>
+<div class="content-list" markdown="1">
+- MySQL
+- Postgres
+- SQLite
+- SQL Server
+</div>
+
+<p><a name="configuration"></a></p>
+<h3 id="configuration">Configuration</h3>
+<p>The database configuration for your application is located at <code>config/database.php</code>. In this file you may define all of your database connections, as well as specify which connection should be used by default. Examples for most of the supported database systems are provided in this file.</p>
+<p>By default, Laravel's sample <a href="../docs/{{version}}/installation#environment-configuration">environment configuration</a> is ready to use with <a href="../docs/{{version}}/homestead">Laravel Homestead</a>, which is a convenient virtual machine for doing Laravel development on your local machine. Of course, you are free to modify this configuration as needed for your local database.</p>
+<h4 id="sqlite-configuration">SQLite Configuration</h4>
+<p>After creating a new SQLite database using a command such as <code>touch database/database.sqlite</code>, you can easily configure your environment variables to point to this newly created database by using the database's absolute path:</p>
+<pre><code>DB_CONNECTION=sqlite
+DB_DATABASE=/absolute/path/to/database.sqlite
+</code></pre>
+<h4 id="sql-server-configuration">SQL Server Configuration</h4>
+<p>Laravel supports SQL Server out of the box; however, you will need to add the connection configuration for the database to your <code>config/database.php</code> configuration file:</p>
+<pre><code>'sqlsrv' =&gt; [
+    'driver' =&gt; 'sqlsrv',
+    'host' =&gt; env('DB_HOST', 'localhost'),
+    'database' =&gt; env('DB_DATABASE', 'forge'),
+    'username' =&gt; env('DB_USERNAME', 'forge'),
+    'password' =&gt; env('DB_PASSWORD', ''),
+    'charset' =&gt; 'utf8',
+    'prefix' =&gt; '',
+],
+</code></pre>
+<p><a name="read-and-write-connections"></a></p>
+<h3 id="read-write-connections">Read &amp; Write Connections</h3>
+<p>Sometimes you may wish to use one database connection for SELECT statements, and another for INSERT, UPDATE, and DELETE statements. Laravel makes this a breeze, and the proper connections will always be used whether you are using raw queries, the query builder, or the Eloquent ORM.</p>
+<p>To see how read / write connections should be configured, let's look at this example:</p>
+<pre><code>'mysql' =&gt; [
+    'read' =&gt; [
+        'host' =&gt; '192.168.1.1',
+    ],
+    'write' =&gt; [
+        'host' =&gt; '196.168.1.2'
+    ],
+    'driver'    =&gt; 'mysql',
+    'database'  =&gt; 'database',
+    'username'  =&gt; 'root',
+    'password'  =&gt; '',
+    'charset'   =&gt; 'utf8',
+    'collation' =&gt; 'utf8_unicode_ci',
+    'prefix'    =&gt; '',
+],
+</code></pre>
+<p>Note that two keys have been added to the configuration array: <code>read</code> and <code>write</code>. Both of these keys have array values containing a single key: <code>host</code>. The rest of the database options for the <code>read</code> and <code>write</code> connections will be merged from the main <code>mysql</code> array.</p>
+<p>You only need to place items in the <code>read</code> and <code>write</code> arrays if you wish to override the values from the main array. So, in this case, <code>192.168.1.1</code> will be used as the host for the "read" connection, while <code>192.168.1.2</code> will be used for the "write" connection. The database credentials, prefix, character set, and all other options in the main <code>mysql</code> array will be shared across both connections.</p>
+<p><a name="using-multiple-database-connections"></a></p>
+<h3 id="using-multiple-database-connections">Using Multiple Database Connections</h3>
+<p>When using multiple connections, you may access each connection via the <code>connection</code> method on the <code>DB</code> facade. The <code>name</code> passed to the <code>connection</code> method should correspond to one of the connections listed in your <code>config/database.php</code> configuration file:</p>
+<pre><code>$users = DB::connection('foo')-&gt;select(...);
+</code></pre>
+<p>You may also access the raw, underlying PDO instance using the <code>getPdo</code> method on a connection instance:</p>
+<pre><code>$pdo = DB::connection()-&gt;getPdo();
+</code></pre>
+<p><a name="running-queries"></a></p>
+<h2 id="running-raw-sql-queries">Running Raw SQL Queries</h2>
+<p>Once you have configured your database connection, you may run queries using the <code>DB</code> facade. The <code>DB</code> facade provides methods for each type of query: <code>select</code>, <code>update</code>, <code>insert</code>, <code>delete</code>, and <code>statement</code>.</p>
+<h4 id="running-a-select-query">Running A Select Query</h4>
+<p>To run a basic query, you may use the <code>select</code> method on the <code>DB</code> facade:</p>
+<pre><code>&lt;?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+
+class UserController extends Controller
+{
+    /**
+     * Show a list of all of the application's users.
+     *
+     * @return Response
+     */
+    public function index()
+    {
+        $users = DB::select('select * from users where active = ?', [1]);
+
+        return view('user.index', ['users' =&gt; $users]);
+    }
+}
+</code></pre>
+<p>The first argument passed to the <code>select</code> method is the raw SQL query, while the second argument is any parameter bindings that need to be bound to the query. Typically, these are the values of the <code>where</code> clause constraints. Parameter binding provides protection against SQL injection.</p>
+<p>The <code>select</code> method will always return an <code>array</code> of results. Each result within the array will be a PHP <code>StdClass</code> object, allowing you to access the values of the results:</p>
+<pre><code>foreach ($users as $user) {
+    echo $user-&gt;name;
+}
+</code></pre>
+<h4 id="using-named-bindings">Using Named Bindings</h4>
+<p>Instead of using <code>?</code> to represent your parameter bindings, you may execute a query using named bindings:</p>
+<pre><code>$results = DB::select('select * from users where id = :id', ['id' =&gt; 1]);
+</code></pre>
+<h4 id="running-an-insert-statement">Running An Insert Statement</h4>
+<p>To execute an <code>insert</code> statement, you may use the <code>insert</code> method on the <code>DB</code> facade. Like <code>select</code>, this method takes the raw SQL query as its first argument and bindings as its second argument:</p>
+<pre><code>DB::insert('insert into users (id, name) values (?, ?)', [1, 'Dayle']);
+</code></pre>
+<h4 id="running-an-update-statement">Running An Update Statement</h4>
+<p>The <code>update</code> method should be used to update existing records in the database. The number of rows affected by the statement will be returned:</p>
+<pre><code>$affected = DB::update('update users set votes = 100 where name = ?', ['John']);
+</code></pre>
+<h4 id="running-a-delete-statement">Running A Delete Statement</h4>
+<p>The <code>delete</code> method should be used to delete records from the database. Like <code>update</code>, the number of rows affected will be returned:</p>
+<pre><code>$deleted = DB::delete('delete from users');
+</code></pre>
+<h4 id="running-a-general-statement">Running A General Statement</h4>
+<p>Some database statements do not return any value. For these types of operations, you may use the <code>statement</code> method on the <code>DB</code> facade:</p>
+<pre><code>DB::statement('drop table users');
+</code></pre>
+<p><a name="listening-for-query-events"></a></p>
+<h3 id="listening-for-query-events">Listening For Query Events</h3>
+<p>If you would like to receive each SQL query executed by your application, you may use the <code>listen</code> method. This method is useful for logging queries or debugging. You may register your query listener in a <a href="../docs/{{version}}/providers">service provider</a>:</p>
+<pre><code>&lt;?php
+
+namespace App\Providers;
+
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\ServiceProvider;
+
+class AppServiceProvider extends ServiceProvider
+{
+    /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        DB::listen(function ($query) {
+            // $query-&gt;sql
+            // $query-&gt;bindings
+            // $query-&gt;time
+        });
+    }
+
+    /**
+     * Register the service provider.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        //
+    }
+}
+</code></pre>
+<p><a name="database-transactions"></a></p>
+<h2 id="database-transactions">Database Transactions</h2>
+<p>You may use the <code>transaction</code> method on the <code>DB</code> facade to run a set of operations within a database transaction. If an exception is thrown within the transaction <code>Closure</code>, the transaction will automatically be rolled back. If the <code>Closure</code> executes successfully, the transaction will automatically be committed. You don't need to worry about manually rolling back or committing while using the <code>transaction</code> method:</p>
+<pre><code>DB::transaction(function () {
+    DB::table('users')-&gt;update(['votes' =&gt; 1]);
+
+    DB::table('posts')-&gt;delete();
+});
+</code></pre>
+<h4 id="manually-using-transactions">Manually Using Transactions</h4>
+<p>If you would like to begin a transaction manually and have complete control over rollbacks and commits, you may use the <code>beginTransaction</code> method on the <code>DB</code> facade:</p>
+<pre><code>DB::beginTransaction();
+</code></pre>
+<p>You can rollback the transaction via the <code>rollBack</code> method:</p>
+<pre><code>DB::rollBack();
+</code></pre>
+<p>Lastly, you can commit a transaction via the <code>commit</code> method:</p>
+<pre><code>DB::commit();
+</code></pre>
+<blockquote>
+<p>{tip} Using the <code>DB</code> facade's transaction methods also controls transactions for the <a href="../docs/{{version}}/queries">query builder</a> and <a href="../docs/{{version}}/eloquent">Eloquent ORM</a>.</p>
+</blockquote>
+          <aside class="copyright" role="note">
+            
+            Documentation built with
+            <a href="http://www.mkdocs.org" target="_blank">MkDocs</a>
+            using the
+            <a href="http://squidfunk.github.io/mkdocs-material/" target="_blank">
+              Material
+            </a>
+            theme.
+          </aside>
+          
+            <footer class="footer">
+              
+  <nav class="pagination" aria-label="Footer">
+    <div class="previous">
+      
+        <a href="../database-testing/" title="Database testing">
+          <span class="direction">
+            Previous
+          </span>
+          <div class="page">
+            <div class="button button-previous" role="button" aria-label="Previous">
+              <i class="icon icon-back"></i>
+            </div>
+            <div class="stretch">
+              <div class="title">
+                Database testing
+              </div>
+            </div>
+          </div>
+        </a>
+      
+    </div>
+    <div class="next">
+      
+        <a href="../documentation/" title="Documentation">
+          <span class="direction">
+            Next
+          </span>
+          <div class="page">
+            <div class="stretch">
+              <div class="title">
+                Documentation
+              </div>
+            </div>
+            <div class="button button-next" role="button" aria-label="Next">
+              <i class="icon icon-forward"></i>
+            </div>
+          </div>
+        </a>
+      
+    </div>
+  </nav>
+
+            </footer>
+          
+        </div>
+      </article>
+      <div class="results" role="status" aria-live="polite">
+        <div class="scrollable">
+          <div class="wrapper">
+            <div class="meta"></div>
+            <div class="list"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script>
+      var base_url = '..';
+      var repo_id  = '';
+    </script>
+    <script src="../assets/javascripts/application-997097ee0c.js"></script>
+    
+      <script src="../assets/jquery.js"></script>
+    
+      <script src="../assets/prism.js"></script>
+    
+    
+  </body>
+</html>

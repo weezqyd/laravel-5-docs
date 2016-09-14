@@ -1,0 +1,564 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+    
+    <url>
+     <loc>None/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/apis/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/application-testing/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/artisan/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/authentication/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/authorization/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/billing/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/blade/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/broadcasting/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/cache/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/collections/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/configuration/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/container/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/contracts/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/contributing/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/contributions/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/controllers/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/csrf/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/database-testing/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/database/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/documentation/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/elixir/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/eloquent-collections/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/eloquent-mutators/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/eloquent-relationships/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/eloquent-serialization/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/eloquent/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/encryption/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/envoy/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/errors/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/events/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/facades/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/filesystem/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/frontend/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/hashing/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/helpers/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/homestead/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/installation/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/license/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/lifecycle/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/localization/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/mail/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/middleware/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/migrations/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/mocking/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/notifications/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/packages/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/pagination/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/passport/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/passwords/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/providers/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/queries/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/queues/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/readme/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/redirects/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/redis/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/releases/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/requests/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/responses/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/routing/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/scheduling/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/scout/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/seeding/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/session/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/structure/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/testing/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/upgrade/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/valet/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/validation/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/views/</loc>
+     <lastmod>2016-09-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+</urlset>

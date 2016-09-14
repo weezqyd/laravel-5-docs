@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="no-js ie6"><![endif]-->
+<!--[if IE 7 ]><html class="no-js ie7"><![endif]-->
+<!--[if IE 8 ]><html class="no-js ie8"><![endif]-->
+<!--[if IE 9 ]><html class="no-js ie9"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
+    
+      
+        <title>Structure - Laravel 5.3 official documentation</title>
+      
+      
+      
+      
+    
+    <meta property="og:url" content="None">
+    <meta property="og:title" content="Laravel 5.3 official documentation">
+    <meta property="og:image" content="None/../">
+    <meta name="apple-mobile-web-app-title" content="Laravel 5.3 official documentation">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    
+    <link rel="shortcut icon" type="image/x-icon" href="../assets/images/favicon-e565ddfa3b.ico">
+    <link rel="icon" type="image/x-icon" href="../assets/images/favicon-e565ddfa3b.ico">
+    <style>
+      @font-face {
+      	font-family: 'Icon';
+      	src: url('../assets/fonts/icon.eot?52m981');
+      	src: url('../assets/fonts/icon.eot?#iefix52m981')
+               format('embedded-opentype'),
+      		   url('../assets/fonts/icon.woff?52m981')
+               format('woff'),
+      		   url('../assets/fonts/icon.ttf?52m981')
+               format('truetype'),
+      		   url('../assets/fonts/icon.svg?52m981#icon')
+               format('svg');
+      	font-weight: normal;
+      	font-style: normal;
+      }
+    </style>
+    <link rel="stylesheet" href="../assets/stylesheets/application-a422ff04cc.css">
+    
+      <link rel="stylesheet" href="../assets/stylesheets/palettes-05ab2406df.css">
+    
+    
+      
+      
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,700|Ubuntu+Mono">
+      <style>
+        body, input {
+          font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
+        }
+        pre, code {
+          font-family: 'Ubuntu Mono', 'Courier New', 'Courier', monospace;
+        }
+      </style>
+    
+    
+      <link rel="stylesheet" href="../assets/prism.css">
+    
+    <script src="../assets/javascripts/modernizr-4ab42b99fd.js"></script>
+    
+  </head>
+  
+  
+  
+  <body class="palette-primary-teal palette-accent-pink">
+    
+    <div class="backdrop">
+      <div class="backdrop-paper"></div>
+    </div>
+    <input class="toggle" type="checkbox" id="toggle-drawer">
+    <input class="toggle" type="checkbox" id="toggle-search">
+    <label class="toggle-button overlay" for="toggle-drawer"></label>
+    <header class="header">
+      <nav aria-label="Header">
+  <div class="bar default">
+    <div class="button button-menu" role="button" aria-label="Menu">
+      <label class="toggle-button icon icon-menu" for="toggle-drawer">
+        <span></span>
+      </label>
+    </div>
+    <div class="stretch">
+      <div class="title">
+        
+          <span class="path">
+            
+          </span>
+        
+        Structure
+      </div>
+    </div>
+    
+    
+    <div class="button button-search" role="button" aria-label="Search">
+      <label class="toggle-button icon icon-search" title="Search" for="toggle-search"></label>
+    </div>
+  </div>
+  <div class="bar search">
+    <div class="button button-close" role="button" aria-label="Close">
+      <label class="toggle-button icon icon-back" for="toggle-search"></label>
+    </div>
+    <div class="stretch">
+      <div class="field">
+        <input class="query" type="text" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck>
+      </div>
+    </div>
+    <div class="button button-reset" role="button" aria-label="Search">
+      <button class="toggle-button icon icon-close" id="reset-search"></button>
+    </div>
+  </div>
+</nav>
+    </header>
+    <main class="main">
+      
+      <div class="drawer">
+        <nav aria-label="Navigation">
+  
+  <a href="/" class="project">
+    <div class="banner">
+      
+      <div class="name">
+        <strong>
+          Laravel 5.3 official documentation
+          <span class="version">
+            
+          </span>
+        </strong>
+        
+      </div>
+    </div>
+  </a>
+  <div class="scrollable">
+    <div class="wrapper">
+      
+      <div class="toc">
+        <ul>
+          
+            
+  <li>
+    <a class="" title="Home" href="..">
+      Home
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Apis" href="../apis/">
+      Apis
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Application testing" href="../application-testing/">
+      Application testing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Artisan" href="../artisan/">
+      Artisan
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Authentication" href="../authentication/">
+      Authentication
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Authorization" href="../authorization/">
+      Authorization
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Billing" href="../billing/">
+      Billing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Blade" href="../blade/">
+      Blade
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Broadcasting" href="../broadcasting/">
+      Broadcasting
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Cache" href="../cache/">
+      Cache
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Collections" href="../collections/">
+      Collections
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Configuration" href="../configuration/">
+      Configuration
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Container" href="../container/">
+      Container
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Contracts" href="../contracts/">
+      Contracts
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Contributing" href="../contributing/">
+      Contributing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Contributions" href="../contributions/">
+      Contributions
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Controllers" href="../controllers/">
+      Controllers
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Csrf" href="../csrf/">
+      Csrf
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Database testing" href="../database-testing/">
+      Database testing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Database" href="../database/">
+      Database
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Documentation" href="../documentation/">
+      Documentation
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Elixir" href="../elixir/">
+      Elixir
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent collections" href="../eloquent-collections/">
+      Eloquent collections
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent mutators" href="../eloquent-mutators/">
+      Eloquent mutators
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent relationships" href="../eloquent-relationships/">
+      Eloquent relationships
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent serialization" href="../eloquent-serialization/">
+      Eloquent serialization
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent" href="../eloquent/">
+      Eloquent
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Encryption" href="../encryption/">
+      Encryption
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Envoy" href="../envoy/">
+      Envoy
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Errors" href="../errors/">
+      Errors
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Events" href="../events/">
+      Events
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Facades" href="../facades/">
+      Facades
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Filesystem" href="../filesystem/">
+      Filesystem
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Frontend" href="../frontend/">
+      Frontend
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Hashing" href="../hashing/">
+      Hashing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Helpers" href="../helpers/">
+      Helpers
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Homestead" href="../homestead/">
+      Homestead
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Installation" href="../installation/">
+      Installation
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="License" href="../license/">
+      License
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Lifecycle" href="../lifecycle/">
+      Lifecycle
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Localization" href="../localization/">
+      Localization
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Mail" href="../mail/">
+      Mail
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Middleware" href="../middleware/">
+      Middleware
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Migrations" href="../migrations/">
+      Migrations
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Mocking" href="../mocking/">
+      Mocking
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Notifications" href="../notifications/">
+      Notifications
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Packages" href="../packages/">
+      Packages
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Pagination" href="../pagination/">
+      Pagination
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Passport" href="../passport/">
+      Passport
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Passwords" href="../passwords/">
+      Passwords
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Providers" href="../providers/">
+      Providers
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Queries" href="../queries/">
+      Queries
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Queues" href="../queues/">
+      Queues
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Readme" href="../readme/">
+      Readme
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Redirects" href="../redirects/">
+      Redirects
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Redis" href="../redis/">
+      Redis
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Releases" href="../releases/">
+      Releases
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Requests" href="../requests/">
+      Requests
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Responses" href="../responses/">
+      Responses
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Routing" href="../routing/">
+      Routing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Scheduling" href="../scheduling/">
+      Scheduling
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Scout" href="../scout/">
+      Scout
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Seeding" href="../seeding/">
+      Seeding
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Session" href="../session/">
+      Session
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="current" title="Structure" href="./">
+      Structure
+    </a>
+    
+      
+        
+      
+      
+        <ul>
+          
+            <li class="anchor">
+              <a title="Introduction" href="#introduction">
+                Introduction
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="The Root Directory" href="#the-root-directory">
+                The Root Directory
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="The App Directory" href="#the-app-directory_1">
+                The App Directory
+              </a>
+            </li>
+          
+        </ul>
+      
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Testing" href="../testing/">
+      Testing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Upgrade" href="../upgrade/">
+      Upgrade
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Valet" href="../valet/">
+      Valet
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Validation" href="../validation/">
+      Validation
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Views" href="../views/">
+      Views
+    </a>
+    
+  </li>
+
+          
+        </ul>
+        
+      </div>
+    </div>
+  </div>
+</nav>
+      </div>
+      <article class="article">
+        <div class="wrapper">
+          
+          <h1 id="directory-structure">Directory Structure</h1>
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#the-root-directory">The Root Directory</a><ul>
+<li><a href="#the-root-app-directory">The <code>app</code> Directory</a></li>
+<li><a href="#the-bootstrap-directory">The <code>bootstrap</code> Directory</a></li>
+<li><a href="#the-config-directory">The <code>config</code> Directory</a></li>
+<li><a href="#the-database-directory">The <code>database</code> Directory</a></li>
+<li><a href="#the-public-directory">The <code>public</code> Directory</a></li>
+<li><a href="#the-resources-directory">The <code>resources</code> Directory</a></li>
+<li><a href="#the-routes-directory">The <code>routes</code> Directory</a></li>
+<li><a href="#the-storage-directory">The <code>storage</code> Directory</a></li>
+<li><a href="#the-tests-directory">The <code>tests</code> Directory</a></li>
+<li><a href="#the-vendor-directory">The <code>vendor</code> Directory</a></li>
+</ul>
+</li>
+<li><a href="#the-app-directory">The App Directory</a><ul>
+<li><a href="#the-console-directory">The <code>Console</code> Directory</a></li>
+<li><a href="#the-events-directory">The <code>Events</code> Directory</a></li>
+<li><a href="#the-exceptions-directory">The <code>Exceptions</code> Directory</a></li>
+<li><a href="#the-http-directory">The <code>Http</code> Directory</a></li>
+<li><a href="#the-jobs-directory">The <code>Jobs</code> Directory</a></li>
+<li><a href="#the-listeners-directory">The <code>Listeners</code> Directory</a></li>
+<li><a href="#the-mail-directory">The <code>Mail</code> Directory</a></li>
+<li><a href="#the-notifications-directory">The <code>Notifications</code> Directory</a></li>
+<li><a href="#the-policies-directory">The <code>Policies</code> Directory</a></li>
+<li><a href="#the-providers-directory">The <code>Providers</code> Directory</a></li>
+</ul>
+</li>
+</ul>
+<p><a name="introduction"></a></p>
+<h2 id="introduction">Introduction</h2>
+<p>The default Laravel application structure is intended to provide a great starting point for both large and small applications. Of course, you are free to organize your application however you like. Laravel imposes almost no restrictions on where any given class is located - as long as Composer can autoload the class.</p>
+<h4 id="where-is-the-models-directory">Where Is The Models Directory?</h4>
+<p>When getting started with Laravel, many developers are confused by the lack of a <code>models</code> directory. However, the lack of such a directory is intentional. We find the word "models" ambiguous since it means many different things to many different people. Some developers refer to an application's "model" as the totality of all of its business logic, while others refer to "models" as classes that interact with a relational database.</p>
+<p>For this reason, we choose to place Eloquent models in the <code>app</code> directory by default, and allow the developer to place them somewhere else if they choose.</p>
+<p><a name="the-root-directory"></a></p>
+<h2 id="the-root-directory">The Root Directory</h2>
+<p><a name="the-root-app-directory"></a></p>
+<h4 id="the-app-directory">The App Directory</h4>
+<p>The <code>app</code> directory, as you might expect, contains the core code of your application. We'll explore this directory in more detail soon; however, almost all of the classes in your application will be in this directory.</p>
+<p><a name="the-bootstrap-directory"></a></p>
+<h4 id="the-bootstrap-directory">The Bootstrap Directory</h4>
+<p>The <code>bootstrap</code> directory contains files that bootstrap the framework and configure autoloading. This directory also houses a <code>cache</code> directory which contains framework generated files for performance optimization such as the route and services cache files.</p>
+<p><a name="the-config-directory"></a></p>
+<h4 id="the-config-directory">The Config Directory</h4>
+<p>The <code>config</code> directory, as the name implies, contains all of your application's configuration files. It's a great idea to read through all of these files and familiarize yourself with all of the options available to you.</p>
+<p><a name="the-database-directory"></a></p>
+<h4 id="the-database-directory">The Database Directory</h4>
+<p>The <code>database</code> directory contains your database migration and seeds. If you wish, you may also use this directory to hold an SQLite database.</p>
+<p><a name="the-public-directory"></a></p>
+<h4 id="the-public-directory">The Public Directory</h4>
+<p>The <code>public</code> directory contains the <code>index.php</code> file, which is the entry point for all requests entering your application. This directory also houses your assets such as images, JavaScript, and CSS.</p>
+<p><a name="the-resources-directory"></a></p>
+<h4 id="the-resources-directory">The Resources Directory</h4>
+<p>The <code>resources</code> directory contains your views as well as your raw, un-compiled assets such as LESS, SASS, or JavaScript. This directory also houses all of your language files.</p>
+<p><a name="the-routes-directory"></a></p>
+<h4 id="the-routes-directory">The Routes Directory</h4>
+<p>The <code>routes</code> directory contains all of the route definitions for your application. By default, three route files are included with Laravel: <code>web.php</code>, <code>api.php</code>, and <code>console.php</code>.</p>
+<p>The <code>web.php</code> file contains routes that the <code>RouteServiceProvider</code> places in the <code>web</code> middleware group, which provides session state, CSRF protection, and cookie encryption. If your application does not offer a stateless, RESTful API, all of your routes will most likely be defined in the <code>web.php</code> file.</p>
+<p>The <code>api.php</code> file contains routes that the <code>RouteServiceProvider</code> places in the <code>api</code> middleware group, which provides rate limiting. These routes are intended to be stateless, so requests entering the application through these routes are intended to be authenticated via tokens and will not have access to session state.</p>
+<p>The <code>console.php</code> file is where you may define all of your Closure based console commands. Each Closure is bound to a command instance allowing a simple approach to interacting with each command's IO methods. Even though this file does not define HTTP routes, it defines console based entry points (routes) into your application.</p>
+<p><a name="the-storage-directory"></a></p>
+<h4 id="the-storage-directory">The Storage Directory</h4>
+<p>The <code>storage</code> directory contains your compiled Blade templates, file based sessions, file caches, and other files generated by the framework. This directory is segregated into <code>app</code>, <code>framework</code>, and <code>logs</code> directories. The <code>app</code> directory may be used to store any files generated by your application. The <code>framework</code> directory is used to store framework generated files and caches. Finally, the <code>logs</code> directory contains your application's log files.</p>
+<p>The <code>storage/app/public</code> directory may be used to store user-generated files, such as profile avatars, that should be publicly accessible. You should create a symbolic link at <code>public/storage</code> which points to this directory. You may create the link using the <code>php artisan storage:link</code> command.</p>
+<p><a name="the-tests-directory"></a></p>
+<h4 id="the-tests-directory">The Tests Directory</h4>
+<p>The <code>tests</code> directory contains your automated tests. An example <a href="https://phpunit.de/">PHPUnit</a> is provided out of the box. Each test class should be suffixed with the word <code>Test</code>. You may run your tests using the <code>phpunit</code> or <code>php vendor/bin/phpunit</code> commands.</p>
+<p><a name="the-vendor-directory"></a></p>
+<h4 id="the-vendor-directory">The Vendor Directory</h4>
+<p>The <code>vendor</code> directory contains your <a href="https://getcomposer.org">Composer</a> dependencies.</p>
+<p><a name="the-app-directory"></a></p>
+<h2 id="the-app-directory_1">The App Directory</h2>
+<p>The majority of your application is housed in the <code>app</code> directory. By default, this directory is namespaced under <code>App</code> and is autoloaded by Composer using the <a href="http://www.php-fig.org/psr/psr-4/">PSR-4 autoloading standard</a>.</p>
+<p>The <code>app</code> directory contains a variety of additional directories such as <code>Console</code>, <code>Http</code>, and <code>Providers</code>. Think of the <code>Console</code> and <code>Http</code> directories as providing an API into the core of your application. The HTTP protocol and CLI are both mechanisms to interact with your application, but do not actually contain application logic. In other words, they are simply two ways of issuing commands to your application. The <code>Console</code> directory contains all of your Artisan commands, while the <code>Http</code> directory contains your controllers, middleware, and requests.</p>
+<p>A variety of other directories will be generated inside the <code>app</code> directory as you use the <code>make</code> Artisan commands to generate classes. So, for example, the <code>app/Jobs</code> directory will not exist until you execute the <code>make:job</code> Artisan command to generate a job class.</p>
+<blockquote>
+<p>{tip} Many of the classes in the <code>app</code> directory can be generated by Artisan via commands. To review the available commands, run the <code>php artisan list make</code> command in your terminal.</p>
+</blockquote>
+<p><a name="the-console-directory"></a></p>
+<h4 id="the-console-directory">The Console Directory</h4>
+<p>The <code>Console</code> directory contains all of the custom Artisan commands for your application. These commands may be generated using the <code>make:command</code> command. This directory also houses your console kernel, which is where your custom Artisan commands are registered and your <a href="../docs/{{version}}/scheduling">scheduled tasks</a> are defined.</p>
+<p><a name="the-events-directory"></a></p>
+<h4 id="the-events-directory">The Events Directory</h4>
+<p>This directory does not exist by default, but will be created for you by the <code>event:generate</code> and <code>make:event</code> Artisan commands. The <code>Events</code> directory, as you might expect, houses <a href="../docs/{{version}}/events">event classes</a>. Events may be used to alert other parts of your application that a given action has occurred, providing a great deal of flexibility and decoupling.</p>
+<p><a name="the-exceptions-directory"></a></p>
+<h4 id="the-exceptions-directory">The Exceptions Directory</h4>
+<p>The <code>Exceptions</code> directory contains your application's exception handler and is also a good place to place any exceptions thrown by your application. If you would like to customize how your exceptions are logged or rendered, you should modify the <code>Handler</code> class in this directory.</p>
+<p><a name="the-http-directory"></a></p>
+<h4 id="the-http-directory">The Http Directory</h4>
+<p>The <code>Http</code> directory contains your controllers, middleware, and form requests. Almost all of the logic to handle requests entering your application will be placed in this directory.</p>
+<p><a name="the-jobs-directory"></a></p>
+<h4 id="the-jobs-directory">The Jobs Directory</h4>
+<p>This directory does not exist by default, but will be created for you if you execute the <code>make:job</code> Artisan command. The <code>Jobs</code> directory houses the <a href="../docs/{{version}}/queues">queueable jobs</a> for your application. Jobs may be queued by your application or run synchronously within the current request lifecycle. Jobs that run synchronously during the current request are sometimes referred to as "commands" since they are an implementation of the <a href="https://en.wikipedia.org/wiki/Command_pattern">command pattern</a>.</p>
+<p><a name="the-listeners-directory"></a></p>
+<h4 id="the-listeners-directory">The Listeners Directory</h4>
+<p>This directory does not exist by default, but will be created for you if you execute the <code>event:generate</code> or <code>make:listener</code> Artisan commands. The <code>Listeners</code> directory contains the classes that handle your <a href="../docs/{{version}}/events">events</a>. Event listeners receive an event instance and perform logic in response to the event being fired. For example, a <code>UserRegistered</code> event might be handled by a <code>SendWelcomeEmail</code> listener.</p>
+<p><a name="the-mail-directory"></a></p>
+<h4 id="the-mail-directory">The Mail Directory</h4>
+<p>This directory does not exist by default, but will be created for you if you execute the <code>make:mail</code> Artisan command. The <code>Mail</code> directory contains all of your classes that represent emails sent by your application. Mail objects allow you to encapsulate all of the logic of building an email in a single, simple class that may be sent using the <code>Mail::send</code> method.</p>
+<p><a name="the-notifications-directory"></a></p>
+<h4 id="the-notifications-directory">The Notifications Directory</h4>
+<p>This directory does not exist by default, but will be created for you if you execute the <code>make:notification</code> Artisan command. The <code>Notifications</code> directory contains all of the "transactional" notifications that are sent by your application, such as simple notifications about events that happen within your application. Laravel's notification features abstracts sending notifications over a variety of drivers such as email, Slack, SMS, or stored in a database.</p>
+<p><a name="the-policies-directory"></a></p>
+<h4 id="the-policies-directory">The Policies Directory</h4>
+<p>This directory does not exist by default, but will be created for you if you execute the <code>make:policy</code> Artisan command. The <code>Policies</code> directory contains the authorization policy classes for your application. Policies are used to determine if a user can perform a given action against a resource. For more information, check out the <a href="../docs/{{version}}/authorization">authorization documentation</a>.</p>
+<p><a name="the-providers-directory"></a></p>
+<h4 id="the-providers-directory">The Providers Directory</h4>
+<p>The <code>Providers</code> directory contains all of the <a href="../docs/{{version}}/providers">service providers</a> for your application. Service providers bootstrap your application by binding services in the service container, registering events, or performing any other tasks to prepare your application for incoming requests.</p>
+<p>In a fresh Laravel application, this directory will already contain several providers. You are free to add your own providers to this directory as needed.</p>
+          <aside class="copyright" role="note">
+            
+            Documentation built with
+            <a href="http://www.mkdocs.org" target="_blank">MkDocs</a>
+            using the
+            <a href="http://squidfunk.github.io/mkdocs-material/" target="_blank">
+              Material
+            </a>
+            theme.
+          </aside>
+          
+            <footer class="footer">
+              
+  <nav class="pagination" aria-label="Footer">
+    <div class="previous">
+      
+        <a href="../session/" title="Session">
+          <span class="direction">
+            Previous
+          </span>
+          <div class="page">
+            <div class="button button-previous" role="button" aria-label="Previous">
+              <i class="icon icon-back"></i>
+            </div>
+            <div class="stretch">
+              <div class="title">
+                Session
+              </div>
+            </div>
+          </div>
+        </a>
+      
+    </div>
+    <div class="next">
+      
+        <a href="../testing/" title="Testing">
+          <span class="direction">
+            Next
+          </span>
+          <div class="page">
+            <div class="stretch">
+              <div class="title">
+                Testing
+              </div>
+            </div>
+            <div class="button button-next" role="button" aria-label="Next">
+              <i class="icon icon-forward"></i>
+            </div>
+          </div>
+        </a>
+      
+    </div>
+  </nav>
+
+            </footer>
+          
+        </div>
+      </article>
+      <div class="results" role="status" aria-live="polite">
+        <div class="scrollable">
+          <div class="wrapper">
+            <div class="meta"></div>
+            <div class="list"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script>
+      var base_url = '..';
+      var repo_id  = '';
+    </script>
+    <script src="../assets/javascripts/application-997097ee0c.js"></script>
+    
+      <script src="../assets/jquery.js"></script>
+    
+      <script src="../assets/prism.js"></script>
+    
+    
+  </body>
+</html>

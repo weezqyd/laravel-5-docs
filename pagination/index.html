@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="no-js ie6"><![endif]-->
+<!--[if IE 7 ]><html class="no-js ie7"><![endif]-->
+<!--[if IE 8 ]><html class="no-js ie8"><![endif]-->
+<!--[if IE 9 ]><html class="no-js ie9"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
+    
+      
+        <title>Pagination - Laravel 5.3 official documentation</title>
+      
+      
+      
+      
+    
+    <meta property="og:url" content="None">
+    <meta property="og:title" content="Laravel 5.3 official documentation">
+    <meta property="og:image" content="None/../">
+    <meta name="apple-mobile-web-app-title" content="Laravel 5.3 official documentation">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    
+    <link rel="shortcut icon" type="image/x-icon" href="../assets/images/favicon-e565ddfa3b.ico">
+    <link rel="icon" type="image/x-icon" href="../assets/images/favicon-e565ddfa3b.ico">
+    <style>
+      @font-face {
+      	font-family: 'Icon';
+      	src: url('../assets/fonts/icon.eot?52m981');
+      	src: url('../assets/fonts/icon.eot?#iefix52m981')
+               format('embedded-opentype'),
+      		   url('../assets/fonts/icon.woff?52m981')
+               format('woff'),
+      		   url('../assets/fonts/icon.ttf?52m981')
+               format('truetype'),
+      		   url('../assets/fonts/icon.svg?52m981#icon')
+               format('svg');
+      	font-weight: normal;
+      	font-style: normal;
+      }
+    </style>
+    <link rel="stylesheet" href="../assets/stylesheets/application-a422ff04cc.css">
+    
+      <link rel="stylesheet" href="../assets/stylesheets/palettes-05ab2406df.css">
+    
+    
+      
+      
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,700|Ubuntu+Mono">
+      <style>
+        body, input {
+          font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
+        }
+        pre, code {
+          font-family: 'Ubuntu Mono', 'Courier New', 'Courier', monospace;
+        }
+      </style>
+    
+    
+      <link rel="stylesheet" href="../assets/prism.css">
+    
+    <script src="../assets/javascripts/modernizr-4ab42b99fd.js"></script>
+    
+  </head>
+  
+  
+  
+  <body class="palette-primary-teal palette-accent-pink">
+    
+    <div class="backdrop">
+      <div class="backdrop-paper"></div>
+    </div>
+    <input class="toggle" type="checkbox" id="toggle-drawer">
+    <input class="toggle" type="checkbox" id="toggle-search">
+    <label class="toggle-button overlay" for="toggle-drawer"></label>
+    <header class="header">
+      <nav aria-label="Header">
+  <div class="bar default">
+    <div class="button button-menu" role="button" aria-label="Menu">
+      <label class="toggle-button icon icon-menu" for="toggle-drawer">
+        <span></span>
+      </label>
+    </div>
+    <div class="stretch">
+      <div class="title">
+        
+          <span class="path">
+            
+          </span>
+        
+        Pagination
+      </div>
+    </div>
+    
+    
+    <div class="button button-search" role="button" aria-label="Search">
+      <label class="toggle-button icon icon-search" title="Search" for="toggle-search"></label>
+    </div>
+  </div>
+  <div class="bar search">
+    <div class="button button-close" role="button" aria-label="Close">
+      <label class="toggle-button icon icon-back" for="toggle-search"></label>
+    </div>
+    <div class="stretch">
+      <div class="field">
+        <input class="query" type="text" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck>
+      </div>
+    </div>
+    <div class="button button-reset" role="button" aria-label="Search">
+      <button class="toggle-button icon icon-close" id="reset-search"></button>
+    </div>
+  </div>
+</nav>
+    </header>
+    <main class="main">
+      
+      <div class="drawer">
+        <nav aria-label="Navigation">
+  
+  <a href="/" class="project">
+    <div class="banner">
+      
+      <div class="name">
+        <strong>
+          Laravel 5.3 official documentation
+          <span class="version">
+            
+          </span>
+        </strong>
+        
+      </div>
+    </div>
+  </a>
+  <div class="scrollable">
+    <div class="wrapper">
+      
+      <div class="toc">
+        <ul>
+          
+            
+  <li>
+    <a class="" title="Home" href="..">
+      Home
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Apis" href="../apis/">
+      Apis
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Application testing" href="../application-testing/">
+      Application testing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Artisan" href="../artisan/">
+      Artisan
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Authentication" href="../authentication/">
+      Authentication
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Authorization" href="../authorization/">
+      Authorization
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Billing" href="../billing/">
+      Billing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Blade" href="../blade/">
+      Blade
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Broadcasting" href="../broadcasting/">
+      Broadcasting
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Cache" href="../cache/">
+      Cache
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Collections" href="../collections/">
+      Collections
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Configuration" href="../configuration/">
+      Configuration
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Container" href="../container/">
+      Container
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Contracts" href="../contracts/">
+      Contracts
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Contributing" href="../contributing/">
+      Contributing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Contributions" href="../contributions/">
+      Contributions
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Controllers" href="../controllers/">
+      Controllers
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Csrf" href="../csrf/">
+      Csrf
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Database testing" href="../database-testing/">
+      Database testing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Database" href="../database/">
+      Database
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Documentation" href="../documentation/">
+      Documentation
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Elixir" href="../elixir/">
+      Elixir
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent collections" href="../eloquent-collections/">
+      Eloquent collections
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent mutators" href="../eloquent-mutators/">
+      Eloquent mutators
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent relationships" href="../eloquent-relationships/">
+      Eloquent relationships
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent serialization" href="../eloquent-serialization/">
+      Eloquent serialization
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent" href="../eloquent/">
+      Eloquent
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Encryption" href="../encryption/">
+      Encryption
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Envoy" href="../envoy/">
+      Envoy
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Errors" href="../errors/">
+      Errors
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Events" href="../events/">
+      Events
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Facades" href="../facades/">
+      Facades
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Filesystem" href="../filesystem/">
+      Filesystem
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Frontend" href="../frontend/">
+      Frontend
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Hashing" href="../hashing/">
+      Hashing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Helpers" href="../helpers/">
+      Helpers
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Homestead" href="../homestead/">
+      Homestead
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Installation" href="../installation/">
+      Installation
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="License" href="../license/">
+      License
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Lifecycle" href="../lifecycle/">
+      Lifecycle
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Localization" href="../localization/">
+      Localization
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Mail" href="../mail/">
+      Mail
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Middleware" href="../middleware/">
+      Middleware
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Migrations" href="../migrations/">
+      Migrations
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Mocking" href="../mocking/">
+      Mocking
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Notifications" href="../notifications/">
+      Notifications
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Packages" href="../packages/">
+      Packages
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="current" title="Pagination" href="./">
+      Pagination
+    </a>
+    
+      
+        
+      
+      
+        <ul>
+          
+            <li class="anchor">
+              <a title="Introduction" href="#introduction">
+                Introduction
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Basic Usage" href="#basic-usage">
+                Basic Usage
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Displaying Pagination Results" href="#displaying-pagination-results">
+                Displaying Pagination Results
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Customizing The Pagination View" href="#customizing-the-pagination-view">
+                Customizing The Pagination View
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Paginator Instance Methods" href="#paginator-instance-methods">
+                Paginator Instance Methods
+              </a>
+            </li>
+          
+        </ul>
+      
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Passport" href="../passport/">
+      Passport
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Passwords" href="../passwords/">
+      Passwords
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Providers" href="../providers/">
+      Providers
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Queries" href="../queries/">
+      Queries
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Queues" href="../queues/">
+      Queues
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Readme" href="../readme/">
+      Readme
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Redirects" href="../redirects/">
+      Redirects
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Redis" href="../redis/">
+      Redis
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Releases" href="../releases/">
+      Releases
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Requests" href="../requests/">
+      Requests
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Responses" href="../responses/">
+      Responses
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Routing" href="../routing/">
+      Routing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Scheduling" href="../scheduling/">
+      Scheduling
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Scout" href="../scout/">
+      Scout
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Seeding" href="../seeding/">
+      Seeding
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Session" href="../session/">
+      Session
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Structure" href="../structure/">
+      Structure
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Testing" href="../testing/">
+      Testing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Upgrade" href="../upgrade/">
+      Upgrade
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Valet" href="../valet/">
+      Valet
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Validation" href="../validation/">
+      Validation
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Views" href="../views/">
+      Views
+    </a>
+    
+  </li>
+
+          
+        </ul>
+        
+      </div>
+    </div>
+  </div>
+</nav>
+      </div>
+      <article class="article">
+        <div class="wrapper">
+          
+          <h1 id="pagination">Pagination</h1>
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#basic-usage">Basic Usage</a><ul>
+<li><a href="#paginating-query-builder-results">Paginating Query Builder Results</a></li>
+<li><a href="#paginating-eloquent-results">Paginating Eloquent Results</a></li>
+<li><a href="#manually-creating-a-paginator">Manually Creating A Paginator</a></li>
+</ul>
+</li>
+<li><a href="#displaying-pagination-results">Displaying Pagination Results</a><ul>
+<li><a href="#converting-results-to-json">Converting Results To JSON</a></li>
+</ul>
+</li>
+<li><a href="#customizing-the-pagination-view">Customizing The Pagination View</a></li>
+<li><a href="#paginator-instance-methods">Paginator Instance Methods</a></li>
+</ul>
+<p><a name="introduction"></a></p>
+<h2 id="introduction">Introduction</h2>
+<p>In other frameworks, pagination can be very painful. Laravel's paginator is integrated with the <a href="../docs/{{version}}/queries">query builder</a> and <a href="../docs/{{version}}/eloquent">Eloquent ORM</a> and provides convenient, easy-to-use pagination of database results out of the box. The HTML generated by the paginator is compatible with the <a href="http://getbootstrap.com/">Bootstrap CSS framework</a>.</p>
+<p><a name="basic-usage"></a></p>
+<h2 id="basic-usage">Basic Usage</h2>
+<p><a name="paginating-query-builder-results"></a></p>
+<h3 id="paginating-query-builder-results">Paginating Query Builder Results</h3>
+<p>There are several ways to paginate items. The simplest is by using the <code>paginate</code> method on the <a href="../docs/{{version}}/queries">query builder</a> or an <a href="../docs/{{version}}/eloquent">Eloquent query</a>. The <code>paginate</code> method automatically takes care of setting the proper limit and offset based on the current page being viewed by the user. By default, the current page is detected by the value of the <code>page</code> query string argument on the HTTP request. Of course, this value is automatically detected by Laravel, and is also automatically inserted into links generated by the paginator.</p>
+<p>In this example, the only argument passed to the <code>paginate</code> method is the number of items you would like displayed "per page". In this case, let's specify that we would like to display <code>15</code> items per page:</p>
+<pre><code>&lt;?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+
+class UserController extends Controller
+{
+    /**
+     * Show all of the users for the application.
+     *
+     * @return Response
+     */
+    public function index()
+    {
+        $users = DB::table('users')-&gt;paginate(15);
+
+        return view('user.index', ['users' =&gt; $users]);
+    }
+}
+</code></pre>
+<blockquote>
+<p>{note} Currently, pagination operations that use a <code>groupBy</code> statement cannot be executed efficiently by Laravel. If you need to use a <code>groupBy</code> with a paginated result set, it is recommended that you query the database and create a paginator manually.</p>
+</blockquote>
+<h4 id="simple-pagination">"Simple Pagination"</h4>
+<p>If you only need to display simple "Next" and "Previous" links in your pagination view, you may use the <code>simplePaginate</code> method to perform a more efficient query. This is very useful for large datasets when you do not need to display a link for each page number when rendering your view:</p>
+<pre><code>$users = DB::table('users')-&gt;simplePaginate(15);
+</code></pre>
+<p><a name="paginating-eloquent-results"></a></p>
+<h3 id="paginating-eloquent-results">Paginating Eloquent Results</h3>
+<p>You may also paginate <a href="../docs/{{version}}/eloquent">Eloquent</a> queries. In this example, we will paginate the <code>User</code> model with <code>15</code> items per page. As you can see, the syntax is nearly identical to paginating query builder results:</p>
+<pre><code>$users = App\User::paginate(15);
+</code></pre>
+<p>Of course, you may call <code>paginate</code> after setting other constraints on the query, such as <code>where</code> clauses:</p>
+<pre><code>$users = User::where('votes', '&gt;', 100)-&gt;paginate(15);
+</code></pre>
+<p>You may also use the <code>simplePaginate</code> method when paginating Eloquent models:</p>
+<pre><code>$users = User::where('votes', '&gt;', 100)-&gt;simplePaginate(15);
+</code></pre>
+<p><a name="manually-creating-a-paginator"></a></p>
+<h3 id="manually-creating-a-paginator">Manually Creating A Paginator</h3>
+<p>Sometimes you may wish to create a pagination instance manually, passing it an array of items. You may do so by creating either an <code>Illuminate\Pagination\Paginator</code> or <code>Illuminate\Pagination\LengthAwarePaginator</code> instance, depending on your needs.</p>
+<p>The <code>Paginator</code> class does not need to know the total number of items in the result set; however, because of this, the class does not have methods for retrieving the index of the last page. The <code>LengthAwarePaginator</code> accepts almost the same arguments as the <code>Paginator</code>; however, it does require a count of the total number of items in the result set.</p>
+<p>In other words, the <code>Paginator</code> corresponds to the <code>simplePaginate</code> method on the query builder and Eloquent, while the <code>LengthAwarePaginator</code> corresponds to the <code>paginate</code> method.</p>
+<blockquote>
+<p>{note} When manually creating a paginator instance, you should manually "slice" the array of results you pass to the paginator. If you're unsure how to do this, check out the <a href="http://php.net/manual/en/function.array-slice.php">array_slice</a> PHP function.</p>
+</blockquote>
+<p><a name="displaying-pagination-results"></a></p>
+<h2 id="displaying-pagination-results">Displaying Pagination Results</h2>
+<p>When calling the <code>paginate</code> method, you will receive an instance of <code>Illuminate\Pagination\LengthAwarePaginator</code>. When calling the <code>simplePaginate</code> method, you will receive an instance of <code>Illuminate\Pagination\Paginator</code>. These objects provide several methods that describe the result set. In addition to these helpers methods, the paginator instances are iterators and may be looped as an array. So, once you have retrieved the results, you may display the results and render the page links using <a href="../docs/{{version}}/blade">Blade</a>:</p>
+<pre><code>&lt;div class="container"&gt;
+    @foreach ($users as $user)
+        {{ $user-&gt;name }}
+    @endforeach
+&lt;/div&gt;
+
+{{ $users-&gt;links() }}
+</code></pre>
+<p>The <code>links</code> method will render the links to the rest of the pages in the result set. Each of these links will already contain the proper <code>page</code> query string variable. Remember, the HTML generated by the <code>links</code> method is compatible with the <a href="https://getbootstrap.com">Bootstrap CSS framework</a>.</p>
+<h4 id="customizing-the-paginator-uri">Customizing The Paginator URI</h4>
+<p>The <code>setPath</code> method allows you to customize the URI used by the paginator when generating links. For example, if you want the paginator to generate links like <code>http://example.com/custom/url?page=N</code>, you should pass <code>custom/url</code> to the <code>setPath</code> method:</p>
+<pre><code>Route::get('users', function () {
+    $users = App\User::paginate(15);
+
+    $users-&gt;setPath('custom/url');
+
+    //
+});
+</code></pre>
+<h4 id="appending-to-pagination-links">Appending To Pagination Links</h4>
+<p>You may append to the query string of pagination links using the <code>appends</code> method. For example, to append <code>sort=votes</code> to each pagination link, you should make the following call to <code>appends</code>:</p>
+<pre><code>{{ $users-&gt;appends(['sort' =&gt; 'votes'])-&gt;links() }}
+</code></pre>
+<p>If you wish to append a "hash fragment" to the paginator's URLs, you may use the <code>fragment</code> method. For example, to append <code>#foo</code> to the end of each pagination link, make the following call to the <code>fragment</code> method:</p>
+<pre><code>{{ $users-&gt;fragment('foo')-&gt;links() }}
+</code></pre>
+<p><a name="converting-results-to-json"></a></p>
+<h3 id="converting-results-to-json">Converting Results To JSON</h3>
+<p>The Laravel paginator result classes implement the <code>Illuminate\Contracts\Support\Jsonable</code> Interface contract and expose the <code>toJson</code> method, so it's very easy to convert your pagination results to JSON. You may also convert a paginator instance to JSON by simply returning it from a route or controller action:</p>
+<pre><code>Route::get('users', function () {
+    return App\User::paginate();
+});
+</code></pre>
+<p>The JSON from the paginator will include meta information such as <code>total</code>, <code>current_page</code>, <code>last_page</code>, and more. The actual result objects will be available via the <code>data</code> key in the JSON array. Here is an example of the JSON created by returning a paginator instance from a route:</p>
+<pre><code>{
+   "total": 50,
+   "per_page": 15,
+   "current_page": 1,
+   "last_page": 4,
+   "next_page_url": "http://laravel.app?page=2",
+   "prev_page_url": null,
+   "from": 1,
+   "to": 15,
+   "data":[
+        {
+            // Result Object
+        },
+        {
+            // Result Object
+        }
+   ]
+}
+</code></pre>
+<p><a name="customizing-the-pagination-view"></a></p>
+<h2 id="customizing-the-pagination-view">Customizing The Pagination View</h2>
+<p>By default, the views rendered to display the pagination links are compatible with the Bootstrap CSS framework. However, if you are not using Bootstrap, you are free to define your own views to render these links. When calling the <code>links</code> method on a paginator instance, pass the view name as the first argument to the method:</p>
+<pre><code>{{ $paginator-&gt;links('view.name') }}
+</code></pre>
+<p>However, the easiest way to customize the pagination views is by exporting them to your <code>resources/views/vendor</code> directory using the <code>vendor:publish</code> command:</p>
+<pre><code>php artisan vendor:publish --tag=laravel-pagination
+</code></pre>
+<p>This command will place the views in the <code>resources/views/vendor/pagination</code> directory. The <code>default.blade.php</code> file within this directory corresponds to the default pagination view. Simply edit this file to modify the pagination HTML.</p>
+<p><a name="paginator-instance-methods"></a></p>
+<h2 id="paginator-instance-methods">Paginator Instance Methods</h2>
+<p>Each paginator instance provides additional pagination information via the following methods:</p>
+<ul>
+<li><code>$results-&gt;count()</code></li>
+<li><code>$results-&gt;currentPage()</code></li>
+<li><code>$results-&gt;firstItem()</code></li>
+<li><code>$results-&gt;hasMorePages()</code></li>
+<li><code>$results-&gt;lastItem()</code></li>
+<li><code>$results-&gt;lastPage() (Not available when using simplePaginate)</code></li>
+<li><code>$results-&gt;nextPageUrl()</code></li>
+<li><code>$results-&gt;perPage()</code></li>
+<li><code>$results-&gt;previousPageUrl()</code></li>
+<li><code>$results-&gt;total() (Not available when using simplePaginate)</code></li>
+<li><code>$results-&gt;url($page)</code></li>
+</ul>
+          <aside class="copyright" role="note">
+            
+            Documentation built with
+            <a href="http://www.mkdocs.org" target="_blank">MkDocs</a>
+            using the
+            <a href="http://squidfunk.github.io/mkdocs-material/" target="_blank">
+              Material
+            </a>
+            theme.
+          </aside>
+          
+            <footer class="footer">
+              
+  <nav class="pagination" aria-label="Footer">
+    <div class="previous">
+      
+        <a href="../packages/" title="Packages">
+          <span class="direction">
+            Previous
+          </span>
+          <div class="page">
+            <div class="button button-previous" role="button" aria-label="Previous">
+              <i class="icon icon-back"></i>
+            </div>
+            <div class="stretch">
+              <div class="title">
+                Packages
+              </div>
+            </div>
+          </div>
+        </a>
+      
+    </div>
+    <div class="next">
+      
+        <a href="../passport/" title="Passport">
+          <span class="direction">
+            Next
+          </span>
+          <div class="page">
+            <div class="stretch">
+              <div class="title">
+                Passport
+              </div>
+            </div>
+            <div class="button button-next" role="button" aria-label="Next">
+              <i class="icon icon-forward"></i>
+            </div>
+          </div>
+        </a>
+      
+    </div>
+  </nav>
+
+            </footer>
+          
+        </div>
+      </article>
+      <div class="results" role="status" aria-live="polite">
+        <div class="scrollable">
+          <div class="wrapper">
+            <div class="meta"></div>
+            <div class="list"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script>
+      var base_url = '..';
+      var repo_id  = '';
+    </script>
+    <script src="../assets/javascripts/application-997097ee0c.js"></script>
+    
+      <script src="../assets/jquery.js"></script>
+    
+      <script src="../assets/prism.js"></script>
+    
+    
+  </body>
+</html>

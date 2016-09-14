@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="no-js ie6"><![endif]-->
+<!--[if IE 7 ]><html class="no-js ie7"><![endif]-->
+<!--[if IE 8 ]><html class="no-js ie8"><![endif]-->
+<!--[if IE 9 ]><html class="no-js ie9"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
+    
+      
+        <title>Views - Laravel 5.3 official documentation</title>
+      
+      
+      
+      
+    
+    <meta property="og:url" content="None">
+    <meta property="og:title" content="Laravel 5.3 official documentation">
+    <meta property="og:image" content="None/../">
+    <meta name="apple-mobile-web-app-title" content="Laravel 5.3 official documentation">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    
+    <link rel="shortcut icon" type="image/x-icon" href="../assets/images/favicon-e565ddfa3b.ico">
+    <link rel="icon" type="image/x-icon" href="../assets/images/favicon-e565ddfa3b.ico">
+    <style>
+      @font-face {
+      	font-family: 'Icon';
+      	src: url('../assets/fonts/icon.eot?52m981');
+      	src: url('../assets/fonts/icon.eot?#iefix52m981')
+               format('embedded-opentype'),
+      		   url('../assets/fonts/icon.woff?52m981')
+               format('woff'),
+      		   url('../assets/fonts/icon.ttf?52m981')
+               format('truetype'),
+      		   url('../assets/fonts/icon.svg?52m981#icon')
+               format('svg');
+      	font-weight: normal;
+      	font-style: normal;
+      }
+    </style>
+    <link rel="stylesheet" href="../assets/stylesheets/application-a422ff04cc.css">
+    
+      <link rel="stylesheet" href="../assets/stylesheets/palettes-05ab2406df.css">
+    
+    
+      
+      
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,700|Ubuntu+Mono">
+      <style>
+        body, input {
+          font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
+        }
+        pre, code {
+          font-family: 'Ubuntu Mono', 'Courier New', 'Courier', monospace;
+        }
+      </style>
+    
+    
+      <link rel="stylesheet" href="../assets/prism.css">
+    
+    <script src="../assets/javascripts/modernizr-4ab42b99fd.js"></script>
+    
+  </head>
+  
+  
+  
+  <body class="palette-primary-teal palette-accent-pink">
+    
+    <div class="backdrop">
+      <div class="backdrop-paper"></div>
+    </div>
+    <input class="toggle" type="checkbox" id="toggle-drawer">
+    <input class="toggle" type="checkbox" id="toggle-search">
+    <label class="toggle-button overlay" for="toggle-drawer"></label>
+    <header class="header">
+      <nav aria-label="Header">
+  <div class="bar default">
+    <div class="button button-menu" role="button" aria-label="Menu">
+      <label class="toggle-button icon icon-menu" for="toggle-drawer">
+        <span></span>
+      </label>
+    </div>
+    <div class="stretch">
+      <div class="title">
+        
+          <span class="path">
+            
+          </span>
+        
+        Views
+      </div>
+    </div>
+    
+    
+    <div class="button button-search" role="button" aria-label="Search">
+      <label class="toggle-button icon icon-search" title="Search" for="toggle-search"></label>
+    </div>
+  </div>
+  <div class="bar search">
+    <div class="button button-close" role="button" aria-label="Close">
+      <label class="toggle-button icon icon-back" for="toggle-search"></label>
+    </div>
+    <div class="stretch">
+      <div class="field">
+        <input class="query" type="text" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck>
+      </div>
+    </div>
+    <div class="button button-reset" role="button" aria-label="Search">
+      <button class="toggle-button icon icon-close" id="reset-search"></button>
+    </div>
+  </div>
+</nav>
+    </header>
+    <main class="main">
+      
+      <div class="drawer">
+        <nav aria-label="Navigation">
+  
+  <a href="/" class="project">
+    <div class="banner">
+      
+      <div class="name">
+        <strong>
+          Laravel 5.3 official documentation
+          <span class="version">
+            
+          </span>
+        </strong>
+        
+      </div>
+    </div>
+  </a>
+  <div class="scrollable">
+    <div class="wrapper">
+      
+      <div class="toc">
+        <ul>
+          
+            
+  <li>
+    <a class="" title="Home" href="..">
+      Home
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Apis" href="../apis/">
+      Apis
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Application testing" href="../application-testing/">
+      Application testing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Artisan" href="../artisan/">
+      Artisan
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Authentication" href="../authentication/">
+      Authentication
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Authorization" href="../authorization/">
+      Authorization
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Billing" href="../billing/">
+      Billing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Blade" href="../blade/">
+      Blade
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Broadcasting" href="../broadcasting/">
+      Broadcasting
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Cache" href="../cache/">
+      Cache
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Collections" href="../collections/">
+      Collections
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Configuration" href="../configuration/">
+      Configuration
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Container" href="../container/">
+      Container
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Contracts" href="../contracts/">
+      Contracts
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Contributing" href="../contributing/">
+      Contributing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Contributions" href="../contributions/">
+      Contributions
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Controllers" href="../controllers/">
+      Controllers
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Csrf" href="../csrf/">
+      Csrf
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Database testing" href="../database-testing/">
+      Database testing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Database" href="../database/">
+      Database
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Documentation" href="../documentation/">
+      Documentation
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Elixir" href="../elixir/">
+      Elixir
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent collections" href="../eloquent-collections/">
+      Eloquent collections
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent mutators" href="../eloquent-mutators/">
+      Eloquent mutators
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent relationships" href="../eloquent-relationships/">
+      Eloquent relationships
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent serialization" href="../eloquent-serialization/">
+      Eloquent serialization
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent" href="../eloquent/">
+      Eloquent
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Encryption" href="../encryption/">
+      Encryption
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Envoy" href="../envoy/">
+      Envoy
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Errors" href="../errors/">
+      Errors
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Events" href="../events/">
+      Events
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Facades" href="../facades/">
+      Facades
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Filesystem" href="../filesystem/">
+      Filesystem
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Frontend" href="../frontend/">
+      Frontend
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Hashing" href="../hashing/">
+      Hashing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Helpers" href="../helpers/">
+      Helpers
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Homestead" href="../homestead/">
+      Homestead
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Installation" href="../installation/">
+      Installation
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="License" href="../license/">
+      License
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Lifecycle" href="../lifecycle/">
+      Lifecycle
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Localization" href="../localization/">
+      Localization
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Mail" href="../mail/">
+      Mail
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Middleware" href="../middleware/">
+      Middleware
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Migrations" href="../migrations/">
+      Migrations
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Mocking" href="../mocking/">
+      Mocking
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Notifications" href="../notifications/">
+      Notifications
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Packages" href="../packages/">
+      Packages
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Pagination" href="../pagination/">
+      Pagination
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Passport" href="../passport/">
+      Passport
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Passwords" href="../passwords/">
+      Passwords
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Providers" href="../providers/">
+      Providers
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Queries" href="../queries/">
+      Queries
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Queues" href="../queues/">
+      Queues
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Readme" href="../readme/">
+      Readme
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Redirects" href="../redirects/">
+      Redirects
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Redis" href="../redis/">
+      Redis
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Releases" href="../releases/">
+      Releases
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Requests" href="../requests/">
+      Requests
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Responses" href="../responses/">
+      Responses
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Routing" href="../routing/">
+      Routing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Scheduling" href="../scheduling/">
+      Scheduling
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Scout" href="../scout/">
+      Scout
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Seeding" href="../seeding/">
+      Seeding
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Session" href="../session/">
+      Session
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Structure" href="../structure/">
+      Structure
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Testing" href="../testing/">
+      Testing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Upgrade" href="../upgrade/">
+      Upgrade
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Valet" href="../valet/">
+      Valet
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Validation" href="../validation/">
+      Validation
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="current" title="Views" href="./">
+      Views
+    </a>
+    
+      
+        
+      
+      
+        <ul>
+          
+            <li class="anchor">
+              <a title="Creating Views" href="#creating-views">
+                Creating Views
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Passing Data To Views" href="#passing-data-to-views">
+                Passing Data To Views
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="View Composers" href="#view-composers">
+                View Composers
+              </a>
+            </li>
+          
+        </ul>
+      
+    
+  </li>
+
+          
+        </ul>
+        
+      </div>
+    </div>
+  </div>
+</nav>
+      </div>
+      <article class="article">
+        <div class="wrapper">
+          
+          <h1 id="views">Views</h1>
+<ul>
+<li><a href="#creating-views">Creating Views</a></li>
+<li><a href="#passing-data-to-views">Passing Data To Views</a><ul>
+<li><a href="#sharing-data-with-all-views">Sharing Data With All Views</a></li>
+</ul>
+</li>
+<li><a href="#view-composers">View Composers</a></li>
+</ul>
+<p><a name="creating-views"></a></p>
+<h2 id="creating-views">Creating Views</h2>
+<p>Views contain the HTML served by your application and separate your controller / application logic from your presentation logic. Views are stored in the <code>resources/views</code> directory. A simple view might look something like this:</p>
+<pre><code>&lt;!-- View stored in resources/views/greeting.php --&gt;
+
+&lt;html&gt;
+    &lt;body&gt;
+        &lt;h1&gt;Hello, {{ $name }}&lt;/h1&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>Since this view is stored at <code>resources/views/greeting.php</code>, we may return it using the global <code>view</code> helper like so:</p>
+<pre><code>Route::get('/', function () {
+    return view('greeting', ['name' =&gt; 'James']);
+});
+</code></pre>
+<p>As you can see, the first argument passed to the <code>view</code> helper corresponds to the name of the view file in the <code>resources/views</code> directory. The second argument is an array of data that should be made available to the view. In this case, we are passing the <code>name</code> variable, which is displayed in the view using <a href="../docs/{{version}}/blade">Blade syntax</a>.</p>
+<p>Of course, views may also be nested within sub-directories of the <code>resources/views</code> directory. "Dot" notation may be used to reference nested views. For example, if your view is stored at <code>resources/views/admin/profile.php</code>, you may reference it like so:</p>
+<pre><code>return view('admin.profile', $data);
+</code></pre>
+<h4 id="determining-if-a-view-exists">Determining If A View Exists</h4>
+<p>If you need to determine if a view exists, you may use the <code>View</code> facade. The <code>exists</code> method will return <code>true</code> if the view exists:</p>
+<pre><code>use Illuminate\Support\Facades\View;
+
+if (View::exists('emails.customer')) {
+    //
+}
+</code></pre>
+<p><a name="passing-data-to-views"></a></p>
+<h2 id="passing-data-to-views">Passing Data To Views</h2>
+<p>As you saw in the previous examples, you may pass an array of data to views:</p>
+<pre><code>return view('greetings', ['name' =&gt; 'Victoria']);
+</code></pre>
+<p>When passing information in this manner, <code>$data</code> should be an array with key/value pairs. Inside your view, you can then access each value using its corresponding key, such as <code>&lt;?php echo $key; ?&gt;</code>. As an alternative to passing a complete array of data to the <code>view</code> helper function, you may use the <code>with</code> method to add individual pieces of data to the view:</p>
+<pre><code>return view('greeting')-&gt;with('name', 'Victoria');
+</code></pre>
+<p><a name="sharing-data-with-all-views"></a></p>
+<h4 id="sharing-data-with-all-views">Sharing Data With All Views</h4>
+<p>Occasionally, you may need to share a piece of data with all views that are rendered by your application. You may do so using the view facade's <code>share</code> method. Typically, you should place calls to <code>share</code> within a service provider's <code>boot</code> method. You are free to add them to the <code>AppServiceProvider</code> or generate a separate service provider to house them:</p>
+<pre><code>&lt;?php
+
+namespace App\Providers;
+
+use Illuminate\Support\Facades\View;
+
+class AppServiceProvider extends ServiceProvider
+{
+    /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        View::share('key', 'value');
+    }
+
+    /**
+     * Register the service provider.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        //
+    }
+}
+</code></pre>
+<p><a name="view-composers"></a></p>
+<h2 id="view-composers">View Composers</h2>
+<p>View composers are callbacks or class methods that are called when a view is rendered. If you have data that you want to be bound to a view each time that view is rendered, a view composer can help you organize that logic into a single location.</p>
+<p>For this example, let's register the view composers within a <a href="../docs/{{version}}/providers">service provider</a>. We'll use the <code>View</code> facade to access the underlying <code>Illuminate\Contracts\View\Factory</code> contract implementation. Remember, Laravel does not include a default directory for view composers. You are free to organize them however you wish. For example, you could create an <code>App\Http\ViewComposers</code> directory:</p>
+<pre><code>&lt;?php
+
+namespace App\Providers;
+
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\ServiceProvider;
+
+class ComposerServiceProvider extends ServiceProvider
+{
+    /**
+     * Register bindings in the container.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        // Using class based composers...
+        View::composer(
+            'profile', 'App\Http\ViewComposers\ProfileComposer'
+        );
+
+        // Using Closure based composers...
+        View::composer('dashboard', function ($view) {
+            //
+        });
+    }
+
+    /**
+     * Register the service provider.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        //
+    }
+}
+</code></pre>
+<blockquote>
+<p>{note} Remember, if you create a new service provider to contain your view composer registrations, you will need to add the service provider to the <code>providers</code> array in the <code>config/app.php</code> configuration file.</p>
+</blockquote>
+<p>Now that we have registered the composer, the <code>ProfileComposer@compose</code> method will be executed each time the <code>profile</code> view is being rendered. So, let's define the composer class:</p>
+<pre><code>&lt;?php
+
+namespace App\Http\ViewComposers;
+
+use Illuminate\View\View;
+use App\Repositories\UserRepository;
+
+class ProfileComposer
+{
+    /**
+     * The user repository implementation.
+     *
+     * @var UserRepository
+     */
+    protected $users;
+
+    /**
+     * Create a new profile composer.
+     *
+     * @param  UserRepository  $users
+     * @return void
+     */
+    public function __construct(UserRepository $users)
+    {
+        // Dependencies automatically resolved by service container...
+        $this-&gt;users = $users;
+    }
+
+    /**
+     * Bind data to the view.
+     *
+     * @param  View  $view
+     * @return void
+     */
+    public function compose(View $view)
+    {
+        $view-&gt;with('count', $this-&gt;users-&gt;count());
+    }
+}
+</code></pre>
+<p>Just before the view is rendered, the composer's <code>compose</code> method is called with the <code>Illuminate\View\View</code> instance. You may use the <code>with</code> method to bind data to the view.</p>
+<blockquote>
+<p>{tip} All view composers are resolved via the <a href="../docs/{{version}}/container">service container</a>, so you may type-hint any dependencies you need within a composer's constructor.</p>
+</blockquote>
+<h4 id="attaching-a-composer-to-multiple-views">Attaching A Composer To Multiple Views</h4>
+<p>You may attach a view composer to multiple views at once by passing an array of views as the first argument to the <code>composer</code> method:</p>
+<pre><code>View::composer(
+    ['profile', 'dashboard'],
+    'App\Http\ViewComposers\MyViewComposer'
+);
+</code></pre>
+<p>The <code>composer</code> method also accepts the <code>*</code> character as a wildcard, allowing you to attach a composer to all views:</p>
+<pre><code>View::composer('*', function ($view) {
+    //
+});
+</code></pre>
+<h4 id="view-creators">View Creators</h4>
+<p>View <strong>creators</strong> are very similar to view composers; however, they are executed immediately after the view is instantiated instead of waiting until the view is about to render. To register a view creator, use the <code>creator</code> method:</p>
+<pre><code>View::creator('profile', 'App\Http\ViewCreators\ProfileCreator');
+</code></pre>
+          <aside class="copyright" role="note">
+            
+            Documentation built with
+            <a href="http://www.mkdocs.org" target="_blank">MkDocs</a>
+            using the
+            <a href="http://squidfunk.github.io/mkdocs-material/" target="_blank">
+              Material
+            </a>
+            theme.
+          </aside>
+          
+            <footer class="footer">
+              
+  <nav class="pagination" aria-label="Footer">
+    <div class="previous">
+      
+        <a href="../validation/" title="Validation">
+          <span class="direction">
+            Previous
+          </span>
+          <div class="page">
+            <div class="button button-previous" role="button" aria-label="Previous">
+              <i class="icon icon-back"></i>
+            </div>
+            <div class="stretch">
+              <div class="title">
+                Validation
+              </div>
+            </div>
+          </div>
+        </a>
+      
+    </div>
+    <div class="next">
+      
+    </div>
+  </nav>
+
+            </footer>
+          
+        </div>
+      </article>
+      <div class="results" role="status" aria-live="polite">
+        <div class="scrollable">
+          <div class="wrapper">
+            <div class="meta"></div>
+            <div class="list"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script>
+      var base_url = '..';
+      var repo_id  = '';
+    </script>
+    <script src="../assets/javascripts/application-997097ee0c.js"></script>
+    
+      <script src="../assets/jquery.js"></script>
+    
+      <script src="../assets/prism.js"></script>
+    
+    
+  </body>
+</html>

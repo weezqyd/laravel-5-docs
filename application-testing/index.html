@@ -1,0 +1,1274 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="no-js ie6"><![endif]-->
+<!--[if IE 7 ]><html class="no-js ie7"><![endif]-->
+<!--[if IE 8 ]><html class="no-js ie8"><![endif]-->
+<!--[if IE 9 ]><html class="no-js ie9"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
+    
+      
+        <title>Application testing - Laravel 5.3 official documentation</title>
+      
+      
+      
+      
+    
+    <meta property="og:url" content="None">
+    <meta property="og:title" content="Laravel 5.3 official documentation">
+    <meta property="og:image" content="None/../">
+    <meta name="apple-mobile-web-app-title" content="Laravel 5.3 official documentation">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    
+    <link rel="shortcut icon" type="image/x-icon" href="../assets/images/favicon-e565ddfa3b.ico">
+    <link rel="icon" type="image/x-icon" href="../assets/images/favicon-e565ddfa3b.ico">
+    <style>
+      @font-face {
+      	font-family: 'Icon';
+      	src: url('../assets/fonts/icon.eot?52m981');
+      	src: url('../assets/fonts/icon.eot?#iefix52m981')
+               format('embedded-opentype'),
+      		   url('../assets/fonts/icon.woff?52m981')
+               format('woff'),
+      		   url('../assets/fonts/icon.ttf?52m981')
+               format('truetype'),
+      		   url('../assets/fonts/icon.svg?52m981#icon')
+               format('svg');
+      	font-weight: normal;
+      	font-style: normal;
+      }
+    </style>
+    <link rel="stylesheet" href="../assets/stylesheets/application-a422ff04cc.css">
+    
+      <link rel="stylesheet" href="../assets/stylesheets/palettes-05ab2406df.css">
+    
+    
+      
+      
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,700|Ubuntu+Mono">
+      <style>
+        body, input {
+          font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
+        }
+        pre, code {
+          font-family: 'Ubuntu Mono', 'Courier New', 'Courier', monospace;
+        }
+      </style>
+    
+    
+      <link rel="stylesheet" href="../assets/prism.css">
+    
+    <script src="../assets/javascripts/modernizr-4ab42b99fd.js"></script>
+    
+  </head>
+  
+  
+  
+  <body class="palette-primary-teal palette-accent-pink">
+    
+    <div class="backdrop">
+      <div class="backdrop-paper"></div>
+    </div>
+    <input class="toggle" type="checkbox" id="toggle-drawer">
+    <input class="toggle" type="checkbox" id="toggle-search">
+    <label class="toggle-button overlay" for="toggle-drawer"></label>
+    <header class="header">
+      <nav aria-label="Header">
+  <div class="bar default">
+    <div class="button button-menu" role="button" aria-label="Menu">
+      <label class="toggle-button icon icon-menu" for="toggle-drawer">
+        <span></span>
+      </label>
+    </div>
+    <div class="stretch">
+      <div class="title">
+        
+          <span class="path">
+            
+          </span>
+        
+        Application testing
+      </div>
+    </div>
+    
+    
+    <div class="button button-search" role="button" aria-label="Search">
+      <label class="toggle-button icon icon-search" title="Search" for="toggle-search"></label>
+    </div>
+  </div>
+  <div class="bar search">
+    <div class="button button-close" role="button" aria-label="Close">
+      <label class="toggle-button icon icon-back" for="toggle-search"></label>
+    </div>
+    <div class="stretch">
+      <div class="field">
+        <input class="query" type="text" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck>
+      </div>
+    </div>
+    <div class="button button-reset" role="button" aria-label="Search">
+      <button class="toggle-button icon icon-close" id="reset-search"></button>
+    </div>
+  </div>
+</nav>
+    </header>
+    <main class="main">
+      
+      <div class="drawer">
+        <nav aria-label="Navigation">
+  
+  <a href="/" class="project">
+    <div class="banner">
+      
+      <div class="name">
+        <strong>
+          Laravel 5.3 official documentation
+          <span class="version">
+            
+          </span>
+        </strong>
+        
+      </div>
+    </div>
+  </a>
+  <div class="scrollable">
+    <div class="wrapper">
+      
+      <div class="toc">
+        <ul>
+          
+            
+  <li>
+    <a class="" title="Home" href="..">
+      Home
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Apis" href="../apis/">
+      Apis
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="current" title="Application testing" href="./">
+      Application testing
+    </a>
+    
+      
+        
+      
+      
+        <ul>
+          
+            <li class="anchor">
+              <a title="Introduction" href="#introduction">
+                Introduction
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Interacting With Your Application" href="#interacting-with-your-application">
+                Interacting With Your Application
+              </a>
+            </li>
+          
+        </ul>
+      
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Artisan" href="../artisan/">
+      Artisan
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Authentication" href="../authentication/">
+      Authentication
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Authorization" href="../authorization/">
+      Authorization
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Billing" href="../billing/">
+      Billing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Blade" href="../blade/">
+      Blade
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Broadcasting" href="../broadcasting/">
+      Broadcasting
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Cache" href="../cache/">
+      Cache
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Collections" href="../collections/">
+      Collections
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Configuration" href="../configuration/">
+      Configuration
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Container" href="../container/">
+      Container
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Contracts" href="../contracts/">
+      Contracts
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Contributing" href="../contributing/">
+      Contributing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Contributions" href="../contributions/">
+      Contributions
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Controllers" href="../controllers/">
+      Controllers
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Csrf" href="../csrf/">
+      Csrf
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Database testing" href="../database-testing/">
+      Database testing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Database" href="../database/">
+      Database
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Documentation" href="../documentation/">
+      Documentation
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Elixir" href="../elixir/">
+      Elixir
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent collections" href="../eloquent-collections/">
+      Eloquent collections
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent mutators" href="../eloquent-mutators/">
+      Eloquent mutators
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent relationships" href="../eloquent-relationships/">
+      Eloquent relationships
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent serialization" href="../eloquent-serialization/">
+      Eloquent serialization
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent" href="../eloquent/">
+      Eloquent
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Encryption" href="../encryption/">
+      Encryption
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Envoy" href="../envoy/">
+      Envoy
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Errors" href="../errors/">
+      Errors
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Events" href="../events/">
+      Events
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Facades" href="../facades/">
+      Facades
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Filesystem" href="../filesystem/">
+      Filesystem
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Frontend" href="../frontend/">
+      Frontend
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Hashing" href="../hashing/">
+      Hashing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Helpers" href="../helpers/">
+      Helpers
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Homestead" href="../homestead/">
+      Homestead
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Installation" href="../installation/">
+      Installation
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="License" href="../license/">
+      License
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Lifecycle" href="../lifecycle/">
+      Lifecycle
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Localization" href="../localization/">
+      Localization
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Mail" href="../mail/">
+      Mail
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Middleware" href="../middleware/">
+      Middleware
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Migrations" href="../migrations/">
+      Migrations
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Mocking" href="../mocking/">
+      Mocking
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Notifications" href="../notifications/">
+      Notifications
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Packages" href="../packages/">
+      Packages
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Pagination" href="../pagination/">
+      Pagination
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Passport" href="../passport/">
+      Passport
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Passwords" href="../passwords/">
+      Passwords
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Providers" href="../providers/">
+      Providers
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Queries" href="../queries/">
+      Queries
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Queues" href="../queues/">
+      Queues
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Readme" href="../readme/">
+      Readme
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Redirects" href="../redirects/">
+      Redirects
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Redis" href="../redis/">
+      Redis
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Releases" href="../releases/">
+      Releases
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Requests" href="../requests/">
+      Requests
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Responses" href="../responses/">
+      Responses
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Routing" href="../routing/">
+      Routing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Scheduling" href="../scheduling/">
+      Scheduling
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Scout" href="../scout/">
+      Scout
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Seeding" href="../seeding/">
+      Seeding
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Session" href="../session/">
+      Session
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Structure" href="../structure/">
+      Structure
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Testing" href="../testing/">
+      Testing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Upgrade" href="../upgrade/">
+      Upgrade
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Valet" href="../valet/">
+      Valet
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Validation" href="../validation/">
+      Validation
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Views" href="../views/">
+      Views
+    </a>
+    
+  </li>
+
+          
+        </ul>
+        
+      </div>
+    </div>
+  </div>
+</nav>
+      </div>
+      <article class="article">
+        <div class="wrapper">
+          
+          <h1 id="application-testing">Application Testing</h1>
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#interacting-with-your-application">Interacting With Your Application</a><ul>
+<li><a href="#interacting-with-links">Interacting With Links</a></li>
+<li><a href="#interacting-with-forms">Interacting With Forms</a></li>
+</ul>
+</li>
+<li><a href="#testing-json-apis">Testing JSON APIs</a><ul>
+<li><a href="#verifying-exact-match">Verifying Exact Match</a></li>
+<li><a href="#verifying-structural-match">Verifying Structural Match</a></li>
+</ul>
+</li>
+<li><a href="#sessions-and-authentication">Sessions / Authentication</a></li>
+<li><a href="#disabling-middleware">Disabling Middleware</a></li>
+<li><a href="#custom-http-requests">Custom HTTP Requests</a></li>
+<li><a href="#phpunit-assertions">PHPUnit Assertions</a></li>
+</ul>
+<p><a name="introduction"></a></p>
+<h2 id="introduction">Introduction</h2>
+<p>Laravel provides a very fluent API for making HTTP requests to your application, examining the output, and even filling out forms. For example, take a look at the test defined below:</p>
+<pre><code>&lt;?php
+
+use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+
+class ExampleTest extends TestCase
+{
+    /**
+     * A basic functional test example.
+     *
+     * @return void
+     */
+    public function testBasicExample()
+    {
+        $this-&gt;visit('/')
+             -&gt;see('Laravel 5')
+             -&gt;dontSee('Rails');
+    }
+}
+</code></pre>
+<p>The <code>visit</code> method makes a <code>GET</code> request into the application. The <code>see</code> method asserts that we should see the given text in the response returned by the application. The <code>dontSee</code> method asserts that the given text is not returned in the application response. This is the most basic application test available in Laravel.</p>
+<p>You may also use the 'visitRoute' method to make a 'GET' request via a named route:</p>
+<pre><code>$this-&gt;visitRoute('profile');
+
+$this-&gt;visitRoute('profile', ['user' =&gt; 1]);
+</code></pre>
+<p><a name="interacting-with-your-application"></a></p>
+<h2 id="interacting-with-your-application">Interacting With Your Application</h2>
+<p>Of course, you can do much more than simply assert that text appears in a given response. Let's take a look at some examples of clicking links and filling out forms:</p>
+<p><a name="interacting-with-links"></a></p>
+<h3 id="interacting-with-links">Interacting With Links</h3>
+<p>In this test, we will make a request to the application, "click" a link in the returned response, and then assert that we landed on a given URI. For example, let's assume there is a link in our response that has a text value of "About Us":</p>
+<pre><code>&lt;a href="/about-us"&gt;About Us&lt;/a&gt;
+</code></pre>
+<p>Now, let's write a test that clicks the link and asserts the user lands on the correct page:</p>
+<pre><code>public function testBasicExample()
+{
+    $this-&gt;visit('/')
+         -&gt;click('About Us')
+         -&gt;seePageIs('/about-us');
+}
+</code></pre>
+<p>You may also check that the user has arrived at the correct named route using the <code>seeRouteIs</code> method:</p>
+<pre><code>-&gt;seeRouteIs('profile', ['user' =&gt; 1]);
+</code></pre>
+<p><a name="interacting-with-forms"></a></p>
+<h3 id="interacting-with-forms">Interacting With Forms</h3>
+<p>Laravel also provides several methods for testing forms. The <code>type</code>, <code>select</code>, <code>check</code>, <code>attach</code>, and <code>press</code> methods allow you to interact with all of your form's inputs. For example, let's imagine this form exists on the application's registration page:</p>
+<pre><code>&lt;form action="/register" method="POST"&gt;
+    {{ csrf_field() }}
+
+    &lt;div&gt;
+        Name: &lt;input type="text" name="name"&gt;
+    &lt;/div&gt;
+
+    &lt;div&gt;
+        &lt;input type="checkbox" value="yes" name="terms"&gt; Accept Terms
+    &lt;/div&gt;
+
+    &lt;div&gt;
+        &lt;input type="submit" value="Register"&gt;
+    &lt;/div&gt;
+&lt;/form&gt;
+</code></pre>
+<p>We can write a test to complete this form and inspect the result:</p>
+<pre><code>public function testNewUserRegistration()
+{
+    $this-&gt;visit('/register')
+         -&gt;type('Taylor', 'name')
+         -&gt;check('terms')
+         -&gt;press('Register')
+         -&gt;seePageIs('/dashboard');
+}
+</code></pre>
+<p>Of course, if your form contains other inputs such as radio buttons or drop-down boxes, you may easily fill out those types of fields as well. Here is a list of each form manipulation method:</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$this-&gt;type($text, $elementName)</code></td>
+<td>"Type" text into a given field.</td>
+</tr>
+<tr>
+<td><code>$this-&gt;select($value, $elementName)</code></td>
+<td>"Select" a radio button or drop-down field.</td>
+</tr>
+<tr>
+<td><code>$this-&gt;check($elementName)</code></td>
+<td>"Check" a checkbox field.</td>
+</tr>
+<tr>
+<td><code>$this-&gt;uncheck($elementName)</code></td>
+<td>"Uncheck" a checkbox field.</td>
+</tr>
+<tr>
+<td><code>$this-&gt;attach($pathToFile, $elementName)</code></td>
+<td>"Attach" a file to the form.</td>
+</tr>
+<tr>
+<td><code>$this-&gt;press($buttonTextOrElementName)</code></td>
+<td>"Press" a button with the given text or name.</td>
+</tr>
+</tbody>
+</table>
+<p><a name="file-inputs"></a></p>
+<h4 id="file-inputs">File Inputs</h4>
+<p>If your form contains <code>file</code> inputs, you may attach files to the form using the <code>attach</code> method:</p>
+<pre><code>public function testPhotoCanBeUploaded()
+{
+    $this-&gt;visit('/upload')
+         -&gt;attach($pathToFile, 'photo')
+         -&gt;press('Upload')
+         -&gt;see('Upload Successful!');
+}
+</code></pre>
+<p><a name="testing-json-apis"></a></p>
+<h3 id="testing-json-apis">Testing JSON APIs</h3>
+<p>Laravel also provides several helpers for testing JSON APIs and their responses. For example, the <code>json</code>, <code>get</code>, <code>post</code>, <code>put</code>, <code>patch</code>, and <code>delete</code> methods may be used to issue requests with various HTTP verbs. You may also easily pass data and headers to these methods. To get started, let's write a test to make a <code>POST</code> request to <code>/user</code> and assert that the expected data was returned:</p>
+<pre><code>&lt;?php
+
+class ExampleTest extends TestCase
+{
+    /**
+     * A basic functional test example.
+     *
+     * @return void
+     */
+    public function testBasicExample()
+    {
+        $this-&gt;json('POST', '/user', ['name' =&gt; 'Sally'])
+             -&gt;seeJson([
+                 'created' =&gt; true,
+             ]);
+    }
+}
+</code></pre>
+<blockquote>
+<p>{tip} The <code>seeJson</code> method converts the given array into JSON, and then verifies that the JSON fragment occurs <strong>anywhere</strong> within the entire JSON response returned by the application. So, if there are other properties in the JSON response, this test will still pass as long as the given fragment is present.</p>
+</blockquote>
+<p><a name="verifying-exact-match"></a></p>
+<h3 id="verifying-exact-match">Verifying Exact Match</h3>
+<p>If you would like to verify that the given array is an <strong>exact</strong> match for the JSON returned by the application, you should use the <code>seeJsonEquals</code> method:</p>
+<pre><code>&lt;?php
+
+class ExampleTest extends TestCase
+{
+    /**
+     * A basic functional test example.
+     *
+     * @return void
+     */
+    public function testBasicExample()
+    {
+        $this-&gt;json('POST', '/user', ['name' =&gt; 'Sally'])
+             -&gt;seeJsonEquals([
+                 'created' =&gt; true,
+             ]);
+    }
+}
+</code></pre>
+<p><a name="verifying-structural-match"></a></p>
+<h3 id="verifying-structural-match">Verifying Structural Match</h3>
+<p>It is also possible to verify that a JSON response adheres to a specific structure. In this scenario, you should use the <code>seeJsonStructure</code> method and pass it your expected JSON structure:</p>
+<pre><code>&lt;?php
+
+class ExampleTest extends TestCase
+{
+    /**
+     * A basic functional test example.
+     *
+     * @return void
+     */
+    public function testBasicExample()
+    {
+        $this-&gt;get('/user/1')
+             -&gt;seeJsonStructure([
+                 'name',
+                 'pet' =&gt; [
+                     'name', 'age'
+                 ]
+             ]);
+    }
+}
+</code></pre>
+<p>The above example illustrates an expectation of receiving a <code>name</code> attribute and a nested <code>pet</code> object with its own <code>name</code> and <code>age</code> attributes. <code>seeJsonStructure</code> will not fail if additional keys are present in the response. For example, the test would still pass if the <code>pet</code> had a <code>weight</code> attribute.</p>
+<p>You may use the <code>*</code> to assert that the returned JSON structure has a list where each list item contains at least the attributes found in the set of values:</p>
+<pre><code>&lt;?php
+
+class ExampleTest extends TestCase
+{
+    /**
+     * A basic functional test example.
+     *
+     * @return void
+     */
+    public function testBasicExample()
+    {
+        // Assert that each user in the list has at least an id, name and email attribute.
+        $this-&gt;get('/users')
+             -&gt;seeJsonStructure([
+                 '*' =&gt; [
+                     'id', 'name', 'email'
+                 ]
+             ]);
+    }
+}
+</code></pre>
+<p>You may also nest the <code>*</code> notation. In this case, we will assert that each user in the JSON response contains a given set of attributes and that each pet on each user also contains a given set of attributes:</p>
+<pre><code>$this-&gt;get('/users')
+     -&gt;seeJsonStructure([
+         '*' =&gt; [
+             'id', 'name', 'email', 'pets' =&gt; [
+                 '*' =&gt; [
+                     'name', 'age'
+                 ]
+             ]
+         ]
+     ]);
+</code></pre>
+<p><a name="sessions-and-authentication"></a></p>
+<h3 id="sessions-authentication">Sessions / Authentication</h3>
+<p>Laravel provides several helpers for working with the session during testing. First, you may set the session data to a given array using the <code>withSession</code> method. This is useful for loading the session with data before issuing a request to your application:</p>
+<pre><code>&lt;?php
+
+class ExampleTest extends TestCase
+{
+    public function testApplication()
+    {
+        $this-&gt;withSession(['foo' =&gt; 'bar'])
+             -&gt;visit('/');
+    }
+}
+</code></pre>
+<p>Of course, one common use of the session is for maintaining state for the authenticated user. The <code>actingAs</code> helper method provides a simple way to authenticate a given user as the current user. For example, we may use a <a href="../docs/{{version}}/database-testing#model-factories">model factory</a> to generate and authenticate a user:</p>
+<pre><code>&lt;?php
+
+class ExampleTest extends TestCase
+{
+    public function testApplication()
+    {
+        $user = factory(App\User::class)-&gt;create();
+
+        $this-&gt;actingAs($user)
+             -&gt;withSession(['foo' =&gt; 'bar'])
+             -&gt;visit('/')
+             -&gt;see('Hello, '.$user-&gt;name);
+    }
+}
+</code></pre>
+<p>You may also specify which guard should be used to authenticate the given user by passing the guard name as the second argument to the <code>actingAs</code> method:</p>
+<pre><code>$this-&gt;actingAs($user, 'api')
+</code></pre>
+<p><a name="disabling-middleware"></a></p>
+<h3 id="disabling-middleware">Disabling Middleware</h3>
+<p>When testing your application, you may find it convenient to disable <a href="../docs/{{version}}/middleware">middleware</a> for some of your tests. This will allow you to test your routes and controller in isolation from any middleware concerns. Laravel includes a simple <code>WithoutMiddleware</code> trait that you can use to automatically disable all middleware for the test class:</p>
+<pre><code>&lt;?php
+
+use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+
+class ExampleTest extends TestCase
+{
+    use WithoutMiddleware;
+
+    //
+}
+</code></pre>
+<p>If you would like to only disable middleware for a few test methods, you may call the <code>withoutMiddleware</code> method from within the test methods:</p>
+<pre><code>&lt;?php
+
+class ExampleTest extends TestCase
+{
+    /**
+     * A basic functional test example.
+     *
+     * @return void
+     */
+    public function testBasicExample()
+    {
+        $this-&gt;withoutMiddleware();
+
+        $this-&gt;visit('/')
+             -&gt;see('Laravel 5');
+    }
+}
+</code></pre>
+<p><a name="custom-http-requests"></a></p>
+<h3 id="custom-http-requests">Custom HTTP Requests</h3>
+<p>If you would like to make a custom HTTP request into your application and get the full <code>Illuminate\Http\Response</code> object, you may use the <code>call</code> method:</p>
+<pre><code>public function testApplication()
+{
+    $response = $this-&gt;call('GET', '/');
+
+    $this-&gt;assertEquals(200, $response-&gt;status());
+}
+</code></pre>
+<p>If you are making <code>POST</code>, <code>PUT</code>, or <code>PATCH</code> requests you may pass an array of input data with the request. Of course, this data will be available in your routes and controller via the <a href="../docs/{{version}}/requests">Request instance</a>:</p>
+<pre><code>   $response = $this-&gt;call('POST', '/user', ['name' =&gt; 'Taylor']);
+</code></pre>
+<p><a name="phpunit-assertions"></a></p>
+<h3 id="phpunit-assertions">PHPUnit Assertions</h3>
+<p>Laravel provides a variety of custom assertion methods for <a href="https://phpunit.de/">PHPUnit</a> tests:</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-&gt;assertResponseOk();</code></td>
+<td>Assert that the client response has an OK status code.</td>
+</tr>
+<tr>
+<td><code>-&gt;assertResponseStatus($code);</code></td>
+<td>Assert that the client response has a given code.</td>
+</tr>
+<tr>
+<td><code>-&gt;assertViewHas($key, $value = null);</code></td>
+<td>Assert that the response view has a given piece of bound data.</td>
+</tr>
+<tr>
+<td><code>-&gt;assertViewHasAll(array $bindings);</code></td>
+<td>Assert that the view has a given list of bound data.</td>
+</tr>
+<tr>
+<td><code>-&gt;assertViewMissing($key);</code></td>
+<td>Assert that the response view is missing a piece of bound data.</td>
+</tr>
+<tr>
+<td><code>-&gt;assertRedirectedTo($uri, $with = []);</code></td>
+<td>Assert whether the client was redirected to a given URI.</td>
+</tr>
+<tr>
+<td><code>-&gt;assertRedirectedToRoute($name, $parameters = [], $with = []);</code></td>
+<td>Assert whether the client was redirected to a given route.</td>
+</tr>
+<tr>
+<td><code>-&gt;assertRedirectedToAction($name, $parameters = [], $with = []);</code></td>
+<td>Assert whether the client was redirected to a given action.</td>
+</tr>
+<tr>
+<td><code>-&gt;assertSessionHas($key, $value = null);</code></td>
+<td>Assert that the session has a given value.</td>
+</tr>
+<tr>
+<td><code>-&gt;assertSessionHasAll(array $bindings);</code></td>
+<td>Assert that the session has a given list of values.</td>
+</tr>
+<tr>
+<td><code>-&gt;assertSessionHasErrors($bindings = [], $format = null);</code></td>
+<td>Assert that the session has errors bound.</td>
+</tr>
+<tr>
+<td><code>-&gt;assertHasOldInput();</code></td>
+<td>Assert that the session has old input.</td>
+</tr>
+<tr>
+<td><code>-&gt;assertSessionMissing($key);</code></td>
+<td>Assert that the session is missing a given key.</td>
+</tr>
+</tbody>
+</table>
+          <aside class="copyright" role="note">
+            
+            Documentation built with
+            <a href="http://www.mkdocs.org" target="_blank">MkDocs</a>
+            using the
+            <a href="http://squidfunk.github.io/mkdocs-material/" target="_blank">
+              Material
+            </a>
+            theme.
+          </aside>
+          
+            <footer class="footer">
+              
+  <nav class="pagination" aria-label="Footer">
+    <div class="previous">
+      
+        <a href="../apis/" title="Apis">
+          <span class="direction">
+            Previous
+          </span>
+          <div class="page">
+            <div class="button button-previous" role="button" aria-label="Previous">
+              <i class="icon icon-back"></i>
+            </div>
+            <div class="stretch">
+              <div class="title">
+                Apis
+              </div>
+            </div>
+          </div>
+        </a>
+      
+    </div>
+    <div class="next">
+      
+        <a href="../artisan/" title="Artisan">
+          <span class="direction">
+            Next
+          </span>
+          <div class="page">
+            <div class="stretch">
+              <div class="title">
+                Artisan
+              </div>
+            </div>
+            <div class="button button-next" role="button" aria-label="Next">
+              <i class="icon icon-forward"></i>
+            </div>
+          </div>
+        </a>
+      
+    </div>
+  </nav>
+
+            </footer>
+          
+        </div>
+      </article>
+      <div class="results" role="status" aria-live="polite">
+        <div class="scrollable">
+          <div class="wrapper">
+            <div class="meta"></div>
+            <div class="list"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script>
+      var base_url = '..';
+      var repo_id  = '';
+    </script>
+    <script src="../assets/javascripts/application-997097ee0c.js"></script>
+    
+      <script src="../assets/jquery.js"></script>
+    
+      <script src="../assets/prism.js"></script>
+    
+    
+  </body>
+</html>

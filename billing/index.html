@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="no-js ie6"><![endif]-->
+<!--[if IE 7 ]><html class="no-js ie7"><![endif]-->
+<!--[if IE 8 ]><html class="no-js ie8"><![endif]-->
+<!--[if IE 9 ]><html class="no-js ie9"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
+    
+      
+        <title>Billing - Laravel 5.3 official documentation</title>
+      
+      
+      
+      
+    
+    <meta property="og:url" content="None">
+    <meta property="og:title" content="Laravel 5.3 official documentation">
+    <meta property="og:image" content="None/../">
+    <meta name="apple-mobile-web-app-title" content="Laravel 5.3 official documentation">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    
+    <link rel="shortcut icon" type="image/x-icon" href="../assets/images/favicon-e565ddfa3b.ico">
+    <link rel="icon" type="image/x-icon" href="../assets/images/favicon-e565ddfa3b.ico">
+    <style>
+      @font-face {
+      	font-family: 'Icon';
+      	src: url('../assets/fonts/icon.eot?52m981');
+      	src: url('../assets/fonts/icon.eot?#iefix52m981')
+               format('embedded-opentype'),
+      		   url('../assets/fonts/icon.woff?52m981')
+               format('woff'),
+      		   url('../assets/fonts/icon.ttf?52m981')
+               format('truetype'),
+      		   url('../assets/fonts/icon.svg?52m981#icon')
+               format('svg');
+      	font-weight: normal;
+      	font-style: normal;
+      }
+    </style>
+    <link rel="stylesheet" href="../assets/stylesheets/application-a422ff04cc.css">
+    
+      <link rel="stylesheet" href="../assets/stylesheets/palettes-05ab2406df.css">
+    
+    
+      
+      
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,700|Ubuntu+Mono">
+      <style>
+        body, input {
+          font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
+        }
+        pre, code {
+          font-family: 'Ubuntu Mono', 'Courier New', 'Courier', monospace;
+        }
+      </style>
+    
+    
+      <link rel="stylesheet" href="../assets/prism.css">
+    
+    <script src="../assets/javascripts/modernizr-4ab42b99fd.js"></script>
+    
+  </head>
+  
+  
+  
+  <body class="palette-primary-teal palette-accent-pink">
+    
+    <div class="backdrop">
+      <div class="backdrop-paper"></div>
+    </div>
+    <input class="toggle" type="checkbox" id="toggle-drawer">
+    <input class="toggle" type="checkbox" id="toggle-search">
+    <label class="toggle-button overlay" for="toggle-drawer"></label>
+    <header class="header">
+      <nav aria-label="Header">
+  <div class="bar default">
+    <div class="button button-menu" role="button" aria-label="Menu">
+      <label class="toggle-button icon icon-menu" for="toggle-drawer">
+        <span></span>
+      </label>
+    </div>
+    <div class="stretch">
+      <div class="title">
+        
+          <span class="path">
+            
+          </span>
+        
+        Billing
+      </div>
+    </div>
+    
+    
+    <div class="button button-search" role="button" aria-label="Search">
+      <label class="toggle-button icon icon-search" title="Search" for="toggle-search"></label>
+    </div>
+  </div>
+  <div class="bar search">
+    <div class="button button-close" role="button" aria-label="Close">
+      <label class="toggle-button icon icon-back" for="toggle-search"></label>
+    </div>
+    <div class="stretch">
+      <div class="field">
+        <input class="query" type="text" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck>
+      </div>
+    </div>
+    <div class="button button-reset" role="button" aria-label="Search">
+      <button class="toggle-button icon icon-close" id="reset-search"></button>
+    </div>
+  </div>
+</nav>
+    </header>
+    <main class="main">
+      
+      <div class="drawer">
+        <nav aria-label="Navigation">
+  
+  <a href="/" class="project">
+    <div class="banner">
+      
+      <div class="name">
+        <strong>
+          Laravel 5.3 official documentation
+          <span class="version">
+            
+          </span>
+        </strong>
+        
+      </div>
+    </div>
+  </a>
+  <div class="scrollable">
+    <div class="wrapper">
+      
+      <div class="toc">
+        <ul>
+          
+            
+  <li>
+    <a class="" title="Home" href="..">
+      Home
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Apis" href="../apis/">
+      Apis
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Application testing" href="../application-testing/">
+      Application testing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Artisan" href="../artisan/">
+      Artisan
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Authentication" href="../authentication/">
+      Authentication
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Authorization" href="../authorization/">
+      Authorization
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="current" title="Billing" href="./">
+      Billing
+    </a>
+    
+      
+        
+      
+      
+        <ul>
+          
+            <li class="anchor">
+              <a title="Introduction" href="#introduction">
+                Introduction
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Configuration" href="#configuration">
+                Configuration
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Subscriptions" href="#subscriptions">
+                Subscriptions
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Subscription Trials" href="#subscription-trials">
+                Subscription Trials
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Handling Stripe Webhooks" href="#handling-stripe-webhooks">
+                Handling Stripe Webhooks
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Handling Braintree Webhooks" href="#handling-braintree-webhooks">
+                Handling Braintree Webhooks
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Single Charges" href="#single-charges">
+                Single Charges
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Invoices" href="#invoices">
+                Invoices
+              </a>
+            </li>
+          
+        </ul>
+      
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Blade" href="../blade/">
+      Blade
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Broadcasting" href="../broadcasting/">
+      Broadcasting
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Cache" href="../cache/">
+      Cache
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Collections" href="../collections/">
+      Collections
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Configuration" href="../configuration/">
+      Configuration
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Container" href="../container/">
+      Container
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Contracts" href="../contracts/">
+      Contracts
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Contributing" href="../contributing/">
+      Contributing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Contributions" href="../contributions/">
+      Contributions
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Controllers" href="../controllers/">
+      Controllers
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Csrf" href="../csrf/">
+      Csrf
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Database testing" href="../database-testing/">
+      Database testing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Database" href="../database/">
+      Database
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Documentation" href="../documentation/">
+      Documentation
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Elixir" href="../elixir/">
+      Elixir
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent collections" href="../eloquent-collections/">
+      Eloquent collections
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent mutators" href="../eloquent-mutators/">
+      Eloquent mutators
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent relationships" href="../eloquent-relationships/">
+      Eloquent relationships
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent serialization" href="../eloquent-serialization/">
+      Eloquent serialization
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent" href="../eloquent/">
+      Eloquent
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Encryption" href="../encryption/">
+      Encryption
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Envoy" href="../envoy/">
+      Envoy
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Errors" href="../errors/">
+      Errors
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Events" href="../events/">
+      Events
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Facades" href="../facades/">
+      Facades
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Filesystem" href="../filesystem/">
+      Filesystem
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Frontend" href="../frontend/">
+      Frontend
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Hashing" href="../hashing/">
+      Hashing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Helpers" href="../helpers/">
+      Helpers
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Homestead" href="../homestead/">
+      Homestead
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Installation" href="../installation/">
+      Installation
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="License" href="../license/">
+      License
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Lifecycle" href="../lifecycle/">
+      Lifecycle
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Localization" href="../localization/">
+      Localization
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Mail" href="../mail/">
+      Mail
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Middleware" href="../middleware/">
+      Middleware
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Migrations" href="../migrations/">
+      Migrations
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Mocking" href="../mocking/">
+      Mocking
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Notifications" href="../notifications/">
+      Notifications
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Packages" href="../packages/">
+      Packages
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Pagination" href="../pagination/">
+      Pagination
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Passport" href="../passport/">
+      Passport
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Passwords" href="../passwords/">
+      Passwords
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Providers" href="../providers/">
+      Providers
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Queries" href="../queries/">
+      Queries
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Queues" href="../queues/">
+      Queues
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Readme" href="../readme/">
+      Readme
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Redirects" href="../redirects/">
+      Redirects
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Redis" href="../redis/">
+      Redis
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Releases" href="../releases/">
+      Releases
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Requests" href="../requests/">
+      Requests
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Responses" href="../responses/">
+      Responses
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Routing" href="../routing/">
+      Routing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Scheduling" href="../scheduling/">
+      Scheduling
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Scout" href="../scout/">
+      Scout
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Seeding" href="../seeding/">
+      Seeding
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Session" href="../session/">
+      Session
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Structure" href="../structure/">
+      Structure
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Testing" href="../testing/">
+      Testing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Upgrade" href="../upgrade/">
+      Upgrade
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Valet" href="../valet/">
+      Valet
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Validation" href="../validation/">
+      Validation
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Views" href="../views/">
+      Views
+    </a>
+    
+  </li>
+
+          
+        </ul>
+        
+      </div>
+    </div>
+  </div>
+</nav>
+      </div>
+      <article class="article">
+        <div class="wrapper">
+          
+          <h1 id="laravel-cashier">Laravel Cashier</h1>
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#configuration">Configuration</a><ul>
+<li><a href="#stripe-configuration">Stripe</a></li>
+<li><a href="#braintree-configuration">Braintree</a></li>
+<li><a href="#currency-configuration">Currency Configuration</a></li>
+</ul>
+</li>
+<li><a href="#subscriptions">Subscriptions</a><ul>
+<li><a href="#creating-subscriptions">Creating Subscriptions</a></li>
+<li><a href="#checking-subscription-status">Checking Subscription Status</a></li>
+<li><a href="#changing-plans">Changing Plans</a></li>
+<li><a href="#subscription-quantity">Subscription Quantity</a></li>
+<li><a href="#subscription-taxes">Subscription Taxes</a></li>
+<li><a href="#cancelling-subscriptions">Cancelling Subscriptions</a></li>
+<li><a href="#resuming-subscriptions">Resuming Subscriptions</a></li>
+<li><a href="#updating-credit-cards">Updating Credit Cards</a></li>
+</ul>
+</li>
+<li><a href="#subscription-trials">Subscription Trials</a><ul>
+<li><a href="#with-credit-card-up-front">With Credit Card Up Front</a></li>
+<li><a href="#without-credit-card-up-front">Without Credit Card Up Front</a></li>
+</ul>
+</li>
+<li><a href="#handling-stripe-webhooks">Handling Stripe Webhooks</a><ul>
+<li><a href="#defining-webhook-event-handlers">Defining Webhook Event Handlers</a></li>
+<li><a href="#handling-failed-subscriptions">Failed Subscriptions</a></li>
+</ul>
+</li>
+<li><a href="#handling-braintree-webhooks">Handling Braintree Webhooks</a><ul>
+<li><a href="#defining-braintree-webhook-event-handlers">Defining Webhook Event Handlers</a></li>
+<li><a href="#handling-braintree-failed-subscriptions">Failed Subscriptions</a></li>
+</ul>
+</li>
+<li><a href="#single-charges">Single Charges</a></li>
+<li><a href="#invoices">Invoices</a><ul>
+<li><a href="#generating-invoice-pdfs">Generating Invoice PDFs</a></li>
+</ul>
+</li>
+</ul>
+<p><a name="introduction"></a></p>
+<h2 id="introduction">Introduction</h2>
+<p>Laravel Cashier provides an expressive, fluent interface to <a href="https://stripe.com">Stripe's</a> and <a href="https://braintreepayments.com">Braintree's</a> subscription billing services. It handles almost all of the boilerplate subscription billing code you are dreading writing. In addition to basic subscription management, Cashier can handle coupons, swapping subscription, subscription "quantities", cancellation grace periods, and even generate invoice PDFs.</p>
+<blockquote>
+<p>{note} If you're only performing "one-off" charges and do not offer subscriptions. You should not use Cashier. You should use the Stripe and Braintree SDKs directly.</p>
+</blockquote>
+<p><a name="configuration"></a></p>
+<h2 id="configuration">Configuration</h2>
+<p><a name="stripe-configuration"></a></p>
+<h3 id="stripe">Stripe</h3>
+<h4 id="composer">Composer</h4>
+<p>First, add the Cashier package for Stripe to your <code>composer.json</code> file and run the <code>composer update</code> command:</p>
+<pre><code>"laravel/cashier": "~7.0"
+</code></pre>
+<h4 id="service-provider">Service Provider</h4>
+<p>Next, register the <code>Laravel\Cashier\CashierServiceProvider</code> <a href="../docs/{{version}}/providers">service provider</a> in your <code>config/app.php</code> configuration file.</p>
+<h4 id="database-migrations">Database Migrations</h4>
+<p>Before using Cashier, we'll also need to <a href="../docs/{{version}}/migrations">prepare the database</a>. We need to add several columns to your <code>users</code> table and create a new <code>subscriptions</code> table to hold all of our customer's subscriptions:</p>
+<pre><code>Schema::table('users', function ($table) {
+    $table-&gt;string('stripe_id')-&gt;nullable();
+    $table-&gt;string('card_brand')-&gt;nullable();
+    $table-&gt;string('card_last_four')-&gt;nullable();
+    $table-&gt;timestamp('trial_ends_at')-&gt;nullable();
+});
+
+Schema::create('subscriptions', function ($table) {
+    $table-&gt;increments('id');
+    $table-&gt;integer('user_id');
+    $table-&gt;string('name');
+    $table-&gt;string('stripe_id');
+    $table-&gt;string('stripe_plan');
+    $table-&gt;integer('quantity');
+    $table-&gt;timestamp('trial_ends_at')-&gt;nullable();
+    $table-&gt;timestamp('ends_at')-&gt;nullable();
+    $table-&gt;timestamps();
+});
+</code></pre>
+<p>Once the migrations have been created, run the <code>migrate</code> Artisan command.</p>
+<h4 id="billable-model">Billable Model</h4>
+<p>Next, add the <code>Billable</code> trait to your model definition. This trait provides various methods to allow you to perform common billing tasks, such as creating subscriptions, applying coupons, and updating credit card information:</p>
+<pre><code>use Laravel\Cashier\Billable;
+
+class User extends Authenticatable
+{
+    use Billable;
+}
+</code></pre>
+<h4 id="api-keys">API Keys</h4>
+<p>Finally, you should configure your Stripe key in your <code>services.php</code> configuration file. You can retrieve your Stripe API keys from the Stripe control panel:</p>
+<pre><code>'stripe' =&gt; [
+    'model'  =&gt; App\User::class,
+    'secret' =&gt; env('STRIPE_SECRET'),
+],
+</code></pre>
+<p><a name="braintree-configuration"></a></p>
+<h3 id="braintree">Braintree</h3>
+<h4 id="braintree-caveats">Braintree Caveats</h4>
+<p>For many operations, the Stripe and Braintree implementations of Cashier function the same. Both services provide subscription billing with credit cards but Braintree also supports payments via PayPal. However, Braintree also lacks some features that are supported by Stripe. You should keep the following in mind when deciding to use Stripe or Braintree:</p>
+<div class="content-list" markdown="1">
+- Braintree supports PayPal while Stripe does not.
+- Braintree does not support the `increment` and `decrement` methods on subscriptions. This is a Braintree limitation, not a Cashier limitation.
+- Braintree does not support percentage based discounts. This is a Braintree limitation, not a Cashier limitation.
+</div>
+
+<h4 id="composer_1">Composer</h4>
+<p>First, add the Cashier package for Braintree to your <code>composer.json</code> file and run the <code>composer update</code> command:</p>
+<pre><code>"laravel/cashier-braintree": "~2.0"
+</code></pre>
+<h4 id="service-provider_1">Service Provider</h4>
+<p>Next, register the <code>Laravel\Cashier\CashierServiceProvider</code> <a href="../docs/{{version}}/providers">service provider</a> in your <code>config/app.php</code> configuration file.</p>
+<h4 id="plan-credit-coupon">Plan Credit Coupon</h4>
+<p>Before using Cashier with Braintree, you will need to define a <code>plan-credit</code> discount in your Braintree control panel. This discount will be used to properly prorate subscriptions that change from yearly to monthly billing, or from monthly to yearly billing.</p>
+<p>The discount amount configured in the Braintree control panel can be any value you wish, as Cashier will simply override the defined amount with our own custom amount each time we apply the coupon. This coupon is needed since Braintree does not natively support prorating subscriptions across subscription frequencies.</p>
+<h4 id="database-migrations_1">Database Migrations</h4>
+<p>Before using Cashier, we'll need to <a href="../docs/{{version}}/migrations">prepare the database</a>. We need to add several columns to your <code>users</code> table and create a new <code>subscriptions</code> table to hold all of our customer's subscriptions:</p>
+<pre><code>Schema::table('users', function ($table) {
+    $table-&gt;string('braintree_id')-&gt;nullable();
+    $table-&gt;string('paypal_email')-&gt;nullable();
+    $table-&gt;string('card_brand')-&gt;nullable();
+    $table-&gt;string('card_last_four')-&gt;nullable();
+    $table-&gt;timestamp('trial_ends_at')-&gt;nullable();
+});
+
+Schema::create('subscriptions', function ($table) {
+    $table-&gt;increments('id');
+    $table-&gt;integer('user_id');
+    $table-&gt;string('name');
+    $table-&gt;string('braintree_id');
+    $table-&gt;string('braintree_plan');
+    $table-&gt;integer('quantity');
+    $table-&gt;timestamp('trial_ends_at')-&gt;nullable();
+    $table-&gt;timestamp('ends_at')-&gt;nullable();
+    $table-&gt;timestamps();
+});
+</code></pre>
+<p>Once the migrations have been created, simply run the <code>migrate</code> Artisan command.</p>
+<h4 id="billable-model_1">Billable Model</h4>
+<p>Next, add the <code>Billable</code> trait to your model definition:</p>
+<pre><code>use Laravel\Cashier\Billable;
+
+class User extends Authenticatable
+{
+    use Billable;
+}
+</code></pre>
+<h4 id="api-keys_1">API Keys</h4>
+<p>Next, You should configure the following options in your <code>services.php</code> file:</p>
+<pre><code>'braintree' =&gt; [
+    'model'  =&gt; App\User::class,
+    'environment' =&gt; env('BRAINTREE_ENV'),
+    'merchant_id' =&gt; env('BRAINTREE_MERCHANT_ID'),
+    'public_key' =&gt; env('BRAINTREE_PUBLIC_KEY'),
+    'private_key' =&gt; env('BRAINTREE_PRIVATE_KEY'),
+],
+</code></pre>
+<p>Then you should add the following Braintree SDK calls to your <code>AppServiceProvider</code> service provider's <code>boot</code> method:</p>
+<pre><code>\Braintree_Configuration::environment(config('services.braintree.environment'));
+\Braintree_Configuration::merchantId(config('services.braintree.merchant_id'));
+\Braintree_Configuration::publicKey(config('services.braintree.public_key'));
+\Braintree_Configuration::privateKey(config('services.braintree.private_key'));
+</code></pre>
+<p><a name="currency-configuration"></a></p>
+<h3 id="currency-configuration">Currency Configuration</h3>
+<p>The default Cashier currency is United States Dollars (USD). You can change the default currency by calling the <code>Cashier::useCurrency</code> method from within the <code>boot</code> method of one of your service providers. The <code>useCurrency</code> method accepts two string parameters: the currency and the currency's symbol:</p>
+<pre><code>use Laravel\Cashier\Cashier;
+
+Cashier::useCurrency('eur', '€');
+</code></pre>
+<p><a name="subscriptions"></a></p>
+<h2 id="subscriptions">Subscriptions</h2>
+<p><a name="creating-subscriptions"></a></p>
+<h3 id="creating-subscriptions">Creating Subscriptions</h3>
+<p>To create a subscription, first retrieve an instance of your billable model, which typically will be an instance of <code>App\User</code>. Once you have retrieved the model instance, you may use the <code>newSubscription</code> method to create the model's subscription:</p>
+<pre><code>$user = User::find(1);
+
+$user-&gt;newSubscription('main', 'monthly')-&gt;create($creditCardToken);
+</code></pre>
+<p>The first argument passed to the <code>newSubscription</code> method should be the name of the subscription. If your application only offers a single subscription, you might call this <code>main</code> or <code>primary</code>. The second argument is the specific Stripe / Braintree plan the user is subscribing to. This value should correspond to the plan's identifier in Stripe or Braintree.</p>
+<p>The <code>create</code> method will begin the subscription as well as update your database with the customer ID and other relevant billing information.</p>
+<h4 id="additional-user-details">Additional User Details</h4>
+<p>If you would like to specify additional customer details, you may do so by passing them as the second argument to the <code>create</code> method:</p>
+<pre><code>$user-&gt;newSubscription('main', 'monthly')-&gt;create($creditCardToken, [
+    'email' =&gt; $email,
+]);
+</code></pre>
+<p>To learn more about the additional fields supported by Stripe or Braintree, check out Stripe's <a href="https://stripe.com/docs/api#create_customer">documentation on customer creation</a> or the corresponding <a href="https://developers.braintreepayments.com/reference/request/customer/create/php">Braintree documentation</a>.</p>
+<h4 id="coupons">Coupons</h4>
+<p>If you would like to apply a coupon when creating the subscription, you may use the <code>withCoupon</code> method:</p>
+<pre><code>$user-&gt;newSubscription('main', 'monthly')
+     -&gt;withCoupon('code')
+     -&gt;create($creditCardToken);
+</code></pre>
+<p><a name="checking-subscription-status"></a></p>
+<h3 id="checking-subscription-status">Checking Subscription Status</h3>
+<p>Once a user is subscribed to your application, you may easily check their subscription status using a variety of convenient methods. First, the <code>subscribed</code> method returns <code>true</code> if the user has an active subscription, even if the subscription is currently within its trial period:</p>
+<pre><code>if ($user-&gt;subscribed('main')) {
+    //
+}
+</code></pre>
+<p>The <code>subscribed</code> method also makes a great candidate for a <a href="../docs/{{version}}/middleware">route middleware</a>, allowing you to filter access to routes and controllers based on the user's subscription status:</p>
+<pre><code>public function handle($request, Closure $next)
+{
+    if ($request-&gt;user() &amp;&amp; ! $request-&gt;user()-&gt;subscribed('main')) {
+        // This user is not a paying customer...
+        return redirect('billing');
+    }
+
+    return $next($request);
+}
+</code></pre>
+<p>If you would like to determine if a user is still within their trial period, you may use the <code>onTrial</code> method. This method can be useful for displaying a warning to the user that they are still on their trial period:</p>
+<pre><code>if ($user-&gt;subscription('main')-&gt;onTrial()) {
+    //
+}
+</code></pre>
+<p>The <code>subscribedToPlan</code> method may be used to determine if the user is subscribed to a given plan based on a given Stripe / Braintree plan ID. In this example, we will determine if the user's <code>main</code> subscription is actively subscribed to the <code>monthly</code> plan:</p>
+<pre><code>if ($user-&gt;subscribedToPlan('monthly', 'main')) {
+    //
+}
+</code></pre>
+<h4 id="cancelled-subscription-status">Cancelled Subscription Status</h4>
+<p>To determine if the user was once an active subscriber, but has cancelled their subscription, you may use the <code>cancelled</code> method:</p>
+<pre><code>if ($user-&gt;subscription('main')-&gt;cancelled()) {
+    //
+}
+</code></pre>
+<p>You may also determine if a user has cancelled their subscription, but are still on their "grace period" until the subscription fully expires. For example, if a user cancels a subscription on March 5th that was originally scheduled to expire on March 10th, the user is on their "grace period" until March 10th. Note that the <code>subscribed</code> method still returns <code>true</code> during this time:</p>
+<pre><code>if ($user-&gt;subscription('main')-&gt;onGracePeriod()) {
+    //
+}
+</code></pre>
+<p><a name="changing-plans"></a></p>
+<h3 id="changing-plans">Changing Plans</h3>
+<p>After a user is subscribed to your application, they may occasionally want to change to a new subscription plan. To swap a user to a new subscription, pass the plan's identifier to the <code>swap</code> method:</p>
+<pre><code>$user = App\User::find(1);
+
+$user-&gt;subscription('main')-&gt;swap('provider-plan-id');
+</code></pre>
+<p>If the user is on trial, the trial period will be maintained. Also, if a "quantity" exists for the subscription, that quantity will also be maintained.</p>
+<p>If you would like to swap plans and cancel any trial period the user is currently on, you may use the <code>skipTrial</code> method:</p>
+<pre><code>$user-&gt;subscription('main')
+        -&gt;skipTrial()
+        -&gt;swap('provider-plan-id');
+</code></pre>
+<p><a name="subscription-quantity"></a></p>
+<h3 id="subscription-quantity">Subscription Quantity</h3>
+<blockquote>
+<p>{note} Subscription quantities are only supported by the Stripe edition of Cashier. Braintree does not have a feature that corresponds to Stripe's "quantity".</p>
+</blockquote>
+<p>Sometimes subscriptions are affected by "quantity". For example, your application might charge $10 per month <strong>per user</strong> on an account. To easily increment or decrement your subscription quantity, use the <code>incrementQuantity</code> and <code>decrementQuantity</code> methods:</p>
+<pre><code>$user = User::find(1);
+
+$user-&gt;subscription('main')-&gt;incrementQuantity();
+
+// Add five to the subscription's current quantity...
+$user-&gt;subscription('main')-&gt;incrementQuantity(5);
+
+$user-&gt;subscription('main')-&gt;decrementQuantity();
+
+// Subtract five to the subscription's current quantity...
+$user-&gt;subscription('main')-&gt;decrementQuantity(5);
+</code></pre>
+<p>Alternatively, you may set a specific quantity using the <code>updateQuantity</code> method:</p>
+<pre><code>$user-&gt;subscription('main')-&gt;updateQuantity(10);
+</code></pre>
+<p>For more information on subscription quantities, consult the <a href="https://stripe.com/docs/guides/subscriptions#setting-quantities">Stripe documentation</a>.</p>
+<p><a name="subscription-taxes"></a></p>
+<h3 id="subscription-taxes">Subscription Taxes</h3>
+<p>To specify the tax percentage a user pays on a subscription, implement the <code>taxPercentage</code> method on your billable model, and return a numeric value between 0 and 100, with no more than 2 decimal places.</p>
+<pre><code>public function taxPercentage() {
+    return 20;
+}
+</code></pre>
+<p>The <code>taxPercentage</code> method enables you to apply a tax rate on a model-by-model basis, which may be helpful for a user base that spans multiple countries and tax rates.</p>
+<blockquote>
+<p>{note} The <code>taxPercentage</code> method only applies to subscription charges. If you use Cashier to make "one off" charges, you will need to manually specify the tax rate at that time.</p>
+</blockquote>
+<p><a name="cancelling-subscriptions"></a></p>
+<h3 id="cancelling-subscriptions">Cancelling Subscriptions</h3>
+<p>To cancel a subscription, simply call the <code>cancel</code> method on the user's subscription:</p>
+<pre><code>$user-&gt;subscription('main')-&gt;cancel();
+</code></pre>
+<p>When a subscription is cancelled, Cashier will automatically set the <code>ends_at</code> column in your database. This column is used to know when the <code>subscribed</code> method should begin returning <code>false</code>. For example, if a customer cancels a subscription on March 1st, but the subscription was not scheduled to end until March 5th, the <code>subscribed</code> method will continue to return <code>true</code> until March 5th.</p>
+<p>You may determine if a user has cancelled their subscription but are still on their "grace period" using the <code>onGracePeriod</code> method:</p>
+<pre><code>if ($user-&gt;subscription('main')-&gt;onGracePeriod()) {
+    //
+}
+</code></pre>
+<p>If you wish to cancel a subscription immediately, call the <code>cancelNow</code> method on the user's subscription:</p>
+<pre><code>$user-&gt;subscription('main')-&gt;cancelNow();
+</code></pre>
+<p><a name="resuming-subscriptions"></a></p>
+<h3 id="resuming-subscriptions">Resuming Subscriptions</h3>
+<p>If a user has cancelled their subscription and you wish to resume it, use the <code>resume</code> method. The user <strong>must</strong> still be on their grace period in order to resume a subscription:</p>
+<pre><code>$user-&gt;subscription('main')-&gt;resume();
+</code></pre>
+<p>If the user cancels a subscription and then resumes that subscription before the subscription has fully expired, they will not be billed immediately. Instead, their subscription will simply be re-activated, and they will be billed on the original billing cycle.</p>
+<p><a name="updating-credit-cards"></a></p>
+<h3 id="updating-credit-cards">Updating Credit Cards</h3>
+<p>The <code>updateCard</code> method may be used to update a customer's credit card information. This method accepts a Stripe token and will assign the new credit card as the default billing source:</p>
+<pre><code>$user-&gt;updateCard($creditCardToken);
+</code></pre>
+<p><a name="subscription-trials"></a></p>
+<h2 id="subscription-trials">Subscription Trials</h2>
+<p><a name="with-credit-card-up-front"></a></p>
+<h3 id="with-credit-card-up-front">With Credit Card Up Front</h3>
+<p>If you would like to offer trial periods to your customers while still collecting payment method information up front, You should use the <code>trialDays</code> method when creating your subscriptions:</p>
+<pre><code>$user = User::find(1);
+
+$user-&gt;newSubscription('main', 'monthly')
+            -&gt;trialDays(10)
+            -&gt;create($creditCardToken);
+</code></pre>
+<p>This method will set the trial period ending date on the subscription record within the database, as well as instruct Stripe / Braintree to not begin billing the customer until after this date.</p>
+<blockquote>
+<p>{note} If the customer's subscription is not cancelled before the trial ending date they will be charged as soon as the trial expires, so you should be sure to notify your users of their trial ending date.</p>
+</blockquote>
+<p>You may determine if the user is within their trial period using either the <code>onTrial</code> method of the user instance, or the <code>onTrial</code> method of the subscription instance. The two examples below are identical:</p>
+<pre><code>if ($user-&gt;onTrial('main')) {
+    //
+}
+
+if ($user-&gt;subscription('main')-&gt;onTrial()) {
+    //
+}
+</code></pre>
+<p><a name="without-credit-card-up-front"></a></p>
+<h3 id="without-credit-card-up-front">Without Credit Card Up Front</h3>
+<p>If you would like to offer trial periods without collecting the user's payment method information up front, you may simply set the <code>trial_ends_at</code> column on the user record to your desired trial ending date. This is typically done during user registration:</p>
+<pre><code>$user = User::create([
+    // Populate other user properties...
+    'trial_ends_at' =&gt; Carbon::now()-&gt;addDays(10),
+]);
+</code></pre>
+<blockquote>
+<p>{note}  Be sure to add a <a href="../docs/{{version}}/eloquent-mutators#date-mutators">date mutator</a> for <code>trial_ends_at</code> to your model definition.</p>
+</blockquote>
+<p>Cashier refers to this type of trial as a "generic trial", since it is not attached to any existing subscription. The <code>onTrial</code> method on the <code>User</code> instance will return <code>true</code> if the current date is not past the value of <code>trial_ends_at</code>:</p>
+<pre><code>if ($user-&gt;onTrial()) {
+    // User is within their trial period...
+}
+</code></pre>
+<p>You may also use the <code>onGenericTrial</code> method if you wish to know specifically that the user is within their "generic" trial period and has not created an actual subscription yet:</p>
+<pre><code>if ($user-&gt;onGenericTrial()) {
+    // User is within their "generic" trial period...
+}
+</code></pre>
+<p>Once you are ready to create an actual subscription for the user, you may use the <code>newSubscription</code> method as usual:</p>
+<pre><code>$user = User::find(1);
+
+$user-&gt;newSubscription('main', 'monthly')-&gt;create($creditCardToken);
+</code></pre>
+<p><a name="handling-stripe-webhooks"></a></p>
+<h2 id="handling-stripe-webhooks">Handling Stripe Webhooks</h2>
+<p>Both Stripe and Braintree can notify your application of a variety of events via webhooks. To handle Stripe webhooks, define a route that points to Cashier's webhook controller. This controller will handle all incoming webhook requests and dispatch them to the proper controller method:</p>
+<pre><code>Route::post(
+    'stripe/webhook',
+    '\Laravel\Cashier\Http\Controllers\WebhookController@handleWebhook'
+);
+</code></pre>
+<blockquote>
+<p>{note} Once you have registered your route, be sure to configure the webhook URL in your Stripe control panel settings.</p>
+</blockquote>
+<p>By default, this controller will automatically handle cancelling subscriptions that have too many failed charges (as defined by your Stripe settings); however, as we'll soon discover, you can extend this controller to handle any webhook event you like.</p>
+<h4 id="webhooks-csrf-protection">Webhooks &amp; CSRF Protection</h4>
+<p>Since Stripe webhooks need to bypass Laravel's <a href="../docs/{{version}}/routing#csrf-protection">CSRF protection</a>, be sure to list the URI as an exception in your <code>VerifyCsrfToken</code> middleware or list the route outside of the <code>web</code> middleware group:</p>
+<pre><code>protected $except = [
+    'stripe/*',
+];
+</code></pre>
+<p><a name="defining-webhook-event-handlers"></a></p>
+<h3 id="defining-webhook-event-handlers">Defining Webhook Event Handlers</h3>
+<p>Cashier automatically handles subscription cancellation on failed charges, but if you have additional Stripe webhook events you would like to handle, simply extend the Webhook controller. Your method names should correspond to Cashier's expected convention, specifically, methods should be prefixed with <code>handle</code> and the "camel case" name of the Stripe webhook you wish to handle. For example, if you wish to handle the <code>invoice.payment_succeeded</code> webhook, you should add a <code>handleInvoicePaymentSucceeded</code> method to the controller:</p>
+<pre><code>&lt;?php
+
+namespace App\Http\Controllers;
+
+use Laravel\Cashier\Http\Controllers\WebhookController as CashierController;
+
+class WebhookController extends CashierController
+{
+    /**
+     * Handle a Stripe webhook.
+     *
+     * @param  array  $payload
+     * @return Response
+     */
+    public function handleInvoicePaymentSucceeded($payload)
+    {
+        // Handle The Event
+    }
+}
+</code></pre>
+<p><a name="handling-failed-subscriptions"></a></p>
+<h3 id="failed-subscriptions">Failed Subscriptions</h3>
+<p>What if a customer's credit card expires? No worries - the Cashier webhook controller that can easily cancel the customer's subscription for you. As noted above, all you need to do is point a route to the controller:</p>
+<pre><code>Route::post(
+    'stripe/webhook',
+    '\Laravel\Cashier\Http\Controllers\WebhookController@handleWebhook'
+);
+</code></pre>
+<p>That's it! Failed payments will be captured and handled by the controller. The controller will cancel the customer's subscription when Stripe determines the subscription has failed (normally after three failed payment attempts).</p>
+<p><a name="handling-braintree-webhooks"></a></p>
+<h2 id="handling-braintree-webhooks">Handling Braintree Webhooks</h2>
+<p>Both Stripe and Braintree can notify your application of a variety of events via webhooks. To handle Braintree webhooks, define a route that points to Cashier's webhook controller. This controller will handle all incoming webhook requests and dispatch them to the proper controller method:</p>
+<pre><code>Route::post(
+    'braintree/webhook',
+    '\Laravel\Cashier\Http\Controllers\WebhookController@handleWebhook'
+);
+</code></pre>
+<blockquote>
+<p>{note} Once you have registered your route, be sure to configure the webhook URL in your Braintree control panel settings.</p>
+</blockquote>
+<p>By default, this controller will automatically handle cancelling subscriptions that have too many failed charges (as defined by your Braintree settings); however, as we'll soon discover, you can extend this controller to handle any webhook event you like.</p>
+<h4 id="webhooks-csrf-protection_1">Webhooks &amp; CSRF Protection</h4>
+<p>Since Braintree webhooks need to bypass Laravel's <a href="../docs/{{version}}/routing#csrf-protection">CSRF protection</a>, be sure to list the URI as an exception in your <code>VerifyCsrfToken</code> middleware or list the route outside of the <code>web</code> middleware group:</p>
+<pre><code>protected $except = [
+    'braintree/*',
+];
+</code></pre>
+<p><a name="defining-braintree-webhook-event-handlers"></a></p>
+<h3 id="defining-webhook-event-handlers_1">Defining Webhook Event Handlers</h3>
+<p>Cashier automatically handles subscription cancellation on failed charges, but if you have additional Braintree webhook events you would like to handle, simply extend the Webhook controller. Your method names should correspond to Cashier's expected convention, specifically, methods should be prefixed with <code>handle</code> and the "camel case" name of the Braintree webhook you wish to handle. For example, if you wish to handle the <code>dispute_opened</code> webhook, you should add a <code>handleDisputeOpened</code> method to the controller:</p>
+<pre><code>&lt;?php
+
+namespace App\Http\Controllers;
+
+use Braintree\WebhookNotification;
+use Laravel\Cashier\Http\Controllers\WebhookController as CashierController;
+
+class WebhookController extends CashierController
+{
+    /**
+     * Handle a Braintree webhook.
+     *
+     * @param  WebhookNotification  $webhook
+     * @return Response
+     */
+    public function handleDisputeOpened(WebhookNotification $notification)
+    {
+        // Handle The Event
+    }
+}
+</code></pre>
+<p><a name="handling-braintree-failed-subscriptions"></a></p>
+<h3 id="failed-subscriptions_1">Failed Subscriptions</h3>
+<p>What if a customer's credit card expires? No worries - Cashier includes a Webhook controller that can easily cancel the customer's subscription for you. Just point a route to the controller:</p>
+<pre><code>Route::post(
+    'braintree/webhook',
+    '\Laravel\Cashier\Http\Controllers\WebhookController@handleWebhook'
+);
+</code></pre>
+<p>That's it! Failed payments will be captured and handled by the controller. The controller will cancel the customer's subscription when Braintree determines the subscription has failed (normally after three failed payment attempts). Don't forget: you will need to configure the webhook URI in your Braintree control panel settings.</p>
+<p><a name="single-charges"></a></p>
+<h2 id="single-charges">Single Charges</h2>
+<h3 id="simple-charge">Simple Charge</h3>
+<blockquote>
+<p>{note} When using Stripe, the <code>charge</code> method accepts the amount you would like to charge in the <strong>lowest denominator of the currency used by your application</strong>. However, when using Braintree, you should pass the full dollar amount to the <code>charge</code> method:</p>
+</blockquote>
+<p>If you would like to make a "one off" charge against a subscribed customer's credit card, you may use the <code>charge</code> method on a billable model instance.</p>
+<pre><code>// Stripe Accepts Charges In Cents...
+$user-&gt;charge(100);
+
+// Braintree Accepts Charges In Dollars...
+$user-&gt;charge(1);
+</code></pre>
+<p>The <code>charge</code> method accepts an array as its second argument, allowing you to pass any options you wish to the underlying Stripe / Braintree charge creation. Consult the Stripe or Braintree documentation regarding the options available to you when creating charges:</p>
+<pre><code>$user-&gt;charge(100, [
+    'custom_option' =&gt; $value,
+]);
+</code></pre>
+<p>The <code>charge</code> method will throw an exception if the charge fails. If the charge is successful, the full Stripe / Braintree response will be returned from the method:</p>
+<pre><code>try {
+    $response = $user-&gt;charge(100);
+} catch (Exception $e) {
+    //
+}
+</code></pre>
+<h3 id="charge-with-invoice">Charge With Invoice</h3>
+<p>Sometimes you may need to make a one-time charge but also generate an invoice for the charge so that you may offer a PDF receipt to your customer. The <code>invoiceFor</code> method lets you do just that. For example, let's invoice the customer $5.00 for a "One Time Fee":</p>
+<pre><code>// Stripe Accepts Charges In Cents...
+$user-&gt;invoiceFor('One Time Fee', 500);
+
+// Braintree Accepts Charges In Dollars...
+$user-&gt;invoiceFor('One Time Fee', 5);
+</code></pre>
+<p>The invoice will be charged immediately against the user's credit card. The <code>invoiceFor</code> method also accepts an array as its third argument, allowing you to pass any options you wish to the underlying Stripe / Braintree charge creation:</p>
+<pre><code>$user-&gt;invoiceFor('One Time Fee', 500, [
+    'custom-option' =&gt; $value,
+]);
+</code></pre>
+<blockquote>
+<p>{note} The <code>invoiceFor</code> method will create a Stripe invoice which will retry failed billing attempts. If you do not want invoices to retry failed charges, you will need to close them using the Stripe API after the first failed charge.</p>
+</blockquote>
+<p><a name="invoices"></a></p>
+<h2 id="invoices">Invoices</h2>
+<p>You may easily retrieve an array of a billable model's invoices using the <code>invoices</code> method:</p>
+<pre><code>$invoices = $user-&gt;invoices();
+
+// Include pending invoices in the results...
+$invoices = $user-&gt;invoicesIncludingPending();
+</code></pre>
+<p>When listing the invoices for the customer, you may use the invoice's helper methods to display the relevant invoice information. For example, you may wish to list every invoice in a table, allowing the user to easily download any of them:</p>
+<pre><code>&lt;table&gt;
+    @foreach ($invoices as $invoice)
+        &lt;tr&gt;
+            &lt;td&gt;{{ $invoice-&gt;date()-&gt;toFormattedDateString() }}&lt;/td&gt;
+            &lt;td&gt;{{ $invoice-&gt;total() }}&lt;/td&gt;
+            &lt;td&gt;&lt;a href="/user/invoice/{{ $invoice-&gt;id }}"&gt;Download&lt;/a&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+    @endforeach
+&lt;/table&gt;
+</code></pre>
+<p><a name="generating-invoice-pdfs"></a></p>
+<h3 id="generating-invoice-pdfs">Generating Invoice PDFs</h3>
+<p>Before generating invoice PDFs, you need to install the <code>dompdf</code> PHP library:</p>
+<pre><code>composer require dompdf/dompdf
+</code></pre>
+<p>Then, from within a route or controller, use the <code>downloadInvoice</code> method to generate a PDF download of the invoice. This method will automatically generate the proper HTTP response to send the download to the browser:</p>
+<pre><code>use Illuminate\Http\Request;
+
+Route::get('user/invoice/{invoice}', function (Request $request, $invoiceId) {
+    return $request-&gt;user()-&gt;downloadInvoice($invoiceId, [
+        'vendor'  =&gt; 'Your Company',
+        'product' =&gt; 'Your Product',
+    ]);
+});
+</code></pre>
+          <aside class="copyright" role="note">
+            
+            Documentation built with
+            <a href="http://www.mkdocs.org" target="_blank">MkDocs</a>
+            using the
+            <a href="http://squidfunk.github.io/mkdocs-material/" target="_blank">
+              Material
+            </a>
+            theme.
+          </aside>
+          
+            <footer class="footer">
+              
+  <nav class="pagination" aria-label="Footer">
+    <div class="previous">
+      
+        <a href="../authorization/" title="Authorization">
+          <span class="direction">
+            Previous
+          </span>
+          <div class="page">
+            <div class="button button-previous" role="button" aria-label="Previous">
+              <i class="icon icon-back"></i>
+            </div>
+            <div class="stretch">
+              <div class="title">
+                Authorization
+              </div>
+            </div>
+          </div>
+        </a>
+      
+    </div>
+    <div class="next">
+      
+        <a href="../blade/" title="Blade">
+          <span class="direction">
+            Next
+          </span>
+          <div class="page">
+            <div class="stretch">
+              <div class="title">
+                Blade
+              </div>
+            </div>
+            <div class="button button-next" role="button" aria-label="Next">
+              <i class="icon icon-forward"></i>
+            </div>
+          </div>
+        </a>
+      
+    </div>
+  </nav>
+
+            </footer>
+          
+        </div>
+      </article>
+      <div class="results" role="status" aria-live="polite">
+        <div class="scrollable">
+          <div class="wrapper">
+            <div class="meta"></div>
+            <div class="list"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script>
+      var base_url = '..';
+      var repo_id  = '';
+    </script>
+    <script src="../assets/javascripts/application-997097ee0c.js"></script>
+    
+      <script src="../assets/jquery.js"></script>
+    
+      <script src="../assets/prism.js"></script>
+    
+    
+  </body>
+</html>
