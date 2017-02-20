@@ -9,16 +9,16 @@
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     
       
-        <title>Database - Laravel 5.3 official documentation</title>
+        <title>Database - Laravel 5.4 Official Documentation</title>
       
       
       
       
     
     <meta property="og:url" content="None">
-    <meta property="og:title" content="Laravel 5.3 official documentation">
+    <meta property="og:title" content="Laravel 5.4 Official Documentation">
     <meta property="og:image" content="None/../">
-    <meta name="apple-mobile-web-app-title" content="Laravel 5.3 official documentation">
+    <meta name="apple-mobile-web-app-title" content="Laravel 5.4 Official Documentation">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
@@ -60,15 +60,13 @@
       </style>
     
     
-      <link rel="stylesheet" href="../assets/prism.css">
-    
     <script src="../assets/javascripts/modernizr-4ab42b99fd.js"></script>
     
   </head>
   
   
   
-  <body class="palette-primary-teal palette-accent-pink">
+  <body class="palette-primary-teal palette-accent-green">
     
     <div class="backdrop">
       <div class="backdrop-paper"></div>
@@ -125,7 +123,7 @@
       
       <div class="name">
         <strong>
-          Laravel 5.3 official documentation
+          Laravel 5.4 Official Documentation
           <span class="version">
             
           </span>
@@ -646,15 +644,6 @@
           
             
   <li>
-    <a class="" title="Readme" href="../readme/">
-      Readme
-    </a>
-    
-  </li>
-
-          
-            
-  <li>
     <a class="" title="Redirects" href="../redirects/">
       Redirects
     </a>
@@ -834,163 +823,207 @@
 <p><a name="configuration"></a></p>
 <h3 id="configuration">Configuration</h3>
 <p>The database configuration for your application is located at <code>config/database.php</code>. In this file you may define all of your database connections, as well as specify which connection should be used by default. Examples for most of the supported database systems are provided in this file.</p>
-<p>By default, Laravel's sample <a href="../docs/{{version}}/installation#environment-configuration">environment configuration</a> is ready to use with <a href="../docs/{{version}}/homestead">Laravel Homestead</a>, which is a convenient virtual machine for doing Laravel development on your local machine. Of course, you are free to modify this configuration as needed for your local database.</p>
+<p>By default, Laravel's sample <a href="../docs/{{version}}/configuration#environment-configuration">environment configuration</a> is ready to use with <a href="../docs/{{version}}/homestead">Laravel Homestead</a>, which is a convenient virtual machine for doing Laravel development on your local machine. Of course, you are free to modify this configuration as needed for your local database.</p>
 <h4 id="sqlite-configuration">SQLite Configuration</h4>
 <p>After creating a new SQLite database using a command such as <code>touch database/database.sqlite</code>, you can easily configure your environment variables to point to this newly created database by using the database's absolute path:</p>
-<pre><code>DB_CONNECTION=sqlite
+<div class="codehilite"><pre><span></span>DB_CONNECTION=sqlite
 DB_DATABASE=/absolute/path/to/database.sqlite
-</code></pre>
+</pre></div>
+
+
 <h4 id="sql-server-configuration">SQL Server Configuration</h4>
 <p>Laravel supports SQL Server out of the box; however, you will need to add the connection configuration for the database to your <code>config/database.php</code> configuration file:</p>
-<pre><code>'sqlsrv' =&gt; [
-    'driver' =&gt; 'sqlsrv',
-    'host' =&gt; env('DB_HOST', 'localhost'),
-    'database' =&gt; env('DB_DATABASE', 'forge'),
-    'username' =&gt; env('DB_USERNAME', 'forge'),
-    'password' =&gt; env('DB_PASSWORD', ''),
-    'charset' =&gt; 'utf8',
-    'prefix' =&gt; '',
+<div class="codehilite"><pre><span></span>&#39;sqlsrv&#39; =&gt; [
+    &#39;driver&#39; =&gt; &#39;sqlsrv&#39;,
+    &#39;host&#39; =&gt; env(&#39;DB_HOST&#39;, &#39;localhost&#39;),
+    &#39;database&#39; =&gt; env(&#39;DB_DATABASE&#39;, &#39;forge&#39;),
+    &#39;username&#39; =&gt; env(&#39;DB_USERNAME&#39;, &#39;forge&#39;),
+    &#39;password&#39; =&gt; env(&#39;DB_PASSWORD&#39;, &#39;&#39;),
+    &#39;charset&#39; =&gt; &#39;utf8&#39;,
+    &#39;prefix&#39; =&gt; &#39;&#39;,
 ],
-</code></pre>
+</pre></div>
+
+
 <p><a name="read-and-write-connections"></a></p>
 <h3 id="read-write-connections">Read &amp; Write Connections</h3>
 <p>Sometimes you may wish to use one database connection for SELECT statements, and another for INSERT, UPDATE, and DELETE statements. Laravel makes this a breeze, and the proper connections will always be used whether you are using raw queries, the query builder, or the Eloquent ORM.</p>
 <p>To see how read / write connections should be configured, let's look at this example:</p>
-<pre><code>'mysql' =&gt; [
-    'read' =&gt; [
-        'host' =&gt; '192.168.1.1',
+<div class="codehilite"><pre><span></span>&#39;mysql&#39; =&gt; [
+    &#39;read&#39; =&gt; [
+        &#39;host&#39; =&gt; &#39;192.168.1.1&#39;,
     ],
-    'write' =&gt; [
-        'host' =&gt; '196.168.1.2'
+    &#39;write&#39; =&gt; [
+        &#39;host&#39; =&gt; &#39;196.168.1.2&#39;
     ],
-    'driver'    =&gt; 'mysql',
-    'database'  =&gt; 'database',
-    'username'  =&gt; 'root',
-    'password'  =&gt; '',
-    'charset'   =&gt; 'utf8',
-    'collation' =&gt; 'utf8_unicode_ci',
-    'prefix'    =&gt; '',
+    &#39;driver&#39;    =&gt; &#39;mysql&#39;,
+    &#39;database&#39;  =&gt; &#39;database&#39;,
+    &#39;username&#39;  =&gt; &#39;root&#39;,
+    &#39;password&#39;  =&gt; &#39;&#39;,
+    &#39;charset&#39;   =&gt; &#39;utf8&#39;,
+    &#39;collation&#39; =&gt; &#39;utf8_unicode_ci&#39;,
+    &#39;prefix&#39;    =&gt; &#39;&#39;,
 ],
-</code></pre>
+</pre></div>
+
+
 <p>Note that two keys have been added to the configuration array: <code>read</code> and <code>write</code>. Both of these keys have array values containing a single key: <code>host</code>. The rest of the database options for the <code>read</code> and <code>write</code> connections will be merged from the main <code>mysql</code> array.</p>
 <p>You only need to place items in the <code>read</code> and <code>write</code> arrays if you wish to override the values from the main array. So, in this case, <code>192.168.1.1</code> will be used as the host for the "read" connection, while <code>192.168.1.2</code> will be used for the "write" connection. The database credentials, prefix, character set, and all other options in the main <code>mysql</code> array will be shared across both connections.</p>
 <p><a name="using-multiple-database-connections"></a></p>
 <h3 id="using-multiple-database-connections">Using Multiple Database Connections</h3>
 <p>When using multiple connections, you may access each connection via the <code>connection</code> method on the <code>DB</code> facade. The <code>name</code> passed to the <code>connection</code> method should correspond to one of the connections listed in your <code>config/database.php</code> configuration file:</p>
-<pre><code>$users = DB::connection('foo')-&gt;select(...);
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="o">$</span><span class="nt">users</span> <span class="o">=</span> <span class="nt">DB</span><span class="p">::</span><span class="nd">connection</span><span class="o">(</span><span class="s1">&#39;foo&#39;</span><span class="o">)</span><span class="nt">-</span><span class="o">&gt;</span><span class="nt">select</span><span class="o">(...);</span>
+</pre></div>
+
+
 <p>You may also access the raw, underlying PDO instance using the <code>getPdo</code> method on a connection instance:</p>
-<pre><code>$pdo = DB::connection()-&gt;getPdo();
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="o">$</span><span class="nt">pdo</span> <span class="o">=</span> <span class="nt">DB</span><span class="p">::</span><span class="nd">connection</span><span class="o">()</span><span class="nt">-</span><span class="o">&gt;</span><span class="nt">getPdo</span><span class="o">();</span>
+</pre></div>
+
+
 <p><a name="running-queries"></a></p>
 <h2 id="running-raw-sql-queries">Running Raw SQL Queries</h2>
 <p>Once you have configured your database connection, you may run queries using the <code>DB</code> facade. The <code>DB</code> facade provides methods for each type of query: <code>select</code>, <code>update</code>, <code>insert</code>, <code>delete</code>, and <code>statement</code>.</p>
 <h4 id="running-a-select-query">Running A Select Query</h4>
 <p>To run a basic query, you may use the <code>select</code> method on the <code>DB</code> facade:</p>
-<pre><code>&lt;?php
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
-namespace App\Http\Controllers;
+<span class="nx">namespace</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Http</span><span class="err">\</span><span class="nx">Controllers</span><span class="p">;</span>
 
-use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\Controller;
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Support</span><span class="err">\</span><span class="nx">Facades</span><span class="err">\</span><span class="nx">DB</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Http</span><span class="err">\</span><span class="nx">Controllers</span><span class="err">\</span><span class="nx">Controller</span><span class="p">;</span>
 
-class UserController extends Controller
-{
-    /**
-     * Show a list of all of the application's users.
-     *
-     * @return Response
-     */
-    public function index()
-    {
-        $users = DB::select('select * from users where active = ?', [1]);
+<span class="kr">class</span> <span class="nx">UserController</span> <span class="kr">extends</span> <span class="nx">Controller</span>
+<span class="p">{</span>
+    <span class="cm">/**</span>
+<span class="cm">     * Show a list of all of the application&#39;s users.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return Response</span>
+<span class="cm">     */</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">index</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nx">$users</span> <span class="o">=</span> <span class="nx">DB</span><span class="o">::</span><span class="nx">select</span><span class="p">(</span><span class="s1">&#39;select * from users where active = ?&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
 
-        return view('user.index', ['users' =&gt; $users]);
-    }
-}
-</code></pre>
+        <span class="k">return</span> <span class="nx">view</span><span class="p">(</span><span class="s1">&#39;user.index&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;users&#39;</span> <span class="o">=&gt;</span> <span class="nx">$users</span><span class="p">]);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <p>The first argument passed to the <code>select</code> method is the raw SQL query, while the second argument is any parameter bindings that need to be bound to the query. Typically, these are the values of the <code>where</code> clause constraints. Parameter binding provides protection against SQL injection.</p>
 <p>The <code>select</code> method will always return an <code>array</code> of results. Each result within the array will be a PHP <code>StdClass</code> object, allowing you to access the values of the results:</p>
-<pre><code>foreach ($users as $user) {
+<div class="codehilite"><pre><span></span>foreach ($users as $user) {
     echo $user-&gt;name;
 }
-</code></pre>
+</pre></div>
+
+
 <h4 id="using-named-bindings">Using Named Bindings</h4>
 <p>Instead of using <code>?</code> to represent your parameter bindings, you may execute a query using named bindings:</p>
-<pre><code>$results = DB::select('select * from users where id = :id', ['id' =&gt; 1]);
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="o">$</span><span class="nt">results</span> <span class="o">=</span> <span class="nt">DB</span><span class="p">::</span><span class="nd">select</span><span class="o">(</span><span class="s1">&#39;select * from users where id = :id&#39;</span><span class="o">,</span> <span class="cp">[</span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="cp">]</span><span class="o">);</span>
+</pre></div>
+
+
 <h4 id="running-an-insert-statement">Running An Insert Statement</h4>
 <p>To execute an <code>insert</code> statement, you may use the <code>insert</code> method on the <code>DB</code> facade. Like <code>select</code>, this method takes the raw SQL query as its first argument and bindings as its second argument:</p>
-<pre><code>DB::insert('insert into users (id, name) values (?, ?)', [1, 'Dayle']);
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="nt">DB</span><span class="p">::</span><span class="nd">insert</span><span class="o">(</span><span class="s1">&#39;insert into users (id, name) values (?, ?)&#39;</span><span class="o">,</span> <span class="cp">[</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Dayle&#39;</span><span class="cp">]</span><span class="o">);</span>
+</pre></div>
+
+
 <h4 id="running-an-update-statement">Running An Update Statement</h4>
 <p>The <code>update</code> method should be used to update existing records in the database. The number of rows affected by the statement will be returned:</p>
-<pre><code>$affected = DB::update('update users set votes = 100 where name = ?', ['John']);
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="o">$</span><span class="nt">affected</span> <span class="o">=</span> <span class="nt">DB</span><span class="p">::</span><span class="nd">update</span><span class="o">(</span><span class="s1">&#39;update users set votes = 100 where name = ?&#39;</span><span class="o">,</span> <span class="cp">[</span><span class="s1">&#39;John&#39;</span><span class="cp">]</span><span class="o">);</span>
+</pre></div>
+
+
 <h4 id="running-a-delete-statement">Running A Delete Statement</h4>
 <p>The <code>delete</code> method should be used to delete records from the database. Like <code>update</code>, the number of rows affected will be returned:</p>
-<pre><code>$deleted = DB::delete('delete from users');
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="o">$</span><span class="nt">deleted</span> <span class="o">=</span> <span class="nt">DB</span><span class="p">::</span><span class="nd">delete</span><span class="o">(</span><span class="s1">&#39;delete from users&#39;</span><span class="o">);</span>
+</pre></div>
+
+
 <h4 id="running-a-general-statement">Running A General Statement</h4>
 <p>Some database statements do not return any value. For these types of operations, you may use the <code>statement</code> method on the <code>DB</code> facade:</p>
-<pre><code>DB::statement('drop table users');
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="nt">DB</span><span class="p">::</span><span class="nd">statement</span><span class="o">(</span><span class="s1">&#39;drop table users&#39;</span><span class="o">);</span>
+</pre></div>
+
+
 <p><a name="listening-for-query-events"></a></p>
 <h3 id="listening-for-query-events">Listening For Query Events</h3>
 <p>If you would like to receive each SQL query executed by your application, you may use the <code>listen</code> method. This method is useful for logging queries or debugging. You may register your query listener in a <a href="../docs/{{version}}/providers">service provider</a>:</p>
-<pre><code>&lt;?php
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
-namespace App\Providers;
+<span class="nx">namespace</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Providers</span><span class="p">;</span>
 
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\ServiceProvider;
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Support</span><span class="err">\</span><span class="nx">Facades</span><span class="err">\</span><span class="nx">DB</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Support</span><span class="err">\</span><span class="nx">ServiceProvider</span><span class="p">;</span>
 
-class AppServiceProvider extends ServiceProvider
-{
-    /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        DB::listen(function ($query) {
-            // $query-&gt;sql
-            // $query-&gt;bindings
-            // $query-&gt;time
-        });
-    }
+<span class="kr">class</span> <span class="nx">AppServiceProvider</span> <span class="kr">extends</span> <span class="nx">ServiceProvider</span>
+<span class="p">{</span>
+    <span class="cm">/**</span>
+<span class="cm">     * Bootstrap any application services.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return void</span>
+<span class="cm">     */</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">boot</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nx">DB</span><span class="o">::</span><span class="nx">listen</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">$query</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// $query-&gt;sql</span>
+            <span class="c1">// $query-&gt;bindings</span>
+            <span class="c1">// $query-&gt;time</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
 
-    /**
-     * Register the service provider.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        //
-    }
-}
-</code></pre>
+    <span class="cm">/**</span>
+<span class="cm">     * Register the service provider.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return void</span>
+<span class="cm">     */</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">register</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">//</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <p><a name="database-transactions"></a></p>
 <h2 id="database-transactions">Database Transactions</h2>
 <p>You may use the <code>transaction</code> method on the <code>DB</code> facade to run a set of operations within a database transaction. If an exception is thrown within the transaction <code>Closure</code>, the transaction will automatically be rolled back. If the <code>Closure</code> executes successfully, the transaction will automatically be committed. You don't need to worry about manually rolling back or committing while using the <code>transaction</code> method:</p>
-<pre><code>DB::transaction(function () {
-    DB::table('users')-&gt;update(['votes' =&gt; 1]);
+<div class="codehilite"><pre><span></span><span class="nt">DB</span><span class="p">::</span><span class="nd">transaction</span><span class="o">(</span><span class="nt">function</span> <span class="o">()</span> <span class="p">{</span>
+    <span class="n">DB</span><span class="p">:</span><span class="o">:</span><span class="nf">table</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="nf">update</span><span class="p">(</span><span class="cp">[</span><span class="s1">&#39;votes&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="cp">]</span><span class="p">);</span>
 
-    DB::table('posts')-&gt;delete();
-});
-</code></pre>
+    <span class="n">DB</span><span class="p">:</span><span class="o">:</span><span class="nf">table</span><span class="p">(</span><span class="s1">&#39;posts&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="nf">delete</span><span class="p">();</span>
+<span class="p">}</span><span class="o">);</span>
+</pre></div>
+
+
+<h4 id="handling-deadlocks">Handling Deadlocks</h4>
+<p>The <code>transaction</code> method accepts an optional second argument which defines the number of times a transaction should be reattempted when a deadlock occurs. Once these attempts have been exhausted, an exception will be thrown:</p>
+<div class="codehilite"><pre><span></span><span class="nt">DB</span><span class="p">::</span><span class="nd">transaction</span><span class="o">(</span><span class="nt">function</span> <span class="o">()</span> <span class="p">{</span>
+    <span class="n">DB</span><span class="p">:</span><span class="o">:</span><span class="nf">table</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="nf">update</span><span class="p">(</span><span class="cp">[</span><span class="s1">&#39;votes&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="cp">]</span><span class="p">);</span>
+
+    <span class="n">DB</span><span class="p">:</span><span class="o">:</span><span class="nf">table</span><span class="p">(</span><span class="s1">&#39;posts&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="nf">delete</span><span class="p">();</span>
+<span class="p">}</span><span class="o">,</span> <span class="nt">5</span><span class="o">);</span>
+</pre></div>
+
+
 <h4 id="manually-using-transactions">Manually Using Transactions</h4>
 <p>If you would like to begin a transaction manually and have complete control over rollbacks and commits, you may use the <code>beginTransaction</code> method on the <code>DB</code> facade:</p>
-<pre><code>DB::beginTransaction();
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="nt">DB</span><span class="p">::</span><span class="nd">beginTransaction</span><span class="o">();</span>
+</pre></div>
+
+
 <p>You can rollback the transaction via the <code>rollBack</code> method:</p>
-<pre><code>DB::rollBack();
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="nt">DB</span><span class="p">::</span><span class="nd">rollBack</span><span class="o">();</span>
+</pre></div>
+
+
 <p>Lastly, you can commit a transaction via the <code>commit</code> method:</p>
-<pre><code>DB::commit();
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="nt">DB</span><span class="p">::</span><span class="nd">commit</span><span class="o">();</span>
+</pre></div>
+
+
 <blockquote>
 <p>{tip} Using the <code>DB</code> facade's transaction methods also controls transactions for the <a href="../docs/{{version}}/queries">query builder</a> and <a href="../docs/{{version}}/eloquent">Eloquent ORM</a>.</p>
 </blockquote>
@@ -1066,10 +1099,6 @@ class AppServiceProvider extends ServiceProvider
       var repo_id  = '';
     </script>
     <script src="../assets/javascripts/application-997097ee0c.js"></script>
-    
-      <script src="../assets/jquery.js"></script>
-    
-      <script src="../assets/prism.js"></script>
     
     
   </body>

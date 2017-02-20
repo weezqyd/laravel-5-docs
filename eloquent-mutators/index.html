@@ -9,16 +9,16 @@
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     
       
-        <title>Eloquent mutators - Laravel 5.3 official documentation</title>
+        <title>Eloquent mutators - Laravel 5.4 Official Documentation</title>
       
       
       
       
     
     <meta property="og:url" content="None">
-    <meta property="og:title" content="Laravel 5.3 official documentation">
+    <meta property="og:title" content="Laravel 5.4 Official Documentation">
     <meta property="og:image" content="None/../">
-    <meta name="apple-mobile-web-app-title" content="Laravel 5.3 official documentation">
+    <meta name="apple-mobile-web-app-title" content="Laravel 5.4 Official Documentation">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
@@ -60,15 +60,13 @@
       </style>
     
     
-      <link rel="stylesheet" href="../assets/prism.css">
-    
     <script src="../assets/javascripts/modernizr-4ab42b99fd.js"></script>
     
   </head>
   
   
   
-  <body class="palette-primary-teal palette-accent-pink">
+  <body class="palette-primary-teal palette-accent-green">
     
     <div class="backdrop">
       <div class="backdrop-paper"></div>
@@ -125,7 +123,7 @@
       
       <div class="name">
         <strong>
-          Laravel 5.3 official documentation
+          Laravel 5.4 Official Documentation
           <span class="version">
             
           </span>
@@ -652,15 +650,6 @@
           
             
   <li>
-    <a class="" title="Readme" href="../readme/">
-      Readme
-    </a>
-    
-  </li>
-
-          
-            
-  <li>
     <a class="" title="Redirects" href="../redirects/">
       Redirects
     </a>
@@ -836,174 +825,196 @@
 <p><a name="defining-an-accessor"></a></p>
 <h3 id="defining-an-accessor">Defining An Accessor</h3>
 <p>To define an accessor, create a <code>getFooAttribute</code> method on your model where <code>Foo</code> is the "studly" cased name of the column you wish to access. In this example, we'll define an accessor for the <code>first_name</code> attribute. The accessor will automatically be called by Eloquent when attempting to retrieve the value of the <code>first_name</code> attribute:</p>
-<pre><code>&lt;?php
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
-namespace App;
+<span class="nx">namespace</span> <span class="nx">App</span><span class="p">;</span>
 
-use Illuminate\Database\Eloquent\Model;
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Database</span><span class="err">\</span><span class="nx">Eloquent</span><span class="err">\</span><span class="nx">Model</span><span class="p">;</span>
 
-class User extends Model
-{
-    /**
-     * Get the user's first name.
-     *
-     * @param  string  $value
-     * @return string
-     */
-    public function getFirstNameAttribute($value)
-    {
-        return ucfirst($value);
-    }
-}
-</code></pre>
-<p>As you can see, the original value of the column is passed to the accessor, allowing you to manipulate and return the value. To access the value of the mutator, you may simply access the <code>first_name</code> attribute on a model instance:</p>
-<pre><code>$user = App\User::find(1);
+<span class="kr">class</span> <span class="nx">User</span> <span class="kr">extends</span> <span class="nx">Model</span>
+<span class="p">{</span>
+    <span class="cm">/**</span>
+<span class="cm">     * Get the user&#39;s first name.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param  string  $value</span>
+<span class="cm">     * @return string</span>
+<span class="cm">     */</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">getFirstNameAttribute</span><span class="p">(</span><span class="nx">$value</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">ucfirst</span><span class="p">(</span><span class="nx">$value</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
 
-$firstName = $user-&gt;first_name;
-</code></pre>
+
+<p>As you can see, the original value of the column is passed to the accessor, allowing you to manipulate and return the value. To access the value of the accessor, you may simply access the <code>first_name</code> attribute on a model instance:</p>
+<div class="codehilite"><pre><span></span><span class="o">$</span><span class="nt">user</span> <span class="o">=</span> <span class="nt">App</span><span class="err">\</span><span class="nt">User</span><span class="p">::</span><span class="nd">find</span><span class="o">(</span><span class="nt">1</span><span class="o">);</span>
+
+<span class="o">$</span><span class="nt">firstName</span> <span class="o">=</span> <span class="o">$</span><span class="nt">user-</span><span class="o">&gt;</span><span class="nt">first_name</span><span class="o">;</span>
+</pre></div>
+
+
 <p><a name="defining-a-mutator"></a></p>
 <h3 id="defining-a-mutator">Defining A Mutator</h3>
 <p>To define a mutator, define a <code>setFooAttribute</code> method on your model where <code>Foo</code> is the "studly" cased name of the column you wish to access. So, again, let's define a mutator for the <code>first_name</code> attribute. This mutator will be automatically called when we attempt to set the value of the <code>first_name</code> attribute on the model:</p>
-<pre><code>&lt;?php
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
-namespace App;
+<span class="nx">namespace</span> <span class="nx">App</span><span class="p">;</span>
 
-use Illuminate\Database\Eloquent\Model;
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Database</span><span class="err">\</span><span class="nx">Eloquent</span><span class="err">\</span><span class="nx">Model</span><span class="p">;</span>
 
-class User extends Model
-{
-    /**
-     * Set the user's first name.
-     *
-     * @param  string  $value
-     * @return void
-     */
-    public function setFirstNameAttribute($value)
-    {
-        $this-&gt;attributes['first_name'] = strtolower($value);
-    }
-}
-</code></pre>
+<span class="kr">class</span> <span class="nx">User</span> <span class="kr">extends</span> <span class="nx">Model</span>
+<span class="p">{</span>
+    <span class="cm">/**</span>
+<span class="cm">     * Set the user&#39;s first name.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param  string  $value</span>
+<span class="cm">     * @return void</span>
+<span class="cm">     */</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">setFirstNameAttribute</span><span class="p">(</span><span class="nx">$value</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">attributes</span><span class="p">[</span><span class="s1">&#39;first_name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nx">strtolower</span><span class="p">(</span><span class="nx">$value</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <p>The mutator will receive the value that is being set on the attribute, allowing you to manipulate the value and set the manipulated value on the Eloquent model's internal <code>$attributes</code> property. So, for example, if we attempt to set the <code>first_name</code> attribute to <code>Sally</code>:</p>
-<pre><code>$user = App\User::find(1);
+<div class="codehilite"><pre><span></span><span class="o">$</span><span class="nt">user</span> <span class="o">=</span> <span class="nt">App</span><span class="err">\</span><span class="nt">User</span><span class="p">::</span><span class="nd">find</span><span class="o">(</span><span class="nt">1</span><span class="o">);</span>
 
-$user-&gt;first_name = 'Sally';
-</code></pre>
+<span class="o">$</span><span class="nt">user-</span><span class="o">&gt;</span><span class="nt">first_name</span> <span class="o">=</span> <span class="s1">&#39;Sally&#39;</span><span class="o">;</span>
+</pre></div>
+
+
 <p>In this example, the <code>setFirstNameAttribute</code> function will be called with the value <code>Sally</code>. The mutator will then apply the <code>strtolower</code> function to the name and set its resulting value in the internal <code>$attributes</code> array.</p>
 <p><a name="date-mutators"></a></p>
 <h2 id="date-mutators">Date Mutators</h2>
 <p>By default, Eloquent will convert the <code>created_at</code> and <code>updated_at</code> columns to instances of <a href="https://github.com/briannesbitt/Carbon">Carbon</a>, which extends the PHP <code>DateTime</code> class to provide an assortment of helpful methods. You may customize which dates are automatically mutated, and even completely disable this mutation, by overriding the <code>$dates</code> property of your model:</p>
-<pre><code>&lt;?php
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
-namespace App;
+<span class="nx">namespace</span> <span class="nx">App</span><span class="p">;</span>
 
-use Illuminate\Database\Eloquent\Model;
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Database</span><span class="err">\</span><span class="nx">Eloquent</span><span class="err">\</span><span class="nx">Model</span><span class="p">;</span>
 
-class User extends Model
-{
-    /**
-     * The attributes that should be mutated to dates.
-     *
-     * @var array
-     */
-    protected $dates = [
-        'created_at',
-        'updated_at',
-        'deleted_at'
-    ];
-}
-</code></pre>
+<span class="kr">class</span> <span class="nx">User</span> <span class="kr">extends</span> <span class="nx">Model</span>
+<span class="p">{</span>
+    <span class="cm">/**</span>
+<span class="cm">     * The attributes that should be mutated to dates.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @var array</span>
+<span class="cm">     */</span>
+    <span class="kr">protected</span> <span class="nx">$dates</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s1">&#39;created_at&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;updated_at&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;deleted_at&#39;</span>
+    <span class="p">];</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <p>When a column is considered a date, you may set its value to a UNIX timestamp, date string (<code>Y-m-d</code>), date-time string, and of course a <code>DateTime</code> / <code>Carbon</code> instance, and the date's value will automatically be correctly stored in your database:</p>
-<pre><code>$user = App\User::find(1);
+<div class="codehilite"><pre><span></span><span class="o">$</span><span class="nt">user</span> <span class="o">=</span> <span class="nt">App</span><span class="err">\</span><span class="nt">User</span><span class="p">::</span><span class="nd">find</span><span class="o">(</span><span class="nt">1</span><span class="o">);</span>
 
-$user-&gt;deleted_at = Carbon::now();
+<span class="o">$</span><span class="nt">user-</span><span class="o">&gt;</span><span class="nt">deleted_at</span> <span class="o">=</span> <span class="nt">Carbon</span><span class="p">::</span><span class="nd">now</span><span class="o">();</span>
 
-$user-&gt;save();
-</code></pre>
+<span class="o">$</span><span class="nt">user-</span><span class="o">&gt;</span><span class="nt">save</span><span class="o">();</span>
+</pre></div>
+
+
 <p>As noted above, when retrieving attributes that are listed in your <code>$dates</code> property, they will automatically be cast to <a href="https://github.com/briannesbitt/Carbon">Carbon</a> instances, allowing you to use any of Carbon's methods on your attributes:</p>
-<pre><code>$user = App\User::find(1);
+<div class="codehilite"><pre><span></span><span class="o">$</span><span class="nt">user</span> <span class="o">=</span> <span class="nt">App</span><span class="err">\</span><span class="nt">User</span><span class="p">::</span><span class="nd">find</span><span class="o">(</span><span class="nt">1</span><span class="o">);</span>
 
-return $user-&gt;deleted_at-&gt;getTimestamp();
-</code></pre>
+<span class="nt">return</span> <span class="o">$</span><span class="nt">user-</span><span class="o">&gt;</span><span class="nt">deleted_at-</span><span class="o">&gt;</span><span class="nt">getTimestamp</span><span class="o">();</span>
+</pre></div>
+
+
 <h4 id="date-formats">Date Formats</h4>
 <p>By default, timestamps are formatted as <code>'Y-m-d H:i:s'</code>. If you need to customize the timestamp format, set the <code>$dateFormat</code> property on your model. This property determines how date attributes are stored in the database, as well as their format when the model is serialized to an array or JSON:</p>
-<pre><code>&lt;?php
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
-namespace App;
+<span class="nx">namespace</span> <span class="nx">App</span><span class="p">;</span>
 
-use Illuminate\Database\Eloquent\Model;
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Database</span><span class="err">\</span><span class="nx">Eloquent</span><span class="err">\</span><span class="nx">Model</span><span class="p">;</span>
 
-class Flight extends Model
-{
-    /**
-     * The storage format of the model's date columns.
-     *
-     * @var string
-     */
-    protected $dateFormat = 'U';
-}
-</code></pre>
+<span class="kr">class</span> <span class="nx">Flight</span> <span class="kr">extends</span> <span class="nx">Model</span>
+<span class="p">{</span>
+    <span class="cm">/**</span>
+<span class="cm">     * The storage format of the model&#39;s date columns.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @var string</span>
+<span class="cm">     */</span>
+    <span class="kr">protected</span> <span class="nx">$dateFormat</span> <span class="o">=</span> <span class="s1">&#39;U&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <p><a name="attribute-casting"></a></p>
 <h2 id="attribute-casting">Attribute Casting</h2>
 <p>The <code>$casts</code> property on your model provides a convenient method of converting attributes to common data types. The <code>$casts</code> property should be an array where the key is the name of the attribute being cast and the value is the type you wish to cast the column to. The supported cast types are: <code>integer</code>, <code>real</code>, <code>float</code>, <code>double</code>, <code>string</code>, <code>boolean</code>, <code>object</code>, <code>array</code>, <code>collection</code>, <code>date</code>, <code>datetime</code>, and <code>timestamp</code>.</p>
 <p>For example, let's cast the <code>is_admin</code> attribute, which is stored in our database as an integer (<code>0</code> or <code>1</code>) to a boolean value:</p>
-<pre><code>&lt;?php
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
-namespace App;
+<span class="nx">namespace</span> <span class="nx">App</span><span class="p">;</span>
 
-use Illuminate\Database\Eloquent\Model;
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Database</span><span class="err">\</span><span class="nx">Eloquent</span><span class="err">\</span><span class="nx">Model</span><span class="p">;</span>
 
-class User extends Model
-{
-    /**
-     * The attributes that should be casted to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'is_admin' =&gt; 'boolean',
-    ];
-}
-</code></pre>
+<span class="kr">class</span> <span class="nx">User</span> <span class="kr">extends</span> <span class="nx">Model</span>
+<span class="p">{</span>
+    <span class="cm">/**</span>
+<span class="cm">     * The attributes that should be casted to native types.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @var array</span>
+<span class="cm">     */</span>
+    <span class="kr">protected</span> <span class="nx">$casts</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s1">&#39;is_admin&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;boolean&#39;</span><span class="p">,</span>
+    <span class="p">];</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <p>Now the <code>is_admin</code> attribute will always be cast to a boolean when you access it, even if the underlying value is stored in the database as an integer:</p>
-<pre><code>$user = App\User::find(1);
+<div class="codehilite"><pre><span></span><span class="o">$</span><span class="nt">user</span> <span class="o">=</span> <span class="nt">App</span><span class="err">\</span><span class="nt">User</span><span class="p">::</span><span class="nd">find</span><span class="o">(</span><span class="nt">1</span><span class="o">);</span>
 
-if ($user-&gt;is_admin) {
-    //
-}
-</code></pre>
+<span class="nt">if</span> <span class="o">($</span><span class="nt">user-</span><span class="o">&gt;</span><span class="nt">is_admin</span><span class="o">)</span> <span class="p">{</span>
+    <span class="err">//</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <p><a name="array-and-json-casting"></a></p>
 <h3 id="array-json-casting">Array &amp; JSON Casting</h3>
 <p>The <code>array</code> cast type is particularly useful when working with columns that are stored as serialized JSON. For example, if your database has a <code>JSON</code> or <code>TEXT</code> field type that contains serialized JSON, adding the <code>array</code> cast to that attribute will automatically deserialize the attribute to a PHP array when you access it on your Eloquent model:</p>
-<pre><code>&lt;?php
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
-namespace App;
+<span class="nx">namespace</span> <span class="nx">App</span><span class="p">;</span>
 
-use Illuminate\Database\Eloquent\Model;
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Database</span><span class="err">\</span><span class="nx">Eloquent</span><span class="err">\</span><span class="nx">Model</span><span class="p">;</span>
 
-class User extends Model
-{
-    /**
-     * The attributes that should be casted to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'options' =&gt; 'array',
-    ];
-}
-</code></pre>
+<span class="kr">class</span> <span class="nx">User</span> <span class="kr">extends</span> <span class="nx">Model</span>
+<span class="p">{</span>
+    <span class="cm">/**</span>
+<span class="cm">     * The attributes that should be casted to native types.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @var array</span>
+<span class="cm">     */</span>
+    <span class="kr">protected</span> <span class="nx">$casts</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s1">&#39;options&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;array&#39;</span><span class="p">,</span>
+    <span class="p">];</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <p>Once the cast is defined, you may access the <code>options</code> attribute and it will automatically be deserialized from JSON into a PHP array. When you set the value of the <code>options</code> attribute, the given array will automatically be serialized back into JSON for storage:</p>
-<pre><code>$user = App\User::find(1);
+<div class="codehilite"><pre><span></span><span class="o">$</span><span class="nt">user</span> <span class="o">=</span> <span class="nt">App</span><span class="err">\</span><span class="nt">User</span><span class="p">::</span><span class="nd">find</span><span class="o">(</span><span class="nt">1</span><span class="o">);</span>
 
-$options = $user-&gt;options;
+<span class="o">$</span><span class="nt">options</span> <span class="o">=</span> <span class="o">$</span><span class="nt">user-</span><span class="o">&gt;</span><span class="nt">options</span><span class="o">;</span>
 
-$options['key'] = 'value';
+<span class="o">$</span><span class="nt">options</span><span class="cp">[</span><span class="s1">&#39;key&#39;</span><span class="cp">]</span> <span class="o">=</span> <span class="s1">&#39;value&#39;</span><span class="o">;</span>
 
-$user-&gt;options = $options;
+<span class="o">$</span><span class="nt">user-</span><span class="o">&gt;</span><span class="nt">options</span> <span class="o">=</span> <span class="o">$</span><span class="nt">options</span><span class="o">;</span>
 
-$user-&gt;save();
-</code></pre>
+<span class="o">$</span><span class="nt">user-</span><span class="o">&gt;</span><span class="nt">save</span><span class="o">();</span>
+</pre></div>
           <aside class="copyright" role="note">
             
             Documentation built with
@@ -1076,10 +1087,6 @@ $user-&gt;save();
       var repo_id  = '';
     </script>
     <script src="../assets/javascripts/application-997097ee0c.js"></script>
-    
-      <script src="../assets/jquery.js"></script>
-    
-      <script src="../assets/prism.js"></script>
     
     
   </body>

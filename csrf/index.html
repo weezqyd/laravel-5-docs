@@ -9,16 +9,16 @@
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     
       
-        <title>Csrf - Laravel 5.3 official documentation</title>
+        <title>Csrf - Laravel 5.4 Official Documentation</title>
       
       
       
       
     
     <meta property="og:url" content="None">
-    <meta property="og:title" content="Laravel 5.3 official documentation">
+    <meta property="og:title" content="Laravel 5.4 Official Documentation">
     <meta property="og:image" content="None/../">
-    <meta name="apple-mobile-web-app-title" content="Laravel 5.3 official documentation">
+    <meta name="apple-mobile-web-app-title" content="Laravel 5.4 Official Documentation">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
@@ -60,15 +60,13 @@
       </style>
     
     
-      <link rel="stylesheet" href="../assets/prism.css">
-    
     <script src="../assets/javascripts/modernizr-4ab42b99fd.js"></script>
     
   </head>
   
   
   
-  <body class="palette-primary-teal palette-accent-pink">
+  <body class="palette-primary-teal palette-accent-green">
     
     <div class="backdrop">
       <div class="backdrop-paper"></div>
@@ -125,7 +123,7 @@
       
       <div class="name">
         <strong>
-          Laravel 5.3 official documentation
+          Laravel 5.4 Official Documentation
           <span class="version">
             
           </span>
@@ -652,15 +650,6 @@
           
             
   <li>
-    <a class="" title="Readme" href="../readme/">
-      Readme
-    </a>
-    
-  </li>
-
-          
-            
-  <li>
     <a class="" title="Redirects" href="../redirects/">
       Redirects
     </a>
@@ -822,49 +811,57 @@
 </ul>
 <p><a name="csrf-introduction"></a></p>
 <h2 id="introduction">Introduction</h2>
-<p>Laravel makes it easy to protect your application from <a href="http://en.wikipedia.org/wiki/Cross-site_request_forgery">cross-site request forgery</a> (CSRF) attacks. Cross-site request forgeries are a type of malicious exploit whereby unauthorized commands are performed on behalf of an authenticated user.</p>
+<p>Laravel makes it easy to protect your application from <a href="https://en.wikipedia.org/wiki/Cross-site_request_forgery">cross-site request forgery</a> (CSRF) attacks. Cross-site request forgeries are a type of malicious exploit whereby unauthorized commands are performed on behalf of an authenticated user.</p>
 <p>Laravel automatically generates a CSRF "token" for each active user session managed by the application. This token is used to verify that the authenticated user is the one actually making the requests to the application.</p>
 <p>Anytime you define a HTML form in your application, you should include a hidden CSRF token field in the form so that the CSRF protection middleware can validate the request. You may use the <code>csrf_field</code> helper to generate the token field:</p>
-<pre><code>&lt;form method="POST" action="/profile"&gt;
-    {{ csrf_field() }}
+<div class="codehilite"><pre><span></span><span class="nt">&lt;form</span> <span class="na">method=</span><span class="s">&quot;POST&quot;</span> <span class="na">action=</span><span class="s">&quot;/profile&quot;</span><span class="nt">&gt;</span>
+    <span class="cp">{{</span> <span class="nv">csrf_field</span><span class="o">()</span> <span class="cp">}}</span>
     ...
-&lt;/form&gt;
-</code></pre>
+<span class="nt">&lt;/form&gt;</span>
+</pre></div>
+
+
 <p>The <code>VerifyCsrfToken</code> <a href="../docs/{{version}}/middleware">middleware</a>, which is included in the <code>web</code> middleware group, will automatically verify that the token in the request input matches the token stored in the session.</p>
 <p><a name="csrf-excluding-uris"></a></p>
 <h2 id="excluding-uris-from-csrf-protection">Excluding URIs From CSRF Protection</h2>
 <p>Sometimes you may wish to exclude a set of URIs from CSRF protection. For example, if you are using <a href="https://stripe.com">Stripe</a> to process payments and are utilizing their webhook system, you will need to exclude your Stripe webhook handler route from CSRF protection since Stripe will not know what CSRF token to send to your routes.</p>
 <p>Typically, you should place these kinds of routes outside of the <code>web</code> middleware group that the <code>RouteServiceProvider</code> applies to all routes in the <code>routes/web.php</code> file. However, you may also exclude the routes by adding their URIs to the <code>$except</code> property of the <code>VerifyCsrfToken</code> middleware:</p>
-<pre><code>&lt;?php
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
-namespace App\Http\Middleware;
+<span class="nx">namespace</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Http</span><span class="err">\</span><span class="nx">Middleware</span><span class="p">;</span>
 
-use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as BaseVerifier;
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Foundation</span><span class="err">\</span><span class="nx">Http</span><span class="err">\</span><span class="nx">Middleware</span><span class="err">\</span><span class="nx">VerifyCsrfToken</span> <span class="kr">as</span> <span class="nx">BaseVerifier</span><span class="p">;</span>
 
-class VerifyCsrfToken extends BaseVerifier
-{
-    /**
-     * The URIs that should be excluded from CSRF verification.
-     *
-     * @var array
-     */
-    protected $except = [
-        'stripe/*',
-    ];
-}
-</code></pre>
+<span class="kr">class</span> <span class="nx">VerifyCsrfToken</span> <span class="kr">extends</span> <span class="nx">BaseVerifier</span>
+<span class="p">{</span>
+    <span class="cm">/**</span>
+<span class="cm">     * The URIs that should be excluded from CSRF verification.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @var array</span>
+<span class="cm">     */</span>
+    <span class="kr">protected</span> <span class="nx">$except</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s1">&#39;stripe/*&#39;</span><span class="p">,</span>
+    <span class="p">];</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <p><a name="csrf-x-csrf-token"></a></p>
 <h2 id="x-csrf-token">X-CSRF-TOKEN</h2>
 <p>In addition to checking for the CSRF token as a POST parameter, the <code>VerifyCsrfToken</code> middleware will also check for the <code>X-CSRF-TOKEN</code> request header. You could, for example, store the token in a HTML <code>meta</code> tag:</p>
-<pre><code>&lt;meta name="csrf-token" content="{{ csrf_token() }}"&gt;
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="x">&lt;meta name=&quot;csrf-token&quot; content=&quot;</span><span class="cp">{{</span> <span class="nv">csrf_token</span><span class="o">()</span> <span class="cp">}}</span><span class="x">&quot;&gt;</span>
+</pre></div>
+
+
 <p>Then, once you have created the <code>meta</code> tag, you can instruct a library like jQuery to automatically add the token to all request headers. This provides simple, convenient CSRF protection for your AJAX based applications:</p>
-<pre><code>$.ajaxSetup({
+<div class="codehilite"><pre><span></span>$.ajaxSetup({
     headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        &#39;X-CSRF-TOKEN&#39;: $(&#39;meta[name=&quot;csrf-token&quot;]&#39;).attr(&#39;content&#39;)
     }
 });
-</code></pre>
+</pre></div>
+
+
 <p><a name="csrf-x-xsrf-token"></a></p>
 <h2 id="x-xsrf-token">X-XSRF-TOKEN</h2>
 <p>Laravel stores the current CSRF token in a <code>XSRF-TOKEN</code> cookie that is included with each response generated by the framework. You can use the cookie value to set the <code>X-XSRF-TOKEN</code> request header.</p>
@@ -941,10 +938,6 @@ class VerifyCsrfToken extends BaseVerifier
       var repo_id  = '';
     </script>
     <script src="../assets/javascripts/application-997097ee0c.js"></script>
-    
-      <script src="../assets/jquery.js"></script>
-    
-      <script src="../assets/prism.js"></script>
     
     
   </body>

@@ -9,16 +9,16 @@
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     
       
-        <title>Lifecycle - Laravel 5.3 official documentation</title>
+        <title>Lifecycle - Laravel 5.4 Official Documentation</title>
       
       
       
       
     
     <meta property="og:url" content="None">
-    <meta property="og:title" content="Laravel 5.3 official documentation">
+    <meta property="og:title" content="Laravel 5.4 Official Documentation">
     <meta property="og:image" content="None/../">
-    <meta name="apple-mobile-web-app-title" content="Laravel 5.3 official documentation">
+    <meta name="apple-mobile-web-app-title" content="Laravel 5.4 Official Documentation">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
@@ -60,15 +60,13 @@
       </style>
     
     
-      <link rel="stylesheet" href="../assets/prism.css">
-    
     <script src="../assets/javascripts/modernizr-4ab42b99fd.js"></script>
     
   </head>
   
   
   
-  <body class="palette-primary-teal palette-accent-pink">
+  <body class="palette-primary-teal palette-accent-green">
     
     <div class="backdrop">
       <div class="backdrop-paper"></div>
@@ -125,7 +123,7 @@
       
       <div class="name">
         <strong>
-          Laravel 5.3 official documentation
+          Laravel 5.4 Official Documentation
           <span class="version">
             
           </span>
@@ -646,15 +644,6 @@
           
             
   <li>
-    <a class="" title="Readme" href="../readme/">
-      Readme
-    </a>
-    
-  </li>
-
-          
-            
-  <li>
     <a class="" title="Redirects" href="../redirects/">
       Redirects
     </a>
@@ -816,8 +805,7 @@
 <p><a name="introduction"></a></p>
 <h2 id="introduction">Introduction</h2>
 <p>When using any tool in the "real world", you feel more confident if you understand how that tool works. Application development is no different. When you understand how your development tools function, you feel more comfortable and confident using them.</p>
-<p>The goal of this document is to give you a good, high-level overview of how the Laravel framework "works". By getting to know the overall framework better, everything feels less "magical" and you will be more confident building your applications.</p>
-<p>If you don't understand all of the terms right away, don't lose heart! Just try to get a basic grasp of what is going on, and your knowledge will grow as you explore other sections of the documentation.</p>
+<p>The goal of this document is to give you a good, high-level overview of how the Laravel framework works. By getting to know the overall framework better, everything feels less "magical" and you will be more confident building your applications. If you don't understand all of the terms right away, don't lose heart! Just try to get a basic grasp of what is going on, and your knowledge will grow as you explore other sections of the documentation.</p>
 <p><a name="lifecycle-overview"></a></p>
 <h2 id="lifecycle-overview">Lifecycle Overview</h2>
 <h3 id="first-things">First Things</h3>
@@ -825,8 +813,8 @@
 <p>The <code>index.php</code> file loads the Composer generated autoloader definition, and then retrieves an instance of the Laravel application from <code>bootstrap/app.php</code> script. The first action taken by Laravel itself is to create an instance of the application / <a href="../docs/{{version}}/container">service container</a>.</p>
 <h3 id="http-console-kernels">HTTP / Console Kernels</h3>
 <p>Next, the incoming request is sent to either the HTTP kernel or the console kernel, depending on the type of request that is entering the application. These two kernels serve as the central location that all requests flow through. For now, let's just focus on the HTTP kernel, which is located in <code>app/Http/Kernel.php</code>.</p>
-<p>The HTTP kernel extends the <code>Illuminate\Foundation\Http\Kernel</code> class, which defines an array of <code>bootstrappers</code> that will be run before the request is executed. These bootstrappers configure error handling, configure logging, <a href="../docs/{{version}}/installation#environment-configuration">detect the application environment</a>, and perform other tasks that need to be done before the request is actually handled.</p>
-<p>The HTTP kernel also defines a list of HTTP <a href="../docs/{{version}}/middleware">middleware</a> that all requests must pass through before being handled by the application. These middleware handle reading and writing the <a href="../docs/{{version}}/session">HTTP session</a>, determine if the application is in maintenance mode, <a href="../docs/{{version}}/routing#csrf-protection">verifying the CSRF token</a>, and more.</p>
+<p>The HTTP kernel extends the <code>Illuminate\Foundation\Http\Kernel</code> class, which defines an array of <code>bootstrappers</code> that will be run before the request is executed. These bootstrappers configure error handling, configure logging, <a href="../docs/{{version}}/configuration#environment-configuration">detect the application environment</a>, and perform other tasks that need to be done before the request is actually handled.</p>
+<p>The HTTP kernel also defines a list of HTTP <a href="../docs/{{version}}/middleware">middleware</a> that all requests must pass through before being handled by the application. These middleware handle reading and writing the <a href="../docs/{{version}}/session">HTTP session</a>, determining if the application is in maintenance mode, <a href="../docs/{{version}}/csrf">verifying the CSRF token</a>, and more.</p>
 <p>The method signature for the HTTP kernel's <code>handle</code> method is quite simple: receive a <code>Request</code> and return a <code>Response</code>. Think of the Kernel as being a big black box that represents your entire application. Feed it HTTP requests and it will return HTTP responses.</p>
 <h4 id="service-providers">Service Providers</h4>
 <p>One of the most important Kernel bootstrapping actions is loading the <a href="../docs/{{version}}/providers">service providers</a> for your application. All of the service providers for the application are configured in the <code>config/app.php</code> configuration file's <code>providers</code> array. First, the <code>register</code> method will be called on all providers, then, once all providers have been registered, the <code>boot</code> method will be called.</p>
@@ -910,10 +898,6 @@
       var repo_id  = '';
     </script>
     <script src="../assets/javascripts/application-997097ee0c.js"></script>
-    
-      <script src="../assets/jquery.js"></script>
-    
-      <script src="../assets/prism.js"></script>
     
     
   </body>

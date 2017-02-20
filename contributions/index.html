@@ -9,16 +9,16 @@
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     
       
-        <title>Contributions - Laravel 5.3 official documentation</title>
+        <title>Contributions - Laravel 5.4 Official Documentation</title>
       
       
       
       
     
     <meta property="og:url" content="None">
-    <meta property="og:title" content="Laravel 5.3 official documentation">
+    <meta property="og:title" content="Laravel 5.4 Official Documentation">
     <meta property="og:image" content="None/../">
-    <meta name="apple-mobile-web-app-title" content="Laravel 5.3 official documentation">
+    <meta name="apple-mobile-web-app-title" content="Laravel 5.4 Official Documentation">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
@@ -60,15 +60,13 @@
       </style>
     
     
-      <link rel="stylesheet" href="../assets/prism.css">
-    
     <script src="../assets/javascripts/modernizr-4ab42b99fd.js"></script>
     
   </head>
   
   
   
-  <body class="palette-primary-teal palette-accent-pink">
+  <body class="palette-primary-teal palette-accent-green">
     
     <div class="backdrop">
       <div class="backdrop-paper"></div>
@@ -125,7 +123,7 @@
       
       <div class="name">
         <strong>
-          Laravel 5.3 official documentation
+          Laravel 5.4 Official Documentation
           <span class="version">
             
           </span>
@@ -658,15 +656,6 @@
           
             
   <li>
-    <a class="" title="Readme" href="../readme/">
-      Readme
-    </a>
-    
-  </li>
-
-          
-            
-  <li>
     <a class="" title="Redirects" href="../redirects/">
       Redirects
     </a>
@@ -846,19 +835,22 @@
 <li><a href="https://github.com/laravel/envoy">Laravel Envoy</a></li>
 <li><a href="https://github.com/laravel/homestead">Laravel Homestead</a></li>
 <li><a href="https://github.com/laravel/settler">Laravel Homestead Build Scripts</a></li>
+<li><a href="https://github.com/laravel/passport">Laravel Passport</a></li>
+<li><a href="https://github.com/laravel/scout">Laravel Scout</a></li>
+<li><a href="https://github.com/laravel/socialite">Laravel Socialite</a></li>
 <li><a href="https://github.com/laravel/laravel.com">Laravel Website</a></li>
 <li><a href="https://github.com/laravel/art">Laravel Art</a></li>
 </ul>
 <p><a name="core-development-discussion"></a></p>
 <h2 id="core-development-discussion">Core Development Discussion</h2>
 <p>You may propose new features or improvements of existing Laravel behavior in the Laravel Internals <a href="https://github.com/laravel/internals/issues">issue board</a>. If you propose a new feature, please be willing to implement at least some of the code that would be needed to complete the feature.</p>
-<p>Informal discussion regarding bugs, new features, and implementation of existing features takes place in the <code>#internals</code> channel of the <a href="http://larachat.co">LaraChat</a> Slack team. Taylor Otwell, the maintainer of Laravel, is typically present in the channel on weekdays from 8am-5pm (UTC-06:00 or America/Chicago), and sporadically present in the channel at other times.</p>
+<p>Informal discussion regarding bugs, new features, and implementation of existing features takes place in the <code>#internals</code> channel of the <a href="https://larachat.co">LaraChat</a> Slack team. Taylor Otwell, the maintainer of Laravel, is typically present in the channel on weekdays from 8am-5pm (UTC-06:00 or America/Chicago), and sporadically present in the channel at other times.</p>
 <p><a name="which-branch"></a></p>
 <h2 id="which-branch">Which Branch?</h2>
 <p><strong>All</strong> bug fixes should be sent to the latest stable branch or to the current LTS branch (5.1). Bug fixes should <strong>never</strong> be sent to the <code>master</code> branch unless they fix features that exist only in the upcoming release.</p>
 <p><strong>Minor</strong> features that are <strong>fully backwards compatible</strong> with the current Laravel release may be sent to the latest stable branch.</p>
 <p><strong>Major</strong> new features should always be sent to the <code>master</code> branch, which contains the upcoming Laravel release.</p>
-<p>If you are unsure if your feature qualifies as a major or minor, please ask Taylor Otwell in the <code>#internals</code> channel of the <a href="http://larachat.co">LaraChat</a> Slack team.</p>
+<p>If you are unsure if your feature qualifies as a major or minor, please ask Taylor Otwell in the <code>#internals</code> channel of the <a href="https://larachat.co">LaraChat</a> Slack team.</p>
 <p><a name="security-vulnerabilities"></a></p>
 <h2 id="security-vulnerabilities">Security Vulnerabilities</h2>
 <p>If you discover a security vulnerability within Laravel, please send an email to Taylor Otwell at <a href="mailto:taylor@laravel.com">taylor@laravel.com</a>. All security vulnerabilities will be promptly addressed.</p>
@@ -868,19 +860,21 @@
 <p><a name="phpdoc"></a></p>
 <h3 id="phpdoc">PHPDoc</h3>
 <p>Below is an example of a valid Laravel documentation block. Note that the <code>@param</code> attribute is followed by two spaces, the argument type, two more spaces, and finally the variable name:</p>
-<pre><code>/**
- * Register a binding with the container.
- *
- * @param  string|array  $abstract
- * @param  \Closure|string|null  $concrete
- * @param  bool  $shared
- * @return void
- */
-public function bind($abstract, $concrete = null, $shared = false)
-{
-    //
-}
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * Register a binding with the container.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param  string|array  $abstract</span>
+<span class="cm"> * @param  \Closure|string|null  $concrete</span>
+<span class="cm"> * @param  bool  $shared</span>
+<span class="cm"> * @return void</span>
+<span class="cm"> */</span><span class="w"></span>
+public<span class="w"> </span>function<span class="w"> </span>bind<span class="o">(</span><span class="err">$</span>abstract<span class="o">,</span><span class="w"> </span><span class="err">$</span>concrete<span class="w"> </span><span class="o">=</span><span class="w"> </span>null<span class="o">,</span><span class="w"> </span><span class="err">$</span>shared<span class="w"> </span><span class="o">=</span><span class="w"> </span>false<span class="o">)</span><span class="w"></span>
+<span class="err">{</span><span class="w"></span>
+<span class="w">    </span><span class="o">//</span><span class="w"></span>
+<span class="err">}</span><span class="w"></span>
+</pre></div>
+
+
 <p><a name="styleci"></a></p>
 <h3 id="styleci">StyleCI</h3>
 <p>Don't worry if your code styling isn't perfect! <a href="https://styleci.io/">StyleCI</a> will automatically merge any style fixes into the Laravel repository after pull requests are merged. This allows us to focus on the content of the contribution and not the code style.</p>
@@ -956,10 +950,6 @@ public function bind($abstract, $concrete = null, $shared = false)
       var repo_id  = '';
     </script>
     <script src="../assets/javascripts/application-997097ee0c.js"></script>
-    
-      <script src="../assets/jquery.js"></script>
-    
-      <script src="../assets/prism.js"></script>
     
     
   </body>

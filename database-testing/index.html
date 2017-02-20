@@ -9,16 +9,16 @@
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     
       
-        <title>Database testing - Laravel 5.3 official documentation</title>
+        <title>Database testing - Laravel 5.4 Official Documentation</title>
       
       
       
       
     
     <meta property="og:url" content="None">
-    <meta property="og:title" content="Laravel 5.3 official documentation">
+    <meta property="og:title" content="Laravel 5.4 Official Documentation">
     <meta property="og:image" content="None/../">
-    <meta name="apple-mobile-web-app-title" content="Laravel 5.3 official documentation">
+    <meta name="apple-mobile-web-app-title" content="Laravel 5.4 Official Documentation">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
@@ -60,15 +60,13 @@
       </style>
     
     
-      <link rel="stylesheet" href="../assets/prism.css">
-    
     <script src="../assets/javascripts/modernizr-4ab42b99fd.js"></script>
     
   </head>
   
   
   
-  <body class="palette-primary-teal palette-accent-pink">
+  <body class="palette-primary-teal palette-accent-green">
     
     <div class="backdrop">
       <div class="backdrop-paper"></div>
@@ -125,7 +123,7 @@
       
       <div class="name">
         <strong>
-          Laravel 5.3 official documentation
+          Laravel 5.4 Official Documentation
           <span class="version">
             
           </span>
@@ -652,15 +650,6 @@
           
             
   <li>
-    <a class="" title="Readme" href="../readme/">
-      Readme
-    </a>
-    
-  </li>
-
-          
-            
-  <li>
     <a class="" title="Redirects" href="../redirects/">
       Redirects
     </a>
@@ -822,7 +811,7 @@
 </ul>
 </li>
 <li><a href="#writing-factories">Writing Factories</a><ul>
-<li><a href="#factory-types">Factory Types</a></li>
+<li><a href="#factory-states">Factory States</a></li>
 </ul>
 </li>
 <li><a href="#using-factories">Using Factories</a><ul>
@@ -835,15 +824,17 @@
 <p><a name="introduction"></a></p>
 <h2 id="introduction">Introduction</h2>
 <p>Laravel provides a variety of helpful tools to make it easier to test your database driven applications. First, you may use the <code>seeInDatabase</code> helper to assert that data exists in the database matching a given set of criteria. For example, if you would like to verify that there is a record in the <code>users</code> table with the <code>email</code> value of <code>sally@example.com</code>, you can do the following:</p>
-<pre><code>public function testDatabase()
+<div class="codehilite"><pre><span></span>public function testDatabase()
 {
     // Make call to application...
 
-    $this-&gt;seeInDatabase('users', [
-        'email' =&gt; 'sally@example.com'
+    $this-&gt;seeInDatabase(&#39;users&#39;, [
+        &#39;email&#39; =&gt; &#39;sally@example.com&#39;
     ]);
 }
-</code></pre>
+</pre></div>
+
+
 <p>Of course, the <code>seeInDatabase</code> method and other helpers like it are for convenience. You are free to use any of PHPUnit's built-in assertion methods to supplement your tests.</p>
 <p><a name="resetting-the-database-after-each-test"></a></p>
 <h2 id="resetting-the-database-after-each-test">Resetting The Database After Each Test</h2>
@@ -851,172 +842,187 @@
 <p><a name="using-migrations"></a></p>
 <h3 id="using-migrations">Using Migrations</h3>
 <p>One approach to resetting the database state is to rollback the database after each test and migrate it before the next test. Laravel provides a simple <code>DatabaseMigrations</code> trait that will automatically handle this for you. Simply use the trait on your test class and everything will be handled for you:</p>
-<pre><code>&lt;?php
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Foundation</span><span class="err">\</span><span class="nx">Testing</span><span class="err">\</span><span class="nx">WithoutMiddleware</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Foundation</span><span class="err">\</span><span class="nx">Testing</span><span class="err">\</span><span class="nx">DatabaseMigrations</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Foundation</span><span class="err">\</span><span class="nx">Testing</span><span class="err">\</span><span class="nx">DatabaseTransactions</span><span class="p">;</span>
 
-class ExampleTest extends TestCase
-{
-    use DatabaseMigrations;
+<span class="kr">class</span> <span class="nx">ExampleTest</span> <span class="kr">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="nx">use</span> <span class="nx">DatabaseMigrations</span><span class="p">;</span>
 
-    /**
-     * A basic functional test example.
-     *
-     * @return void
-     */
-    public function testBasicExample()
-    {
-        $this-&gt;visit('/')
-             -&gt;see('Laravel 5');
-    }
-}
-</code></pre>
+    <span class="cm">/**</span>
+<span class="cm">     * A basic functional test example.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return void</span>
+<span class="cm">     */</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">testBasicExample</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">visit</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+             <span class="o">-&gt;</span><span class="nx">see</span><span class="p">(</span><span class="s1">&#39;Laravel 5&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <p><a name="using-transactions"></a></p>
 <h3 id="using-transactions">Using Transactions</h3>
 <p>Another approach to resetting the database state is to wrap each test case in a database transaction. Again, Laravel provides a convenient <code>DatabaseTransactions</code> trait that will automatically handle this for you:</p>
-<pre><code>&lt;?php
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Foundation</span><span class="err">\</span><span class="nx">Testing</span><span class="err">\</span><span class="nx">WithoutMiddleware</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Foundation</span><span class="err">\</span><span class="nx">Testing</span><span class="err">\</span><span class="nx">DatabaseMigrations</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Foundation</span><span class="err">\</span><span class="nx">Testing</span><span class="err">\</span><span class="nx">DatabaseTransactions</span><span class="p">;</span>
 
-class ExampleTest extends TestCase
-{
-    use DatabaseTransactions;
+<span class="kr">class</span> <span class="nx">ExampleTest</span> <span class="kr">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="nx">use</span> <span class="nx">DatabaseTransactions</span><span class="p">;</span>
 
-    /**
-     * A basic functional test example.
-     *
-     * @return void
-     */
-    public function testBasicExample()
-    {
-        $this-&gt;visit('/')
-             -&gt;see('Laravel 5');
-    }
-}
-</code></pre>
+    <span class="cm">/**</span>
+<span class="cm">     * A basic functional test example.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return void</span>
+<span class="cm">     */</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">testBasicExample</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">visit</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+             <span class="o">-&gt;</span><span class="nx">see</span><span class="p">(</span><span class="s1">&#39;Laravel 5&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <blockquote>
-<p>{note} This trait will only wrap the default database connection in a transaction. If your application is using multiple database connections, you will need to manually handle the transaction logic for those connections.</p>
+<p>{note} By default, this trait will only wrap the default database connection in a transaction. If your application is using multiple database connections, you should define a <code>$connectionsToTransact</code> property on your test class. This property should be an array of connection names to execute the transactions on.</p>
 </blockquote>
-<p><a name="model-factories"></a></p>
+<p><a name="writing-factories"></a></p>
 <h2 id="writing-factories">Writing Factories</h2>
-<p>When testing, it is common to need to insert a few records into your database before executing your test. Instead of manually specifying the value of each column when you create this test data, Laravel allows you to define a default set of attributes for each of your <a href="../docs/{{version}}/eloquent">Eloquent models</a> using model factories. To get started, take a look at the <code>database/factories/ModelFactory.php</code> file in your application. Out of the box, this file contains one factory definition:</p>
-<pre><code>$factory-&gt;define(App\User::class, function (Faker\Generator $faker) {
+<p>When testing, you may need to insert a few records into your database before executing your test. Instead of manually specifying the value of each column when you create this test data, Laravel allows you to define a default set of attributes for each of your <a href="../docs/{{version}}/eloquent">Eloquent models</a> using model factories. To get started, take a look at the <code>database/factories/ModelFactory.php</code> file in your application. Out of the box, this file contains one factory definition:</p>
+<div class="codehilite"><pre><span></span>$factory-&gt;define(App\User::class, function (Faker\Generator $faker) {
+    static $password;
+
     return [
-        'name' =&gt; $faker-&gt;name,
-        'email' =&gt; $faker-&gt;email,
-        'password' =&gt; bcrypt(str_random(10)),
-        'remember_token' =&gt; str_random(10),
+        &#39;name&#39; =&gt; $faker-&gt;name,
+        &#39;email&#39; =&gt; $faker-&gt;unique()-&gt;safeEmail,
+        &#39;password&#39; =&gt; $password ?: $password = bcrypt(&#39;secret&#39;),
+        &#39;remember_token&#39; =&gt; str_random(10),
     ];
 });
-</code></pre>
+</pre></div>
+
+
 <p>Within the Closure, which serves as the factory definition, you may return the default test values of all attributes on the model. The Closure will receive an instance of the <a href="https://github.com/fzaninotto/Faker">Faker</a> PHP library, which allows you to conveniently generate various kinds of random data for testing.</p>
 <p>Of course, you are free to add your own additional factories to the <code>ModelFactory.php</code> file. You may also create additional factory files for each model for better organization. For example, you could create <code>UserFactory.php</code> and <code>CommentFactory.php</code> files within your <code>database/factories</code> directory. All of the files within the <code>factories</code> directory will automatically be loaded by Laravel.</p>
-<p><a name="factory-types"></a></p>
-<h3 id="factory-types">Factory Types</h3>
-<p>Sometimes you may wish to have multiple factories for the same Eloquent model class. For example, perhaps you would like to have a factory for "Administrator" users in addition to normal users. You may define these factories using the <code>defineAs</code> method:</p>
-<pre><code>$factory-&gt;defineAs(App\User::class, 'admin', function ($faker) {
+<p><a name="factory-states"></a></p>
+<h3 id="factory-states">Factory States</h3>
+<p>States allow you to define discrete modifications that can be applied to your model factories in any combination. For example, your <code>User</code> model might have a <code>delinquent</code> state that modifies one of its default attribute values. You may define your state transformations using the <code>state</code> method:</p>
+<div class="codehilite"><pre><span></span>$factory-&gt;state(App\User::class, &#39;delinquent&#39;, function ($faker) {
     return [
-        'name' =&gt; $faker-&gt;name,
-        'email' =&gt; $faker-&gt;email,
-        'password' =&gt; str_random(10),
-        'remember_token' =&gt; str_random(10),
-        'admin' =&gt; true,
+        &#39;account_status&#39; =&gt; &#39;delinquent&#39;,
     ];
 });
-</code></pre>
-<p>Instead of duplicating all of the attributes from your base user factory, you may use the <code>raw</code> method to retrieve the base attributes. Once you have the attributes, simply supplement them with any additional values you require:</p>
-<pre><code>$factory-&gt;defineAs(App\User::class, 'admin', function ($faker) use ($factory) {
-    $user = $factory-&gt;raw(App\User::class);
+</pre></div>
 
-    return array_merge($user, ['admin' =&gt; true]);
-});
-</code></pre>
+
 <p><a name="using-factories"></a></p>
 <h2 id="using-factories">Using Factories</h2>
 <p><a name="creating-models"></a></p>
 <h3 id="creating-models">Creating Models</h3>
 <p>Once you have defined your factories, you may use the global <code>factory</code> function in your tests or seed files to generate model instances. So, let's take a look at a few examples of creating models. First, we'll use the <code>make</code> method to create models but not save them to the database:</p>
-<pre><code>public function testDatabase()
-{
-    $user = factory(App\User::class)-&gt;make();
+<div class="codehilite"><pre><span></span><span class="nt">public</span> <span class="nt">function</span> <span class="nt">testDatabase</span><span class="o">()</span>
+<span class="p">{</span>
+    <span class="err">$user</span> <span class="err">=</span> <span class="err">factory(App\</span><span class="n">User</span><span class="p">:</span><span class="o">:</span><span class="n">class</span><span class="p">)</span><span class="o">-&gt;</span><span class="nf">make</span><span class="p">();</span>
 
-    // Use model in tests...
-}
-</code></pre>
+    <span class="err">//</span> <span class="err">Use</span> <span class="err">model</span> <span class="err">in</span> <span class="err">tests...</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <p>You may also create a Collection of many models or create models of a given type:</p>
-<pre><code>// Create three App\User instances...
-$users = factory(App\User::class, 3)-&gt;make();
+<div class="codehilite"><pre><span></span><span class="o">//</span> <span class="nt">Create</span> <span class="nt">three</span> <span class="nt">App</span><span class="err">\</span><span class="nt">User</span> <span class="nt">instances</span><span class="o">...</span>
+<span class="o">$</span><span class="nt">users</span> <span class="o">=</span> <span class="nt">factory</span><span class="o">(</span><span class="nt">App</span><span class="err">\</span><span class="nt">User</span><span class="p">::</span><span class="nd">class</span><span class="o">,</span> <span class="nt">3</span><span class="o">)</span><span class="nt">-</span><span class="o">&gt;</span><span class="nt">make</span><span class="o">();</span>
+</pre></div>
 
-// Create an "admin" App\User instance...
-$user = factory(App\User::class, 'admin')-&gt;make();
 
-// Create three "admin" App\User instances...
-$users = factory(App\User::class, 'admin', 3)-&gt;make();
-</code></pre>
+<h4 id="applying-states">Applying States</h4>
+<p>You may also apply any of your <a href="#factory-states">states</a> to the models. If you would like to apply multiple state transformations to the models, you should specify the name of each state you would like to apply:</p>
+<div class="codehilite"><pre><span></span><span class="o">$</span><span class="nt">users</span> <span class="o">=</span> <span class="nt">factory</span><span class="o">(</span><span class="nt">App</span><span class="err">\</span><span class="nt">User</span><span class="p">::</span><span class="nd">class</span><span class="o">,</span> <span class="nt">5</span><span class="o">)</span><span class="nt">-</span><span class="o">&gt;</span><span class="nt">states</span><span class="o">(</span><span class="s1">&#39;delinquent&#39;</span><span class="o">)</span><span class="nt">-</span><span class="o">&gt;</span><span class="nt">make</span><span class="o">();</span>
+
+<span class="o">$</span><span class="nt">users</span> <span class="o">=</span> <span class="nt">factory</span><span class="o">(</span><span class="nt">App</span><span class="err">\</span><span class="nt">User</span><span class="p">::</span><span class="nd">class</span><span class="o">,</span> <span class="nt">5</span><span class="o">)</span><span class="nt">-</span><span class="o">&gt;</span><span class="nt">states</span><span class="o">(</span><span class="s1">&#39;premium&#39;</span><span class="o">,</span> <span class="s1">&#39;delinquent&#39;</span><span class="o">)</span><span class="nt">-</span><span class="o">&gt;</span><span class="nt">make</span><span class="o">();</span>
+</pre></div>
+
+
 <h4 id="overriding-attributes">Overriding Attributes</h4>
 <p>If you would like to override some of the default values of your models, you may pass an array of values to the <code>make</code> method. Only the specified values will be replaced while the rest of the values remain set to their default values as specified by the factory:</p>
-<pre><code>$user = factory(App\User::class)-&gt;make([
-    'name' =&gt; 'Abigail',
+<div class="codehilite"><pre><span></span>$user = factory(App\User::class)-&gt;make([
+    &#39;name&#39; =&gt; &#39;Abigail&#39;,
 ]);
-</code></pre>
+</pre></div>
+
+
 <p><a name="persisting-models"></a></p>
 <h3 id="persisting-models">Persisting Models</h3>
 <p>The <code>create</code> method not only creates the model instances but also saves them to the database using Eloquent's <code>save</code> method:</p>
-<pre><code>public function testDatabase()
-{
-    // Create a single App\User instance...
-    $user = factory(App\User::class)-&gt;create();
+<div class="codehilite"><pre><span></span><span class="nt">public</span> <span class="nt">function</span> <span class="nt">testDatabase</span><span class="o">()</span>
+<span class="p">{</span>
+    <span class="err">//</span> <span class="err">Create</span> <span class="err">a</span> <span class="err">single</span> <span class="err">App\User</span> <span class="err">instance...</span>
+    <span class="err">$user</span> <span class="err">=</span> <span class="err">factory(App\</span><span class="n">User</span><span class="p">:</span><span class="o">:</span><span class="n">class</span><span class="p">)</span><span class="o">-&gt;</span><span class="nf">create</span><span class="p">();</span>
 
-    // Create three App\User instances...
-    $users = factory(App\User::class, 3)-&gt;create();
+    <span class="err">//</span> <span class="err">Create</span> <span class="err">three</span> <span class="err">App\User</span> <span class="err">instances...</span>
+    <span class="err">$users</span> <span class="err">=</span> <span class="err">factory(App\</span><span class="n">User</span><span class="p">:</span><span class="o">:</span><span class="n">class</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span><span class="o">-&gt;</span><span class="nf">create</span><span class="p">();</span>
 
-    // Use model in tests...
-}
-</code></pre>
+    <span class="err">//</span> <span class="err">Use</span> <span class="err">model</span> <span class="err">in</span> <span class="err">tests...</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <p>You may override attributes on the model by passing an array to the <code>create</code> method:</p>
-<pre><code>$user = factory(App\User::class)-&gt;create([
-    'name' =&gt; 'Abigail',
+<div class="codehilite"><pre><span></span>$user = factory(App\User::class)-&gt;create([
+    &#39;name&#39; =&gt; &#39;Abigail&#39;,
 ]);
-</code></pre>
+</pre></div>
+
+
 <p><a name="relationships"></a></p>
 <h3 id="relationships">Relationships</h3>
 <p>In this example, we'll attach a relation to some created models. When using the <code>create</code> method to create multiple models, an Eloquent <a href="../docs/{{version}}/eloquent-collections">collection instance</a> is returned, allowing you to use any of the convenient functions provided by the collection, such as <code>each</code>:</p>
-<pre><code>$users = factory(App\User::class, 3)
-           -&gt;create()
-           -&gt;each(function ($u) {
-                $u-&gt;posts()-&gt;save(factory(App\Post::class)-&gt;make());
-            });
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="o">$</span><span class="nt">users</span> <span class="o">=</span> <span class="nt">factory</span><span class="o">(</span><span class="nt">App</span><span class="err">\</span><span class="nt">User</span><span class="p">::</span><span class="nd">class</span><span class="o">,</span> <span class="nt">3</span><span class="o">)</span>
+           <span class="nt">-</span><span class="o">&gt;</span><span class="nt">create</span><span class="o">()</span>
+           <span class="nt">-</span><span class="o">&gt;</span><span class="nt">each</span><span class="o">(</span><span class="nt">function</span> <span class="o">($</span><span class="nt">u</span><span class="o">)</span> <span class="p">{</span>
+                <span class="err">$u-&gt;posts()-&gt;save(factory(App\</span><span class="n">Post</span><span class="p">:</span><span class="o">:</span><span class="n">class</span><span class="p">)</span><span class="o">-&gt;</span><span class="nf">make</span><span class="p">());</span>
+            <span class="p">}</span><span class="o">);</span>
+</pre></div>
+
+
 <h4 id="relations-attribute-closures">Relations &amp; Attribute Closures</h4>
 <p>You may also attach relationships to models using Closure attributes in your factory definitions. For example, if you would like to create a new <code>User</code> instance when creating a <code>Post</code>, you may do the following:</p>
-<pre><code>$factory-&gt;define(App\Post::class, function ($faker) {
-    return [
-        'title' =&gt; $faker-&gt;title,
-        'content' =&gt; $faker-&gt;paragraph,
-        'user_id' =&gt; function () {
-            return factory(App\User::class)-&gt;create()-&gt;id;
-        }
-    ];
-});
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="o">$</span><span class="nt">factory-</span><span class="o">&gt;</span><span class="nt">define</span><span class="o">(</span><span class="nt">App</span><span class="err">\</span><span class="nt">Post</span><span class="p">::</span><span class="nd">class</span><span class="o">,</span> <span class="nt">function</span> <span class="o">($</span><span class="nt">faker</span><span class="o">)</span> <span class="p">{</span>
+    <span class="err">return</span> <span class="cp">[</span>
+        <span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="nv">$faker</span><span class="o">-&gt;</span><span class="nb">title</span><span class="p">,</span>
+        <span class="s1">&#39;content&#39;</span> <span class="o">=&gt;</span> <span class="nv">$faker</span><span class="o">-&gt;</span><span class="nx nx-Member">paragraph</span><span class="p">,</span>
+        <span class="s1">&#39;user_id&#39;</span> <span class="o">=&gt;</span> <span class="nx">function</span> <span class="p">()</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nx">factory</span><span class="p">(</span><span class="nx">App</span><span class="o">\</span><span class="nx">User</span><span class="nl">::class</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">create</span><span class="p">()</span><span class="o">-&gt;</span><span class="nb">id</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="cp">]</span><span class="p">;</span>
+<span class="p">}</span><span class="o">);</span>
+</pre></div>
+
+
 <p>These Closures also receive the evaluated attribute array of the factory that contains them:</p>
-<pre><code>$factory-&gt;define(App\Post::class, function ($faker) {
-    return [
-        'title' =&gt; $faker-&gt;title,
-        'content' =&gt; $faker-&gt;paragraph,
-        'user_id' =&gt; function () {
-            return factory(App\User::class)-&gt;create()-&gt;id;
-        },
-        'user_type' =&gt; function (array $post) {
-            return App\User::find($post['user_id'])-&gt;type;
-        }
-    ];
-});
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="o">$</span><span class="nt">factory-</span><span class="o">&gt;</span><span class="nt">define</span><span class="o">(</span><span class="nt">App</span><span class="err">\</span><span class="nt">Post</span><span class="p">::</span><span class="nd">class</span><span class="o">,</span> <span class="nt">function</span> <span class="o">($</span><span class="nt">faker</span><span class="o">)</span> <span class="p">{</span>
+    <span class="err">return</span> <span class="cp">[</span>
+        <span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="nv">$faker</span><span class="o">-&gt;</span><span class="nb">title</span><span class="p">,</span>
+        <span class="s1">&#39;content&#39;</span> <span class="o">=&gt;</span> <span class="nv">$faker</span><span class="o">-&gt;</span><span class="nx nx-Member">paragraph</span><span class="p">,</span>
+        <span class="s1">&#39;user_id&#39;</span> <span class="o">=&gt;</span> <span class="nx">function</span> <span class="p">()</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nx">factory</span><span class="p">(</span><span class="nx">App</span><span class="o">\</span><span class="nx">User</span><span class="nl">::class</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">create</span><span class="p">()</span><span class="o">-&gt;</span><span class="nb">id</span><span class="p">;</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;user_type&#39;</span> <span class="o">=&gt;</span> <span class="nx">function</span> <span class="p">(</span><span class="kt">array</span> <span class="nv">$post</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nx">App</span><span class="o">\</span><span class="nx">User</span><span class="nl">::find</span><span class="p">(</span><span class="nv">$post</span><span class="err">[</span><span class="s1">&#39;user_id&#39;</span><span class="cp">]</span><span class="err">)-&gt;type</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="o">];</span>
+<span class="err">}</span><span class="o">);</span>
+</pre></div>
           <aside class="copyright" role="note">
             
             Documentation built with
@@ -1089,10 +1095,6 @@ $users = factory(App\User::class, 'admin', 3)-&gt;make();
       var repo_id  = '';
     </script>
     <script src="../assets/javascripts/application-997097ee0c.js"></script>
-    
-      <script src="../assets/jquery.js"></script>
-    
-      <script src="../assets/prism.js"></script>
     
     
   </body>

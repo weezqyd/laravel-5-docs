@@ -9,16 +9,16 @@
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     
       
-        <title>Views - Laravel 5.3 official documentation</title>
+        <title>Views - Laravel 5.4 Official Documentation</title>
       
       
       
       
     
     <meta property="og:url" content="None">
-    <meta property="og:title" content="Laravel 5.3 official documentation">
+    <meta property="og:title" content="Laravel 5.4 Official Documentation">
     <meta property="og:image" content="None/../">
-    <meta name="apple-mobile-web-app-title" content="Laravel 5.3 official documentation">
+    <meta name="apple-mobile-web-app-title" content="Laravel 5.4 Official Documentation">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
@@ -60,15 +60,13 @@
       </style>
     
     
-      <link rel="stylesheet" href="../assets/prism.css">
-    
     <script src="../assets/javascripts/modernizr-4ab42b99fd.js"></script>
     
   </head>
   
   
   
-  <body class="palette-primary-teal palette-accent-pink">
+  <body class="palette-primary-teal palette-accent-green">
     
     <div class="backdrop">
       <div class="backdrop-paper"></div>
@@ -125,7 +123,7 @@
       
       <div class="name">
         <strong>
-          Laravel 5.3 official documentation
+          Laravel 5.4 Official Documentation
           <span class="version">
             
           </span>
@@ -619,15 +617,6 @@
           
             
   <li>
-    <a class="" title="Readme" href="../readme/">
-      Readme
-    </a>
-    
-  </li>
-
-          
-            
-  <li>
     <a class="" title="Redirects" href="../redirects/">
       Redirects
     </a>
@@ -819,177 +808,199 @@
 <p><a name="creating-views"></a></p>
 <h2 id="creating-views">Creating Views</h2>
 <p>Views contain the HTML served by your application and separate your controller / application logic from your presentation logic. Views are stored in the <code>resources/views</code> directory. A simple view might look something like this:</p>
-<pre><code>&lt;!-- View stored in resources/views/greeting.php --&gt;
+<div class="codehilite"><pre><span></span><span class="c">&lt;!-- View stored in resources/views/greeting.blade.php --&gt;</span>
 
-&lt;html&gt;
-    &lt;body&gt;
-        &lt;h1&gt;Hello, {{ $name }}&lt;/h1&gt;
-    &lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-<p>Since this view is stored at <code>resources/views/greeting.php</code>, we may return it using the global <code>view</code> helper like so:</p>
-<pre><code>Route::get('/', function () {
-    return view('greeting', ['name' =&gt; 'James']);
+<span class="nt">&lt;html&gt;</span>
+    <span class="nt">&lt;body&gt;</span>
+        <span class="nt">&lt;h1&gt;</span>Hello, <span class="cp">{{</span> <span class="err">$</span><span class="nv">name</span> <span class="cp">}}</span><span class="nt">&lt;/h1&gt;</span>
+    <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+
+
+<p>Since this view is stored at <code>resources/views/greeting.blade.php</code>, we may return it using the global <code>view</code> helper like so:</p>
+<div class="codehilite"><pre><span></span>Route::get(&#39;/&#39;, function () {
+    return view(&#39;greeting&#39;, [&#39;name&#39; =&gt; &#39;James&#39;]);
 });
-</code></pre>
+</pre></div>
+
+
 <p>As you can see, the first argument passed to the <code>view</code> helper corresponds to the name of the view file in the <code>resources/views</code> directory. The second argument is an array of data that should be made available to the view. In this case, we are passing the <code>name</code> variable, which is displayed in the view using <a href="../docs/{{version}}/blade">Blade syntax</a>.</p>
-<p>Of course, views may also be nested within sub-directories of the <code>resources/views</code> directory. "Dot" notation may be used to reference nested views. For example, if your view is stored at <code>resources/views/admin/profile.php</code>, you may reference it like so:</p>
-<pre><code>return view('admin.profile', $data);
-</code></pre>
+<p>Of course, views may also be nested within sub-directories of the <code>resources/views</code> directory. "Dot" notation may be used to reference nested views. For example, if your view is stored at <code>resources/views/admin/profile.blade.php</code>, you may reference it like so:</p>
+<div class="codehilite"><pre><span></span>return view(&#39;admin.profile&#39;, $data);
+</pre></div>
+
+
 <h4 id="determining-if-a-view-exists">Determining If A View Exists</h4>
 <p>If you need to determine if a view exists, you may use the <code>View</code> facade. The <code>exists</code> method will return <code>true</code> if the view exists:</p>
-<pre><code>use Illuminate\Support\Facades\View;
+<div class="codehilite"><pre><span></span>use Illuminate\Support\Facades\View;
 
-if (View::exists('emails.customer')) {
+if (View::exists(&#39;emails.customer&#39;)) {
     //
 }
-</code></pre>
+</pre></div>
+
+
 <p><a name="passing-data-to-views"></a></p>
 <h2 id="passing-data-to-views">Passing Data To Views</h2>
 <p>As you saw in the previous examples, you may pass an array of data to views:</p>
-<pre><code>return view('greetings', ['name' =&gt; 'Victoria']);
-</code></pre>
+<div class="codehilite"><pre><span></span>return view(&#39;greetings&#39;, [&#39;name&#39; =&gt; &#39;Victoria&#39;]);
+</pre></div>
+
+
 <p>When passing information in this manner, <code>$data</code> should be an array with key/value pairs. Inside your view, you can then access each value using its corresponding key, such as <code>&lt;?php echo $key; ?&gt;</code>. As an alternative to passing a complete array of data to the <code>view</code> helper function, you may use the <code>with</code> method to add individual pieces of data to the view:</p>
-<pre><code>return view('greeting')-&gt;with('name', 'Victoria');
-</code></pre>
+<div class="codehilite"><pre><span></span>return view(&#39;greeting&#39;)-&gt;with(&#39;name&#39;, &#39;Victoria&#39;);
+</pre></div>
+
+
 <p><a name="sharing-data-with-all-views"></a></p>
 <h4 id="sharing-data-with-all-views">Sharing Data With All Views</h4>
 <p>Occasionally, you may need to share a piece of data with all views that are rendered by your application. You may do so using the view facade's <code>share</code> method. Typically, you should place calls to <code>share</code> within a service provider's <code>boot</code> method. You are free to add them to the <code>AppServiceProvider</code> or generate a separate service provider to house them:</p>
-<pre><code>&lt;?php
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
-namespace App\Providers;
+<span class="nx">namespace</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Providers</span><span class="p">;</span>
 
-use Illuminate\Support\Facades\View;
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Support</span><span class="err">\</span><span class="nx">Facades</span><span class="err">\</span><span class="nx">View</span><span class="p">;</span>
 
-class AppServiceProvider extends ServiceProvider
-{
-    /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        View::share('key', 'value');
-    }
+<span class="kr">class</span> <span class="nx">AppServiceProvider</span> <span class="kr">extends</span> <span class="nx">ServiceProvider</span>
+<span class="p">{</span>
+    <span class="cm">/**</span>
+<span class="cm">     * Bootstrap any application services.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return void</span>
+<span class="cm">     */</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">boot</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nx">View</span><span class="o">::</span><span class="nx">share</span><span class="p">(</span><span class="s1">&#39;key&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
 
-    /**
-     * Register the service provider.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        //
-    }
-}
-</code></pre>
+    <span class="cm">/**</span>
+<span class="cm">     * Register the service provider.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return void</span>
+<span class="cm">     */</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">register</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">//</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <p><a name="view-composers"></a></p>
 <h2 id="view-composers">View Composers</h2>
 <p>View composers are callbacks or class methods that are called when a view is rendered. If you have data that you want to be bound to a view each time that view is rendered, a view composer can help you organize that logic into a single location.</p>
 <p>For this example, let's register the view composers within a <a href="../docs/{{version}}/providers">service provider</a>. We'll use the <code>View</code> facade to access the underlying <code>Illuminate\Contracts\View\Factory</code> contract implementation. Remember, Laravel does not include a default directory for view composers. You are free to organize them however you wish. For example, you could create an <code>App\Http\ViewComposers</code> directory:</p>
-<pre><code>&lt;?php
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
-namespace App\Providers;
+<span class="nx">namespace</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Providers</span><span class="p">;</span>
 
-use Illuminate\Support\Facades\View;
-use Illuminate\Support\ServiceProvider;
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Support</span><span class="err">\</span><span class="nx">Facades</span><span class="err">\</span><span class="nx">View</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Support</span><span class="err">\</span><span class="nx">ServiceProvider</span><span class="p">;</span>
 
-class ComposerServiceProvider extends ServiceProvider
-{
-    /**
-     * Register bindings in the container.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        // Using class based composers...
-        View::composer(
-            'profile', 'App\Http\ViewComposers\ProfileComposer'
-        );
+<span class="kr">class</span> <span class="nx">ComposerServiceProvider</span> <span class="kr">extends</span> <span class="nx">ServiceProvider</span>
+<span class="p">{</span>
+    <span class="cm">/**</span>
+<span class="cm">     * Register bindings in the container.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return void</span>
+<span class="cm">     */</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">boot</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// Using class based composers...</span>
+        <span class="nx">View</span><span class="o">::</span><span class="nx">composer</span><span class="p">(</span>
+            <span class="s1">&#39;profile&#39;</span><span class="p">,</span> <span class="s1">&#39;App\Http\ViewComposers\ProfileComposer&#39;</span>
+        <span class="p">);</span>
 
-        // Using Closure based composers...
-        View::composer('dashboard', function ($view) {
-            //
-        });
-    }
+        <span class="c1">// Using Closure based composers...</span>
+        <span class="nx">View</span><span class="o">::</span><span class="nx">composer</span><span class="p">(</span><span class="s1">&#39;dashboard&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">$view</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">//</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
 
-    /**
-     * Register the service provider.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        //
-    }
-}
-</code></pre>
+    <span class="cm">/**</span>
+<span class="cm">     * Register the service provider.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return void</span>
+<span class="cm">     */</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">register</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">//</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <blockquote>
 <p>{note} Remember, if you create a new service provider to contain your view composer registrations, you will need to add the service provider to the <code>providers</code> array in the <code>config/app.php</code> configuration file.</p>
 </blockquote>
 <p>Now that we have registered the composer, the <code>ProfileComposer@compose</code> method will be executed each time the <code>profile</code> view is being rendered. So, let's define the composer class:</p>
-<pre><code>&lt;?php
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
-namespace App\Http\ViewComposers;
+<span class="nx">namespace</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Http</span><span class="err">\</span><span class="nx">ViewComposers</span><span class="p">;</span>
 
-use Illuminate\View\View;
-use App\Repositories\UserRepository;
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">View</span><span class="err">\</span><span class="nx">View</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Repositories</span><span class="err">\</span><span class="nx">UserRepository</span><span class="p">;</span>
 
-class ProfileComposer
-{
-    /**
-     * The user repository implementation.
-     *
-     * @var UserRepository
-     */
-    protected $users;
+<span class="kr">class</span> <span class="nx">ProfileComposer</span>
+<span class="p">{</span>
+    <span class="cm">/**</span>
+<span class="cm">     * The user repository implementation.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @var UserRepository</span>
+<span class="cm">     */</span>
+    <span class="kr">protected</span> <span class="nx">$users</span><span class="p">;</span>
 
-    /**
-     * Create a new profile composer.
-     *
-     * @param  UserRepository  $users
-     * @return void
-     */
-    public function __construct(UserRepository $users)
-    {
-        // Dependencies automatically resolved by service container...
-        $this-&gt;users = $users;
-    }
+    <span class="cm">/**</span>
+<span class="cm">     * Create a new profile composer.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param  UserRepository  $users</span>
+<span class="cm">     * @return void</span>
+<span class="cm">     */</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">__construct</span><span class="p">(</span><span class="nx">UserRepository</span> <span class="nx">$users</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// Dependencies automatically resolved by service container...</span>
+        <span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">users</span> <span class="o">=</span> <span class="nx">$users</span><span class="p">;</span>
+    <span class="p">}</span>
 
-    /**
-     * Bind data to the view.
-     *
-     * @param  View  $view
-     * @return void
-     */
-    public function compose(View $view)
-    {
-        $view-&gt;with('count', $this-&gt;users-&gt;count());
-    }
-}
-</code></pre>
+    <span class="cm">/**</span>
+<span class="cm">     * Bind data to the view.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param  View  $view</span>
+<span class="cm">     * @return void</span>
+<span class="cm">     */</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">compose</span><span class="p">(</span><span class="nx">View</span> <span class="nx">$view</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nx">$view</span><span class="o">-&gt;</span><span class="kd">with</span><span class="p">(</span><span class="s1">&#39;count&#39;</span><span class="p">,</span> <span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">users</span><span class="o">-&gt;</span><span class="nx">count</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <p>Just before the view is rendered, the composer's <code>compose</code> method is called with the <code>Illuminate\View\View</code> instance. You may use the <code>with</code> method to bind data to the view.</p>
 <blockquote>
 <p>{tip} All view composers are resolved via the <a href="../docs/{{version}}/container">service container</a>, so you may type-hint any dependencies you need within a composer's constructor.</p>
 </blockquote>
 <h4 id="attaching-a-composer-to-multiple-views">Attaching A Composer To Multiple Views</h4>
 <p>You may attach a view composer to multiple views at once by passing an array of views as the first argument to the <code>composer</code> method:</p>
-<pre><code>View::composer(
-    ['profile', 'dashboard'],
-    'App\Http\ViewComposers\MyViewComposer'
+<div class="codehilite"><pre><span></span>View::composer(
+    [&#39;profile&#39;, &#39;dashboard&#39;],
+    &#39;App\Http\ViewComposers\MyViewComposer&#39;
 );
-</code></pre>
+</pre></div>
+
+
 <p>The <code>composer</code> method also accepts the <code>*</code> character as a wildcard, allowing you to attach a composer to all views:</p>
-<pre><code>View::composer('*', function ($view) {
+<div class="codehilite"><pre><span></span>View::composer(&#39;*&#39;, function ($view) {
     //
 });
-</code></pre>
+</pre></div>
+
+
 <h4 id="view-creators">View Creators</h4>
 <p>View <strong>creators</strong> are very similar to view composers; however, they are executed immediately after the view is instantiated instead of waiting until the view is about to render. To register a view creator, use the <code>creator</code> method:</p>
-<pre><code>View::creator('profile', 'App\Http\ViewCreators\ProfileCreator');
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="nt">View</span><span class="p">::</span><span class="nd">creator</span><span class="o">(</span><span class="s1">&#39;profile&#39;</span><span class="o">,</span> <span class="s1">&#39;App\Http\ViewCreators\ProfileCreator&#39;</span><span class="o">);</span>
+</pre></div>
           <aside class="copyright" role="note">
             
             Documentation built with
@@ -1046,10 +1057,6 @@ class ProfileComposer
       var repo_id  = '';
     </script>
     <script src="../assets/javascripts/application-997097ee0c.js"></script>
-    
-      <script src="../assets/jquery.js"></script>
-    
-      <script src="../assets/prism.js"></script>
     
     
   </body>

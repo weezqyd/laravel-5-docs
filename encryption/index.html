@@ -9,16 +9,16 @@
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     
       
-        <title>Encryption - Laravel 5.3 official documentation</title>
+        <title>Encryption - Laravel 5.4 Official Documentation</title>
       
       
       
       
     
     <meta property="og:url" content="None">
-    <meta property="og:title" content="Laravel 5.3 official documentation">
+    <meta property="og:title" content="Laravel 5.4 Official Documentation">
     <meta property="og:image" content="None/../">
-    <meta name="apple-mobile-web-app-title" content="Laravel 5.3 official documentation">
+    <meta name="apple-mobile-web-app-title" content="Laravel 5.4 Official Documentation">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
@@ -60,15 +60,13 @@
       </style>
     
     
-      <link rel="stylesheet" href="../assets/prism.css">
-    
     <script src="../assets/javascripts/modernizr-4ab42b99fd.js"></script>
     
   </head>
   
   
   
-  <body class="palette-primary-teal palette-accent-pink">
+  <body class="palette-primary-teal palette-accent-green">
     
     <div class="backdrop">
       <div class="backdrop-paper"></div>
@@ -125,7 +123,7 @@
       
       <div class="name">
         <strong>
-          Laravel 5.3 official documentation
+          Laravel 5.4 Official Documentation
           <span class="version">
             
           </span>
@@ -646,15 +644,6 @@
           
             
   <li>
-    <a class="" title="Readme" href="../readme/">
-      Readme
-    </a>
-    
-  </li>
-
-          
-            
-  <li>
     <a class="" title="Redirects" href="../redirects/">
       Redirects
     </a>
@@ -823,46 +812,48 @@
 <h2 id="using-the-encrypter">Using The Encrypter</h2>
 <h4 id="encrypting-a-value">Encrypting A Value</h4>
 <p>You may encrypt a value using the <code>encrypt</code> helper. All encrypted values are encrypted using OpenSSL and the <code>AES-256-CBC</code> cipher. Furthermore, all encrypted values are signed with a message authentication code (MAC) to detect any modifications to the encrypted string:</p>
-<pre><code>&lt;?php
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
-namespace App\Http\Controllers;
+<span class="nx">namespace</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Http</span><span class="err">\</span><span class="nx">Controllers</span><span class="p">;</span>
 
-use App\User;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+<span class="nx">use</span> <span class="nx">App</span><span class="err">\</span><span class="nx">User</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Http</span><span class="err">\</span><span class="nx">Request</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Http</span><span class="err">\</span><span class="nx">Controllers</span><span class="err">\</span><span class="nx">Controller</span><span class="p">;</span>
 
-class UserController extends Controller
-{
-    /**
-     * Store a secret message for the user.
-     *
-     * @param  Request  $request
-     * @param  int  $id
-     * @return Response
-     */
-    public function storeSecret(Request $request, $id)
-    {
-        $user = User::findOrFail($id);
+<span class="kr">class</span> <span class="nx">UserController</span> <span class="kr">extends</span> <span class="nx">Controller</span>
+<span class="p">{</span>
+    <span class="cm">/**</span>
+<span class="cm">     * Store a secret message for the user.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param  Request  $request</span>
+<span class="cm">     * @param  int  $id</span>
+<span class="cm">     * @return Response</span>
+<span class="cm">     */</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">storeSecret</span><span class="p">(</span><span class="nx">Request</span> <span class="nx">$request</span><span class="p">,</span> <span class="nx">$id</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nx">$user</span> <span class="o">=</span> <span class="nx">User</span><span class="o">::</span><span class="nx">findOrFail</span><span class="p">(</span><span class="nx">$id</span><span class="p">);</span>
 
-        $user-&gt;fill([
-            'secret' =&gt; encrypt($request-&gt;secret)
-        ])-&gt;save();
-    }
-}
-</code></pre>
+        <span class="nx">$user</span><span class="o">-&gt;</span><span class="nx">fill</span><span class="p">([</span>
+            <span class="s1">&#39;secret&#39;</span> <span class="o">=&gt;</span> <span class="nx">encrypt</span><span class="p">(</span><span class="nx">$request</span><span class="o">-&gt;</span><span class="nx">secret</span><span class="p">)</span>
+        <span class="p">])</span><span class="o">-&gt;</span><span class="nx">save</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <blockquote>
 <p>{note} Encrypted values are passed through <code>serialize</code> during encryption, which allows for encryption of objects and arrays. Thus, non-PHP clients receiving encrypted values will need to <code>unserialize</code> the data.</p>
 </blockquote>
 <h4 id="decrypting-a-value">Decrypting A Value</h4>
 <p>You may decrypt values using the <code>decrypt</code> helper. If the value can not be properly decrypted, such as when the MAC is invalid, an <code>Illuminate\Contracts\Encryption\DecryptException</code> will be thrown:</p>
-<pre><code>use Illuminate\Contracts\Encryption\DecryptException;
+<div class="codehilite"><pre><span></span>use Illuminate\Contracts\Encryption\DecryptException;
 
 try {
     $decrypted = decrypt($encryptedValue);
 } catch (DecryptException $e) {
     //
 }
-</code></pre>
+</pre></div>
           <aside class="copyright" role="note">
             
             Documentation built with
@@ -935,10 +926,6 @@ try {
       var repo_id  = '';
     </script>
     <script src="../assets/javascripts/application-997097ee0c.js"></script>
-    
-      <script src="../assets/jquery.js"></script>
-    
-      <script src="../assets/prism.js"></script>
     
     
   </body>

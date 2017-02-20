@@ -9,16 +9,16 @@
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     
       
-        <title>Envoy - Laravel 5.3 official documentation</title>
+        <title>Envoy - Laravel 5.4 Official Documentation</title>
       
       
       
       
     
     <meta property="og:url" content="None">
-    <meta property="og:title" content="Laravel 5.3 official documentation">
+    <meta property="og:title" content="Laravel 5.4 Official Documentation">
     <meta property="og:image" content="None/../">
-    <meta name="apple-mobile-web-app-title" content="Laravel 5.3 official documentation">
+    <meta name="apple-mobile-web-app-title" content="Laravel 5.4 Official Documentation">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
@@ -60,15 +60,13 @@
       </style>
     
     
-      <link rel="stylesheet" href="../assets/prism.css">
-    
     <script src="../assets/javascripts/modernizr-4ab42b99fd.js"></script>
     
   </head>
   
   
   
-  <body class="palette-primary-teal palette-accent-pink">
+  <body class="palette-primary-teal palette-accent-green">
     
     <div class="backdrop">
       <div class="backdrop-paper"></div>
@@ -125,7 +123,7 @@
       
       <div class="name">
         <strong>
-          Laravel 5.3 official documentation
+          Laravel 5.4 Official Documentation
           <span class="version">
             
           </span>
@@ -652,15 +650,6 @@
           
             
   <li>
-    <a class="" title="Readme" href="../readme/">
-      Readme
-    </a>
-    
-  </li>
-
-          
-            
-  <li>
     <a class="" title="Redirects" href="../redirects/">
       Redirects
     </a>
@@ -841,129 +830,159 @@
 <p><a name="installation"></a></p>
 <h3 id="installation">Installation</h3>
 <p>First, install Envoy using the Composer <code>global require</code> command:</p>
-<pre><code>composer global require "laravel/envoy=~1.0"
-</code></pre>
+<div class="codehilite"><pre><span></span>composer global require &quot;laravel/envoy=~1.0&quot;
+</pre></div>
+
+
 <p>Since global Composer libraries can sometimes cause package version conflicts, you may wish to consider using <code>cgr</code>, which is a drop-in replacement for the <code>composer global require</code> command. The <code>cgr</code> library's installation instructions can be <a href="https://github.com/consolidation-org/cgr">found on GitHub</a>.</p>
 <blockquote>
 <p>{note} Make sure to place the <code>~/.composer/vendor/bin</code> directory in your PATH so the <code>envoy</code> executable is found when running the <code>envoy</code> command in your terminal.</p>
 </blockquote>
 <h4 id="updating-envoy">Updating Envoy</h4>
-<p>You may also use Composer to keep your Envoy installation up to date. Issuing the the <code>composer global update</code> command will update all of your globally installed Composer packages:</p>
-<pre><code>composer global update
-</code></pre>
+<p>You may also use Composer to keep your Envoy installation up to date. Issuing the <code>composer global update</code> command will update all of your globally installed Composer packages:</p>
+<div class="codehilite"><pre><span></span>composer global update
+</pre></div>
+
+
 <p><a name="writing-tasks"></a></p>
 <h2 id="writing-tasks">Writing Tasks</h2>
 <p>All of your Envoy tasks should be defined in an <code>Envoy.blade.php</code> file in the root of your project. Here's an example to get you started:</p>
-<pre><code>@servers(['web' =&gt; ['user@192.168.1.1']])
+<div class="codehilite"><pre><span></span><span class="p">@</span><span class="n">servers</span><span class="p">([</span><span class="err">&#39;</span><span class="n">web</span><span class="err">&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="err">&#39;</span><span class="n">user</span><span class="mf">@192.168.1.1</span><span class="err">&#39;</span><span class="p">]])</span>
 
-@task('foo', ['on' =&gt; 'web'])
-    ls -la
-@endtask
-</code></pre>
+<span class="p">@</span><span class="n">task</span><span class="p">(</span><span class="err">&#39;</span><span class="n">foo</span><span class="err">&#39;</span><span class="p">,</span> <span class="p">[</span><span class="err">&#39;</span><span class="n">on</span><span class="err">&#39;</span> <span class="o">=&gt;</span> <span class="err">&#39;</span><span class="n">web</span><span class="err">&#39;</span><span class="p">])</span>
+    <span class="n">ls</span> <span class="o">-</span><span class="n">la</span>
+<span class="p">@</span><span class="n">endtask</span>
+</pre></div>
+
+
 <p>As you can see, an array of <code>@servers</code> is defined at the top of the file, allowing you to reference these servers in the <code>on</code> option of your task declarations. Within your <code>@task</code> declarations, you should place the Bash code that should run on your server when the task is executed.</p>
 <p>You can force a script to run locally by specifying the server's IP address as <code>127.0.0.1</code>:</p>
-<pre><code>@servers(['localhost' =&gt; '127.0.0.1'])
-</code></pre>
+<div class="codehilite"><pre><span></span>@servers([&#39;localhost&#39; =&gt; &#39;127.0.0.1&#39;])
+</pre></div>
+
+
 <p><a name="setup"></a></p>
 <h3 id="setup">Setup</h3>
 <p>Sometimes, you may need to execute some PHP code before executing your Envoy tasks. You may use the <code>@setup</code> directive to declare variables and do other general PHP work before any of your other tasks are executed:</p>
-<pre><code>@setup
-    $now = new DateTime();
+<div class="codehilite"><pre><span></span><span class="p">@</span><span class="n">setup</span>
+    <span class="err">$</span><span class="n">now</span> <span class="o">=</span> <span class="n">new</span> <span class="n">DateTime</span><span class="p">();</span>
 
-    $environment = isset($env) ? $env : "testing";
-@endsetup
-</code></pre>
+    <span class="err">$</span><span class="n">environment</span> <span class="o">=</span> <span class="n">isset</span><span class="p">(</span><span class="err">$</span><span class="n">env</span><span class="p">)</span> <span class="o">?</span> <span class="err">$</span><span class="nl">env</span> <span class="p">:</span> <span class="s">&quot;testing&quot;</span><span class="p">;</span>
+<span class="p">@</span><span class="n">endsetup</span>
+</pre></div>
+
+
 <p>If you need to require other PHP files before your task is executed, you may use the <code>@include</code> directive at the top of your <code>Envoy.blade.php</code> file:</p>
-<pre><code>@include('vendor/autoload.php')
+<div class="codehilite"><pre><span></span><span class="p">@</span><span class="n">include</span><span class="p">(</span><span class="err">&#39;</span><span class="n">vendor</span><span class="o">/</span><span class="n">autoload</span><span class="p">.</span><span class="n">php</span><span class="err">&#39;</span><span class="p">)</span>
 
-@task('foo')
-    # ...
-@endtask
-</code></pre>
+<span class="p">@</span><span class="n">task</span><span class="p">(</span><span class="err">&#39;</span><span class="n">foo</span><span class="err">&#39;</span><span class="p">)</span>
+    <span class="cp"># ...</span>
+<span class="p">@</span><span class="n">endtask</span>
+</pre></div>
+
+
 <p><a name="variables"></a></p>
 <h3 id="variables">Variables</h3>
 <p>If needed, you may pass option values into Envoy tasks using the command line:</p>
-<pre><code>envoy run deploy --branch=master
-</code></pre>
-<p>You may use access the options in your tasks via Blade's "echo" syntax. Of course, you may also use <code>if</code> statements and loops within your tasks. For example, let's verify the presence of the <code>$branch</code> variable before executing the <code>git pull</code> command:</p>
-<pre><code>@servers(['web' =&gt; '192.168.1.1'])
+<div class="codehilite"><pre><span></span>envoy run deploy --branch=master
+</pre></div>
 
-@task('deploy', ['on' =&gt; 'web'])
-    cd site
 
-    @if ($branch)
-        git pull origin {{ $branch }}
-    @endif
+<p>You may access the options in your tasks via Blade's "echo" syntax. Of course, you may also use <code>if</code> statements and loops within your tasks. For example, let's verify the presence of the <code>$branch</code> variable before executing the <code>git pull</code> command:</p>
+<div class="codehilite"><pre><span></span><span class="p">@</span><span class="n">servers</span><span class="p">([</span><span class="err">&#39;</span><span class="n">web</span><span class="err">&#39;</span> <span class="o">=&gt;</span> <span class="err">&#39;</span><span class="mf">192.168.1.1</span><span class="err">&#39;</span><span class="p">])</span>
 
-    php artisan migrate
-@endtask
-</code></pre>
+<span class="p">@</span><span class="n">task</span><span class="p">(</span><span class="err">&#39;</span><span class="n">deploy</span><span class="err">&#39;</span><span class="p">,</span> <span class="p">[</span><span class="err">&#39;</span><span class="n">on</span><span class="err">&#39;</span> <span class="o">=&gt;</span> <span class="err">&#39;</span><span class="n">web</span><span class="err">&#39;</span><span class="p">])</span>
+    <span class="n">cd</span> <span class="n">site</span>
+
+    <span class="p">@</span><span class="k">if</span> <span class="p">(</span><span class="err">$</span><span class="n">branch</span><span class="p">)</span>
+        <span class="n">git</span> <span class="n">pull</span> <span class="n">origin</span> <span class="p">{{</span> <span class="err">$</span><span class="n">branch</span> <span class="p">}}</span>
+    <span class="p">@</span><span class="n">endif</span>
+
+    <span class="n">php</span> <span class="n">artisan</span> <span class="n">migrate</span>
+<span class="p">@</span><span class="n">endtask</span>
+</pre></div>
+
+
 <p><a name="stories"></a></p>
 <h3 id="stories">Stories</h3>
 <p>Stories group a set of tasks under a single, convenient name, allowing you to group small, focused tasks into large tasks. For instance, a <code>deploy</code> story may run the <code>git</code> and <code>composer</code> tasks by listing the task names within its definition:</p>
-<pre><code>@servers(['web' =&gt; '192.168.1.1'])
+<div class="codehilite"><pre><span></span><span class="p">@</span><span class="n">servers</span><span class="p">([</span><span class="err">&#39;</span><span class="n">web</span><span class="err">&#39;</span> <span class="o">=&gt;</span> <span class="err">&#39;</span><span class="mf">192.168.1.1</span><span class="err">&#39;</span><span class="p">])</span>
 
-@story('deploy')
-    git
-    composer
-@endstory
+<span class="p">@</span><span class="n">story</span><span class="p">(</span><span class="err">&#39;</span><span class="n">deploy</span><span class="err">&#39;</span><span class="p">)</span>
+    <span class="n">git</span>
+    <span class="n">composer</span>
+<span class="p">@</span><span class="n">endstory</span>
 
-@task('git')
-    git pull origin master
-@endtask
+<span class="p">@</span><span class="n">task</span><span class="p">(</span><span class="err">&#39;</span><span class="n">git</span><span class="err">&#39;</span><span class="p">)</span>
+    <span class="n">git</span> <span class="n">pull</span> <span class="n">origin</span> <span class="n">master</span>
+<span class="p">@</span><span class="n">endtask</span>
 
-@task('composer')
-    composer install
-@endtask
-</code></pre>
+<span class="p">@</span><span class="n">task</span><span class="p">(</span><span class="err">&#39;</span><span class="n">composer</span><span class="err">&#39;</span><span class="p">)</span>
+    <span class="n">composer</span> <span class="n">install</span>
+<span class="p">@</span><span class="n">endtask</span>
+</pre></div>
+
+
 <p>Once the story has been written, you may run it just like a typical task:</p>
-<pre><code>envoy run deploy
-</code></pre>
+<div class="codehilite"><pre><span></span>envoy run deploy
+</pre></div>
+
+
 <p><a name="multiple-servers"></a></p>
 <h3 id="multiple-servers">Multiple Servers</h3>
 <p>Envoy allows you to easily run a task across multiple servers. First, add additional servers to your <code>@servers</code> declaration. Each server should be assigned a unique name. Once you have defined your additional servers, list each of the servers in the task's <code>on</code> array:</p>
-<pre><code>@servers(['web-1' =&gt; '192.168.1.1', 'web-2' =&gt; '192.168.1.2'])
+<div class="codehilite"><pre><span></span><span class="p">@</span><span class="n">servers</span><span class="p">([</span><span class="err">&#39;</span><span class="n">web</span><span class="o">-</span><span class="mi">1</span><span class="err">&#39;</span> <span class="o">=&gt;</span> <span class="err">&#39;</span><span class="mf">192.168.1.1</span><span class="err">&#39;</span><span class="p">,</span> <span class="err">&#39;</span><span class="n">web</span><span class="o">-</span><span class="mi">2</span><span class="err">&#39;</span> <span class="o">=&gt;</span> <span class="err">&#39;</span><span class="mf">192.168.1.2</span><span class="err">&#39;</span><span class="p">])</span>
 
-@task('deploy', ['on' =&gt; ['web-1', 'web-2']])
-    cd site
-    git pull origin {{ $branch }}
-    php artisan migrate
-@endtask
-</code></pre>
+<span class="p">@</span><span class="n">task</span><span class="p">(</span><span class="err">&#39;</span><span class="n">deploy</span><span class="err">&#39;</span><span class="p">,</span> <span class="p">[</span><span class="err">&#39;</span><span class="n">on</span><span class="err">&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="err">&#39;</span><span class="n">web</span><span class="o">-</span><span class="mi">1</span><span class="err">&#39;</span><span class="p">,</span> <span class="err">&#39;</span><span class="n">web</span><span class="o">-</span><span class="mi">2</span><span class="err">&#39;</span><span class="p">]])</span>
+    <span class="n">cd</span> <span class="n">site</span>
+    <span class="n">git</span> <span class="n">pull</span> <span class="n">origin</span> <span class="p">{{</span> <span class="err">$</span><span class="n">branch</span> <span class="p">}}</span>
+    <span class="n">php</span> <span class="n">artisan</span> <span class="n">migrate</span>
+<span class="p">@</span><span class="n">endtask</span>
+</pre></div>
+
+
 <h4 id="parallel-execution">Parallel Execution</h4>
 <p>By default, tasks will be executed on each server serially. In other words, a task will finish running on the first server before proceeding to execute on the second server. If you would like to run a task across multiple servers in parallel, add the <code>parallel</code> option to your task declaration:</p>
-<pre><code>@servers(['web-1' =&gt; '192.168.1.1', 'web-2' =&gt; '192.168.1.2'])
+<div class="codehilite"><pre><span></span><span class="p">@</span><span class="n">servers</span><span class="p">([</span><span class="err">&#39;</span><span class="n">web</span><span class="o">-</span><span class="mi">1</span><span class="err">&#39;</span> <span class="o">=&gt;</span> <span class="err">&#39;</span><span class="mf">192.168.1.1</span><span class="err">&#39;</span><span class="p">,</span> <span class="err">&#39;</span><span class="n">web</span><span class="o">-</span><span class="mi">2</span><span class="err">&#39;</span> <span class="o">=&gt;</span> <span class="err">&#39;</span><span class="mf">192.168.1.2</span><span class="err">&#39;</span><span class="p">])</span>
 
-@task('deploy', ['on' =&gt; ['web-1', 'web-2'], 'parallel' =&gt; true])
-    cd site
-    git pull origin {{ $branch }}
-    php artisan migrate
-@endtask
-</code></pre>
+<span class="p">@</span><span class="n">task</span><span class="p">(</span><span class="err">&#39;</span><span class="n">deploy</span><span class="err">&#39;</span><span class="p">,</span> <span class="p">[</span><span class="err">&#39;</span><span class="n">on</span><span class="err">&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="err">&#39;</span><span class="n">web</span><span class="o">-</span><span class="mi">1</span><span class="err">&#39;</span><span class="p">,</span> <span class="err">&#39;</span><span class="n">web</span><span class="o">-</span><span class="mi">2</span><span class="err">&#39;</span><span class="p">],</span> <span class="err">&#39;</span><span class="n">parallel</span><span class="err">&#39;</span> <span class="o">=&gt;</span> <span class="nb">true</span><span class="p">])</span>
+    <span class="n">cd</span> <span class="n">site</span>
+    <span class="n">git</span> <span class="n">pull</span> <span class="n">origin</span> <span class="p">{{</span> <span class="err">$</span><span class="n">branch</span> <span class="p">}}</span>
+    <span class="n">php</span> <span class="n">artisan</span> <span class="n">migrate</span>
+<span class="p">@</span><span class="n">endtask</span>
+</pre></div>
+
+
 <p><a name="running-tasks"></a></p>
 <h2 id="running-tasks">Running Tasks</h2>
 <p>To run a task or story that is defined in your <code>Envoy.blade.php</code> file, execute Envoy's <code>run</code> command, passing the name of the task or story you would like to execute. Envoy will run the task and display the output from the servers as the task is running:</p>
-<pre><code>envoy run task
-</code></pre>
+<div class="codehilite"><pre><span></span>envoy run task
+</pre></div>
+
+
 <p><a name="confirming-task-execution"></a></p>
 <h3 id="confirming-task-execution">Confirming Task Execution</h3>
 <p>If you would like to be prompted for confirmation before running a given task on your servers, you should add the <code>confirm</code> directive to your task declaration. This option is particularly useful for destructive operations:</p>
-<pre><code>@task('deploy', ['on' =&gt; 'web', 'confirm' =&gt; true])
-    cd site
-    git pull origin {{ $branch }}
-    php artisan migrate
-@endtask
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="p">@</span><span class="n">task</span><span class="p">(</span><span class="err">&#39;</span><span class="n">deploy</span><span class="err">&#39;</span><span class="p">,</span> <span class="p">[</span><span class="err">&#39;</span><span class="n">on</span><span class="err">&#39;</span> <span class="o">=&gt;</span> <span class="err">&#39;</span><span class="n">web</span><span class="err">&#39;</span><span class="p">,</span> <span class="err">&#39;</span><span class="n">confirm</span><span class="err">&#39;</span> <span class="o">=&gt;</span> <span class="nb">true</span><span class="p">])</span>
+    <span class="n">cd</span> <span class="n">site</span>
+    <span class="n">git</span> <span class="n">pull</span> <span class="n">origin</span> <span class="p">{{</span> <span class="err">$</span><span class="n">branch</span> <span class="p">}}</span>
+    <span class="n">php</span> <span class="n">artisan</span> <span class="n">migrate</span>
+<span class="p">@</span><span class="n">endtask</span>
+</pre></div>
+
+
 <p><a name="notifications"></a>
 <a name="hipchat-notifications"></a></p>
 <h2 id="notifications">Notifications</h2>
 <p><a name="slack"></a></p>
 <h3 id="slack">Slack</h3>
 <p>Envoy also supports sending notifications to <a href="https://slack.com">Slack</a> after each task is executed. The <code>@slack</code> directive accepts a Slack hook URL and a channel name. You may retrieve your webhook URL by creating an "Incoming WebHooks" integration in your Slack control panel. You should pass the entire webhook URL into the <code>@slack</code> directive:</p>
-<pre><code>@after
-    @slack('webhook-url', '#bots')
-@endafter
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="p">@</span><span class="n">finished</span>
+    <span class="p">@</span><span class="n">slack</span><span class="p">(</span><span class="err">&#39;</span><span class="n">webhook</span><span class="o">-</span><span class="n">url</span><span class="err">&#39;</span><span class="p">,</span> <span class="err">&#39;#</span><span class="n">bots</span><span class="err">&#39;</span><span class="p">)</span>
+<span class="p">@</span><span class="n">endfinished</span>
+</pre></div>
+
+
 <p>You may provide one of the following as the channel argument:</p>
 <div class="content-list" markdown="1">
 - To send the notification to a channel: `#channel`
@@ -1041,10 +1060,6 @@
       var repo_id  = '';
     </script>
     <script src="../assets/javascripts/application-997097ee0c.js"></script>
-    
-      <script src="../assets/jquery.js"></script>
-    
-      <script src="../assets/prism.js"></script>
     
     
   </body>

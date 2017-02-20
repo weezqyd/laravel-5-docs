@@ -9,16 +9,16 @@
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     
       
-        <title>Redis - Laravel 5.3 official documentation</title>
+        <title>Redis - Laravel 5.4 Official Documentation</title>
       
       
       
       
     
     <meta property="og:url" content="None">
-    <meta property="og:title" content="Laravel 5.3 official documentation">
+    <meta property="og:title" content="Laravel 5.4 Official Documentation">
     <meta property="og:image" content="None/../">
-    <meta name="apple-mobile-web-app-title" content="Laravel 5.3 official documentation">
+    <meta name="apple-mobile-web-app-title" content="Laravel 5.4 Official Documentation">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
@@ -60,15 +60,13 @@
       </style>
     
     
-      <link rel="stylesheet" href="../assets/prism.css">
-    
     <script src="../assets/javascripts/modernizr-4ab42b99fd.js"></script>
     
   </head>
   
   
   
-  <body class="palette-primary-teal palette-accent-pink">
+  <body class="palette-primary-teal palette-accent-green">
     
     <div class="backdrop">
       <div class="backdrop-paper"></div>
@@ -125,7 +123,7 @@
       
       <div class="name">
         <strong>
-          Laravel 5.3 official documentation
+          Laravel 5.4 Official Documentation
           <span class="version">
             
           </span>
@@ -619,15 +617,6 @@
           
             
   <li>
-    <a class="" title="Readme" href="../readme/">
-      Readme
-    </a>
-    
-  </li>
-
-          
-            
-  <li>
     <a class="" title="Redirects" href="../redirects/">
       Redirects
     </a>
@@ -811,6 +800,8 @@
 <ul>
 <li><a href="#introduction">Introduction</a><ul>
 <li><a href="#configuration">Configuration</a></li>
+<li><a href="#predis">Predis</a></li>
+<li><a href="#phpredis">PhpRedis</a></li>
 </ul>
 </li>
 <li><a href="#interacting-with-redis">Interacting With Redis</a><ul>
@@ -821,138 +812,197 @@
 </ul>
 <p><a name="introduction"></a></p>
 <h2 id="introduction">Introduction</h2>
-<p><a href="http://redis.io">Redis</a> is an open source, advanced key-value store. It is often referred to as a data structure server since keys can contain <a href="http://redis.io/topics/data-types#strings">strings</a>, <a href="http://redis.io/topics/data-types#hashes">hashes</a>, <a href="http://redis.io/topics/data-types#lists">lists</a>, <a href="http://redis.io/topics/data-types#sets">sets</a>, and <a href="http://redis.io/topics/data-types#sorted-sets">sorted sets</a>. Before using Redis with Laravel, you will need to install the <code>predis/predis</code> package via Composer:</p>
-<pre><code>composer require predis/predis
-</code></pre>
+<p><a href="http://redis.io">Redis</a> is an open source, advanced key-value store. It is often referred to as a data structure server since keys can contain <a href="http://redis.io/topics/data-types#strings">strings</a>, <a href="http://redis.io/topics/data-types#hashes">hashes</a>, <a href="http://redis.io/topics/data-types#lists">lists</a>, <a href="http://redis.io/topics/data-types#sets">sets</a>, and <a href="http://redis.io/topics/data-types#sorted-sets">sorted sets</a>.</p>
+<p>Before using Redis with Laravel, you will either need to install the <code>predis/predis</code> package via Composer:</p>
+<div class="codehilite"><pre><span></span>composer require predis/predis
+</pre></div>
+
+
+<p>Alternatively, you may install the <a href="https://github.com/phpredis/phpredis">PhpRedis</a> PHP extension via PECL. The extension is more complex to install but may yield better performance for applications that make heavy use of Redis.</p>
 <p><a name="configuration"></a></p>
 <h3 id="configuration">Configuration</h3>
 <p>The Redis configuration for your application is located in the <code>config/database.php</code> configuration file. Within this file, you will see a <code>redis</code> array containing the Redis servers utilized by your application:</p>
-<pre><code>'redis' =&gt; [
+<div class="codehilite"><pre><span></span>&#39;redis&#39; =&gt; [
 
-    'cluster' =&gt; false,
+    &#39;client&#39; =&gt; &#39;predis&#39;,
 
-    'default' =&gt; [
-        'host' =&gt; '127.0.0.1',
-        'port' =&gt; 6379,
-        'database' =&gt; 0,
+    &#39;cluster&#39; =&gt; false,
+
+    &#39;default&#39; =&gt; [
+        &#39;host&#39; =&gt; env(&#39;REDIS_HOST&#39;, &#39;localhost&#39;),
+        &#39;password&#39; =&gt; env(&#39;REDIS_PASSWORD&#39;, null),
+        &#39;port&#39; =&gt; env(&#39;REDIS_PORT&#39;, 6379),
+        &#39;database&#39; =&gt; 0,
     ],
 
 ],
-</code></pre>
+</pre></div>
+
+
 <p>The default server configuration should suffice for development. However, you are free to modify this array based on your environment. Each Redis server defined in your configuration file is required to have a name, host, and port.</p>
 <p>The <code>cluster</code> option will instruct the Laravel Redis client to perform client-side sharding across your Redis nodes, allowing you to pool nodes and create a large amount of available RAM. However, note that client-side sharding does not handle failover; therefore, is primarily suited for cached data that is available from another primary data store.</p>
-<p>Additionally, you may define an <code>options</code> array value in your Redis connection definition, allowing you to specify a set of Predis <a href="https://github.com/nrk/predis/wiki/Client-Options">client options</a>.</p>
-<p>If your Redis server requires authentication, you may supply a password by adding a <code>password</code> configuration item to your Redis server configuration array.</p>
+<p><a name="predis"></a></p>
+<h3 id="predis">Predis</h3>
+<p>In addition to the default <code>host</code>, <code>port</code>, <code>database</code>, and <code>password</code> server configuration options, Predis supports additional <a href="https://github.com/nrk/predis/wiki/Connection-Parameters">connection parameters</a> that may be defined for each of your Redis servers. To utilize these additional configuration options, simply add them to your Redis server configuration in the <code>config/database.php</code> configuration file:</p>
+<div class="codehilite"><pre><span></span>&#39;default&#39; =&gt; [
+    &#39;host&#39; =&gt; env(&#39;REDIS_HOST&#39;, &#39;localhost&#39;),
+    &#39;password&#39; =&gt; env(&#39;REDIS_PASSWORD&#39;, null),
+    &#39;port&#39; =&gt; env(&#39;REDIS_PORT&#39;, 6379),
+    &#39;database&#39; =&gt; 0,
+    &#39;read_write_timeout&#39; =&gt; 60,
+],
+</pre></div>
+
+
+<p><a name="phpredis"></a></p>
+<h3 id="phpredis">PhpRedis</h3>
 <blockquote>
-<p>{note} If you have the Redis PHP extension installed via PECL, you will need to rename the alias for Redis in your <code>config/app.php</code> file.</p>
+<p>{note} If you have the PhpRedis PHP extension installed via PECL, you will need to rename the <code>Redis</code> alias in your <code>config/app.php</code> configuration file.</p>
 </blockquote>
+<p>To utilize the PhpRedis extension, you should change the <code>client</code> option of your Redis configuration to <code>phpredis</code>. This option is found in your <code>config/database.php</code> configuration file:</p>
+<div class="codehilite"><pre><span></span>&#39;redis&#39; =&gt; [
+
+    &#39;client&#39; =&gt; &#39;phpredis&#39;,
+
+    // Rest of Redis configuration...
+],
+</pre></div>
+
+
+<p>In addition to the default <code>host</code>, <code>port</code>, <code>database</code>, and <code>password</code> server configuration options, PhpRedis supports the following additional connection parameters: <code>persistent</code>, <code>prefix</code>, <code>read_timeout</code> and <code>timeout</code>. You may add any of these options to your Redis server configuration in the <code>config/database.php</code> configuration file:</p>
+<div class="codehilite"><pre><span></span>&#39;default&#39; =&gt; [
+    &#39;host&#39; =&gt; env(&#39;REDIS_HOST&#39;, &#39;localhost&#39;),
+    &#39;password&#39; =&gt; env(&#39;REDIS_PASSWORD&#39;, null),
+    &#39;port&#39; =&gt; env(&#39;REDIS_PORT&#39;, 6379),
+    &#39;database&#39; =&gt; 0,
+    &#39;read_timeout&#39; =&gt; 60,
+],
+</pre></div>
+
+
 <p><a name="interacting-with-redis"></a></p>
 <h2 id="interacting-with-redis">Interacting With Redis</h2>
 <p>You may interact with Redis by calling various methods on the <code>Redis</code> <a href="../docs/{{version}}/facades">facade</a>. The <code>Redis</code> facade supports dynamic methods, meaning you may call any <a href="http://redis.io/commands">Redis command</a> on the facade and the command will be passed directly to Redis. In this example, we will call the Redis <code>GET</code> command by calling the <code>get</code> method on the <code>Redis</code> facade:</p>
-<pre><code>&lt;?php
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
-namespace App\Http\Controllers;
+<span class="nx">namespace</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Http</span><span class="err">\</span><span class="nx">Controllers</span><span class="p">;</span>
 
-use Illuminate\Support\Facades\Redis;
-use App\Http\Controllers\Controller;
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Support</span><span class="err">\</span><span class="nx">Facades</span><span class="err">\</span><span class="nx">Redis</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Http</span><span class="err">\</span><span class="nx">Controllers</span><span class="err">\</span><span class="nx">Controller</span><span class="p">;</span>
 
-class UserController extends Controller
-{
-    /**
-     * Show the profile for the given user.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function showProfile($id)
-    {
-        $user = Redis::get('user:profile:'.$id);
+<span class="kr">class</span> <span class="nx">UserController</span> <span class="kr">extends</span> <span class="nx">Controller</span>
+<span class="p">{</span>
+    <span class="cm">/**</span>
+<span class="cm">     * Show the profile for the given user.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param  int  $id</span>
+<span class="cm">     * @return Response</span>
+<span class="cm">     */</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">showProfile</span><span class="p">(</span><span class="nx">$id</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nx">$user</span> <span class="o">=</span> <span class="nx">Redis</span><span class="o">::</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;user:profile:&#39;</span><span class="p">.</span><span class="nx">$id</span><span class="p">);</span>
 
-        return view('user.profile', ['user' =&gt; $user]);
-    }
-}
-</code></pre>
+        <span class="k">return</span> <span class="nx">view</span><span class="p">(</span><span class="s1">&#39;user.profile&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;user&#39;</span> <span class="o">=&gt;</span> <span class="nx">$user</span><span class="p">]);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <p>Of course, as mentioned above, you may call any of the Redis commands on the <code>Redis</code> facade. Laravel uses magic methods to pass the commands to the Redis server, so simply pass the arguments the Redis command expects:</p>
-<pre><code>Redis::set('name', 'Taylor');
+<div class="codehilite"><pre><span></span><span class="nt">Redis</span><span class="p">::</span><span class="nd">set</span><span class="o">(</span><span class="s1">&#39;name&#39;</span><span class="o">,</span> <span class="s1">&#39;Taylor&#39;</span><span class="o">);</span>
 
-$values = Redis::lrange('names', 5, 10);
-</code></pre>
+<span class="o">$</span><span class="nt">values</span> <span class="o">=</span> <span class="nt">Redis</span><span class="p">::</span><span class="nd">lrange</span><span class="o">(</span><span class="s1">&#39;names&#39;</span><span class="o">,</span> <span class="nt">5</span><span class="o">,</span> <span class="nt">10</span><span class="o">);</span>
+</pre></div>
+
+
 <p>Alternatively, you may also pass commands to the server using the <code>command</code> method, which accepts the name of the command as its first argument, and an array of values as its second argument:</p>
-<pre><code>$values = Redis::command('lrange', ['name', 5, 10]);
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="o">$</span><span class="nt">values</span> <span class="o">=</span> <span class="nt">Redis</span><span class="p">::</span><span class="nd">command</span><span class="o">(</span><span class="s1">&#39;lrange&#39;</span><span class="o">,</span> <span class="cp">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="cp">]</span><span class="o">);</span>
+</pre></div>
+
+
 <h4 id="using-multiple-redis-connections">Using Multiple Redis Connections</h4>
 <p>You may get a Redis instance by calling the <code>Redis::connection</code> method:</p>
-<pre><code>$redis = Redis::connection();
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="o">$</span><span class="nt">redis</span> <span class="o">=</span> <span class="nt">Redis</span><span class="p">::</span><span class="nd">connection</span><span class="o">();</span>
+</pre></div>
+
+
 <p>This will give you an instance of the default Redis server. If you are not using server clustering, you may pass the server name to the <code>connection</code> method to get a specific server as defined in your Redis configuration:</p>
-<pre><code>$redis = Redis::connection('other');
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="o">$</span><span class="nt">redis</span> <span class="o">=</span> <span class="nt">Redis</span><span class="p">::</span><span class="nd">connection</span><span class="o">(</span><span class="s1">&#39;other&#39;</span><span class="o">);</span>
+</pre></div>
+
+
 <p><a name="pipelining-commands"></a></p>
 <h3 id="pipelining-commands">Pipelining Commands</h3>
 <p>Pipelining should be used when you need to send many commands to the server in one operation. The <code>pipeline</code> method accepts one argument: a <code>Closure</code> that receives a Redis instance. You may issue all of your commands to this Redis instance and they will all be executed within a single operation:</p>
-<pre><code>Redis::pipeline(function ($pipe) {
-    for ($i = 0; $i &lt; 1000; $i++) {
-        $pipe-&gt;set("key:$i", $i);
-    }
-});
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="nt">Redis</span><span class="p">::</span><span class="nd">pipeline</span><span class="o">(</span><span class="nt">function</span> <span class="o">($</span><span class="nt">pipe</span><span class="o">)</span> <span class="p">{</span>
+    <span class="err">for</span> <span class="err">($i</span> <span class="err">=</span> <span class="err">0</span><span class="p">;</span> <span class="err">$i</span> <span class="err">&lt;</span> <span class="err">1000</span><span class="p">;</span> <span class="err">$i++)</span> <span class="err">{</span>
+        <span class="err">$pipe-&gt;set(&quot;</span><span class="n">key</span><span class="p">:</span><span class="err">$</span><span class="n">i</span><span class="err">&quot;</span><span class="p">,</span> <span class="err">$</span><span class="n">i</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="err">}</span><span class="o">);</span>
+</pre></div>
+
+
 <p><a name="pubsub"></a></p>
 <h2 id="pub-sub">Pub / Sub</h2>
 <p>Laravel provides a convenient interface to the Redis <code>publish</code> and <code>subscribe</code> commands. These Redis commands allow you to listen for messages on a given "channel". You may publish messages to the channel from another application, or even using another programming language, allowing easy communication between applications and processes.</p>
 <p>First, let's setup a channel listener using the <code>subscribe</code> method. We'll place this method call within an <a href="../docs/{{version}}/artisan">Artisan command</a> since calling the <code>subscribe</code> method begins a long-running process:</p>
-<pre><code>&lt;?php
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
-namespace App\Console\Commands;
+<span class="nx">namespace</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Console</span><span class="err">\</span><span class="nx">Commands</span><span class="p">;</span>
 
-use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Redis;
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Console</span><span class="err">\</span><span class="nx">Command</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Support</span><span class="err">\</span><span class="nx">Facades</span><span class="err">\</span><span class="nx">Redis</span><span class="p">;</span>
 
-class RedisSubscribe extends Command
-{
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
-    protected $signature = 'redis:subscribe';
+<span class="kr">class</span> <span class="nx">RedisSubscribe</span> <span class="kr">extends</span> <span class="nx">Command</span>
+<span class="p">{</span>
+    <span class="cm">/**</span>
+<span class="cm">     * The name and signature of the console command.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @var string</span>
+<span class="cm">     */</span>
+    <span class="kr">protected</span> <span class="nx">$signature</span> <span class="o">=</span> <span class="s1">&#39;redis:subscribe&#39;</span><span class="p">;</span>
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
-    protected $description = 'Subscribe to a Redis channel';
+    <span class="cm">/**</span>
+<span class="cm">     * The console command description.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @var string</span>
+<span class="cm">     */</span>
+    <span class="kr">protected</span> <span class="nx">$description</span> <span class="o">=</span> <span class="s1">&#39;Subscribe to a Redis channel&#39;</span><span class="p">;</span>
 
-    /**
-     * Execute the console command.
-     *
-     * @return mixed
-     */
-    public function handle()
-    {
-        Redis::subscribe(['test-channel'], function($message) {
-            echo $message;
-        });
-    }
-}
-</code></pre>
+    <span class="cm">/**</span>
+<span class="cm">     * Execute the console command.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return mixed</span>
+<span class="cm">     */</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">handle</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nx">Redis</span><span class="o">::</span><span class="nx">subscribe</span><span class="p">([</span><span class="s1">&#39;test-channel&#39;</span><span class="p">],</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">$message</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">echo</span> <span class="nx">$message</span><span class="p">;</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <p>Now we may publish messages to the channel using the <code>publish</code> method:</p>
-<pre><code>Route::get('publish', function () {
-    // Route logic...
+<div class="codehilite"><pre><span></span><span class="nt">Route</span><span class="p">::</span><span class="nd">get</span><span class="o">(</span><span class="s1">&#39;publish&#39;</span><span class="o">,</span> <span class="nt">function</span> <span class="o">()</span> <span class="p">{</span>
+    <span class="err">//</span> <span class="err">Route</span> <span class="err">logic...</span>
 
-    Redis::publish('test-channel', json_encode(['foo' =&gt; 'bar']));
-});
-</code></pre>
+    <span class="n">Redis</span><span class="p">:</span><span class="o">:</span><span class="nf">publish</span><span class="p">(</span><span class="s1">&#39;test-channel&#39;</span><span class="p">,</span> <span class="nf">json_encode</span><span class="p">(</span><span class="cp">[</span><span class="s1">&#39;foo&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;bar&#39;</span><span class="cp">]</span><span class="p">));</span>
+<span class="p">}</span><span class="o">);</span>
+</pre></div>
+
+
 <h4 id="wildcard-subscriptions">Wildcard Subscriptions</h4>
 <p>Using the <code>psubscribe</code> method, you may subscribe to a wildcard channel, which may be useful for catching all messages on all channels. The <code>$channel</code> name will be passed as the second argument to the provided callback <code>Closure</code>:</p>
-<pre><code>Redis::psubscribe(['*'], function($message, $channel) {
+<div class="codehilite"><pre><span></span>Redis::psubscribe([&#39;*&#39;], function ($message, $channel) {
     echo $message;
 });
 
-Redis::psubscribe(['users.*'], function($message, $channel) {
+Redis::psubscribe([&#39;users.*&#39;], function ($message, $channel) {
     echo $message;
 });
-</code></pre>
+</pre></div>
           <aside class="copyright" role="note">
             
             Documentation built with
@@ -1025,10 +1075,6 @@ Redis::psubscribe(['users.*'], function($message, $channel) {
       var repo_id  = '';
     </script>
     <script src="../assets/javascripts/application-997097ee0c.js"></script>
-    
-      <script src="../assets/jquery.js"></script>
-    
-      <script src="../assets/prism.js"></script>
     
     
   </body>

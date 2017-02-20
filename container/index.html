@@ -9,16 +9,16 @@
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     
       
-        <title>Container - Laravel 5.3 official documentation</title>
+        <title>Container - Laravel 5.4 Official Documentation</title>
       
       
       
       
     
     <meta property="og:url" content="None">
-    <meta property="og:title" content="Laravel 5.3 official documentation">
+    <meta property="og:title" content="Laravel 5.4 Official Documentation">
     <meta property="og:image" content="None/../">
-    <meta name="apple-mobile-web-app-title" content="Laravel 5.3 official documentation">
+    <meta name="apple-mobile-web-app-title" content="Laravel 5.4 Official Documentation">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
@@ -60,15 +60,13 @@
       </style>
     
     
-      <link rel="stylesheet" href="../assets/prism.css">
-    
     <script src="../assets/javascripts/modernizr-4ab42b99fd.js"></script>
     
   </head>
   
   
   
-  <body class="palette-primary-teal palette-accent-pink">
+  <body class="palette-primary-teal palette-accent-green">
     
     <div class="backdrop">
       <div class="backdrop-paper"></div>
@@ -125,7 +123,7 @@
       
       <div class="name">
         <strong>
-          Laravel 5.3 official documentation
+          Laravel 5.4 Official Documentation
           <span class="version">
             
           </span>
@@ -652,15 +650,6 @@
           
             
   <li>
-    <a class="" title="Readme" href="../readme/">
-      Readme
-    </a>
-    
-  </li>
-
-          
-            
-  <li>
     <a class="" title="Redirects" href="../redirects/">
       Redirects
     </a>
@@ -834,48 +823,50 @@
 <h2 id="introduction">Introduction</h2>
 <p>The Laravel service container is a powerful tool for managing class dependencies and performing dependency injection. Dependency injection is a fancy phrase that essentially means this: class dependencies are "injected" into the class via the constructor or, in some cases, "setter" methods.</p>
 <p>Let's look at a simple example:</p>
-<pre><code>&lt;?php
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
-namespace App\Http\Controllers;
+<span class="nx">namespace</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Http</span><span class="err">\</span><span class="nx">Controllers</span><span class="p">;</span>
 
-use App\User;
-use App\Repositories\UserRepository;
-use App\Http\Controllers\Controller;
+<span class="nx">use</span> <span class="nx">App</span><span class="err">\</span><span class="nx">User</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Repositories</span><span class="err">\</span><span class="nx">UserRepository</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Http</span><span class="err">\</span><span class="nx">Controllers</span><span class="err">\</span><span class="nx">Controller</span><span class="p">;</span>
 
-class UserController extends Controller
-{
-    /**
-     * The user repository implementation.
-     *
-     * @var UserRepository
-     */
-    protected $users;
+<span class="kr">class</span> <span class="nx">UserController</span> <span class="kr">extends</span> <span class="nx">Controller</span>
+<span class="p">{</span>
+    <span class="cm">/**</span>
+<span class="cm">     * The user repository implementation.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @var UserRepository</span>
+<span class="cm">     */</span>
+    <span class="kr">protected</span> <span class="nx">$users</span><span class="p">;</span>
 
-    /**
-     * Create a new controller instance.
-     *
-     * @param  UserRepository  $users
-     * @return void
-     */
-    public function __construct(UserRepository $users)
-    {
-        $this-&gt;users = $users;
-    }
+    <span class="cm">/**</span>
+<span class="cm">     * Create a new controller instance.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param  UserRepository  $users</span>
+<span class="cm">     * @return void</span>
+<span class="cm">     */</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">__construct</span><span class="p">(</span><span class="nx">UserRepository</span> <span class="nx">$users</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">users</span> <span class="o">=</span> <span class="nx">$users</span><span class="p">;</span>
+    <span class="p">}</span>
 
-    /**
-     * Show the profile for the given user.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        $user = $this-&gt;users-&gt;find($id);
+    <span class="cm">/**</span>
+<span class="cm">     * Show the profile for the given user.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param  int  $id</span>
+<span class="cm">     * @return Response</span>
+<span class="cm">     */</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">show</span><span class="p">(</span><span class="nx">$id</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nx">$user</span> <span class="o">=</span> <span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">users</span><span class="o">-&gt;</span><span class="nx">find</span><span class="p">(</span><span class="nx">$id</span><span class="p">);</span>
 
-        return view('user.profile', ['user' =&gt; $user]);
-    }
-}
-</code></pre>
+        <span class="k">return</span> <span class="nx">view</span><span class="p">(</span><span class="s1">&#39;user.profile&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;user&#39;</span> <span class="o">=&gt;</span> <span class="nx">$user</span><span class="p">]);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <p>In this example, the <code>UserController</code> needs to retrieve users from a data source. So, we will <strong>inject</strong> a service that is able to retrieve users. In this context, our <code>UserRepository</code> most likely uses <a href="../docs/{{version}}/eloquent">Eloquent</a> to retrieve user information from the database. However, since the repository is injected, we are able to easily swap it out with another implementation. We are also able to easily "mock", or create a dummy implementation of the <code>UserRepository</code> when testing our application.</p>
 <p>A deep understanding of the Laravel service container is essential to building a powerful, large application, as well as for contributing to the Laravel core itself.</p>
 <p><a name="binding"></a></p>
@@ -888,39 +879,49 @@ class UserController extends Controller
 </blockquote>
 <h4 id="simple-bindings">Simple Bindings</h4>
 <p>Within a service provider, you always have access to the container via the <code>$this-&gt;app</code> property. We can register a binding using the <code>bind</code> method, passing the class or interface name that we wish to register along with a <code>Closure</code> that returns an instance of the class:</p>
-<pre><code>$this-&gt;app-&gt;bind('HelpSpot\API', function ($app) {
-    return new HelpSpot\API($app-&gt;make('HttpClient'));
+<div class="codehilite"><pre><span></span>$this-&gt;app-&gt;bind(&#39;HelpSpot\API&#39;, function ($app) {
+    return new HelpSpot\API($app-&gt;make(&#39;HttpClient&#39;));
 });
-</code></pre>
+</pre></div>
+
+
 <p>Note that we receive the container itself as an argument to the resolver. We can then use the container to resolve sub-dependencies of the object we are building.</p>
 <h4 id="binding-a-singleton">Binding A Singleton</h4>
 <p>The <code>singleton</code> method binds a class or interface into the container that should only be resolved one time. Once a singleton binding is resolved, the same object instance will be returned on subsequent calls into the container:</p>
-<pre><code>$this-&gt;app-&gt;singleton('HelpSpot\API', function ($app) {
-    return new HelpSpot\API($app-&gt;make('HttpClient'));
+<div class="codehilite"><pre><span></span>$this-&gt;app-&gt;singleton(&#39;HelpSpot\API&#39;, function ($app) {
+    return new HelpSpot\API($app-&gt;make(&#39;HttpClient&#39;));
 });
-</code></pre>
+</pre></div>
+
+
 <h4 id="binding-instances">Binding Instances</h4>
 <p>You may also bind an existing object instance into the container using the <code>instance</code> method. The given instance will always be returned on subsequent calls into the container:</p>
-<pre><code>$api = new HelpSpot\API(new HttpClient);
+<div class="codehilite"><pre><span></span>$api = new HelpSpot\API(new HttpClient);
 
-$this-&gt;app-&gt;instance('HelpSpot\Api', $api);
-</code></pre>
+$this-&gt;app-&gt;instance(&#39;HelpSpot\Api&#39;, $api);
+</pre></div>
+
+
 <h4 id="binding-primitives">Binding Primitives</h4>
 <p>Sometimes you may have a class that receives some injected classes, but also needs an injected primitive value such as an integer. You may easily use contextual binding to inject any value your class may need:</p>
-<pre><code>$this-&gt;app-&gt;when('App\Http\Controllers\UserController')
-          -&gt;needs('$variableName')
+<div class="codehilite"><pre><span></span>$this-&gt;app-&gt;when(&#39;App\Http\Controllers\UserController&#39;)
+          -&gt;needs(&#39;$variableName&#39;)
           -&gt;give($value);
-</code></pre>
+</pre></div>
+
+
 <p><a name="binding-interfaces-to-implementations"></a></p>
 <h3 id="binding-interfaces-to-implementations">Binding Interfaces To Implementations</h3>
 <p>A very powerful feature of the service container is its ability to bind an interface to a given implementation. For example, let's assume we have an <code>EventPusher</code> interface and a <code>RedisEventPusher</code> implementation. Once we have coded our <code>RedisEventPusher</code> implementation of this interface, we can register it with the service container like so:</p>
-<pre><code>$this-&gt;app-&gt;bind(
-    'App\Contracts\EventPusher',
-    'App\Services\RedisEventPusher'
+<div class="codehilite"><pre><span></span>$this-&gt;app-&gt;bind(
+    &#39;App\Contracts\EventPusher&#39;,
+    &#39;App\Services\RedisEventPusher&#39;
 );
-</code></pre>
+</pre></div>
+
+
 <p>This statement tells the container that it should inject the <code>RedisEventPusher</code> when a class needs an implementation of <code>EventPusher</code>. Now we can type-hint the <code>EventPusher</code> interface in a constructor, or any other location where dependencies are injected by the service container:</p>
-<pre><code>use App\Contracts\EventPusher;
+<div class="codehilite"><pre><span></span>use App\Contracts\EventPusher;
 
 /**
  * Create a new class instance.
@@ -932,106 +933,122 @@ public function __construct(EventPusher $pusher)
 {
     $this-&gt;pusher = $pusher;
 }
-</code></pre>
+</pre></div>
+
+
 <p><a name="contextual-binding"></a></p>
 <h3 id="contextual-binding">Contextual Binding</h3>
 <p>Sometimes you may have two classes that utilize the same interface, but you wish to inject different implementations into each class. For example, two controllers may depend on different implementations of the <code>Illuminate\Contracts\Filesystem\Filesystem</code> <a href="../docs/{{version}}/contracts">contract</a>. Laravel provides a simple, fluent interface for defining this behavior:</p>
-<pre><code>use Illuminate\Support\Facades\Storage;
-use App\Http\Controllers\PhotoController;
-use App\Http\Controllers\VideoController;
-use Illuminate\Contracts\Filesystem\Filesystem;
+<div class="codehilite"><pre><span></span><span class="nt">use</span> <span class="nt">Illuminate</span><span class="err">\</span><span class="nt">Support</span><span class="err">\</span><span class="nt">Facades</span><span class="err">\</span><span class="nt">Storage</span><span class="o">;</span>
+<span class="nt">use</span> <span class="nt">App</span><span class="err">\</span><span class="nt">Http</span><span class="err">\</span><span class="nt">Controllers</span><span class="err">\</span><span class="nt">PhotoController</span><span class="o">;</span>
+<span class="nt">use</span> <span class="nt">App</span><span class="err">\</span><span class="nt">Http</span><span class="err">\</span><span class="nt">Controllers</span><span class="err">\</span><span class="nt">VideoController</span><span class="o">;</span>
+<span class="nt">use</span> <span class="nt">Illuminate</span><span class="err">\</span><span class="nt">Contracts</span><span class="err">\</span><span class="nt">Filesystem</span><span class="err">\</span><span class="nt">Filesystem</span><span class="o">;</span>
 
-$this-&gt;app-&gt;when(PhotoController::class)
-          -&gt;needs(Filesystem::class)
-          -&gt;give(function () {
-              return Storage::disk('local');
-          });
+<span class="o">$</span><span class="nt">this-</span><span class="o">&gt;</span><span class="nt">app-</span><span class="o">&gt;</span><span class="nt">when</span><span class="o">(</span><span class="nt">PhotoController</span><span class="p">::</span><span class="nd">class</span><span class="o">)</span>
+          <span class="nt">-</span><span class="o">&gt;</span><span class="nt">needs</span><span class="o">(</span><span class="nt">Filesystem</span><span class="p">::</span><span class="nd">class</span><span class="o">)</span>
+          <span class="nt">-</span><span class="o">&gt;</span><span class="nt">give</span><span class="o">(</span><span class="nt">function</span> <span class="o">()</span> <span class="p">{</span>
+              <span class="err">return</span> <span class="n">Storage</span><span class="p">:</span><span class="o">:</span><span class="nf">disk</span><span class="p">(</span><span class="s1">&#39;local&#39;</span><span class="p">);</span>
+          <span class="p">}</span><span class="o">);</span>
 
-$this-&gt;app-&gt;when(VideoController::class)
-          -&gt;needs(Filesystem::class)
-          -&gt;give(function () {
-              return Storage::disk('s3');
-          });
-</code></pre>
+<span class="o">$</span><span class="nt">this-</span><span class="o">&gt;</span><span class="nt">app-</span><span class="o">&gt;</span><span class="nt">when</span><span class="o">(</span><span class="nt">VideoController</span><span class="p">::</span><span class="nd">class</span><span class="o">)</span>
+          <span class="nt">-</span><span class="o">&gt;</span><span class="nt">needs</span><span class="o">(</span><span class="nt">Filesystem</span><span class="p">::</span><span class="nd">class</span><span class="o">)</span>
+          <span class="nt">-</span><span class="o">&gt;</span><span class="nt">give</span><span class="o">(</span><span class="nt">function</span> <span class="o">()</span> <span class="p">{</span>
+              <span class="err">return</span> <span class="n">Storage</span><span class="p">:</span><span class="o">:</span><span class="nf">disk</span><span class="p">(</span><span class="s1">&#39;s3&#39;</span><span class="p">);</span>
+          <span class="p">}</span><span class="o">);</span>
+</pre></div>
+
+
 <p><a name="tagging"></a></p>
 <h3 id="tagging">Tagging</h3>
 <p>Occasionally, you may need to resolve all of a certain "category" of binding. For example, perhaps you are building a report aggregator that receives an array of many different <code>Report</code> interface implementations. After registering the <code>Report</code> implementations, you can assign them a tag using the <code>tag</code> method:</p>
-<pre><code>$this-&gt;app-&gt;bind('SpeedReport', function () {
+<div class="codehilite"><pre><span></span>$this-&gt;app-&gt;bind(&#39;SpeedReport&#39;, function () {
     //
 });
 
-$this-&gt;app-&gt;bind('MemoryReport', function () {
+$this-&gt;app-&gt;bind(&#39;MemoryReport&#39;, function () {
     //
 });
 
-$this-&gt;app-&gt;tag(['SpeedReport', 'MemoryReport'], 'reports');
-</code></pre>
+$this-&gt;app-&gt;tag([&#39;SpeedReport&#39;, &#39;MemoryReport&#39;], &#39;reports&#39;);
+</pre></div>
+
+
 <p>Once the services have been tagged, you may easily resolve them all via the <code>tagged</code> method:</p>
-<pre><code>$this-&gt;app-&gt;bind('ReportAggregator', function ($app) {
-    return new ReportAggregator($app-&gt;tagged('reports'));
+<div class="codehilite"><pre><span></span>$this-&gt;app-&gt;bind(&#39;ReportAggregator&#39;, function ($app) {
+    return new ReportAggregator($app-&gt;tagged(&#39;reports&#39;));
 });
-</code></pre>
+</pre></div>
+
+
 <p><a name="resolving"></a></p>
 <h2 id="resolving">Resolving</h2>
 <p><a name="the-make-method"></a></p>
 <h4 id="the-make-method">The <code>make</code> Method</h4>
 <p>You may use the <code>make</code> method to resolve a class instance out of the container. The <code>make</code> method accepts the name of the class or interface you wish to resolve:</p>
-<pre><code>$api = $this-&gt;app-&gt;make('HelpSpot\API');
-</code></pre>
+<div class="codehilite"><pre><span></span>$api = $this-&gt;app-&gt;make(&#39;HelpSpot\API&#39;);
+</pre></div>
+
+
 <p>If you are in a location of your code that does not have access to the <code>$app</code> variable, you may use the global <code>resolve</code> helper:</p>
-<pre><code>$api = resolve('HelpSpot\API');
-</code></pre>
+<div class="codehilite"><pre><span></span>$api = resolve(&#39;HelpSpot\API&#39;);
+</pre></div>
+
+
 <p><a name="automatic-injection"></a></p>
 <h4 id="automatic-injection">Automatic Injection</h4>
 <p>Alternatively, and importantly, you may simply "type-hint" the dependency in the constructor of a class that is resolved by the container, including <a href="../docs/{{version}}/controllers">controllers</a>, <a href="../docs/{{version}}/events">event listeners</a>, <a href="../docs/{{version}}/queues">queue jobs</a>, <a href="../docs/{{version}}/middleware">middleware</a>, and more. In practice, this is how most of your objects should be resolved by the container.</p>
 <p>For example, you may type-hint a repository defined by your application in a controller's constructor. The repository will automatically be resolved and injected into the class:</p>
-<pre><code>&lt;?php
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
-namespace App\Http\Controllers;
+<span class="nx">namespace</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Http</span><span class="err">\</span><span class="nx">Controllers</span><span class="p">;</span>
 
-use App\Users\Repository as UserRepository;
+<span class="nx">use</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Users</span><span class="err">\</span><span class="nx">Repository</span> <span class="kr">as</span> <span class="nx">UserRepository</span><span class="p">;</span>
 
-class UserController extends Controller
-{
-    /**
-     * The user repository instance.
-     */
-    protected $users;
+<span class="kr">class</span> <span class="nx">UserController</span> <span class="kr">extends</span> <span class="nx">Controller</span>
+<span class="p">{</span>
+    <span class="cm">/**</span>
+<span class="cm">     * The user repository instance.</span>
+<span class="cm">     */</span>
+    <span class="kr">protected</span> <span class="nx">$users</span><span class="p">;</span>
 
-    /**
-     * Create a new controller instance.
-     *
-     * @param  UserRepository  $users
-     * @return void
-     */
-    public function __construct(UserRepository $users)
-    {
-        $this-&gt;users = $users;
-    }
+    <span class="cm">/**</span>
+<span class="cm">     * Create a new controller instance.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param  UserRepository  $users</span>
+<span class="cm">     * @return void</span>
+<span class="cm">     */</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">__construct</span><span class="p">(</span><span class="nx">UserRepository</span> <span class="nx">$users</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">users</span> <span class="o">=</span> <span class="nx">$users</span><span class="p">;</span>
+    <span class="p">}</span>
 
-    /**
-     * Show the user with the given ID.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        //
-    }
-}
-</code></pre>
+    <span class="cm">/**</span>
+<span class="cm">     * Show the user with the given ID.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param  int  $id</span>
+<span class="cm">     * @return Response</span>
+<span class="cm">     */</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">show</span><span class="p">(</span><span class="nx">$id</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">//</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <p><a name="container-events"></a></p>
 <h2 id="container-events">Container Events</h2>
 <p>The service container fires an event each time it resolves an object. You may listen to this event using the <code>resolving</code> method:</p>
-<pre><code>$this-&gt;app-&gt;resolving(function ($object, $app) {
+<div class="codehilite"><pre><span></span>$this-&gt;app-&gt;resolving(function ($object, $app) {
     // Called when container resolves object of any type...
 });
 
 $this-&gt;app-&gt;resolving(HelpSpot\API::class, function ($api, $app) {
-    // Called when container resolves objects of type "HelpSpot\API"...
+    // Called when container resolves objects of type &quot;HelpSpot\API&quot;...
 });
-</code></pre>
+</pre></div>
+
+
 <p>As you can see, the object being resolved will be passed to the callback, allowing you to set any additional properties on the object before it is given to its consumer.</p>
           <aside class="copyright" role="note">
             
@@ -1105,10 +1122,6 @@ $this-&gt;app-&gt;resolving(HelpSpot\API::class, function ($api, $app) {
       var repo_id  = '';
     </script>
     <script src="../assets/javascripts/application-997097ee0c.js"></script>
-    
-      <script src="../assets/jquery.js"></script>
-    
-      <script src="../assets/prism.js"></script>
     
     
   </body>

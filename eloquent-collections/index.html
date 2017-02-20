@@ -9,16 +9,16 @@
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     
       
-        <title>Eloquent collections - Laravel 5.3 official documentation</title>
+        <title>Eloquent collections - Laravel 5.4 Official Documentation</title>
       
       
       
       
     
     <meta property="og:url" content="None">
-    <meta property="og:title" content="Laravel 5.3 official documentation">
+    <meta property="og:title" content="Laravel 5.4 Official Documentation">
     <meta property="og:image" content="None/../">
-    <meta name="apple-mobile-web-app-title" content="Laravel 5.3 official documentation">
+    <meta name="apple-mobile-web-app-title" content="Laravel 5.4 Official Documentation">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
@@ -60,15 +60,13 @@
       </style>
     
     
-      <link rel="stylesheet" href="../assets/prism.css">
-    
     <script src="../assets/javascripts/modernizr-4ab42b99fd.js"></script>
     
   </head>
   
   
   
-  <body class="palette-primary-teal palette-accent-pink">
+  <body class="palette-primary-teal palette-accent-green">
     
     <div class="backdrop">
       <div class="backdrop-paper"></div>
@@ -125,7 +123,7 @@
       
       <div class="name">
         <strong>
-          Laravel 5.3 official documentation
+          Laravel 5.4 Official Documentation
           <span class="version">
             
           </span>
@@ -646,15 +644,6 @@
           
             
   <li>
-    <a class="" title="Readme" href="../readme/">
-      Readme
-    </a>
-    
-  </li>
-
-          
-            
-  <li>
     <a class="" title="Redirects" href="../redirects/">
       Redirects
     </a>
@@ -817,22 +806,26 @@
 <h2 id="introduction">Introduction</h2>
 <p>All multi-result sets returned by Eloquent are instances of the <code>Illuminate\Database\Eloquent\Collection</code> object, including results retrieved via the <code>get</code> method or accessed via a relationship. The Eloquent collection object extends the Laravel <a href="../docs/{{version}}/collections">base collection</a>, so it naturally inherits dozens of methods used to fluently work with the underlying array of Eloquent models.</p>
 <p>Of course, all collections also serve as iterators, allowing you to loop over them as if they were simple PHP arrays:</p>
-<pre><code>$users = App\User::where('active', 1)-&gt;get();
+<div class="codehilite"><pre><span></span><span class="o">$</span><span class="nt">users</span> <span class="o">=</span> <span class="nt">App</span><span class="err">\</span><span class="nt">User</span><span class="p">::</span><span class="nd">where</span><span class="o">(</span><span class="s1">&#39;active&#39;</span><span class="o">,</span> <span class="nt">1</span><span class="o">)</span><span class="nt">-</span><span class="o">&gt;</span><span class="nt">get</span><span class="o">();</span>
 
-foreach ($users as $user) {
-    echo $user-&gt;name;
-}
-</code></pre>
+<span class="nt">foreach</span> <span class="o">($</span><span class="nt">users</span> <span class="nt">as</span> <span class="o">$</span><span class="nt">user</span><span class="o">)</span> <span class="p">{</span>
+    <span class="err">echo</span> <span class="err">$user-&gt;name</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <p>However, collections are much more powerful than arrays and expose a variety of map / reduce operations that may be chained using an intuitive interface. For example, let's remove all inactive models and gather the first name for each remaining user:</p>
-<pre><code>$users = App\User::where('active', 1)-&gt;get();
+<div class="codehilite"><pre><span></span><span class="o">$</span><span class="nt">users</span> <span class="o">=</span> <span class="nt">App</span><span class="err">\</span><span class="nt">User</span><span class="p">::</span><span class="nd">where</span><span class="o">(</span><span class="s1">&#39;active&#39;</span><span class="o">,</span> <span class="nt">1</span><span class="o">)</span><span class="nt">-</span><span class="o">&gt;</span><span class="nt">get</span><span class="o">();</span>
 
-$names = $users-&gt;reject(function ($user) {
-    return $user-&gt;active === false;
-})
--&gt;map(function ($user) {
-    return $user-&gt;name;
-});
-</code></pre>
+<span class="o">$</span><span class="nt">names</span> <span class="o">=</span> <span class="o">$</span><span class="nt">users-</span><span class="o">&gt;</span><span class="nt">reject</span><span class="o">(</span><span class="nt">function</span> <span class="o">($</span><span class="nt">user</span><span class="o">)</span> <span class="p">{</span>
+    <span class="err">return</span> <span class="err">$user-&gt;active</span> <span class="err">===</span> <span class="err">false</span><span class="p">;</span>
+<span class="p">}</span><span class="o">)</span>
+<span class="nt">-</span><span class="o">&gt;</span><span class="nt">map</span><span class="o">(</span><span class="nt">function</span> <span class="o">($</span><span class="nt">user</span><span class="o">)</span> <span class="p">{</span>
+    <span class="err">return</span> <span class="err">$user-&gt;name</span><span class="p">;</span>
+<span class="p">}</span><span class="o">);</span>
+</pre></div>
+
+
 <blockquote>
 <p>{note} While most Eloquent collection methods return a new instance of an Eloquent collection, the <code>pluck</code>, <code>keys</code>, <code>zip</code>, <code>collapse</code>, <code>flatten</code> and <code>flip</code> methods return a <a href="../docs/{{version}}/collections">base collection</a> instance. Likewise, if a <code>map</code> operation returns a collection that does not contain any Eloquent models, it will be automatically cast to a base collection.</p>
 </blockquote>
@@ -923,27 +916,29 @@ $names = $users-&gt;reject(function ($user) {
 <p><a name="custom-collections"></a></p>
 <h2 id="custom-collections">Custom Collections</h2>
 <p>If you need to use a custom <code>Collection</code> object with your own extension methods, you may override the <code>newCollection</code> method on your model:</p>
-<pre><code>&lt;?php
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
-namespace App;
+<span class="nx">namespace</span> <span class="nx">App</span><span class="p">;</span>
 
-use App\CustomCollection;
-use Illuminate\Database\Eloquent\Model;
+<span class="nx">use</span> <span class="nx">App</span><span class="err">\</span><span class="nx">CustomCollection</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Database</span><span class="err">\</span><span class="nx">Eloquent</span><span class="err">\</span><span class="nx">Model</span><span class="p">;</span>
 
-class User extends Model
-{
-    /**
-     * Create a new Eloquent Collection instance.
-     *
-     * @param  array  $models
-     * @return \Illuminate\Database\Eloquent\Collection
-     */
-    public function newCollection(array $models = [])
-    {
-        return new CustomCollection($models);
-    }
-}
-</code></pre>
+<span class="kr">class</span> <span class="nx">User</span> <span class="kr">extends</span> <span class="nx">Model</span>
+<span class="p">{</span>
+    <span class="cm">/**</span>
+<span class="cm">     * Create a new Eloquent Collection instance.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param  array  $models</span>
+<span class="cm">     * @return \Illuminate\Database\Eloquent\Collection</span>
+<span class="cm">     */</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">newCollection</span><span class="p">(</span><span class="nx">array</span> <span class="nx">$models</span> <span class="o">=</span> <span class="p">[])</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nx">CustomCollection</span><span class="p">(</span><span class="nx">$models</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <p>Once you have defined a <code>newCollection</code> method, you will receive an instance of your custom collection anytime Eloquent returns a <code>Collection</code> instance of that model. If you would like to use a custom collection for every model in your application, you should override the <code>newCollection</code> method on a base model class that is extended by all of your models.</p>
           <aside class="copyright" role="note">
             
@@ -1017,10 +1012,6 @@ class User extends Model
       var repo_id  = '';
     </script>
     <script src="../assets/javascripts/application-997097ee0c.js"></script>
-    
-      <script src="../assets/jquery.js"></script>
-    
-      <script src="../assets/prism.js"></script>
     
     
   </body>

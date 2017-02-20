@@ -9,16 +9,16 @@
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     
       
-        <title>Redirects - Laravel 5.3 official documentation</title>
+        <title>Redirects - Laravel 5.4 Official Documentation</title>
       
       
       
       
     
     <meta property="og:url" content="None">
-    <meta property="og:title" content="Laravel 5.3 official documentation">
+    <meta property="og:title" content="Laravel 5.4 Official Documentation">
     <meta property="og:image" content="None/../">
-    <meta name="apple-mobile-web-app-title" content="Laravel 5.3 official documentation">
+    <meta name="apple-mobile-web-app-title" content="Laravel 5.4 Official Documentation">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
@@ -60,15 +60,13 @@
       </style>
     
     
-      <link rel="stylesheet" href="../assets/prism.css">
-    
     <script src="../assets/javascripts/modernizr-4ab42b99fd.js"></script>
     
   </head>
   
   
   
-  <body class="palette-primary-teal palette-accent-pink">
+  <body class="palette-primary-teal palette-accent-green">
     
     <div class="backdrop">
       <div class="backdrop-paper"></div>
@@ -125,7 +123,7 @@
       
       <div class="name">
         <strong>
-          Laravel 5.3 official documentation
+          Laravel 5.4 Official Documentation
           <span class="version">
             
           </span>
@@ -619,15 +617,6 @@
           
             
   <li>
-    <a class="" title="Readme" href="../readme/">
-      Readme
-    </a>
-    
-  </li>
-
-          
-            
-  <li>
     <a class="current" title="Redirects" href="./">
       Redirects
     </a>
@@ -823,70 +812,88 @@
 <p><a name="creating-redirects"></a></p>
 <h2 id="creating-redirects">Creating Redirects</h2>
 <p>Redirect responses are instances of the <code>Illuminate\Http\RedirectResponse</code> class, and contain the proper headers needed to redirect the user to another URL. There are several ways to generate a <code>RedirectResponse</code> instance. The simplest method is to use the global <code>redirect</code> helper:</p>
-<pre><code>Route::get('dashboard', function () {
-    return redirect('home/dashboard');
+<div class="codehilite"><pre><span></span>Route::get(&#39;dashboard&#39;, function () {
+    return redirect(&#39;home/dashboard&#39;);
 });
-</code></pre>
+</pre></div>
+
+
 <p>Sometimes you may wish to redirect the user to their previous location, such as when a submitted form is invalid. You may do so by using the global <code>back</code> helper function. Since this feature utilizes the <a href="../docs/{{version}}/session">session</a>, make sure the route calling the <code>back</code> function is using the <code>web</code> middleware group or has all of the session middleware applied:</p>
-<pre><code>Route::post('user/profile', function () {
+<div class="codehilite"><pre><span></span>Route::post(&#39;user/profile&#39;, function () {
     // Validate the request...
 
     return back()-&gt;withInput();
 });
-</code></pre>
+</pre></div>
+
+
 <p><a name="redirecting-named-routes"></a></p>
 <h2 id="redirecting-to-named-routes">Redirecting To Named Routes</h2>
 <p>When you call the <code>redirect</code> helper with no parameters, an instance of <code>Illuminate\Routing\Redirector</code> is returned, allowing you to call any method on the <code>Redirector</code> instance. For example, to generate a <code>RedirectResponse</code> to a named route, you may use the <code>route</code> method:</p>
-<pre><code>return redirect()-&gt;route('login');
-</code></pre>
-<p>If your route has parameters, you may pass them as the second argument to the <code>route</code> method:</p>
-<pre><code>// For a route with the following URI: profile/{id}
+<div class="codehilite"><pre><span></span>return redirect()-&gt;route(&#39;login&#39;);
+</pre></div>
 
-return redirect()-&gt;route('profile', ['id' =&gt; 1]);
-</code></pre>
+
+<p>If your route has parameters, you may pass them as the second argument to the <code>route</code> method:</p>
+<div class="codehilite"><pre><span></span>// For a route with the following URI: profile/{id}
+
+return redirect()-&gt;route(&#39;profile&#39;, [&#39;id&#39; =&gt; 1]);
+</pre></div>
+
+
 <h4 id="populating-parameters-via-eloquent-models">Populating Parameters Via Eloquent Models</h4>
 <p>If you are redirecting to a route with an "ID" parameter that is being populated from an Eloquent model, you may simply pass the model itself. The ID will be extracted automatically:</p>
-<pre><code>// For a route with the following URI: profile/{id}
+<div class="codehilite"><pre><span></span>// For a route with the following URI: profile/{id}
 
-return redirect()-&gt;route('profile', [$user]);
-</code></pre>
+return redirect()-&gt;route(&#39;profile&#39;, [$user]);
+</pre></div>
+
+
 <p>If you would like to customize the value that is placed in the route parameter, you should override the <code>getRouteKey</code> method on your Eloquent model:</p>
-<pre><code>/**
- * Get the value of the model's route key.
- *
- * @return mixed
- */
-public function getRouteKey()
-{
-    return $this-&gt;slug;
-}
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * Get the value of the model&#39;s route key.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return mixed</span>
+<span class="cm"> */</span><span class="w"></span>
+public<span class="w"> </span>function<span class="w"> </span>getRouteKey<span class="o">()</span><span class="w"></span>
+<span class="err">{</span><span class="w"></span>
+<span class="w">    </span><span class="kr">return</span><span class="w"> </span><span class="err">$</span>this<span class="o">-&gt;</span>slug<span class="err">;</span><span class="w"></span>
+<span class="err">}</span><span class="w"></span>
+</pre></div>
+
+
 <p><a name="redirecting-controller-actions"></a></p>
 <h2 id="redirecting-to-controller-actions">Redirecting To Controller Actions</h2>
 <p>You may also generate redirects to <a href="../docs/{{version}}/controllers">controller actions</a>. To do so, pass the controller and action name to the <code>action</code> method. Remember, you do not need to specify the full namespace to the controller since Laravel's <code>RouteServiceProvider</code> will automatically set the base controller namespace:</p>
-<pre><code>return redirect()-&gt;action('HomeController@index');
-</code></pre>
+<div class="codehilite"><pre><span></span>return redirect()-&gt;action(&#39;HomeController@index&#39;);
+</pre></div>
+
+
 <p>If your controller route requires parameters, you may pass them as the second argument to the <code>action</code> method:</p>
-<pre><code>return redirect()-&gt;action(
-    'UserController@profile', ['id' =&gt; 1]
+<div class="codehilite"><pre><span></span>return redirect()-&gt;action(
+    &#39;UserController@profile&#39;, [&#39;id&#39; =&gt; 1]
 );
-</code></pre>
+</pre></div>
+
+
 <p><a name="redirecting-with-flashed-session-data"></a></p>
 <h2 id="redirecting-with-flashed-session-data">Redirecting With Flashed Session Data</h2>
 <p>Redirecting to a new URL and <a href="../docs/{{version}}/session#flash-data">flashing data to the session</a> are usually done at the same time. Typically, this is done after successfully performing an action when you flash a success message to the session. For convenience, you may create a <code>RedirectResponse</code> instance and flash data to the session in a single, fluent method chain:</p>
-<pre><code>Route::post('user/profile', function () {
-    // Update the user's profile...
+<div class="codehilite"><pre><span></span>Route::post(&#39;user/profile&#39;, function () {
+    // Update the user&#39;s profile...
 
-    return redirect('dashboard')-&gt;with('status', 'Profile updated!');
+    return redirect(&#39;dashboard&#39;)-&gt;with(&#39;status&#39;, &#39;Profile updated!&#39;);
 });
-</code></pre>
+</pre></div>
+
+
 <p>After the user is redirected, you may display the flashed message from the <a href="../docs/{{version}}/session">session</a>. For example, using <a href="../docs/{{version}}/blade">Blade syntax</a>:</p>
-<pre><code>@if (session('status'))
-    &lt;div class="alert alert-success"&gt;
-        {{ session('status') }}
-    &lt;/div&gt;
-@endif
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="p">@</span><span class="k">if</span> <span class="p">(</span><span class="n">session</span><span class="p">(</span><span class="err">&#39;</span><span class="n">status</span><span class="err">&#39;</span><span class="p">))</span>
+    <span class="o">&lt;</span><span class="n">div</span> <span class="k">class</span><span class="o">=</span><span class="s">&quot;alert alert-success&quot;</span><span class="o">&gt;</span>
+        <span class="p">{{</span> <span class="n">session</span><span class="p">(</span><span class="err">&#39;</span><span class="n">status</span><span class="err">&#39;</span><span class="p">)</span> <span class="p">}}</span>
+    <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+<span class="p">@</span><span class="n">endif</span>
+</pre></div>
           <aside class="copyright" role="note">
             
             Documentation built with
@@ -903,7 +910,7 @@ public function getRouteKey()
   <nav class="pagination" aria-label="Footer">
     <div class="previous">
       
-        <a href="../readme/" title="Readme">
+        <a href="../queues/" title="Queues">
           <span class="direction">
             Previous
           </span>
@@ -913,7 +920,7 @@ public function getRouteKey()
             </div>
             <div class="stretch">
               <div class="title">
-                Readme
+                Queues
               </div>
             </div>
           </div>
@@ -959,10 +966,6 @@ public function getRouteKey()
       var repo_id  = '';
     </script>
     <script src="../assets/javascripts/application-997097ee0c.js"></script>
-    
-      <script src="../assets/jquery.js"></script>
-    
-      <script src="../assets/prism.js"></script>
     
     
   </body>

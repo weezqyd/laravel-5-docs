@@ -9,16 +9,16 @@
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     
       
-        <title>Scout - Laravel 5.3 official documentation</title>
+        <title>Scout - Laravel 5.4 Official Documentation</title>
       
       
       
       
     
     <meta property="og:url" content="None">
-    <meta property="og:title" content="Laravel 5.3 official documentation">
+    <meta property="og:title" content="Laravel 5.4 Official Documentation">
     <meta property="og:image" content="None/../">
-    <meta name="apple-mobile-web-app-title" content="Laravel 5.3 official documentation">
+    <meta name="apple-mobile-web-app-title" content="Laravel 5.4 Official Documentation">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
@@ -60,15 +60,13 @@
       </style>
     
     
-      <link rel="stylesheet" href="../assets/prism.css">
-    
     <script src="../assets/javascripts/modernizr-4ab42b99fd.js"></script>
     
   </head>
   
   
   
-  <body class="palette-primary-teal palette-accent-pink">
+  <body class="palette-primary-teal palette-accent-green">
     
     <div class="backdrop">
       <div class="backdrop-paper"></div>
@@ -125,7 +123,7 @@
       
       <div class="name">
         <strong>
-          Laravel 5.3 official documentation
+          Laravel 5.4 Official Documentation
           <span class="version">
             
           </span>
@@ -619,15 +617,6 @@
           
             
   <li>
-    <a class="" title="Readme" href="../readme/">
-      Readme
-    </a>
-    
-  </li>
-
-          
-            
-  <li>
     <a class="" title="Redirects" href="../redirects/">
       Redirects
     </a>
@@ -860,216 +849,262 @@
 <p><a name="installation"></a></p>
 <h2 id="installation">Installation</h2>
 <p>First, install the Scout via the Composer package manager:</p>
-<pre><code>composer require laravel/scout
-</code></pre>
+<div class="codehilite"><pre><span></span>composer require laravel/scout
+</pre></div>
+
+
 <p>Next, you should add the <code>ScoutServiceProvider</code> to the <code>providers</code> array of your <code>config/app.php</code> configuration file:</p>
-<pre><code>Laravel\Scout\ScoutServiceProvider::class,
-</code></pre>
+<div class="codehilite"><pre><span></span>Laravel\Scout\ScoutServiceProvider::class,
+</pre></div>
+
+
 <p>After registering the Scout service provider, you should publish the Scout configuration using the <code>vendor:publish</code> Artisan command. This command will publish the <code>scout.php</code> configuration file to your <code>config</code> directory:</p>
-<pre><code>php artisan vendor:publish
-</code></pre>
+<div class="codehilite"><pre><span></span>php artisan vendor:publish --provider=&quot;Laravel\Scout\ScoutServiceProvider&quot;
+</pre></div>
+
+
 <p>Finally, add the <code>Laravel\Scout\Searchable</code> trait to the model you would like to make searchable. This trait will register a model observer to keep the model in sync with your search driver:</p>
-<pre><code>&lt;?php
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
-namespace App;
+<span class="nx">namespace</span> <span class="nx">App</span><span class="p">;</span>
 
-use Laravel\Scout\Searchable;
-use Illuminate\Database\Eloquent\Model;
+<span class="nx">use</span> <span class="nx">Laravel</span><span class="err">\</span><span class="nx">Scout</span><span class="err">\</span><span class="nx">Searchable</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Database</span><span class="err">\</span><span class="nx">Eloquent</span><span class="err">\</span><span class="nx">Model</span><span class="p">;</span>
 
-class Post extends Model
-{
-    use Searchable;
-}
-</code></pre>
+<span class="kr">class</span> <span class="nx">Post</span> <span class="kr">extends</span> <span class="nx">Model</span>
+<span class="p">{</span>
+    <span class="nx">use</span> <span class="nx">Searchable</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <p><a name="queueing"></a></p>
 <h3 id="queueing">Queueing</h3>
 <p>While not strictly required to use Scout, you should strongly consider configuring a <a href="../docs/{{version}}/queues">queue driver</a> before using the library. Running a queue worker will allow Scout to queue all operations that sync your model information to your search indexes, providing much better response times for your application's web interface.</p>
 <p>Once you have configured a queue driver, set the value of the <code>queue</code> option in your <code>config/scout.php</code> configuration file to <code>true</code>:</p>
-<pre><code>'queue' =&gt; true,
-</code></pre>
+<div class="codehilite"><pre><span></span>&#39;queue&#39; =&gt; true,
+</pre></div>
+
+
 <p><a name="driver-prerequisites"></a></p>
 <h3 id="driver-prerequisites">Driver Prerequisites</h3>
 <h4 id="algolia">Algolia</h4>
 <p>When using the Algolia driver, you should configure your Algolia <code>id</code> and <code>secret</code> credentials in your <code>config/scout.php</code> configuration file. Once your credentials have been configured, you will also need to install the Algolia PHP SDK via the Composer package manager:</p>
-<pre><code>composer require algolia/algoliasearch-client-php
-</code></pre>
+<div class="codehilite"><pre><span></span>composer require algolia/algoliasearch-client-php
+</pre></div>
+
+
 <p><a name="configuration"></a></p>
 <h2 id="configuration">Configuration</h2>
 <p><a name="configuring-model-indexes"></a></p>
 <h3 id="configuring-model-indexes">Configuring Model Indexes</h3>
 <p>Each Eloquent model is synced with a given search "index", which contains all of the searchable records for that model. In other words, you can think of each index like a MySQL table. By default, each model will be persisted to an index matching the model's typical "table" name. Typically, this is the plural form of the model name; however, you are free to customize the model's index by overriding the <code>searchableAs</code> method on the model:</p>
-<pre><code>&lt;?php
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
-namespace App;
+<span class="nx">namespace</span> <span class="nx">App</span><span class="p">;</span>
 
-use Laravel\Scout\Searchable;
-use Illuminate\Database\Eloquent\Model;
+<span class="nx">use</span> <span class="nx">Laravel</span><span class="err">\</span><span class="nx">Scout</span><span class="err">\</span><span class="nx">Searchable</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Database</span><span class="err">\</span><span class="nx">Eloquent</span><span class="err">\</span><span class="nx">Model</span><span class="p">;</span>
 
-class Post extends Model
-{
-    use Searchable;
+<span class="kr">class</span> <span class="nx">Post</span> <span class="kr">extends</span> <span class="nx">Model</span>
+<span class="p">{</span>
+    <span class="nx">use</span> <span class="nx">Searchable</span><span class="p">;</span>
 
-    /**
-     * Get the index name for the model.
-     *
-     * @return string
-     */
-    public function searchableAs()
-    {
-        return 'posts_index';
-    }
-}
-</code></pre>
+    <span class="cm">/**</span>
+<span class="cm">     * Get the index name for the model.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return string</span>
+<span class="cm">     */</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">searchableAs</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="s1">&#39;posts_index&#39;</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <p><a name="configuring-searchable-data"></a></p>
 <h3 id="configuring-searchable-data">Configuring Searchable Data</h3>
 <p>By default, the entire <code>toArray</code> form of a given model will be persisted to its search index. If you would like to customize the data that is synchronized to the search index, you may override the <code>toSearchableArray</code> method on the model:</p>
-<pre><code>&lt;?php
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
-namespace App;
+<span class="nx">namespace</span> <span class="nx">App</span><span class="p">;</span>
 
-use Laravel\Scout\Searchable;
-use Illuminate\Database\Eloquent\Model;
+<span class="nx">use</span> <span class="nx">Laravel</span><span class="err">\</span><span class="nx">Scout</span><span class="err">\</span><span class="nx">Searchable</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Database</span><span class="err">\</span><span class="nx">Eloquent</span><span class="err">\</span><span class="nx">Model</span><span class="p">;</span>
 
-class Post extends Model
-{
-    use Searchable;
+<span class="kr">class</span> <span class="nx">Post</span> <span class="kr">extends</span> <span class="nx">Model</span>
+<span class="p">{</span>
+    <span class="nx">use</span> <span class="nx">Searchable</span><span class="p">;</span>
 
-    /**
-     * Get the indexable data array for the model.
-     *
-     * @return array
-     */
-    public function toSearchableArray()
-    {
-        $array = $this-&gt;toArray();
+    <span class="cm">/**</span>
+<span class="cm">     * Get the indexable data array for the model.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return array</span>
+<span class="cm">     */</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">toSearchableArray</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nx">$array</span> <span class="o">=</span> <span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">toArray</span><span class="p">();</span>
 
-        // Customize array...
+        <span class="c1">// Customize array...</span>
 
-        return $array;
-    }
-}
-</code></pre>
+        <span class="k">return</span> <span class="nx">$array</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <p><a name="indexing"></a></p>
 <h2 id="indexing">Indexing</h2>
 <p><a name="batch-import"></a></p>
 <h3 id="batch-import">Batch Import</h3>
 <p>If you are installing Scout into an existing project, you may already have database records you need to import into your search driver. Scout provides an <code>import</code> Artisan command that you may use to import all of your existing records into your search indexes:</p>
-<pre><code>php artisan scout:import "App\Post"
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="n">php</span> <span class="n">artisan</span> <span class="n">scout</span><span class="p">:</span><span class="kn">import</span> <span class="s2">&quot;App\Post&quot;</span>
+</pre></div>
+
+
 <p><a name="adding-records"></a></p>
 <h3 id="adding-records">Adding Records</h3>
 <p>Once you have added the <code>Laravel\Scout\Searchable</code> trait to a model, all you need to do is <code>save</code> a model instance and it will automatically be added to your search index. If you have configured Scout to <a href="#queueing">use queues</a> this operation will be performed in the background by your queue worker:</p>
-<pre><code>$order = new App\Order;
+<div class="codehilite"><pre><span></span>$order = new App\Order;
 
 // ...
 
 $order-&gt;save();
-</code></pre>
+</pre></div>
+
+
 <h4 id="adding-via-query">Adding Via Query</h4>
 <p>If you would like to add a collection of models to your search index via an Eloquent query, you may chain the <code>searchable</code> method onto an Eloquent query. The <code>searchable</code> method will <a href="../docs/{{version}}/eloquent#chunking-results">chunk the results</a> of the query and add the records to your search index. Again, if you have configured Scout to use queues, all of the chunks will be added in the background by your queue workers:</p>
-<pre><code>// Adding via Eloquent query...
-App\Order::where('price', '&gt;', 100)-&gt;searchable();
+<div class="codehilite"><pre><span></span><span class="o">//</span> <span class="nt">Adding</span> <span class="nt">via</span> <span class="nt">Eloquent</span> <span class="nt">query</span><span class="o">...</span>
+<span class="nt">App</span><span class="err">\</span><span class="nt">Order</span><span class="p">::</span><span class="nd">where</span><span class="o">(</span><span class="s1">&#39;price&#39;</span><span class="o">,</span> <span class="s1">&#39;&gt;&#39;</span><span class="o">,</span> <span class="nt">100</span><span class="o">)</span><span class="nt">-</span><span class="o">&gt;</span><span class="nt">searchable</span><span class="o">();</span>
 
-// You may also add records via relationships...
-$user-&gt;orders()-&gt;searchable();
+<span class="o">//</span> <span class="nt">You</span> <span class="nt">may</span> <span class="nt">also</span> <span class="nt">add</span> <span class="nt">records</span> <span class="nt">via</span> <span class="nt">relationships</span><span class="o">...</span>
+<span class="o">$</span><span class="nt">user-</span><span class="o">&gt;</span><span class="nt">orders</span><span class="o">()</span><span class="nt">-</span><span class="o">&gt;</span><span class="nt">searchable</span><span class="o">();</span>
 
-// You may also add records via collections...
-$orders-&gt;searchable();
-</code></pre>
+<span class="o">//</span> <span class="nt">You</span> <span class="nt">may</span> <span class="nt">also</span> <span class="nt">add</span> <span class="nt">records</span> <span class="nt">via</span> <span class="nt">collections</span><span class="o">...</span>
+<span class="o">$</span><span class="nt">orders-</span><span class="o">&gt;</span><span class="nt">searchable</span><span class="o">();</span>
+</pre></div>
+
+
 <p>The <code>searchable</code> method can be considered an "upsert" operation. In other words, if the model record is already in your index, it will be updated. If it does not exist in the search index, it will be added to the index.</p>
 <p><a name="updating-records"></a></p>
 <h3 id="updating-records">Updating Records</h3>
 <p>To update a searchable model, you only need to update the model instance's properties and <code>save</code> the model to your database. Scout will automatically persist the changes to your search index:</p>
-<pre><code>$order = App\Order::find(1);
+<div class="codehilite"><pre><span></span><span class="o">$</span><span class="nt">order</span> <span class="o">=</span> <span class="nt">App</span><span class="err">\</span><span class="nt">Order</span><span class="p">::</span><span class="nd">find</span><span class="o">(</span><span class="nt">1</span><span class="o">);</span>
 
-// Update the order...
+<span class="o">//</span> <span class="nt">Update</span> <span class="nt">the</span> <span class="nt">order</span><span class="o">...</span>
 
-$order-&gt;save();
-</code></pre>
+<span class="o">$</span><span class="nt">order-</span><span class="o">&gt;</span><span class="nt">save</span><span class="o">();</span>
+</pre></div>
+
+
 <p>You may also use the <code>searchable</code> method on an Eloquent query to update a collection of models. If the models do not exist in your search index, they will be created:</p>
-<pre><code>// Updating via Eloquent query...
-App\Order::where('price', '&gt;', 100)-&gt;searchable();
+<div class="codehilite"><pre><span></span><span class="o">//</span> <span class="nt">Updating</span> <span class="nt">via</span> <span class="nt">Eloquent</span> <span class="nt">query</span><span class="o">...</span>
+<span class="nt">App</span><span class="err">\</span><span class="nt">Order</span><span class="p">::</span><span class="nd">where</span><span class="o">(</span><span class="s1">&#39;price&#39;</span><span class="o">,</span> <span class="s1">&#39;&gt;&#39;</span><span class="o">,</span> <span class="nt">100</span><span class="o">)</span><span class="nt">-</span><span class="o">&gt;</span><span class="nt">searchable</span><span class="o">();</span>
 
-// You may also update via relationships...
-$user-&gt;orders()-&gt;searchable();
+<span class="o">//</span> <span class="nt">You</span> <span class="nt">may</span> <span class="nt">also</span> <span class="nt">update</span> <span class="nt">via</span> <span class="nt">relationships</span><span class="o">...</span>
+<span class="o">$</span><span class="nt">user-</span><span class="o">&gt;</span><span class="nt">orders</span><span class="o">()</span><span class="nt">-</span><span class="o">&gt;</span><span class="nt">searchable</span><span class="o">();</span>
 
-// You may also update via collections...
-$orders-&gt;searchable();
-</code></pre>
+<span class="o">//</span> <span class="nt">You</span> <span class="nt">may</span> <span class="nt">also</span> <span class="nt">update</span> <span class="nt">via</span> <span class="nt">collections</span><span class="o">...</span>
+<span class="o">$</span><span class="nt">orders-</span><span class="o">&gt;</span><span class="nt">searchable</span><span class="o">();</span>
+</pre></div>
+
+
 <p><a name="removing-records"></a></p>
 <h3 id="removing-records">Removing Records</h3>
 <p>To remove a record from your index, simply <code>delete</code> the model from the database. This form of removal is even compatible with <a href="../docs/{{version}}/eloquent#soft-deleting">soft deleted</a> models:</p>
-<pre><code>$order = App\Order::find(1);
+<div class="codehilite"><pre><span></span><span class="o">$</span><span class="nt">order</span> <span class="o">=</span> <span class="nt">App</span><span class="err">\</span><span class="nt">Order</span><span class="p">::</span><span class="nd">find</span><span class="o">(</span><span class="nt">1</span><span class="o">);</span>
 
-$order-&gt;delete();
-</code></pre>
+<span class="o">$</span><span class="nt">order-</span><span class="o">&gt;</span><span class="nt">delete</span><span class="o">();</span>
+</pre></div>
+
+
 <p>If you do not want to retrieve the model before deleting the record, you may use the <code>unsearchable</code> method on an Eloquent query instance or collection:</p>
-<pre><code>// Removing via Eloquent query...
-App\Order::where('price', '&gt;', 100)-&gt;unsearchable();
+<div class="codehilite"><pre><span></span><span class="o">//</span> <span class="nt">Removing</span> <span class="nt">via</span> <span class="nt">Eloquent</span> <span class="nt">query</span><span class="o">...</span>
+<span class="nt">App</span><span class="err">\</span><span class="nt">Order</span><span class="p">::</span><span class="nd">where</span><span class="o">(</span><span class="s1">&#39;price&#39;</span><span class="o">,</span> <span class="s1">&#39;&gt;&#39;</span><span class="o">,</span> <span class="nt">100</span><span class="o">)</span><span class="nt">-</span><span class="o">&gt;</span><span class="nt">unsearchable</span><span class="o">();</span>
 
-// You may also remove via relationships...
-$user-&gt;orders()-&gt;unsearchable();
+<span class="o">//</span> <span class="nt">You</span> <span class="nt">may</span> <span class="nt">also</span> <span class="nt">remove</span> <span class="nt">via</span> <span class="nt">relationships</span><span class="o">...</span>
+<span class="o">$</span><span class="nt">user-</span><span class="o">&gt;</span><span class="nt">orders</span><span class="o">()</span><span class="nt">-</span><span class="o">&gt;</span><span class="nt">unsearchable</span><span class="o">();</span>
 
-// You may also remove via collections...
-$orders-&gt;unsearchable();
-</code></pre>
+<span class="o">//</span> <span class="nt">You</span> <span class="nt">may</span> <span class="nt">also</span> <span class="nt">remove</span> <span class="nt">via</span> <span class="nt">collections</span><span class="o">...</span>
+<span class="o">$</span><span class="nt">orders-</span><span class="o">&gt;</span><span class="nt">unsearchable</span><span class="o">();</span>
+</pre></div>
+
+
 <p><a name="pausing-indexing"></a></p>
 <h3 id="pausing-indexing">Pausing Indexing</h3>
 <p>Sometimes you may need to perform a batch of Eloquent operations on a model without syncing the model data to your search index. You may do this using the <code>withoutSyncingToSearch</code> method. This method accepts a single callback which will be immediately executed. Any model operations that occur within the callback will not be synced to the model's index:</p>
-<pre><code>App\Order::withoutSyncingToSearch(function () {
+<div class="codehilite"><pre><span></span>App\Order::withoutSyncingToSearch(function () {
     // Perform model actions...
 });
-</code></pre>
+</pre></div>
+
+
 <p><a name="searching"></a></p>
 <h2 id="searching">Searching</h2>
 <p>You may begin searching a model using the <code>search</code> method. The search method accepts a single string that will be used to search your models. You should then chain the <code>get</code> method onto the search query to retrieve the Eloquent models that match the given search query:</p>
-<pre><code>$orders = App\Order::search('Star Trek')-&gt;get();
-</code></pre>
-<p>Since Scout searches return a collection of Eloquent models, you may even return the results directly from a route or controller and they will automatically be converted to JSON:</p>
-<pre><code>use Illuminate\Http\Request;
+<div class="codehilite"><pre><span></span><span class="o">$</span><span class="nt">orders</span> <span class="o">=</span> <span class="nt">App</span><span class="err">\</span><span class="nt">Order</span><span class="p">::</span><span class="nd">search</span><span class="o">(</span><span class="s1">&#39;Star Trek&#39;</span><span class="o">)</span><span class="nt">-</span><span class="o">&gt;</span><span class="nt">get</span><span class="o">();</span>
+</pre></div>
 
-Route::get('/search', function (Request $request) {
-    return App\Order::search($request-&gt;search)-&gt;get();
-});
-</code></pre>
+
+<p>Since Scout searches return a collection of Eloquent models, you may even return the results directly from a route or controller and they will automatically be converted to JSON:</p>
+<div class="codehilite"><pre><span></span><span class="nt">use</span> <span class="nt">Illuminate</span><span class="err">\</span><span class="nt">Http</span><span class="err">\</span><span class="nt">Request</span><span class="o">;</span>
+
+<span class="nt">Route</span><span class="p">::</span><span class="nd">get</span><span class="o">(</span><span class="s1">&#39;/search&#39;</span><span class="o">,</span> <span class="nt">function</span> <span class="o">(</span><span class="nt">Request</span> <span class="o">$</span><span class="nt">request</span><span class="o">)</span> <span class="p">{</span>
+    <span class="err">return</span> <span class="err">App\</span><span class="n">Order</span><span class="p">:</span><span class="o">:</span><span class="nf">search</span><span class="p">(</span><span class="err">$</span><span class="n">request</span><span class="o">-</span><span class="err">&gt;</span><span class="n">search</span><span class="p">)</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">();</span>
+<span class="p">}</span><span class="o">);</span>
+</pre></div>
+
+
 <p><a name="where-clauses"></a></p>
 <h3 id="where-clauses">Where Clauses</h3>
 <p>Scout allows you to add simple "where" clauses to your search queries. Currently, these clauses only support basic numeric equality checks, and are primarily useful for scoping search queries by a tenant ID. Since a search index is not a relational database, more advanced "where" clauses are not currently supported:</p>
-<pre><code>$orders = App\Order::search('Star Trek')-&gt;where('user_id', 1)-&gt;get();
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="o">$</span><span class="nt">orders</span> <span class="o">=</span> <span class="nt">App</span><span class="err">\</span><span class="nt">Order</span><span class="p">::</span><span class="nd">search</span><span class="o">(</span><span class="s1">&#39;Star Trek&#39;</span><span class="o">)</span><span class="nt">-</span><span class="o">&gt;</span><span class="nt">where</span><span class="o">(</span><span class="s1">&#39;user_id&#39;</span><span class="o">,</span> <span class="nt">1</span><span class="o">)</span><span class="nt">-</span><span class="o">&gt;</span><span class="nt">get</span><span class="o">();</span>
+</pre></div>
+
+
 <p><a name="pagination"></a></p>
 <h3 id="pagination">Pagination</h3>
 <p>In addition to retrieving a collection of models, you may paginate your search results using the <code>paginate</code> method. This method will return a <code>Paginator</code> instance just as if you had <a href="../docs/{{version}}/pagination">paginated a traditional Eloquent query</a>:</p>
-<pre><code>$orders = App\Order::search('Star Trek')-&gt;paginate();
-</code></pre>
-<p>You may specify how many models to retrieve per page by passing the amount as the first argument to the <code>paginate</code> method:</p>
-<pre><code>$orders = App\Order::search('Star Trek')-&gt;paginate(15);
-</code></pre>
-<p>Once you have retrieved the results, you may display the results and render the page links using <a href="../docs/{{version}}/blade">Blade</a> just as if you had paginated a traditional Eloquent query:</p>
-<pre><code>&lt;div class="container"&gt;
-    @foreach ($orders as $order)
-        {{ $order-&gt;price }}
-    @endforeach
-&lt;/div&gt;
+<div class="codehilite"><pre><span></span><span class="o">$</span><span class="nt">orders</span> <span class="o">=</span> <span class="nt">App</span><span class="err">\</span><span class="nt">Order</span><span class="p">::</span><span class="nd">search</span><span class="o">(</span><span class="s1">&#39;Star Trek&#39;</span><span class="o">)</span><span class="nt">-</span><span class="o">&gt;</span><span class="nt">paginate</span><span class="o">();</span>
+</pre></div>
 
-{{ $orders-&gt;links() }}
-</code></pre>
+
+<p>You may specify how many models to retrieve per page by passing the amount as the first argument to the <code>paginate</code> method:</p>
+<div class="codehilite"><pre><span></span><span class="o">$</span><span class="nt">orders</span> <span class="o">=</span> <span class="nt">App</span><span class="err">\</span><span class="nt">Order</span><span class="p">::</span><span class="nd">search</span><span class="o">(</span><span class="s1">&#39;Star Trek&#39;</span><span class="o">)</span><span class="nt">-</span><span class="o">&gt;</span><span class="nt">paginate</span><span class="o">(</span><span class="nt">15</span><span class="o">);</span>
+</pre></div>
+
+
+<p>Once you have retrieved the results, you may display the results and render the page links using <a href="../docs/{{version}}/blade">Blade</a> just as if you had paginated a traditional Eloquent query:</p>
+<div class="codehilite"><pre><span></span><span class="o">&lt;</span><span class="n">div</span> <span class="k">class</span><span class="o">=</span><span class="s">&quot;container&quot;</span><span class="o">&gt;</span>
+    <span class="p">@</span><span class="n">foreach</span> <span class="p">(</span><span class="err">$</span><span class="n">orders</span> <span class="n">as</span> <span class="err">$</span><span class="n">order</span><span class="p">)</span>
+        <span class="p">{{</span> <span class="err">$</span><span class="n">order</span><span class="o">-&gt;</span><span class="n">price</span> <span class="p">}}</span>
+    <span class="p">@</span><span class="n">endforeach</span>
+<span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+
+<span class="p">{{</span> <span class="err">$</span><span class="n">orders</span><span class="o">-&gt;</span><span class="n">links</span><span class="p">()</span> <span class="p">}}</span>
+</pre></div>
+
+
 <p><a name="custom-engines"></a></p>
 <h2 id="custom-engines">Custom Engines</h2>
 <h4 id="writing-the-engine">Writing The Engine</h4>
 <p>If one of the built-in Scout search engines doesn't fit your needs, you may write your own custom engine and register it with Scout. Your engine should extend the <code>Laravel\Scout\Engines\Engine</code> abstract class. This abstract class contains five methods your custom engine must implement:</p>
-<pre><code>use Laravel\Scout\Builder;
+<div class="codehilite"><pre><span></span>use Laravel\Scout\Builder;
 
 abstract public function update($models);
 abstract public function delete($models);
 abstract public function search(Builder $builder);
 abstract public function paginate(Builder $builder, $perPage, $page);
 abstract public function map($results, $model);
-</code></pre>
+</pre></div>
+
+
 <p>You may find it helpful to review the implementations of these methods on the <code>Laravel\Scout\Engines\AlgoliaEngine</code> class. This class will provide you with a good starting point for learning how to implement each of these methods in your own engine.</p>
 <h4 id="registering-the-engine">Registering The Engine</h4>
 <p>Once you have written your custom engine, you may register it with Scout using the <code>extend</code> method of the Scout engine manager. You should call the <code>extend</code> method from the <code>boot</code> method of your <code>AppServiceProvider</code> or any other service provider used by your application. For example, if you have written a <code>MySqlSearchEngine</code>, you may register it like so:</p>
-<pre><code>use Laravel\Scout\EngineManager;
+<div class="codehilite"><pre><span></span>use Laravel\Scout\EngineManager;
 
 /**
  * Bootstrap any application services.
@@ -1078,14 +1113,16 @@ abstract public function map($results, $model);
  */
 public function boot()
 {
-    resolve(EngineManager::class)-&gt;extend('mysql', function () {
+    resolve(EngineManager::class)-&gt;extend(&#39;mysql&#39;, function () {
         return new MySqlSearchEngine;
     });
 }
-</code></pre>
+</pre></div>
+
+
 <p>Once your engine has been registered, you may specify it as your default Scout <code>driver</code> in your <code>config/scout.php</code> configuration file:</p>
-<pre><code>'driver' =&gt; 'mysql',
-</code></pre>
+<div class="codehilite"><pre><span></span>&#39;driver&#39; =&gt; &#39;mysql&#39;,
+</pre></div>
           <aside class="copyright" role="note">
             
             Documentation built with
@@ -1158,10 +1195,6 @@ public function boot()
       var repo_id  = '';
     </script>
     <script src="../assets/javascripts/application-997097ee0c.js"></script>
-    
-      <script src="../assets/jquery.js"></script>
-    
-      <script src="../assets/prism.js"></script>
     
     
   </body>

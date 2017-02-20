@@ -9,16 +9,16 @@
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     
       
-        <title>Application testing - Laravel 5.3 official documentation</title>
+        <title>Application testing - Laravel 5.4 Official Documentation</title>
       
       
       
       
     
     <meta property="og:url" content="None">
-    <meta property="og:title" content="Laravel 5.3 official documentation">
+    <meta property="og:title" content="Laravel 5.4 Official Documentation">
     <meta property="og:image" content="None/../">
-    <meta name="apple-mobile-web-app-title" content="Laravel 5.3 official documentation">
+    <meta name="apple-mobile-web-app-title" content="Laravel 5.4 Official Documentation">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
@@ -60,15 +60,13 @@
       </style>
     
     
-      <link rel="stylesheet" href="../assets/prism.css">
-    
     <script src="../assets/javascripts/modernizr-4ab42b99fd.js"></script>
     
   </head>
   
   
   
-  <body class="palette-primary-teal palette-accent-pink">
+  <body class="palette-primary-teal palette-accent-green">
     
     <div class="backdrop">
       <div class="backdrop-paper"></div>
@@ -125,7 +123,7 @@
       
       <div class="name">
         <strong>
-          Laravel 5.3 official documentation
+          Laravel 5.4 Official Documentation
           <span class="version">
             
           </span>
@@ -640,15 +638,6 @@
           
             
   <li>
-    <a class="" title="Readme" href="../readme/">
-      Readme
-    </a>
-    
-  </li>
-
-          
-            
-  <li>
     <a class="" title="Redirects" href="../redirects/">
       Redirects
     </a>
@@ -822,80 +811,94 @@
 <p><a name="introduction"></a></p>
 <h2 id="introduction">Introduction</h2>
 <p>Laravel provides a very fluent API for making HTTP requests to your application, examining the output, and even filling out forms. For example, take a look at the test defined below:</p>
-<pre><code>&lt;?php
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Foundation</span><span class="err">\</span><span class="nx">Testing</span><span class="err">\</span><span class="nx">WithoutMiddleware</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Foundation</span><span class="err">\</span><span class="nx">Testing</span><span class="err">\</span><span class="nx">DatabaseTransactions</span><span class="p">;</span>
 
-class ExampleTest extends TestCase
-{
-    /**
-     * A basic functional test example.
-     *
-     * @return void
-     */
-    public function testBasicExample()
-    {
-        $this-&gt;visit('/')
-             -&gt;see('Laravel 5')
-             -&gt;dontSee('Rails');
-    }
-}
-</code></pre>
+<span class="kr">class</span> <span class="nx">ExampleTest</span> <span class="kr">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="cm">/**</span>
+<span class="cm">     * A basic functional test example.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return void</span>
+<span class="cm">     */</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">testBasicExample</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">visit</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+             <span class="o">-&gt;</span><span class="nx">see</span><span class="p">(</span><span class="s1">&#39;Laravel 5&#39;</span><span class="p">)</span>
+             <span class="o">-&gt;</span><span class="nx">dontSee</span><span class="p">(</span><span class="s1">&#39;Rails&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <p>The <code>visit</code> method makes a <code>GET</code> request into the application. The <code>see</code> method asserts that we should see the given text in the response returned by the application. The <code>dontSee</code> method asserts that the given text is not returned in the application response. This is the most basic application test available in Laravel.</p>
 <p>You may also use the 'visitRoute' method to make a 'GET' request via a named route:</p>
-<pre><code>$this-&gt;visitRoute('profile');
+<div class="codehilite"><pre><span></span>$this-&gt;visitRoute(&#39;profile&#39;);
 
-$this-&gt;visitRoute('profile', ['user' =&gt; 1]);
-</code></pre>
+$this-&gt;visitRoute(&#39;profile&#39;, [&#39;user&#39; =&gt; 1]);
+</pre></div>
+
+
 <p><a name="interacting-with-your-application"></a></p>
 <h2 id="interacting-with-your-application">Interacting With Your Application</h2>
 <p>Of course, you can do much more than simply assert that text appears in a given response. Let's take a look at some examples of clicking links and filling out forms:</p>
 <p><a name="interacting-with-links"></a></p>
 <h3 id="interacting-with-links">Interacting With Links</h3>
 <p>In this test, we will make a request to the application, "click" a link in the returned response, and then assert that we landed on a given URI. For example, let's assume there is a link in our response that has a text value of "About Us":</p>
-<pre><code>&lt;a href="/about-us"&gt;About Us&lt;/a&gt;
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;/about-us&quot;</span><span class="nt">&gt;</span>About Us<span class="nt">&lt;/a&gt;</span>
+</pre></div>
+
+
 <p>Now, let's write a test that clicks the link and asserts the user lands on the correct page:</p>
-<pre><code>public function testBasicExample()
+<div class="codehilite"><pre><span></span>public function testBasicExample()
 {
-    $this-&gt;visit('/')
-         -&gt;click('About Us')
-         -&gt;seePageIs('/about-us');
+    $this-&gt;visit(&#39;/&#39;)
+         -&gt;click(&#39;About Us&#39;)
+         -&gt;seePageIs(&#39;/about-us&#39;);
 }
-</code></pre>
+</pre></div>
+
+
 <p>You may also check that the user has arrived at the correct named route using the <code>seeRouteIs</code> method:</p>
-<pre><code>-&gt;seeRouteIs('profile', ['user' =&gt; 1]);
-</code></pre>
+<div class="codehilite"><pre><span></span>-&gt;seeRouteIs(&#39;profile&#39;, [&#39;user&#39; =&gt; 1]);
+</pre></div>
+
+
 <p><a name="interacting-with-forms"></a></p>
 <h3 id="interacting-with-forms">Interacting With Forms</h3>
 <p>Laravel also provides several methods for testing forms. The <code>type</code>, <code>select</code>, <code>check</code>, <code>attach</code>, and <code>press</code> methods allow you to interact with all of your form's inputs. For example, let's imagine this form exists on the application's registration page:</p>
-<pre><code>&lt;form action="/register" method="POST"&gt;
-    {{ csrf_field() }}
+<div class="codehilite"><pre><span></span><span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">&quot;/register&quot;</span> <span class="na">method=</span><span class="s">&quot;POST&quot;</span><span class="nt">&gt;</span>
+    <span class="cp">{{</span> <span class="nv">csrf_field</span><span class="o">()</span> <span class="cp">}}</span>
 
-    &lt;div&gt;
-        Name: &lt;input type="text" name="name"&gt;
-    &lt;/div&gt;
+    <span class="nt">&lt;div&gt;</span>
+        Name: <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">name=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
 
-    &lt;div&gt;
-        &lt;input type="checkbox" value="yes" name="terms"&gt; Accept Terms
-    &lt;/div&gt;
+    <span class="nt">&lt;div&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;checkbox&quot;</span> <span class="na">value=</span><span class="s">&quot;yes&quot;</span> <span class="na">name=</span><span class="s">&quot;terms&quot;</span><span class="nt">&gt;</span> Accept Terms
+    <span class="nt">&lt;/div&gt;</span>
 
-    &lt;div&gt;
-        &lt;input type="submit" value="Register"&gt;
-    &lt;/div&gt;
-&lt;/form&gt;
-</code></pre>
+    <span class="nt">&lt;div&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="na">value=</span><span class="s">&quot;Register&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+</pre></div>
+
+
 <p>We can write a test to complete this form and inspect the result:</p>
-<pre><code>public function testNewUserRegistration()
+<div class="codehilite"><pre><span></span>public function testNewUserRegistration()
 {
-    $this-&gt;visit('/register')
-         -&gt;type('Taylor', 'name')
-         -&gt;check('terms')
-         -&gt;press('Register')
-         -&gt;seePageIs('/dashboard');
+    $this-&gt;visit(&#39;/register&#39;)
+         -&gt;type(&#39;Taylor&#39;, &#39;name&#39;)
+         -&gt;check(&#39;terms&#39;)
+         -&gt;press(&#39;Register&#39;)
+         -&gt;seePageIs(&#39;/dashboard&#39;);
 }
-</code></pre>
+</pre></div>
+
+
 <p>Of course, if your form contains other inputs such as radio buttons or drop-down boxes, you may easily fill out those types of fields as well. Here is a list of each form manipulation method:</p>
 <table>
 <thead>
@@ -934,199 +937,225 @@ $this-&gt;visitRoute('profile', ['user' =&gt; 1]);
 <p><a name="file-inputs"></a></p>
 <h4 id="file-inputs">File Inputs</h4>
 <p>If your form contains <code>file</code> inputs, you may attach files to the form using the <code>attach</code> method:</p>
-<pre><code>public function testPhotoCanBeUploaded()
+<div class="codehilite"><pre><span></span>public function testPhotoCanBeUploaded()
 {
-    $this-&gt;visit('/upload')
-         -&gt;attach($pathToFile, 'photo')
-         -&gt;press('Upload')
-         -&gt;see('Upload Successful!');
+    $this-&gt;visit(&#39;/upload&#39;)
+         -&gt;attach($pathToFile, &#39;photo&#39;)
+         -&gt;press(&#39;Upload&#39;)
+         -&gt;see(&#39;Upload Successful!&#39;);
 }
-</code></pre>
+</pre></div>
+
+
 <p><a name="testing-json-apis"></a></p>
 <h3 id="testing-json-apis">Testing JSON APIs</h3>
 <p>Laravel also provides several helpers for testing JSON APIs and their responses. For example, the <code>json</code>, <code>get</code>, <code>post</code>, <code>put</code>, <code>patch</code>, and <code>delete</code> methods may be used to issue requests with various HTTP verbs. You may also easily pass data and headers to these methods. To get started, let's write a test to make a <code>POST</code> request to <code>/user</code> and assert that the expected data was returned:</p>
-<pre><code>&lt;?php
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
-class ExampleTest extends TestCase
-{
-    /**
-     * A basic functional test example.
-     *
-     * @return void
-     */
-    public function testBasicExample()
-    {
-        $this-&gt;json('POST', '/user', ['name' =&gt; 'Sally'])
-             -&gt;seeJson([
-                 'created' =&gt; true,
-             ]);
-    }
-}
-</code></pre>
+<span class="kr">class</span> <span class="nx">ExampleTest</span> <span class="kr">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="cm">/**</span>
+<span class="cm">     * A basic functional test example.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return void</span>
+<span class="cm">     */</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">testBasicExample</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">json</span><span class="p">(</span><span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="s1">&#39;/user&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Sally&#39;</span><span class="p">])</span>
+             <span class="o">-&gt;</span><span class="nx">seeJson</span><span class="p">([</span>
+                 <span class="s1">&#39;created&#39;</span> <span class="o">=&gt;</span> <span class="kc">true</span><span class="p">,</span>
+             <span class="p">]);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <blockquote>
 <p>{tip} The <code>seeJson</code> method converts the given array into JSON, and then verifies that the JSON fragment occurs <strong>anywhere</strong> within the entire JSON response returned by the application. So, if there are other properties in the JSON response, this test will still pass as long as the given fragment is present.</p>
 </blockquote>
 <p><a name="verifying-exact-match"></a></p>
 <h3 id="verifying-exact-match">Verifying Exact Match</h3>
 <p>If you would like to verify that the given array is an <strong>exact</strong> match for the JSON returned by the application, you should use the <code>seeJsonEquals</code> method:</p>
-<pre><code>&lt;?php
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
-class ExampleTest extends TestCase
-{
-    /**
-     * A basic functional test example.
-     *
-     * @return void
-     */
-    public function testBasicExample()
-    {
-        $this-&gt;json('POST', '/user', ['name' =&gt; 'Sally'])
-             -&gt;seeJsonEquals([
-                 'created' =&gt; true,
-             ]);
-    }
-}
-</code></pre>
+<span class="kr">class</span> <span class="nx">ExampleTest</span> <span class="kr">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="cm">/**</span>
+<span class="cm">     * A basic functional test example.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return void</span>
+<span class="cm">     */</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">testBasicExample</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">json</span><span class="p">(</span><span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="s1">&#39;/user&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Sally&#39;</span><span class="p">])</span>
+             <span class="o">-&gt;</span><span class="nx">seeJsonEquals</span><span class="p">([</span>
+                 <span class="s1">&#39;created&#39;</span> <span class="o">=&gt;</span> <span class="kc">true</span><span class="p">,</span>
+             <span class="p">]);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <p><a name="verifying-structural-match"></a></p>
 <h3 id="verifying-structural-match">Verifying Structural Match</h3>
 <p>It is also possible to verify that a JSON response adheres to a specific structure. In this scenario, you should use the <code>seeJsonStructure</code> method and pass it your expected JSON structure:</p>
-<pre><code>&lt;?php
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
-class ExampleTest extends TestCase
-{
-    /**
-     * A basic functional test example.
-     *
-     * @return void
-     */
-    public function testBasicExample()
-    {
-        $this-&gt;get('/user/1')
-             -&gt;seeJsonStructure([
-                 'name',
-                 'pet' =&gt; [
-                     'name', 'age'
-                 ]
-             ]);
-    }
-}
-</code></pre>
+<span class="kr">class</span> <span class="nx">ExampleTest</span> <span class="kr">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="cm">/**</span>
+<span class="cm">     * A basic functional test example.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return void</span>
+<span class="cm">     */</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">testBasicExample</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/user/1&#39;</span><span class="p">)</span>
+             <span class="o">-&gt;</span><span class="nx">seeJsonStructure</span><span class="p">([</span>
+                 <span class="s1">&#39;name&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;pet&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                     <span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span>
+                 <span class="p">]</span>
+             <span class="p">]);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <p>The above example illustrates an expectation of receiving a <code>name</code> attribute and a nested <code>pet</code> object with its own <code>name</code> and <code>age</code> attributes. <code>seeJsonStructure</code> will not fail if additional keys are present in the response. For example, the test would still pass if the <code>pet</code> had a <code>weight</code> attribute.</p>
 <p>You may use the <code>*</code> to assert that the returned JSON structure has a list where each list item contains at least the attributes found in the set of values:</p>
-<pre><code>&lt;?php
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
-class ExampleTest extends TestCase
-{
-    /**
-     * A basic functional test example.
-     *
-     * @return void
-     */
-    public function testBasicExample()
-    {
-        // Assert that each user in the list has at least an id, name and email attribute.
-        $this-&gt;get('/users')
-             -&gt;seeJsonStructure([
-                 '*' =&gt; [
-                     'id', 'name', 'email'
-                 ]
-             ]);
-    }
-}
-</code></pre>
+<span class="kr">class</span> <span class="nx">ExampleTest</span> <span class="kr">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="cm">/**</span>
+<span class="cm">     * A basic functional test example.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return void</span>
+<span class="cm">     */</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">testBasicExample</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// Assert that each user in the list has at least an id, name and email attribute.</span>
+        <span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/users&#39;</span><span class="p">)</span>
+             <span class="o">-&gt;</span><span class="nx">seeJsonStructure</span><span class="p">([</span>
+                 <span class="s1">&#39;*&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                     <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;email&#39;</span>
+                 <span class="p">]</span>
+             <span class="p">]);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <p>You may also nest the <code>*</code> notation. In this case, we will assert that each user in the JSON response contains a given set of attributes and that each pet on each user also contains a given set of attributes:</p>
-<pre><code>$this-&gt;get('/users')
+<div class="codehilite"><pre><span></span>$this-&gt;get(&#39;/users&#39;)
      -&gt;seeJsonStructure([
-         '*' =&gt; [
-             'id', 'name', 'email', 'pets' =&gt; [
-                 '*' =&gt; [
-                     'name', 'age'
+         &#39;*&#39; =&gt; [
+             &#39;id&#39;, &#39;name&#39;, &#39;email&#39;, &#39;pets&#39; =&gt; [
+                 &#39;*&#39; =&gt; [
+                     &#39;name&#39;, &#39;age&#39;
                  ]
              ]
          ]
      ]);
-</code></pre>
+</pre></div>
+
+
 <p><a name="sessions-and-authentication"></a></p>
 <h3 id="sessions-authentication">Sessions / Authentication</h3>
 <p>Laravel provides several helpers for working with the session during testing. First, you may set the session data to a given array using the <code>withSession</code> method. This is useful for loading the session with data before issuing a request to your application:</p>
-<pre><code>&lt;?php
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
-class ExampleTest extends TestCase
-{
-    public function testApplication()
-    {
-        $this-&gt;withSession(['foo' =&gt; 'bar'])
-             -&gt;visit('/');
-    }
-}
-</code></pre>
-<p>Of course, one common use of the session is for maintaining state for the authenticated user. The <code>actingAs</code> helper method provides a simple way to authenticate a given user as the current user. For example, we may use a <a href="../docs/{{version}}/database-testing#model-factories">model factory</a> to generate and authenticate a user:</p>
-<pre><code>&lt;?php
+<span class="kr">class</span> <span class="nx">ExampleTest</span> <span class="kr">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">testApplication</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">withSession</span><span class="p">([</span><span class="s1">&#39;foo&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;bar&#39;</span><span class="p">])</span>
+             <span class="o">-&gt;</span><span class="nx">visit</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
 
-class ExampleTest extends TestCase
-{
-    public function testApplication()
-    {
-        $user = factory(App\User::class)-&gt;create();
 
-        $this-&gt;actingAs($user)
-             -&gt;withSession(['foo' =&gt; 'bar'])
-             -&gt;visit('/')
-             -&gt;see('Hello, '.$user-&gt;name);
-    }
-}
-</code></pre>
+<p>Of course, one common use of the session is for maintaining state for the authenticated user. The <code>actingAs</code> helper method provides a simple way to authenticate a given user as the current user. For example, we may use a <a href="../docs/{{version}}/database-testing#writing-factories">model factory</a> to generate and authenticate a user:</p>
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+
+<span class="kr">class</span> <span class="nx">ExampleTest</span> <span class="kr">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">testApplication</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nx">$user</span> <span class="o">=</span> <span class="nx">factory</span><span class="p">(</span><span class="nx">App</span><span class="err">\</span><span class="nx">User</span><span class="o">::</span><span class="kr">class</span><span class="p">)</span><span class="o">-&gt;</span><span class="nx">create</span><span class="p">();</span>
+
+        <span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">actingAs</span><span class="p">(</span><span class="nx">$user</span><span class="p">)</span>
+             <span class="o">-&gt;</span><span class="nx">withSession</span><span class="p">([</span><span class="s1">&#39;foo&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;bar&#39;</span><span class="p">])</span>
+             <span class="o">-&gt;</span><span class="nx">visit</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+             <span class="o">-&gt;</span><span class="nx">see</span><span class="p">(</span><span class="s1">&#39;Hello, &#39;</span><span class="p">.</span><span class="nx">$user</span><span class="o">-&gt;</span><span class="nx">name</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <p>You may also specify which guard should be used to authenticate the given user by passing the guard name as the second argument to the <code>actingAs</code> method:</p>
-<pre><code>$this-&gt;actingAs($user, 'api')
-</code></pre>
+<div class="codehilite"><pre><span></span>$this-&gt;actingAs($user, &#39;api&#39;)
+</pre></div>
+
+
 <p><a name="disabling-middleware"></a></p>
 <h3 id="disabling-middleware">Disabling Middleware</h3>
 <p>When testing your application, you may find it convenient to disable <a href="../docs/{{version}}/middleware">middleware</a> for some of your tests. This will allow you to test your routes and controller in isolation from any middleware concerns. Laravel includes a simple <code>WithoutMiddleware</code> trait that you can use to automatically disable all middleware for the test class:</p>
-<pre><code>&lt;?php
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Foundation</span><span class="err">\</span><span class="nx">Testing</span><span class="err">\</span><span class="nx">WithoutMiddleware</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Foundation</span><span class="err">\</span><span class="nx">Testing</span><span class="err">\</span><span class="nx">DatabaseMigrations</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Foundation</span><span class="err">\</span><span class="nx">Testing</span><span class="err">\</span><span class="nx">DatabaseTransactions</span><span class="p">;</span>
 
-class ExampleTest extends TestCase
-{
-    use WithoutMiddleware;
+<span class="kr">class</span> <span class="nx">ExampleTest</span> <span class="kr">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="nx">use</span> <span class="nx">WithoutMiddleware</span><span class="p">;</span>
 
-    //
-}
-</code></pre>
+    <span class="c1">//</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <p>If you would like to only disable middleware for a few test methods, you may call the <code>withoutMiddleware</code> method from within the test methods:</p>
-<pre><code>&lt;?php
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
-class ExampleTest extends TestCase
-{
-    /**
-     * A basic functional test example.
-     *
-     * @return void
-     */
-    public function testBasicExample()
-    {
-        $this-&gt;withoutMiddleware();
+<span class="kr">class</span> <span class="nx">ExampleTest</span> <span class="kr">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="cm">/**</span>
+<span class="cm">     * A basic functional test example.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return void</span>
+<span class="cm">     */</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">testBasicExample</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">withoutMiddleware</span><span class="p">();</span>
 
-        $this-&gt;visit('/')
-             -&gt;see('Laravel 5');
-    }
-}
-</code></pre>
+        <span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">visit</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+             <span class="o">-&gt;</span><span class="nx">see</span><span class="p">(</span><span class="s1">&#39;Laravel 5&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <p><a name="custom-http-requests"></a></p>
 <h3 id="custom-http-requests">Custom HTTP Requests</h3>
 <p>If you would like to make a custom HTTP request into your application and get the full <code>Illuminate\Http\Response</code> object, you may use the <code>call</code> method:</p>
-<pre><code>public function testApplication()
+<div class="codehilite"><pre><span></span>public function testApplication()
 {
-    $response = $this-&gt;call('GET', '/');
+    $response = $this-&gt;call(&#39;GET&#39;, &#39;/&#39;);
 
     $this-&gt;assertEquals(200, $response-&gt;status());
 }
-</code></pre>
+</pre></div>
+
+
 <p>If you are making <code>POST</code>, <code>PUT</code>, or <code>PATCH</code> requests you may pass an array of input data with the request. Of course, this data will be available in your routes and controller via the <a href="../docs/{{version}}/requests">Request instance</a>:</p>
-<pre><code>   $response = $this-&gt;call('POST', '/user', ['name' =&gt; 'Taylor']);
-</code></pre>
+<div class="codehilite"><pre><span></span>   $response = $this-&gt;call(&#39;POST&#39;, &#39;/user&#39;, [&#39;name&#39; =&gt; &#39;Taylor&#39;]);
+</pre></div>
+
+
 <p><a name="phpunit-assertions"></a></p>
 <h3 id="phpunit-assertions">PHPUnit Assertions</h3>
 <p>Laravel provides a variety of custom assertion methods for <a href="https://phpunit.de/">PHPUnit</a> tests:</p>
@@ -1264,10 +1293,6 @@ class ExampleTest extends TestCase
       var repo_id  = '';
     </script>
     <script src="../assets/javascripts/application-997097ee0c.js"></script>
-    
-      <script src="../assets/jquery.js"></script>
-    
-      <script src="../assets/prism.js"></script>
     
     
   </body>

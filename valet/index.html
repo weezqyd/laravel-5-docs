@@ -9,16 +9,16 @@
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     
       
-        <title>Valet - Laravel 5.3 official documentation</title>
+        <title>Valet - Laravel 5.4 Official Documentation</title>
       
       
       
       
     
     <meta property="og:url" content="None">
-    <meta property="og:title" content="Laravel 5.3 official documentation">
+    <meta property="og:title" content="Laravel 5.4 Official Documentation">
     <meta property="og:image" content="None/../">
-    <meta name="apple-mobile-web-app-title" content="Laravel 5.3 official documentation">
+    <meta name="apple-mobile-web-app-title" content="Laravel 5.4 Official Documentation">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
@@ -60,15 +60,13 @@
       </style>
     
     
-      <link rel="stylesheet" href="../assets/prism.css">
-    
     <script src="../assets/javascripts/modernizr-4ab42b99fd.js"></script>
     
   </head>
   
   
   
-  <body class="palette-primary-teal palette-accent-pink">
+  <body class="palette-primary-teal palette-accent-green">
     
     <div class="backdrop">
       <div class="backdrop-paper"></div>
@@ -125,7 +123,7 @@
       
       <div class="name">
         <strong>
-          Laravel 5.3 official documentation
+          Laravel 5.4 Official Documentation
           <span class="version">
             
           </span>
@@ -619,15 +617,6 @@
           
             
   <li>
-    <a class="" title="Readme" href="../readme/">
-      Readme
-    </a>
-    
-  </li>
-
-          
-            
-  <li>
     <a class="" title="Redirects" href="../redirects/">
       Redirects
     </a>
@@ -780,12 +769,6 @@
             </li>
           
             <li class="anchor">
-              <a title="Viewing Logs" href="#viewing-logs">
-                Viewing Logs
-              </a>
-            </li>
-          
-            <li class="anchor">
               <a title="Custom Valet Drivers" href="#custom-valet-drivers">
                 Custom Valet Drivers
               </a>
@@ -848,24 +831,23 @@
 </ul>
 </li>
 <li><a href="#sharing-sites">Sharing Sites</a></li>
-<li><a href="#viewing-logs">Viewing Logs</a></li>
 <li><a href="#custom-valet-drivers">Custom Valet Drivers</a></li>
 <li><a href="#other-valet-commands">Other Valet Commands</a></li>
 </ul>
 <p><a name="introduction"></a></p>
 <h2 id="introduction">Introduction</h2>
-<p>Valet is a Laravel development environment for Mac minimalists. No Vagrant, No Apache, No Nginx, No <code>/etc/hosts</code> file. You can even share your sites publicly using local tunnels. <em>Yeah, we like it too.</em></p>
-<p>Laravel Valet configures your Mac to always run <a href="https://caddyserver.com">Caddy</a> in the background when your machine starts. Then, using <a href="https://en.wikipedia.org/wiki/Dnsmasq">DnsMasq</a>, Valet proxies all requests on the <code>*.dev</code> domain to point to sites installed on your local machine.</p>
+<p>Valet is a Laravel development environment for Mac minimalists. No Vagrant, no <code>/etc/hosts</code> file. You can even share your sites publicly using local tunnels. <em>Yeah, we like it too.</em></p>
+<p>Laravel Valet configures your Mac to always run <a href="https://www.nginx.com/">Nginx</a> in the background when your machine starts. Then, using <a href="https://en.wikipedia.org/wiki/Dnsmasq">DnsMasq</a>, Valet proxies all requests on the <code>*.dev</code> domain to point to sites installed on your local machine.</p>
 <p>In other words, a blazing fast Laravel development environment that uses roughly 7 MB of RAM. Valet isn't a complete replacement for Vagrant or Homestead, but provides a great alternative if you want flexible basics, prefer extreme speed, or are working on a machine with a limited amount of RAM.</p>
 <p>Out of the box, Valet support includes, but is not limited to:</p>
 <div class="content-list" markdown="1">
 - [Laravel](https://laravel.com)
 - [Lumen](https://lumen.laravel.com)
 - [Symfony](https://symfony.com)
-- [Zend](http://framework.zend.com)
-- [CakePHP 3](http://cakephp.org)
+- [Zend](https://framework.zend.com)
+- [CakePHP 3](https://cakephp.org)
 - [WordPress](https://wordpress.org)
-- [Bedrock](https://roots.io/bedrock)
+- [Bedrock](https://roots.io/bedrock/)
 - [Craft](https://craftcms.com)
 - [Statamic](https://statamic.com)
 - [Jigsaw](http://jigsaw.tighten.co)
@@ -876,14 +858,14 @@
 <p><a name="valet-or-homestead"></a></p>
 <h3 id="valet-or-homestead">Valet Or Homestead</h3>
 <p>As you may know, Laravel offers <a href="../docs/{{version}}/homestead">Homestead</a>, another local Laravel development environment. Homestead and Valet differ in regards to their intended audience and their approach to local development. Homestead offers an entire Ubuntu virtual machine with automated Nginx configuration. Homestead is a wonderful choice if you want a fully virtualized Linux development environment or are on Windows / Linux.</p>
-<p>Valet only supports Mac, and requires you to install PHP and a database server directly onto your local machine. This is easily achieved by using <a href="http://brew.sh/">Homebrew</a> with commands like <code>brew install php70</code> and <code>brew install mariadb</code>. Valet provides a blazing fast local development environment with minimal resource consumption, so it's great for developers who only require PHP / MySQL and do not need a fully virtualized development environment.</p>
+<p>Valet only supports Mac, and requires you to install PHP and a database server directly onto your local machine. This is easily achieved by using <a href="http://brew.sh/">Homebrew</a> with commands like <code>brew install php71</code> and <code>brew install mariadb</code>. Valet provides a blazing fast local development environment with minimal resource consumption, so it's great for developers who only require PHP / MySQL and do not need a fully virtualized development environment.</p>
 <p>Both Valet and Homestead are great choices for configuring your Laravel development environment. Which one you choose will depend on your personal taste and your team's needs.</p>
 <p><a name="installation"></a></p>
 <h2 id="installation">Installation</h2>
 <p><strong>Valet requires macOS and <a href="http://brew.sh/">Homebrew</a>. Before installation, you should make sure that no other programs such as Apache or Nginx are binding to your local machine's port 80.</strong></p>
 <div class="content-list" markdown="1">
 - Install or update [Homebrew](http://brew.sh/) to the latest version using `brew update`.
-- Install PHP 7.0 using Homebrew via `brew install homebrew/php/php70`.
+- Install PHP 7.1 using Homebrew via `brew install homebrew/php/php71`.
 - Install Valet with Composer via `composer global require laravel/valet`. Make sure the `~/.composer/vendor/bin` directory is in your system's "PATH".
 - Run the `valet install` command. This will configure and install Valet and DnsMasq, and register Valet's daemon to launch when your system starts.
 </div>
@@ -898,6 +880,25 @@
 <p><a name="upgrading"></a></p>
 <h3 id="upgrading">Upgrading</h3>
 <p>You may update your Valet installation using the <code>composer global update</code> command in your terminal. After upgrading, it is good practice to run the <code>valet install</code> command so Valet can make additional upgrades to your configuration files if necessary.</p>
+<h4 id="upgrading-to-valet-20">Upgrading To Valet 2.0</h4>
+<p>Valet 2.0 transitions Valet's underlying web server from Caddy to Nginx. Before upgrading to this version you should run the following commands to stop and uninstall the existing Caddy daemon:</p>
+<div class="codehilite"><pre><span></span>valet stop
+valet uninstall
+</pre></div>
+
+
+<p>Next, you should upgrade to the latest version of Valet. Depending on how you installed Valet, this is typically done through Git or Composer. If you installed Valet via Composer, you should use the following command to update to the latest major version:</p>
+<div class="codehilite"><pre><span></span>composer global require laravel/valet
+</pre></div>
+
+
+<p>Once the fresh Valet source code has been downloaded, you should run the <code>install</code> command:</p>
+<div class="codehilite"><pre><span></span>valet install
+valet restart
+</pre></div>
+
+
+<p>After upgrading, it may be necessary to re-park or re-link your sites.</p>
 <p><a name="serving-sites"></a></p>
 <h2 id="serving-sites">Serving Sites</h2>
 <p>Once Valet is installed, you're ready to start serving sites. Valet provides two commands to help you serve your Laravel sites: <code>park</code> and <code>link</code>.</p>
@@ -925,78 +926,88 @@
 <p><a name="securing-sites"></a>
 <strong>Securing Sites With TLS</strong></p>
 <p>By default, Valet serves sites over plain HTTP. However, if you would like to serve a site over encrypted TLS using HTTP/2, use the <code>secure</code> command. For example, if your site is being served by Valet on the <code>laravel.dev</code> domain, you should run the following command to secure it:</p>
-<pre><code>valet secure laravel
-</code></pre>
+<div class="codehilite"><pre><span></span>valet secure laravel
+</pre></div>
+
+
 <p>To "unsecure" a site and revert back to serving its traffic over plain HTTP, use the <code>unsecure</code> command. Like the <code>secure</code> command, this command accepts the host name that you wish to unsecure:</p>
-<pre><code>valet unsecure laravel
-</code></pre>
+<div class="codehilite"><pre><span></span>valet unsecure laravel
+</pre></div>
+
+
 <p><a name="sharing-sites"></a></p>
 <h2 id="sharing-sites">Sharing Sites</h2>
 <p>Valet even includes a command to share your local sites with the world. No additional software installation is required once Valet is installed.</p>
 <p>To share a site, navigate to the site's directory in your terminal and run the <code>valet share</code> command. A publicly accessible URL will be inserted into your clipboard and is ready to paste directly into your browser. That's it.</p>
 <p>To stop sharing your site, hit <code>Control + C</code> to cancel the process.</p>
-<p><a name="viewing-logs"></a></p>
-<h2 id="viewing-logs">Viewing Logs</h2>
-<p>If you would like to stream all of the logs for all of your sites to your terminal, run the <code>valet logs</code> command. New log entries will display in your terminal as they occur. This is a great way to stay on top of all of your log files without ever having to leave your terminal.</p>
+<blockquote>
+<p>{note} <code>valet share</code> does not currently support sharing sites that have been secured using the <code>valet secure</code> command.</p>
+</blockquote>
 <p><a name="custom-valet-drivers"></a></p>
 <h2 id="custom-valet-drivers">Custom Valet Drivers</h2>
 <p>You can write your own Valet "driver" to serve PHP applications running on another framework or CMS that is not natively supported by Valet. When you install Valet, a <code>~/.valet/Drivers</code> directory is created which contains a <code>SampleValetDriver.php</code> file. This file contains a sample driver implementation to demonstrate how to write a custom driver. Writing a driver only requires you to implement three methods: <code>serves</code>, <code>isStaticFile</code>, and <code>frontControllerPath</code>.</p>
 <p>All three methods receive the <code>$sitePath</code>, <code>$siteName</code>, and <code>$uri</code> values as their arguments. The <code>$sitePath</code> is the fully qualified path to the site being served on your machine, such as <code>/Users/Lisa/Sites/my-project</code>. The <code>$siteName</code> is the "host" / "site name" portion of the domain (<code>my-project</code>). The <code>$uri</code> is the incoming request URI (<code>/foo/bar</code>).</p>
 <p>Once you have completed your custom Valet driver, place it in the <code>~/.valet/Drivers</code> directory using the <code>FrameworkValetDriver.php</code> naming convention. For example, if you are writing a custom valet driver for WordPress, your file name should be <code>WordPressValetDriver.php</code>.</p>
-<p>Let's take at a sample implementation of each method your custom Valet driver should implement.</p>
+<p>Let's take a look at a sample implementation of each method your custom Valet driver should implement.</p>
 <h4 id="the-serves-method">The <code>serves</code> Method</h4>
 <p>The <code>serves</code> method should return <code>true</code> if your driver should handle the incoming request. Otherwise, the method should return <code>false</code>. So, within this method you should attempt to determine if the given <code>$sitePath</code> contains a project of the type you are trying to serve.</p>
 <p>For example, let's pretend we are writing a <code>WordPressValetDriver</code>. Our serve method might look something like this:</p>
-<pre><code>/**
- * Determine if the driver serves the request.
- *
- * @param  string  $sitePath
- * @param  string  $siteName
- * @param  string  $uri
- * @return void
- */
-public function serves($sitePath, $siteName, $uri)
-{
-    return is_dir($sitePath.'/wp-admin');
-}
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * Determine if the driver serves the request.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param  string  $sitePath</span>
+<span class="cm"> * @param  string  $siteName</span>
+<span class="cm"> * @param  string  $uri</span>
+<span class="cm"> * @return bool</span>
+<span class="cm"> */</span><span class="w"></span>
+public<span class="w"> </span>function<span class="w"> </span>serves<span class="o">(</span><span class="err">$</span>sitePath<span class="o">,</span><span class="w"> </span><span class="err">$</span>siteName<span class="o">,</span><span class="w"> </span><span class="err">$</span>uri<span class="o">)</span><span class="w"></span>
+<span class="err">{</span><span class="w"></span>
+<span class="w">    </span><span class="kr">return</span><span class="w"> </span>is_dir<span class="o">(</span><span class="err">$</span>sitePath<span class="o">.</span><span class="s">&#39;/wp-admin&#39;</span><span class="o">)</span><span class="err">;</span><span class="w"></span>
+<span class="err">}</span><span class="w"></span>
+</pre></div>
+
+
 <h4 id="the-isstaticfile-method">The <code>isStaticFile</code> Method</h4>
 <p>The <code>isStaticFile</code> should determine if the incoming request is for a file that is "static", such as an image or a stylesheet. If the file is static, the method should return the fully qualified path to the static file on disk. If the incoming request is not for a static file, the method should return <code>false</code>:</p>
-<pre><code>/**
- * Determine if the incoming request is for a static file.
- *
- * @param  string  $sitePath
- * @param  string  $siteName
- * @param  string  $uri
- * @return string|false
- */
-public function isStaticFile($sitePath, $siteName, $uri)
-{
-    if (file_exists($staticFilePath = $sitePath.'/public/'.$uri)) {
-        return $staticFilePath;
-    }
+<div class="codehilite"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * Determine if the incoming request is for a static file.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param  string  $sitePath</span>
+<span class="cm"> * @param  string  $siteName</span>
+<span class="cm"> * @param  string  $uri</span>
+<span class="cm"> * @return string|false</span>
+<span class="cm"> */</span><span class="w"></span>
+public<span class="w"> </span>function<span class="w"> </span>isStaticFile<span class="o">(</span><span class="err">$</span>sitePath<span class="o">,</span><span class="w"> </span><span class="err">$</span>siteName<span class="o">,</span><span class="w"> </span><span class="err">$</span>uri<span class="o">)</span><span class="w"></span>
+<span class="err">{</span><span class="w"></span>
+<span class="w">    </span><span class="kr">if</span><span class="w"> </span><span class="o">(</span>file_exists<span class="o">(</span><span class="err">$</span>staticFilePath<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">$</span>sitePath<span class="o">.</span><span class="s">&#39;/public/&#39;</span><span class="o">.</span><span class="err">$</span>uri<span class="o">))</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
+<span class="w">        </span><span class="kr">return</span><span class="w"> </span><span class="err">$</span>staticFilePath<span class="err">;</span><span class="w"></span>
+<span class="w">    </span><span class="err">}</span><span class="w"></span>
 
-    return false;
-}
-</code></pre>
+<span class="w">    </span><span class="kr">return</span><span class="w"> </span>false<span class="err">;</span><span class="w"></span>
+<span class="err">}</span><span class="w"></span>
+</pre></div>
+
+
 <blockquote>
 <p>{note} The <code>isStaticFile</code> method will only be called if the <code>serves</code> method returns <code>true</code> for the incoming request and the request URI is not <code>/</code>.</p>
 </blockquote>
 <h4 id="the-frontcontrollerpath-method">The <code>frontControllerPath</code> Method</h4>
 <p>The <code>frontControllerPath</code> method should return the fully qualified path to your application's "front controller", which is typically your "index.php" file or equivalent:</p>
-<pre><code>/**
- * Get the fully resolved path to the application's front controller.
- *
- * @param  string  $sitePath
- * @param  string  $siteName
- * @param  string  $uri
- * @return string
- */
-public function frontControllerPath($sitePath, $siteName, $uri)
-{
-    return $sitePath.'/public/index.php';
-}
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * Get the fully resolved path to the application&#39;s front controller.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param  string  $sitePath</span>
+<span class="cm"> * @param  string  $siteName</span>
+<span class="cm"> * @param  string  $uri</span>
+<span class="cm"> * @return string</span>
+<span class="cm"> */</span><span class="w"></span>
+public<span class="w"> </span>function<span class="w"> </span>frontControllerPath<span class="o">(</span><span class="err">$</span>sitePath<span class="o">,</span><span class="w"> </span><span class="err">$</span>siteName<span class="o">,</span><span class="w"> </span><span class="err">$</span>uri<span class="o">)</span><span class="w"></span>
+<span class="err">{</span><span class="w"></span>
+<span class="w">    </span><span class="kr">return</span><span class="w"> </span><span class="err">$</span>sitePath<span class="o">.</span><span class="s">&#39;/public/index.php&#39;</span><span class="err">;</span><span class="w"></span>
+<span class="err">}</span><span class="w"></span>
+</pre></div>
+
+
 <p><a name="other-valet-commands"></a></p>
 <h2 id="other-valet-commands">Other Valet Commands</h2>
 <table>
@@ -1105,10 +1116,6 @@ public function frontControllerPath($sitePath, $siteName, $uri)
       var repo_id  = '';
     </script>
     <script src="../assets/javascripts/application-997097ee0c.js"></script>
-    
-      <script src="../assets/jquery.js"></script>
-    
-      <script src="../assets/prism.js"></script>
     
     
   </body>

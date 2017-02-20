@@ -9,16 +9,16 @@
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     
       
-        <title>Authentication - Laravel 5.3 official documentation</title>
+        <title>Authentication - Laravel 5.4 Official Documentation</title>
       
       
       
       
     
     <meta property="og:url" content="None">
-    <meta property="og:title" content="Laravel 5.3 official documentation">
+    <meta property="og:title" content="Laravel 5.4 Official Documentation">
     <meta property="og:image" content="None/../">
-    <meta name="apple-mobile-web-app-title" content="Laravel 5.3 official documentation">
+    <meta name="apple-mobile-web-app-title" content="Laravel 5.4 Official Documentation">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
@@ -60,15 +60,13 @@
       </style>
     
     
-      <link rel="stylesheet" href="../assets/prism.css">
-    
     <script src="../assets/javascripts/modernizr-4ab42b99fd.js"></script>
     
   </head>
   
   
   
-  <body class="palette-primary-teal palette-accent-pink">
+  <body class="palette-primary-teal palette-accent-green">
     
     <div class="backdrop">
       <div class="backdrop-paper"></div>
@@ -125,7 +123,7 @@
       
       <div class="name">
         <strong>
-          Laravel 5.3 official documentation
+          Laravel 5.4 Official Documentation
           <span class="version">
             
           </span>
@@ -670,15 +668,6 @@
           
             
   <li>
-    <a class="" title="Readme" href="../readme/">
-      Readme
-    </a>
-    
-  </li>
-
-          
-            
-  <li>
     <a class="" title="Redirects" href="../redirects/">
       Redirects
     </a>
@@ -855,6 +844,7 @@
 <li><a href="#stateless-http-basic-authentication">Stateless HTTP Basic Authentication</a></li>
 </ul>
 </li>
+<li><a href="https://github.com/laravel/socialite">Social Authentication</a></li>
 <li><a href="#adding-custom-guards">Adding Custom Guards</a></li>
 <li><a href="#adding-custom-user-providers">Adding Custom User Providers</a><ul>
 <li><a href="#the-user-provider-contract">The User Provider Contract</a></li>
@@ -866,7 +856,7 @@
 <p><a name="introduction"></a></p>
 <h2 id="introduction">Introduction</h2>
 <blockquote>
-<p>{tip} <strong>Want to get started fast?</strong> Just run <code>php artisan make:auth</code> in a fresh Laravel application and navigate your browser to <code>http://your-app.dev/register</code> or any other URL that is assigned to your application. This single command will take care of scaffolding your entire authentication system!</p>
+<p>{tip} <strong>Want to get started fast?</strong> Just run <code>php artisan make:auth</code> and <code>php artisan migrate</code> in a fresh Laravel application. Then, navigate your browser to <code>http://your-app.dev/register</code> or any other URL that is assigned to your application. These two commands will take care of scaffolding your entire authentication system!</p>
 </blockquote>
 <p>Laravel makes implementing authentication very simple. In fact, almost everything is configured for you out of the box. The authentication configuration file is located at <code>config/auth.php</code>, which contains several well documented options for tweaking the behavior of the authentication services.</p>
 <p>At its core, Laravel's authentication facilities are made up of "guards" and "providers". Guards define how users are authenticated for each request. For example, Laravel ships with a <code>session</code> guard which maintains state using session storage and cookies.</p>
@@ -883,8 +873,10 @@
 <p><a name="included-routing"></a></p>
 <h3 id="routing">Routing</h3>
 <p>Laravel provides a quick way to scaffold all of the routes and views you need for authentication using one simple command:</p>
-<pre><code>php artisan make:auth
-</code></pre>
+<div class="codehilite"><pre><span></span>php artisan make:auth
+</pre></div>
+
+
 <p>This command should be used on fresh applications and will install a layout view, registration and login views, as well as routes for all authentication end-points. A <code>HomeController</code> will also be generated to handle post-login requests to your application's dashboard.</p>
 <p><a name="included-views"></a></p>
 <h3 id="views">Views</h3>
@@ -895,18 +887,41 @@
 <p>Now that you have routes and views setup for the included authentication controllers, you are ready to register and authenticate new users for your application! You may simply access your application in a browser since the authentication controllers already contain the logic (via their traits) to authenticate existing users and store new users in the database.</p>
 <h4 id="path-customization">Path Customization</h4>
 <p>When a user is successfully authenticated, they will be redirected to the <code>/home</code> URI. You can customize the post-authentication redirect location by defining a <code>redirectTo</code> property on the <code>LoginController</code>, <code>RegisterController</code>, and <code>ResetPasswordController</code>:</p>
-<pre><code>protected $redirectTo = '/';
-</code></pre>
-<p>When a user is not successfully authenticated, they will be automatically redirected back to the login form.</p>
+<div class="codehilite"><pre><span></span>protected $redirectTo = &#39;/&#39;;
+</pre></div>
+
+
+<p>If the redirect path needs custom generation logic you may define a <code>redirectTo</code> method instead of a <code>redirectTo</code> property:</p>
+<div class="codehilite"><pre><span></span>protected function redirectTo()
+{
+    //
+}
+</pre></div>
+
+
+<blockquote>
+<p>{tip} <code>redirectTo</code> method has higher priority than <code>redirectTo</code> attribute.</p>
+</blockquote>
+<h4 id="username-customization">Username Customization</h4>
+<p>By default, Laravel uses the <code>email</code> field for authentication. If you would like to customize this, you may define a <code>username</code> method on your <code>LoginController</code>:</p>
+<div class="codehilite"><pre><span></span>public function username()
+{
+    return &#39;username&#39;;
+}
+</pre></div>
+
+
 <h4 id="guard-customization">Guard Customization</h4>
 <p>You may also customize the "guard" that is used to authenticate and register users. To get started, define a <code>guard</code> method on your <code>LoginController</code>, <code>RegisterController</code>, and <code>ResetPasswordController</code>. The method should return a guard instance:</p>
-<pre><code>use Illuminate\Support\Facades\Auth;
+<div class="codehilite"><pre><span></span><span class="nt">use</span> <span class="nt">Illuminate</span><span class="err">\</span><span class="nt">Support</span><span class="err">\</span><span class="nt">Facades</span><span class="err">\</span><span class="nt">Auth</span><span class="o">;</span>
 
-protected function guard()
-{
-    return Auth::guard('guard-name');
-}
-</code></pre>
+<span class="nt">protected</span> <span class="nt">function</span> <span class="nt">guard</span><span class="o">()</span>
+<span class="p">{</span>
+    <span class="err">return</span> <span class="n">Auth</span><span class="p">:</span><span class="o">:</span><span class="nf">guard</span><span class="p">(</span><span class="s1">&#39;guard-name&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <h4 id="validation-storage-customization">Validation / Storage Customization</h4>
 <p>To modify the form fields that are required when a new user registers with your application, or to customize how new users are stored into your database, you may modify the <code>RegisterController</code> class. This class is responsible for validating and creating new users of your application.</p>
 <p>The <code>validator</code> method of the <code>RegisterController</code> contains the validation rules for new users of the application. You are free to modify this method as you wish.</p>
@@ -914,62 +929,78 @@ protected function guard()
 <p><a name="retrieving-the-authenticated-user"></a></p>
 <h3 id="retrieving-the-authenticated-user">Retrieving The Authenticated User</h3>
 <p>You may access the authenticated user via the <code>Auth</code> facade:</p>
-<pre><code>use Illuminate\Support\Facades\Auth;
+<div class="codehilite"><pre><span></span><span class="nt">use</span> <span class="nt">Illuminate</span><span class="err">\</span><span class="nt">Support</span><span class="err">\</span><span class="nt">Facades</span><span class="err">\</span><span class="nt">Auth</span><span class="o">;</span>
 
-$user = Auth::user();
-</code></pre>
+<span class="o">//</span> <span class="nt">Get</span> <span class="nt">the</span> <span class="nt">currently</span> <span class="nt">authenticated</span> <span class="nt">user</span><span class="o">...</span>
+<span class="o">$</span><span class="nt">user</span> <span class="o">=</span> <span class="nt">Auth</span><span class="p">::</span><span class="nd">user</span><span class="o">();</span>
+
+<span class="o">//</span> <span class="nt">Get</span> <span class="nt">the</span> <span class="nt">currently</span> <span class="nt">authenticated</span> <span class="nt">user</span><span class="err">&#39;</span><span class="nt">s</span> <span class="nt">ID</span><span class="o">...</span>
+<span class="o">$</span><span class="nt">id</span> <span class="o">=</span> <span class="nt">Auth</span><span class="p">::</span><span class="nd">id</span><span class="o">();</span>
+</pre></div>
+
+
 <p>Alternatively, once a user is authenticated, you may access the authenticated user via an <code>Illuminate\Http\Request</code> instance. Remember, type-hinted classes will automatically be injected into your controller methods:</p>
-<pre><code>&lt;?php
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
-namespace App\Http\Controllers;
+<span class="nx">namespace</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Http</span><span class="err">\</span><span class="nx">Controllers</span><span class="p">;</span>
 
-use Illuminate\Http\Request;
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Http</span><span class="err">\</span><span class="nx">Request</span><span class="p">;</span>
 
-class ProfileController extends Controller
-{
-    /**
-     * Update the user's profile.
-     *
-     * @param  Request  $request
-     * @return Response
-     */
-    public function update(Request $request)
-    {
-        // $request-&gt;user() returns an instance of the authenticated user...
-    }
-}
-</code></pre>
+<span class="kr">class</span> <span class="nx">ProfileController</span> <span class="kr">extends</span> <span class="nx">Controller</span>
+<span class="p">{</span>
+    <span class="cm">/**</span>
+<span class="cm">     * Update the user&#39;s profile.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param  Request  $request</span>
+<span class="cm">     * @return Response</span>
+<span class="cm">     */</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">update</span><span class="p">(</span><span class="nx">Request</span> <span class="nx">$request</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// $request-&gt;user() returns an instance of the authenticated user...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <h4 id="determining-if-the-current-user-is-authenticated">Determining If The Current User Is Authenticated</h4>
 <p>To determine if the user is already logged into your application, you may use the <code>check</code> method on the <code>Auth</code> facade, which will return <code>true</code> if the user is authenticated:</p>
-<pre><code>use Illuminate\Support\Facades\Auth;
+<div class="codehilite"><pre><span></span>use Illuminate\Support\Facades\Auth;
 
 if (Auth::check()) {
     // The user is logged in...
 }
-</code></pre>
+</pre></div>
+
+
 <blockquote>
 <p>{tip} Even though it is possible to determine if a user is authenticated using the <code>check</code> method, you will typically use a middleware to verify that the user is authenticated before allowing the user access to certain routes / controllers. To learn more about this, check out the documentation on <a href="../docs/{{version}}/authentication#protecting-routes">protecting routes</a>.</p>
 </blockquote>
 <p><a name="protecting-routes"></a></p>
 <h3 id="protecting-routes">Protecting Routes</h3>
 <p><a href="../docs/{{version}}/middleware">Route middleware</a> can be used to only allow authenticated users to access a given route. Laravel ships with an <code>auth</code> middleware, which is defined at <code>Illuminate\Auth\Middleware\Authenticate</code>. Since this middleware is already registered in your HTTP kernel, all you need to do is attach the middleware to a route definition:</p>
-<pre><code>Route::get('profile', function () {
+<div class="codehilite"><pre><span></span>Route::get(&#39;profile&#39;, function () {
     // Only authenticated users may enter...
-})-&gt;middleware('auth');
-</code></pre>
+})-&gt;middleware(&#39;auth&#39;);
+</pre></div>
+
+
 <p>Of course, if you are using <a href="../docs/{{version}}/controllers">controllers</a>, you may call the <code>middleware</code> method from the controller's constructor instead of attaching it in the route definition directly:</p>
-<pre><code>public function __construct()
+<div class="codehilite"><pre><span></span>public function __construct()
 {
-    $this-&gt;middleware('auth');
+    $this-&gt;middleware(&#39;auth&#39;);
 }
-</code></pre>
+</pre></div>
+
+
 <h4 id="specifying-a-guard">Specifying A Guard</h4>
 <p>When attaching the <code>auth</code> middleware to a route, you may also specify which guard should be used to authenticate the user. The guard specified should correspond to one of the keys in the <code>guards</code> array of your <code>auth.php</code> configuration file:</p>
-<pre><code>public function __construct()
-{
-    $this-&gt;middleware('auth:api');
-}
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="nt">public</span> <span class="nt">function</span> <span class="nt">__construct</span><span class="o">()</span>
+<span class="p">{</span>
+    <span class="err">$this-&gt;middleware(&#39;</span><span class="n">auth</span><span class="p">:</span><span class="n">api</span><span class="err">&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <p><a name="login-throttling"></a></p>
 <h3 id="login-throttling">Login Throttling</h3>
 <p>If you are using Laravel's built-in <code>LoginController</code> class, the <code>Illuminate\Foundation\Auth\ThrottlesLogins</code> trait will already be included in your controller. By default, the user will not be able to login for one minute if they fail to provide the correct credentials after several attempts. The throttling is unique to the user's username / e-mail address and their IP address.</p>
@@ -977,235 +1008,275 @@ if (Auth::check()) {
 <h2 id="manually-authenticating-users">Manually Authenticating Users</h2>
 <p>Of course, you are not required to use the authentication controllers included with Laravel. If you choose to remove these controllers, you will need to manage user authentication using the Laravel authentication classes directly. Don't worry, it's a cinch!</p>
 <p>We will access Laravel's authentication services via the <code>Auth</code> <a href="../docs/{{version}}/facades">facade</a>, so we'll need to make sure to import the <code>Auth</code> facade at the top of the class. Next, let's check out the <code>attempt</code> method:</p>
-<pre><code>&lt;?php
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
-namespace App\Http\Controllers;
+<span class="nx">namespace</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Http</span><span class="err">\</span><span class="nx">Controllers</span><span class="p">;</span>
 
-use Illuminate\Support\Facades\Auth;
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Support</span><span class="err">\</span><span class="nx">Facades</span><span class="err">\</span><span class="nx">Auth</span><span class="p">;</span>
 
-class AuthController extends Controller
-{
-    /**
-     * Handle an authentication attempt.
-     *
-     * @return Response
-     */
-    public function authenticate()
-    {
-        if (Auth::attempt(['email' =&gt; $email, 'password' =&gt; $password])) {
-            // Authentication passed...
-            return redirect()-&gt;intended('dashboard');
-        }
-    }
-}
-</code></pre>
+<span class="kr">class</span> <span class="nx">LoginController</span> <span class="kr">extends</span> <span class="nx">Controller</span>
+<span class="p">{</span>
+    <span class="cm">/**</span>
+<span class="cm">     * Handle an authentication attempt.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return Response</span>
+<span class="cm">     */</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">authenticate</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">Auth</span><span class="o">::</span><span class="nx">attempt</span><span class="p">([</span><span class="s1">&#39;email&#39;</span> <span class="o">=&gt;</span> <span class="nx">$email</span><span class="p">,</span> <span class="s1">&#39;password&#39;</span> <span class="o">=&gt;</span> <span class="nx">$password</span><span class="p">]))</span> <span class="p">{</span>
+            <span class="c1">// Authentication passed...</span>
+            <span class="k">return</span> <span class="nx">redirect</span><span class="p">()</span><span class="o">-&gt;</span><span class="nx">intended</span><span class="p">(</span><span class="s1">&#39;dashboard&#39;</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <p>The <code>attempt</code> method accepts an array of key / value pairs as its first argument. The values in the array will be used to find the user in your database table. So, in the example above, the user will be retrieved by the value of the <code>email</code> column. If the user is found, the hashed password stored in the database will be compared with the hashed <code>password</code> value passed to the method via the array. If the two hashed passwords match an authenticated session will be started for the user.</p>
 <p>The <code>attempt</code> method will return <code>true</code> if authentication was successful. Otherwise, <code>false</code> will be returned.</p>
 <p>The <code>intended</code> method on the redirector will redirect the user to the URL they were attempting to access before being intercepted by the authentication middleware. A fallback URI may be given to this method in case the intended destination is not available.</p>
 <h4 id="specifying-additional-conditions">Specifying Additional Conditions</h4>
 <p>If you wish, you also may add extra conditions to the authentication query in addition to the user's e-mail and password. For example, we may verify that user is marked as "active":</p>
-<pre><code>if (Auth::attempt(['email' =&gt; $email, 'password' =&gt; $password, 'active' =&gt; 1])) {
+<div class="codehilite"><pre><span></span>if (Auth::attempt([&#39;email&#39; =&gt; $email, &#39;password&#39; =&gt; $password, &#39;active&#39; =&gt; 1])) {
     // The user is active, not suspended, and exists.
 }
-</code></pre>
+</pre></div>
+
+
 <blockquote>
 <p>{note} In these examples, <code>email</code> is not a required option, it is merely used as an example. You should use whatever column name corresponds to a "username" in your database.</p>
 </blockquote>
 <h4 id="accessing-specific-guard-instances">Accessing Specific Guard Instances</h4>
 <p>You may specify which guard instance you would like to utilize using the <code>guard</code> method on the <code>Auth</code> facade. This allows you to manage authentication for separate parts of your application using entirely separate authenticatable models or user tables.</p>
 <p>The guard name passed to the <code>guard</code> method should correspond to one of the guards configured in your <code>auth.php</code> configuration file:</p>
-<pre><code>if (Auth::guard('admin')-&gt;attempt($credentials)) {
+<div class="codehilite"><pre><span></span>if (Auth::guard(&#39;admin&#39;)-&gt;attempt($credentials)) {
     //
 }
-</code></pre>
+</pre></div>
+
+
 <h4 id="logging-out">Logging Out</h4>
 <p>To log users out of your application, you may use the <code>logout</code> method on the <code>Auth</code> facade. This will clear the authentication information in the user's session:</p>
-<pre><code>Auth::logout();
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="nt">Auth</span><span class="p">::</span><span class="nd">logout</span><span class="o">();</span>
+</pre></div>
+
+
 <p><a name="remembering-users"></a></p>
 <h3 id="remembering-users">Remembering Users</h3>
 <p>If you would like to provide "remember me" functionality in your application, you may pass a boolean value as the second argument to the <code>attempt</code> method, which will keep the user authenticated indefinitely, or until they manually logout. Of course, your <code>users</code> table must include the string <code>remember_token</code> column, which will be used to store the "remember me" token.</p>
-<pre><code>if (Auth::attempt(['email' =&gt; $email, 'password' =&gt; $password], $remember)) {
+<div class="codehilite"><pre><span></span>if (Auth::attempt([&#39;email&#39; =&gt; $email, &#39;password&#39; =&gt; $password], $remember)) {
     // The user is being remembered...
 }
-</code></pre>
+</pre></div>
+
+
 <blockquote>
 <p>{tip} If you are using the built-in <code>LoginController</code> that is shipped with Laravel, the proper logic to "remember" users is already implemented by the traits used by the controller.</p>
 </blockquote>
 <p>If you are "remembering" users, you may use the <code>viaRemember</code> method to determine if the user was authenticated using the "remember me" cookie:</p>
-<pre><code>if (Auth::viaRemember()) {
+<div class="codehilite"><pre><span></span>if (Auth::viaRemember()) {
     //
 }
-</code></pre>
+</pre></div>
+
+
 <p><a name="other-authentication-methods"></a></p>
 <h3 id="other-authentication-methods">Other Authentication Methods</h3>
 <h4 id="authenticate-a-user-instance">Authenticate A User Instance</h4>
 <p>If you need to log an existing user instance into your application, you may call the <code>login</code> method with the user instance. The given object must be an implementation of the <code>Illuminate\Contracts\Auth\Authenticatable</code> <a href="../docs/{{version}}/contracts">contract</a>. Of course, the <code>App\User</code> model included with Laravel already implements this interface:</p>
-<pre><code>Auth::login($user);
+<div class="codehilite"><pre><span></span><span class="nt">Auth</span><span class="p">::</span><span class="nd">login</span><span class="o">($</span><span class="nt">user</span><span class="o">);</span>
 
-// Login and "remember" the given user...
-Auth::login($user, true);
-</code></pre>
+<span class="o">//</span> <span class="nt">Login</span> <span class="nt">and</span> <span class="s2">&quot;remember&quot;</span> <span class="nt">the</span> <span class="nt">given</span> <span class="nt">user</span><span class="o">...</span>
+<span class="nt">Auth</span><span class="p">::</span><span class="nd">login</span><span class="o">($</span><span class="nt">user</span><span class="o">,</span> <span class="nt">true</span><span class="o">);</span>
+</pre></div>
+
+
 <p>Of course, you may specify the guard instance you would like to use:</p>
-<pre><code>Auth::guard('admin')-&gt;login($user);
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="nt">Auth</span><span class="p">::</span><span class="nd">guard</span><span class="o">(</span><span class="s1">&#39;admin&#39;</span><span class="o">)</span><span class="nt">-</span><span class="o">&gt;</span><span class="nt">login</span><span class="o">($</span><span class="nt">user</span><span class="o">);</span>
+</pre></div>
+
+
 <h4 id="authenticate-a-user-by-id">Authenticate A User By ID</h4>
 <p>To log a user into the application by their ID, you may use the <code>loginUsingId</code> method. This method simply accepts the primary key of the user you wish to authenticate:</p>
-<pre><code>Auth::loginUsingId(1);
+<div class="codehilite"><pre><span></span><span class="nt">Auth</span><span class="p">::</span><span class="nd">loginUsingId</span><span class="o">(</span><span class="nt">1</span><span class="o">);</span>
 
-// Login and "remember" the given user...
-Auth::loginUsingId(1, true);
-</code></pre>
+<span class="o">//</span> <span class="nt">Login</span> <span class="nt">and</span> <span class="s2">&quot;remember&quot;</span> <span class="nt">the</span> <span class="nt">given</span> <span class="nt">user</span><span class="o">...</span>
+<span class="nt">Auth</span><span class="p">::</span><span class="nd">loginUsingId</span><span class="o">(</span><span class="nt">1</span><span class="o">,</span> <span class="nt">true</span><span class="o">);</span>
+</pre></div>
+
+
 <h4 id="authenticate-a-user-once">Authenticate A User Once</h4>
 <p>You may use the <code>once</code> method to log a user into the application for a single request. No sessions or cookies will be utilized, which means this method may be helpful when building a stateless API:</p>
-<pre><code>if (Auth::once($credentials)) {
+<div class="codehilite"><pre><span></span>if (Auth::once($credentials)) {
     //
 }
-</code></pre>
+</pre></div>
+
+
 <p><a name="http-basic-authentication"></a></p>
 <h2 id="http-basic-authentication">HTTP Basic Authentication</h2>
-<p><a href="http://en.wikipedia.org/wiki/Basic_access_authentication">HTTP Basic Authentication</a> provides a quick way to authenticate users of your application without setting up a dedicated "login" page. To get started, attach the <code>auth.basic</code> <a href="../docs/{{version}}/middleware">middleware</a> to your route. The <code>auth.basic</code> middleware is included with the Laravel framework, so you do not need to define it:</p>
-<pre><code>Route::get('profile', function () {
+<p><a href="https://en.wikipedia.org/wiki/Basic_access_authentication">HTTP Basic Authentication</a> provides a quick way to authenticate users of your application without setting up a dedicated "login" page. To get started, attach the <code>auth.basic</code> <a href="../docs/{{version}}/middleware">middleware</a> to your route. The <code>auth.basic</code> middleware is included with the Laravel framework, so you do not need to define it:</p>
+<div class="codehilite"><pre><span></span>Route::get(&#39;profile&#39;, function () {
     // Only authenticated users may enter...
-})-&gt;middleware('auth.basic');
-</code></pre>
+})-&gt;middleware(&#39;auth.basic&#39;);
+</pre></div>
+
+
 <p>Once the middleware has been attached to the route, you will automatically be prompted for credentials when accessing the route in your browser. By default, the <code>auth.basic</code> middleware will use the <code>email</code> column on the user record as the "username".</p>
 <h4 id="a-note-on-fastcgi">A Note On FastCGI</h4>
 <p>If you are using PHP FastCGI, HTTP Basic authentication may not work correctly out of the box. The following lines should be added to your <code>.htaccess</code> file:</p>
-<pre><code>RewriteCond %{HTTP:Authorization} ^(.+)$
+<div class="codehilite"><pre><span></span>RewriteCond %{HTTP:Authorization} ^(.+)$
 RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
-</code></pre>
+</pre></div>
+
+
 <p><a name="stateless-http-basic-authentication"></a></p>
 <h3 id="stateless-http-basic-authentication">Stateless HTTP Basic Authentication</h3>
 <p>You may also use HTTP Basic Authentication without setting a user identifier cookie in the session, which is particularly useful for API authentication. To do so, <a href="../docs/{{version}}/middleware">define a middleware</a> that calls the <code>onceBasic</code> method. If no response is returned by the <code>onceBasic</code> method, the request may be passed further into the application:</p>
-<pre><code>&lt;?php
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
-namespace Illuminate\Auth\Middleware;
+<span class="nx">namespace</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Auth</span><span class="err">\</span><span class="nx">Middleware</span><span class="p">;</span>
 
-use Illuminate\Support\Facades\Auth;
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Support</span><span class="err">\</span><span class="nx">Facades</span><span class="err">\</span><span class="nx">Auth</span><span class="p">;</span>
 
-class AuthenticateOnceWithBasicAuth
-{
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @return mixed
-     */
-    public function handle($request, $next)
-    {
-        return Auth::onceBasic() ?: $next($request);
-    }
+<span class="kr">class</span> <span class="nx">AuthenticateOnceWithBasicAuth</span>
+<span class="p">{</span>
+    <span class="cm">/**</span>
+<span class="cm">     * Handle an incoming request.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param  \Illuminate\Http\Request  $request</span>
+<span class="cm">     * @param  \Closure  $next</span>
+<span class="cm">     * @return mixed</span>
+<span class="cm">     */</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">handle</span><span class="p">(</span><span class="nx">$request</span><span class="p">,</span> <span class="nx">$next</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">Auth</span><span class="o">::</span><span class="nx">onceBasic</span><span class="p">()</span> <span class="o">?:</span> <span class="nx">$next</span><span class="p">(</span><span class="nx">$request</span><span class="p">);</span>
+    <span class="p">}</span>
 
-}
-</code></pre>
+<span class="p">}</span>
+</pre></div>
+
+
 <p>Next, <a href="../docs/{{version}}/middleware#registering-middleware">register the route middleware</a> and attach it to a route:</p>
-<pre><code>Route::get('api/user', function () {
+<div class="codehilite"><pre><span></span>Route::get(&#39;api/user&#39;, function () {
     // Only authenticated users may enter...
-})-&gt;middleware('auth.basic.once');
-</code></pre>
+})-&gt;middleware(&#39;auth.basic.once&#39;);
+</pre></div>
+
+
 <p><a name="adding-custom-guards"></a></p>
 <h2 id="adding-custom-guards">Adding Custom Guards</h2>
 <p>You may define your own authentication guards using the <code>extend</code> method on the <code>Auth</code> facade. You should place this call to <code>provider</code> within a <a href="../docs/{{version}}/providers">service provider</a>. Since Laravel already ships with an <code>AuthServiceProvider</code>, we can place the code in that provider:</p>
-<pre><code>&lt;?php
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
-namespace App\Providers;
+<span class="nx">namespace</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Providers</span><span class="p">;</span>
 
-use App\Services\Auth\JwtGuard;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\ServiceProvider;
+<span class="nx">use</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Services</span><span class="err">\</span><span class="nx">Auth</span><span class="err">\</span><span class="nx">JwtGuard</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Support</span><span class="err">\</span><span class="nx">Facades</span><span class="err">\</span><span class="nx">Auth</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Foundation</span><span class="err">\</span><span class="nx">Support</span><span class="err">\</span><span class="nx">Providers</span><span class="err">\</span><span class="nx">AuthServiceProvider</span> <span class="kr">as</span> <span class="nx">ServiceProvider</span><span class="p">;</span>
 
-class AuthServiceProvider extends ServiceProvider
-{
-    /**
-     * Register any application authentication / authorization services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        $this-&gt;registerPolicies();
+<span class="kr">class</span> <span class="nx">AuthServiceProvider</span> <span class="kr">extends</span> <span class="nx">ServiceProvider</span>
+<span class="p">{</span>
+    <span class="cm">/**</span>
+<span class="cm">     * Register any application authentication / authorization services.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return void</span>
+<span class="cm">     */</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">boot</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">registerPolicies</span><span class="p">();</span>
 
-        Auth::extend('jwt', function ($app, $name, array $config) {
-            // Return an instance of Illuminate\Contracts\Auth\Guard...
+        <span class="nx">Auth</span><span class="o">::</span><span class="nx">extend</span><span class="p">(</span><span class="s1">&#39;jwt&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">$app</span><span class="p">,</span> <span class="nx">$name</span><span class="p">,</span> <span class="nx">array</span> <span class="nx">$config</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// Return an instance of Illuminate\Contracts\Auth\Guard...</span>
 
-            return new JwtGuard(Auth::createUserProvider($config['provider']));
-        });
-    }
-}
-</code></pre>
+            <span class="k">return</span> <span class="k">new</span> <span class="nx">JwtGuard</span><span class="p">(</span><span class="nx">Auth</span><span class="o">::</span><span class="nx">createUserProvider</span><span class="p">(</span><span class="nx">$config</span><span class="p">[</span><span class="s1">&#39;provider&#39;</span><span class="p">]));</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <p>As you can see in the example above, the callback passed to the <code>extend</code> method should return an implementation of <code>Illuminate\Contracts\Auth\Guard</code>. This interface contains a few methods you will need to implement to define a custom guard. Once your custom guard has been defined, you may use the guard in the <code>guards</code> configuration of your <code>auth.php</code> configuration file:</p>
-<pre><code>'guards' =&gt; [
-    'api' =&gt; [
-        'driver' =&gt; 'jwt',
-        'provider' =&gt; 'users',
+<div class="codehilite"><pre><span></span>&#39;guards&#39; =&gt; [
+    &#39;api&#39; =&gt; [
+        &#39;driver&#39; =&gt; &#39;jwt&#39;,
+        &#39;provider&#39; =&gt; &#39;users&#39;,
     ],
 ],
-</code></pre>
+</pre></div>
+
+
 <p><a name="adding-custom-user-providers"></a></p>
 <h2 id="adding-custom-user-providers">Adding Custom User Providers</h2>
 <p>If you are not using a traditional relational database to store your users, you will need to extend Laravel with your own authentication user provider. We will use the <code>provider</code> method on the <code>Auth</code> facade to define a custom user provider:</p>
-<pre><code>&lt;?php
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
-namespace App\Providers;
+<span class="nx">namespace</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Providers</span><span class="p">;</span>
 
-use Illuminate\Support\Facades\Auth;
-use App\Extensions\RiakUserProvider;
-use Illuminate\Support\ServiceProvider;
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Support</span><span class="err">\</span><span class="nx">Facades</span><span class="err">\</span><span class="nx">Auth</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Extensions</span><span class="err">\</span><span class="nx">RiakUserProvider</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Support</span><span class="err">\</span><span class="nx">ServiceProvider</span><span class="p">;</span>
 
-class AuthServiceProvider extends ServiceProvider
-{
-    /**
-     * Register any application authentication / authorization services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        $this-&gt;registerPolicies();
+<span class="kr">class</span> <span class="nx">AuthServiceProvider</span> <span class="kr">extends</span> <span class="nx">ServiceProvider</span>
+<span class="p">{</span>
+    <span class="cm">/**</span>
+<span class="cm">     * Register any application authentication / authorization services.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return void</span>
+<span class="cm">     */</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">boot</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">registerPolicies</span><span class="p">();</span>
 
-        Auth::provider('riak', function ($app, array $config) {
-            // Return an instance of Illuminate\Contracts\Auth\UserProvider...
+        <span class="nx">Auth</span><span class="o">::</span><span class="nx">provider</span><span class="p">(</span><span class="s1">&#39;riak&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">$app</span><span class="p">,</span> <span class="nx">array</span> <span class="nx">$config</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// Return an instance of Illuminate\Contracts\Auth\UserProvider...</span>
 
-            return new RiakUserProvider($app-&gt;make('riak.connection'));
-        });
-    }
-}
-</code></pre>
+            <span class="k">return</span> <span class="k">new</span> <span class="nx">RiakUserProvider</span><span class="p">(</span><span class="nx">$app</span><span class="o">-&gt;</span><span class="nx">make</span><span class="p">(</span><span class="s1">&#39;riak.connection&#39;</span><span class="p">));</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <p>After you have registered the provider using the <code>provider</code> method, you may switch to the new user provider in your <code>auth.php</code> configuration file. First, define a <code>provider</code> that uses your new driver:</p>
-<pre><code>'providers' =&gt; [
-    'users' =&gt; [
-        'driver' =&gt; 'riak',
+<div class="codehilite"><pre><span></span>&#39;providers&#39; =&gt; [
+    &#39;users&#39; =&gt; [
+        &#39;driver&#39; =&gt; &#39;riak&#39;,
     ],
 ],
-</code></pre>
+</pre></div>
+
+
 <p>Finally, you may use this provider in your <code>guards</code> configuration:</p>
-<pre><code>'guards' =&gt; [
-    'web' =&gt; [
-        'driver' =&gt; 'session',
-        'provider' =&gt; 'users',
+<div class="codehilite"><pre><span></span>&#39;guards&#39; =&gt; [
+    &#39;web&#39; =&gt; [
+        &#39;driver&#39; =&gt; &#39;session&#39;,
+        &#39;provider&#39; =&gt; &#39;users&#39;,
     ],
 ],
-</code></pre>
+</pre></div>
+
+
 <p><a name="the-user-provider-contract"></a></p>
 <h3 id="the-user-provider-contract">The User Provider Contract</h3>
 <p>The <code>Illuminate\Contracts\Auth\UserProvider</code> implementations are only responsible for fetching a <code>Illuminate\Contracts\Auth\Authenticatable</code> implementation out of a persistent storage system, such as MySQL, Riak, etc. These two interfaces allow the Laravel authentication mechanisms to continue functioning regardless of how the user data is stored or what type of class is used to represent it.</p>
 <p>Let's take a look at the <code>Illuminate\Contracts\Auth\UserProvider</code> contract:</p>
-<pre><code>&lt;?php
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
-namespace Illuminate\Contracts\Auth;
+<span class="nx">namespace</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Contracts</span><span class="err">\</span><span class="nx">Auth</span><span class="p">;</span>
 
-interface UserProvider {
+<span class="kr">interface</span> <span class="nx">UserProvider</span> <span class="p">{</span>
 
-    public function retrieveById($identifier);
-    public function retrieveByToken($identifier, $token);
-    public function updateRememberToken(Authenticatable $user, $token);
-    public function retrieveByCredentials(array $credentials);
-    public function validateCredentials(Authenticatable $user, array $credentials);
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">retrieveById</span><span class="p">(</span><span class="nx">$identifier</span><span class="p">);</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">retrieveByToken</span><span class="p">(</span><span class="nx">$identifier</span><span class="p">,</span> <span class="nx">$token</span><span class="p">);</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">updateRememberToken</span><span class="p">(</span><span class="nx">Authenticatable</span> <span class="nx">$user</span><span class="p">,</span> <span class="nx">$token</span><span class="p">);</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">retrieveByCredentials</span><span class="p">(</span><span class="nx">array</span> <span class="nx">$credentials</span><span class="p">);</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">validateCredentials</span><span class="p">(</span><span class="nx">Authenticatable</span> <span class="nx">$user</span><span class="p">,</span> <span class="nx">array</span> <span class="nx">$credentials</span><span class="p">);</span>
 
-}
-</code></pre>
+<span class="p">}</span>
+</pre></div>
+
+
 <p>The <code>retrieveById</code> function typically receives a key representing the user, such as an auto-incrementing ID from a MySQL database. The <code>Authenticatable</code> implementation matching the ID should be retrieved and returned by the method.</p>
 <p>The <code>retrieveByToken</code> function retrieves a user by their unique <code>$identifier</code> and "remember me" <code>$token</code>, stored in a field <code>remember_token</code>. As with the previous method, the <code>Authenticatable</code> implementation should be returned.</p>
 <p>The <code>updateRememberToken</code> method updates the <code>$user</code> field <code>remember_token</code> with the new <code>$token</code>. The new token can be either a fresh token, assigned on a successful "remember me" login attempt, or <code>null</code> when the user is logging out.</p>
@@ -1214,52 +1285,62 @@ interface UserProvider {
 <p><a name="the-authenticatable-contract"></a></p>
 <h3 id="the-authenticatable-contract">The Authenticatable Contract</h3>
 <p>Now that we have explored each of the methods on the <code>UserProvider</code>, let's take a look at the <code>Authenticatable</code> contract. Remember, the provider should return implementations of this interface from the <code>retrieveById</code> and <code>retrieveByCredentials</code> methods:</p>
-<pre><code>&lt;?php
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
-namespace Illuminate\Contracts\Auth;
+<span class="nx">namespace</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Contracts</span><span class="err">\</span><span class="nx">Auth</span><span class="p">;</span>
 
-interface Authenticatable {
+<span class="kr">interface</span> <span class="nx">Authenticatable</span> <span class="p">{</span>
 
-    public function getAuthIdentifierName();
-    public function getAuthIdentifier();
-    public function getAuthPassword();
-    public function getRememberToken();
-    public function setRememberToken($value);
-    public function getRememberTokenName();
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">getAuthIdentifierName</span><span class="p">();</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">getAuthIdentifier</span><span class="p">();</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">getAuthPassword</span><span class="p">();</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">getRememberToken</span><span class="p">();</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">setRememberToken</span><span class="p">(</span><span class="nx">$value</span><span class="p">);</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">getRememberTokenName</span><span class="p">();</span>
 
-}
-</code></pre>
+<span class="p">}</span>
+</pre></div>
+
+
 <p>This interface is simple. The <code>getAuthIdentifierName</code> method should return the name of the "primary key" field of the user and the <code>getAuthIdentifier</code> method should return the "primary key" of the user. In a MySQL back-end, again, this would be the auto-incrementing primary key. The <code>getAuthPassword</code> should return the user's hashed password. This interface allows the authentication system to work with any User class, regardless of what ORM or storage abstraction layer you are using. By default, Laravel includes a <code>User</code> class in the <code>app</code> directory which implements this interface, so you may consult this class for an implementation example.</p>
 <p><a name="events"></a></p>
 <h2 id="events">Events</h2>
 <p>Laravel raises a variety of <a href="../docs/{{version}}/events">events</a> during the authentication process. You may attach listeners to these events in your <code>EventServiceProvider</code>:</p>
-<pre><code>/**
- * The event listener mappings for the application.
- *
- * @var array
- */
-protected $listen = [
-    'Illuminate\Auth\Events\Attempting' =&gt; [
-        'App\Listeners\LogAuthenticationAttempt',
-    ],
+<div class="codehilite"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * The event listener mappings for the application.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @var array</span>
+<span class="cm"> */</span><span class="w"></span>
+protected<span class="w"> </span><span class="err">$</span>listen<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">[</span><span class="w"></span>
+<span class="w">    </span><span class="s">&#39;Illuminate\Auth\Events\Registered&#39;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="err">[</span><span class="w"></span>
+<span class="w">        </span><span class="s">&#39;App\Listeners\LogRegisteredUser&#39;</span><span class="o">,</span><span class="w"></span>
+<span class="w">    </span><span class="err">]</span><span class="o">,</span><span class="w"></span>
 
-    'Illuminate\Auth\Events\Authenticated' =&gt; [
-        'App\Listeners\LogAuthenticated',
-    ],
+<span class="w">    </span><span class="s">&#39;Illuminate\Auth\Events\Attempting&#39;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="err">[</span><span class="w"></span>
+<span class="w">        </span><span class="s">&#39;App\Listeners\LogAuthenticationAttempt&#39;</span><span class="o">,</span><span class="w"></span>
+<span class="w">    </span><span class="err">]</span><span class="o">,</span><span class="w"></span>
 
-    'Illuminate\Auth\Events\Login' =&gt; [
-        'App\Listeners\LogSuccessfulLogin',
-    ],
+<span class="w">    </span><span class="s">&#39;Illuminate\Auth\Events\Authenticated&#39;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="err">[</span><span class="w"></span>
+<span class="w">        </span><span class="s">&#39;App\Listeners\LogAuthenticated&#39;</span><span class="o">,</span><span class="w"></span>
+<span class="w">    </span><span class="err">]</span><span class="o">,</span><span class="w"></span>
 
-    'Illuminate\Auth\Events\Logout' =&gt; [
-        'App\Listeners\LogSuccessfulLogout',
-    ],
+<span class="w">    </span><span class="s">&#39;Illuminate\Auth\Events\Login&#39;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="err">[</span><span class="w"></span>
+<span class="w">        </span><span class="s">&#39;App\Listeners\LogSuccessfulLogin&#39;</span><span class="o">,</span><span class="w"></span>
+<span class="w">    </span><span class="err">]</span><span class="o">,</span><span class="w"></span>
 
-    'Illuminate\Auth\Events\Lockout' =&gt; [
-        'App\Listeners\LogLockout',
-    ],
-];
-</code></pre>
+<span class="w">    </span><span class="s">&#39;Illuminate\Auth\Events\Failed&#39;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="err">[</span><span class="w"></span>
+<span class="w">        </span><span class="s">&#39;App\Listeners\LogFailedLogin&#39;</span><span class="o">,</span><span class="w"></span>
+<span class="w">    </span><span class="err">]</span><span class="o">,</span><span class="w"></span>
+
+<span class="w">    </span><span class="s">&#39;Illuminate\Auth\Events\Logout&#39;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="err">[</span><span class="w"></span>
+<span class="w">        </span><span class="s">&#39;App\Listeners\LogSuccessfulLogout&#39;</span><span class="o">,</span><span class="w"></span>
+<span class="w">    </span><span class="err">]</span><span class="o">,</span><span class="w"></span>
+
+<span class="w">    </span><span class="s">&#39;Illuminate\Auth\Events\Lockout&#39;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="err">[</span><span class="w"></span>
+<span class="w">        </span><span class="s">&#39;App\Listeners\LogLockout&#39;</span><span class="o">,</span><span class="w"></span>
+<span class="w">    </span><span class="err">]</span><span class="o">,</span><span class="w"></span>
+<span class="err">];</span><span class="w"></span>
+</pre></div>
           <aside class="copyright" role="note">
             
             Documentation built with
@@ -1332,10 +1413,6 @@ protected $listen = [
       var repo_id  = '';
     </script>
     <script src="../assets/javascripts/application-997097ee0c.js"></script>
-    
-      <script src="../assets/jquery.js"></script>
-    
-      <script src="../assets/prism.js"></script>
     
     
   </body>

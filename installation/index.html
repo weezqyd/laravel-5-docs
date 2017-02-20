@@ -9,16 +9,16 @@
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     
       
-        <title>Installation - Laravel 5.3 official documentation</title>
+        <title>Installation - Laravel 5.4 Official Documentation</title>
       
       
       
       
     
     <meta property="og:url" content="None">
-    <meta property="og:title" content="Laravel 5.3 official documentation">
+    <meta property="og:title" content="Laravel 5.4 Official Documentation">
     <meta property="og:image" content="None/../">
-    <meta name="apple-mobile-web-app-title" content="Laravel 5.3 official documentation">
+    <meta name="apple-mobile-web-app-title" content="Laravel 5.4 Official Documentation">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
@@ -60,15 +60,13 @@
       </style>
     
     
-      <link rel="stylesheet" href="../assets/prism.css">
-    
     <script src="../assets/javascripts/modernizr-4ab42b99fd.js"></script>
     
   </head>
   
   
   
-  <body class="palette-primary-teal palette-accent-pink">
+  <body class="palette-primary-teal palette-accent-green">
     
     <div class="backdrop">
       <div class="backdrop-paper"></div>
@@ -125,7 +123,7 @@
       
       <div class="name">
         <strong>
-          Laravel 5.3 official documentation
+          Laravel 5.4 Official Documentation
           <span class="version">
             
           </span>
@@ -491,6 +489,12 @@
               </a>
             </li>
           
+            <li class="anchor">
+              <a title="Web Server Configuration" href="#web-server-configuration">
+                Web Server Configuration
+              </a>
+            </li>
+          
         </ul>
       
     
@@ -627,15 +631,6 @@
   <li>
     <a class="" title="Queues" href="../queues/">
       Queues
-    </a>
-    
-  </li>
-
-          
-            
-  <li>
-    <a class="" title="Readme" href="../readme/">
-      Readme
     </a>
     
   </li>
@@ -803,6 +798,10 @@
 <li><a href="#configuration">Configuration</a></li>
 </ul>
 </li>
+<li><a href="#web-server-configuration">Web Server Configuration</a><ul>
+<li><a href="#pretty-urls">Pretty URLs</a></li>
+</ul>
+</li>
 </ul>
 <p><a name="installation"></a></p>
 <h2 id="installation_1">Installation</h2>
@@ -816,27 +815,36 @@
 - PDO PHP Extension
 - Mbstring PHP Extension
 - Tokenizer PHP Extension
+- XML PHP Extension
 </div>
 
 <p><a name="installing-laravel"></a></p>
 <h3 id="installing-laravel">Installing Laravel</h3>
-<p>Laravel utilizes <a href="http://getcomposer.org">Composer</a> to manage its dependencies. So, before using Laravel, make sure you have Composer installed on your machine.</p>
+<p>Laravel utilizes <a href="https://getcomposer.org">Composer</a> to manage its dependencies. So, before using Laravel, make sure you have Composer installed on your machine.</p>
 <h4 id="via-laravel-installer">Via Laravel Installer</h4>
 <p>First, download the Laravel installer using Composer:</p>
-<pre><code>composer global require "laravel/installer"
-</code></pre>
-<p>Make sure to place the <code>~/.composer/vendor/bin</code> directory (or the equivalent directory for your OS) in your $PATH so the <code>laravel</code> executable can be located by your system.</p>
+<div class="codehilite"><pre><span></span>composer global require &quot;laravel/installer&quot;
+</pre></div>
+
+
+<p>Make sure to place the <code>$HOME/.composer/vendor/bin</code> directory (or the equivalent directory for your OS) in your $PATH so the <code>laravel</code> executable can be located by your system.</p>
 <p>Once installed, the <code>laravel new</code> command will create a fresh Laravel installation in the directory you specify. For instance, <code>laravel new blog</code> will create a directory named <code>blog</code> containing a fresh Laravel installation with all of Laravel's dependencies already installed:</p>
-<pre><code>laravel new blog
-</code></pre>
+<div class="codehilite"><pre><span></span>laravel new blog
+</pre></div>
+
+
 <h4 id="via-composer-create-project">Via Composer Create-Project</h4>
 <p>Alternatively, you may also install Laravel by issuing the Composer <code>create-project</code> command in your terminal:</p>
-<pre><code>composer create-project --prefer-dist laravel/laravel blog
-</code></pre>
+<div class="codehilite"><pre><span></span>composer create-project --prefer-dist laravel/laravel blog &quot;5.3.*&quot;
+</pre></div>
+
+
 <h4 id="local-development-server">Local Development Server</h4>
 <p>If you have PHP installed locally and you would like to use PHP's built-in development server to serve your application, you may use the <code>serve</code> Artisan command. This command will start a development server at <code>http://localhost:8000</code>:</p>
-<pre><code>php artisan serve
-</code></pre>
+<div class="codehilite"><pre><span></span>php artisan serve
+</pre></div>
+
+
 <p>Of course, more robust local development options are available via <a href="../docs/{{version}}/homestead">Homestead</a> and <a href="../docs/{{version}}/valet">Valet</a>.</p>
 <p><a name="configuration"></a></p>
 <h3 id="configuration">Configuration</h3>
@@ -858,7 +866,31 @@
 - [Session](/docs/{{version}}/session#configuration)
 </div>
 
-<p>Once Laravel is installed, you should also <a href="../docs/{{version}}/configuration#environment-configuration">configure your local environment</a>.</p>
+<p><a name="web-server-configuration"></a></p>
+<h2 id="web-server-configuration">Web Server Configuration</h2>
+<p><a name="pretty-urls"></a></p>
+<h3 id="pretty-urls">Pretty URLs</h3>
+<h4 id="apache">Apache</h4>
+<p>Laravel includes a <code>public/.htaccess</code> file that is used to provide URLs without the <code>index.php</code> front controller in the path. Before serving Laravel with Apache, be sure to enable the <code>mod_rewrite</code> module so the <code>.htaccess</code> file will be honored by the server.</p>
+<p>If the <code>.htaccess</code> file that ships with Laravel does not work with your Apache installation, try this alternative:</p>
+<div class="codehilite"><pre><span></span>Options +FollowSymLinks
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.php [L]
+</pre></div>
+
+
+<h4 id="nginx">Nginx</h4>
+<p>If you are using Nginx, the following directive in your site configuration will direct all requests to the <code>index.php</code> front controller:</p>
+<div class="codehilite"><pre><span></span>location / {
+    try_files $uri $uri/ /index.php?$query_string;
+}
+</pre></div>
+
+
+<p>Of course, when using <a href="../docs/{{version}}/homestead">Homestead</a> or <a href="../docs/{{version}}/valet">Valet</a>, pretty URLs will be automatically configured.</p>
           <aside class="copyright" role="note">
             
             Documentation built with
@@ -931,10 +963,6 @@
       var repo_id  = '';
     </script>
     <script src="../assets/javascripts/application-997097ee0c.js"></script>
-    
-      <script src="../assets/jquery.js"></script>
-    
-      <script src="../assets/prism.js"></script>
     
     
   </body>

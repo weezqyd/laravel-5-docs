@@ -9,16 +9,16 @@
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     
       
-        <title>Upgrade - Laravel 5.3 official documentation</title>
+        <title>Upgrade - Laravel 5.4 Official Documentation</title>
       
       
       
       
     
     <meta property="og:url" content="None">
-    <meta property="og:title" content="Laravel 5.3 official documentation">
+    <meta property="og:title" content="Laravel 5.4 Official Documentation">
     <meta property="og:image" content="None/../">
-    <meta name="apple-mobile-web-app-title" content="Laravel 5.3 official documentation">
+    <meta name="apple-mobile-web-app-title" content="Laravel 5.4 Official Documentation">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
@@ -60,15 +60,13 @@
       </style>
     
     
-      <link rel="stylesheet" href="../assets/prism.css">
-    
     <script src="../assets/javascripts/modernizr-4ab42b99fd.js"></script>
     
   </head>
   
   
   
-  <body class="palette-primary-teal palette-accent-pink">
+  <body class="palette-primary-teal palette-accent-green">
     
     <div class="backdrop">
       <div class="backdrop-paper"></div>
@@ -125,7 +123,7 @@
       
       <div class="name">
         <strong>
-          Laravel 5.3 official documentation
+          Laravel 5.4 Official Documentation
           <span class="version">
             
           </span>
@@ -619,15 +617,6 @@
           
             
   <li>
-    <a class="" title="Readme" href="../readme/">
-      Readme
-    </a>
-    
-  </li>
-
-          
-            
-  <li>
     <a class="" title="Redirects" href="../redirects/">
       Redirects
     </a>
@@ -868,6 +857,9 @@
 <blockquote>
 <p>{note} We attempt to document every possible breaking change. Since some of these breaking changes are in obscure parts of the framework only a portion of these changes may actually affect your application.</p>
 </blockquote>
+<h3 id="updating-dependencies">Updating Dependencies</h3>
+<p>Update your <code>laravel/framework</code> dependency to <code>5.3.*</code> in your <code>composer.json</code> file.</p>
+<p>You should also upgrade your <code>symfony/css-selector</code> and <code>symfony/dom-crawler</code> dependencies to <code>3.1.*</code> in the <code>require-dev</code> section of your <code>composer.json</code> file.</p>
 <h3 id="php-hhvm">PHP &amp; HHVM</h3>
 <p>Laravel 5.3 requires PHP 5.6.4 or higher. HHVM is no longer officially supported as it does not contain the same language features as PHP 5.6+.</p>
 <h3 id="deprecations">Deprecations</h3>
@@ -880,17 +872,19 @@
 <h3 id="arrays">Arrays</h3>
 <h4 id="key-value-order-change">Key / Value Order Change</h4>
 <p>The <code>first</code>, <code>last</code>, and <code>where</code> methods on the <code>Arr</code> class now pass the "value" as the first parameter to the given callback Closure. For example:</p>
-<pre><code>Arr::first($array, function ($value, $key) {
+<div class="codehilite"><pre><span></span>Arr::first($array, function ($value, $key) {
     return ! is_null($value);
 });
-</code></pre>
+</pre></div>
+
+
 <p>In previous versions of Laravel, the <code>$key</code> was passed first. Since most use cases are only interested in the <code>$value</code> it is now passed first. You should do a "global find" in your application for these methods to verify that you are expecting the <code>$value</code> to be passed as the first argument to your Closure.</p>
 <h3 id="artisan">Artisan</h3>
 <h5 id="the-makeconsole-command">The <code>make:console</code> Command</h5>
 <p>The <code>make:console</code> command has been renamed to <code>make:command</code>.</p>
 <h3 id="authentication">Authentication</h3>
 <h4 id="authentication-scaffolding">Authentication Scaffolding</h4>
-<p>The two default authentication controllers provided with the framework have been split into four smaller controllers. This change provides cleaner, more focused authentication controllers by default. The easiest way to upgrade your application to the new authentication controllers is to <a href="https://github.com/laravel/laravel/tree/master/app/Http/Controllers/Auth">grab a fresh copy of each controller from GitHub</a> and place them into your application.</p>
+<p>The two default authentication controllers provided with the framework have been split into four smaller controllers. This change provides cleaner, more focused authentication controllers by default. The easiest way to upgrade your application to the new authentication controllers is to <a href="https://github.com/laravel/laravel/tree/5.3/app/Http/Controllers/Auth">grab a fresh copy of each controller from GitHub</a> and place them into your application.</p>
 <p>You should also make sure that you are calling the <code>Auth::routes()</code> method in your <code>routes/web.php</code> file. This method will register the proper routes for the new authentication controllers.</p>
 <p>Once these controllers have been placed into your application, you may need to re-implement any customizations you made to these controllers. For example, if you are customizing the authentication guard that is used for authentication, you may need to override the controller's <code>guard</code> method. You can examine each authentication controller's trait to determine which methods to override.</p>
 <blockquote>
@@ -899,40 +893,46 @@
 <h4 id="password-reset-emails">Password Reset Emails</h4>
 <p>Password reset emails now use the new Laravel notifications feature. If you would like to customize the notification sent when sending password reset links, you should override the <code>sendPasswordResetNotification</code> method of the <code>Illuminate\Auth\Passwords\CanResetPassword</code> trait.</p>
 <p>Your <code>User</code> model <strong>must</strong> use the new <code>Illuminate\Notifications\Notifiable</code> trait in order for password reset link emails to be delivered:</p>
-<pre><code>&lt;?php
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
-namespace App;
+<span class="nx">namespace</span> <span class="nx">App</span><span class="p">;</span>
 
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Notifications</span><span class="err">\</span><span class="nx">Notifiable</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Foundation</span><span class="err">\</span><span class="nx">Auth</span><span class="err">\</span><span class="nx">User</span> <span class="kr">as</span> <span class="nx">Authenticatable</span><span class="p">;</span>
 
-class User extends Authenticatable
-{
-    use Notifiable;
-}
-</code></pre>
+<span class="kr">class</span> <span class="nx">User</span> <span class="kr">extends</span> <span class="nx">Authenticatable</span>
+<span class="p">{</span>
+    <span class="nx">use</span> <span class="nx">Notifiable</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <blockquote>
 <p>{note} Don't forget to register the <code>Illuminate\Notifications\NotificationServiceProvider</code> in the <code>providers</code> array of your <code>config/app.php</code> configuration file.</p>
 </blockquote>
 <h4 id="post-to-logout">POST To Logout</h4>
 <p>The <code>Auth::routes</code> method now registers a <code>POST</code> route for <code>/logout</code> instead of a <code>GET</code> route. This prevents other web applications from logging your users out of your application. To upgrade, you should either convert your logout requests to use the <code>POST</code> verb or register your own <code>GET</code> route for the <code>/logout</code> URI:</p>
-<pre><code>Route::get('/logout', 'Auth\LoginController@logout');
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="nt">Route</span><span class="p">::</span><span class="nd">get</span><span class="o">(</span><span class="s1">&#39;/logout&#39;</span><span class="o">,</span> <span class="s1">&#39;Auth\LoginController@logout&#39;</span><span class="o">);</span>
+</pre></div>
+
+
 <h3 id="authorization">Authorization</h3>
 <h4 id="calling-policy-methods-with-class-names">Calling Policy Methods With Class Names</h4>
 <p>Some policy methods only receive the currently authenticated user and not an instance of the model they authorize. This situation is most common when authorizing <code>create</code> actions. For example, if you are creating a blog, you may wish to check if a user is authorized to create any posts at all.</p>
 <p>When defining policy methods that will not receive a model instance, such as a <code>create</code> method, the class name will no longer be passed as the second argument to the method. Your method should just expect the authenticated user instance:</p>
-<pre><code>/**
- * Determine if the given user can create posts.
- *
- * @param  \App\User  $user
- * @return bool
- */
-public function create(User $user)
-{
-    //
-}
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * Determine if the given user can create posts.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param  \App\User  $user</span>
+<span class="cm"> * @return bool</span>
+<span class="cm"> */</span><span class="w"></span>
+public<span class="w"> </span>function<span class="w"> </span>create<span class="o">(</span>User<span class="w"> </span><span class="err">$</span>user<span class="o">)</span><span class="w"></span>
+<span class="err">{</span><span class="w"></span>
+<span class="w">    </span><span class="o">//</span><span class="w"></span>
+<span class="err">}</span><span class="w"></span>
+</pre></div>
+
+
 <h4 id="the-authorizesresources-trait">The <code>AuthorizesResources</code> Trait</h4>
 <p>The <code>AuthorizesResources</code> trait has been merged with the <code>AuthorizesRequests</code> trait. You should remove the <code>AuthorizesResources</code> trait from your <code>app/Http/Controllers/Controller.php</code> file.</p>
 <h3 id="blade">Blade</h3>
@@ -940,137 +940,167 @@ public function create(User $user)
 <p>In prior versions of Laravel, when registering custom Blade directives using the <code>directive</code> method, the <code>$expression</code> passed to your directive callback contained the outer-most parenthesis. In Laravel 5.3, these outer-most parenthesis are not included in the expression passed to your directive callback. Be sure to review the <a href="../docs/5.3/blade#extending-blade">Blade extension</a> documentation and verify your custom Blade directives are still working properly.</p>
 <h3 id="broadcasting">Broadcasting</h3>
 <h4 id="service-provider">Service Provider</h4>
-<p>Laravel 5.3 includes significant improvements to <a href="../docs/{{version}}/broadcasting">event broadcasting</a>. You should add the new <code>BroadcastServiceProvider</code> to your <code>app/Providers</code> directory by <a href="https://raw.githubusercontent.com/laravel/laravel/develop/app/Providers/BroadcastServiceProvider.php">grabbing a fresh copy of the source from GitHub</a>. Once you have defined the new service provider, you should add it to the <code>providers</code> array of your <code>config/app.php</code> configuration file.</p>
+<p>Laravel 5.3 includes significant improvements to <a href="../docs/{{version}}/broadcasting">event broadcasting</a>. You should add the new <code>BroadcastServiceProvider</code> to your <code>app/Providers</code> directory by <a href="https://raw.githubusercontent.com/laravel/laravel/5.3/app/Providers/BroadcastServiceProvider.php">grabbing a fresh copy of the source from GitHub</a>. Once you have defined the new service provider, you should add it to the <code>providers</code> array of your <code>config/app.php</code> configuration file.</p>
 <h3 id="cache">Cache</h3>
 <h4 id="extension-closure-binding-this">Extension Closure Binding &amp; <code>$this</code></h4>
 <p>When calling the <code>Cache::extend</code> method with a Closure, <code>$this</code> will be bound to the <code>CacheManager</code> instance, allowing you to call its methods from within your extension Closure:</p>
-<pre><code>Cache::extend('memcached', function ($app, $config) {
+<div class="codehilite"><pre><span></span>Cache::extend(&#39;memcached&#39;, function ($app, $config) {
     try {
         return $this-&gt;createMemcachedDriver($config);
     } catch (Exception $e) {
         return $this-&gt;createNullDriver($config);
     }
 });
-</code></pre>
+</pre></div>
+
+
 <h3 id="cashier">Cashier</h3>
 <p>If you are using Cashier, you should upgrade your <code>laravel/cashier</code> package to the <code>~7.0</code> release. This release of Cashier only upgrades a few internal methods to be compatible with Laravel 5.3 and is not a breaking change.</p>
 <h3 id="collections">Collections</h3>
 <h4 id="key-value-order-change_1">Key / Value Order Change</h4>
 <p>The <code>first</code>, <code>last</code>, and <code>contains</code> collection methods all pass the "value" as the first parameter to their given callback Closure. For example:</p>
-<pre><code>$collection-&gt;first(function ($value, $key) {
+<div class="codehilite"><pre><span></span>$collection-&gt;first(function ($value, $key) {
     return ! is_null($value);
 });
-</code></pre>
+</pre></div>
+
+
 <p>In previous versions of Laravel, the <code>$key</code> was passed first. Since most use cases are only interested in the <code>$value</code> it is now passed first. You should do a "global find" in your application for these methods to verify that you are expecting the <code>$value</code> to be passed as the first argument to your Closure.</p>
 <h4 id="collection-where-comparison-methods-are-loose-by-default">Collection <code>where</code> Comparison Methods Are "Loose" By Default</h4>
 <p>A collection's <code>where</code> method now performs a "loose" comparison by default instead of a strict comparison. If you would like to perform a strict comparison, you may use the <code>whereStrict</code> method.</p>
-<p>The <code>where</code> method also no longer accepts a third parameter to indicate "strictness." You should explicitly call either <code>where</code> or <code>whereStrict</code> depending on your application's needs.</p>
+<p>The <code>where</code> method also no longer accepts a third parameter to indicate "strictness". You should explicitly call either <code>where</code> or <code>whereStrict</code> depending on your application's needs.</p>
+<h3 id="configuration">Configuration</h3>
+<h4 id="application-name">Application Name</h4>
+<p>In the <code>config/app.php</code> configuration file, add the following configuration option:</p>
+<div class="codehilite"><pre><span></span>&#39;name&#39; =&gt; &#39;Your Application Name&#39;,
+</pre></div>
+
+
 <h3 id="controllers">Controllers</h3>
 <p><a name="5.3-session-in-constructors"></a></p>
 <h4 id="session-in-the-constructor">Session In The Constructor</h4>
 <p>In previous versions of Laravel, you could access session variables or the authenticated user in your controller's constructor. This was never intended to be an explicit feature of the framework. In Laravel 5.3, you can't access the session or authenticated user in your controller's constructor because the middleware has not run yet.</p>
 <p>As an alternative, you may define a Closure based middleware directly in your controller's constructor. Before using this feature, make sure that your application is running Laravel <code>5.3.4</code> or above:</p>
-<pre><code>&lt;?php
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
-namespace App\Http\Controllers;
+<span class="nx">namespace</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Http</span><span class="err">\</span><span class="nx">Controllers</span><span class="p">;</span>
 
-use App\User;
-use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\Controller;
+<span class="nx">use</span> <span class="nx">App</span><span class="err">\</span><span class="nx">User</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Support</span><span class="err">\</span><span class="nx">Facades</span><span class="err">\</span><span class="nx">Auth</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Http</span><span class="err">\</span><span class="nx">Controllers</span><span class="err">\</span><span class="nx">Controller</span><span class="p">;</span>
 
-class ProjectController extends Controller
-{
-    /**
-     * All of the current user's projects.
-     */
-    protected $projects;
+<span class="kr">class</span> <span class="nx">ProjectController</span> <span class="kr">extends</span> <span class="nx">Controller</span>
+<span class="p">{</span>
+    <span class="cm">/**</span>
+<span class="cm">     * All of the current user&#39;s projects.</span>
+<span class="cm">     */</span>
+    <span class="kr">protected</span> <span class="nx">$projects</span><span class="p">;</span>
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this-&gt;middleware(function ($request, $next) {
-            $this-&gt;projects = Auth::user()-&gt;projects;
+    <span class="cm">/**</span>
+<span class="cm">     * Create a new controller instance.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return void</span>
+<span class="cm">     */</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">__construct</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">middleware</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">$request</span><span class="p">,</span> <span class="nx">$next</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">projects</span> <span class="o">=</span> <span class="nx">Auth</span><span class="o">::</span><span class="nx">user</span><span class="p">()</span><span class="o">-&gt;</span><span class="nx">projects</span><span class="p">;</span>
 
-            return $next($request);
-        });
-    }
-}
-</code></pre>
+            <span class="k">return</span> <span class="nx">$next</span><span class="p">(</span><span class="nx">$request</span><span class="p">);</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <p>Of course, you may also access the request session data or authenticated user by type-hinting the <code>Illuminate\Http\Request</code> class on your controller action:</p>
-<pre><code>/**
- * Show all of the projects for the current user.
- *
- * @param  \Illuminate\Http\Request  $request
- * @return Response
- */
-public function index(Request $request)
-{
-    $projects = $request-&gt;user()-&gt;projects;
+<div class="codehilite"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * Show all of the projects for the current user.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param  \Illuminate\Http\Request  $request</span>
+<span class="cm"> * @return Response</span>
+<span class="cm"> */</span><span class="w"></span>
+public<span class="w"> </span>function<span class="w"> </span>index<span class="o">(</span>Request<span class="w"> </span><span class="err">$</span>request<span class="o">)</span><span class="w"></span>
+<span class="err">{</span><span class="w"></span>
+<span class="w">    </span><span class="err">$</span>projects<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">$</span>request<span class="o">-&gt;</span>user<span class="o">()-&gt;</span>projects<span class="err">;</span><span class="w"></span>
 
-    $value = $request-&gt;session()-&gt;get('key');
+<span class="w">    </span><span class="err">$</span>value<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">$</span>request<span class="o">-&gt;</span>session<span class="o">()-&gt;</span>get<span class="o">(</span><span class="s">&#39;key&#39;</span><span class="o">)</span><span class="err">;</span><span class="w"></span>
 
-    //
-}
-</code></pre>
+<span class="w">    </span><span class="o">//</span><span class="w"></span>
+<span class="err">}</span><span class="w"></span>
+</pre></div>
+
+
 <h3 id="database">Database</h3>
 <h4 id="collections_1">Collections</h4>
 <p>The <a href="../docs/{{version}}/queries">fluent query builder</a> now returns <code>Illuminate\Support\Collection</code> instances instead of plain arrays. This brings consistency to the result types returned by the fluent query builder and Eloquent.</p>
-<p>If you do not want to migrate your query builder results to <code>Collection</code> instances, you may chain the <code>all</code> method onto your calls to the query builder's <code>get</code> method. This will return a plain PHP array of the results, allowing you to maintain backwards compatibility:</p>
-<pre><code>$users = DB::table('users')-&gt;get()-&gt;all();
-</code></pre>
+<p>If you do not want to migrate your query builder results to <code>Collection</code> instances, you may chain the <code>all</code> method onto your calls to the query builder's <code>get</code> or <code>pluck</code> methods. This will return a plain PHP array of the results, allowing you to maintain backwards compatibility:</p>
+<div class="codehilite"><pre><span></span><span class="o">$</span><span class="nt">users</span> <span class="o">=</span> <span class="nt">DB</span><span class="p">::</span><span class="nd">table</span><span class="o">(</span><span class="s1">&#39;users&#39;</span><span class="o">)</span><span class="nt">-</span><span class="o">&gt;</span><span class="nt">get</span><span class="o">()</span><span class="nt">-</span><span class="o">&gt;</span><span class="nt">all</span><span class="o">();</span>
+
+<span class="o">$</span><span class="nt">usersIds</span> <span class="o">=</span> <span class="nt">DB</span><span class="p">::</span><span class="nd">table</span><span class="o">(</span><span class="s1">&#39;users&#39;</span><span class="o">)</span><span class="nt">-</span><span class="o">&gt;</span><span class="nt">pluck</span><span class="o">(</span><span class="s1">&#39;id&#39;</span><span class="o">)</span><span class="nt">-</span><span class="o">&gt;</span><span class="nt">all</span><span class="o">();</span>
+</pre></div>
+
+
+<h4 id="eloquent-getrelation-method">Eloquent <code>getRelation</code> Method</h4>
+<p>The Eloquent <code>getRelation</code> method no longer throws a <code>BadMethodCallException</code> if the relation can't be loaded. Instead, it will throw an <code>Illuminate\Database\Eloquent\RelationNotFoundException</code>. This change will only affect your application if you were manually catching the <code>BadMethodCallException</code>.</p>
 <h4 id="eloquent-morphclass-property">Eloquent <code>$morphClass</code> Property</h4>
 <p>The <code>$morphClass</code> property that could be defined on Eloquent models has been removed in favor of defining a "morph map". Defining a morph map provides support for eager loading and resolves additional bugs with polymorphic relations. If you were previously relying on the <code>$morphClass</code> property, you should migrate to <code>morphMap</code> using the following syntax:</p>
-<pre><code class="php">Relation::morphMap([
-    'YourCustomMorphName' =&gt; YourModel::class,
-]);
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="x">Relation::morphMap([</span>
+<span class="x">    &#39;YourCustomMorphName&#39; =&gt; YourModel::class,</span>
+<span class="x">]);</span>
+</pre></div>
+
 
 <p>For example, if you previously defined the following <code>$morphClass</code>:</p>
-<pre><code class="php">class User extends Model
-{
-    protected $morphClass = 'user'
-}
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="x">class User extends Model</span>
+<span class="x">{</span>
+<span class="x">    protected $morphClass = &#39;user&#39;</span>
+<span class="x">}</span>
+</pre></div>
+
 
 <p>You should define the following <code>morphMap</code> in the <code>boot</code> method of your <code>AppServiceProvider</code>:</p>
-<pre><code class="php">use Illuminate\Database\Eloquent\Relations\Relation;
+<div class="codehilite"><pre><span></span><span class="x">use Illuminate\Database\Eloquent\Relations\Relation;</span>
 
-Relation::morphMap([
-    'user' =&gt; User::class,
-]);
-</code></pre>
+<span class="x">Relation::morphMap([</span>
+<span class="x">    &#39;user&#39; =&gt; User::class,</span>
+<span class="x">]);</span>
+</pre></div>
 
-<h4 id="eloquent-save-method">Eloquent <code>save</code> Method</h4>
-<p>The Eloquent <code>save</code> method now returns <code>false</code> if the model has not been changed since the last time it was retrieved or saved.</p>
+
 <h4 id="eloquent-scopes">Eloquent Scopes</h4>
 <p>Eloquent scopes now respect the leading boolean of scope constraints. For example, if you are starting your scope with an <code>orWhere</code> constraint it will no longer be converted to normal <code>where</code>. If you were relying on this feature (e.g. adding multiple <code>orWhere</code> constraints within a loop), you should verify that the first condition is a normal <code>where</code> to avoid any boolean logic issues.</p>
 <p>If your scopes begin with <code>where</code> constraints no action is required. Remember, you can verify your query SQL using the <code>toSql</code> method of a query:</p>
-<pre><code>User::where('foo', 'bar')-&gt;toSql();
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="nt">User</span><span class="p">::</span><span class="nd">where</span><span class="o">(</span><span class="s1">&#39;foo&#39;</span><span class="o">,</span> <span class="s1">&#39;bar&#39;</span><span class="o">)</span><span class="nt">-</span><span class="o">&gt;</span><span class="nt">toSql</span><span class="o">();</span>
+</pre></div>
+
+
 <h4 id="join-clause">Join Clause</h4>
 <p>The <code>JoinClause</code> class has been rewritten to unify its syntax with the query builder. The optional <code>$where</code> parameter of the <code>on</code> clause has been removed. To add a "where" conditions you should explicitly use one of the <code>where</code> methods offered by the <a href="../docs/{{version}}/queries#where-clauses">query builder</a>:</p>
-<pre><code>$query-&gt;join('table', function ($join) {
-    $join-&gt;on('foo', 'bar')-&gt;where('bar', 'baz');
+<div class="codehilite"><pre><span></span>$query-&gt;join(&#39;table&#39;, function ($join) {
+    $join-&gt;on(&#39;foo&#39;, &#39;bar&#39;)-&gt;where(&#39;bar&#39;, &#39;baz&#39;);
 });
-</code></pre>
+</pre></div>
+
+
 <p>The operator of the <code>on</code> clause is now validated and can no longer contain invalid values. If you were relying on this feature (e.g. <code>$join-&gt;on('foo', 'in', DB::raw('("bar")'))</code>) you should rewrite the condition using the appropriate where clause:</p>
-<pre><code>$join-&gt;whereIn('foo', ['bar']);
-</code></pre>
+<div class="codehilite"><pre><span></span>$join-&gt;whereIn(&#39;foo&#39;, [&#39;bar&#39;]);
+</pre></div>
+
+
 <p>The <code>$bindings</code> property was also removed. To manipulate join bindings directly you may use the <code>addBinding</code> method:</p>
-<pre><code>$query-&gt;join(DB::raw('('.$subquery-&gt;toSql().') table'), function ($join) use ($subquery) {
-    $join-&gt;addBinding($subquery-&gt;getBindings(), 'join');
+<div class="codehilite"><pre><span></span>$query-&gt;join(DB::raw(&#39;(&#39;.$subquery-&gt;toSql().&#39;) table&#39;), function ($join) use ($subquery) {
+    $join-&gt;addBinding($subquery-&gt;getBindings(), &#39;join&#39;);
 });
-</code></pre>
+</pre></div>
+
+
 <h3 id="encryption">Encryption</h3>
 <h4 id="mcrypt-encrypter-has-been-removed">Mcrypt Encrypter Has Been Removed</h4>
 <p>The Mcrypt encrypter was deprecated during the Laravel 5.1.0 release in June 2015. This encrypter has been totally removed in the 5.3.0 release in favor of the newer encryption implementation based on OpenSSL, which has been the default encryption scheme for all releases since Laravel 5.1.0.</p>
 <p>If you are still using an Mcrypt based <code>cipher</code> in your <code>config/app.php</code> configuration file, you should update the cipher to <code>AES-256-CBC</code> and set your key to a random 32 byte string which may be securely generated using <code>php artisan key:generate</code>.</p>
 <p>If you are storing encrypted data in your database using the Mcrypt encrypter, you may install the <code>laravel/legacy-encrypter</code> <a href="https://github.com/laravel/legacy-encrypter">package</a> which includes the legacy Mcrypt encrypter implementation. You should use this package to decrypt your encrypted data and re-encrypt it using the new OpenSSL encrypter. For example, you may do something like the following in a <a href="../docs/{{version}}/artisan">custom Artisan command</a>:</p>
-<pre><code>$legacy = new McryptEncrypter($encryptionKey);
+<div class="codehilite"><pre><span></span>$legacy = new McryptEncrypter($encryptionKey);
 
 foreach ($records as $record) {
     $record-&gt;encrypted = encrypt(
@@ -1079,50 +1109,64 @@ foreach ($records as $record) {
 
     $record-&gt;save();
 }
-</code></pre>
+</pre></div>
+
+
 <h3 id="exception-handler">Exception Handler</h3>
 <h4 id="constructor">Constructor</h4>
 <p>The base exception handler class now requires a <code>Illuminate\Container\Container</code> instance to be passed to its constructor. This change will only affect your application if you have defined a custom <code>__construct</code> method in your <code>app/Exceptions/Handler.php</code> file. If you have done this, you should pass a container instance into the <code>parent::__construct</code> method:</p>
-<pre><code>parent::__construct(app());
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="nt">parent</span><span class="p">::</span><span class="nd">__construct</span><span class="o">(</span><span class="nt">app</span><span class="o">());</span>
+</pre></div>
+
+
 <h4 id="unauthenticated-method">Unauthenticated Method</h4>
 <p>You should add the <code>unauthenticated</code> method to your <code>App\Exceptions\Handler</code> class. This method will convert authentication exceptions into HTTP responses:</p>
-<pre><code>/**
- * Convert an authentication exception into an unauthenticated response.
- *
- * @param  \Illuminate\Http\Request  $request
- * @param  \Illuminate\Auth\AuthenticationException  $exception
- * @return \Illuminate\Http\Response
- */
-protected function unauthenticated($request, AuthenticationException $exception)
-{
-    if ($request-&gt;expectsJson()) {
-        return response()-&gt;json(['error' =&gt; 'Unauthenticated.'], 401);
-    }
+<div class="codehilite"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * Convert an authentication exception into an unauthenticated response.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param  \Illuminate\Http\Request  $request</span>
+<span class="cm"> * @param  \Illuminate\Auth\AuthenticationException  $exception</span>
+<span class="cm"> * @return \Illuminate\Http\Response</span>
+<span class="cm"> */</span><span class="w"></span>
+protected<span class="w"> </span>function<span class="w"> </span>unauthenticated<span class="o">(</span><span class="err">$</span>request<span class="o">,</span><span class="w"> </span>AuthenticationException<span class="w"> </span><span class="err">$</span>exception<span class="o">)</span><span class="w"></span>
+<span class="err">{</span><span class="w"></span>
+<span class="w">    </span><span class="kr">if</span><span class="w"> </span><span class="o">(</span><span class="err">$</span>request<span class="o">-&gt;</span>expectsJson<span class="o">())</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
+<span class="w">        </span><span class="kr">return</span><span class="w"> </span>response<span class="o">()-&gt;</span>json<span class="o">(</span><span class="err">[</span><span class="s">&#39;error&#39;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&#39;Unauthenticated.&#39;</span><span class="err">]</span><span class="o">,</span><span class="w"> </span><span class="m">401</span><span class="o">)</span><span class="err">;</span><span class="w"></span>
+<span class="w">    </span><span class="err">}</span><span class="w"></span>
 
-    return redirect()-&gt;guest('login');
-}
-</code></pre>
+<span class="w">    </span><span class="kr">return</span><span class="w"> </span>redirect<span class="o">()-&gt;</span>guest<span class="o">(</span><span class="s">&#39;login&#39;</span><span class="o">)</span><span class="err">;</span><span class="w"></span>
+<span class="err">}</span><span class="w"></span>
+</pre></div>
+
+
 <h3 id="middleware">Middleware</h3>
 <h4 id="can-middleware-namespace-change"><code>can</code> Middleware Namespace Change</h4>
 <p>The <code>can</code> middleware listed in the <code>$routeMiddleware</code> property of your HTTP kernel should be updated to the following class:</p>
-<pre><code>'can' =&gt; \Illuminate\Auth\Middleware\Authorize::class,
-</code></pre>
+<div class="codehilite"><pre><span></span>&#39;can&#39; =&gt; \Illuminate\Auth\Middleware\Authorize::class,
+</pre></div>
+
+
 <h4 id="can-middleware-authentication-exception"><code>can</code> Middleware Authentication Exception</h4>
 <p>The <code>can</code> middleware will now throw an instance of <code>Illuminate\Auth\AuthenticationException</code> if the user is not authenticated. If you were manually catching a different exception type, you should update your application to catch this exception. In most cases, this change will not affect your application.</p>
 <h4 id="binding-substitution-middleware">Binding Substitution Middleware</h4>
 <p>Route model binding is now accomplished using middleware. All applications should add the <code>Illuminate\Routing\Middleware\SubstituteBindings</code> to your <code>web</code> middleware group in your <code>app/Http/Kernel.php</code> file:</p>
-<pre><code>\Illuminate\Routing\Middleware\SubstituteBindings::class,
-</code></pre>
+<div class="codehilite"><pre><span></span>\Illuminate\Routing\Middleware\SubstituteBindings::class,
+</pre></div>
+
+
 <p>You should also register a route middleware for binding substitution in the <code>$routeMiddleware</code> property of your HTTP kernel:</p>
-<pre><code>'bindings' =&gt; \Illuminate\Routing\Middleware\SubstituteBindings::class,
-</code></pre>
+<div class="codehilite"><pre><span></span>&#39;bindings&#39; =&gt; \Illuminate\Routing\Middleware\SubstituteBindings::class,
+</pre></div>
+
+
 <p>Once this route middleware has been registered, you should add it to the <code>api</code> middleware group:</p>
-<pre><code>'api' =&gt; [
-    'throttle:60,1',
-    'bindings',
+<div class="codehilite"><pre><span></span>&#39;api&#39; =&gt; [
+    &#39;throttle:60,1&#39;,
+    &#39;bindings&#39;,
 ],
-</code></pre>
+</pre></div>
+
+
 <h3 id="notifications">Notifications</h3>
 <h4 id="installation">Installation</h4>
 <p>Laravel 5.3 includes a new, driver based notification system. You should register the <code>Illuminate\Notifications\NotificationServiceProvider</code> in the <code>providers</code> array of your <code>config/app.php</code> configuration file.</p>
@@ -1131,85 +1175,150 @@ protected function unauthenticated($request, AuthenticationException $exception)
 <h3 id="pagination">Pagination</h3>
 <h4 id="customization">Customization</h4>
 <p>Customizing the paginator's generated HTML is much easier in Laravel 5.3 compared to previous Laravel 5.x releases. Instead of defining a "Presenter" class, you only need to define a simple Blade template. The easiest way to customize the pagination views is by exporting them to your <code>resources/views/vendor</code> directory using the <code>vendor:publish</code> command:</p>
-<pre><code>php artisan vendor:publish --tag=laravel-pagination
-</code></pre>
+<div class="codehilite"><pre><span></span>php artisan vendor:publish --tag=laravel-pagination
+</pre></div>
+
+
 <p>This command will place the views in the <code>resources/views/vendor/pagination</code> directory. The <code>default.blade.php</code> file within this directory corresponds to the default pagination view. Simply edit this file to modify the pagination HTML.</p>
 <p>Be sure to review the full <a href="../docs/{{version}}/pagination">pagination documentation</a> for more information.</p>
 <h3 id="queue">Queue</h3>
-<h4 id="configuration">Configuration</h4>
+<h4 id="configuration_1">Configuration</h4>
 <p>In your queue configuration, all <code>expire</code> configuration items should be renamed to <code>retry_after</code>. Likewise, the Beanstalk configuration's <code>ttr</code> item should be renamed to <code>retry_after</code>. This name change provides more clarity on the purpose of this configuration option.</p>
 <h4 id="closures">Closures</h4>
 <p>Queueing Closures is no longer supported. If you are queueing a Closure in your application, you should convert the Closure to a class and queue an instance of the class:</p>
-<pre><code>dispatch(new ProcessPodcast($podcast));
-</code></pre>
+<div class="codehilite"><pre><span></span>dispatch(new ProcessPodcast($podcast));
+</pre></div>
+
+
 <h4 id="collection-serialization">Collection Serialization</h4>
 <p>The <code>Illuminate\Queue\SerializesModels</code> trait now properly serializes instances of <code>Illuminate\Database\Eloquent\Collection</code>. This will most likely not be a breaking change for the vast majority of applications; however, if your application is absolutely dependent on collections not being re-retrieved from the database by queued jobs, you should verify that this change does not negatively affect your application.</p>
 <h4 id="daemon-workers">Daemon Workers</h4>
 <p>It is no longer necessary to specify the <code>--daemon</code> option when calling the <code>queue:work</code> Artisan command. Running the <code>php artisan queue:work</code> command will automatically assume that you want to run the worker in daemon mode. If you would like to process a single job, you may use the <code>--once</code> option on the command:</p>
-<pre><code>// Start a daemon queue worker...
+<div class="codehilite"><pre><span></span>// Start a daemon queue worker...
 php artisan queue:work
 
 // Process a single job...
 php artisan queue:work --once
-</code></pre>
+</pre></div>
+
+
+<h4 id="database-driver-changes">Database Driver Changes</h4>
+<p>If you are using the <code>database</code> driver to store your queued jobs, you should drop the <code>jobs_queue_reserved_reserved_at_index</code> index then drop the <code>reserved</code> column from your <code>jobs</code> table. This column is no longer required when using the <code>database</code> driver. Once you have completed these changes, you should add a new compound index on the <code>queue</code> and <code>reserved_at</code> columns.</p>
+<p>Below is an example migration you may use to perform the necessary changes:</p>
+<div class="codehilite"><pre><span></span>public function up()
+{
+    Schema::table(&#39;jobs&#39;, function (Blueprint $table) {
+        $table-&gt;dropIndex(&#39;jobs_queue_reserved_reserved_at_index&#39;);
+        $table-&gt;dropColumn(&#39;reserved&#39;);
+        $table-&gt;index([&#39;queue&#39;, &#39;reserved_at&#39;]);
+    });
+
+    Schema::table(&#39;failed_jobs&#39;, function (Blueprint $table) {
+        $table-&gt;longText(&#39;exception&#39;)-&gt;after(&#39;payload&#39;);
+    });
+}
+
+public function down()
+{
+    Schema::table(&#39;jobs&#39;, function (Blueprint $table) {
+        $table-&gt;tinyInteger(&#39;reserved&#39;)-&gt;unsigned();
+        $table-&gt;index([&#39;queue&#39;, &#39;reserved&#39;, &#39;reserved_at&#39;]);
+        $table-&gt;dropIndex(&#39;jobs_queue_reserved_at_index&#39;);
+    });
+
+    Schema::table(&#39;failed_jobs&#39;, function (Blueprint $table) {
+        $table-&gt;dropColumn(&#39;exception&#39;);
+    });
+}
+</pre></div>
+
+
 <h4 id="event-data-changes">Event Data Changes</h4>
 <p>Various queue job events such as <code>JobProcessing</code> and <code>JobProcessed</code> no longer contain the <code>$data</code> property. You should update your application to call <code>$event-&gt;job-&gt;payload()</code> to get the equivalent data.</p>
-<h4 id="jobs-table">Jobs Table</h4>
-<p>If you are using the <code>database</code> driver to store your queued jobs in <code>config/queue.php</code>, you should drop the <code>jobs_queue_reserved_reserved_at_index</code> index then drop the <code>reserved</code> column from your <code>jobs</code> table. This column is no longer required when using the <code>database</code> driver. Once you have completed these changes, you should add a new compound index on the <code>queue</code> and <code>reserved_at</code> columns.</p>
-<h4 id="failed-jobs-table">Failed Jobs Table</h4>
-<p>If your application has a <code>failed_jobs</code> table, you should add an <code>exception</code> column to the table. The <code>exception</code> column should be a <code>TEXT</code> type column and will be used to store a string representation of the exception that caused the job to fail.</p>
+<h4 id="failed-job-events">Failed Job Events</h4>
+<p>If you are calling the <code>Queue::failing</code> method in your <code>AppServiceProvider</code>, you should update the method signature to the following:</p>
+<div class="codehilite"><pre><span></span>use Illuminate\Queue\Events\JobFailed;
+
+Queue::failing(function (JobFailed $event) {
+    // $event-&gt;connectionName
+    // $event-&gt;job
+    // $event-&gt;exception
+});
+</pre></div>
+
+
+<h4 id="process-control-extension">Process Control Extension</h4>
+<p>If your application makes use of the <code>--timeout</code> option for queue workers, you'll need to verify that the <a href="https://secure.php.net/manual/en/pcntl.installation.php">pcntl extension</a> is installed.</p>
 <h4 id="serializing-models-on-legacy-style-queue-jobs">Serializing Models On Legacy Style Queue Jobs</h4>
 <p>Typically, jobs in Laravel are queued by passing a new job instance to the <code>Queue::push</code> method. However, some applications may be queuing jobs using the following legacy syntax:</p>
-<pre><code>Queue::push('ClassName@method');
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="nt">Queue</span><span class="p">::</span><span class="nd">push</span><span class="o">(</span><span class="s1">&#39;ClassName@method&#39;</span><span class="o">);</span>
+</pre></div>
+
+
 <p>If you are queueing jobs using this syntax, Eloquent models will no longer be automatically serialized and re-retrieved by the queue. If you would like your Eloquent models to be automatically serialized by the queue, you should use the <code>Illuminate\Queue\SerializesModels</code> trait on your job class and queue the job using the new <code>push</code> syntax:</p>
-<pre><code>Queue::push(new ClassName);
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="nt">Queue</span><span class="p">::</span><span class="nd">push</span><span class="o">(</span><span class="nt">new</span> <span class="nt">ClassName</span><span class="o">);</span>
+</pre></div>
+
+
 <h3 id="routing">Routing</h3>
 <h4 id="resource-parameters-are-singular-by-default">Resource Parameters Are Singular By Default</h4>
 <p>In previous versions of Laravel, route parameters registered using <code>Route::resource</code> were not "singularized". This could lead to some unexpected behavior when registering route model bindings. For example, given the following <code>Route::resource</code> call:</p>
-<pre><code>Route::resource('photos', 'PhotoController');
-</code></pre>
-<p>The URI for the <code>show</code> route would be defined as follows:</p>
-<pre><code>/photos/{photos}
-</code></pre>
-<p>In Laravel 5.3, all resource route parameters are singularized by default. So, the same call to <code>Route::resource</code> would register the following URI:</p>
-<pre><code>/photos/{photo}
-</code></pre>
-<p>If you would like to maintain the previous behavior instead of automatically singularizing resource route parameters, you may make the following call to the <code>singularResourceParameters</code> method in your <code>AppServiceProvider</code>:</p>
-<pre><code>use Illuminate\Support\Facades\Route;
+<div class="codehilite"><pre><span></span><span class="nt">Route</span><span class="p">::</span><span class="nd">resource</span><span class="o">(</span><span class="s1">&#39;photos&#39;</span><span class="o">,</span> <span class="s1">&#39;PhotoController&#39;</span><span class="o">);</span>
+</pre></div>
 
-Route::singularResourceParameters(false);
-</code></pre>
+
+<p>The URI for the <code>show</code> route would be defined as follows:</p>
+<div class="codehilite"><pre><span></span>/photos/{photos}
+</pre></div>
+
+
+<p>In Laravel 5.3, all resource route parameters are singularized by default. So, the same call to <code>Route::resource</code> would register the following URI:</p>
+<div class="codehilite"><pre><span></span>/photos/{photo}
+</pre></div>
+
+
+<p>If you would like to maintain the previous behavior instead of automatically singularizing resource route parameters, you may make the following call to the <code>singularResourceParameters</code> method in your <code>AppServiceProvider</code>:</p>
+<div class="codehilite"><pre><span></span><span class="nt">use</span> <span class="nt">Illuminate</span><span class="err">\</span><span class="nt">Support</span><span class="err">\</span><span class="nt">Facades</span><span class="err">\</span><span class="nt">Route</span><span class="o">;</span>
+
+<span class="nt">Route</span><span class="p">::</span><span class="nd">singularResourceParameters</span><span class="o">(</span><span class="nt">false</span><span class="o">);</span>
+</pre></div>
+
+
 <h4 id="resource-route-names-no-longer-affected-by-prefixes">Resource Route Names No Longer Affected By Prefixes</h4>
 <p>URL prefixes no longer affect the route names assigned to routes when using <code>Route::resource</code>, since this behavior defeated the entire purpose of using route names in the first place.</p>
 <p>If your application is using <code>Route::resource</code> within a <code>Route::group</code> call that specified a <code>prefix</code> option, you should examine all of your <code>route</code> helper and <code>UrlGenerator::route</code> calls to verify that you are no longer appending this URI prefix to the route name.</p>
 <p>If this change causes you to have two routes with the same name, you have two options. First, you may use the <code>names</code> option when calling <code>Route::resource</code> to specify a custom name for a given route. Refer to the <a href="../docs/5.3/controllers#resource-controllers">resource routing documentation</a> for more information. Alternatively, you may add the <code>as</code> option on your route group:</p>
-<pre><code>Route::group(['as' =&gt; 'admin.', 'prefix' =&gt; 'admin'], function () {
+<div class="codehilite"><pre><span></span>Route::group([&#39;as&#39; =&gt; &#39;admin.&#39;, &#39;prefix&#39; =&gt; &#39;admin&#39;], function () {
     //
 });
-</code></pre>
+</pre></div>
+
+
 <h3 id="validation">Validation</h3>
 <h4 id="form-request-exceptions">Form Request Exceptions</h4>
 <p>If a form request's validation fails, Laravel will now throw an instance of <code>Illuminate\Validation\ValidationException</code> instead of an instance of <code>HttpException</code>. If you are manually catching the <code>HttpException</code> instance thrown by a form request, you should update your <code>catch</code> blocks to catch the <code>ValidationException</code> instead.</p>
+<h4 id="the-message-bag">The Message Bag</h4>
+<p>If you were previously using the <code>has</code> method to determine if an <code>Illuminate\Support\MessageBag</code> instance contained any messages, you should use the <code>count</code> method instead. The <code>has</code> method now requires a parameter and only determines if a specific key exists in the message bag.</p>
 <h4 id="nullable-primitives">Nullable Primitives</h4>
 <p>When validating arrays, booleans, integers, numerics, and strings, <code>null</code> will no longer be considered a valid value unless the rule set contains the new <code>nullable</code> rule:</p>
-<pre><code>Validate::make($request-&gt;all(), [
-    'field' =&gt; 'nullable|max:5',
+<div class="codehilite"><pre><span></span>Validate::make($request-&gt;all(), [
+    &#39;field&#39; =&gt; &#39;nullable|max:5&#39;,
 ]);
-</code></pre>
+</pre></div>
+
+
 <p><a name="upgrade-5.2.0"></a></p>
 <h2 id="upgrading-to-520-from-51">Upgrading To 5.2.0 From 5.1</h2>
 <h4 id="estimated-upgrade-time-less-than-1-hour">Estimated Upgrade Time: Less Than 1 Hour</h4>
 <blockquote>
 <p>{note} We attempt to provide a very comprehensive listing of every possible breaking change made to the framework. However, many of these changes may not apply to your own application.</p>
 </blockquote>
-<h3 id="updating-dependencies">Updating Dependencies</h3>
+<h3 id="updating-dependencies_1">Updating Dependencies</h3>
 <p>Update your <code>composer.json</code> file to point to <code>laravel/framework 5.2.*</code>.</p>
 <p>Add <code>"symfony/dom-crawler": "~3.0"</code> and <code>"symfony/css-selector": "~3.0"</code> to the <code>require-dev</code> section of your <code>composer.json</code> file.</p>
 <h3 id="authentication_1">Authentication</h3>
 <h4 id="configuration-file">Configuration File</h4>
-<p>You should update your <code>config/auth.php</code> configuration file with the following: <a href="https://github.com/laravel/laravel/blob/master/config/auth.php">https://github.com/laravel/laravel/blob/master/config/auth.php</a></p>
+<p>You should update your <code>config/auth.php</code> configuration file with the following: <a href="https://github.com/laravel/laravel/blob/5.2/config/auth.php">https://github.com/laravel/laravel/blob/5.2/config/auth.php</a></p>
 <p>Once you have updated the file with a fresh copy, set your authentication configuration options to their desired value based on your old configuration file. If you were using the typical, Eloquent based authentication services available in Laravel 5.1, most values should remain the same.</p>
 <p>Take special note of the <code>passwords.users.email</code> configuration option in the new <code>auth.php</code> configuration file and verify that the view path matches the actual view path for your application, as the default path to this view was changed in Laravel 5.2. If the default value in the new configuration file does not match your existing view, update the configuration option.</p>
 <h4 id="contracts">Contracts</h4>
@@ -1235,31 +1344,37 @@ Route::singularResourceParameters(false);
 <h4 id="separate-commands-handlers">Separate Commands &amp; Handlers</h4>
 <p>The Laravel 5.2 command bus now only supports self-handling commands and no longer supports separate commands and handlers.</p>
 <p>If you would like to continue using separate commands and handlers, you may install a Laravel Collective package which provides backwards-compatible support for this: <a href="https://github.com/laravelcollective/bus">https://github.com/LaravelCollective/bus</a></p>
-<h3 id="configuration_1">Configuration</h3>
+<h3 id="configuration_2">Configuration</h3>
 <h4 id="environment-value">Environment Value</h4>
 <p>Add an <code>env</code> configuration option to your <code>app.php</code> configuration file that looks like the following:</p>
-<pre><code>'env' =&gt; env('APP_ENV', 'production'),
-</code></pre>
+<div class="codehilite"><pre><span></span>&#39;env&#39; =&gt; env(&#39;APP_ENV&#39;, &#39;production&#39;),
+</pre></div>
+
+
 <h4 id="caching-and-env">Caching And Env</h4>
 <p>If you are using the <code>config:cache</code> command during deployment, you <strong>must</strong> make sure that you are only calling the <code>env</code> function from within your configuration files, and not from anywhere else in your application.</p>
 <p>If you are calling <code>env</code> from within your application, it is strongly recommended you add proper configuration values to your configuration files and call <code>env</code> from that location instead, allowing you to convert your <code>env</code> calls to <code>config</code> calls.</p>
 <h4 id="compiled-classes">Compiled Classes</h4>
 <p>If present, remove the following lines from <code>config/compile.php</code> in the <code>files</code> array:</p>
-<pre><code>realpath(__DIR__.'/../app/Providers/BusServiceProvider.php'),
-realpath(__DIR__.'/../app/Providers/ConfigServiceProvider.php'),
-</code></pre>
+<div class="codehilite"><pre><span></span>realpath(__DIR__.&#39;/../app/Providers/BusServiceProvider.php&#39;),
+realpath(__DIR__.&#39;/../app/Providers/ConfigServiceProvider.php&#39;),
+</pre></div>
+
+
 <p>Not doing so can trigger an error when running <code>php artisan optimize</code> if the service providers listed here do not exist.</p>
 <h3 id="csrf-verification">CSRF Verification</h3>
 <p>CSRF verification is no longer automatically performed when running unit tests. This is unlikely to affect your application.</p>
 <h3 id="database_1">Database</h3>
 <h4 id="mysql-dates">MySQL Dates</h4>
 <p>Starting with MySQL 5.7, <code>0000-00-00 00:00:00</code> is no longer considered a valid date, since <code>strict</code> mode is enabled by default. All timestamp columns should receive a valid default value when you insert records into your database. You may use the <code>useCurrent</code> method in your migrations to default the timestamp columns to the current timestamps, or you may make the timestamps <code>nullable</code> to allow <code>null</code> values:</p>
-<pre><code>$table-&gt;timestamp('foo')-&gt;nullable();
+<div class="codehilite"><pre><span></span>$table-&gt;timestamp(&#39;foo&#39;)-&gt;nullable();
 
-$table-&gt;timestamp('foo')-&gt;useCurrent();
+$table-&gt;timestamp(&#39;foo&#39;)-&gt;useCurrent();
 
 $table-&gt;nullableTimestamps();
-</code></pre>
+</pre></div>
+
+
 <h4 id="mysql-json-column-type">MySQL JSON Column Type</h4>
 <p>The <code>json</code> column type now creates actual JSON columns when used by the MySQL driver. If you are not running MySQL 5.7 or above, this column type will not be available to you. Instead, use the <code>text</code> column type in your migration.</p>
 <h4 id="seeding">Seeding</h4>
@@ -1274,13 +1389,15 @@ $table-&gt;nullableTimestamps();
 <p>New methods <code>withoutGlobalScope</code> and <code>withoutGlobalScopes</code> have been added to the Eloquent query builder. Any calls to <code>$model-&gt;removeGlobalScopes($builder)</code> may be changed to simply <code>$builder-&gt;withoutGlobalScopes()</code>.</p>
 <h4 id="primary-keys">Primary keys</h4>
 <p>By default, Eloquent assumes your primary keys are integers and will automatically cast them to integers. For any primary key that is not an integer you should override the <code>$incrementing</code> property on your Eloquent model to <code>false</code>:</p>
-<pre><code>/**
- * Indicates if the IDs are auto-incrementing.
- *
- * @var bool
- */
-public $incrementing = true;
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * Indicates if the IDs are auto-incrementing.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @var bool</span>
+<span class="cm"> */</span><span class="w"></span>
+public<span class="w"> </span><span class="err">$</span>incrementing<span class="w"> </span><span class="o">=</span><span class="w"> </span>true<span class="err">;</span><span class="w"></span>
+</pre></div>
+
+
 <h3 id="events">Events</h3>
 <h4 id="core-event-objects">Core Event Objects</h4>
 <p>Some of the core events fired by Laravel now use event objects instead of string event names and dynamic parameters. Below is a list of the old event names and their new object based counterparts:</p>
@@ -1367,15 +1484,17 @@ public $incrementing = true;
 </tbody>
 </table>
 <p>Each of these event objects contains <strong>exactly</strong> the same parameters that were passed to the event handler in Laravel 5.1. For example, if you were using <code>DB::listen</code> in 5.1.<em>, you may update your code like so for 5.2.</em>:</p>
-<pre><code>DB::listen(function ($event) {
+<div class="codehilite"><pre><span></span>DB::listen(function ($event) {
     dump($event-&gt;sql);
     dump($event-&gt;bindings);
 });
-</code></pre>
+</pre></div>
+
+
 <p>You may check out each of the new event object classes to see their public properties.</p>
 <h3 id="exception-handling">Exception Handling</h3>
 <p>Your <code>App\Exceptions\Handler</code> class' <code>$dontReport</code> property should be updated to include at least the following exception types:</p>
-<pre><code>use Illuminate\Validation\ValidationException;
+<div class="codehilite"><pre><span></span>use Illuminate\Validation\ValidationException;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -1391,7 +1510,9 @@ protected $dontReport = [
     ModelNotFoundException::class,
     ValidationException::class,
 ];
-</code></pre>
+</pre></div>
+
+
 <h3 id="helper-functions">Helper Functions</h3>
 <p>The <code>url()</code> helper function now returns a <code>Illuminate\Routing\UrlGenerator</code> instance when no path is provided.</p>
 <h3 id="implicit-model-binding">Implicit Model Binding</h3>
@@ -1399,7 +1520,7 @@ protected $dontReport = [
 <p>If you were type-hinting a model instance in your route or controller and were expecting an <strong>empty</strong> model instance to be injected, you should remove this type-hint and create an empty model instance directly within your route or controller; otherwise, Laravel will attempt to retrieve an existing model instance from the database based on the identifier present in the route's URI.</p>
 <h3 id="ironmq">IronMQ</h3>
 <p>The IronMQ queue driver has been moved into its own package and is no longer shipped with the core framework.</p>
-<p><a href="http://github.com/laravelcollective/iron-queue">http://github.com/LaravelCollective/iron-queue</a></p>
+<p><a href="https://github.com/laravelcollective/iron-queue">https://github.com/LaravelCollective/iron-queue</a></p>
 <h3 id="jobs-queue">Jobs / Queue</h3>
 <p>The <code>php artisan make:job</code> command now creates a "queued" job class definition by default. If you would like to create a "sync" job, use the <code>--sync</code> option when issuing the command.</p>
 <h3 id="mail">Mail</h3>
@@ -1442,59 +1563,69 @@ protected $dontReport = [
 <h4 id="create-the-policies-directory">Create The Policies Directory</h4>
 <p>First, create an empty <code>app/Policies</code> directory within your application.</p>
 <h4 id="create-register-the-authserviceprovider-gate-facade">Create / Register The AuthServiceProvider &amp; Gate Facade</h4>
-<p>Create a <code>AuthServiceProvider</code> within your <code>app/Providers</code> directory. You may copy the contents of the default provider <a href="https://raw.githubusercontent.com/laravel/laravel/master/app/Providers/AuthServiceProvider.php">from GitHub</a>. Remember to change the provider's namespace if your application is using a custom namespace. After creating the provider, be sure to register it in your <code>app.php</code> configuration file's <code>providers</code> array.</p>
+<p>Create a <code>AuthServiceProvider</code> within your <code>app/Providers</code> directory. You may copy the contents of the default provider <a href="https://raw.githubusercontent.com/laravel/laravel/5.1/app/Providers/AuthServiceProvider.php">from GitHub</a>. Remember to change the provider's namespace if your application is using a custom namespace. After creating the provider, be sure to register it in your <code>app.php</code> configuration file's <code>providers</code> array.</p>
 <p>Also, you should register the <code>Gate</code> facade in your <code>app.php</code> configuration file's <code>aliases</code> array:</p>
-<pre><code>'Gate' =&gt; Illuminate\Support\Facades\Gate::class,
-</code></pre>
+<div class="codehilite"><pre><span></span>&#39;Gate&#39; =&gt; Illuminate\Support\Facades\Gate::class,
+</pre></div>
+
+
 <h4 id="update-the-user-model">Update The User Model</h4>
 <p>Secondly, use the <code>Illuminate\Foundation\Auth\Access\Authorizable</code> trait and <code>Illuminate\Contracts\Auth\Access\Authorizable</code> contract on your <code>App\User</code> model:</p>
-<pre><code>&lt;?php
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
-namespace App;
+<span class="nx">namespace</span> <span class="nx">App</span><span class="p">;</span>
 
-use Illuminate\Auth\Authenticatable;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Auth\Passwords\CanResetPassword;
-use Illuminate\Foundation\Auth\Access\Authorizable;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
-use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
-use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Auth</span><span class="err">\</span><span class="nx">Authenticatable</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Database</span><span class="err">\</span><span class="nx">Eloquent</span><span class="err">\</span><span class="nx">Model</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Auth</span><span class="err">\</span><span class="nx">Passwords</span><span class="err">\</span><span class="nx">CanResetPassword</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Foundation</span><span class="err">\</span><span class="nx">Auth</span><span class="err">\</span><span class="nx">Access</span><span class="err">\</span><span class="nx">Authorizable</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Contracts</span><span class="err">\</span><span class="nx">Auth</span><span class="err">\</span><span class="nx">Authenticatable</span> <span class="kr">as</span> <span class="nx">AuthenticatableContract</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Contracts</span><span class="err">\</span><span class="nx">Auth</span><span class="err">\</span><span class="nx">Access</span><span class="err">\</span><span class="nx">Authorizable</span> <span class="kr">as</span> <span class="nx">AuthorizableContract</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Contracts</span><span class="err">\</span><span class="nx">Auth</span><span class="err">\</span><span class="nx">CanResetPassword</span> <span class="kr">as</span> <span class="nx">CanResetPasswordContract</span><span class="p">;</span>
 
-class User extends Model implements AuthenticatableContract,
-                                    AuthorizableContract,
-                                    CanResetPasswordContract
-{
-    use Authenticatable, Authorizable, CanResetPassword;
-}
-</code></pre>
+<span class="kr">class</span> <span class="nx">User</span> <span class="kr">extends</span> <span class="nx">Model</span> <span class="kr">implements</span> <span class="nx">AuthenticatableContract</span><span class="p">,</span>
+                                    <span class="nx">AuthorizableContract</span><span class="p">,</span>
+                                    <span class="nx">CanResetPasswordContract</span>
+<span class="p">{</span>
+    <span class="nx">use</span> <span class="nx">Authenticatable</span><span class="p">,</span> <span class="nx">Authorizable</span><span class="p">,</span> <span class="nx">CanResetPassword</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <h4 id="update-the-base-controller">Update The Base Controller</h4>
 <p>Next, update your base <code>App\Http\Controllers\Controller</code> controller to use the <code>Illuminate\Foundation\Auth\Access\AuthorizesRequests</code> trait:</p>
-<pre><code>&lt;?php
+<div class="codehilite"><pre><span></span><span class="cp">&lt;?php</span>
 
-namespace App\Http\Controllers;
+<span class="k">namespace</span> <span class="nx">App\Http\Controllers</span><span class="p">;</span>
 
-use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Routing\Controller as BaseController;
-use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+<span class="k">use</span> <span class="nx">Illuminate\Foundation\Bus\DispatchesJobs</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Illuminate\Routing\Controller</span> <span class="k">as</span> <span class="nx">BaseController</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Illuminate\Foundation\Validation\ValidatesRequests</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Illuminate\Foundation\Auth\Access\AuthorizesRequests</span><span class="p">;</span>
 
-abstract class Controller extends BaseController
-{
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-}
-</code></pre>
+<span class="k">abstract</span> <span class="k">class</span> <span class="nc">Controller</span> <span class="k">extends</span> <span class="nx">BaseController</span>
+<span class="p">{</span>
+    <span class="k">use</span> <span class="nx">AuthorizesRequests</span><span class="p">,</span> <span class="nx">DispatchesJobs</span><span class="p">,</span> <span class="nx">ValidatesRequests</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <p><a name="upgrade-5.1.0"></a></p>
 <h2 id="upgrading-to-510">Upgrading To 5.1.0</h2>
 <h4 id="estimated-upgrade-time-less-than-1-hour_1">Estimated Upgrade Time: Less Than 1 Hour</h4>
 <h3 id="update-bootstrapautoloadphp">Update <code>bootstrap/autoload.php</code></h3>
 <p>Update the <code>$compiledPath</code> variable in <code>bootstrap/autoload.php</code> to the following:</p>
-<pre><code>$compiledPath = __DIR__.'/cache/compiled.php';
-</code></pre>
+<div class="codehilite"><pre><span></span>$compiledPath = __DIR__.&#39;/cache/compiled.php&#39;;
+</pre></div>
+
+
 <h3 id="create-bootstrapcache-directory">Create <code>bootstrap/cache</code> Directory</h3>
 <p>Within your <code>bootstrap</code> directory, create a <code>cache</code> directory (<code>bootstrap/cache</code>). Place a <code>.gitignore</code> file in this directory with the following contents:</p>
-<pre><code>*
+<div class="codehilite"><pre><span></span>*
 !.gitignore
-</code></pre>
+</pre></div>
+
+
 <p>This directory should be writable, and will be used by the framework to store temporary optimization files like <code>compiled.php</code>, <code>routes.php</code>, <code>config.php</code>, and <code>services.json</code>.</p>
 <h3 id="add-broadcastserviceprovider-provider">Add <code>BroadcastServiceProvider</code> Provider</h3>
 <p>Within your <code>config/app.php</code> configuration file, add <code>Illuminate\Broadcasting\BroadcastServiceProvider</code> to the <code>providers</code> array.</p>
@@ -1512,26 +1643,32 @@ abstract class Controller extends BaseController
 <h3 id="eloquent_1">Eloquent</h3>
 <h4 id="the-create-method">The <code>create</code> Method</h4>
 <p>Eloquent's <code>create</code> method can now be called without any parameters. If you are overriding the <code>create</code> method in your own models, set the default value of the <code>$attributes</code> parameter to an array:</p>
-<pre><code>public static function create(array $attributes = [])
+<div class="codehilite"><pre><span></span>public static function create(array $attributes = [])
 {
     // Your custom implementation
 }
-</code></pre>
+</pre></div>
+
+
 <h4 id="the-find-method">The <code>find</code> Method</h4>
 <p>If you are overriding the <code>find</code> method in your own models and calling <code>parent::find()</code> within your custom method, you should now change it to call the <code>find</code> method on the Eloquent query builder:</p>
-<pre><code>public static function find($id, $columns = ['*'])
-{
-    $model = static::query()-&gt;find($id, $columns);
+<div class="codehilite"><pre><span></span><span class="nt">public</span> <span class="nt">static</span> <span class="nt">function</span> <span class="nt">find</span><span class="o">($</span><span class="nt">id</span><span class="o">,</span> <span class="o">$</span><span class="nt">columns</span> <span class="o">=</span> <span class="cp">[</span><span class="s1">&#39;*&#39;</span><span class="cp">]</span><span class="o">)</span>
+<span class="p">{</span>
+    <span class="err">$model</span> <span class="err">=</span> <span class="n">static</span><span class="p">:</span><span class="o">:</span><span class="nf">query</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">find</span><span class="p">(</span><span class="err">$</span><span class="n">id</span><span class="p">,</span> <span class="err">$</span><span class="n">columns</span><span class="p">);</span>
 
-    // ...
+    <span class="err">//</span> <span class="err">...</span>
 
-    return $model;
-}
-</code></pre>
+    <span class="err">return</span> <span class="err">$model</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <h4 id="the-lists-method">The <code>lists</code> Method</h4>
 <p>The <code>lists</code> method now returns a <code>Collection</code> instance instead of a plain array for Eloquent queries. If you would like to convert the <code>Collection</code> into a plain array, use the <code>all</code> method:</p>
-<pre><code>User::lists('id')-&gt;all();
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="nt">User</span><span class="p">::</span><span class="nd">lists</span><span class="o">(</span><span class="s1">&#39;id&#39;</span><span class="o">)</span><span class="nt">-</span><span class="o">&gt;</span><span class="nt">all</span><span class="o">();</span>
+</pre></div>
+
+
 <p>Be aware that the Query Builder <code>lists</code> method still returns an array.</p>
 <h4 id="date-formatting">Date Formatting</h4>
 <p>Previously, the storage format for Eloquent date fields could be modified by overriding the <code>getDateFormat</code> method on your model. This is still possible; however, for convenience you may simply specify a <code>$dateFormat</code> property on the model instead of overriding the method.</p>
@@ -1539,23 +1676,31 @@ abstract class Controller extends BaseController
 <h3 id="the-collection-class">The Collection Class</h3>
 <h4 id="the-sort-method">The <code>sort</code> Method</h4>
 <p>The <code>sort</code> method now returns a fresh collection instance instead of modifying the existing collection:</p>
-<pre><code>$collection = $collection-&gt;sort($callback);
-</code></pre>
+<div class="codehilite"><pre><span></span>$collection = $collection-&gt;sort($callback);
+</pre></div>
+
+
 <h4 id="the-sortby-method">The <code>sortBy</code> Method</h4>
 <p>The <code>sortBy</code> method now returns a fresh collection instance instead of modifying the existing collection:</p>
-<pre><code>$collection = $collection-&gt;sortBy('name');
-</code></pre>
+<div class="codehilite"><pre><span></span>$collection = $collection-&gt;sortBy(&#39;name&#39;);
+</pre></div>
+
+
 <h4 id="the-groupby-method">The <code>groupBy</code> Method</h4>
 <p>The <code>groupBy</code> method now returns <code>Collection</code> instances for each item in the parent <code>Collection</code>. If you would like to convert all of the items back to plain arrays, you may <code>map</code> over them:</p>
-<pre><code>$collection-&gt;groupBy('type')-&gt;map(function($item)
+<div class="codehilite"><pre><span></span>$collection-&gt;groupBy(&#39;type&#39;)-&gt;map(function ($item)
 {
     return $item-&gt;all();
 });
-</code></pre>
+</pre></div>
+
+
 <h4 id="the-lists-method_1">The <code>lists</code> Method</h4>
 <p>The <code>lists</code> method now returns a <code>Collection</code> instance instead of a plain array. If you would like to convert the <code>Collection</code> into a plain array, use the <code>all</code> method:</p>
-<pre><code>$collection-&gt;lists('id')-&gt;all();
-</code></pre>
+<div class="codehilite"><pre><span></span>$collection-&gt;lists(&#39;id&#39;)-&gt;all();
+</pre></div>
+
+
 <h3 id="commands-handlers">Commands &amp; Handlers</h3>
 <p>The <code>app/Commands</code> directory has been renamed to <code>app/Jobs</code>. However, you are not required to move all of your commands to the new location, and you may continue using the <code>make:command</code> and <code>handler:command</code> Artisan commands to generate your classes.</p>
 <p>Likewise, the <code>app/Handlers</code> directory has been renamed to <code>app/Listeners</code> and now only contains event listeners. However, you are not required to move or rename your existing command and event handlers, and you may continue to use the <code>handler:event</code> command to generate event handlers.</p>
@@ -1564,8 +1709,10 @@ abstract class Controller extends BaseController
 <p>The <code>createMatcher</code>, <code>createOpenMatcher</code>, and <code>createPlainMatcher</code> methods have been removed from the Blade compiler. Use the new <code>directive</code> method to create custom directives for Blade in Laravel 5.1. Consult the <a href="../docs/{{version}}/blade#extending-blade">extending blade</a> documentation for more information.</p>
 <h3 id="tests">Tests</h3>
 <p>Add the protected <code>$baseUrl</code> property to the <code>tests/TestCase.php</code> file:</p>
-<pre><code>protected $baseUrl = 'http://localhost';
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="nt">protected</span> <span class="o">$</span><span class="nt">baseUrl</span> <span class="o">=</span> <span class="s1">&#39;http://localhost&#39;</span><span class="o">;</span>
+</pre></div>
+
+
 <h3 id="translation-files">Translation Files</h3>
 <p>The default directory for published language files for vendor packages has been moved. Move any vendor package language files from <code>resources/lang/packages/{locale}/{namespace}</code> to <code>resources/lang/vendor/{namespace}/{locale}</code> directory. For example, <code>Acme/Anvil</code> package's <code>acme/anvil::foo</code> namespaced English language file would be moved from <code>resources/lang/packages/en/acme/anvil/foo.php</code> to <code>resources/lang/vendor/acme/anvil/en/foo.php</code>.</p>
 <h3 id="amazon-web-services-sdk">Amazon Web Services SDK</h3>
@@ -1592,8 +1739,10 @@ abstract class Controller extends BaseController
 <p><a name="upgrade-5.0.16"></a></p>
 <h2 id="upgrading-to-5016">Upgrading To 5.0.16</h2>
 <p>In your <code>bootstrap/autoload.php</code> file, update the <code>$compiledPath</code> variable to:</p>
-<pre><code>$compiledPath = __DIR__.'/../vendor/compiled.php';
-</code></pre>
+<div class="codehilite"><pre><span></span>$compiledPath = __DIR__.&#39;/../vendor/compiled.php&#39;;
+</pre></div>
+
+
 <h3 id="service-providers_1">Service Providers</h3>
 <p>The <code>App\Providers\BusServiceProvider</code> may be removed from your service provider list in your <code>app.php</code> configuration file.</p>
 <p>The <code>App\Providers\ConfigServiceProvider</code> may be removed from your service provider list in your <code>app.php</code> configuration file.</p>
@@ -1607,7 +1756,7 @@ abstract class Controller extends BaseController
 <p>Some Laravel-specific packages may not be compatible with Laravel 5 on initial release. Check with your package's maintainer to determine the proper version of the package for Laravel 5. Once you have added any additional Composer dependencies your application needs, run <code>composer update</code>.</p>
 <h3 id="namespacing">Namespacing</h3>
 <p>By default, Laravel 4 applications did not utilize namespacing within your application code. So, for example, all Eloquent models and controllers simply lived in the "global" namespace. For a quicker migration, you can simply leave these classes in the global namespace in Laravel 5 as well.</p>
-<h3 id="configuration_2">Configuration</h3>
+<h3 id="configuration_3">Configuration</h3>
 <h4 id="migrating-environment-variables">Migrating Environment Variables</h4>
 <p>Copy the new <code>.env.example</code> file to <code>.env</code>, which is the <code>5.0</code> equivalent of the old <code>.env.php</code> file. Set any appropriate values there, like your <code>APP_ENV</code> and <code>APP_KEY</code> (your encryption key), your database credentials, and your cache and session drivers.</p>
 <p>Additionally, copy any custom values you had in your old <code>.env.php</code> file and place them in both <code>.env</code> (the real value for your local environment) and <code>.env.example</code> (a sample instructional value for other team members).</p>
@@ -1630,11 +1779,15 @@ abstract class Controller extends BaseController
 <p>Filters are not removed in Laravel 5. You can still bind and use your own custom filters using <code>before</code> and <code>after</code>.</p>
 <h3 id="global-csrf">Global CSRF</h3>
 <p>By default, <a href="../docs/{{version}}/routing#csrf-protection">CSRF protection</a> is enabled on all routes. If you'd like to disable this, or only manually enable it on certain routes, remove this line from <code>App\Http\Kernel</code>'s <code>middleware</code> array:</p>
-<pre><code>'App\Http\Middleware\VerifyCsrfToken',
-</code></pre>
+<div class="codehilite"><pre><span></span>&#39;App\Http\Middleware\VerifyCsrfToken&#39;,
+</pre></div>
+
+
 <p>If you want to use it elsewhere, add this line to <code>$routeMiddleware</code>:</p>
-<pre><code>'csrf' =&gt; 'App\Http\Middleware\VerifyCsrfToken',
-</code></pre>
+<div class="codehilite"><pre><span></span>&#39;csrf&#39; =&gt; &#39;App\Http\Middleware\VerifyCsrfToken&#39;,
+</pre></div>
+
+
 <p>Now you can add the middleware to individual routes / controllers using <code>['middleware' =&gt; 'csrf']</code> on the route. For more information on middleware, consult the <a href="../docs/{{version}}/middleware">full documentation</a>.</p>
 <h3 id="eloquent-models">Eloquent Models</h3>
 <p>Feel free to create a new <code>app/Models</code> directory to house your Eloquent models. Again, add this directory to the <code>classmap</code> directive of your <code>composer.json</code> file.</p>
@@ -1644,25 +1797,29 @@ abstract class Controller extends BaseController
 <h3 id="user-authentication-model">User Authentication Model</h3>
 <p>To upgrade your <code>User</code> model for Laravel 5's authentication system, follow these instructions:</p>
 <p><strong>Delete the following from your <code>use</code> block:</strong></p>
-<pre><code class="php">use Illuminate\Auth\UserInterface;
-use Illuminate\Auth\Reminders\RemindableInterface;
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="x">use Illuminate\Auth\UserInterface;</span>
+<span class="x">use Illuminate\Auth\Reminders\RemindableInterface;</span>
+</pre></div>
+
 
 <p><strong>Add the following to your <code>use</code> block:</strong></p>
-<pre><code class="php">use Illuminate\Auth\Authenticatable;
-use Illuminate\Auth\Passwords\CanResetPassword;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
-use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="x">use Illuminate\Auth\Authenticatable;</span>
+<span class="x">use Illuminate\Auth\Passwords\CanResetPassword;</span>
+<span class="x">use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;</span>
+<span class="x">use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;</span>
+</pre></div>
+
 
 <p><strong>Remove the UserInterface and RemindableInterface interfaces.</strong></p>
 <p><strong>Mark the class as implementing the following interfaces:</strong></p>
-<pre><code class="php">implements AuthenticatableContract, CanResetPasswordContract
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="x">implements AuthenticatableContract, CanResetPasswordContract</span>
+</pre></div>
+
 
 <p><strong>Include the following traits within the class declaration:</strong></p>
-<pre><code class="php">use Authenticatable, CanResetPassword;
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="x">use Authenticatable, CanResetPassword;</span>
+</pre></div>
+
 
 <p><strong>If you used them, remove <code>Illuminate\Auth\Reminders\RemindableTrait</code>  and <code>Illuminate\Auth\UserTrait</code> from your use block and your class declaration.</strong></p>
 <h3 id="cashier-user-changes">Cashier User Changes</h3>
@@ -1681,10 +1838,11 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 <h3 id="blade-tag-changes">Blade Tag Changes</h3>
 <p>For better security by default, Laravel 5.0 escapes all output from both the <code>{{ }}</code> and <code>{{{ }}}</code> Blade directives. A new <code>{!! !!}</code> directive has been introduced to display raw, unescaped output. The most secure option when upgrading your application is to only use the new <code>{!! !!}</code> directive when you are <strong>certain</strong> that it is safe to display raw output.</p>
 <p>However, if you <strong>must</strong> use the old Blade syntax, add the following lines at the bottom of <code>AppServiceProvider@register</code>:</p>
-<pre><code class="php">\Blade::setRawTags('{{', '}}');
-\Blade::setContentTags('{{{', '}}}');
-\Blade::setEscapedContentTags('{{{', '}}}');
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="x">\Blade::setRawTags(&#39;{{&#39;, &#39;}}&#39;);</span>
+<span class="x">\Blade::setContentTags(&#39;{{{&#39;, &#39;}}}&#39;);</span>
+<span class="x">\Blade::setEscapedContentTags(&#39;{{{&#39;, &#39;}}}&#39;);</span>
+</pre></div>
+
 
 <p>This should not be done lightly, and may make your application more vulnerable to XSS exploits. Also, comments with <code>{{--</code> will no longer work.</p>
 <h3 id="translation-files_1">Translation Files</h3>
@@ -1700,12 +1858,16 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 <p>If you're using Form or HTML helpers, you will see an error stating <code>class 'Form' not found</code> or <code>class 'Html' not found</code>. The Form and HTML helpers have been deprecated in Laravel 5.0; however, there are community-driven replacements such as those maintained by the <a href="http://laravelcollective.com/docs/{{version}}/html">Laravel Collective</a>.</p>
 <p>For example, you may add <code>"laravelcollective/html": "~5.0"</code> to your <code>composer.json</code> file's <code>require</code> section.</p>
 <p>You'll also need to add the Form and HTML facades and service provider. Edit <code>config/app.php</code> and add this line to the 'providers' array:</p>
-<pre><code>'Collective\Html\HtmlServiceProvider',
-</code></pre>
+<div class="codehilite"><pre><span></span>&#39;Collective\Html\HtmlServiceProvider&#39;,
+</pre></div>
+
+
 <p>Next, add these lines to the 'aliases' array:</p>
-<pre><code>'Form' =&gt; 'Collective\Html\FormFacade',
-'Html' =&gt; 'Collective\Html\HtmlFacade',
-</code></pre>
+<div class="codehilite"><pre><span></span>&#39;Form&#39; =&gt; &#39;Collective\Html\FormFacade&#39;,
+&#39;Html&#39; =&gt; &#39;Collective\Html\HtmlFacade&#39;,
+</pre></div>
+
+
 <h3 id="cachemanager">CacheManager</h3>
 <p>If your application code was injecting <code>Illuminate\Cache\CacheManager</code> to get a non-Facade version of Laravel's cache, inject <code>Illuminate\Contracts\Cache\Repository</code> instead.</p>
 <h3 id="pagination_2">Pagination</h3>
@@ -1724,29 +1886,35 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 <p>Laravel 4.2 requires PHP 5.4.0 or greater.</p>
 <h3 id="encryption-defaults">Encryption Defaults</h3>
 <p>Add a new <code>cipher</code> option in your <code>app/config/app.php</code> configuration file. The value of this option should be <code>MCRYPT_RIJNDAEL_256</code>.</p>
-<pre><code>'cipher' =&gt; MCRYPT_RIJNDAEL_256
-</code></pre>
+<div class="codehilite"><pre><span></span>&#39;cipher&#39; =&gt; MCRYPT_RIJNDAEL_256
+</pre></div>
+
+
 <p>This setting may be used to control the default cipher used by the Laravel encryption facilities.</p>
 <blockquote>
 <p>{note} In Laravel 4.2, the default cipher is <code>MCRYPT_RIJNDAEL_128</code> (AES), which is considered to be the most secure cipher. Changing the cipher back to <code>MCRYPT_RIJNDAEL_256</code> is required to decrypt cookies/values that were encrypted in Laravel &lt;= 4.1</p>
 </blockquote>
 <h3 id="soft-deleting-models-now-use-traits">Soft Deleting Models Now Use Traits</h3>
 <p>If you are using soft deleting models, the <code>softDeletes</code> property has been removed. You must now use the <code>SoftDeletingTrait</code> like so:</p>
-<pre><code>use Illuminate\Database\Eloquent\SoftDeletingTrait;
+<div class="codehilite"><pre><span></span><span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Database</span><span class="err">\</span><span class="nx">Eloquent</span><span class="err">\</span><span class="nx">SoftDeletingTrait</span><span class="p">;</span>
 
-class User extends Eloquent
-{
-    use SoftDeletingTrait;
-}
-</code></pre>
+<span class="kr">class</span> <span class="nx">User</span> <span class="kr">extends</span> <span class="nx">Eloquent</span>
+<span class="p">{</span>
+    <span class="nx">use</span> <span class="nx">SoftDeletingTrait</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <p>You must also manually add the <code>deleted_at</code> column to your <code>dates</code> property:</p>
-<pre><code>class User extends Eloquent
-{
-    use SoftDeletingTrait;
+<div class="codehilite"><pre><span></span><span class="kr">class</span> <span class="nx">User</span> <span class="kr">extends</span> <span class="nx">Eloquent</span>
+<span class="p">{</span>
+    <span class="nx">use</span> <span class="nx">SoftDeletingTrait</span><span class="p">;</span>
 
-    protected $dates = ['deleted_at'];
-}
-</code></pre>
+    <span class="kr">protected</span> <span class="nx">$dates</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;deleted_at&#39;</span><span class="p">];</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <p>The API for all soft delete operations remains the same.</p>
 <blockquote>
 <p>{note} The <code>SoftDeletingTrait</code> can not be applied on a base model. It must be used on an actual model class.</p>
@@ -1755,12 +1923,16 @@ class User extends Eloquent
 <p>If you are directly referencing the <code>Illuminate\View\Environment</code> class or <code>Illuminate\Pagination\Environment</code> class, update your code to reference <code>Illuminate\View\Factory</code> and <code>Illuminate\Pagination\Factory</code> instead. These two classes have been renamed to better reflect their function.</p>
 <h3 id="additional-parameter-on-pagination-presenter">Additional Parameter On Pagination Presenter</h3>
 <p>If you are extending the <code>Illuminate\Pagination\Presenter</code> class, the abstract method <code>getPageLinkWrapper</code> signature has changed to add the <code>rel</code> argument:</p>
-<pre><code>abstract public function getPageLinkWrapper($url, $page, $rel = null);
-</code></pre>
+<div class="codehilite"><pre><span></span>abstract public function getPageLinkWrapper($url, $page, $rel = null);
+</pre></div>
+
+
 <h3 id="ironio-queue-encryption">Iron.Io Queue Encryption</h3>
 <p>If you are using the Iron.io queue driver, you will need to add a new <code>encrypt</code> option to your queue configuration file:</p>
-<pre><code>'encrypt' =&gt; true
-</code></pre>
+<div class="codehilite"><pre><span></span>&#39;encrypt&#39; =&gt; true
+</pre></div>
+
+
 <p><a name="upgrade-4.1.29"></a></p>
 <h2 id="upgrading-to-4129-from-41x">Upgrading To 4.1.29 From &lt;= 4.1.x</h2>
 <p>Laravel 4.1.29 improves the column quoting for all database drivers. This protects your application from some mass assignment vulnerabilities when <strong>not</strong> using the <code>fillable</code> property on models. If you are using the <code>fillable</code> property on your models to protect against mass assignment, your application is not vulnerable. However, if you are using <code>guarded</code> and are passing a user controlled array into an "update" or "save" type function, you should upgrade to <code>4.1.29</code> immediately as your application may be at risk of mass assignment.</p>
@@ -1772,7 +1944,7 @@ class User extends Eloquent
 <h3 id="upgrade-path">Upgrade Path</h3>
 <p>First, add a new, nullable <code>remember_token</code> of VARCHAR(100), TEXT, or equivalent to your <code>users</code> table.</p>
 <p>Next, if you are using the Eloquent authentication driver, update your <code>User</code> class with the following three methods:</p>
-<pre><code>public function getRememberToken()
+<div class="codehilite"><pre><span></span>public function getRememberToken()
 {
     return $this-&gt;remember_token;
 }
@@ -1784,18 +1956,22 @@ public function setRememberToken($value)
 
 public function getRememberTokenName()
 {
-    return 'remember_token';
+    return &#39;remember_token&#39;;
 }
-</code></pre>
+</pre></div>
+
+
 <blockquote>
 <p>{note} All existing "remember me" sessions will be invalidated by this change, so all users will be forced to re-authenticate with your application.</p>
 </blockquote>
 <h3 id="package-maintainers">Package Maintainers</h3>
 <p>Two new methods were added to the <code>Illuminate\Auth\UserProviderInterface</code> interface. Sample implementations may be found in the default drivers:</p>
-<pre><code>public function retrieveByToken($identifier, $token);
+<div class="codehilite"><pre><span></span>public function retrieveByToken($identifier, $token);
 
 public function updateRememberToken(UserInterface $user, $token);
-</code></pre>
+</pre></div>
+
+
 <p>The <code>Illuminate\Auth\UserInterface</code> also received the three new methods described in the "Upgrade Path".</p>
 <p><a name="upgrade-4.1"></a></p>
 <h2 id="upgrading-to-41-from-40">Upgrading To 4.1 From 4.0</h2>
@@ -1809,10 +1985,12 @@ public function updateRememberToken(UserInterface $user, $token);
 <p>Add the new <code>app/config/remote.php</code> file <a href="https://github.com/laravel/laravel/blob/v4.1.0/app/config/remote.php">from the repository</a>.</p>
 <p>Add the new <code>expire_on_close</code> configuration option to your <code>app/config/session.php</code> file. The default value should be <code>false</code>.</p>
 <p>Add the new <code>failed</code> configuration section to your <code>app/config/queue.php</code> file. Here are the default values for the section:</p>
-<pre><code>'failed' =&gt; [
-    'database' =&gt; 'mysql', 'table' =&gt; 'failed_jobs',
+<div class="codehilite"><pre><span></span>&#39;failed&#39; =&gt; [
+    &#39;database&#39; =&gt; &#39;mysql&#39;, &#39;table&#39; =&gt; &#39;failed_jobs&#39;,
 ],
-</code></pre>
+</pre></div>
+
+
 <p><strong>(Optional)</strong> Update the <code>pagination</code> configuration option in your <code>app/config/view.php</code> file to <code>pagination::slider-3</code>.</p>
 <h3 id="controller-updates">Controller Updates</h3>
 <p>If <code>app/controllers/BaseController.php</code> has a <code>use</code> statement at the top, change <code>use Illuminate\Routing\Controllers\Controller;</code> to <code>use Illuminate\Routing\Controller;</code>.</p>
@@ -1904,10 +2082,6 @@ public function updateRememberToken(UserInterface $user, $token);
       var repo_id  = '';
     </script>
     <script src="../assets/javascripts/application-997097ee0c.js"></script>
-    
-      <script src="../assets/jquery.js"></script>
-    
-      <script src="../assets/prism.js"></script>
     
     
   </body>

@@ -9,16 +9,16 @@
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     
       
-        <title>Errors - Laravel 5.3 official documentation</title>
+        <title>Errors - Laravel 5.4 Official Documentation</title>
       
       
       
       
     
     <meta property="og:url" content="None">
-    <meta property="og:title" content="Laravel 5.3 official documentation">
+    <meta property="og:title" content="Laravel 5.4 Official Documentation">
     <meta property="og:image" content="None/../">
-    <meta name="apple-mobile-web-app-title" content="Laravel 5.3 official documentation">
+    <meta name="apple-mobile-web-app-title" content="Laravel 5.4 Official Documentation">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
@@ -60,15 +60,13 @@
       </style>
     
     
-      <link rel="stylesheet" href="../assets/prism.css">
-    
     <script src="../assets/javascripts/modernizr-4ab42b99fd.js"></script>
     
   </head>
   
   
   
-  <body class="palette-primary-teal palette-accent-pink">
+  <body class="palette-primary-teal palette-accent-green">
     
     <div class="backdrop">
       <div class="backdrop-paper"></div>
@@ -125,7 +123,7 @@
       
       <div class="name">
         <strong>
-          Laravel 5.3 official documentation
+          Laravel 5.4 Official Documentation
           <span class="version">
             
           </span>
@@ -658,15 +656,6 @@
           
             
   <li>
-    <a class="" title="Readme" href="../readme/">
-      Readme
-    </a>
-    
-  </li>
-
-          
-            
-  <li>
     <a class="" title="Redirects" href="../redirects/">
       Redirects
     </a>
@@ -853,143 +842,167 @@
 <p><a name="log-storage"></a></p>
 <h3 id="log-storage">Log Storage</h3>
 <p>Out of the box, Laravel supports writing log information to <code>single</code> files, <code>daily</code> files, the <code>syslog</code>, and the <code>errorlog</code>. To configure which storage mechanism Laravel uses, you should modify the <code>log</code> option in your <code>config/app.php</code> configuration file. For example, if you wish to use daily log files instead of a single file, you should set the <code>log</code> value in your <code>app</code> configuration file to <code>daily</code>:</p>
-<pre><code>'log' =&gt; 'daily'
-</code></pre>
+<div class="codehilite"><pre><span></span>&#39;log&#39; =&gt; &#39;daily&#39;
+</pre></div>
+
+
 <h4 id="maximum-daily-log-files">Maximum Daily Log Files</h4>
 <p>When using the <code>daily</code> log mode, Laravel will only retain five days of log files by default. If you want to adjust the number of retained files, you may add a <code>log_max_files</code> configuration value to your <code>app</code> configuration file:</p>
-<pre><code>'log_max_files' =&gt; 30
-</code></pre>
+<div class="codehilite"><pre><span></span>&#39;log_max_files&#39; =&gt; 30
+</pre></div>
+
+
 <p><a name="log-severity-levels"></a></p>
 <h3 id="log-severity-levels">Log Severity Levels</h3>
 <p>When using Monolog, log messages may have different levels of severity. By default, Laravel writes all log levels to storage. However, in your production environment, you may wish to configure the minimum severity that should be logged by adding the <code>log_level</code> option to your <code>app.php</code> configuration file.</p>
 <p>Once this option has been configured, Laravel will log all levels greater than or equal to the specified severity. For example, a default <code>log_level</code> of <code>error</code> will log <strong>error</strong>, <strong>critical</strong>, <strong>alert</strong>, and <strong>emergency</strong> messages:</p>
-<pre><code>'log_level' =&gt; env('APP_LOG_LEVEL', 'error'),
-</code></pre>
+<div class="codehilite"><pre><span></span>&#39;log_level&#39; =&gt; env(&#39;APP_LOG_LEVEL&#39;, &#39;error&#39;),
+</pre></div>
+
+
 <blockquote>
 <p>{tip} Monolog recognizes the following severity levels - from least severe to most severe: <code>debug</code>, <code>info</code>, <code>notice</code>, <code>warning</code>, <code>error</code>, <code>critical</code>, <code>alert</code>, <code>emergency</code>.</p>
 </blockquote>
 <p><a name="custom-monolog-configuration"></a></p>
 <h3 id="custom-monolog-configuration">Custom Monolog Configuration</h3>
 <p>If you would like to have complete control over how Monolog is configured for your application, you may use the application's <code>configureMonologUsing</code> method. You should place a call to this method in your <code>bootstrap/app.php</code> file right before the <code>$app</code> variable is returned by the file:</p>
-<pre><code>$app-&gt;configureMonologUsing(function($monolog) {
+<div class="codehilite"><pre><span></span>$app-&gt;configureMonologUsing(function ($monolog) {
     $monolog-&gt;pushHandler(...);
 });
 
 return $app;
-</code></pre>
+</pre></div>
+
+
 <p><a name="the-exception-handler"></a></p>
 <h2 id="the-exception-handler">The Exception Handler</h2>
 <p><a name="report-method"></a></p>
 <h3 id="the-report-method">The Report Method</h3>
 <p>All exceptions are handled by the <code>App\Exceptions\Handler</code> class. This class contains two methods: <code>report</code> and <code>render</code>. We'll examine each of these methods in detail. The <code>report</code> method is used to log exceptions or send them to an external service like <a href="https://bugsnag.com">Bugsnag</a> or <a href="https://github.com/getsentry/sentry-laravel">Sentry</a>. By default, the <code>report</code> method simply passes the exception to the base class where the exception is logged. However, you are free to log exceptions however you wish.</p>
 <p>For example, if you need to report different types of exceptions in different ways, you may use the PHP <code>instanceof</code> comparison operator:</p>
-<pre><code>/**
- * Report or log an exception.
- *
- * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
- *
- * @param  \Exception  $exception
- * @return void
- */
-public function report(Exception $exception)
-{
-    if ($exception instanceof CustomException) {
-        //
-    }
+<div class="codehilite"><pre><span></span><span class="c">/**</span>
+<span class="c"> * Report or log an exception.</span>
+<span class="c"> *</span>
+<span class="c"> * This is a great spot to send exceptions to Sentry, Bugsnag, etc.</span>
+<span class="c"> *</span>
+<span class="c"> * @param  \Exception  $exception</span>
+<span class="c"> * @return void</span>
+<span class="c"> */</span>
+<span class="nt">public</span> <span class="nt">function</span> <span class="nt">report</span><span class="o">(</span><span class="nt">Exception</span> <span class="o">$</span><span class="nt">exception</span><span class="o">)</span>
+<span class="p">{</span>
+    <span class="err">if</span> <span class="err">($exception</span> <span class="err">instanceof</span> <span class="err">CustomException)</span> <span class="err">{</span>
+        <span class="err">//</span>
+    <span class="p">}</span>
 
-    return parent::report($exception);
-}
-</code></pre>
+    <span class="nt">return</span> <span class="nt">parent</span><span class="p">::</span><span class="nd">report</span><span class="o">($</span><span class="nt">exception</span><span class="o">);</span>
+<span class="err">}</span>
+</pre></div>
+
+
 <h4 id="ignoring-exceptions-by-type">Ignoring Exceptions By Type</h4>
 <p>The <code>$dontReport</code> property of the exception handler contains an array of exception types that will not be logged. For example, exceptions resulting from 404 errors, as well as several other types of errors, are not written to your log files. You may add other exception types to this array as needed:</p>
-<pre><code>/**
- * A list of the exception types that should not be reported.
- *
- * @var array
- */
-protected $dontReport = [
-    \Illuminate\Auth\AuthenticationException::class,
-    \Illuminate\Auth\Access\AuthorizationException::class,
-    \Symfony\Component\HttpKernel\Exception\HttpException::class,
-    \Illuminate\Database\Eloquent\ModelNotFoundException::class,
-    \Illuminate\Validation\ValidationException::class,
-];
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * A list of the exception types that should not be reported.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @var array</span>
+<span class="cm"> */</span><span class="w"></span>
+protected<span class="w"> </span><span class="err">$</span>dontReport<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">[</span><span class="w"></span>
+<span class="w">    </span><span class="o">\</span>Illuminate<span class="o">\</span>Auth<span class="o">\</span><span class="nl">AuthenticationException</span><span class="o">:</span><span class="err">:</span>class<span class="o">,</span><span class="w"></span>
+<span class="w">    </span><span class="o">\</span>Illuminate<span class="o">\</span>Auth<span class="o">\</span>Access<span class="o">\</span><span class="nl">AuthorizationException</span><span class="o">:</span><span class="err">:</span>class<span class="o">,</span><span class="w"></span>
+<span class="w">    </span><span class="o">\</span>Symfony<span class="o">\</span>Component<span class="o">\</span>HttpKernel<span class="o">\</span>Exception<span class="o">\</span><span class="nl">HttpException</span><span class="o">:</span><span class="err">:</span>class<span class="o">,</span><span class="w"></span>
+<span class="w">    </span><span class="o">\</span>Illuminate<span class="o">\</span>Database<span class="o">\</span>Eloquent<span class="o">\</span><span class="nl">ModelNotFoundException</span><span class="o">:</span><span class="err">:</span>class<span class="o">,</span><span class="w"></span>
+<span class="w">    </span><span class="o">\</span>Illuminate<span class="o">\</span>Validation<span class="o">\</span><span class="nl">ValidationException</span><span class="o">:</span><span class="err">:</span>class<span class="o">,</span><span class="w"></span>
+<span class="err">];</span><span class="w"></span>
+</pre></div>
+
+
 <p><a name="render-method"></a></p>
 <h3 id="the-render-method">The Render Method</h3>
 <p>The <code>render</code> method is responsible for converting a given exception into an HTTP response that should be sent back to the browser. By default, the exception is passed to the base class which generates a response for you. However, you are free to check the exception type or return your own custom response:</p>
-<pre><code>/**
- * Render an exception into an HTTP response.
- *
- * @param  \Illuminate\Http\Request  $request
- * @param  \Exception  $exception
- * @return \Illuminate\Http\Response
- */
-public function render($request, Exception $exception)
-{
-    if ($exception instanceof CustomException) {
-        return response()-&gt;view('errors.custom', [], 500);
-    }
+<div class="codehilite"><pre><span></span><span class="c">/**</span>
+<span class="c"> * Render an exception into an HTTP response.</span>
+<span class="c"> *</span>
+<span class="c"> * @param  \Illuminate\Http\Request  $request</span>
+<span class="c"> * @param  \Exception  $exception</span>
+<span class="c"> * @return \Illuminate\Http\Response</span>
+<span class="c"> */</span>
+<span class="nt">public</span> <span class="nt">function</span> <span class="nt">render</span><span class="o">($</span><span class="nt">request</span><span class="o">,</span> <span class="nt">Exception</span> <span class="o">$</span><span class="nt">exception</span><span class="o">)</span>
+<span class="p">{</span>
+    <span class="err">if</span> <span class="err">($exception</span> <span class="err">instanceof</span> <span class="err">CustomException)</span> <span class="err">{</span>
+        <span class="err">return</span> <span class="err">response()-&gt;view(&#39;errors.custom&#39;,</span> <span class="cp">[]</span><span class="err">,</span> <span class="err">500)</span><span class="p">;</span>
+    <span class="p">}</span>
 
-    return parent::render($request, $exception);
-}
-</code></pre>
+    <span class="nt">return</span> <span class="nt">parent</span><span class="p">::</span><span class="nd">render</span><span class="o">($</span><span class="nt">request</span><span class="o">,</span> <span class="o">$</span><span class="nt">exception</span><span class="o">);</span>
+<span class="err">}</span>
+</pre></div>
+
+
 <p><a name="http-exceptions"></a></p>
 <h2 id="http-exceptions">HTTP Exceptions</h2>
 <p>Some exceptions describe HTTP error codes from the server. For example, this may be a "page not found" error (404), an "unauthorized error" (401) or even a developer generated 500 error. In order to generate such a response from anywhere in your application, you may use the <code>abort</code> helper:</p>
-<pre><code>abort(404);
-</code></pre>
+<div class="codehilite"><pre><span></span>abort(404);
+</pre></div>
+
+
 <p>The <code>abort</code> helper will immediately raise an exception which will be rendered by the exception handler. Optionally, you may provide the response text:</p>
-<pre><code>abort(403, 'Unauthorized action.');
-</code></pre>
+<div class="codehilite"><pre><span></span>abort(403, &#39;Unauthorized action.&#39;);
+</pre></div>
+
+
 <p><a name="custom-http-error-pages"></a></p>
 <h3 id="custom-http-error-pages">Custom HTTP Error Pages</h3>
 <p>Laravel makes it easy to display custom error pages for various HTTP status codes. For example, if you wish to customize the error page for 404 HTTP status codes, create a <code>resources/views/errors/404.blade.php</code>. This file will be served on all 404 errors generated by your application. The views within this directory should be named to match the HTTP status code they correspond to. The <code>HttpException</code> instance raised by the <code>abort</code> function will be passed to the view as an <code>$exception</code> variable.</p>
 <p><a name="logging"></a></p>
 <h2 id="logging">Logging</h2>
-<p>Laravel provides a simple abstraction layer on top of the powerful <a href="http://github.com/seldaek/monolog">Monolog</a> library. By default, Laravel is configured to create a log file for your application in the <code>storage/logs</code> directory. You may write information to the logs using the <code>Log</code> <a href="../docs/{{version}}/facades">facade</a>:</p>
-<pre><code>&lt;?php
+<p>Laravel provides a simple abstraction layer on top of the powerful <a href="https://github.com/seldaek/monolog">Monolog</a> library. By default, Laravel is configured to create a log file for your application in the <code>storage/logs</code> directory. You may write information to the logs using the <code>Log</code> <a href="../docs/{{version}}/facades">facade</a>:</p>
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
-namespace App\Http\Controllers;
+<span class="nx">namespace</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Http</span><span class="err">\</span><span class="nx">Controllers</span><span class="p">;</span>
 
-use App\User;
-use Illuminate\Support\Facades\Log;
-use App\Http\Controllers\Controller;
+<span class="nx">use</span> <span class="nx">App</span><span class="err">\</span><span class="nx">User</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Support</span><span class="err">\</span><span class="nx">Facades</span><span class="err">\</span><span class="nx">Log</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Http</span><span class="err">\</span><span class="nx">Controllers</span><span class="err">\</span><span class="nx">Controller</span><span class="p">;</span>
 
-class UserController extends Controller
-{
-    /**
-     * Show the profile for the given user.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function showProfile($id)
-    {
-        Log::info('Showing user profile for user: '.$id);
+<span class="kr">class</span> <span class="nx">UserController</span> <span class="kr">extends</span> <span class="nx">Controller</span>
+<span class="p">{</span>
+    <span class="cm">/**</span>
+<span class="cm">     * Show the profile for the given user.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param  int  $id</span>
+<span class="cm">     * @return Response</span>
+<span class="cm">     */</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">showProfile</span><span class="p">(</span><span class="nx">$id</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nx">Log</span><span class="o">::</span><span class="nx">info</span><span class="p">(</span><span class="s1">&#39;Showing user profile for user: &#39;</span><span class="p">.</span><span class="nx">$id</span><span class="p">);</span>
 
-        return view('user.profile', ['user' =&gt; User::findOrFail($id)]);
-    }
-}
-</code></pre>
-<p>The logger provides the eight logging levels defined in <a href="http://tools.ietf.org/html/rfc5424">RFC 5424</a>: <strong>emergency</strong>, <strong>alert</strong>, <strong>critical</strong>, <strong>error</strong>, <strong>warning</strong>, <strong>notice</strong>, <strong>info</strong> and <strong>debug</strong>.</p>
-<pre><code>Log::emergency($message);
-Log::alert($message);
-Log::critical($message);
-Log::error($message);
-Log::warning($message);
-Log::notice($message);
-Log::info($message);
-Log::debug($message);
-</code></pre>
+        <span class="k">return</span> <span class="nx">view</span><span class="p">(</span><span class="s1">&#39;user.profile&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;user&#39;</span> <span class="o">=&gt;</span> <span class="nx">User</span><span class="o">::</span><span class="nx">findOrFail</span><span class="p">(</span><span class="nx">$id</span><span class="p">)]);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>The logger provides the eight logging levels defined in <a href="https://tools.ietf.org/html/rfc5424">RFC 5424</a>: <strong>emergency</strong>, <strong>alert</strong>, <strong>critical</strong>, <strong>error</strong>, <strong>warning</strong>, <strong>notice</strong>, <strong>info</strong> and <strong>debug</strong>.</p>
+<div class="codehilite"><pre><span></span><span class="nt">Log</span><span class="p">::</span><span class="nd">emergency</span><span class="o">($</span><span class="nt">message</span><span class="o">);</span>
+<span class="nt">Log</span><span class="p">::</span><span class="nd">alert</span><span class="o">($</span><span class="nt">message</span><span class="o">);</span>
+<span class="nt">Log</span><span class="p">::</span><span class="nd">critical</span><span class="o">($</span><span class="nt">message</span><span class="o">);</span>
+<span class="nt">Log</span><span class="p">::</span><span class="nd">error</span><span class="o">($</span><span class="nt">message</span><span class="o">);</span>
+<span class="nt">Log</span><span class="p">::</span><span class="nd">warning</span><span class="o">($</span><span class="nt">message</span><span class="o">);</span>
+<span class="nt">Log</span><span class="p">::</span><span class="nd">notice</span><span class="o">($</span><span class="nt">message</span><span class="o">);</span>
+<span class="nt">Log</span><span class="p">::</span><span class="nd">info</span><span class="o">($</span><span class="nt">message</span><span class="o">);</span>
+<span class="nt">Log</span><span class="p">::</span><span class="nd">debug</span><span class="o">($</span><span class="nt">message</span><span class="o">);</span>
+</pre></div>
+
+
 <h4 id="contextual-information">Contextual Information</h4>
 <p>An array of contextual data may also be passed to the log methods. This contextual data will be formatted and displayed with the log message:</p>
-<pre><code>Log::info('User failed to login.', ['id' =&gt; $user-&gt;id]);
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="nt">Log</span><span class="p">::</span><span class="nd">info</span><span class="o">(</span><span class="s1">&#39;User failed to login.&#39;</span><span class="o">,</span> <span class="cp">[</span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="nb">id</span><span class="cp">]</span><span class="o">);</span>
+</pre></div>
+
+
 <h4 id="accessing-the-underlying-monolog-instance">Accessing The Underlying Monolog Instance</h4>
 <p>Monolog has a variety of additional handlers you may use for logging. If needed, you may access the underlying Monolog instance being used by Laravel:</p>
-<pre><code>$monolog = Log::getMonolog();
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="o">$</span><span class="nt">monolog</span> <span class="o">=</span> <span class="nt">Log</span><span class="p">::</span><span class="nd">getMonolog</span><span class="o">();</span>
+</pre></div>
           <aside class="copyright" role="note">
             
             Documentation built with
@@ -1062,10 +1075,6 @@ Log::debug($message);
       var repo_id  = '';
     </script>
     <script src="../assets/javascripts/application-997097ee0c.js"></script>
-    
-      <script src="../assets/jquery.js"></script>
-    
-      <script src="../assets/prism.js"></script>
     
     
   </body>

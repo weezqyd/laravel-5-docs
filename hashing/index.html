@@ -9,16 +9,16 @@
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     
       
-        <title>Hashing - Laravel 5.3 official documentation</title>
+        <title>Hashing - Laravel 5.4 Official Documentation</title>
       
       
       
       
     
     <meta property="og:url" content="None">
-    <meta property="og:title" content="Laravel 5.3 official documentation">
+    <meta property="og:title" content="Laravel 5.4 Official Documentation">
     <meta property="og:image" content="None/../">
-    <meta name="apple-mobile-web-app-title" content="Laravel 5.3 official documentation">
+    <meta name="apple-mobile-web-app-title" content="Laravel 5.4 Official Documentation">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
@@ -60,15 +60,13 @@
       </style>
     
     
-      <link rel="stylesheet" href="../assets/prism.css">
-    
     <script src="../assets/javascripts/modernizr-4ab42b99fd.js"></script>
     
   </head>
   
   
   
-  <body class="palette-primary-teal palette-accent-pink">
+  <body class="palette-primary-teal palette-accent-green">
     
     <div class="backdrop">
       <div class="backdrop-paper"></div>
@@ -125,7 +123,7 @@
       
       <div class="name">
         <strong>
-          Laravel 5.3 official documentation
+          Laravel 5.4 Official Documentation
           <span class="version">
             
           </span>
@@ -640,15 +638,6 @@
           
             
   <li>
-    <a class="" title="Readme" href="../readme/">
-      Readme
-    </a>
-    
-  </li>
-
-          
-            
-  <li>
     <a class="" title="Redirects" href="../redirects/">
       Redirects
     </a>
@@ -815,44 +804,48 @@
 <p><a name="basic-usage"></a></p>
 <h2 id="basic-usage">Basic Usage</h2>
 <p>You may hash a password by calling the <code>make</code> method on the <code>Hash</code> facade:</p>
-<pre><code>&lt;?php
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
-namespace App\Http\Controllers;
+<span class="nx">namespace</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Http</span><span class="err">\</span><span class="nx">Controllers</span><span class="p">;</span>
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use App\Http\Controllers\Controller;
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Http</span><span class="err">\</span><span class="nx">Request</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Support</span><span class="err">\</span><span class="nx">Facades</span><span class="err">\</span><span class="nx">Hash</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Http</span><span class="err">\</span><span class="nx">Controllers</span><span class="err">\</span><span class="nx">Controller</span><span class="p">;</span>
 
-class UpdatePasswordController extends Controller
-{
-    /**
-     * Update the password for the user.
-     *
-     * @param  Request  $request
-     * @return Response
-     */
-    public function update(Request $request)
-    {
-        // Validate the new password length...
+<span class="kr">class</span> <span class="nx">UpdatePasswordController</span> <span class="kr">extends</span> <span class="nx">Controller</span>
+<span class="p">{</span>
+    <span class="cm">/**</span>
+<span class="cm">     * Update the password for the user.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param  Request  $request</span>
+<span class="cm">     * @return Response</span>
+<span class="cm">     */</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">update</span><span class="p">(</span><span class="nx">Request</span> <span class="nx">$request</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// Validate the new password length...</span>
 
-        $request-&gt;user()-&gt;fill([
-            'password' =&gt; Hash::make($request-&gt;newPassword)
-        ])-&gt;save();
-    }
-}
-</code></pre>
+        <span class="nx">$request</span><span class="o">-&gt;</span><span class="nx">user</span><span class="p">()</span><span class="o">-&gt;</span><span class="nx">fill</span><span class="p">([</span>
+            <span class="s1">&#39;password&#39;</span> <span class="o">=&gt;</span> <span class="nx">Hash</span><span class="o">::</span><span class="nx">make</span><span class="p">(</span><span class="nx">$request</span><span class="o">-&gt;</span><span class="nx">newPassword</span><span class="p">)</span>
+        <span class="p">])</span><span class="o">-&gt;</span><span class="nx">save</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <h4 id="verifying-a-password-against-a-hash">Verifying A Password Against A Hash</h4>
 <p>The <code>check</code> method allows you to verify that a given plain-text string corresponds to a given hash. However, if you are using the <code>LoginController</code> <a href="../docs/{{version}}/authentication">included with Laravel</a>, you will probably not need to use this directly, as this controller automatically calls this method:</p>
-<pre><code>if (Hash::check('plain-text', $hashedPassword)) {
+<div class="codehilite"><pre><span></span>if (Hash::check(&#39;plain-text&#39;, $hashedPassword)) {
     // The passwords match...
 }
-</code></pre>
+</pre></div>
+
+
 <h4 id="checking-if-a-password-needs-to-be-rehashed">Checking If A Password Needs To Be Rehashed</h4>
 <p>The <code>needsRehash</code> function allows you to determine if the work factor used by the hasher has changed since the password was hashed:</p>
-<pre><code>if (Hash::needsRehash($hashed)) {
-    $hashed = Hash::make('plain-text');
-}
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="nt">if</span> <span class="o">(</span><span class="nt">Hash</span><span class="p">::</span><span class="nd">needsRehash</span><span class="o">($</span><span class="nt">hashed</span><span class="o">))</span> <span class="p">{</span>
+    <span class="err">$hashed</span> <span class="err">=</span> <span class="n">Hash</span><span class="p">:</span><span class="o">:</span><span class="nf">make</span><span class="p">(</span><span class="s1">&#39;plain-text&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
           <aside class="copyright" role="note">
             
             Documentation built with
@@ -925,10 +918,6 @@ class UpdatePasswordController extends Controller
       var repo_id  = '';
     </script>
     <script src="../assets/javascripts/application-997097ee0c.js"></script>
-    
-      <script src="../assets/jquery.js"></script>
-    
-      <script src="../assets/prism.js"></script>
     
     
   </body>

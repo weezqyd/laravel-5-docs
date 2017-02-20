@@ -9,16 +9,16 @@
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     
       
-        <title>Filesystem - Laravel 5.3 official documentation</title>
+        <title>Filesystem - Laravel 5.4 Official Documentation</title>
       
       
       
       
     
     <meta property="og:url" content="None">
-    <meta property="og:title" content="Laravel 5.3 official documentation">
+    <meta property="og:title" content="Laravel 5.4 Official Documentation">
     <meta property="og:image" content="None/../">
-    <meta name="apple-mobile-web-app-title" content="Laravel 5.3 official documentation">
+    <meta name="apple-mobile-web-app-title" content="Laravel 5.4 Official Documentation">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
@@ -60,15 +60,13 @@
       </style>
     
     
-      <link rel="stylesheet" href="../assets/prism.css">
-    
     <script src="../assets/javascripts/modernizr-4ab42b99fd.js"></script>
     
   </head>
   
   
   
-  <body class="palette-primary-teal palette-accent-pink">
+  <body class="palette-primary-teal palette-accent-green">
     
     <div class="backdrop">
       <div class="backdrop-paper"></div>
@@ -125,7 +123,7 @@
       
       <div class="name">
         <strong>
-          Laravel 5.3 official documentation
+          Laravel 5.4 Official Documentation
           <span class="version">
             
           </span>
@@ -676,15 +674,6 @@
           
             
   <li>
-    <a class="" title="Readme" href="../readme/">
-      Readme
-    </a>
-    
-  </li>
-
-          
-            
-  <li>
     <a class="" title="Redirects" href="../redirects/">
       Redirects
     </a>
@@ -872,16 +861,22 @@
 <h3 id="the-public-disk">The Public Disk</h3>
 <p>The <code>public</code> disk is intended for files that are going to be publicly accessible. By default, the <code>public</code> disk uses the <code>local</code> driver and stores these files in <code>storage/app/public</code>. To make them accessible from the web, you should create a symbolic link from <code>public/storage</code> to <code>storage/app/public</code>. This convention will keep your publicly accessible files in one directory that can be easily shared across deployments when using zero down-time deployment systems like <a href="https://envoyer.io">Envoyer</a>.</p>
 <p>To create the symbolic link, you may use the <code>storage:link</code> Artisan command:</p>
-<pre><code>php artisan storage:link
-</code></pre>
+<div class="codehilite"><pre><span></span>php artisan storage:link
+</pre></div>
+
+
 <p>Of course, once a file has been stored and the symbolic link has been created, you can create a URL to the files using the <code>asset</code> helper:</p>
-<pre><code>echo asset('storage/file.txt');
-</code></pre>
+<div class="codehilite"><pre><span></span>echo asset(&#39;storage/file.txt&#39;);
+</pre></div>
+
+
 <p><a name="the-local-driver"></a></p>
 <h3 id="the-local-driver">The Local Driver</h3>
 <p>When using the <code>local</code> driver, all file operations are relative to the <code>root</code> directory defined in your configuration file. By default, this value is set to the <code>storage/app</code> directory. Therefore, the following method would store a file in <code>storage/app/file.txt</code>:</p>
-<pre><code>Storage::disk('local')-&gt;put('file.txt', 'Contents');
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="nt">Storage</span><span class="p">::</span><span class="nd">disk</span><span class="o">(</span><span class="s1">&#39;local&#39;</span><span class="o">)</span><span class="nt">-</span><span class="o">&gt;</span><span class="nt">put</span><span class="o">(</span><span class="s1">&#39;file.txt&#39;</span><span class="o">,</span> <span class="s1">&#39;Contents&#39;</span><span class="o">);</span>
+</pre></div>
+
+
 <p><a name="driver-prerequisites"></a></p>
 <h3 id="driver-prerequisites">Driver Prerequisites</h3>
 <h4 id="composer-packages">Composer Packages</h4>
@@ -894,247 +889,298 @@
 <p>The S3 driver configuration information is located in your <code>config/filesystems.php</code> configuration file. This file contains an example configuration array for an S3 driver. You are free to modify this array with your own S3 configuration and credentials.</p>
 <h4 id="ftp-driver-configuration">FTP Driver Configuration</h4>
 <p>Laravel's Flysystem integrations works great with FTP; however, a sample configuration is not included with the framework's default <code>filesystems.php</code> configuration file. If you need to configure a FTP filesystem, you may use the example configuration below:</p>
-<pre><code>'ftp' =&gt; [
-    'driver'   =&gt; 'ftp',
-    'host'     =&gt; 'ftp.example.com',
-    'username' =&gt; 'your-username',
-    'password' =&gt; 'your-password',
+<div class="codehilite"><pre><span></span>&#39;ftp&#39; =&gt; [
+    &#39;driver&#39;   =&gt; &#39;ftp&#39;,
+    &#39;host&#39;     =&gt; &#39;ftp.example.com&#39;,
+    &#39;username&#39; =&gt; &#39;your-username&#39;,
+    &#39;password&#39; =&gt; &#39;your-password&#39;,
 
     // Optional FTP Settings...
-    // 'port'     =&gt; 21,
-    // 'root'     =&gt; '',
-    // 'passive'  =&gt; true,
-    // 'ssl'      =&gt; true,
-    // 'timeout'  =&gt; 30,
+    // &#39;port&#39;     =&gt; 21,
+    // &#39;root&#39;     =&gt; &#39;&#39;,
+    // &#39;passive&#39;  =&gt; true,
+    // &#39;ssl&#39;      =&gt; true,
+    // &#39;timeout&#39;  =&gt; 30,
 ],
-</code></pre>
+</pre></div>
+
+
 <h4 id="rackspace-driver-configuration">Rackspace Driver Configuration</h4>
 <p>Laravel's Flysystem integrations works great with Rackspace; however, a sample configuration is not included with the framework's default <code>filesystems.php</code> configuration file. If you need to configure a Rackspace filesystem, you may use the example configuration below:</p>
-<pre><code>'rackspace' =&gt; [
-    'driver'    =&gt; 'rackspace',
-    'username'  =&gt; 'your-username',
-    'key'       =&gt; 'your-key',
-    'container' =&gt; 'your-container',
-    'endpoint'  =&gt; 'https://identity.api.rackspacecloud.com/v2.0/',
-    'region'    =&gt; 'IAD',
-    'url_type'  =&gt; 'publicURL',
+<div class="codehilite"><pre><span></span>&#39;rackspace&#39; =&gt; [
+    &#39;driver&#39;    =&gt; &#39;rackspace&#39;,
+    &#39;username&#39;  =&gt; &#39;your-username&#39;,
+    &#39;key&#39;       =&gt; &#39;your-key&#39;,
+    &#39;container&#39; =&gt; &#39;your-container&#39;,
+    &#39;endpoint&#39;  =&gt; &#39;https://identity.api.rackspacecloud.com/v2.0/&#39;,
+    &#39;region&#39;    =&gt; &#39;IAD&#39;,
+    &#39;url_type&#39;  =&gt; &#39;publicURL&#39;,
 ],
-</code></pre>
+</pre></div>
+
+
 <p><a name="obtaining-disk-instances"></a></p>
 <h2 id="obtaining-disk-instances">Obtaining Disk Instances</h2>
 <p>The <code>Storage</code> facade may be used to interact with any of your configured disks. For example, you may use the <code>put</code> method on the facade to store an avatar on the default disk. If you call methods on the <code>Storage</code> facade without first calling the <code>disk</code> method, the method call will automatically be passed to the default disk:</p>
-<pre><code>use Illuminate\Support\Facades\Storage;
+<div class="codehilite"><pre><span></span><span class="nt">use</span> <span class="nt">Illuminate</span><span class="err">\</span><span class="nt">Support</span><span class="err">\</span><span class="nt">Facades</span><span class="err">\</span><span class="nt">Storage</span><span class="o">;</span>
 
-Storage::put('avatars/1', $fileContents);
-</code></pre>
+<span class="nt">Storage</span><span class="p">::</span><span class="nd">put</span><span class="o">(</span><span class="s1">&#39;avatars/1&#39;</span><span class="o">,</span> <span class="o">$</span><span class="nt">fileContents</span><span class="o">);</span>
+</pre></div>
+
+
 <p>If your applications interacts with multiple disks, you may use the <code>disk</code> method on the <code>Storage</code> facade to work with files on a particular disk:</p>
-<pre><code>Storage::disk('s3')-&gt;put('avatars/1', $fileContents);
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="nt">Storage</span><span class="p">::</span><span class="nd">disk</span><span class="o">(</span><span class="s1">&#39;s3&#39;</span><span class="o">)</span><span class="nt">-</span><span class="o">&gt;</span><span class="nt">put</span><span class="o">(</span><span class="s1">&#39;avatars/1&#39;</span><span class="o">,</span> <span class="o">$</span><span class="nt">fileContents</span><span class="o">);</span>
+</pre></div>
+
+
 <p><a name="retrieving-files"></a></p>
 <h2 id="retrieving-files">Retrieving Files</h2>
 <p>The <code>get</code> method may be used to retrieve the contents of a file. The raw string contents of the file will be returned by the method. Remember, all file paths should be specified relative to the "root" location configured for the disk:</p>
-<pre><code>$contents = Storage::get('file.jpg');
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="o">$</span><span class="nt">contents</span> <span class="o">=</span> <span class="nt">Storage</span><span class="p">::</span><span class="nd">get</span><span class="o">(</span><span class="s1">&#39;file.jpg&#39;</span><span class="o">);</span>
+</pre></div>
+
+
 <p>The <code>exists</code> method may be used to determine if a file exists on the disk:</p>
-<pre><code>$exists = Storage::disk('s3')-&gt;exists('file.jpg');
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="o">$</span><span class="nt">exists</span> <span class="o">=</span> <span class="nt">Storage</span><span class="p">::</span><span class="nd">disk</span><span class="o">(</span><span class="s1">&#39;s3&#39;</span><span class="o">)</span><span class="nt">-</span><span class="o">&gt;</span><span class="nt">exists</span><span class="o">(</span><span class="s1">&#39;file.jpg&#39;</span><span class="o">);</span>
+</pre></div>
+
+
 <p><a name="file-urls"></a></p>
 <h3 id="file-urls">File URLs</h3>
 <p>When using the <code>local</code> or <code>s3</code> drivers, you may use the <code>url</code> method to get the URL for the given file. If you are using the <code>local</code> driver, this will typically just prepend <code>/storage</code> to the given path and return a relative URL to the file. If you are using the <code>s3</code> driver, the fully qualified remote URL will be returned:</p>
-<pre><code>use Illuminate\Support\Facades\Storage;
+<div class="codehilite"><pre><span></span><span class="nt">use</span> <span class="nt">Illuminate</span><span class="err">\</span><span class="nt">Support</span><span class="err">\</span><span class="nt">Facades</span><span class="err">\</span><span class="nt">Storage</span><span class="o">;</span>
 
-$url = Storage::url('file1.jpg');
-</code></pre>
+<span class="o">$</span><span class="nt">url</span> <span class="o">=</span> <span class="nt">Storage</span><span class="p">::</span><span class="nd">url</span><span class="o">(</span><span class="s1">&#39;file1.jpg&#39;</span><span class="o">);</span>
+</pre></div>
+
+
 <blockquote>
-<p>{note} Remember, if you are using the <code>local</code> driver, all files that should be publicly accessible should be placed in the <code>storage/app/public</code> directory. Furthermore, you should <a href="#the-public-disk">create a symbolic link</a> to the <code>storage/app/public</code> directory.</p>
+<p>{note} Remember, if you are using the <code>local</code> driver, all files that should be publicly accessible should be placed in the <code>storage/app/public</code> directory. Furthermore, you should <a href="#the-public-disk">create a symbolic link</a> at <code>public/storage</code> which points to the <code>storage/app/public</code> directory.</p>
 </blockquote>
 <p><a name="file-metadata"></a></p>
 <h3 id="file-metadata">File Metadata</h3>
 <p>In addition to reading and writing files, Laravel can also provide information about the files themselves. For example, the <code>size</code> method may be used to get the size of the file in bytes:</p>
-<pre><code>use Illuminate\Support\Facades\Storage;
+<div class="codehilite"><pre><span></span><span class="nt">use</span> <span class="nt">Illuminate</span><span class="err">\</span><span class="nt">Support</span><span class="err">\</span><span class="nt">Facades</span><span class="err">\</span><span class="nt">Storage</span><span class="o">;</span>
 
-$size = Storage::size('file1.jpg');
-</code></pre>
+<span class="o">$</span><span class="nt">size</span> <span class="o">=</span> <span class="nt">Storage</span><span class="p">::</span><span class="nd">size</span><span class="o">(</span><span class="s1">&#39;file1.jpg&#39;</span><span class="o">);</span>
+</pre></div>
+
+
 <p>The <code>lastModified</code> method returns the UNIX timestamp of the last time the file was modified:</p>
-<pre><code>$time = Storage::lastModified('file1.jpg');
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="o">$</span><span class="nt">time</span> <span class="o">=</span> <span class="nt">Storage</span><span class="p">::</span><span class="nd">lastModified</span><span class="o">(</span><span class="s1">&#39;file1.jpg&#39;</span><span class="o">);</span>
+</pre></div>
+
+
 <p><a name="storing-files"></a></p>
 <h2 id="storing-files">Storing Files</h2>
 <p>The <code>put</code> method may be used to store raw file contents on a disk. You may also pass a PHP <code>resource</code> to the <code>put</code> method, which will use Flysystem's underlying stream support. Using streams is greatly recommended when dealing with large files:</p>
-<pre><code>use Illuminate\Support\Facades\Storage;
+<div class="codehilite"><pre><span></span><span class="nt">use</span> <span class="nt">Illuminate</span><span class="err">\</span><span class="nt">Support</span><span class="err">\</span><span class="nt">Facades</span><span class="err">\</span><span class="nt">Storage</span><span class="o">;</span>
 
-Storage::put('file.jpg', $contents);
+<span class="nt">Storage</span><span class="p">::</span><span class="nd">put</span><span class="o">(</span><span class="s1">&#39;file.jpg&#39;</span><span class="o">,</span> <span class="o">$</span><span class="nt">contents</span><span class="o">);</span>
 
-Storage::put('file.jpg', $resource);
-</code></pre>
+<span class="nt">Storage</span><span class="p">::</span><span class="nd">put</span><span class="o">(</span><span class="s1">&#39;file.jpg&#39;</span><span class="o">,</span> <span class="o">$</span><span class="nt">resource</span><span class="o">);</span>
+</pre></div>
+
+
 <h4 id="automatic-streaming">Automatic Streaming</h4>
 <p>If you would like Laravel to automatically manage streaming a given file to your storage location, you may use the <code>putFile</code> or <code>putFileAs</code> method. This method accepts either a <code>Illuminate\Http\File</code> or <code>Illuminate\Http\UploadedFile</code> instance and will automatically stream the file to your desire location:</p>
-<pre><code>use Illuminate\Http\File;
+<div class="codehilite"><pre><span></span><span class="nt">use</span> <span class="nt">Illuminate</span><span class="err">\</span><span class="nt">Http</span><span class="err">\</span><span class="nt">File</span><span class="o">;</span>
 
-// Automatically calculate MD5 hash for file name...
-Storage::putFile('photos', new File('/path/to/photo'));
+<span class="o">//</span> <span class="nt">Automatically</span> <span class="nt">generate</span> <span class="nt">a</span> <span class="nt">UUID</span> <span class="nt">for</span> <span class="nt">file</span> <span class="nt">name</span><span class="o">...</span>
+<span class="nt">Storage</span><span class="p">::</span><span class="nd">putFile</span><span class="o">(</span><span class="s1">&#39;photos&#39;</span><span class="o">,</span> <span class="nt">new</span> <span class="nt">File</span><span class="o">(</span><span class="s1">&#39;/path/to/photo&#39;</span><span class="o">));</span>
 
-// Manually specify a file name...
-Storage::putFileAs('photos', new File('/path/to/photo'), 'photo.jpg');
-</code></pre>
-<p>There are a few important things to note about the <code>putFile</code> method. Note that we only specified a directory name, not a file name. By default, the <code>putFile</code> method will automatically generate a filename based on the contents of the file. This is accomplished by taking a MD5 hash of the file's contents. The path to the file will be returned by the <code>putFile</code> method so you can store the path, including the generated file name, in your database.</p>
-<p>The <code>putFile</code> and <code>putFileAs</code> methods also accept an argument to specify the "visibility" of the stored file. This is particularly useful if you are storing the file on a cloud disk such as S3 and would like the file to publicly accessible:</p>
-<pre><code>Storage::putFile('photos', new File('/path/to/photo'), 'public');
-</code></pre>
+<span class="o">//</span> <span class="nt">Manually</span> <span class="nt">specify</span> <span class="nt">a</span> <span class="nt">file</span> <span class="nt">name</span><span class="o">...</span>
+<span class="nt">Storage</span><span class="p">::</span><span class="nd">putFileAs</span><span class="o">(</span><span class="s1">&#39;photos&#39;</span><span class="o">,</span> <span class="nt">new</span> <span class="nt">File</span><span class="o">(</span><span class="s1">&#39;/path/to/photo&#39;</span><span class="o">),</span> <span class="s1">&#39;photo.jpg&#39;</span><span class="o">);</span>
+</pre></div>
+
+
+<p>There are a few important things to note about the <code>putFile</code> method. Note that we only specified a directory name, not a file name. By default, the <code>putFile</code> method will generate a UUID to serve as the file name. The path to the file will be returned by the <code>putFile</code> method so you can store the path, including the generated file name, in your database.</p>
+<p>The <code>putFile</code> and <code>putFileAs</code> methods also accept an argument to specify the "visibility" of the stored file. This is particularly useful if you are storing the file on a cloud disk such as S3 and would like the file to be publicly accessible:</p>
+<div class="codehilite"><pre><span></span><span class="nt">Storage</span><span class="p">::</span><span class="nd">putFile</span><span class="o">(</span><span class="s1">&#39;photos&#39;</span><span class="o">,</span> <span class="nt">new</span> <span class="nt">File</span><span class="o">(</span><span class="s1">&#39;/path/to/photo&#39;</span><span class="o">),</span> <span class="s1">&#39;public&#39;</span><span class="o">);</span>
+</pre></div>
+
+
 <h4 id="prepending-appending-to-files">Prepending &amp; Appending To Files</h4>
 <p>The <code>prepend</code> and <code>append</code> methods allow you to write to the beginning or end of a file:</p>
-<pre><code>Storage::prepend('file.log', 'Prepended Text');
+<div class="codehilite"><pre><span></span><span class="nt">Storage</span><span class="p">::</span><span class="nd">prepend</span><span class="o">(</span><span class="s1">&#39;file.log&#39;</span><span class="o">,</span> <span class="s1">&#39;Prepended Text&#39;</span><span class="o">);</span>
 
-Storage::append('file.log', 'Appended Text');
-</code></pre>
+<span class="nt">Storage</span><span class="p">::</span><span class="nd">append</span><span class="o">(</span><span class="s1">&#39;file.log&#39;</span><span class="o">,</span> <span class="s1">&#39;Appended Text&#39;</span><span class="o">);</span>
+</pre></div>
+
+
 <h4 id="copying-moving-files">Copying &amp; Moving Files</h4>
 <p>The <code>copy</code> method may be used to copy an existing file to a new location on the disk, while the <code>move</code> method may be used to rename or move an existing file to a new location:</p>
-<pre><code>Storage::copy('old/file1.jpg', 'new/file1.jpg');
+<div class="codehilite"><pre><span></span><span class="nt">Storage</span><span class="p">::</span><span class="nd">copy</span><span class="o">(</span><span class="s1">&#39;old/file1.jpg&#39;</span><span class="o">,</span> <span class="s1">&#39;new/file1.jpg&#39;</span><span class="o">);</span>
 
-Storage::move('old/file1.jpg', 'new/file1.jpg');
-</code></pre>
+<span class="nt">Storage</span><span class="p">::</span><span class="nd">move</span><span class="o">(</span><span class="s1">&#39;old/file1.jpg&#39;</span><span class="o">,</span> <span class="s1">&#39;new/file1.jpg&#39;</span><span class="o">);</span>
+</pre></div>
+
+
 <p><a name="file-uploads"></a></p>
 <h3 id="file-uploads">File Uploads</h3>
 <p>In web applications, one of the most common use-cases for storing files is storing user uploaded files such as profile pictures, photos, and documents. Laravel makes it very easy to store uploaded files using the <code>store</code> method on an uploaded file instance. Simply call the <code>store</code> method with the path at which you wish to store the uploaded file:</p>
-<pre><code>&lt;?php
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
-namespace App\Http\Controllers;
+<span class="nx">namespace</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Http</span><span class="err">\</span><span class="nx">Controllers</span><span class="p">;</span>
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Http</span><span class="err">\</span><span class="nx">Request</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Http</span><span class="err">\</span><span class="nx">Controllers</span><span class="err">\</span><span class="nx">Controller</span><span class="p">;</span>
 
-class UserAvatarController extends Controller
-{
-    /**
-     * Update the avatar for the user.
-     *
-     * @param  Request  $request
-     * @return Response
-     */
-    public function update(Request $request)
-    {
-        $path = $request-&gt;file('avatar')-&gt;store('avatars');
+<span class="kr">class</span> <span class="nx">UserAvatarController</span> <span class="kr">extends</span> <span class="nx">Controller</span>
+<span class="p">{</span>
+    <span class="cm">/**</span>
+<span class="cm">     * Update the avatar for the user.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param  Request  $request</span>
+<span class="cm">     * @return Response</span>
+<span class="cm">     */</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">update</span><span class="p">(</span><span class="nx">Request</span> <span class="nx">$request</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nx">$path</span> <span class="o">=</span> <span class="nx">$request</span><span class="o">-&gt;</span><span class="nx">file</span><span class="p">(</span><span class="s1">&#39;avatar&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="nx">store</span><span class="p">(</span><span class="s1">&#39;avatars&#39;</span><span class="p">);</span>
 
-        return $path;
-    }
-}
-</code></pre>
-<p>There are a few important things to note about this example. Note that we only specified a directory name, not a file name. By default, the <code>store</code> method will automatically generate a filename based on the contents of the file. This is accomplished by taking a MD5 hash of the file's contents. The path to the file will be returned by the <code>store</code> method so you can store the path, including the generated file name, in your database.</p>
+        <span class="k">return</span> <span class="nx">$path</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>There are a few important things to note about this example. Note that we only specified a directory name, not a file name. By default, the <code>store</code> method will generate a UUID to serve as the file name. The path to the file will be returned by the <code>store</code> method so you can store the path, including the generated file name, in your database.</p>
 <p>You may also call the <code>putFile</code> method on the <code>Storage</code> facade to perform the same file manipulation as the example above:</p>
-<pre><code>$path = Storage::putFile('avatars', $request-&gt;file('avatar'));
-</code></pre>
-<blockquote>
-<p>{note} If you are receiving very large file uploads, you may wish to manually specify the file name as shown below. Calculating an MD5 hash for extremely large files can be memory intensive.</p>
-</blockquote>
+<div class="codehilite"><pre><span></span><span class="o">$</span><span class="nt">path</span> <span class="o">=</span> <span class="nt">Storage</span><span class="p">::</span><span class="nd">putFile</span><span class="o">(</span><span class="s1">&#39;avatars&#39;</span><span class="o">,</span> <span class="o">$</span><span class="nt">request-</span><span class="o">&gt;</span><span class="nt">file</span><span class="o">(</span><span class="s1">&#39;avatar&#39;</span><span class="o">));</span>
+</pre></div>
+
+
 <h4 id="specifying-a-file-name">Specifying A File Name</h4>
 <p>If you would not like a file name to be automatically assigned to your stored file, you may use the <code>storeAs</code> method, which receives the path, the file name, and the (optional) disk as its arguments:</p>
-<pre><code>$path = $request-&gt;file('avatar')-&gt;storeAs(
-    'avatars', $request-&gt;user()-&gt;id
+<div class="codehilite"><pre><span></span>$path = $request-&gt;file(&#39;avatar&#39;)-&gt;storeAs(
+    &#39;avatars&#39;, $request-&gt;user()-&gt;id
 );
-</code></pre>
+</pre></div>
+
+
 <p>Of course, you may also use the <code>putFileAs</code> method on the <code>Storage</code> facade, which will perform the same file manipulation as the example above:</p>
-<pre><code>$path = Storage::putFileAs(
-    'avatars', $request-&gt;file('avatar'), $request-&gt;user()-&gt;id
+<div class="codehilite"><pre><span></span>$path = Storage::putFileAs(
+    &#39;avatars&#39;, $request-&gt;file(&#39;avatar&#39;), $request-&gt;user()-&gt;id
 );
-</code></pre>
+</pre></div>
+
+
 <h4 id="specifying-a-disk">Specifying A Disk</h4>
 <p>By default, this method will use your default disk. If you would like to specify another disk, pass the disk name as the second argument to the <code>store</code> method:</p>
-<pre><code>$path = $request-&gt;file('avatar')-&gt;store(
-    'avatars/'.$request-&gt;user()-&gt;id, 's3'
+<div class="codehilite"><pre><span></span>$path = $request-&gt;file(&#39;avatar&#39;)-&gt;store(
+    &#39;avatars/&#39;.$request-&gt;user()-&gt;id, &#39;s3&#39;
 );
-</code></pre>
+</pre></div>
+
+
 <p><a name="file-visibility"></a></p>
 <h3 id="file-visibility">File Visibility</h3>
 <p>In Laravel's Flysystem integration, "visibility" is an abstraction of file permissions across multiple platforms. Files may either be declared <code>public</code> or <code>private</code>. When a file is declared <code>public</code>, you are indicating that the file should generally be accessible to others. For example, when using the S3 driver, you may retrieve URLs for <code>public</code> files.</p>
 <p>You can set the visibility when setting the file via the <code>put</code> method:</p>
-<pre><code>use Illuminate\Support\Facades\Storage;
+<div class="codehilite"><pre><span></span><span class="nt">use</span> <span class="nt">Illuminate</span><span class="err">\</span><span class="nt">Support</span><span class="err">\</span><span class="nt">Facades</span><span class="err">\</span><span class="nt">Storage</span><span class="o">;</span>
 
-Storage::put('file.jpg', $contents, 'public');
-</code></pre>
+<span class="nt">Storage</span><span class="p">::</span><span class="nd">put</span><span class="o">(</span><span class="s1">&#39;file.jpg&#39;</span><span class="o">,</span> <span class="o">$</span><span class="nt">contents</span><span class="o">,</span> <span class="s1">&#39;public&#39;</span><span class="o">);</span>
+</pre></div>
+
+
 <p>If the file has already been stored, its visibility can be retrieved and set via the <code>getVisibility</code> and <code>setVisibility</code> methods:</p>
-<pre><code>$visibility = Storage::getVisibility('file.jpg');
+<div class="codehilite"><pre><span></span><span class="o">$</span><span class="nt">visibility</span> <span class="o">=</span> <span class="nt">Storage</span><span class="p">::</span><span class="nd">getVisibility</span><span class="o">(</span><span class="s1">&#39;file.jpg&#39;</span><span class="o">);</span>
 
-Storage::setVisibility('file.jpg', 'public')
-</code></pre>
+<span class="nt">Storage</span><span class="p">::</span><span class="nd">setVisibility</span><span class="o">(</span><span class="s1">&#39;file.jpg&#39;</span><span class="o">,</span> <span class="s1">&#39;public&#39;</span><span class="o">)</span>
+</pre></div>
+
+
 <p><a name="deleting-files"></a></p>
 <h2 id="deleting-files">Deleting Files</h2>
 <p>The <code>delete</code> method accepts a single filename or an array of files to remove from the disk:</p>
-<pre><code>use Illuminate\Support\Facades\Storage;
+<div class="codehilite"><pre><span></span><span class="nt">use</span> <span class="nt">Illuminate</span><span class="err">\</span><span class="nt">Support</span><span class="err">\</span><span class="nt">Facades</span><span class="err">\</span><span class="nt">Storage</span><span class="o">;</span>
 
-Storage::delete('file.jpg');
+<span class="nt">Storage</span><span class="p">::</span><span class="nd">delete</span><span class="o">(</span><span class="s1">&#39;file.jpg&#39;</span><span class="o">);</span>
 
-Storage::delete(['file1.jpg', 'file2.jpg']);
-</code></pre>
+<span class="nt">Storage</span><span class="p">::</span><span class="nd">delete</span><span class="o">(</span><span class="cp">[</span><span class="s1">&#39;file1.jpg&#39;</span><span class="p">,</span> <span class="s1">&#39;file2.jpg&#39;</span><span class="cp">]</span><span class="o">);</span>
+</pre></div>
+
+
 <p><a name="directories"></a></p>
 <h2 id="directories">Directories</h2>
 <h4 id="get-all-files-within-a-directory">Get All Files Within A Directory</h4>
 <p>The <code>files</code> method returns an array of all of the files in a given directory. If you would like to retrieve a list of all files within a given directory including all sub-directories, you may use the <code>allFiles</code> method:</p>
-<pre><code>use Illuminate\Support\Facades\Storage;
+<div class="codehilite"><pre><span></span><span class="nt">use</span> <span class="nt">Illuminate</span><span class="err">\</span><span class="nt">Support</span><span class="err">\</span><span class="nt">Facades</span><span class="err">\</span><span class="nt">Storage</span><span class="o">;</span>
 
-$files = Storage::files($directory);
+<span class="o">$</span><span class="nt">files</span> <span class="o">=</span> <span class="nt">Storage</span><span class="p">::</span><span class="nd">files</span><span class="o">($</span><span class="nt">directory</span><span class="o">);</span>
 
-$files = Storage::allFiles($directory);
-</code></pre>
+<span class="o">$</span><span class="nt">files</span> <span class="o">=</span> <span class="nt">Storage</span><span class="p">::</span><span class="nd">allFiles</span><span class="o">($</span><span class="nt">directory</span><span class="o">);</span>
+</pre></div>
+
+
 <h4 id="get-all-directories-within-a-directory">Get All Directories Within A Directory</h4>
 <p>The <code>directories</code> method returns an array of all the directories within a given directory. Additionally, you may use the <code>allDirectories</code> method to get a list of all directories within a given directory and all of its sub-directories:</p>
-<pre><code>$directories = Storage::directories($directory);
+<div class="codehilite"><pre><span></span><span class="o">$</span><span class="nt">directories</span> <span class="o">=</span> <span class="nt">Storage</span><span class="p">::</span><span class="nd">directories</span><span class="o">($</span><span class="nt">directory</span><span class="o">);</span>
 
-// Recursive...
-$directories = Storage::allDirectories($directory);
-</code></pre>
+<span class="o">//</span> <span class="nt">Recursive</span><span class="o">...</span>
+<span class="o">$</span><span class="nt">directories</span> <span class="o">=</span> <span class="nt">Storage</span><span class="p">::</span><span class="nd">allDirectories</span><span class="o">($</span><span class="nt">directory</span><span class="o">);</span>
+</pre></div>
+
+
 <h4 id="create-a-directory">Create A Directory</h4>
 <p>The <code>makeDirectory</code> method will create the given directory, including any needed sub-directories:</p>
-<pre><code>Storage::makeDirectory($directory);
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="nt">Storage</span><span class="p">::</span><span class="nd">makeDirectory</span><span class="o">($</span><span class="nt">directory</span><span class="o">);</span>
+</pre></div>
+
+
 <h4 id="delete-a-directory">Delete A Directory</h4>
 <p>Finally, the <code>deleteDirectory</code> may be used to remove a directory and all of its files:</p>
-<pre><code>Storage::deleteDirectory($directory);
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="nt">Storage</span><span class="p">::</span><span class="nd">deleteDirectory</span><span class="o">($</span><span class="nt">directory</span><span class="o">);</span>
+</pre></div>
+
+
 <p><a name="custom-filesystems"></a></p>
 <h2 id="custom-filesystems">Custom Filesystems</h2>
 <p>Laravel's Flysystem integration provides drivers for several "drivers" out of the box; however, Flysystem is not limited to these and has adapters for many other storage systems. You can create a custom driver if you want to use one of these additional adapters in your Laravel application.</p>
 <p>In order to set up the custom filesystem you will need to create a <a href="../docs/{{version}}/providers">service provider</a> such as <code>DropboxServiceProvider</code>. In the provider's <code>boot</code> method, you may use the <code>Storage</code> facade's <code>extend</code> method to define the custom driver:</p>
-<pre><code>&lt;?php
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
-namespace App\Providers;
+<span class="nx">namespace</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Providers</span><span class="p">;</span>
 
-use Storage;
-use League\Flysystem\Filesystem;
-use Dropbox\Client as DropboxClient;
-use Illuminate\Support\ServiceProvider;
-use League\Flysystem\Dropbox\DropboxAdapter;
+<span class="nx">use</span> <span class="nx">Storage</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">League</span><span class="err">\</span><span class="nx">Flysystem</span><span class="err">\</span><span class="nx">Filesystem</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Dropbox</span><span class="err">\</span><span class="nx">Client</span> <span class="kr">as</span> <span class="nx">DropboxClient</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Support</span><span class="err">\</span><span class="nx">ServiceProvider</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">League</span><span class="err">\</span><span class="nx">Flysystem</span><span class="err">\</span><span class="nx">Dropbox</span><span class="err">\</span><span class="nx">DropboxAdapter</span><span class="p">;</span>
 
-class DropboxServiceProvider extends ServiceProvider
-{
-    /**
-     * Perform post-registration booting of services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        Storage::extend('dropbox', function($app, $config) {
-            $client = new DropboxClient(
-                $config['accessToken'], $config['clientIdentifier']
-            );
+<span class="kr">class</span> <span class="nx">DropboxServiceProvider</span> <span class="kr">extends</span> <span class="nx">ServiceProvider</span>
+<span class="p">{</span>
+    <span class="cm">/**</span>
+<span class="cm">     * Perform post-registration booting of services.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return void</span>
+<span class="cm">     */</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">boot</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nx">Storage</span><span class="o">::</span><span class="nx">extend</span><span class="p">(</span><span class="s1">&#39;dropbox&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">$app</span><span class="p">,</span> <span class="nx">$config</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DropboxClient</span><span class="p">(</span>
+                <span class="nx">$config</span><span class="p">[</span><span class="s1">&#39;accessToken&#39;</span><span class="p">],</span> <span class="nx">$config</span><span class="p">[</span><span class="s1">&#39;clientIdentifier&#39;</span><span class="p">]</span>
+            <span class="p">);</span>
 
-            return new Filesystem(new DropboxAdapter($client));
-        });
-    }
+            <span class="k">return</span> <span class="k">new</span> <span class="nx">Filesystem</span><span class="p">(</span><span class="k">new</span> <span class="nx">DropboxAdapter</span><span class="p">(</span><span class="nx">$client</span><span class="p">));</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
 
-    /**
-     * Register bindings in the container.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        //
-    }
-}
-</code></pre>
+    <span class="cm">/**</span>
+<span class="cm">     * Register bindings in the container.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return void</span>
+<span class="cm">     */</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">register</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">//</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <p>The first argument of the <code>extend</code> method is the name of the driver and the second is a Closure that receives the <code>$app</code> and <code>$config</code> variables. The resolver Closure must return an instance of <code>League\Flysystem\Filesystem</code>. The <code>$config</code> variable contains the values defined in <code>config/filesystems.php</code> for the specified disk.</p>
-<p>Once you have created the service provider to register the extension, you may use the <code>dropbox</code> driver in your <code>config/filesystem.php</code> configuration file.</p>
+<p>Once you have created the service provider to register the extension, you may use the <code>dropbox</code> driver in your <code>config/filesystems.php</code> configuration file.</p>
           <aside class="copyright" role="note">
             
             Documentation built with
@@ -1207,10 +1253,6 @@ class DropboxServiceProvider extends ServiceProvider
       var repo_id  = '';
     </script>
     <script src="../assets/javascripts/application-997097ee0c.js"></script>
-    
-      <script src="../assets/jquery.js"></script>
-    
-      <script src="../assets/prism.js"></script>
     
     
   </body>

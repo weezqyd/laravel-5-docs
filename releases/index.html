@@ -9,16 +9,16 @@
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     
       
-        <title>Releases - Laravel 5.3 official documentation</title>
+        <title>Releases - Laravel 5.4 Official Documentation</title>
       
       
       
       
     
     <meta property="og:url" content="None">
-    <meta property="og:title" content="Laravel 5.3 official documentation">
+    <meta property="og:title" content="Laravel 5.4 Official Documentation">
     <meta property="og:image" content="None/../">
-    <meta name="apple-mobile-web-app-title" content="Laravel 5.3 official documentation">
+    <meta name="apple-mobile-web-app-title" content="Laravel 5.4 Official Documentation">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
@@ -60,15 +60,13 @@
       </style>
     
     
-      <link rel="stylesheet" href="../assets/prism.css">
-    
     <script src="../assets/javascripts/modernizr-4ab42b99fd.js"></script>
     
   </head>
   
   
   
-  <body class="palette-primary-teal palette-accent-pink">
+  <body class="palette-primary-teal palette-accent-green">
     
     <div class="backdrop">
       <div class="backdrop-paper"></div>
@@ -125,7 +123,7 @@
       
       <div class="name">
         <strong>
-          Laravel 5.3 official documentation
+          Laravel 5.4 Official Documentation
           <span class="version">
             
           </span>
@@ -619,15 +617,6 @@
           
             
   <li>
-    <a class="" title="Readme" href="../readme/">
-      Readme
-    </a>
-    
-  </li>
-
-          
-            
-  <li>
     <a class="" title="Redirects" href="../redirects/">
       Redirects
     </a>
@@ -866,26 +855,32 @@
 <p>{video} There is a free <a href="https://laracasts.com/series/whats-new-in-laravel-5-3/episodes/9">video tutorial</a> for this feature available on Laracasts.</p>
 </blockquote>
 <p>Laravel Notifications provide a simple, expressive API for sending notifications across a variety of delivery channels such as email, Slack, SMS, and more. For example, you may define a notification that an invoice has been paid and deliver that notification via email and SMS. Then, you may send the notification using a single, simple method:</p>
-<pre><code>$user-&gt;notify(new InvoicePaid($invoice));
-</code></pre>
+<div class="codehilite"><pre><span></span>$user-&gt;notify(new InvoicePaid($invoice));
+</pre></div>
+
+
 <p>There is already a wide variety of <a href="http://laravel-notification-channels.com">community written drivers</a> for notifications, including support for iOS and Android notifications. To learn more about notifications, be sure to check out the <a href="../docs/5.3/notifications">full notification documentation</a>.</p>
 <h3 id="websockets-event-broadcasting">WebSockets / Event Broadcasting</h3>
 <p>While event broadcasting existed in previous versions of Laravel, the Laravel 5.3 release greatly improves this feature of the framework by adding channel-level authentication for private and presence WebSocket channels:</p>
-<pre><code>/*
- * Authenticate the channel subscription...
- */
-Broadcast::channel('orders.*', function ($user, $orderId) {
-    return $user-&gt;placedOrder($orderId);
-});
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * Authenticate the channel subscription...</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="nl">Broadcast</span><span class="o">:</span><span class="err">:</span>channel<span class="o">(</span><span class="s">&#39;orders.*&#39;</span><span class="o">,</span><span class="w"> </span>function<span class="w"> </span><span class="o">(</span><span class="err">$</span>user<span class="o">,</span><span class="w"> </span><span class="err">$</span>orderId<span class="o">)</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
+<span class="w">    </span><span class="kr">return</span><span class="w"> </span><span class="err">$</span>user<span class="o">-&gt;</span>placedOrder<span class="o">(</span><span class="err">$</span>orderId<span class="o">)</span><span class="err">;</span><span class="w"></span>
+<span class="err">}</span><span class="o">)</span><span class="err">;</span><span class="w"></span>
+</pre></div>
+
+
 <p>Laravel Echo, a new JavaScript package installable via NPM, has also been released to provide a simple, beautiful API for subscribing to channels and listening for your server-side events in your client-side JavaScript application. Echo includes support for <a href="https://pusher.com">Pusher</a> and <a href="http://socket.io">Socket.io</a>:</p>
-<pre><code>Echo.channel('orders.' + orderId)
-    .listen('ShippingStatusUpdated', (e) =&gt; {
+<div class="codehilite"><pre><span></span>Echo.channel(&#39;orders.&#39; + orderId)
+    .listen(&#39;ShippingStatusUpdated&#39;, (e) =&gt; {
         console.log(e.description);
     });
-</code></pre>
+</pre></div>
+
+
 <p>In addition to subscribing to traditional channels, Laravel Echo also makes it a breeze to subscribe to presence channels which provide information about who is listening on a given channel:</p>
-<pre><code>Echo.join('chat.' + roomId)
+<div class="codehilite"><pre><span></span>Echo.join(&#39;chat.&#39; + roomId)
     .here((users) =&gt; {
         //
     })
@@ -895,7 +890,9 @@ Broadcast::channel('orders.*', function ($user, $orderId) {
     .leaving((user) =&gt; {
         console.log(user.name);
     });
-</code></pre>
+</pre></div>
+
+
 <p>To learn more about Echo and event broadcasting, check out the <a href="../docs/5.3/broadcasting">full documentation</a>.</p>
 <h3 id="laravel-passport-oauth2-server">Laravel Passport (OAuth2 Server)</h3>
 <blockquote>
@@ -903,107 +900,129 @@ Broadcast::channel('orders.*', function ($user, $orderId) {
 </blockquote>
 <p>Laravel 5.3 makes API authentication a breeze using <a href="../docs/{{version}}/passport">Laravel Passport</a>, which provides a full OAuth2 server implementation for your Laravel application in a matter of minutes. Passport is built on top of the <a href="https://github.com/thephpleague/oauth2-server">League OAuth2 server</a> that is maintained by Alex Bilbie.</p>
 <p>Passport makes it painless to issue access tokens via OAuth2 authorization codes. You may also allow your users to create "personal access tokens" via your web UI. To get you started quickly, Passport includes <a href="https://vuejs.org">Vue components</a> that can serve as a starting point for your OAuth2 dashboard, allowing users to create clients, revoke access tokens, and more:</p>
-<pre><code>&lt;passport-clients&gt;&lt;/passport-clients&gt;
-&lt;passport-authorized-clients&gt;&lt;/passport-authorized-clients&gt;
-&lt;passport-personal-access-tokens&gt;&lt;/passport-personal-access-tokens&gt;
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="nt">&lt;passport-clients&gt;&lt;/passport-clients&gt;</span>
+<span class="nt">&lt;passport-authorized-clients&gt;&lt;/passport-authorized-clients&gt;</span>
+<span class="nt">&lt;passport-personal-access-tokens&gt;&lt;/passport-personal-access-tokens&gt;</span>
+</pre></div>
+
+
 <p>If you do not want to use the Vue components, you are welcome to provide your own frontend dashboard for managing clients and access tokens. Passport exposes a simple JSON API that you may use with any JavaScript framework you choose.</p>
 <p>Of course, Passport also makes it simple to define access token scopes that may be requested by application's consuming your API:</p>
-<pre><code>Passport::tokensCan([
-    'place-orders' =&gt; 'Place new orders',
-    'check-status' =&gt; 'Check order status',
+<div class="codehilite"><pre><span></span>Passport::tokensCan([
+    &#39;place-orders&#39; =&gt; &#39;Place new orders&#39;,
+    &#39;check-status&#39; =&gt; &#39;Check order status&#39;,
 ]);
-</code></pre>
+</pre></div>
+
+
 <p>In addition, Passport includes helpful middleware for verifying that an access token authenticated request contains the necessary token scopes:</p>
-<pre><code>Route::get('/orders/{order}/status', function (Order $order) {
-    // Access token has "check-status" scope...
-})-&gt;middleware('scope:check-status');
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="nt">Route</span><span class="p">::</span><span class="nd">get</span><span class="o">(</span><span class="s1">&#39;/orders/{order}/status&#39;</span><span class="o">,</span> <span class="nt">function</span> <span class="o">(</span><span class="nt">Order</span> <span class="o">$</span><span class="nt">order</span><span class="o">)</span> <span class="p">{</span>
+    <span class="err">//</span> <span class="err">Access</span> <span class="err">token</span> <span class="err">has</span> <span class="err">&quot;check-status&quot;</span> <span class="err">scope...</span>
+<span class="p">}</span><span class="o">)</span><span class="nt">-</span><span class="o">&gt;</span><span class="nt">middleware</span><span class="o">(</span><span class="s1">&#39;scope:check-status&#39;</span><span class="o">);</span>
+</pre></div>
+
+
 <p>Lastly, Passport includes support for consuming your own API from your JavaScript application without worrying about passing access tokens. Passport achieves this through encrypted JWT cookies and synchronized CSRF tokens, allowing you to focus on what matters: your application. For more information on Passport, be sure to check out its <a href="../docs/5.3/passport">full documentation</a>.</p>
 <h3 id="search-laravel-scout">Search (Laravel Scout)</h3>
 <p>Laravel Scout provides a simple, driver based solution for adding full-text search to your <a href="../docs/5.3/eloquent">Eloquent models</a>. Using model observers, Scout will automatically keep your search indexes in sync with your Eloquent records. Currently, Scout ships with an <a href="https://www.algolia.com/">Algolia</a> driver; however, writing custom drivers is simple and you are free to extend Scout with your own search implementations.</p>
 <p>Making models searchable is as simple as adding a <code>Searchable</code> trait to the model:</p>
-<pre><code>&lt;?php
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
-namespace App;
+<span class="nx">namespace</span> <span class="nx">App</span><span class="p">;</span>
 
-use Laravel\Scout\Searchable;
-use Illuminate\Database\Eloquent\Model;
+<span class="nx">use</span> <span class="nx">Laravel</span><span class="err">\</span><span class="nx">Scout</span><span class="err">\</span><span class="nx">Searchable</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Database</span><span class="err">\</span><span class="nx">Eloquent</span><span class="err">\</span><span class="nx">Model</span><span class="p">;</span>
 
-class Post extends Model
-{
-    use Searchable;
-}
-</code></pre>
+<span class="kr">class</span> <span class="nx">Post</span> <span class="kr">extends</span> <span class="nx">Model</span>
+<span class="p">{</span>
+    <span class="nx">use</span> <span class="nx">Searchable</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <p>Once the trait has been added to your model, its information will be kept in sync with your search indexes by simply saving the model:</p>
-<pre><code>$order = new Order;
+<div class="codehilite"><pre><span></span>$order = new Order;
 
 // ...
 
 $order-&gt;save();
-</code></pre>
-<p>Once your models have been indexed, its a breeze to perform full-text searches across all of your models. You may even paginate your search results:</p>
-<pre><code>return Order::search('Star Trek')-&gt;get();
+</pre></div>
 
-return Order::search('Star Trek')-&gt;where('user_id', 1)-&gt;paginate();
-</code></pre>
+
+<p>Once your models have been indexed, its a breeze to perform full-text searches across all of your models. You may even paginate your search results:</p>
+<div class="codehilite"><pre><span></span><span class="nt">return</span> <span class="nt">Order</span><span class="p">::</span><span class="nd">search</span><span class="o">(</span><span class="s1">&#39;Star Trek&#39;</span><span class="o">)</span><span class="nt">-</span><span class="o">&gt;</span><span class="nt">get</span><span class="o">();</span>
+
+<span class="nt">return</span> <span class="nt">Order</span><span class="p">::</span><span class="nd">search</span><span class="o">(</span><span class="s1">&#39;Star Trek&#39;</span><span class="o">)</span><span class="nt">-</span><span class="o">&gt;</span><span class="nt">where</span><span class="o">(</span><span class="s1">&#39;user_id&#39;</span><span class="o">,</span> <span class="nt">1</span><span class="o">)</span><span class="nt">-</span><span class="o">&gt;</span><span class="nt">paginate</span><span class="o">();</span>
+</pre></div>
+
+
 <p>Of course, Scout has many more features which are covered in the <a href="../docs/5.3/scout">full documentation</a>.</p>
 <h3 id="mailable-objects">Mailable Objects</h3>
 <blockquote>
 <p>{video} There is a free <a href="https://laracasts.com/series/whats-new-in-laravel-5-3/episodes/6">video tutorial</a> for this feature available on Laracasts.</p>
 </blockquote>
 <p>Laravel 5.3 ships with support for mailable objects. These objects allow you to represent your email messages as a simple objects instead of customizing mail messages within Closures. For example, you may define a simple mailable object for a "welcome" email:</p>
-<pre><code>class WelcomeMessage extends Mailable
-{
-    use Queueable, SerializesModels;
+<div class="codehilite"><pre><span></span><span class="kr">class</span> <span class="nx">WelcomeMessage</span> <span class="kr">extends</span> <span class="nx">Mailable</span>
+<span class="p">{</span>
+    <span class="nx">use</span> <span class="nx">Queueable</span><span class="p">,</span> <span class="nx">SerializesModels</span><span class="p">;</span>
 
-    /**
-     * Build the message.
-     *
-     * @return $this
-     */
-    public function build()
-    {
-        return $this-&gt;view('emails.welcome');
-    }
-}
-</code></pre>
+    <span class="cm">/**</span>
+<span class="cm">     * Build the message.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return $this</span>
+<span class="cm">     */</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">build</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">view</span><span class="p">(</span><span class="s1">&#39;emails.welcome&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <p>Once the mailable object has been defined, you can send it to a user using a simple, expressive API. Mailable objects are great for discovering the intent of your messages while scanning your code:</p>
-<pre><code>Mail::to($user)-&gt;send(new WelcomeMessage);
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="nt">Mail</span><span class="p">::</span><span class="nd">to</span><span class="o">($</span><span class="nt">user</span><span class="o">)</span><span class="nt">-</span><span class="o">&gt;</span><span class="nt">send</span><span class="o">(</span><span class="nt">new</span> <span class="nt">WelcomeMessage</span><span class="o">);</span>
+</pre></div>
+
+
 <p>Of course, you may also mark mailable objects as "queueable" so that they will be sent in the background by your queue workers:</p>
-<pre><code>class WelcomeMessage extends Mailable implements ShouldQueue
-{
-    //
-}
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="kr">class</span> <span class="nx">WelcomeMessage</span> <span class="kr">extends</span> <span class="nx">Mailable</span> <span class="kr">implements</span> <span class="nx">ShouldQueue</span>
+<span class="p">{</span>
+    <span class="c1">//</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <p>For more information on mailable objects, be sure to check out the <a href="../docs/5.3/mail">mail documentation</a>.</p>
 <h3 id="storing-uploaded-files">Storing Uploaded Files</h3>
 <blockquote>
 <p>{video} There is a free <a href="https://laracasts.com/series/whats-new-in-laravel-5-3/episodes/12">video tutorial</a> for this feature available on Laracasts.</p>
 </blockquote>
 <p>In web applications, one of the most common use-cases for storing files is storing user uploaded files such as profile pictures, photos, and documents. Laravel 5.3 makes it very easy to store uploaded files using the new <code>store</code> method on an uploaded file instance. Simply call the <code>store</code> method with the path at which you wish to store the uploaded file:</p>
-<pre><code>/**
- * Update the avatar for the user.
- *
- * @param  Request  $request
- * @return Response
- */
-public function update(Request $request)
-{
-    $path = $request-&gt;file('avatar')-&gt;store('avatars', 's3');
+<div class="codehilite"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * Update the avatar for the user.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param  Request  $request</span>
+<span class="cm"> * @return Response</span>
+<span class="cm"> */</span><span class="w"></span>
+public<span class="w"> </span>function<span class="w"> </span>update<span class="o">(</span>Request<span class="w"> </span><span class="err">$</span>request<span class="o">)</span><span class="w"></span>
+<span class="err">{</span><span class="w"></span>
+<span class="w">    </span><span class="err">$</span>path<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">$</span>request<span class="o">-&gt;</span>file<span class="o">(</span><span class="s">&#39;avatar&#39;</span><span class="o">)-&gt;</span>store<span class="o">(</span><span class="s">&#39;avatars&#39;</span><span class="o">,</span><span class="w"> </span><span class="s">&#39;s3&#39;</span><span class="o">)</span><span class="err">;</span><span class="w"></span>
 
-    return $path;
-}
-</code></pre>
+<span class="w">    </span><span class="kr">return</span><span class="w"> </span><span class="err">$</span>path<span class="err">;</span><span class="w"></span>
+<span class="err">}</span><span class="w"></span>
+</pre></div>
+
+
 <p>For more information on storing uploaded files, check out the <a href="../docs/{{version}}/filesystem#file-uploads">full documentation</a>.</p>
 <h3 id="webpack-laravel-elixir">Webpack &amp; Laravel Elixir</h3>
 <p>Along with Laravel 5.3, Laravel Elixir 6.0 has been released with baked-in support for the Webpack and Rollup JavaScript module bundlers. By default, the Laravel 5.3 <code>gulpfile.js</code> file now uses Webpack to compile your JavaScript. The <a href="../docs/5.3/elixir">full Laravel Elixir documentation</a> contains more information on both of these bundlers:</p>
-<pre><code>elixir(mix =&gt; {
-    mix.sass('app.scss')
-       .webpack('app.js');
+<div class="codehilite"><pre><span></span>elixir(mix =&gt; {
+    mix.sass(&#39;app.scss&#39;)
+       .webpack(&#39;app.js&#39;);
 });
-</code></pre>
+</pre></div>
+
+
 <h3 id="frontend-structure">Frontend Structure</h3>
 <blockquote>
 <p>{video} There is a free <a href="https://laracasts.com/series/whats-new-in-laravel-5-3/episodes/4">video tutorial</a> for this feature available on Laracasts.</p>
@@ -1015,28 +1034,32 @@ public function update(Request $request)
 <p>By default, fresh Laravel 5.3 applications contain two HTTP route files in a new top-level <code>routes</code> directory. The <code>web</code> and <code>api</code> route files provide more explicit guidance in how to split the routes for your web interface and your API. The routes in the <code>api</code> route file are automatically assigned the <code>api</code> prefix by the <code>RouteServiceProvider</code>.</p>
 <h3 id="closure-console-commands">Closure Console Commands</h3>
 <p>In addition to being defined as command classes, Artisan commands may now be defined as simple Closures in the <code>commands</code> method of your <code>app/Console/Kernel.php</code> file. In fresh Laravel 5.3 applications, the <code>commands</code> method loads a <code>routes/console.php</code> file which allows you to define your Console commands as route-like, Closure based entry points into your application:</p>
-<pre><code>Artisan::command('build {project}', function ($project) {
-    $this-&gt;info('Building project...');
+<div class="codehilite"><pre><span></span>Artisan::command(&#39;build {project}&#39;, function ($project) {
+    $this-&gt;info(&#39;Building project...&#39;);
 });
-</code></pre>
+</pre></div>
+
+
 <p>For more information on Closure commands, check out the <a href="../docs/5.3/artisan#closure-commands">full Artisan documentation</a>.</p>
 <h3 id="the-loop-variable">The <code>$loop</code> Variable</h3>
 <blockquote>
 <p>{video} There is a free <a href="https://laracasts.com/series/whats-new-in-laravel-5-3/episodes/7">video tutorial</a> for this feature available on Laracasts.</p>
 </blockquote>
 <p>When looping within a Blade template, a <code>$loop</code> variable will be available inside of your loop. This variable provides access to some useful bits of information such as the current loop index and whether this is the first or last iteration through the loop:</p>
-<pre><code>@foreach ($users as $user)
-    @if ($loop-&gt;first)
-        This is the first iteration.
-    @endif
+<div class="codehilite"><pre><span></span><span class="p">@</span><span class="n">foreach</span> <span class="p">(</span><span class="err">$</span><span class="n">users</span> <span class="n">as</span> <span class="err">$</span><span class="n">user</span><span class="p">)</span>
+    <span class="p">@</span><span class="k">if</span> <span class="p">(</span><span class="err">$</span><span class="n">loop</span><span class="o">-&gt;</span><span class="n">first</span><span class="p">)</span>
+        <span class="n">This</span> <span class="n">is</span> <span class="n">the</span> <span class="n">first</span> <span class="n">iteration</span><span class="p">.</span>
+    <span class="p">@</span><span class="n">endif</span>
 
-    @if ($loop-&gt;last)
-        This is the last iteration.
-    @endif
+    <span class="p">@</span><span class="k">if</span> <span class="p">(</span><span class="err">$</span><span class="n">loop</span><span class="o">-&gt;</span><span class="n">last</span><span class="p">)</span>
+        <span class="n">This</span> <span class="n">is</span> <span class="n">the</span> <span class="n">last</span> <span class="n">iteration</span><span class="p">.</span>
+    <span class="p">@</span><span class="n">endif</span>
 
-    &lt;p&gt;This is user {{ $user-&gt;id }}&lt;/p&gt;
-@endforeach
-</code></pre>
+    <span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">This</span> <span class="n">is</span> <span class="n">user</span> <span class="p">{{</span> <span class="err">$</span><span class="n">user</span><span class="o">-&gt;</span><span class="kt">id</span> <span class="p">}}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+<span class="p">@</span><span class="n">endforeach</span>
+</pre></div>
+
+
 <p>For more information, consult the <a href="../docs/5.3/blade#the-loop-variable">full Blade documentation</a>.</p>
 <p><a name="laravel-5.2"></a></p>
 <h2 id="laravel-52">Laravel 5.2</h2>
@@ -1046,75 +1069,91 @@ public function update(Request $request)
 <p>However, in Laravel 5.2, you may define additional authentication drivers as well define multiple authenticatable models or user tables, and control their authentication process separately from each other. For example, if your application has one database table for "admin" users and one database table for "student" users, you may now use the <code>Auth</code> methods to authenticate against each of these tables separately.</p>
 <h3 id="authentication-scaffolding">Authentication Scaffolding</h3>
 <p>Laravel already makes it easy to handle authentication on the back-end; however, Laravel 5.2 provides a convenient, lightning-fast way to scaffold the authentication views for your front-end. Simply execute the <code>make:auth</code> command on your terminal:</p>
-<pre><code>php artisan make:auth
-</code></pre>
+<div class="codehilite"><pre><span></span>php artisan make:auth
+</pre></div>
+
+
 <p>This command will generate plain, Bootstrap compatible views for user login, registration, and password reset. The command will also update your routes file with the appropriate routes.</p>
 <blockquote>
 <p>{note} This feature is only meant to be used on new applications, not during application upgrades.</p>
 </blockquote>
 <h3 id="implicit-model-binding">Implicit Model Binding</h3>
 <p>Implicit model binding makes it painless to inject relevant models directly into your routes and controllers. For example, assume you have a route defined like the following:</p>
-<pre><code>use App\User;
+<div class="codehilite"><pre><span></span>use App\User;
 
-Route::get('/user/{user}', function (User $user) {
+Route::get(&#39;/user/{user}&#39;, function (User $user) {
     return $user;
 });
-</code></pre>
+</pre></div>
+
+
 <p>In Laravel 5.1, you would typically need to use the <code>Route::model</code> method to instruct Laravel to inject the <code>App\User</code> instance that matches the <code>{user}</code> parameter in your route definition. However, in Laravel 5.2, the framework will <strong>automatically</strong> inject this model based on the URI segment, allowing you to quickly gain access to the model instances you need.</p>
 <p>Laravel will automatically inject the model when the route parameter segment (<code>{user}</code>) matches the route Closure or controller method's corresponding variable name (<code>$user</code>) and the variable is type-hinting an Eloquent model class.</p>
 <h3 id="middleware-groups">Middleware Groups</h3>
 <p>Middleware groups allow you to group several route middleware under a single, convenient key, allowing you to assign several middleware to a route at once. For example, this can be useful when building a web UI and an API within the same application. You may group the session and CSRF routes into a <code>web</code> group, and perhaps the rate limiter in the <code>api</code> group.</p>
 <p>In fact, the default Laravel 5.2 application structure takes exactly this approach. For example, in the default <code>App\Http\Kernel.php</code> file you will find the following:</p>
-<pre><code>/**
- * The application's route middleware groups.
- *
- * @var array
- */
-protected $middlewareGroups = [
-    'web' =&gt; [
-        \App\Http\Middleware\EncryptCookies::class,
-        \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
-        \Illuminate\Session\Middleware\StartSession::class,
-        \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-        \App\Http\Middleware\VerifyCsrfToken::class,
-    ],
+<div class="codehilite"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * The application&#39;s route middleware groups.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @var array</span>
+<span class="cm"> */</span><span class="w"></span>
+protected<span class="w"> </span><span class="err">$</span>middlewareGroups<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">[</span><span class="w"></span>
+<span class="w">    </span><span class="s">&#39;web&#39;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="err">[</span><span class="w"></span>
+<span class="w">        </span><span class="o">\</span>App<span class="o">\</span>Http<span class="o">\</span>Middleware<span class="o">\</span><span class="nl">EncryptCookies</span><span class="o">:</span><span class="err">:</span>class<span class="o">,</span><span class="w"></span>
+<span class="w">        </span><span class="o">\</span>Illuminate<span class="o">\</span>Cookie<span class="o">\</span>Middleware<span class="o">\</span><span class="nl">AddQueuedCookiesToResponse</span><span class="o">:</span><span class="err">:</span>class<span class="o">,</span><span class="w"></span>
+<span class="w">        </span><span class="o">\</span>Illuminate<span class="o">\</span>Session<span class="o">\</span>Middleware<span class="o">\</span><span class="nl">StartSession</span><span class="o">:</span><span class="err">:</span>class<span class="o">,</span><span class="w"></span>
+<span class="w">        </span><span class="o">\</span>Illuminate<span class="o">\</span>View<span class="o">\</span>Middleware<span class="o">\</span><span class="nl">ShareErrorsFromSession</span><span class="o">:</span><span class="err">:</span>class<span class="o">,</span><span class="w"></span>
+<span class="w">        </span><span class="o">\</span>App<span class="o">\</span>Http<span class="o">\</span>Middleware<span class="o">\</span><span class="nl">VerifyCsrfToken</span><span class="o">:</span><span class="err">:</span>class<span class="o">,</span><span class="w"></span>
+<span class="w">    </span><span class="err">]</span><span class="o">,</span><span class="w"></span>
 
-    'api' =&gt; [
-        'throttle:60,1',
-    ],
-];
-</code></pre>
+<span class="w">    </span><span class="s">&#39;api&#39;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="err">[</span><span class="w"></span>
+<span class="w">        </span><span class="s">&#39;throttle:60,1&#39;</span><span class="o">,</span><span class="w"></span>
+<span class="w">    </span><span class="err">]</span><span class="o">,</span><span class="w"></span>
+<span class="err">];</span><span class="w"></span>
+</pre></div>
+
+
 <p>Then, the <code>web</code> group may be assigned to routes like so:</p>
-<pre><code>Route::group(['middleware' =&gt; ['web']], function () {
+<div class="codehilite"><pre><span></span>Route::group([&#39;middleware&#39; =&gt; [&#39;web&#39;]], function () {
     //
 });
-</code></pre>
+</pre></div>
+
+
 <p>However, keep in mind the <code>web</code> middleware group is <em>already</em> applied to your routes by default since the <code>RouteServiceProvider</code> includes it in the default middleware group.</p>
 <h3 id="rate-limiting">Rate Limiting</h3>
 <p>A new rate limiter middleware is now included with the framework, allowing you to easily limit the number of requests that a given IP address can make to a route over a specified number of minutes. For example, to limit a route to 60 requests every minute from a single IP address, you may do the following:</p>
-<pre><code>Route::get('/api/users', ['middleware' =&gt; 'throttle:60,1', function () {
+<div class="codehilite"><pre><span></span>Route::get(&#39;/api/users&#39;, [&#39;middleware&#39; =&gt; &#39;throttle:60,1&#39;, function () {
     //
 }]);
-</code></pre>
+</pre></div>
+
+
 <h3 id="array-validation">Array Validation</h3>
 <p>Validating array form input fields is much easier in Laravel 5.2. For example, to validate that each e-mail in a given array input field is unique, you may do the following:</p>
-<pre><code>$validator = Validator::make($request-&gt;all(), [
-    'person.*.email' =&gt; 'email|unique:users'
+<div class="codehilite"><pre><span></span>$validator = Validator::make($request-&gt;all(), [
+    &#39;person.*.email&#39; =&gt; &#39;email|unique:users&#39;
 ]);
-</code></pre>
+</pre></div>
+
+
 <p>Likewise, you may use the <code>*</code> character when specifying your validation messages in your language files, making it a breeze to use a single validation message for array based fields:</p>
-<pre><code>'custom' =&gt; [
-    'person.*.email' =&gt; [
-        'unique' =&gt; 'Each person must have a unique e-mail address',
+<div class="codehilite"><pre><span></span>&#39;custom&#39; =&gt; [
+    &#39;person.*.email&#39; =&gt; [
+        &#39;unique&#39; =&gt; &#39;Each person must have a unique e-mail address&#39;,
     ]
 ],
-</code></pre>
+</pre></div>
+
+
 <h3 id="bail-validation-rule">Bail Validation Rule</h3>
 <p>A new <code>bail</code> validation rule has been added, which instructs the validator to stop validating after the first validation failure for a given rule. For example, you may now prevent the validator from running a <code>unique</code> check if an attribute fails an <code>integer</code> check:</p>
-<pre><code>$this-&gt;validate($request, [
-    'user_id' =&gt; 'bail|integer|unique:users'
+<div class="codehilite"><pre><span></span>$this-&gt;validate($request, [
+    &#39;user_id&#39; =&gt; &#39;bail|integer|unique:users&#39;
 ]);
-</code></pre>
+</pre></div>
+
+
 <h3 id="eloquent-global-scope-improvements">Eloquent Global Scope Improvements</h3>
 <p>In previous versions of Laravel, global Eloquent scopes were complicated and error-prone to implement; however, in Laravel 5.2, global query scopes only require you to implement a single, simple method: <code>apply</code>.</p>
 <p>For more information on writing global scopes, check out the full <a href="../docs/{{version}}/eloquent#global-scopes">Eloquent documentation</a>.</p>
@@ -1142,72 +1181,82 @@ protected $middlewareGroups = [
 <p>To learn more about event broadcasting, check out the <a href="../docs/{{version}}/events#broadcasting-events">event documentation</a>.</p>
 <h3 id="middleware-parameters">Middleware Parameters</h3>
 <p>Middleware can now receive additional custom parameters. For example, if your application needs to verify that the authenticated user has a given "role" before performing a given action, you could create a <code>RoleMiddleware</code> that receives a role name as an additional argument:</p>
-<pre><code>&lt;?php
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
-namespace App\Http\Middleware;
+<span class="nx">namespace</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Http</span><span class="err">\</span><span class="nx">Middleware</span><span class="p">;</span>
 
-use Closure;
+<span class="nx">use</span> <span class="nx">Closure</span><span class="p">;</span>
 
-class RoleMiddleware
-{
-    /**
-     * Run the request filter.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @param  string  $role
-     * @return mixed
-     */
-    public function handle($request, Closure $next, $role)
-    {
-        if (! $request-&gt;user()-&gt;hasRole($role)) {
-            // Redirect...
-        }
+<span class="kr">class</span> <span class="nx">RoleMiddleware</span>
+<span class="p">{</span>
+    <span class="cm">/**</span>
+<span class="cm">     * Run the request filter.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param  \Illuminate\Http\Request  $request</span>
+<span class="cm">     * @param  \Closure  $next</span>
+<span class="cm">     * @param  string  $role</span>
+<span class="cm">     * @return mixed</span>
+<span class="cm">     */</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">handle</span><span class="p">(</span><span class="nx">$request</span><span class="p">,</span> <span class="nx">Closure</span> <span class="nx">$next</span><span class="p">,</span> <span class="nx">$role</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span> <span class="nx">$request</span><span class="o">-&gt;</span><span class="nx">user</span><span class="p">()</span><span class="o">-&gt;</span><span class="nx">hasRole</span><span class="p">(</span><span class="nx">$role</span><span class="p">))</span> <span class="p">{</span>
+            <span class="c1">// Redirect...</span>
+        <span class="p">}</span>
 
-        return $next($request);
-    }
+        <span class="k">return</span> <span class="nx">$next</span><span class="p">(</span><span class="nx">$request</span><span class="p">);</span>
+    <span class="p">}</span>
 
-}
-</code></pre>
+<span class="p">}</span>
+</pre></div>
+
+
 <p>Middleware parameters may be specified when defining the route by separating the middleware name and parameters with a <code>:</code>. Multiple parameters should be delimited by commas:</p>
-<pre><code>Route::put('post/{id}', ['middleware' =&gt; 'role:editor', function ($id) {
+<div class="codehilite"><pre><span></span>Route::put(&#39;post/{id}&#39;, [&#39;middleware&#39; =&gt; &#39;role:editor&#39;, function ($id) {
     //
 }]);
-</code></pre>
+</pre></div>
+
+
 <p>For more information on middleware, check out the <a href="../docs/{{version}}/middleware">middleware documentation</a>.</p>
 <h3 id="testing-overhaul">Testing Overhaul</h3>
 <p>The built-in testing capabilities of Laravel have been dramatically improved. A variety of new methods provide a fluent, expressive interface for interacting with your application and examining its responses. For example, check out the following test:</p>
-<pre><code>public function testNewUserRegistration()
+<div class="codehilite"><pre><span></span>public function testNewUserRegistration()
 {
-    $this-&gt;visit('/register')
-         -&gt;type('Taylor', 'name')
-         -&gt;check('terms')
-         -&gt;press('Register')
-         -&gt;seePageIs('/dashboard');
+    $this-&gt;visit(&#39;/register&#39;)
+         -&gt;type(&#39;Taylor&#39;, &#39;name&#39;)
+         -&gt;check(&#39;terms&#39;)
+         -&gt;press(&#39;Register&#39;)
+         -&gt;seePageIs(&#39;/dashboard&#39;);
 }
-</code></pre>
+</pre></div>
+
+
 <p>For more information on testing, check out the <a href="../docs/{{version}}/testing">testing documentation</a>.</p>
 <h3 id="model-factories">Model Factories</h3>
 <p>Laravel now ships with an easy way to create stub Eloquent models using <a href="../docs/{{version}}/database-testing#writing-factories">model factories</a>. Model factories allow you to easily define a set of "default" attributes for your Eloquent model, and then generate test model instances for your tests or database seeds. Model factories also take advantage of the powerful <a href="https://github.com/fzaninotto/Faker">Faker</a> PHP library for generating random attribute data:</p>
-<pre><code>$factory-&gt;define(App\User::class, function ($faker) {
+<div class="codehilite"><pre><span></span>$factory-&gt;define(App\User::class, function ($faker) {
     return [
-        'name' =&gt; $faker-&gt;name,
-        'email' =&gt; $faker-&gt;email,
-        'password' =&gt; str_random(10),
-        'remember_token' =&gt; str_random(10),
+        &#39;name&#39; =&gt; $faker-&gt;name,
+        &#39;email&#39; =&gt; $faker-&gt;email,
+        &#39;password&#39; =&gt; str_random(10),
+        &#39;remember_token&#39; =&gt; str_random(10),
     ];
 });
-</code></pre>
+</pre></div>
+
+
 <p>For more information on model factories, check out <a href="../docs/{{version}}/database-testing#writing-factories">the documentation</a>.</p>
 <h3 id="artisan-improvements">Artisan Improvements</h3>
 <p>Artisan commands may now be defined using a simple, route-like "signature", which provides an extremely simple interface for defining command line arguments and options. For example, you may define a simple command and its options like so:</p>
-<pre><code>/**
- * The name and signature of the console command.
- *
- * @var string
- */
-protected $signature = 'email:send {user} {--force}';
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="c">/**</span>
+<span class="c"> * The name and signature of the console command.</span>
+<span class="c"> *</span>
+<span class="c"> * @var string</span>
+<span class="c"> */</span>
+<span class="nt">protected</span> <span class="o">$</span><span class="nt">signature</span> <span class="o">=</span> <span class="s1">&#39;email:send {user} {--force}&#39;</span><span class="o">;</span>
+</pre></div>
+
+
 <p>For more information on defining Artisan commands, consult the <a href="../docs/{{version}}/artisan">Artisan documentation</a>.</p>
 <h3 id="folder-structure">Folder Structure</h3>
 <p>To better express intent, the <code>app/Commands</code> directory has been renamed to <code>app/Jobs</code>. Additionally, the <code>app/Handlers</code> directory has been consolidated into a single <code>app/Listeners</code> directory which simply contains event listeners. However, this is not a breaking change and you are not required to update to the new folder structure to use Laravel 5.1.</p>
@@ -1231,92 +1280,108 @@ protected $signature = 'email:send {user} {--force}';
 <p>For more information on middleware, check out <a href="../docs/{{version}}/middleware">the documentation</a>.</p>
 <h3 id="controller-method-injection">Controller Method Injection</h3>
 <p>In addition to the existing constructor injection, you may now type-hint dependencies on controller methods. The <a href="../docs/{{version}}/container">service container</a> will automatically inject the dependencies, even if the route contains other parameters:</p>
-<pre><code>public function createPost(Request $request, PostRepository $posts)
+<div class="codehilite"><pre><span></span>public function createPost(Request $request, PostRepository $posts)
 {
     //
 }
-</code></pre>
+</pre></div>
+
+
 <h3 id="authentication-scaffolding_1">Authentication Scaffolding</h3>
 <p>User registration, authentication, and password reset controllers are now included out of the box, as well as simple corresponding views, which are located at <code>resources/views/auth</code>. In addition, a "users" table migration has been included with the framework. Including these simple resources allows rapid development of application ideas without bogging down on authentication boilerplate. The authentication views may be accessed on the <code>auth/login</code> and <code>auth/register</code> routes. The <code>App\Services\Auth\Registrar</code> service is responsible for user validation and creation.</p>
 <h3 id="event-objects">Event Objects</h3>
 <p>You may now define events as objects instead of simply using strings. For example, check out the following event:</p>
-<pre><code>&lt;?php
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
-class PodcastWasPurchased
-{
-    public $podcast;
+<span class="kr">class</span> <span class="nx">PodcastWasPurchased</span>
+<span class="p">{</span>
+    <span class="kr">public</span> <span class="nx">$podcast</span><span class="p">;</span>
 
-    public function __construct(Podcast $podcast)
-    {
-        $this-&gt;podcast = $podcast;
-    }
-}
-</code></pre>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">__construct</span><span class="p">(</span><span class="nx">Podcast</span> <span class="nx">$podcast</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">podcast</span> <span class="o">=</span> <span class="nx">$podcast</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <p>The event may be dispatched like normal:</p>
-<pre><code>Event::fire(new PodcastWasPurchased($podcast));
-</code></pre>
-<p>Of course, your event handler will receive the event object instead of a list of data:</p>
-<pre><code>&lt;?php
+<div class="codehilite"><pre><span></span><span class="nt">Event</span><span class="p">::</span><span class="nd">fire</span><span class="o">(</span><span class="nt">new</span> <span class="nt">PodcastWasPurchased</span><span class="o">($</span><span class="nt">podcast</span><span class="o">));</span>
+</pre></div>
 
-class ReportPodcastPurchase
-{
-    public function handle(PodcastWasPurchased $event)
-    {
-        //
-    }
-}
-</code></pre>
+
+<p>Of course, your event handler will receive the event object instead of a list of data:</p>
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+
+<span class="kr">class</span> <span class="nx">ReportPodcastPurchase</span>
+<span class="p">{</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">handle</span><span class="p">(</span><span class="nx">PodcastWasPurchased</span> <span class="nx">$event</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">//</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <p>For more information on working with events, check out the <a href="../docs/{{version}}/events">full documentation</a>.</p>
 <h3 id="commands-queueing">Commands / Queueing</h3>
 <p>In addition to the queue job format supported in Laravel 4, Laravel 5 allows you to represent your queued jobs as simple command objects. These commands live in the <code>app/Commands</code> directory. Here's a sample command:</p>
-<pre><code>&lt;?php
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
-class PurchasePodcast extends Command implements SelfHandling, ShouldBeQueued
-{
-    use SerializesModels;
+<span class="kr">class</span> <span class="nx">PurchasePodcast</span> <span class="kr">extends</span> <span class="nx">Command</span> <span class="kr">implements</span> <span class="nx">SelfHandling</span><span class="p">,</span> <span class="nx">ShouldBeQueued</span>
+<span class="p">{</span>
+    <span class="nx">use</span> <span class="nx">SerializesModels</span><span class="p">;</span>
 
-    protected $user, $podcast;
+    <span class="kr">protected</span> <span class="nx">$user</span><span class="p">,</span> <span class="nx">$podcast</span><span class="p">;</span>
 
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct(User $user, Podcast $podcast)
-    {
-        $this-&gt;user = $user;
-        $this-&gt;podcast = $podcast;
-    }
+    <span class="cm">/**</span>
+<span class="cm">     * Create a new command instance.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return void</span>
+<span class="cm">     */</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">__construct</span><span class="p">(</span><span class="nx">User</span> <span class="nx">$user</span><span class="p">,</span> <span class="nx">Podcast</span> <span class="nx">$podcast</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">user</span> <span class="o">=</span> <span class="nx">$user</span><span class="p">;</span>
+        <span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">podcast</span> <span class="o">=</span> <span class="nx">$podcast</span><span class="p">;</span>
+    <span class="p">}</span>
 
-    /**
-     * Execute the command.
-     *
-     * @return void
-     */
-    public function handle()
-    {
-        // Handle the logic to purchase the podcast...
+    <span class="cm">/**</span>
+<span class="cm">     * Execute the command.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return void</span>
+<span class="cm">     */</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">handle</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// Handle the logic to purchase the podcast...</span>
 
-        event(new PodcastWasPurchased($this-&gt;user, $this-&gt;podcast));
-    }
-}
-</code></pre>
+        <span class="nx">event</span><span class="p">(</span><span class="k">new</span> <span class="nx">PodcastWasPurchased</span><span class="p">(</span><span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">user</span><span class="p">,</span> <span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">podcast</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <p>The base Laravel controller utilizes the new <code>DispatchesCommands</code> trait, allowing you to easily dispatch your commands for execution:</p>
-<pre><code>$this-&gt;dispatch(new PurchasePodcastCommand($user, $podcast));
-</code></pre>
+<div class="codehilite"><pre><span></span>$this-&gt;dispatch(new PurchasePodcastCommand($user, $podcast));
+</pre></div>
+
+
 <p>Of course, you may also use commands for tasks that are executed synchronously (are not queued). In fact, using commands is a great way to encapsulate complex tasks your application needs to perform. For more information, check out the <a href="../docs/{{version}}/bus">command bus</a> documentation.</p>
 <h3 id="database-queue">Database Queue</h3>
 <p>A <code>database</code> queue driver is now included in Laravel, providing a simple, local queue driver that requires no extra package installation beyond your database software.</p>
 <h3 id="laravel-scheduler">Laravel Scheduler</h3>
 <p>In the past, developers have generated a Cron entry for each console command they wished to schedule. However, this is a headache. Your console schedule is no longer in source control, and you must SSH into your server to add the Cron entries. Let's make our lives easier. The Laravel command scheduler allows you to fluently and expressively define your command schedule within Laravel itself, and only a single Cron entry is needed on your server.</p>
 <p>It looks like this:</p>
-<pre><code>$schedule-&gt;command('artisan:command')-&gt;dailyAt('15:00');
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="o">$</span><span class="nt">schedule-</span><span class="o">&gt;</span><span class="nt">command</span><span class="o">(</span><span class="s1">&#39;artisan:command&#39;</span><span class="o">)</span><span class="nt">-</span><span class="o">&gt;</span><span class="nt">dailyAt</span><span class="o">(</span><span class="s1">&#39;15:00&#39;</span><span class="o">);</span>
+</pre></div>
+
+
 <p>Of course, check out the <a href="../docs/{{version}}/scheduling">full documentation</a> to learn all about the scheduler!</p>
 <h3 id="tinker-psysh">Tinker / Psysh</h3>
 <p>The <code>php artisan tinker</code> command now utilizes <a href="https://github.com/bobthecow/psysh">Psysh</a> by Justin Hileman, a more robust REPL for PHP. If you liked Boris in Laravel 4, you're going to love Psysh. Even better, it works on Windows! To get started, just try:</p>
-<pre><code>php artisan tinker
-</code></pre>
+<div class="codehilite"><pre><span></span>php artisan tinker
+</pre></div>
+
+
 <h3 id="dotenv">DotEnv</h3>
 <p>Instead of a variety of confusing, nested environment configuration directories, Laravel 5 now utilizes <a href="https://github.com/vlucas/phpdotenv">DotEnv</a> by Vance Lucas. This library provides a super simple way to manage your environment configuration, and makes environment detection in Laravel 5 a breeze. For more details, check out the full <a href="../docs/{{version}}/installation#environment-configuration">configuration documentation</a>.</p>
 <h3 id="laravel-elixir">Laravel Elixir</h3>
@@ -1324,61 +1389,71 @@ class PurchasePodcast extends Command implements SelfHandling, ShouldBeQueued
 <p>For more information on Elixir, check out the <a href="../docs/{{version}}/elixir">full documentation</a>.</p>
 <h3 id="laravel-socialite">Laravel Socialite</h3>
 <p>Laravel Socialite is an optional, Laravel 5.0+ compatible package that provides totally painless authentication with OAuth providers. Currently, Socialite supports Facebook, Twitter, Google, and GitHub. Here's what it looks like:</p>
-<pre><code>public function redirectForAuth()
-{
-    return Socialize::with('twitter')-&gt;redirect();
-}
+<div class="codehilite"><pre><span></span><span class="nt">public</span> <span class="nt">function</span> <span class="nt">redirectForAuth</span><span class="o">()</span>
+<span class="p">{</span>
+    <span class="err">return</span> <span class="n">Socialize</span><span class="p">:</span><span class="o">:</span><span class="nf">with</span><span class="p">(</span><span class="s1">&#39;twitter&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="nf">redirect</span><span class="p">();</span>
+<span class="p">}</span>
 
-public function getUserFromProvider()
-{
-    $user = Socialize::with('twitter')-&gt;user();
-}
-</code></pre>
+<span class="nt">public</span> <span class="nt">function</span> <span class="nt">getUserFromProvider</span><span class="o">()</span>
+<span class="p">{</span>
+    <span class="err">$user</span> <span class="err">=</span> <span class="n">Socialize</span><span class="p">:</span><span class="o">:</span><span class="nf">with</span><span class="p">(</span><span class="s1">&#39;twitter&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="nf">user</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <p>No more spending hours writing OAuth authentication flows. Get started in minutes! The <a href="../docs/{{version}}/authentication#social-authentication">full documentation</a> has all the details.</p>
 <h3 id="flysystem-integration">Flysystem Integration</h3>
 <p>Laravel now includes the powerful <a href="https://github.com/thephpleague/flysystem">Flysystem</a> filesystem abstraction library, providing pain free integration with local, Amazon S3, and Rackspace cloud storage - all with one, unified and elegant API! Storing a file in Amazon S3 is now as simple as:</p>
-<pre><code>Storage::put('file.txt', 'contents');
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="nt">Storage</span><span class="p">::</span><span class="nd">put</span><span class="o">(</span><span class="s1">&#39;file.txt&#39;</span><span class="o">,</span> <span class="s1">&#39;contents&#39;</span><span class="o">);</span>
+</pre></div>
+
+
 <p>For more information on the Laravel Flysystem integration, consult the <a href="../docs/{{version}}/filesystem">full documentation</a>.</p>
 <h3 id="form-requests">Form Requests</h3>
 <p>Laravel 5.0 introduces <strong>form requests</strong>, which extend the <code>Illuminate\Foundation\Http\FormRequest</code> class. These request objects can be combined with controller method injection to provide a boiler-plate free method of validating user input. Let's dig in and look at a sample <code>FormRequest</code>:</p>
-<pre><code>&lt;?php
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
-namespace App\Http\Requests;
+<span class="nx">namespace</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Http</span><span class="err">\</span><span class="nx">Requests</span><span class="p">;</span>
 
-class RegisterRequest extends FormRequest
-{
-    public function rules()
-    {
-        return [
-            'email' =&gt; 'required|email|unique:users',
-            'password' =&gt; 'required|confirmed|min:8',
-        ];
-    }
+<span class="kr">class</span> <span class="nx">RegisterRequest</span> <span class="kr">extends</span> <span class="nx">FormRequest</span>
+<span class="p">{</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">rules</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="s1">&#39;email&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;required|email|unique:users&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;password&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;required|confirmed|min:8&#39;</span><span class="p">,</span>
+        <span class="p">];</span>
+    <span class="p">}</span>
 
-    public function authorize()
-    {
-        return true;
-    }
-}
-</code></pre>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">authorize</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <p>Once the class has been defined, we can type-hint it on our controller action:</p>
-<pre><code>public function register(RegisterRequest $request)
+<div class="codehilite"><pre><span></span>public function register(RegisterRequest $request)
 {
     var_dump($request-&gt;input());
 }
-</code></pre>
+</pre></div>
+
+
 <p>When the Laravel service container identifies that the class it is injecting is a <code>FormRequest</code> instance, the request will <strong>automatically be validated</strong>. This means that if your controller action is called, you can safely assume the HTTP request input has been validated according to the rules you specified in your form request class. Even more, if the request is invalid, an HTTP redirect, which you may customize, will automatically be issued, and the error messages will be either flashed to the session or converted to JSON. <strong>Form validation has never been more simple.</strong> For more information on <code>FormRequest</code> validation, check out the <a href="../docs/{{version}}/validation#form-request-validation">documentation</a>.</p>
 <h3 id="simple-controller-request-validation">Simple Controller Request Validation</h3>
 <p>The Laravel 5 base controller now includes a <code>ValidatesRequests</code> trait. This trait provides a simple <code>validate</code> method to validate incoming requests. If <code>FormRequests</code> are a little too much for your application, check this out:</p>
-<pre><code>public function createPost(Request $request)
+<div class="codehilite"><pre><span></span>public function createPost(Request $request)
 {
     $this-&gt;validate($request, [
-        'title' =&gt; 'required|max:255',
-        'body' =&gt; 'required',
+        &#39;title&#39; =&gt; &#39;required|max:255&#39;,
+        &#39;body&#39; =&gt; &#39;required&#39;,
     ]);
 }
-</code></pre>
+</pre></div>
+
+
 <p>If the validation fails, an exception will be thrown and the proper HTTP response will automatically be sent back to the browser. The validation errors will even be flashed to the session! If the request was an AJAX request, Laravel even takes care of sending a JSON representation of the validation errors back to you.</p>
 <p>For more information on this new method, check out <a href="../docs/{{version}}/validation#validation-quickstart">the documentation</a>.</p>
 <h3 id="new-generators">New Generators</h3>
@@ -1387,8 +1462,10 @@ class RegisterRequest extends FormRequest
 <p>You may now cache all of your configuration in a single file using the <code>config:cache</code> command.</p>
 <h3 id="symfony-vardumper">Symfony VarDumper</h3>
 <p>The popular <code>dd</code> helper function, which dumps variable debug information, has been upgraded to use the amazing Symfony VarDumper. This provides color-coded output and even collapsing of arrays. Just try the following in your project:</p>
-<pre><code>dd([1, 2, 3]);
-</code></pre>
+<div class="codehilite"><pre><span></span>dd([1, 2, 3]);
+</pre></div>
+
+
 <p><a name="laravel-4.2"></a></p>
 <h2 id="laravel-42">Laravel 4.2</h2>
 <p>The full change list for this release by running the <code>php artisan changes</code> command from a 4.2 installation, or by <a href="https://github.com/laravel/framework/blob/4.2/src/Illuminate/Foundation/changes.json">viewing the change file on Github</a>. These notes only cover the major enhancements and changes for the release.</p>
@@ -1521,10 +1598,6 @@ class RegisterRequest extends FormRequest
       var repo_id  = '';
     </script>
     <script src="../assets/javascripts/application-997097ee0c.js"></script>
-    
-      <script src="../assets/jquery.js"></script>
-    
-      <script src="../assets/prism.js"></script>
     
     
   </body>
