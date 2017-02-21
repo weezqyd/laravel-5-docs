@@ -158,15 +158,6 @@
           
             
   <li>
-    <a class="" title="Application testing" href="../application-testing/">
-      Application testing
-    </a>
-    
-  </li>
-
-          
-            
-  <li>
     <a class="" title="Artisan" href="../artisan/">
       Artisan
     </a>
@@ -329,8 +320,8 @@
           
             
   <li>
-    <a class="" title="Elixir" href="../elixir/">
-      Elixir
+    <a class="" title="Dusk" href="../dusk/">
+      Dusk
     </a>
     
   </li>
@@ -473,6 +464,15 @@
           
             
   <li>
+    <a class="" title="Http tests" href="../http-tests/">
+      Http tests
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
     <a class="" title="Installation" href="../installation/">
       Installation
     </a>
@@ -529,6 +529,15 @@
   <li>
     <a class="" title="Migrations" href="../migrations/">
       Migrations
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Mix" href="../mix/">
+      Mix
     </a>
     
   </li>
@@ -796,7 +805,7 @@
       <article class="article">
         <div class="wrapper">
           
-          <h1 id="testing">Testing</h1>
+          <h1 id="testing-getting-started">Testing: Getting Started</h1>
 <ul>
 <li><a href="#introduction">Introduction</a></li>
 <li><a href="#environment">Environment</a></li>
@@ -805,33 +814,40 @@
 <p><a name="introduction"></a></p>
 <h2 id="introduction">Introduction</h2>
 <p>Laravel is built with testing in mind. In fact, support for testing with PHPUnit is included out of the box and a <code>phpunit.xml</code> file is already setup for your application. The framework also ships with convenient helper methods that allow you to expressively test your applications.</p>
-<p>An <code>ExampleTest.php</code> file is provided in the <code>tests</code> directory. After installing a new Laravel application, simply run <code>phpunit</code> on the command line to run your tests.</p>
+<p>By default, your application's <code>tests</code> directory contains two directories: <code>Feature</code> and <code>Unit</code>. Unit tests are tests that focus on a very small, isolated portion of your code. In fact, most unit tests probably focus on a single method. Feature tests may test a larger portion of your code, including how several objects interact with each other or even a full HTTP request to a JSON endpoint.</p>
+<p>An <code>ExampleTest.php</code> file is provided in both the <code>Feature</code> and <code>Unit</code> test directories. After installing a new Laravel application, simply run <code>phpunit</code> on the command line to run your tests.</p>
 <p><a name="environment"></a></p>
 <h2 id="environment">Environment</h2>
-<p>When running tests, Laravel will automatically set the configuration environment to <code>testing</code>. Laravel automatically configures the session and cache to the <code>array</code> driver while testing, meaning no session or cache data will be persisted while testing.</p>
+<p>When running tests via <code>phpunit</code>, Laravel will automatically set the configuration environment to <code>testing</code> because of the environment variables defined in the <code>phpunit.xml</code> file. Laravel also automatically configures the session and cache to the <code>array</code> driver while testing, meaning no session or cache data will be persisted while testing.</p>
 <p>You are free to define other testing environment configuration values as necessary. The <code>testing</code> environment variables may be configured in the <code>phpunit.xml</code> file, but make sure to clear your configuration cache using the <code>config:clear</code> Artisan command before running your tests!</p>
 <p><a name="creating-and-running-tests"></a></p>
 <h2 id="creating-running-tests">Creating &amp; Running Tests</h2>
 <p>To create a new test case, use the <code>make:test</code> Artisan command:</p>
-<div class="codehilite"><pre><span></span>php artisan make:test UserTest
+<div class="codehilite"><pre><span></span>// Create a test in the Feature directory...
+php artisan make:test UserTest
+
+// Create a test in the Unit directory...
+php artisan make:test UserTest --unit
 </pre></div>
 
 
-<p>This command will place a new <code>UserTest</code> class within your <code>tests</code> directory. You may then define test methods as you normally would using PHPUnit. To run your tests, simply execute the <code>phpunit</code> command from your terminal:</p>
+<p>Once the test has been generated, you may define test methods as you normally would using PHPUnit. To run your tests, simply execute the <code>phpunit</code> command from your terminal:</p>
 <div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
-<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Foundation</span><span class="err">\</span><span class="nx">Testing</span><span class="err">\</span><span class="nx">WithoutMiddleware</span><span class="p">;</span>
+<span class="nx">namespace</span> <span class="nx">Tests</span><span class="err">\</span><span class="nx">Unit</span><span class="p">;</span>
+
+<span class="nx">use</span> <span class="nx">Tests</span><span class="err">\</span><span class="nx">TestCase</span><span class="p">;</span>
 <span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Foundation</span><span class="err">\</span><span class="nx">Testing</span><span class="err">\</span><span class="nx">DatabaseMigrations</span><span class="p">;</span>
 <span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Foundation</span><span class="err">\</span><span class="nx">Testing</span><span class="err">\</span><span class="nx">DatabaseTransactions</span><span class="p">;</span>
 
-<span class="kr">class</span> <span class="nx">UserTest</span> <span class="kr">extends</span> <span class="nx">TestCase</span>
+<span class="kr">class</span> <span class="nx">ExampleTest</span> <span class="kr">extends</span> <span class="nx">TestCase</span>
 <span class="p">{</span>
     <span class="cm">/**</span>
 <span class="cm">     * A basic test example.</span>
 <span class="cm">     *</span>
 <span class="cm">     * @return void</span>
 <span class="cm">     */</span>
-    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">testExample</span><span class="p">()</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">testBasicTest</span><span class="p">()</span>
     <span class="p">{</span>
         <span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">assertTrue</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
     <span class="p">}</span>
@@ -840,7 +856,7 @@
 
 
 <blockquote>
-<p>{note} If you define your own <code>setUp</code> method within a test class, be sure to call <code>parent::setUp</code>.</p>
+<p>{note} If you define your own <code>setUp</code> method within a test class, be sure to call <code>parent::setUp()</code>.</p>
 </blockquote>
           <aside class="copyright" role="note">
             

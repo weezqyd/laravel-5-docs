@@ -158,15 +158,6 @@
           
             
   <li>
-    <a class="" title="Application testing" href="../application-testing/">
-      Application testing
-    </a>
-    
-  </li>
-
-          
-            
-  <li>
     <a class="" title="Artisan" href="../artisan/">
       Artisan
     </a>
@@ -329,8 +320,8 @@
           
             
   <li>
-    <a class="" title="Elixir" href="../elixir/">
-      Elixir
+    <a class="" title="Dusk" href="../dusk/">
+      Dusk
     </a>
     
   </li>
@@ -500,6 +491,15 @@
           
             
   <li>
+    <a class="" title="Http tests" href="../http-tests/">
+      Http tests
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
     <a class="" title="Installation" href="../installation/">
       Installation
     </a>
@@ -556,6 +556,15 @@
   <li>
     <a class="" title="Migrations" href="../migrations/">
       Migrations
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Mix" href="../mix/">
+      Mix
     </a>
     
   </li>
@@ -796,7 +805,7 @@
       <article class="article">
         <div class="wrapper">
           
-          <h1 id="javascript-css">JavaScript &amp; CSS</h1>
+          <h1 id="javascript-css-scaffolding">JavaScript &amp; CSS Scaffolding</h1>
 <ul>
 <li><a href="#introduction">Introduction</a></li>
 <li><a href="#writing-css">Writing CSS</a></li>
@@ -809,8 +818,8 @@
 <h2 id="introduction">Introduction</h2>
 <p>While Laravel does not dictate which JavaScript or CSS pre-processors you use, it does provide a basic starting point using <a href="https://getbootstrap.com/">Bootstrap</a> and <a href="https://vuejs.org">Vue</a> that will be helpful for many applications. By default, Laravel uses <a href="https://www.npmjs.org">NPM</a> to install both of these frontend packages.</p>
 <h4 id="css">CSS</h4>
-<p><a href="../docs/{{version}}/elixir">Laravel Elixir</a> provides a clean, expressive API over compiling SASS or Less, which are extensions of plain CSS that add variables, mixins, and other powerful features that make working with CSS much more enjoyable.</p>
-<p>In this document, we will briefly discuss CSS compilation in general; however, you should consult the full <a href="../docs/{{version}}/elixir">Laravel Elixir documentation</a> for more information on compiling SASS or Less.</p>
+<p><a href="../docs/{{version}}/mix">Laravel Mix</a> provides a clean, expressive API over compiling SASS or Less, which are extensions of plain CSS that add variables, mixins, and other powerful features that make working with CSS much more enjoyable.</p>
+<p>In this document, we will briefly discuss CSS compilation in general; however, you should consult the full <a href="../docs/{{version}}/mix">Laravel Mix documentation</a> for more information on compiling SASS or Less.</p>
 <h4 id="javascript">JavaScript</h4>
 <p>Laravel does not require you to use a specific JavaScript framework or library to build your applications. In fact, you don't have to use JavaScript at all. However, Laravel does include some basic scaffolding to make it easier to get started writing modern JavaScript using the <a href="https://vuejs.org">Vue</a> library. Vue provides an expressive API for building robust JavaScript applications using components.</p>
 <p><a name="writing-css"></a></p>
@@ -821,12 +830,12 @@
 </pre></div>
 
 
-<p>Once the dependencies have been installed using <code>npm install</code>, you can compile your SASS files to plain CSS using <a href="http://gulpjs.com/">Gulp</a>. The <code>gulp</code> command will process the instructions in your <code>gulpfile.js</code> file. Typically, your compiled CSS will be placed in the <code>public/css</code> directory:</p>
-<div class="codehilite"><pre><span></span>gulp
+<p>Once the dependencies have been installed using <code>npm install</code>, you can compile your SASS files to plain CSS using <a href="../docs/{{version}}/mix#working-with-stylesheets">Laravel Mix</a>. The <code>npm run dev</code> command will process the instructions in your <code>webpack.mix.js</code> file. Typically, your compiled CSS will be placed in the <code>public/css</code> directory:</p>
+<div class="codehilite"><pre><span></span>npm run dev
 </pre></div>
 
 
-<p>The default <code>gulpfile.js</code> included with Laravel will compile the <code>resources/assets/sass/app.scss</code> SASS file. This <code>app.scss</code> file imports a file of SASS variables and loads Bootstrap, which provides a good starting point for most applications. Feel free to customize the <code>app.scss</code> file however you wish or even use an entirely different pre-processor by <a href="../docs/{{version}}/elixir">configuring Laravel Elixir</a>.</p>
+<p>The default <code>webpack.mix.js</code> included with Laravel will compile the <code>resources/assets/sass/app.scss</code> SASS file. This <code>app.scss</code> file imports a file of SASS variables and loads Bootstrap, which provides a good starting point for most applications. Feel free to customize the <code>app.scss</code> file however you wish or even use an entirely different pre-processor by <a href="../docs/{{version}}/mix">configuring Laravel Mix</a>.</p>
 <p><a name="writing-javascript"></a></p>
 <h2 id="writing-javascript">Writing JavaScript</h2>
 <p>All of the JavaScript dependencies required by your application can be found in the <code>package.json</code> file in the project's root directory. This file is similar to a <code>composer.json</code> file except it specifies JavaScript dependencies instead of PHP dependencies. You can install these dependencies using the <a href="https://www.npmjs.org">Node package manager (NPM)</a>:</p>
@@ -834,15 +843,15 @@
 </pre></div>
 
 
-<p>By default, the Laravel <code>package.json</code> file includes a few packages such as <code>vue</code> and <code>vue-resource</code> to help you get started building your JavaScript application. Feel free to add or remove from the <code>package.json</code> file as needed for your own application.</p>
-<p>Once the packages are installed, you can use the <code>gulp</code> command to <a href="../docs/{{version}}/elixir">compile your assets</a>. Gulp is a command-line build system for JavaScript. When you run the <code>gulp</code> command, Gulp will execute the instructions in your <code>gulpfile.js</code> file:</p>
-<div class="codehilite"><pre><span></span>gulp
+<p>By default, the Laravel <code>package.json</code> file includes a few packages such as <code>vue</code> and <code>axios</code> to help you get started building your JavaScript application. Feel free to add or remove from the <code>package.json</code> file as needed for your own application.</p>
+<p>Once the packages are installed, you can use the <code>npm run dev</code> command to <a href="../docs/{{version}}/mix">compile your assets</a>. Webpack is a module bundler for modern JavaScript applications. When you run the <code>npm run dev</code> command, Webpack will execute the instructions in your <code>webpack.mix.js</code> file:</p>
+<div class="codehilite"><pre><span></span>npm run dev
 </pre></div>
 
 
-<p>By default, the Laravel <code>gulpfile.js</code> file compiles your SASS and the <code>resources/assets/js/app.js</code> file. Within the <code>app.js</code> file you may register your Vue components or, if you prefer a different framework, configure your own JavaScript application. Your compiled JavaScript will typically be placed in the <code>public/js</code> directory.</p>
+<p>By default, the Laravel <code>webpack.mix.js</code> file compiles your SASS and the <code>resources/assets/js/app.js</code> file. Within the <code>app.js</code> file you may register your Vue components or, if you prefer a different framework, configure your own JavaScript application. Your compiled JavaScript will typically be placed in the <code>public/js</code> directory.</p>
 <blockquote>
-<p>{tip} The <code>app.js</code> file will load the <code>resources/assets/js/bootstrap.js</code> file which bootstraps and configures Vue, Vue Resource, jQuery, and all other JavaScript dependencies. If you have additional JavaScript dependencies to configure, you may do so in this file.</p>
+<p>{tip} The <code>app.js</code> file will load the <code>resources/assets/js/bootstrap.js</code> file which bootstraps and configures Vue, Axios, jQuery, and all other JavaScript dependencies. If you have additional JavaScript dependencies to configure, you may do so in this file.</p>
 </blockquote>
 <p><a name="writing-vue-components"></a></p>
 <h3 id="writing-vue-components">Writing Vue Components</h3>
@@ -861,7 +870,7 @@
 
 
 <blockquote>
-<p>{tip} Remember, you should run the <code>gulp</code> command each time you change a Vue component. Or, you may run the <code>gulp watch</code> command to monitor and automatically recompile your components each time they are modified.</p>
+<p>{tip} Remember, you should run the <code>npm run dev</code> command each time you change a Vue component. Or, you may run the <code>npm run watch</code> command to monitor and automatically recompile your components each time they are modified.</p>
 </blockquote>
 <p>Of course, if you are interested in learning more about writing Vue components, you should read the <a href="https://vuejs.org/guide/">Vue documentation</a>, which provides a thorough, easy-to-read overview of the entire Vue framework.</p>
           <aside class="copyright" role="note">

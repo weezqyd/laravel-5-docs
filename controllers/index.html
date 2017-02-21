@@ -158,15 +158,6 @@
           
             
   <li>
-    <a class="" title="Application testing" href="../application-testing/">
-      Application testing
-    </a>
-    
-  </li>
-
-          
-            
-  <li>
     <a class="" title="Artisan" href="../artisan/">
       Artisan
     </a>
@@ -374,8 +365,8 @@
           
             
   <li>
-    <a class="" title="Elixir" href="../elixir/">
-      Elixir
+    <a class="" title="Dusk" href="../dusk/">
+      Dusk
     </a>
     
   </li>
@@ -518,6 +509,15 @@
           
             
   <li>
+    <a class="" title="Http tests" href="../http-tests/">
+      Http tests
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
     <a class="" title="Installation" href="../installation/">
       Installation
     </a>
@@ -574,6 +574,15 @@
   <li>
     <a class="" title="Migrations" href="../migrations/">
       Migrations
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Mix" href="../mix/">
+      Mix
     </a>
     
   </li>
@@ -828,6 +837,7 @@
 <li><a href="#restful-partial-resource-routes">Partial Resource Routes</a></li>
 <li><a href="#restful-naming-resource-routes">Naming Resource Routes</a></li>
 <li><a href="#restful-naming-resource-route-parameters">Naming Resource Route Parameters</a></li>
+<li><a href="#restful-localizing-resource-uris">Localizing Resource URIs</a></li>
 <li><a href="#restful-supplementing-resource-controllers">Supplementing Resource Controllers</a></li>
 </ul>
 </li>
@@ -1021,6 +1031,12 @@
 </tr>
 </tbody>
 </table>
+<h4 id="specifying-the-resource-model">Specifying The Resource Model</h4>
+<p>If you are using route model binding and would like the resource controller's methods to type-hint a model instance, you may use the <code>--model</code> option when generating the controller:</p>
+<div class="codehilite"><pre><span></span>php artisan make:controller PhotoController --resource --model=Photo
+</pre></div>
+
+
 <h4 id="spoofing-form-methods">Spoofing Form Methods</h4>
 <p>Since HTML forms can't make <code>PUT</code>, <code>PATCH</code>, or <code>DELETE</code> requests, you will need to add a hidden <code>_method</code> field to spoof these HTTP verbs. The <code>method_field</code> helper can create this field for you:</p>
 <div class="codehilite"><pre><span></span><span class="cp">{{</span> <span class="nv">method_field</span><span class="o">(</span><span class="s1">&#39;PUT&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="x"></span>
@@ -1060,6 +1076,33 @@ Route::resource(&#39;photo&#39;, &#39;PhotoController&#39;, [&#39;except&#39; =&
 
 <p>The example above generates the following URIs for the resource's <code>show</code> route:</p>
 <div class="codehilite"><pre><span></span>/user/{admin_user}
+</pre></div>
+
+
+<p><a name="restful-localizing-resource-uris"></a></p>
+<h3 id="localizing-resource-uris">Localizing Resource URIs</h3>
+<p>By default, <code>Route::resource</code> will create resource URIs using English verbs. If you need to localize the <code>create</code> and <code>edit</code> action verbs, you may use the <code>Route::resourceVerbs</code> method. This may be done in the <code>boot</code> method of your <code>AppServiceProvider</code>:</p>
+<div class="codehilite"><pre><span></span>use Illuminate\Support\Facades\Route;
+
+/**
+ * Bootstrap any application services.
+ *
+ * @return void
+ */
+public function boot()
+{
+    Route::resourceVerbs([
+        &#39;create&#39; =&gt; &#39;crear&#39;,
+        &#39;edit&#39; =&gt; &#39;editar&#39;,
+    ]);
+}
+</pre></div>
+
+
+<p>Once the verbs have been customized, a resource route registration such as <code>Route::resource('fotos', 'PhotoController')</code> will produce the following URIs:</p>
+<div class="codehilite"><pre><span></span>/fotos/crear
+
+/fotos/{foto}/editar
 </pre></div>
 
 

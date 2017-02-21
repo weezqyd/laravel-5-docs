@@ -158,15 +158,6 @@
           
             
   <li>
-    <a class="" title="Application testing" href="../application-testing/">
-      Application testing
-    </a>
-    
-  </li>
-
-          
-            
-  <li>
     <a class="" title="Artisan" href="../artisan/">
       Artisan
     </a>
@@ -329,8 +320,8 @@
           
             
   <li>
-    <a class="" title="Elixir" href="../elixir/">
-      Elixir
+    <a class="" title="Dusk" href="../dusk/">
+      Dusk
     </a>
     
   </li>
@@ -530,6 +521,15 @@
           
             
   <li>
+    <a class="" title="Http tests" href="../http-tests/">
+      Http tests
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
     <a class="" title="Installation" href="../installation/">
       Installation
     </a>
@@ -586,6 +586,15 @@
   <li>
     <a class="" title="Migrations" href="../migrations/">
       Migrations
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Mix" href="../mix/">
+      Mix
     </a>
     
   </li>
@@ -880,7 +889,7 @@
 [base_path](#method-base-path)
 [config_path](#method-config-path)
 [database_path](#method-database-path)
-[elixir](#method-elixir)
+[mix](#method-mix)
 [public_path](#method-public-path)
 [resource_path](#method-resource-path)
 [storage_path](#method-storage-path)
@@ -949,6 +958,7 @@
 [redirect](#method-redirect)
 [request](#method-request)
 [response](#method-response)
+[retry](#method-retry)
 [session](#method-session)
 [value](#method-value)
 [view](#method-view)
@@ -1294,10 +1304,10 @@ $path = base_path(&#39;vendor/bin&#39;);
 </pre></div>
 
 
-<p><a name="method-elixir"></a></p>
-<h4 id="elixir-collection-method"><code>elixir()</code> {#collection-method}</h4>
-<p>The <code>elixir</code> function gets the path to a <a href="../docs/{{version}}/elixir">versioned Elixir file</a>:</p>
-<div class="codehilite"><pre><span></span>elixir($file);
+<p><a name="method-mix"></a></p>
+<h4 id="mix-collection-method"><code>mix()</code> {#collection-method}</h4>
+<p>The <code>mix</code> function gets the path to a <a href="../docs/{{version}}/mix">versioned Mix file</a>:</p>
+<div class="codehilite"><pre><span></span>mix($file);
 </pre></div>
 
 
@@ -1310,7 +1320,7 @@ $path = base_path(&#39;vendor/bin&#39;);
 
 <p><a name="method-resource-path"></a></p>
 <h4 id="resource_path-collection-method"><code>resource_path()</code> {#collection-method}</h4>
-<p>The <code>resource_path</code> function returns the fully qualified path to the <code>resources</code> directory. You may also use the <code>resource_path</code> function to generate a fully qualified path to a given file relative to the storage directory:</p>
+<p>The <code>resource_path</code> function returns the fully qualified path to the <code>resources</code> directory. You may also use the <code>resource_path</code> function to generate a fully qualified path to a given file relative to the resources directory:</p>
 <div class="codehilite"><pre><span></span>$path = resource_path();
 
 $path = resource_path(&#39;assets/sass/app.scss&#39;);
@@ -1791,6 +1801,15 @@ $value = request(&#39;key&#39;, $default = null)
 <div class="codehilite"><pre><span></span>return response(&#39;Hello World&#39;, 200, $headers);
 
 return response()-&gt;json([&#39;foo&#39; =&gt; &#39;bar&#39;], 200, $headers);
+</pre></div>
+
+
+<p><a name="method-retry"></a></p>
+<h4 id="retry-collection-method"><code>retry()</code> {#collection-method}</h4>
+<p>The <code>retry</code> function attempts to execute the given callback until the given maximum attempt threshold is met. If the callback does not throw an exception, it's return value will be returned. If the callback throws an exception, it will automatically be retried. If the maximum attempt count is exceeded, the exception will be thrown:</p>
+<div class="codehilite"><pre><span></span>return retry(5, function () {
+    // Attempt 5 times while resting 100ms in between attempts...
+}, 100);
 </pre></div>
 
 

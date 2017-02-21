@@ -158,15 +158,6 @@
           
             
   <li>
-    <a class="" title="Application testing" href="../application-testing/">
-      Application testing
-    </a>
-    
-  </li>
-
-          
-            
-  <li>
     <a class="" title="Artisan" href="../artisan/">
       Artisan
     </a>
@@ -329,8 +320,8 @@
           
             
   <li>
-    <a class="" title="Elixir" href="../elixir/">
-      Elixir
+    <a class="" title="Dusk" href="../dusk/">
+      Dusk
     </a>
     
   </li>
@@ -473,6 +464,15 @@
           
             
   <li>
+    <a class="" title="Http tests" href="../http-tests/">
+      Http tests
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
     <a class="" title="Installation" href="../installation/">
       Installation
     </a>
@@ -538,6 +538,12 @@
             </li>
           
             <li class="anchor">
+              <a title="Markdown Mailables" href="#markdown-mailables">
+                Markdown Mailables
+              </a>
+            </li>
+          
+            <li class="anchor">
               <a title="Sending Mail" href="#sending-mail">
                 Sending Mail
               </a>
@@ -574,6 +580,15 @@
   <li>
     <a class="" title="Migrations" href="../migrations/">
       Migrations
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Mix" href="../mix/">
+      Mix
     </a>
     
   </li>
@@ -827,6 +842,12 @@
 <li><a href="#view-data">View Data</a></li>
 <li><a href="#attachments">Attachments</a></li>
 <li><a href="#inline-attachments">Inline Attachments</a></li>
+</ul>
+</li>
+<li><a href="#markdown-mailables">Markdown Mailables</a><ul>
+<li><a href="#generating-markdown-mailables">Generating Markdown Mailables</a></li>
+<li><a href="#writing-markdown-messages">Writing Markdown Messages</a></li>
+<li><a href="#customizing-the-components">Customizing The Components</a></li>
 </ul>
 </li>
 <li><a href="#sending-mail">Sending Mail</a><ul>
@@ -1125,6 +1146,88 @@ public<span class="w"> </span>function<span class="w"> </span>build<span class="
 </pre></div>
 
 
+<p><a name="markdown-mailables"></a></p>
+<h2 id="markdown-mailables">Markdown Mailables</h2>
+<p>Markdown mailable messages allow you to take advantage of the pre-built templates and components of mail notifications in your mailables. Since the messages are written in Markdown, Laravel is able to render beautiful, responsive HTML templates for the messages while also automatically generating a plain-text counterpart.</p>
+<p><a name="generating-markdown-mailables"></a></p>
+<h3 id="generating-markdown-mailables">Generating Markdown Mailables</h3>
+<p>To generate a mailable with a corresponding Markdown template, you may use the <code>--markdown</code> option of the <code>make:mail</code> Artisan command:</p>
+<div class="codehilite"><pre><span></span>php artisan make:mail OrderShipped --markdown=emails.orders.shipped
+</pre></div>
+
+
+<p>Then, when configuring the mailable within its <code>build</code> method, call the <code>markdown</code> method instead of the <code>view</code> method. The <code>markdown</code> methods accepts the name of the Markdown template and an optional array of data to make available to the template:</p>
+<div class="codehilite"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * Build the message.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return $this</span>
+<span class="cm"> */</span><span class="w"></span>
+public<span class="w"> </span>function<span class="w"> </span>build<span class="o">()</span><span class="w"></span>
+<span class="err">{</span><span class="w"></span>
+<span class="w">    </span><span class="kr">return</span><span class="w"> </span><span class="err">$</span>this<span class="o">-&gt;</span>from<span class="o">(</span><span class="s">&#39;example@example.com&#39;</span><span class="o">)</span><span class="w"></span>
+<span class="w">                </span><span class="o">-&gt;</span>markdown<span class="o">(</span><span class="s">&#39;emails.orders.shipped&#39;</span><span class="o">)</span><span class="err">;</span><span class="w"></span>
+<span class="err">}</span><span class="w"></span>
+</pre></div>
+
+
+<p><a name="writing-markdown-messages"></a></p>
+<h3 id="writing-markdown-messages">Writing Markdown Messages</h3>
+<p>Markdown mailables use a combination of Blade components and Markdown syntax which allow you to easily construct mail messages while leveraging Laravel's pre-crafted components:</p>
+<div class="codehilite"><pre><span></span><span class="p">@</span><span class="n">component</span><span class="p">(</span><span class="err">&#39;</span><span class="n">mail</span><span class="o">::</span><span class="n">message</span><span class="err">&#39;</span><span class="p">)</span>
+<span class="cp"># Order Shipped</span>
+
+<span class="n">Your</span> <span class="n">order</span> <span class="n">has</span> <span class="n">been</span> <span class="n">shipped</span><span class="o">!</span>
+
+<span class="p">@</span><span class="n">component</span><span class="p">(</span><span class="err">&#39;</span><span class="n">mail</span><span class="o">::</span><span class="n">button</span><span class="err">&#39;</span><span class="p">,</span> <span class="p">[</span><span class="err">&#39;</span><span class="n">url</span><span class="err">&#39;</span> <span class="o">=&gt;</span> <span class="err">$</span><span class="n">url</span><span class="p">])</span>
+<span class="n">View</span> <span class="n">Order</span>
+<span class="p">@</span><span class="n">endcomponent</span>
+
+<span class="n">Thanks</span><span class="p">,</span><span class="o">&lt;</span><span class="n">br</span><span class="o">&gt;</span>
+<span class="p">{{</span> <span class="n">config</span><span class="p">(</span><span class="err">&#39;</span><span class="n">app</span><span class="p">.</span><span class="n">name</span><span class="err">&#39;</span><span class="p">)</span> <span class="p">}}</span>
+<span class="p">@</span><span class="n">endcomponent</span>
+</pre></div>
+
+
+<h4 id="button-component">Button Component</h4>
+<p>The button component renders a centered button link. The component accepts two arguments, a <code>url</code> and an optional <code>color</code>. Supported colors are <code>blue</code>, <code>green</code>, and <code>red</code>. You may add as many button components to a message as you wish:</p>
+<div class="codehilite"><pre><span></span><span class="p">@</span><span class="n">component</span><span class="p">(</span><span class="err">&#39;</span><span class="n">mail</span><span class="o">::</span><span class="n">button</span><span class="err">&#39;</span><span class="p">,</span> <span class="p">[</span><span class="err">&#39;</span><span class="n">url</span><span class="err">&#39;</span> <span class="o">=&gt;</span> <span class="err">$</span><span class="n">url</span><span class="p">,</span> <span class="err">&#39;</span><span class="n">color</span><span class="err">&#39;</span> <span class="o">=&gt;</span> <span class="err">&#39;</span><span class="n">green</span><span class="err">&#39;</span><span class="p">])</span>
+<span class="n">View</span> <span class="n">Order</span>
+<span class="p">@</span><span class="n">endcomponent</span>
+</pre></div>
+
+
+<h4 id="panel-component">Panel Component</h4>
+<p>The panel component renders the given block of text in a panel that has a slightly different background color than the rest of the message. This allows you to draw attention to a given block of text:</p>
+<div class="codehilite"><pre><span></span><span class="p">@</span><span class="n">component</span><span class="p">(</span><span class="err">&#39;</span><span class="n">mail</span><span class="o">::</span><span class="n">panel</span><span class="err">&#39;</span><span class="p">)</span>
+<span class="n">This</span> <span class="n">is</span> <span class="n">the</span> <span class="n">panel</span> <span class="n">content</span><span class="p">.</span>
+<span class="p">@</span><span class="n">endcomponent</span>
+</pre></div>
+
+
+<h4 id="table-component">Table Component</h4>
+<p>The table component allows you to transform a Markdown table into an HTML table. The component accepts the Markdown table as its content. Table column alignment is supported using the default Markdown table alignment syntax:</p>
+<div class="codehilite"><pre><span></span><span class="p">@</span><span class="n">component</span><span class="p">(</span><span class="err">&#39;</span><span class="n">mail</span><span class="o">::</span><span class="n">table</span><span class="err">&#39;</span><span class="p">)</span>
+<span class="o">|</span> <span class="n">Laravel</span>       <span class="o">|</span> <span class="n">Table</span>         <span class="o">|</span> <span class="n">Example</span>  <span class="o">|</span>
+<span class="o">|</span> <span class="o">-------------</span> <span class="o">|:-------------:|</span> <span class="o">--------:|</span>
+<span class="o">|</span> <span class="n">Col</span> <span class="mi">2</span> <span class="n">is</span>      <span class="o">|</span> <span class="n">Centered</span>      <span class="o">|</span> <span class="err">$</span><span class="mi">10</span>      <span class="o">|</span>
+<span class="o">|</span> <span class="n">Col</span> <span class="mi">3</span> <span class="n">is</span>      <span class="o">|</span> <span class="n">Right</span><span class="o">-</span><span class="n">Aligned</span> <span class="o">|</span> <span class="err">$</span><span class="mi">20</span>      <span class="o">|</span>
+<span class="p">@</span><span class="n">endcomponent</span>
+</pre></div>
+
+
+<p><a name="customizing-the-components"></a></p>
+<h3 id="customizing-the-components">Customizing The Components</h3>
+<p>You may export all of the Markdown mail components to your own application for customization. To export the components, use the <code>vendor:publish</code> Artisan command to publish the <code>laravel-mail</code> asset tag:</p>
+<div class="codehilite"><pre><span></span>php artisan vendor:publish --tag=laravel-mail
+</pre></div>
+
+
+<p>This command will publish the Markdown mail components to the <code>resources/views/vendor/mail</code> directory. The <code>mail</code> directory will contain a <code>html</code> and a <code>markdown</code> directory, each containing their respective representations of every available component. You are free to customize these components however you like.</p>
+<h4 id="customizing-the-css">Customizing The CSS</h4>
+<p>After exporting the components, the <code>resources/views/vendor/mail/html/themes</code> directory will contain a <code>default.css</code> file. You may customize the CSS in this file and your styles will automatically be in-lined within the HTML representations of your Markdown mail messages.</p>
+<blockquote>
+<p>{tip} If you would like to build an entirely new theme for the Markdown components, simply write a new CSS file within the <code>html/themes</code> directory and change the <code>theme</code> option of your <code>mail</code> configuration file.</p>
+</blockquote>
 <p><a name="sending-mail"></a></p>
 <h2 id="sending-mail">Sending Mail</h2>
 <p>To send a message, use the <code>to</code> method on the <code>Mail</code> <a href="../docs/{{version}}/facades">facade</a>. The <code>to</code> method accepts an email address, a user instance, or a collection of users. If you pass an object or collection of objects, the mailer will automatically use their <code>email</code> and <code>name</code> properties when setting the email recipients, so make sure these attributes are available on your objects. Once you have specified your recipients, you may pass an instance of your mailable class to the <code>send</code> method:</p>

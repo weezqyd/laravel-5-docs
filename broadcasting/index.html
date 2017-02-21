@@ -158,15 +158,6 @@
           
             
   <li>
-    <a class="" title="Application testing" href="../application-testing/">
-      Application testing
-    </a>
-    
-  </li>
-
-          
-            
-  <li>
     <a class="" title="Artisan" href="../artisan/">
       Artisan
     </a>
@@ -261,6 +252,12 @@
             <li class="anchor">
               <a title="Presence Channels" href="#presence-channels">
                 Presence Channels
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Client Events" href="#client-events">
+                Client Events
               </a>
             </li>
           
@@ -386,8 +383,8 @@
           
             
   <li>
-    <a class="" title="Elixir" href="../elixir/">
-      Elixir
+    <a class="" title="Dusk" href="../dusk/">
+      Dusk
     </a>
     
   </li>
@@ -530,6 +527,15 @@
           
             
   <li>
+    <a class="" title="Http tests" href="../http-tests/">
+      Http tests
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
     <a class="" title="Installation" href="../installation/">
       Installation
     </a>
@@ -586,6 +592,15 @@
   <li>
     <a class="" title="Migrations" href="../migrations/">
       Migrations
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Mix" href="../mix/">
+      Mix
     </a>
     
   </li>
@@ -834,7 +849,7 @@
 </ul>
 </li>
 <li><a href="#concept-overview">Concept Overview</a><ul>
-<li><a href="#using-example-application">Using Example Application</a></li>
+<li><a href="#using-example-application">Using An Example Application</a></li>
 </ul>
 </li>
 <li><a href="#defining-broadcast-events">Defining Broadcast Events</a><ul>
@@ -865,6 +880,7 @@
 <li><a href="#broadcasting-to-presence-channels">Broadcasting To Presence Channels</a></li>
 </ul>
 </li>
+<li><a href="#client-events">Client Events</a></li>
 <li><a href="#notifications">Notifications</a></li>
 </ul>
 <p><a name="introduction"></a></p>
@@ -943,7 +959,7 @@
 <p>Laravel's event broadcasting allows you to broadcast your server-side Laravel events to your client-side JavaScript application using a driver-based approach to WebSockets. Currently, Laravel ships with <a href="https://pusher.com">Pusher</a> and Redis drivers. The events may be easily consumed on the client-side using the <a href="#installing-laravel-echo">Laravel Echo</a> Javascript package.</p>
 <p>Events are broadcast over "channels", which may be specified as public or private. Any visitor to your application may subscribe to a public channel without any authentication or authorization; however, in order to subscribe to a private channel, a user must be authenticated and authorized to listen on that channel.</p>
 <p><a name="using-example-application"></a></p>
-<h3 id="using-example-application">Using Example Application</h3>
+<h3 id="using-an-example-application">Using An Example Application</h3>
 <p>Before diving into each component of event broadcasting, let's take a high level overview using an e-commerce store as an example. We won't discuss the details of configuring <a href="https://pusher.com">Pusher</a> or <a href="#installing-laravel-echo">Laravel Echo</a> since that will be discussed in detail in other sections of this documentation.</p>
 <p>In our application, let's assume we have a page that allows users to view the shipping status for their orders. Let's also assume that a <code>ShippingStatusUpdated</code> event is fired when a shipping status update is processed by the application:</p>
 <div class="codehilite"><pre><span></span>event(new ShippingStatusUpdated($update));
@@ -965,7 +981,12 @@
 
 <span class="kr">class</span> <span class="nx">ShippingStatusUpdated</span> <span class="kr">implements</span> <span class="nx">ShouldBroadcast</span>
 <span class="p">{</span>
-    <span class="c1">//</span>
+    <span class="cm">/**</span>
+<span class="cm">     * Information about the shipping status update.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @var string</span>
+<span class="cm">     */</span>
+    <span class="kr">public</span> <span class="nx">$update</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -984,15 +1005,15 @@ public<span class="w"> </span>function<span class="w"> </span>broadcastOn<span c
 
 
 <h4 id="authorizing-channels">Authorizing Channels</h4>
-<p>Remember, users must be authorized to listen on private channels. We may define our channel authorization rules in the <code>boot</code> method of the <code>BroadcastServiceProvider</code>. In this example, we need to verify that any user attempting to listen on the private <code>order.1</code> channel is actually the creator of the order:</p>
-<div class="codehilite"><pre><span></span><span class="nt">Broadcast</span><span class="p">::</span><span class="nd">channel</span><span class="o">(</span><span class="s1">&#39;order.*&#39;</span><span class="o">,</span> <span class="nt">function</span> <span class="o">($</span><span class="nt">user</span><span class="o">,</span> <span class="o">$</span><span class="nt">orderId</span><span class="o">)</span> <span class="p">{</span>
+<p>Remember, users must be authorized to listen on private channels. We may define our channel authorization rules in the <code>routes/channels.php</code> file. In this example, we need to verify that any user attempting to listen on the private <code>order.1</code> channel is actually the creator of the order:</p>
+<div class="codehilite"><pre><span></span><span class="nt">Broadcast</span><span class="p">::</span><span class="nd">channel</span><span class="o">(</span><span class="s1">&#39;order.{orderId}&#39;</span><span class="o">,</span> <span class="nt">function</span> <span class="o">($</span><span class="nt">user</span><span class="o">,</span> <span class="o">$</span><span class="nt">orderId</span><span class="o">)</span> <span class="p">{</span>
     <span class="err">return</span> <span class="err">$user-&gt;id</span> <span class="err">===</span> <span class="n">Order</span><span class="p">:</span><span class="o">:</span><span class="nf">findOrNew</span><span class="p">(</span><span class="err">$</span><span class="n">orderId</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">user_id</span><span class="p">;</span>
 <span class="p">}</span><span class="o">);</span>
 </pre></div>
 
 
 <p>The <code>channel</code> method accepts two arguments: the name of the channel and a callback which returns <code>true</code> or <code>false</code> indicating whether the user is authorized to listen on the channel.</p>
-<p>All authorization callbacks receive the currently authenticated user as their first argument and any additional wildcard parameters as their subsequent arguments. In this example, we are using the <code>*</code> character to indicate that the "ID" portion of the channel name is a wildcard.</p>
+<p>All authorization callbacks receive the currently authenticated user as their first argument and any additional wildcard parameters as their subsequent arguments. In this example, we are using the <code>{orderId}</code> placeholder to indicate that the "ID" portion of the channel name is a wildcard.</p>
 <h4 id="listening-for-event-broadcasts">Listening For Event Broadcasts</h4>
 <p>Next, all that remains is to listen for the event in our JavaScript application. We can do this using Laravel Echo. First, we'll use the <code>private</code> method to subscribe to the private channel. Then, we may use the <code>listen</code> method to listen for the <code>ShippingStatusUpdated</code> event. By default, all of the event's public properties will be included on the broadcast event:</p>
 <div class="codehilite"><pre><span></span>Echo.private(`order.<span class="cp">${</span><span class="n">orderId</span><span class="cp">}</span>`)
@@ -1117,15 +1138,25 @@ public<span class="w"> </span><span class="err">$</span>broadcastQueue<span clas
 
 <p><a name="defining-authorization-callbacks"></a></p>
 <h3 id="defining-authorization-callbacks">Defining Authorization Callbacks</h3>
-<p>Next, we need to define the logic that will actually perform the channel authorization. Like defining the authorization routes, this is also done in the <code>boot</code> method of the <code>BroadcastServiceProvider</code>. In this method, you may use the <code>Broadcast::channel</code> method to register channel authorization callbacks:</p>
-<div class="codehilite"><pre><span></span><span class="nt">Broadcast</span><span class="p">::</span><span class="nd">channel</span><span class="o">(</span><span class="s1">&#39;order.*&#39;</span><span class="o">,</span> <span class="nt">function</span> <span class="o">($</span><span class="nt">user</span><span class="o">,</span> <span class="o">$</span><span class="nt">orderId</span><span class="o">)</span> <span class="p">{</span>
+<p>Next, we need to define the logic that will actually perform the channel authorization. This is done in the <code>routes/channels.php</code> file that is included with your application. In this file, you may use the <code>Broadcast::channel</code> method to register channel authorization callbacks:</p>
+<div class="codehilite"><pre><span></span><span class="nt">Broadcast</span><span class="p">::</span><span class="nd">channel</span><span class="o">(</span><span class="s1">&#39;order.{orderId}&#39;</span><span class="o">,</span> <span class="nt">function</span> <span class="o">($</span><span class="nt">user</span><span class="o">,</span> <span class="o">$</span><span class="nt">orderId</span><span class="o">)</span> <span class="p">{</span>
     <span class="err">return</span> <span class="err">$user-&gt;id</span> <span class="err">===</span> <span class="n">Order</span><span class="p">:</span><span class="o">:</span><span class="nf">findOrNew</span><span class="p">(</span><span class="err">$</span><span class="n">orderId</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">user_id</span><span class="p">;</span>
 <span class="p">}</span><span class="o">);</span>
 </pre></div>
 
 
 <p>The <code>channel</code> method accepts two arguments: the name of the channel and a callback which returns <code>true</code> or <code>false</code> indicating whether the user is authorized to listen on the channel.</p>
-<p>All authorization callbacks receive the currently authenticated user as their first argument and any additional wildcard parameters as their subsequent arguments. In this example, we are using the <code>*</code> character to indicate that the "ID" portion of the channel name is a wildcard.</p>
+<p>All authorization callbacks receive the currently authenticated user as their first argument and any additional wildcard parameters as their subsequent arguments. In this example, we are using the <code>{orderId}</code> placeholder to indicate that the "ID" portion of the channel name is a wildcard.</p>
+<h4 id="authorization-callback-model-binding">Authorization Callback Model Binding</h4>
+<p>Just like HTTP routes, channel routes may also take advantage of implicit and explicit <a href="../docs/{{version}}/routing#route-model-binding">route model binding</a>. For example, instead of receiving the string or numeric order ID, you may request an actual <code>Order</code> model instance:</p>
+<div class="codehilite"><pre><span></span>use App\Order;
+
+Broadcast::channel(&#39;order.{order}&#39;, function ($user, Order $order) {
+    return $user-&gt;id === $order-&gt;user_id;
+});
+</pre></div>
+
+
 <p><a name="broadcasting-events"></a></p>
 <h2 id="broadcasting-events">Broadcasting Events</h2>
 <p>Once you have defined an event and marked it with the <code>ShouldBroadcast</code> interface, you only need to fire the event using the <code>event</code> function. The event dispatcher will notice that the event is marked with the <code>ShouldBroadcast</code> interface and will queue the event for broadcasting:</p>
@@ -1146,7 +1177,7 @@ public<span class="w"> </span><span class="err">$</span>broadcastQueue<span clas
 
 
 <p>To better understand when you may want to use the <code>toOthers</code> method, let's imagine a task list application where a user may create a new task by entering a task name. To create a task, your application might make a request to a <code>/task</code> end-point which broadcasts the task's creation and returns a JSON representation of the new task. When your JavaScript application receives the response from the end-point, it might directly insert the new task into its task list like so:</p>
-<div class="codehilite"><pre><span></span>this.$http.post(&#39;/task&#39;, task)
+<div class="codehilite"><pre><span></span>axios.post(&#39;/task&#39;, task)
     .then((response) =&gt; {
         this.tasks.push(response.data);
     });
@@ -1156,8 +1187,8 @@ public<span class="w"> </span><span class="err">$</span>broadcastQueue<span clas
 <p>However, remember that we also broadcast the task's creation. If your JavaScript application is listening for this event in order to add tasks to the task list, you will have duplicate tasks in your list: one from the end-point and one from the broadcast.</p>
 <p>You may solve this by using the <code>toOthers</code> method to instruct the broadcaster to not broadcast the event to the current user.</p>
 <h4 id="configuration_1">Configuration</h4>
-<p>When you initialize a Laravel Echo instance, a socket ID is assigned to the connection. If you are using <a href="https://vuejs.org">Vue</a> and Vue Resource, the socket ID will automatically be attached to every outgoing request as a <code>X-Socket-ID</code> header. Then, when you call the <code>toOthers</code> method, Laravel will extract the socket ID from the header and instruct the broadcaster to not broadcast to any connections with that socket ID.</p>
-<p>If you are not using Vue and Vue Resource, you will need to manually configure your JavaScript application to send the <code>X-Socket-ID</code> header. You may retrieve the socket ID using the <code>Echo.socketId</code> method:</p>
+<p>When you initialize a Laravel Echo instance, a socket ID is assigned to the connection. If you are using <a href="https://vuejs.org">Vue</a> and <a href="https://github.com/mzabriskie/axios">Axios</a>, the socket ID will automatically be attached to every outgoing request as a <code>X-Socket-ID</code> header. Then, when you call the <code>toOthers</code> method, Laravel will extract the socket ID from the header and instruct the broadcaster to not broadcast to any connections with that socket ID.</p>
+<p>If you are not using Vue and Axios, you will need to manually configure your JavaScript application to send the <code>X-Socket-ID</code> header. You may retrieve the socket ID using the <code>Echo.socketId</code> method:</p>
 <div class="codehilite"><pre><span></span>var socketId = Echo.socketId();
 </pre></div>
 
@@ -1300,6 +1331,24 @@ broadcast(new NewMessage($message))-&gt;toOthers();
 </pre></div>
 
 
+<p><a name="client-events"></a></p>
+<h2 id="client-events">Client Events</h2>
+<p>Sometimes you may wish to broadcast an event to other connected clients without hitting your Laravel application at all. This can be particularly useful for things like "typing" notifications, where you want to alert users of your application that another user is typing a message on a given screen. To broadcast client events, you may use Echo's <code>whisper</code> method:</p>
+<div class="codehilite"><pre><span></span>Echo.channel(&#39;chat&#39;)
+    .whisper(&#39;typing&#39;, {
+        name: this.user.name
+    });
+</pre></div>
+
+
+<p>To listen for client events, you may use the <code>listenForWhisper</code> method:</p>
+<div class="codehilite"><pre><span></span>Echo.channel(&#39;chat&#39;)
+    .listenForWhisper(&#39;typing&#39;, (e) =&gt; {
+        console.log(e.name);
+    });
+</pre></div>
+
+
 <p><a name="notifications"></a></p>
 <h2 id="notifications">Notifications</h2>
 <p>By pairing event broadcasting with <a href="../docs/{{version}}/notifications">notifications</a>, your JavaScript application may receive new notifications as they occur without needing to refresh the page. First, be sure to read over the documentation on using <a href="../docs/{{version}}/notifications#broadcast-notifications">the broadcast notification channel</a>.</p>
@@ -1311,7 +1360,7 @@ broadcast(new NewMessage($message))-&gt;toOthers();
 </pre></div>
 
 
-<p>In this example, all notifications sent to <code>App\User</code> instances via the <code>broadcast</code> channel would be received by the callback. A channel authorization callback for the <code>App.User.*</code> channel is included in the default <code>BroadcastServiceProvider</code> that ships with the Laravel framework.</p>
+<p>In this example, all notifications sent to <code>App\User</code> instances via the <code>broadcast</code> channel would be received by the callback. A channel authorization callback for the <code>App.User.{id}</code> channel is included in the default <code>BroadcastServiceProvider</code> that ships with the Laravel framework.</p>
           <aside class="copyright" role="note">
             
             Documentation built with

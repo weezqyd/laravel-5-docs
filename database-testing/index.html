@@ -158,15 +158,6 @@
           
             
   <li>
-    <a class="" title="Application testing" href="../application-testing/">
-      Application testing
-    </a>
-    
-  </li>
-
-          
-            
-  <li>
     <a class="" title="Artisan" href="../artisan/">
       Artisan
     </a>
@@ -362,8 +353,8 @@
           
             
   <li>
-    <a class="" title="Elixir" href="../elixir/">
-      Elixir
+    <a class="" title="Dusk" href="../dusk/">
+      Dusk
     </a>
     
   </li>
@@ -506,6 +497,15 @@
           
             
   <li>
+    <a class="" title="Http tests" href="../http-tests/">
+      Http tests
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
     <a class="" title="Installation" href="../installation/">
       Installation
     </a>
@@ -562,6 +562,15 @@
   <li>
     <a class="" title="Migrations" href="../migrations/">
       Migrations
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Mix" href="../mix/">
+      Mix
     </a>
     
   </li>
@@ -823,19 +832,19 @@
 </ul>
 <p><a name="introduction"></a></p>
 <h2 id="introduction">Introduction</h2>
-<p>Laravel provides a variety of helpful tools to make it easier to test your database driven applications. First, you may use the <code>seeInDatabase</code> helper to assert that data exists in the database matching a given set of criteria. For example, if you would like to verify that there is a record in the <code>users</code> table with the <code>email</code> value of <code>sally@example.com</code>, you can do the following:</p>
+<p>Laravel provides a variety of helpful tools to make it easier to test your database driven applications. First, you may use the <code>assertDatabaseHas</code> helper to assert that data exists in the database matching a given set of criteria. For example, if you would like to verify that there is a record in the <code>users</code> table with the <code>email</code> value of <code>sally@example.com</code>, you can do the following:</p>
 <div class="codehilite"><pre><span></span>public function testDatabase()
 {
     // Make call to application...
 
-    $this-&gt;seeInDatabase(&#39;users&#39;, [
+    $this-&gt;assertDatabaseHas(&#39;users&#39;, [
         &#39;email&#39; =&gt; &#39;sally@example.com&#39;
     ]);
 }
 </pre></div>
 
 
-<p>Of course, the <code>seeInDatabase</code> method and other helpers like it are for convenience. You are free to use any of PHPUnit's built-in assertion methods to supplement your tests.</p>
+<p>Of course, the <code>assertDatabaseHas</code> method and other helpers like it are for convenience. You are free to use any of PHPUnit's built-in assertion methods to supplement your tests.</p>
 <p><a name="resetting-the-database-after-each-test"></a></p>
 <h2 id="resetting-the-database-after-each-test">Resetting The Database After Each Test</h2>
 <p>It is often useful to reset your database after each test so that data from a previous test does not interfere with subsequent tests.</p>
@@ -844,6 +853,9 @@
 <p>One approach to resetting the database state is to rollback the database after each test and migrate it before the next test. Laravel provides a simple <code>DatabaseMigrations</code> trait that will automatically handle this for you. Simply use the trait on your test class and everything will be handled for you:</p>
 <div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
+<span class="nx">namespace</span> <span class="nx">Tests</span><span class="err">\</span><span class="nx">Feature</span><span class="p">;</span>
+
+<span class="nx">use</span> <span class="nx">Tests</span><span class="err">\</span><span class="nx">TestCase</span><span class="p">;</span>
 <span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Foundation</span><span class="err">\</span><span class="nx">Testing</span><span class="err">\</span><span class="nx">WithoutMiddleware</span><span class="p">;</span>
 <span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Foundation</span><span class="err">\</span><span class="nx">Testing</span><span class="err">\</span><span class="nx">DatabaseMigrations</span><span class="p">;</span>
 <span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Foundation</span><span class="err">\</span><span class="nx">Testing</span><span class="err">\</span><span class="nx">DatabaseTransactions</span><span class="p">;</span>
@@ -859,8 +871,9 @@
 <span class="cm">     */</span>
     <span class="kr">public</span> <span class="kd">function</span> <span class="nx">testBasicExample</span><span class="p">()</span>
     <span class="p">{</span>
-        <span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">visit</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
-             <span class="o">-&gt;</span><span class="nx">see</span><span class="p">(</span><span class="s1">&#39;Laravel 5&#39;</span><span class="p">);</span>
+        <span class="nx">$response</span> <span class="o">=</span> <span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">);</span>
+
+        <span class="c1">// ...</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -871,6 +884,9 @@
 <p>Another approach to resetting the database state is to wrap each test case in a database transaction. Again, Laravel provides a convenient <code>DatabaseTransactions</code> trait that will automatically handle this for you:</p>
 <div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
+<span class="nx">namespace</span> <span class="nx">Tests</span><span class="err">\</span><span class="nx">Feature</span><span class="p">;</span>
+
+<span class="nx">use</span> <span class="nx">Tests</span><span class="err">\</span><span class="nx">TestCase</span><span class="p">;</span>
 <span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Foundation</span><span class="err">\</span><span class="nx">Testing</span><span class="err">\</span><span class="nx">WithoutMiddleware</span><span class="p">;</span>
 <span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Foundation</span><span class="err">\</span><span class="nx">Testing</span><span class="err">\</span><span class="nx">DatabaseMigrations</span><span class="p">;</span>
 <span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Foundation</span><span class="err">\</span><span class="nx">Testing</span><span class="err">\</span><span class="nx">DatabaseTransactions</span><span class="p">;</span>
@@ -886,8 +902,9 @@
 <span class="cm">     */</span>
     <span class="kr">public</span> <span class="kd">function</span> <span class="nx">testBasicExample</span><span class="p">()</span>
     <span class="p">{</span>
-        <span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">visit</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
-             <span class="o">-&gt;</span><span class="nx">see</span><span class="p">(</span><span class="s1">&#39;Laravel 5&#39;</span><span class="p">);</span>
+        <span class="nx">$response</span> <span class="o">=</span> <span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">);</span>
+
+        <span class="c1">// ...</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -1009,7 +1026,7 @@
 </pre></div>
 
 
-<p>These Closures also receive the evaluated attribute array of the factory that contains them:</p>
+<p>These Closures also receive the evaluated attribute array of the factory that defines them:</p>
 <div class="codehilite"><pre><span></span><span class="o">$</span><span class="nt">factory-</span><span class="o">&gt;</span><span class="nt">define</span><span class="o">(</span><span class="nt">App</span><span class="err">\</span><span class="nt">Post</span><span class="p">::</span><span class="nd">class</span><span class="o">,</span> <span class="nt">function</span> <span class="o">($</span><span class="nt">faker</span><span class="o">)</span> <span class="p">{</span>
     <span class="err">return</span> <span class="cp">[</span>
         <span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="nv">$faker</span><span class="o">-&gt;</span><span class="nb">title</span><span class="p">,</span>

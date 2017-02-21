@@ -158,15 +158,6 @@
           
             
   <li>
-    <a class="" title="Application testing" href="../application-testing/">
-      Application testing
-    </a>
-    
-  </li>
-
-          
-            
-  <li>
     <a class="" title="Artisan" href="../artisan/">
       Artisan
     </a>
@@ -329,8 +320,8 @@
           
             
   <li>
-    <a class="" title="Elixir" href="../elixir/">
-      Elixir
+    <a class="" title="Dusk" href="../dusk/">
+      Dusk
     </a>
     
   </li>
@@ -518,6 +509,15 @@
           
             
   <li>
+    <a class="" title="Http tests" href="../http-tests/">
+      Http tests
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
     <a class="" title="Installation" href="../installation/">
       Installation
     </a>
@@ -574,6 +574,15 @@
   <li>
     <a class="" title="Migrations" href="../migrations/">
       Migrations
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Mix" href="../mix/">
+      Mix
     </a>
     
   </li>
@@ -861,7 +870,7 @@
 </ul>
 <p><a name="defining-relationships"></a></p>
 <h2 id="defining-relationships">Defining Relationships</h2>
-<p>Eloquent relationships are defined as functions on your Eloquent model classes. Since, like Eloquent models themselves, relationships also serve as powerful <a href="../docs/{{version}}/queries">query builders</a>, defining relationships as functions provides powerful method chaining and querying capabilities. For example, we may chain additional constraints on this <code>posts</code> relationship:</p>
+<p>Eloquent relationships are defined as methods on your Eloquent model classes. Since, like Eloquent models themselves, relationships also serve as powerful <a href="../docs/{{version}}/queries">query builders</a>, defining relationships as methods provides powerful method chaining and querying capabilities. For example, we may chain additional constraints on this <code>posts</code> relationship:</p>
 <div class="codehilite"><pre><span></span>$user-&gt;posts()-&gt;where(&#39;active&#39;, 1)-&gt;get();
 </pre></div>
 
@@ -889,7 +898,7 @@
 </pre></div>
 
 
-<p>The first argument passed to the <code>hasOne</code> method is the name of the related model. Once the relationship is defined, we may retrieve the related record using Eloquent's dynamic properties. Dynamic properties allow you to access relationship functions as if they were properties defined on the model:</p>
+<p>The first argument passed to the <code>hasOne</code> method is the name of the related model. Once the relationship is defined, we may retrieve the related record using Eloquent's dynamic properties. Dynamic properties allow you to access relationship methods as if they were properties defined on the model:</p>
 <div class="codehilite"><pre><span></span><span class="o">$</span><span class="nt">phone</span> <span class="o">=</span> <span class="nt">User</span><span class="p">::</span><span class="nd">find</span><span class="o">(</span><span class="nt">1</span><span class="o">)</span><span class="nt">-</span><span class="o">&gt;</span><span class="nt">phone</span><span class="o">;</span>
 </pre></div>
 
@@ -970,7 +979,7 @@ public<span class="w"> </span>function<span class="w"> </span>user<span class="o
 
 
 <p>Remember, Eloquent will automatically determine the proper foreign key column on the <code>Comment</code> model. By convention, Eloquent will take the "snake case" name of the owning model and suffix it with <code>_id</code>. So, for this example, Eloquent will assume the foreign key on the <code>Comment</code> model is <code>post_id</code>.</p>
-<p>Once the relationship has been defined, we can access the collection of comments by accessing the <code>comments</code> property. Remember, since Eloquent provides "dynamic properties", we can access relationship functions as if they were defined as properties on the model:</p>
+<p>Once the relationship has been defined, we can access the collection of comments by accessing the <code>comments</code> property. Remember, since Eloquent provides "dynamic properties", we can access relationship methods as if they were defined as properties on the model:</p>
 <div class="codehilite"><pre><span></span><span class="o">$</span><span class="nt">comments</span> <span class="o">=</span> <span class="nt">App</span><span class="err">\</span><span class="nt">Post</span><span class="p">::</span><span class="nd">find</span><span class="o">(</span><span class="nt">1</span><span class="o">)</span><span class="nt">-</span><span class="o">&gt;</span><span class="nt">comments</span><span class="o">;</span>
 
 <span class="nt">foreach</span> <span class="o">($</span><span class="nt">comments</span> <span class="nt">as</span> <span class="o">$</span><span class="nt">comment</span><span class="o">)</span> <span class="p">{</span>
@@ -1137,6 +1146,27 @@ public<span class="w"> </span>function<span class="w"> </span>post<span class="o
 <div class="codehilite"><pre><span></span>return $this-&gt;belongsToMany(&#39;App\Role&#39;)-&gt;wherePivot(&#39;approved&#39;, 1);
 
 return $this-&gt;belongsToMany(&#39;App\Role&#39;)-&gt;wherePivotIn(&#39;priority&#39;, [1, 2]);
+</pre></div>
+
+
+<h4 id="defining-custom-intermediate-table-models">Defining Custom Intermediate Table Models</h4>
+<p>If you would like to define a custom model to represent the intermediate table of your relationship, you may call the <code>using</code> method when defining the relationship. All custom models used to represent intermediate tables of relationships must extend the <code>Illuminate\Database\Eloquent\Relations\Pivot</code> class:</p>
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+
+<span class="nx">namespace</span> <span class="nx">App</span><span class="p">;</span>
+
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Database</span><span class="err">\</span><span class="nx">Eloquent</span><span class="err">\</span><span class="nx">Model</span><span class="p">;</span>
+
+<span class="kr">class</span> <span class="nx">Role</span> <span class="kr">extends</span> <span class="nx">Model</span>
+<span class="p">{</span>
+    <span class="cm">/**</span>
+<span class="cm">     * The users that belong to the role.</span>
+<span class="cm">     */</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">users</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">belongsToMany</span><span class="p">(</span><span class="s1">&#39;App\User&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="nx">using</span><span class="p">(</span><span class="s1">&#39;App\UserRole&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
 
 
@@ -1385,7 +1415,7 @@ taggables
 
 <p><a name="querying-relations"></a></p>
 <h2 id="querying-relations">Querying Relations</h2>
-<p>Since all types of Eloquent relationships are defined via functions, you may call those functions to obtain an instance of the relationship without actually executing the relationship queries. In addition, all types of Eloquent relationships also serve as <a href="../docs/{{version}}/queries">query builders</a>, allowing you to continue to chain constraints onto the relationship query before finally executing the SQL against your database.</p>
+<p>Since all types of Eloquent relationships are defined via methods, you may call those methods to obtain an instance of the relationship without actually executing the relationship queries. In addition, all types of Eloquent relationships also serve as <a href="../docs/{{version}}/queries">query builders</a>, allowing you to continue to chain constraints onto the relationship query before finally executing the SQL against your database.</p>
 <p>For example, imagine a blog system in which a <code>User</code> model has many associated <code>Post</code> models:</p>
 <div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 

@@ -158,15 +158,6 @@
           
             
   <li>
-    <a class="" title="Application testing" href="../application-testing/">
-      Application testing
-    </a>
-    
-  </li>
-
-          
-            
-  <li>
     <a class="" title="Artisan" href="../artisan/">
       Artisan
     </a>
@@ -329,8 +320,8 @@
           
             
   <li>
-    <a class="" title="Elixir" href="../elixir/">
-      Elixir
+    <a class="" title="Dusk" href="../dusk/">
+      Dusk
     </a>
     
   </li>
@@ -530,6 +521,15 @@
           
             
   <li>
+    <a class="" title="Http tests" href="../http-tests/">
+      Http tests
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
     <a class="" title="Installation" href="../installation/">
       Installation
     </a>
@@ -586,6 +586,15 @@
   <li>
     <a class="" title="Migrations" href="../migrations/">
       Migrations
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Mix" href="../mix/">
+      Mix
     </a>
     
   </li>
@@ -1545,39 +1554,31 @@ $flight-&gt;history()-&gt;forceDelete();
 
 <p><a name="events"></a></p>
 <h2 id="events">Events</h2>
-<p>Eloquent models fire several events, allowing you to hook into various points in the model's lifecycle using the following methods: <code>creating</code>, <code>created</code>, <code>updating</code>, <code>updated</code>, <code>saving</code>, <code>saved</code>, <code>deleting</code>, <code>deleted</code>, <code>restoring</code>, <code>restored</code>. Events allow you to easily execute code each time a specific model class is saved or updated in the database.</p>
+<p>Eloquent models fire several events, allowing you to hook into the following points in a model's lifecycle: <code>creating</code>, <code>created</code>, <code>updating</code>, <code>updated</code>, <code>saving</code>, <code>saved</code>, <code>deleting</code>, <code>deleted</code>, <code>restoring</code>, <code>restored</code>. Events allow you to easily execute code each time a specific model class is saved or updated in the database.</p>
 <p>Whenever a new model is saved for the first time, the <code>creating</code> and <code>created</code> events will fire. If a model already existed in the database and the <code>save</code> method is called, the <code>updating</code> / <code>updated</code> events will fire. However, in both cases, the <code>saving</code> / <code>saved</code> events will fire.</p>
-<p>For example, let's define an Eloquent event listener in a <a href="../docs/{{version}}/providers">service provider</a>. Within our event listener, we will call the <code>isValid</code> method on the given model, and return <code>false</code> if the model is not valid. Returning <code>false</code> from an Eloquent event listener will cancel the <code>save</code> / <code>update</code> operation:</p>
+<p>To get started, define an <code>$events</code> property on your Eloquent model that maps various points of the Eloquent model's lifecycle to your own <a href="../docs/{{version}}/events">event classes</a>:</p>
 <div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
-<span class="nx">namespace</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Providers</span><span class="p">;</span>
+<span class="nx">namespace</span> <span class="nx">App</span><span class="p">;</span>
 
-<span class="nx">use</span> <span class="nx">App</span><span class="err">\</span><span class="nx">User</span><span class="p">;</span>
-<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Support</span><span class="err">\</span><span class="nx">ServiceProvider</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Events</span><span class="err">\</span><span class="nx">UserSaved</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Events</span><span class="err">\</span><span class="nx">UserDeleted</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Notifications</span><span class="err">\</span><span class="nx">Notifiable</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Foundation</span><span class="err">\</span><span class="nx">Auth</span><span class="err">\</span><span class="nx">User</span> <span class="kr">as</span> <span class="nx">Authenticatable</span><span class="p">;</span>
 
-<span class="kr">class</span> <span class="nx">AppServiceProvider</span> <span class="kr">extends</span> <span class="nx">ServiceProvider</span>
+<span class="kr">class</span> <span class="nx">User</span> <span class="kr">extends</span> <span class="nx">Authenticatable</span>
 <span class="p">{</span>
-    <span class="cm">/**</span>
-<span class="cm">     * Bootstrap any application services.</span>
-<span class="cm">     *</span>
-<span class="cm">     * @return void</span>
-<span class="cm">     */</span>
-    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">boot</span><span class="p">()</span>
-    <span class="p">{</span>
-        <span class="nx">User</span><span class="o">::</span><span class="nx">creating</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">$user</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="nx">$user</span><span class="o">-&gt;</span><span class="nx">isValid</span><span class="p">();</span>
-        <span class="p">});</span>
-    <span class="p">}</span>
+    <span class="nx">use</span> <span class="nx">Notifiable</span><span class="p">;</span>
 
     <span class="cm">/**</span>
-<span class="cm">     * Register the service provider.</span>
+<span class="cm">     * The event map for the model.</span>
 <span class="cm">     *</span>
-<span class="cm">     * @return void</span>
+<span class="cm">     * @var array</span>
 <span class="cm">     */</span>
-    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">register</span><span class="p">()</span>
-    <span class="p">{</span>
-        <span class="c1">//</span>
-    <span class="p">}</span>
+    <span class="kr">protected</span> <span class="nx">$events</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s1">&#39;saved&#39;</span> <span class="o">=&gt;</span> <span class="nx">UserSaved</span><span class="o">::</span><span class="kr">class</span><span class="p">,</span>
+        <span class="s1">&#39;deleted&#39;</span> <span class="o">=&gt;</span> <span class="nx">UserDeleted</span><span class="o">::</span><span class="kr">class</span><span class="p">,</span>
+    <span class="p">];</span>
 <span class="p">}</span>
 </pre></div>
 

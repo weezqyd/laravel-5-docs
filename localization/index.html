@@ -158,15 +158,6 @@
           
             
   <li>
-    <a class="" title="Application testing" href="../application-testing/">
-      Application testing
-    </a>
-    
-  </li>
-
-          
-            
-  <li>
     <a class="" title="Artisan" href="../artisan/">
       Artisan
     </a>
@@ -329,8 +320,8 @@
           
             
   <li>
-    <a class="" title="Elixir" href="../elixir/">
-      Elixir
+    <a class="" title="Dusk" href="../dusk/">
+      Dusk
     </a>
     
   </li>
@@ -473,6 +464,15 @@
           
             
   <li>
+    <a class="" title="Http tests" href="../http-tests/">
+      Http tests
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
     <a class="" title="Installation" href="../installation/">
       Installation
     </a>
@@ -517,8 +517,14 @@
             </li>
           
             <li class="anchor">
-              <a title="Retrieving Language Lines" href="#retrieving-language-lines">
-                Retrieving Language Lines
+              <a title="Defining Translation Strings" href="#defining-translation-strings">
+                Defining Translation Strings
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Retrieving Translation Strings" href="#retrieving-translation-strings">
+                Retrieving Translation Strings
               </a>
             </li>
           
@@ -556,6 +562,15 @@
   <li>
     <a class="" title="Migrations" href="../migrations/">
       Migrations
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Mix" href="../mix/">
+      Mix
     </a>
     
   </li>
@@ -799,8 +814,13 @@
           <h1 id="localization">Localization</h1>
 <ul>
 <li><a href="#introduction">Introduction</a></li>
-<li><a href="#retrieving-language-lines">Retrieving Language Lines</a><ul>
-<li><a href="#replacing-parameters-in-language-lines">Replacing Parameters In Language Lines</a></li>
+<li><a href="#defining-translation-strings">Defining Translation Strings</a><ul>
+<li><a href="#using-short-keys">Using Short Keys</a></li>
+<li><a href="#using-translation-strings-as-keys">Using Translation Strings As Keys</a></li>
+</ul>
+</li>
+<li><a href="#retrieving-translation-strings">Retrieving Translation Strings</a><ul>
+<li><a href="#replacing-parameters-in-translation-strings">Replacing Parameters In Translation Strings</a></li>
 <li><a href="#pluralization">Pluralization</a></li>
 </ul>
 </li>
@@ -837,7 +857,7 @@
 </pre></div>
 
 
-<p>You may configure a "fallback language", which will be used when the active language does not contain a given language line. Like the default language, the fallback language is also configured in the <code>config/app.php</code> configuration file:</p>
+<p>You may configure a "fallback language", which will be used when the active language does not contain a given translation string. Like the default language, the fallback language is also configured in the <code>config/app.php</code> configuration file:</p>
 <div class="codehilite"><pre><span></span>&#39;fallback_locale&#39; =&gt; &#39;en&#39;,
 </pre></div>
 
@@ -852,30 +872,67 @@
 </pre></div>
 
 
-<p><a name="retrieving-language-lines"></a></p>
-<h2 id="retrieving-language-lines">Retrieving Language Lines</h2>
-<p>You may retrieve lines from language files using the <code>trans</code> helper function. The <code>trans</code> method accepts the file and key of the language line as its first argument. For example, let's retrieve the <code>welcome</code> language line from the <code>resources/lang/messages.php</code> language file:</p>
-<div class="codehilite"><pre><span></span>echo trans(&#39;messages.welcome&#39;);
+<p><a name="defining-translation-strings"></a></p>
+<h2 id="defining-translation-strings">Defining Translation Strings</h2>
+<p><a name="using-short-keys"></a></p>
+<h3 id="using-short-keys">Using Short Keys</h3>
+<p>Typically, translation strings are stored in files within the <code>resources/lang</code> directory. Within this directory there should be a subdirectory for each language supported by the application:</p>
+<div class="codehilite"><pre><span></span>/resources
+    /lang
+        /en
+            messages.php
+        /es
+            messages.php
 </pre></div>
 
 
-<p>Of course if you are using the <a href="../docs/{{version}}/blade">Blade templating engine</a>, you may use the <code>{{ }}</code> syntax to echo the language line or use the <code>@lang</code> directive:</p>
-<div class="codehilite"><pre><span></span><span class="cp">{{</span> <span class="nv">trans</span><span class="o">(</span><span class="s1">&#39;messages.welcome&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="x"></span>
+<p>All language files simply return an array of keyed strings. For example:</p>
+<div class="codehilite"><pre><span></span><span class="cp">&lt;?php</span>
+
+<span class="c1">// resources/lang/en/messages.php</span>
+
+<span class="k">return</span> <span class="p">[</span>
+    <span class="s1">&#39;welcome&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Welcome to our application&#39;</span>
+<span class="p">];</span>
+</pre></div>
+
+
+<p><a name="using-translation-strings-as-keys"></a></p>
+<h3 id="using-translation-strings-as-keys">Using Translation Strings As Keys</h3>
+<p>For applications with heavy translation requirements, defining every string with a "short key" can become quickly confusing when referencing them in your views. For this reason, Laravel also provides support for defining translation strings using the "default" translation of the string as the key.</p>
+<p>Translation files that use translation strings as keys are stored as JSON files in the <code>resources/lang</code> directory. For example, if your application has a Spanish translation, you should create a <code>resources/lang/es.json</code> file:</p>
+<div class="codehilite"><pre><span></span>{
+    &quot;I love programming.&quot;: &quot;Me encanta la programación.&quot;
+}
+</pre></div>
+
+
+<p><a name="retrieving-translation-strings"></a></p>
+<h2 id="retrieving-translation-strings">Retrieving Translation Strings</h2>
+<p>You may retrieve lines from language files using the <code>__</code> helper function. The <code>__</code> method accepts the file and key of the translation string as its first argument. For example, let's retrieve the <code>welcome</code> translation string from the <code>resources/lang/messages.php</code> language file:</p>
+<div class="codehilite"><pre><span></span>echo __(&#39;messages.welcome&#39;);
+
+echo __(&#39;I love programming.&#39;);
+</pre></div>
+
+
+<p>Of course if you are using the <a href="../docs/{{version}}/blade">Blade templating engine</a>, you may use the <code>{{ }}</code> syntax to echo the translation string or use the <code>@lang</code> directive:</p>
+<div class="codehilite"><pre><span></span><span class="cp">{{</span> <span class="nv">__</span><span class="o">(</span><span class="s1">&#39;messages.welcome&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="x"></span>
 
 <span class="x">@lang(&#39;messages.welcome&#39;)</span>
 </pre></div>
 
 
-<p>If the specified language line does not exist, the <code>trans</code> function will simply return the language line key. So, using the example above, the <code>trans</code> function would return <code>messages.welcome</code> if the language line does not exist.</p>
-<p><a name="replacing-parameters-in-language-lines"></a></p>
-<h3 id="replacing-parameters-in-language-lines">Replacing Parameters In Language Lines</h3>
-<p>If you wish, you may define place-holders in your language lines. All place-holders are prefixed with a <code>:</code>. For example, you may define a welcome message with a place-holder name:</p>
+<p>If the specified translation string does not exist, the <code>__</code> function will simply return the translation string key. So, using the example above, the <code>__</code> function would return <code>messages.welcome</code> if the translation string does not exist.</p>
+<p><a name="replacing-parameters-in-translation-strings"></a></p>
+<h3 id="replacing-parameters-in-translation-strings">Replacing Parameters In Translation Strings</h3>
+<p>If you wish, you may define place-holders in your translation strings. All place-holders are prefixed with a <code>:</code>. For example, you may define a welcome message with a place-holder name:</p>
 <div class="codehilite"><pre><span></span>&#39;welcome&#39; =&gt; &#39;Welcome, :name&#39;,
 </pre></div>
 
 
-<p>To replace the place-holders when retrieving a language line, pass an array of replacements as the second argument to the <code>trans</code> function:</p>
-<div class="codehilite"><pre><span></span>echo trans(&#39;messages.welcome&#39;, [&#39;name&#39; =&gt; &#39;dayle&#39;]);
+<p>To replace the place-holders when retrieving a translation string, pass an array of replacements as the second argument to the <code>__</code> function:</p>
+<div class="codehilite"><pre><span></span>echo __(&#39;messages.welcome&#39;, [&#39;name&#39; =&gt; &#39;dayle&#39;]);
 </pre></div>
 
 
@@ -892,20 +949,20 @@
 </pre></div>
 
 
-<p>After defining a language line that has pluralization options, you may use the <code>trans_choice</code> function to retrieve the line for a given "count". In this example, since the count is greater than one, the plural form of the language line is returned:</p>
-<div class="codehilite"><pre><span></span>echo trans_choice(&#39;messages.apples&#39;, 10);
+<p>You may even create more complex pluralization rules which specify translation strings for multiple number ranges:</p>
+<div class="codehilite"><pre><span></span>&#39;apples&#39; =&gt; &#39;{0} There are none|[1,19] There are some|[20,*] There are many&#39;,
 </pre></div>
 
 
-<p>Since the Laravel translator is powered by the Symfony Translation component, you may create even more complex pluralization rules which specify language lines for multiple number ranges:</p>
-<div class="codehilite"><pre><span></span>&#39;apples&#39; =&gt; &#39;{0} There are none|[1,19] There are some|[20,Inf] There are many&#39;,
+<p>After defining a translation string that has pluralization options, you may use the <code>trans_choice</code> function to retrieve the line for a given "count". In this example, since the count is greater than one, the plural form of the translation string is returned:</p>
+<div class="codehilite"><pre><span></span>echo trans_choice(&#39;messages.apples&#39;, 10);
 </pre></div>
 
 
 <p><a name="overriding-package-language-files"></a></p>
 <h2 id="overriding-package-language-files">Overriding Package Language Files</h2>
 <p>Some packages may ship with their own language files. Instead of changing the package's core files to tweak these lines, you may override them by placing files in the <code>resources/lang/vendor/{package}/{locale}</code> directory.</p>
-<p>So, for example, if you need to override the English language lines in <code>messages.php</code> for a package named <code>skyrim/hearthfire</code>, you should place a language file at: <code>resources/lang/vendor/hearthfire/en/messages.php</code>. Within this file, you should only define the language lines you wish to override. Any language lines you don't override will still be loaded from the package's original language files.</p>
+<p>So, for example, if you need to override the English translation strings in <code>messages.php</code> for a package named <code>skyrim/hearthfire</code>, you should place a language file at: <code>resources/lang/vendor/hearthfire/en/messages.php</code>. Within this file, you should only define the translation strings you wish to override. Any translation strings you don't override will still be loaded from the package's original language files.</p>
           <aside class="copyright" role="note">
             
             Documentation built with

@@ -158,15 +158,6 @@
           
             
   <li>
-    <a class="" title="Application testing" href="../application-testing/">
-      Application testing
-    </a>
-    
-  </li>
-
-          
-            
-  <li>
     <a class="" title="Artisan" href="../artisan/">
       Artisan
     </a>
@@ -329,8 +320,8 @@
           
             
   <li>
-    <a class="" title="Elixir" href="../elixir/">
-      Elixir
+    <a class="" title="Dusk" href="../dusk/">
+      Dusk
     </a>
     
   </li>
@@ -473,6 +464,15 @@
           
             
   <li>
+    <a class="" title="Http tests" href="../http-tests/">
+      Http tests
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
     <a class="" title="Installation" href="../installation/">
       Installation
     </a>
@@ -529,6 +529,15 @@
   <li>
     <a class="" title="Migrations" href="../migrations/">
       Migrations
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Mix" href="../mix/">
+      Mix
     </a>
     
   </li>
@@ -1049,14 +1058,14 @@ $url = route(&#39;profile&#39;, [&#39;id&#39; =&gt; 1]);
 <p>When injecting a model ID to a route or controller action, you will often query to retrieve the model that corresponds to that ID. Laravel route model binding provides a convenient way to automatically inject the model instances directly into your routes. For example, instead of injecting a user's ID, you can inject the entire <code>User</code> model instance that matches the given ID.</p>
 <p><a name="implicit-binding"></a></p>
 <h3 id="implicit-binding">Implicit Binding</h3>
-<p>Laravel automatically resolves Eloquent models defined in routes or controller actions whose variable names match a route segment name. For example:</p>
+<p>Laravel automatically resolves Eloquent models defined in routes or controller actions whose type-hinted variable names match a route segment name. For example:</p>
 <div class="codehilite"><pre><span></span>Route::get(&#39;api/users/{user}&#39;, function (App\User $user) {
     return $user-&gt;email;
 });
 </pre></div>
 
 
-<p>In this example, since the Eloquent <code>$user</code> variable defined on the route matches the <code>{user}</code> segment in the route's URI, Laravel will automatically inject the model instance that has an ID matching the corresponding value from the request URI. If a matching model instance is not found in the database, a 404 HTTP response will automatically be generated.</p>
+<p>Since the <code>$user</code> variable is type-hinted as the <code>App\User</code> Eloquent model and the variable name matches the <code>{user}</code> URI segment, Laravel will automatically inject the model instance that has an ID matching the corresponding value from the request URI. If a matching model instance is not found in the database, a 404 HTTP response will automatically be generated.</p>
 <h4 id="customizing-the-key-name">Customizing The Key Name</h4>
 <p>If you would like model binding to use a database column other than <code>id</code> when retrieving a given model class, you may override the <code>getRouteKeyName</code> method on the Eloquent model:</p>
 <div class="codehilite"><pre><span></span><span class="cm">/**</span>

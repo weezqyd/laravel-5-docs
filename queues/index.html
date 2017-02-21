@@ -158,15 +158,6 @@
           
             
   <li>
-    <a class="" title="Application testing" href="../application-testing/">
-      Application testing
-    </a>
-    
-  </li>
-
-          
-            
-  <li>
     <a class="" title="Artisan" href="../artisan/">
       Artisan
     </a>
@@ -329,8 +320,8 @@
           
             
   <li>
-    <a class="" title="Elixir" href="../elixir/">
-      Elixir
+    <a class="" title="Dusk" href="../dusk/">
+      Dusk
     </a>
     
   </li>
@@ -473,6 +464,15 @@
           
             
   <li>
+    <a class="" title="Http tests" href="../http-tests/">
+      Http tests
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
     <a class="" title="Installation" href="../installation/">
       Installation
     </a>
@@ -529,6 +529,15 @@
   <li>
     <a class="" title="Migrations" href="../migrations/">
       Migrations
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Mix" href="../mix/">
+      Mix
     </a>
     
   </li>
@@ -835,6 +844,7 @@
 <li><a href="#dispatching-jobs">Dispatching Jobs</a><ul>
 <li><a href="#delayed-dispatching">Delayed Dispatching</a></li>
 <li><a href="#customizing-the-queue-and-connection">Customizing The Queue &amp; Connection</a></li>
+<li><a href="#max-job-attempts-and-timeout">Specifying Max Job Attempts / Timeout Values</a></li>
 <li><a href="#error-handling">Error Handling</a></li>
 </ul>
 </li>
@@ -1101,9 +1111,57 @@ php artisan migrate
 </pre></div>
 
 
+<p><a name="max-job-attempts-and-timeout"></a></p>
+<h3 id="specifying-max-job-attempts-timeout-values">Specifying Max Job Attempts / Timeout Values</h3>
+<h4 id="max-attempts">Max Attempts</h4>
+<p>One approach to specifying the maximum number of times a job may be attempted is via the <code>--tries</code> switch on the Artisan command line:</p>
+<div class="codehilite"><pre><span></span>php artisan queue:work --tries=3
+</pre></div>
+
+
+<p>However, you may take a more granular approach by defining the maximum number of attempts on the job class itself. If the maximum number of attempts is specified on the job, it will take precedence over the value provided on the command line:</p>
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+
+<span class="nx">namespace</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Jobs</span><span class="p">;</span>
+
+<span class="kr">class</span> <span class="nx">ProcessPodcast</span> <span class="kr">implements</span> <span class="nx">ShouldQueue</span>
+<span class="p">{</span>
+    <span class="cm">/**</span>
+<span class="cm">     * The number of times the job may be attempted.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @var int</span>
+<span class="cm">     */</span>
+    <span class="kr">public</span> <span class="nx">$tries</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<h4 id="timeout">Timeout</h4>
+<p>Likewise, the maximum number of seconds that jobs can run may be specified using the <code>--timeout</code> switch on the Artisan command line:</p>
+<div class="codehilite"><pre><span></span>php artisan queue:work --timeout=30
+</pre></div>
+
+
+<p>However, you may also define the maximum number of seconds a job should be allowed to run on the job class itself. If the timeout is specified on the job, it will take precedence over any timeout specified on the command line:</p>
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+
+<span class="nx">namespace</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Jobs</span><span class="p">;</span>
+
+<span class="kr">class</span> <span class="nx">ProcessPodcast</span> <span class="kr">implements</span> <span class="nx">ShouldQueue</span>
+<span class="p">{</span>
+    <span class="cm">/**</span>
+<span class="cm">     * The number of seconds the job can run before timing out.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @var int</span>
+<span class="cm">     */</span>
+    <span class="kr">public</span> <span class="nx">$timeout</span> <span class="o">=</span> <span class="mi">120</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <p><a name="error-handling"></a></p>
 <h3 id="error-handling">Error Handling</h3>
-<p>If an exception is thrown while the job is being processed, the job will automatically be released back onto the queue so it may be attempted again. The job will continue to be released until it has been attempted the maximum number of times allowed by your application. The number of maximum attempts is defined by the <code>--tries</code> switch used on the <code>queue:work</code> Artisan command. More information on running the queue worker <a href="#running-the-queue-worker">can be found below</a>.</p>
+<p>If an exception is thrown while the job is being processed, the job will automatically be released back onto the queue so it may be attempted again. The job will continue to be released until it has been attempted the maximum number of times allowed by your application. The maximum number of attempts is defined by the <code>--tries</code> switch used on the <code>queue:work</code> Artisan command. Alternatively, the maximum number of attempts may be defined on the job class itself. More information on running the queue worker <a href="#running-the-queue-worker">can be found below</a>.</p>
 <p><a name="running-the-queue-worker"></a></p>
 <h2 id="running-the-queue-worker">Running The Queue Worker</h2>
 <p>Laravel includes a queue worker that will process new jobs as they are pushed onto the queue. You may run the worker using the <code>queue:work</code> Artisan command. Note that once the <code>queue:work</code> command has started, it will continue to run until it is manually stopped or you close your terminal:</p>

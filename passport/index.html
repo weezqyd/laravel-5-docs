@@ -158,15 +158,6 @@
           
             
   <li>
-    <a class="" title="Application testing" href="../application-testing/">
-      Application testing
-    </a>
-    
-  </li>
-
-          
-            
-  <li>
     <a class="" title="Artisan" href="../artisan/">
       Artisan
     </a>
@@ -329,8 +320,8 @@
           
             
   <li>
-    <a class="" title="Elixir" href="../elixir/">
-      Elixir
+    <a class="" title="Dusk" href="../dusk/">
+      Dusk
     </a>
     
   </li>
@@ -473,6 +464,15 @@
           
             
   <li>
+    <a class="" title="Http tests" href="../http-tests/">
+      Http tests
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
     <a class="" title="Installation" href="../installation/">
       Installation
     </a>
@@ -529,6 +529,15 @@
   <li>
     <a class="" title="Migrations" href="../migrations/">
       Migrations
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Mix" href="../mix/">
+      Mix
     </a>
     
   </li>
@@ -651,6 +660,12 @@
             <li class="anchor">
               <a title="Events" href="#events">
                 Events
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Testing" href="#testing">
+                Testing
               </a>
             </li>
           
@@ -893,6 +908,7 @@
 </li>
 <li><a href="#consuming-your-api-with-javascript">Consuming Your API With JavaScript</a></li>
 <li><a href="#events">Events</a></li>
+<li><a href="#testing">Testing</a></li>
 </ul>
 <p><a name="introduction"></a></p>
 <h2 id="introduction">Introduction</h2>
@@ -903,7 +919,7 @@
 <p><a name="installation"></a></p>
 <h2 id="installation">Installation</h2>
 <p>To get started, install Passport via the Composer package manager:</p>
-<div class="codehilite"><pre><span></span>composer require laravel/passport=~1.0
+<div class="codehilite"><pre><span></span>composer require laravel/passport
 </pre></div>
 
 
@@ -917,6 +933,9 @@
 </pre></div>
 
 
+<blockquote>
+<p>{note} If you are not going to use Passport's default migrations, you should call the <code>Passport::ignoreMigrations</code> method in the <code>register</code> method of your <code>AppServiceProvider</code>. You may export the default migrations using <code>php artisan vendor:publish --tag=passport-migrations</code>.</p>
+</blockquote>
 <p>Next, you should run the <code>passport:install</code> command. This command will create the encryption keys needed to generate secure access tokens. In addition, the command will create "personal access" and "password grant" clients which will be used to generate access tokens:</p>
 <div class="codehilite"><pre><span></span>php artisan passport:install
 </pre></div>
@@ -1017,7 +1036,7 @@ Vue.component(
 </pre></div>
 
 
-<p>After registering the components, make sure to run <code>gulp</code> to recompile your assets. Once you have recompiled your assets, you may drop the components into one of your application's templates to get started creating clients and personal access tokens:</p>
+<p>After registering the components, make sure to run <code>npm run dev</code> to recompile your assets. Once you have recompiled your assets, you may drop the components into one of your application's templates to get started creating clients and personal access tokens:</p>
 <div class="codehilite"><pre><span></span><span class="nt">&lt;passport-clients&gt;&lt;/passport-clients&gt;</span>
 <span class="nt">&lt;passport-authorized-clients&gt;&lt;/passport-authorized-clients&gt;</span>
 <span class="nt">&lt;passport-personal-access-tokens&gt;&lt;/passport-personal-access-tokens&gt;</span>
@@ -1063,13 +1082,13 @@ Vue.component(
 
 <h4 id="json-api">JSON API</h4>
 <p>Since your users will not be able to utilize the <code>client</code> command, Passport provides a JSON API that you may use to create clients. This saves you the trouble of having to manually code controllers for creating, updating, and deleting clients.</p>
-<p>However, you will need to pair Passport's JSON API with your own frontend to provide a dashboard for your users to manage their clients. Below, we'll review all of the API endpoints for managing clients. For convenience, we'll use <a href="https://vuejs.org">Vue</a> to demonstrate making HTTP requests to the endpoints.</p>
+<p>However, you will need to pair Passport's JSON API with your own frontend to provide a dashboard for your users to manage their clients. Below, we'll review all of the API endpoints for managing clients. For convenience, we'll use <a href="https://github.com/mzabriskie/axios">Axios</a> to demonstrate making HTTP requests to the endpoints.</p>
 <blockquote>
 <p>{tip} If you don't want to implement the entire client management frontend yourself, you can use the <a href="#frontend-quickstart">frontend quickstart</a> to have a fully functional frontend in a matter of minutes.</p>
 </blockquote>
 <h4 id="get-oauthclients"><code>GET /oauth/clients</code></h4>
 <p>This route returns all of the clients for the authenticated user. This is primarily useful for listing all of the user's clients so that they may edit or delete them:</p>
-<div class="codehilite"><pre><span></span>this.$http.get(&#39;/oauth/clients&#39;)
+<div class="codehilite"><pre><span></span>axios.get(&#39;/oauth/clients&#39;)
     .then(response =&gt; {
         console.log(response.data);
     });
@@ -1084,7 +1103,7 @@ Vue.component(
     redirect: &#39;http://example.com/callback&#39;
 };
 
-this.$http.post(&#39;/oauth/clients&#39;, data)
+axios.post(&#39;/oauth/clients&#39;, data)
     .then(response =&gt; {
         console.log(response.data);
     })
@@ -1101,7 +1120,7 @@ this.$http.post(&#39;/oauth/clients&#39;, data)
     redirect: &#39;http://example.com/callback&#39;
 };
 
-this.$http.put(&#39;/oauth/clients/&#39; + clientId, data)
+axios.put(&#39;/oauth/clients/&#39; + clientId, data)
     .then(response =&gt; {
         console.log(response.data);
     })
@@ -1113,7 +1132,7 @@ this.$http.put(&#39;/oauth/clients/&#39; + clientId, data)
 
 <h4 id="delete-oauthclientsclient-id"><code>DELETE /oauth/clients/{client-id}</code></h4>
 <p>This route is used to delete clients:</p>
-<div class="codehilite"><pre><span></span>this.$http.delete(&#39;/oauth/clients/&#39; + clientId)
+<div class="codehilite"><pre><span></span>axios.delete(&#39;/oauth/clients/&#39; + clientId)
     .then(response =&gt; {
         //
     });
@@ -1321,13 +1340,13 @@ echo json_decode((string) $response-&gt;getBody(), true);
 
 
 <h4 id="json-api_1">JSON API</h4>
-<p>Passport also includes a JSON API for managing personal access tokens. You may pair this with your own frontend to offer your users a dashboard for managing personal access tokens. Below, we'll review all of the API endpoints for managing personal access tokens. For convenience, we'll use <a href="https://vuejs.org">Vue</a> to demonstrate making HTTP requests to the endpoints.</p>
+<p>Passport also includes a JSON API for managing personal access tokens. You may pair this with your own frontend to offer your users a dashboard for managing personal access tokens. Below, we'll review all of the API endpoints for managing personal access tokens. For convenience, we'll use <a href="https://github.com/mzabriskie/axios">Axios</a> to demonstrate making HTTP requests to the endpoints.</p>
 <blockquote>
 <p>{tip} If you don't want to implement the personal access token frontend yourself, you can use the <a href="#frontend-quickstart">frontend quickstart</a> to have a fully functional frontend in a matter of minutes.</p>
 </blockquote>
 <h4 id="get-oauthscopes"><code>GET /oauth/scopes</code></h4>
 <p>This route returns all of the <a href="#token-scopes">scopes</a> defined for your application. You may use this route to list the scopes a user may assign to a personal access token:</p>
-<div class="codehilite"><pre><span></span>this.$http.get(&#39;/oauth/scopes&#39;)
+<div class="codehilite"><pre><span></span>axios.get(&#39;/oauth/scopes&#39;)
     .then(response =&gt; {
         console.log(response.data);
     });
@@ -1336,7 +1355,7 @@ echo json_decode((string) $response-&gt;getBody(), true);
 
 <h4 id="get-oauthpersonal-access-tokens"><code>GET /oauth/personal-access-tokens</code></h4>
 <p>This route returns all of the personal access tokens that the authenticated user has created. This is primarily useful for listing all of the user's token so that they may edit or delete them:</p>
-<div class="codehilite"><pre><span></span>this.$http.get(&#39;/oauth/personal-access-tokens&#39;)
+<div class="codehilite"><pre><span></span>axios.get(&#39;/oauth/personal-access-tokens&#39;)
     .then(response =&gt; {
         console.log(response.data);
     });
@@ -1350,7 +1369,7 @@ echo json_decode((string) $response-&gt;getBody(), true);
     scopes: []
 };
 
-this.$http.post(&#39;/oauth/personal-access-tokens&#39;, data)
+axios.post(&#39;/oauth/personal-access-tokens&#39;, data)
     .then(response =&gt; {
         console.log(response.data.accessToken);
     })
@@ -1362,7 +1381,7 @@ this.$http.post(&#39;/oauth/personal-access-tokens&#39;, data)
 
 <h4 id="delete-oauthpersonal-access-tokenstoken-id"><code>DELETE /oauth/personal-access-tokens/{token-id}</code></h4>
 <p>This route may be used to delete personal access tokens:</p>
-<div class="codehilite"><pre><span></span>this.$http.delete(&#39;/oauth/personal-access-tokens/&#39; + tokenId);
+<div class="codehilite"><pre><span></span>axios.delete(&#39;/oauth/personal-access-tokens/&#39; + tokenId);
 </pre></div>
 
 
@@ -1475,24 +1494,22 @@ Route::get(&#39;/orders&#39;, function (Request $request) {
 
 
 <p>This Passport middleware will attach a <code>laravel_token</code> cookie to your outgoing responses. This cookie contains an encrypted JWT that Passport will use to authenticate API requests from your JavaScript application. Now, you may make requests to your application's API without explicitly passing an access token:</p>
-<div class="codehilite"><pre><span></span>this.$http.get(&#39;/user&#39;)
+<div class="codehilite"><pre><span></span>axios.get(&#39;/user&#39;)
     .then(response =&gt; {
         console.log(response.data);
     });
 </pre></div>
 
 
-<p>When using this method of authentication, you will need to send the CSRF token with every request via the <code>X-CSRF-TOKEN</code> header. Laravel will automatically send this header if you are using the default <a href="https://vuejs.org">Vue</a> configuration that is included with the framework:</p>
-<div class="codehilite"><pre><span></span>Vue.http.interceptors.push((request, next) =&gt; {
-    request.headers.set(&#39;X-CSRF-TOKEN&#39;, Laravel.csrfToken);
-
-    next();
-});
+<p>When using this method of authentication, Axios will automatically send the <code>X-CSRF-TOKEN</code> header. In addition, the default Laravel JavaScript scaffolding instructs Axios to send the <code>X-Requested-With</code> header:</p>
+<div class="codehilite"><pre><span></span>window.axios.defaults.headers.common = {
+    &#39;X-Requested-With&#39;: &#39;XMLHttpRequest&#39;,
+};
 </pre></div>
 
 
 <blockquote>
-<p>{note} If you are using a different JavaScript framework, you should make sure it is configured to send this header with every outgoing request.</p>
+<p>{note} If you are using a different JavaScript framework, you should make sure it is configured to send the <code>X-CSRF-TOKEN</code> and <code>X-Requested-With</code> headers with every outgoing request.</p>
 </blockquote>
 <p><a name="events"></a></p>
 <h2 id="events">Events</h2>
@@ -1511,6 +1528,23 @@ Route::get(&#39;/orders&#39;, function (Request $request) {
 <span class="x">        &#39;App\Listeners\PruneOldTokens&#39;,</span>
 <span class="x">    ],</span>
 <span class="x">];</span>
+</pre></div>
+
+
+<p><a name="testing"></a></p>
+<h2 id="testing">Testing</h2>
+<p>Passport's <code>actingAs</code> method may be used to specify the currently authenticated user as well as its scopes. The first argument given to the <code>actingAs</code> method is the user instance and the second is an array of scopes that should be granted to the user's token:</p>
+<div class="codehilite"><pre><span></span>public function testServerCreation()
+{
+    Passport::actingAs(
+        factory(User::class)-&gt;create(),
+        [&#39;create-servers&#39;]
+    );
+
+    $response = $this-&gt;post(&#39;/api/create-server&#39;);
+
+    $response-&gt;assertStatus(200);
+}
 </pre></div>
           <aside class="copyright" role="note">
             

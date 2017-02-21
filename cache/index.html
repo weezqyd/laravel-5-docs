@@ -158,15 +158,6 @@
           
             
   <li>
-    <a class="" title="Application testing" href="../application-testing/">
-      Application testing
-    </a>
-    
-  </li>
-
-          
-            
-  <li>
     <a class="" title="Artisan" href="../artisan/">
       Artisan
     </a>
@@ -368,8 +359,8 @@
           
             
   <li>
-    <a class="" title="Elixir" href="../elixir/">
-      Elixir
+    <a class="" title="Dusk" href="../dusk/">
+      Dusk
     </a>
     
   </li>
@@ -512,6 +503,15 @@
           
             
   <li>
+    <a class="" title="Http tests" href="../http-tests/">
+      Http tests
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
     <a class="" title="Installation" href="../installation/">
       Installation
     </a>
@@ -568,6 +568,15 @@
   <li>
     <a class="" title="Migrations" href="../migrations/">
       Migrations
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Mix" href="../mix/">
+      Mix
     </a>
     
   </li>
@@ -878,7 +887,7 @@
 
 
 <h4 id="redis">Redis</h4>
-<p>Before using a Redis cache with Laravel, you will need to install the <code>predis/predis</code> package (~1.0) via Composer.</p>
+<p>Before using a Redis cache with Laravel, you will need to either install the <code>predis/predis</code> package (~1.0) via Composer or install the PhpRedis PHP extension via PECL.</p>
 <p>For more information on configuring Redis, consult its <a href="../docs/{{version}}/redis#configuration">Laravel documentation page</a>.</p>
 <p><a name="cache-usage"></a></p>
 <h2 id="cache-usage">Cache Usage</h2>
@@ -934,7 +943,7 @@
 
 
 <h4 id="checking-for-item-existence">Checking For Item Existence</h4>
-<p>The <code>has</code> method may be used to determine if an item exists in the cache. This method will return <code>false</code> if the value is <code>null</code>:</p>
+<p>The <code>has</code> method may be used to determine if an item exists in the cache. This method will return <code>false</code> if the value is <code>null</code> or <code>false</code>:</p>
 <div class="codehilite"><pre><span></span>if (Cache::has(&#39;key&#39;)) {
     //
 }

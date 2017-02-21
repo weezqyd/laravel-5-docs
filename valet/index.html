@@ -158,15 +158,6 @@
           
             
   <li>
-    <a class="" title="Application testing" href="../application-testing/">
-      Application testing
-    </a>
-    
-  </li>
-
-          
-            
-  <li>
     <a class="" title="Artisan" href="../artisan/">
       Artisan
     </a>
@@ -329,8 +320,8 @@
           
             
   <li>
-    <a class="" title="Elixir" href="../elixir/">
-      Elixir
+    <a class="" title="Dusk" href="../dusk/">
+      Dusk
     </a>
     
   </li>
@@ -473,6 +464,15 @@
           
             
   <li>
+    <a class="" title="Http tests" href="../http-tests/">
+      Http tests
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
     <a class="" title="Installation" href="../installation/">
       Installation
     </a>
@@ -529,6 +529,15 @@
   <li>
     <a class="" title="Migrations" href="../migrations/">
       Migrations
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Mix" href="../mix/">
+      Mix
     </a>
     
   </li>
@@ -858,7 +867,7 @@
 <p><a name="valet-or-homestead"></a></p>
 <h3 id="valet-or-homestead">Valet Or Homestead</h3>
 <p>As you may know, Laravel offers <a href="../docs/{{version}}/homestead">Homestead</a>, another local Laravel development environment. Homestead and Valet differ in regards to their intended audience and their approach to local development. Homestead offers an entire Ubuntu virtual machine with automated Nginx configuration. Homestead is a wonderful choice if you want a fully virtualized Linux development environment or are on Windows / Linux.</p>
-<p>Valet only supports Mac, and requires you to install PHP and a database server directly onto your local machine. This is easily achieved by using <a href="http://brew.sh/">Homebrew</a> with commands like <code>brew install php71</code> and <code>brew install mariadb</code>. Valet provides a blazing fast local development environment with minimal resource consumption, so it's great for developers who only require PHP / MySQL and do not need a fully virtualized development environment.</p>
+<p>Valet only supports Mac, and requires you to install PHP and a database server directly onto your local machine. This is easily achieved by using <a href="http://brew.sh/">Homebrew</a> with commands like <code>brew install php71</code> and <code>brew install mysql</code>. Valet provides a blazing fast local development environment with minimal resource consumption, so it's great for developers who only require PHP / MySQL and do not need a fully virtualized development environment.</p>
 <p>Both Valet and Homestead are great choices for configuring your Laravel development environment. Which one you choose will depend on your personal taste and your team's needs.</p>
 <p><a name="installation"></a></p>
 <h2 id="installation">Installation</h2>
@@ -876,7 +885,7 @@
 <p>By default, Valet serves your projects using the <code>.dev</code> TLD. If you'd like to use another domain, you can do so using the <code>valet domain tld-name</code> command.</p>
 <p>For example, if you'd like to use <code>.app</code> instead of <code>.dev</code>, run <code>valet domain app</code> and Valet will start serving your projects at <code>*.app</code> automatically.</p>
 <h4 id="database">Database</h4>
-<p>If you need a database, try MariaDB by running <code>brew install mariadb</code> on your command line. Once MariaDB has been installed, you may start it using the <code>brew services start mariadb</code> command. You can then connect to the database at <code>127.0.0.1</code> using the <code>root</code> username and an empty string for the password.</p>
+<p>If you need a database, try MySQL by running <code>brew install mysql</code> on your command line. Once MySQL has been installed, you may start it using the <code>brew services start mysql</code> command. You can then connect to the database at <code>127.0.0.1</code> using the <code>root</code> username and an empty string for the password.</p>
 <p><a name="upgrading"></a></p>
 <h3 id="upgrading">Upgrading</h3>
 <p>You may update your Valet installation using the <code>composer global update</code> command in your terminal. After upgrading, it is good practice to run the <code>valet install</code> command so Valet can make additional upgrades to your configuration files if necessary.</p>

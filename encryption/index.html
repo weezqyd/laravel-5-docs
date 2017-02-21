@@ -158,15 +158,6 @@
           
             
   <li>
-    <a class="" title="Application testing" href="../application-testing/">
-      Application testing
-    </a>
-    
-  </li>
-
-          
-            
-  <li>
     <a class="" title="Artisan" href="../artisan/">
       Artisan
     </a>
@@ -329,8 +320,8 @@
           
             
   <li>
-    <a class="" title="Elixir" href="../elixir/">
-      Elixir
+    <a class="" title="Dusk" href="../dusk/">
+      Dusk
     </a>
     
   </li>
@@ -500,6 +491,15 @@
           
             
   <li>
+    <a class="" title="Http tests" href="../http-tests/">
+      Http tests
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
     <a class="" title="Installation" href="../installation/">
       Installation
     </a>
@@ -556,6 +556,15 @@
   <li>
     <a class="" title="Migrations" href="../migrations/">
       Migrations
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Mix" href="../mix/">
+      Mix
     </a>
     
   </li>
@@ -841,9 +850,16 @@
 </pre></div>
 
 
-<blockquote>
-<p>{note} Encrypted values are passed through <code>serialize</code> during encryption, which allows for encryption of objects and arrays. Thus, non-PHP clients receiving encrypted values will need to <code>unserialize</code> the data.</p>
-</blockquote>
+<h4 id="encrypting-without-serialization">Encrypting Without Serialization</h4>
+<p>Encrypted values are passed through <code>serialize</code> during encryption, which allows for encryption of objects and arrays. Thus, non-PHP clients receiving encrypted values will need to <code>unserialize</code> the data. If you would like to encrypt and decrypt values without serialization, you may use the <code>encryptString</code> and <code>decryptString</code> methods of the <code>Crypt</code> facade:</p>
+<div class="codehilite"><pre><span></span><span class="nt">use</span> <span class="nt">Illuminate</span><span class="err">\</span><span class="nt">Support</span><span class="err">\</span><span class="nt">Facades</span><span class="err">\</span><span class="nt">Crypt</span><span class="o">;</span>
+
+<span class="o">$</span><span class="nt">encrypted</span> <span class="o">=</span> <span class="nt">Crypt</span><span class="p">::</span><span class="nd">encryptString</span><span class="o">(</span><span class="s1">&#39;Hello world.&#39;</span><span class="o">);</span>
+
+<span class="o">$</span><span class="nt">decrypted</span> <span class="o">=</span> <span class="nt">Crypt</span><span class="p">::</span><span class="nd">decryptString</span><span class="o">($</span><span class="nt">encrypted</span><span class="o">);</span>
+</pre></div>
+
+
 <h4 id="decrypting-a-value">Decrypting A Value</h4>
 <p>You may decrypt values using the <code>decrypt</code> helper. If the value can not be properly decrypted, such as when the MAC is invalid, an <code>Illuminate\Contracts\Encryption\DecryptException</code> will be thrown:</p>
 <div class="codehilite"><pre><span></span>use Illuminate\Contracts\Encryption\DecryptException;

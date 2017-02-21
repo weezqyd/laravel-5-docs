@@ -158,15 +158,6 @@
           
             
   <li>
-    <a class="" title="Application testing" href="../application-testing/">
-      Application testing
-    </a>
-    
-  </li>
-
-          
-            
-  <li>
     <a class="" title="Artisan" href="../artisan/">
       Artisan
     </a>
@@ -329,8 +320,8 @@
           
             
   <li>
-    <a class="" title="Elixir" href="../elixir/">
-      Elixir
+    <a class="" title="Dusk" href="../dusk/">
+      Dusk
     </a>
     
   </li>
@@ -473,6 +464,15 @@
           
             
   <li>
+    <a class="" title="Http tests" href="../http-tests/">
+      Http tests
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
     <a class="" title="Installation" href="../installation/">
       Installation
     </a>
@@ -536,6 +536,15 @@
           
             
   <li>
+    <a class="" title="Mix" href="../mix/">
+      Mix
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
     <a class="current" title="Mocking" href="./">
       Mocking
     </a>
@@ -553,26 +562,32 @@
             </li>
           
             <li class="anchor">
-              <a title="Events" href="#events">
-                Events
+              <a title="Bus Fake" href="#bus-fake">
+                Bus Fake
               </a>
             </li>
           
             <li class="anchor">
-              <a title="Jobs" href="#jobs">
-                Jobs
+              <a title="Event Fake" href="#event-fake">
+                Event Fake
               </a>
             </li>
           
             <li class="anchor">
-              <a title="Mail Fakes" href="#mail-fakes">
-                Mail Fakes
+              <a title="Mail Fake" href="#mail-fake">
+                Mail Fake
               </a>
             </li>
           
             <li class="anchor">
-              <a title="Notification Fakes" href="#notification-fakes">
-                Notification Fakes
+              <a title="Notification Fake" href="#notification-fake">
+                Notification Fake
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Queue Fake" href="#queue-fake">
+                Queue Fake
               </a>
             </li>
           
@@ -817,94 +832,64 @@
           <h1 id="mocking">Mocking</h1>
 <ul>
 <li><a href="#introduction">Introduction</a></li>
-<li><a href="#mocking-events">Events</a><ul>
-<li><a href="#using-event-mocks">Using Mocks</a></li>
-<li><a href="#using-event-fakes">Using Fakes</a></li>
-</ul>
-</li>
-<li><a href="#mocking-jobs">Jobs</a><ul>
-<li><a href="#using-job-mocks">Using Mocks</a></li>
-<li><a href="#using-job-fakes">Using Fakes</a></li>
-</ul>
-</li>
-<li><a href="#mail-fakes">Mail Fakes</a></li>
-<li><a href="#notification-fakes">Notification Fakes</a></li>
+<li><a href="#bus-fake">Bus Fake</a></li>
+<li><a href="#event-fake">Event Fake</a></li>
+<li><a href="#mail-fake">Mail Fake</a></li>
+<li><a href="#notification-fake">Notification Fake</a></li>
+<li><a href="#queue-fake">Queue Fake</a></li>
 <li><a href="#mocking-facades">Facades</a></li>
 </ul>
 <p><a name="introduction"></a></p>
 <h2 id="introduction">Introduction</h2>
-<p>When testing Laravel applications, you may wish to "mock" certain aspects of your application so they are not actually executed during a given test. For example, when testing a controller that fires an event, you may wish to mock the event listeners so they are not actually executed during the test. This allows you to only test the controller's HTTP response without worrying about the execution of the event listeners, since the event listeners can be tested in their own test case.</p>
+<p>When testing Laravel applications, you may wish to "mock" certain aspects of your application so they are not actually executed during a given test. For example, when testing a controller that dispatches an event, you may wish to mock the event listeners so they are not actually executed during the test. This allows you to only test the controller's HTTP response without worrying about the execution of the event listeners, since the event listeners can be tested in their own test case.</p>
 <p>Laravel provides helpers for mocking events, jobs, and facades out of the box. These helpers primarily provide a convenience layer over Mockery so you do not have to manually make complicated Mockery method calls. Of course, you are free to use <a href="http://docs.mockery.io/en/latest/">Mockery</a> or PHPUnit to create your own mocks or spies.</p>
-<p><a name="mocking-events"></a></p>
-<h2 id="events">Events</h2>
-<p><a name="using-event-mocks"></a></p>
-<h3 id="using-mocks">Using Mocks</h3>
-<p>If you are making heavy use of Laravel's event system, you may wish to silence or mock certain events while testing. For example, if you are testing user registration, you probably do not want all of a <code>UserRegistered</code> event's handlers firing, since the listeners may send "welcome" e-mails, etc.</p>
-<p>Laravel provides a convenient <code>expectsEvents</code> method which verifies the expected events are fired, but prevents any listeners for those events from executing:</p>
+<p><a name="bus-fake"></a></p>
+<h2 id="bus-fake">Bus Fake</h2>
+<p>As an alternative to mocking, you may use the <code>Bus</code> facade's <code>fake</code> method to prevent jobs from being dispatched. When using fakes, assertions are made after the code under test is executed:</p>
 <div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
-<span class="nx">use</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Events</span><span class="err">\</span><span class="nx">UserRegistered</span><span class="p">;</span>
+<span class="nx">namespace</span> <span class="nx">Tests</span><span class="err">\</span><span class="nx">Feature</span><span class="p">;</span>
+
+<span class="nx">use</span> <span class="nx">Tests</span><span class="err">\</span><span class="nx">TestCase</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Jobs</span><span class="err">\</span><span class="nx">ShipOrder</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Support</span><span class="err">\</span><span class="nx">Facades</span><span class="err">\</span><span class="nx">Bus</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Foundation</span><span class="err">\</span><span class="nx">Testing</span><span class="err">\</span><span class="nx">WithoutMiddleware</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Foundation</span><span class="err">\</span><span class="nx">Testing</span><span class="err">\</span><span class="nx">DatabaseMigrations</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Foundation</span><span class="err">\</span><span class="nx">Testing</span><span class="err">\</span><span class="nx">DatabaseTransactions</span><span class="p">;</span>
 
 <span class="kr">class</span> <span class="nx">ExampleTest</span> <span class="kr">extends</span> <span class="nx">TestCase</span>
 <span class="p">{</span>
-    <span class="cm">/**</span>
-<span class="cm">     * Test new user registration.</span>
-<span class="cm">     */</span>
-    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">testUserRegistration</span><span class="p">()</span>
-    <span class="p">{</span>
-        <span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">expectsEvents</span><span class="p">(</span><span class="nx">UserRegistered</span><span class="o">::</span><span class="kr">class</span><span class="p">);</span>
-
-        <span class="c1">// Test user registration...</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-
-
-<p>You may use the <code>doesntExpectEvents</code> method to verify that the given events are not fired:</p>
-<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
-
-<span class="nx">use</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Events</span><span class="err">\</span><span class="nx">OrderShipped</span><span class="p">;</span>
-<span class="nx">use</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Events</span><span class="err">\</span><span class="nx">OrderFailedToShip</span><span class="p">;</span>
-
-<span class="kr">class</span> <span class="nx">ExampleTest</span> <span class="kr">extends</span> <span class="nx">TestCase</span>
-<span class="p">{</span>
-    <span class="cm">/**</span>
-<span class="cm">     * Test order shipping.</span>
-<span class="cm">     */</span>
     <span class="kr">public</span> <span class="kd">function</span> <span class="nx">testOrderShipping</span><span class="p">()</span>
     <span class="p">{</span>
-        <span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">expectsEvents</span><span class="p">(</span><span class="nx">OrderShipped</span><span class="o">::</span><span class="kr">class</span><span class="p">);</span>
-        <span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">doesntExpectEvents</span><span class="p">(</span><span class="nx">OrderFailedToShip</span><span class="o">::</span><span class="kr">class</span><span class="p">);</span>
+        <span class="nx">Bus</span><span class="o">::</span><span class="nx">fake</span><span class="p">();</span>
 
-        <span class="c1">// Test order shipping...</span>
+        <span class="c1">// Perform order shipping...</span>
+
+        <span class="nx">Bus</span><span class="o">::</span><span class="nx">assertDispatched</span><span class="p">(</span><span class="nx">ShipOrder</span><span class="o">::</span><span class="kr">class</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">$job</span><span class="p">)</span> <span class="nx">use</span> <span class="p">(</span><span class="nx">$order</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nx">$job</span><span class="o">-&gt;</span><span class="nx">order</span><span class="o">-&gt;</span><span class="nx">id</span> <span class="o">===</span> <span class="nx">$order</span><span class="o">-&gt;</span><span class="nx">id</span><span class="p">;</span>
+        <span class="p">});</span>
+
+        <span class="c1">// Assert a job was not dispatched...</span>
+        <span class="nx">Bus</span><span class="o">::</span><span class="nx">assertNotDispatched</span><span class="p">(</span><span class="nx">AnotherJob</span><span class="o">::</span><span class="kr">class</span><span class="p">);</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 
 
-<p>If you would like to prevent all event listeners from running, you may use the <code>withoutEvents</code> method. When this method is called, all listeners for all events will be mocked:</p>
+<p><a name="event-fake"></a></p>
+<h2 id="event-fake">Event Fake</h2>
+<p>As an alternative to mocking, you may use the <code>Event</code> facade's <code>fake</code> method to prevent all event listeners from executing. You may then assert that events were dispatched and even inspect the data they received. When using fakes, assertions are made after the code under test is executed:</p>
 <div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
-<span class="kr">class</span> <span class="nx">ExampleTest</span> <span class="kr">extends</span> <span class="nx">TestCase</span>
-<span class="p">{</span>
-    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">testUserRegistration</span><span class="p">()</span>
-    <span class="p">{</span>
-        <span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">withoutEvents</span><span class="p">();</span>
+<span class="nx">namespace</span> <span class="nx">Tests</span><span class="err">\</span><span class="nx">Feature</span><span class="p">;</span>
 
-        <span class="c1">// Test user registration code...</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-
-
-<p><a name="using-event-fakes"></a></p>
-<h3 id="using-fakes">Using Fakes</h3>
-<p>As an alternative to mocking, you may use the <code>Event</code> facade's <code>fake</code> method to prevent all event listeners from executing. You may then assert that events were fired and even inspect the data they received. When using fakes, assertions are made after the code under test is executed:</p>
-<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
-
+<span class="nx">use</span> <span class="nx">Tests</span><span class="err">\</span><span class="nx">TestCase</span><span class="p">;</span>
 <span class="nx">use</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Events</span><span class="err">\</span><span class="nx">OrderShipped</span><span class="p">;</span>
 <span class="nx">use</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Events</span><span class="err">\</span><span class="nx">OrderFailedToShip</span><span class="p">;</span>
 <span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Support</span><span class="err">\</span><span class="nx">Facades</span><span class="err">\</span><span class="nx">Event</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Foundation</span><span class="err">\</span><span class="nx">Testing</span><span class="err">\</span><span class="nx">WithoutMiddleware</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Foundation</span><span class="err">\</span><span class="nx">Testing</span><span class="err">\</span><span class="nx">DatabaseMigrations</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Foundation</span><span class="err">\</span><span class="nx">Testing</span><span class="err">\</span><span class="nx">DatabaseTransactions</span><span class="p">;</span>
 
 <span class="kr">class</span> <span class="nx">ExampleTest</span> <span class="kr">extends</span> <span class="nx">TestCase</span>
 <span class="p">{</span>
@@ -917,118 +902,29 @@
 
         <span class="c1">// Perform order shipping...</span>
 
-        <span class="nx">Event</span><span class="o">::</span><span class="nx">assertFired</span><span class="p">(</span><span class="nx">OrderShipped</span><span class="o">::</span><span class="kr">class</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">$e</span><span class="p">)</span> <span class="nx">use</span> <span class="p">(</span><span class="nx">$order</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">Event</span><span class="o">::</span><span class="nx">assertDispatched</span><span class="p">(</span><span class="nx">OrderShipped</span><span class="o">::</span><span class="kr">class</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">$e</span><span class="p">)</span> <span class="nx">use</span> <span class="p">(</span><span class="nx">$order</span><span class="p">)</span> <span class="p">{</span>
             <span class="k">return</span> <span class="nx">$e</span><span class="o">-&gt;</span><span class="nx">order</span><span class="o">-&gt;</span><span class="nx">id</span> <span class="o">===</span> <span class="nx">$order</span><span class="o">-&gt;</span><span class="nx">id</span><span class="p">;</span>
         <span class="p">});</span>
 
-        <span class="nx">Event</span><span class="o">::</span><span class="nx">assertNotFired</span><span class="p">(</span><span class="nx">OrderFailedToShip</span><span class="o">::</span><span class="kr">class</span><span class="p">);</span>
+        <span class="nx">Event</span><span class="o">::</span><span class="nx">assertNotDispatched</span><span class="p">(</span><span class="nx">OrderFailedToShip</span><span class="o">::</span><span class="kr">class</span><span class="p">);</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 
 
-<p><a name="mocking-jobs"></a></p>
-<h2 id="jobs">Jobs</h2>
-<p><a name="using-job-mocks"></a></p>
-<h3 id="using-mocks_1">Using Mocks</h3>
-<p>Sometimes, you may wish to test that given jobs are dispatched when making requests to your application. This will allow you to test your routes and controllers in isolation without worrying about your job's logic. Of course, you should then test the job in a separate test case.</p>
-<p>Laravel provides the convenient <code>expectsJobs</code> method which will verify that the expected jobs are dispatched. However, the job itself will not be executed:</p>
-<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
-
-<span class="nx">use</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Jobs</span><span class="err">\</span><span class="nx">ShipOrder</span><span class="p">;</span>
-
-<span class="kr">class</span> <span class="nx">ExampleTest</span> <span class="kr">extends</span> <span class="nx">TestCase</span>
-<span class="p">{</span>
-    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">testOrderShipping</span><span class="p">()</span>
-    <span class="p">{</span>
-        <span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">expectsJobs</span><span class="p">(</span><span class="nx">ShipOrder</span><span class="o">::</span><span class="kr">class</span><span class="p">);</span>
-
-        <span class="c1">// Test order shipping...</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-
-
-<blockquote>
-<p>{note} This method only detects jobs that are dispatched via the <code>DispatchesJobs</code> trait's dispatch methods or the <code>dispatch</code> helper function. It does not detect queued jobs that are sent directly to <code>Queue::push</code>.</p>
-</blockquote>
-<p>Like the event mocking helpers, you may also test that a job is not dispatched using the <code>doesntExpectJobs</code> method:</p>
-<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
-
-<span class="nx">use</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Jobs</span><span class="err">\</span><span class="nx">ShipOrder</span><span class="p">;</span>
-
-<span class="kr">class</span> <span class="nx">ExampleTest</span> <span class="kr">extends</span> <span class="nx">TestCase</span>
-<span class="p">{</span>
-    <span class="cm">/**</span>
-<span class="cm">     * Test order cancellation.</span>
-<span class="cm">     */</span>
-    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">testOrderCancellation</span><span class="p">()</span>
-    <span class="p">{</span>
-        <span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">doesntExpectJobs</span><span class="p">(</span><span class="nx">ShipOrder</span><span class="o">::</span><span class="kr">class</span><span class="p">);</span>
-
-        <span class="c1">// Test order cancellation...</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-
-
-<p>Alternatively, you may ignore all dispatched jobs using the <code>withoutJobs</code> method. When this method is called within a test method, all jobs that are dispatched during that test will be discarded:</p>
-<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
-
-<span class="nx">use</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Jobs</span><span class="err">\</span><span class="nx">ShipOrder</span><span class="p">;</span>
-
-<span class="kr">class</span> <span class="nx">ExampleTest</span> <span class="kr">extends</span> <span class="nx">TestCase</span>
-<span class="p">{</span>
-    <span class="cm">/**</span>
-<span class="cm">     * Test order cancellation.</span>
-<span class="cm">     */</span>
-    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">testOrderCancellation</span><span class="p">()</span>
-    <span class="p">{</span>
-        <span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">withoutJobs</span><span class="p">();</span>
-
-        <span class="c1">// Test order cancellation...</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-
-
-<p><a name="using-job-fakes"></a></p>
-<h3 id="using-fakes_1">Using Fakes</h3>
-<p>As an alternative to mocking, you may use the <code>Queue</code> facade's <code>fake</code> method to prevent jobs from being queued. You may then assert that jobs were pushed to the queue and even inspect the data they received. When using fakes, assertions are made after the code under test is executed:</p>
-<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
-
-<span class="nx">use</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Jobs</span><span class="err">\</span><span class="nx">ShipOrder</span><span class="p">;</span>
-<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Support</span><span class="err">\</span><span class="nx">Facades</span><span class="err">\</span><span class="nx">Queue</span><span class="p">;</span>
-
-<span class="kr">class</span> <span class="nx">ExampleTest</span> <span class="kr">extends</span> <span class="nx">TestCase</span>
-<span class="p">{</span>
-    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">testOrderShipping</span><span class="p">()</span>
-    <span class="p">{</span>
-        <span class="nx">Queue</span><span class="o">::</span><span class="nx">fake</span><span class="p">();</span>
-
-        <span class="c1">// Perform order shipping...</span>
-
-        <span class="nx">Queue</span><span class="o">::</span><span class="nx">assertPushed</span><span class="p">(</span><span class="nx">ShipOrder</span><span class="o">::</span><span class="kr">class</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">$job</span><span class="p">)</span> <span class="nx">use</span> <span class="p">(</span><span class="nx">$order</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="nx">$job</span><span class="o">-&gt;</span><span class="nx">order</span><span class="o">-&gt;</span><span class="nx">id</span> <span class="o">===</span> <span class="nx">$order</span><span class="o">-&gt;</span><span class="nx">id</span><span class="p">;</span>
-        <span class="p">});</span>
-
-        <span class="c1">// Assert a job was pushed to a given queue...</span>
-        <span class="nx">Queue</span><span class="o">::</span><span class="nx">assertPushedOn</span><span class="p">(</span><span class="s1">&#39;queue-name&#39;</span><span class="p">,</span> <span class="nx">ShipOrder</span><span class="o">::</span><span class="kr">class</span><span class="p">);</span>
-
-        <span class="c1">// Assert a job was not pushed...</span>
-        <span class="nx">Queue</span><span class="o">::</span><span class="nx">assertNotPushed</span><span class="p">(</span><span class="nx">AnotherJob</span><span class="o">::</span><span class="kr">class</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-
-
-<p><a name="mail-fakes"></a></p>
-<h2 id="mail-fakes">Mail Fakes</h2>
+<p><a name="mail-fake"></a></p>
+<h2 id="mail-fake">Mail Fake</h2>
 <p>You may use the <code>Mail</code> facade's <code>fake</code> method to prevent mail from being sent. You may then assert that <a href="../docs/{{version}}/mail">mailables</a> were sent to users and even inspect the data they received. When using fakes, assertions are made after the code under test is executed:</p>
 <div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
+<span class="nx">namespace</span> <span class="nx">Tests</span><span class="err">\</span><span class="nx">Feature</span><span class="p">;</span>
+
+<span class="nx">use</span> <span class="nx">Tests</span><span class="err">\</span><span class="nx">TestCase</span><span class="p">;</span>
 <span class="nx">use</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Mail</span><span class="err">\</span><span class="nx">OrderShipped</span><span class="p">;</span>
 <span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Support</span><span class="err">\</span><span class="nx">Facades</span><span class="err">\</span><span class="nx">Mail</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Foundation</span><span class="err">\</span><span class="nx">Testing</span><span class="err">\</span><span class="nx">WithoutMiddleware</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Foundation</span><span class="err">\</span><span class="nx">Testing</span><span class="err">\</span><span class="nx">DatabaseMigrations</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Foundation</span><span class="err">\</span><span class="nx">Testing</span><span class="err">\</span><span class="nx">DatabaseTransactions</span><span class="p">;</span>
 
 <span class="kr">class</span> <span class="nx">ExampleTest</span> <span class="kr">extends</span> <span class="nx">TestCase</span>
 <span class="p">{</span>
@@ -1043,7 +939,11 @@
         <span class="p">});</span>
 
         <span class="c1">// Assert a message was sent to the given users...</span>
-        <span class="nx">Mail</span><span class="o">::</span><span class="nx">assertSentTo</span><span class="p">([</span><span class="nx">$user</span><span class="p">],</span> <span class="nx">OrderShipped</span><span class="o">::</span><span class="kr">class</span><span class="p">);</span>
+        <span class="nx">Mail</span><span class="o">::</span><span class="nx">assertSent</span><span class="p">(</span><span class="nx">OrderShipped</span><span class="o">::</span><span class="kr">class</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">$mail</span><span class="p">)</span> <span class="nx">use</span> <span class="p">(</span><span class="nx">$user</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nx">$mail</span><span class="o">-&gt;</span><span class="nx">hasTo</span><span class="p">(</span><span class="nx">$user</span><span class="o">-&gt;</span><span class="nx">email</span><span class="p">)</span> <span class="o">&amp;&amp;</span>
+                   <span class="nx">$mail</span><span class="o">-&gt;</span><span class="nx">hasCc</span><span class="p">(</span><span class="s1">&#39;...&#39;</span><span class="p">)</span> <span class="o">&amp;&amp;</span>
+                   <span class="nx">$mail</span><span class="o">-&gt;</span><span class="nx">hasBcc</span><span class="p">(</span><span class="s1">&#39;...&#39;</span><span class="p">);</span>
+        <span class="p">});</span>
 
         <span class="c1">// Assert a mailable was not sent...</span>
         <span class="nx">Mail</span><span class="o">::</span><span class="nx">assertNotSent</span><span class="p">(</span><span class="nx">AnotherMailable</span><span class="o">::</span><span class="kr">class</span><span class="p">);</span>
@@ -1052,13 +952,19 @@
 </pre></div>
 
 
-<p><a name="notification-fakes"></a></p>
-<h2 id="notification-fakes">Notification Fakes</h2>
+<p><a name="notification-fake"></a></p>
+<h2 id="notification-fake">Notification Fake</h2>
 <p>You may use the <code>Notification</code> facade's <code>fake</code> method to prevent notifications from being sent. You may then assert that <a href="../docs/{{version}}/notifications">notifications</a> were sent to users and even inspect the data they received. When using fakes, assertions are made after the code under test is executed:</p>
 <div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
+<span class="nx">namespace</span> <span class="nx">Tests</span><span class="err">\</span><span class="nx">Feature</span><span class="p">;</span>
+
+<span class="nx">use</span> <span class="nx">Tests</span><span class="err">\</span><span class="nx">TestCase</span><span class="p">;</span>
 <span class="nx">use</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Notifications</span><span class="err">\</span><span class="nx">OrderShipped</span><span class="p">;</span>
 <span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Support</span><span class="err">\</span><span class="nx">Facades</span><span class="err">\</span><span class="nx">Notification</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Foundation</span><span class="err">\</span><span class="nx">Testing</span><span class="err">\</span><span class="nx">WithoutMiddleware</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Foundation</span><span class="err">\</span><span class="nx">Testing</span><span class="err">\</span><span class="nx">DatabaseMigrations</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Foundation</span><span class="err">\</span><span class="nx">Testing</span><span class="err">\</span><span class="nx">DatabaseTransactions</span><span class="p">;</span>
 
 <span class="kr">class</span> <span class="nx">ExampleTest</span> <span class="kr">extends</span> <span class="nx">TestCase</span>
 <span class="p">{</span>
@@ -1085,6 +991,42 @@
         <span class="nx">Notification</span><span class="o">::</span><span class="nx">assertNotSentTo</span><span class="p">(</span>
             <span class="p">[</span><span class="nx">$user</span><span class="p">],</span> <span class="nx">AnotherNotification</span><span class="o">::</span><span class="kr">class</span>
         <span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p><a name="queue-fake"></a></p>
+<h2 id="queue-fake">Queue Fake</h2>
+<p>As an alternative to mocking, you may use the <code>Queue</code> facade's <code>fake</code> method to prevent jobs from being queued. You may then assert that jobs were pushed to the queue and even inspect the data they received. When using fakes, assertions are made after the code under test is executed:</p>
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+
+<span class="nx">namespace</span> <span class="nx">Tests</span><span class="err">\</span><span class="nx">Feature</span><span class="p">;</span>
+
+<span class="nx">use</span> <span class="nx">Tests</span><span class="err">\</span><span class="nx">TestCase</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Jobs</span><span class="err">\</span><span class="nx">ShipOrder</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Support</span><span class="err">\</span><span class="nx">Facades</span><span class="err">\</span><span class="nx">Queue</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Foundation</span><span class="err">\</span><span class="nx">Testing</span><span class="err">\</span><span class="nx">WithoutMiddleware</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Foundation</span><span class="err">\</span><span class="nx">Testing</span><span class="err">\</span><span class="nx">DatabaseMigrations</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Foundation</span><span class="err">\</span><span class="nx">Testing</span><span class="err">\</span><span class="nx">DatabaseTransactions</span><span class="p">;</span>
+
+<span class="kr">class</span> <span class="nx">ExampleTest</span> <span class="kr">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">testOrderShipping</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nx">Queue</span><span class="o">::</span><span class="nx">fake</span><span class="p">();</span>
+
+        <span class="c1">// Perform order shipping...</span>
+
+        <span class="nx">Queue</span><span class="o">::</span><span class="nx">assertPushed</span><span class="p">(</span><span class="nx">ShipOrder</span><span class="o">::</span><span class="kr">class</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">$job</span><span class="p">)</span> <span class="nx">use</span> <span class="p">(</span><span class="nx">$order</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nx">$job</span><span class="o">-&gt;</span><span class="nx">order</span><span class="o">-&gt;</span><span class="nx">id</span> <span class="o">===</span> <span class="nx">$order</span><span class="o">-&gt;</span><span class="nx">id</span><span class="p">;</span>
+        <span class="p">});</span>
+
+        <span class="c1">// Assert a job was pushed to a given queue...</span>
+        <span class="nx">Queue</span><span class="o">::</span><span class="nx">assertPushedOn</span><span class="p">(</span><span class="s1">&#39;queue-name&#39;</span><span class="p">,</span> <span class="nx">ShipOrder</span><span class="o">::</span><span class="kr">class</span><span class="p">);</span>
+
+        <span class="c1">// Assert a job was not pushed...</span>
+        <span class="nx">Queue</span><span class="o">::</span><span class="nx">assertNotPushed</span><span class="p">(</span><span class="nx">AnotherJob</span><span class="o">::</span><span class="kr">class</span><span class="p">);</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -1119,7 +1061,15 @@
 <p>We can mock the call to the <code>Cache</code> facade by using the <code>shouldReceive</code> method, which will return an instance of a <a href="https://github.com/padraic/mockery">Mockery</a> mock. Since facades are actually resolved and managed by the Laravel <a href="../docs/{{version}}/container">service container</a>, they have much more testability than a typical static class. For example, let's mock our call to the <code>Cache</code> facade's <code>get</code> method:</p>
 <div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
-<span class="kr">class</span> <span class="nx">FooTest</span> <span class="kr">extends</span> <span class="nx">TestCase</span>
+<span class="nx">namespace</span> <span class="nx">Tests</span><span class="err">\</span><span class="nx">Feature</span><span class="p">;</span>
+
+<span class="nx">use</span> <span class="nx">Tests</span><span class="err">\</span><span class="nx">TestCase</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Support</span><span class="err">\</span><span class="nx">Facades</span><span class="err">\</span><span class="nx">Cache</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Foundation</span><span class="err">\</span><span class="nx">Testing</span><span class="err">\</span><span class="nx">WithoutMiddleware</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Foundation</span><span class="err">\</span><span class="nx">Testing</span><span class="err">\</span><span class="nx">DatabaseMigrations</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Foundation</span><span class="err">\</span><span class="nx">Testing</span><span class="err">\</span><span class="nx">DatabaseTransactions</span><span class="p">;</span>
+
+<span class="kr">class</span> <span class="nx">UserControllerTest</span> <span class="kr">extends</span> <span class="nx">TestCase</span>
 <span class="p">{</span>
     <span class="kr">public</span> <span class="kd">function</span> <span class="nx">testGetIndex</span><span class="p">()</span>
     <span class="p">{</span>
@@ -1128,14 +1078,16 @@
                     <span class="o">-&gt;</span><span class="kd">with</span><span class="p">(</span><span class="s1">&#39;key&#39;</span><span class="p">)</span>
                     <span class="o">-&gt;</span><span class="nx">andReturn</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">);</span>
 
-        <span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">visit</span><span class="p">(</span><span class="s1">&#39;/users&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="nx">see</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">);</span>
+        <span class="nx">$response</span> <span class="o">=</span> <span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/users&#39;</span><span class="p">);</span>
+
+        <span class="c1">// ...</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 
 
 <blockquote>
-<p>{note} You should not mock the <code>Request</code> facade. Instead, pass the input you desire into the HTTP helper methods such as <code>call</code> and <code>post</code> when running your test. Likewise, instead of mocking the <code>Config</code> facade, simply call the <code>Config::set</code> method in your tests.</p>
+<p>{note} You should not mock the <code>Request</code> facade. Instead, pass the input you desire into the HTTP helper methods such as <code>get</code> and <code>post</code> when running your test. Likewise, instead of mocking the <code>Config</code> facade, simply call the <code>Config::set</code> method in your tests.</p>
 </blockquote>
           <aside class="copyright" role="note">
             
@@ -1153,7 +1105,7 @@
   <nav class="pagination" aria-label="Footer">
     <div class="previous">
       
-        <a href="../migrations/" title="Migrations">
+        <a href="../mix/" title="Mix">
           <span class="direction">
             Previous
           </span>
@@ -1163,7 +1115,7 @@
             </div>
             <div class="stretch">
               <div class="title">
-                Migrations
+                Mix
               </div>
             </div>
           </div>

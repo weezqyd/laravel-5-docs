@@ -158,15 +158,6 @@
           
             
   <li>
-    <a class="" title="Application testing" href="../application-testing/">
-      Application testing
-    </a>
-    
-  </li>
-
-          
-            
-  <li>
     <a class="" title="Artisan" href="../artisan/">
       Artisan
     </a>
@@ -329,8 +320,8 @@
           
             
   <li>
-    <a class="" title="Elixir" href="../elixir/">
-      Elixir
+    <a class="" title="Dusk" href="../dusk/">
+      Dusk
     </a>
     
   </li>
@@ -473,6 +464,15 @@
           
             
   <li>
+    <a class="" title="Http tests" href="../http-tests/">
+      Http tests
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
     <a class="" title="Installation" href="../installation/">
       Installation
     </a>
@@ -529,6 +529,15 @@
   <li>
     <a class="" title="Migrations" href="../migrations/">
       Migrations
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Mix" href="../mix/">
+      Mix
     </a>
     
   </li>
@@ -831,6 +840,7 @@
 <li><a href="#resources">Resources</a><ul>
 <li><a href="#configuration">Configuration</a></li>
 <li><a href="#migrations">Migrations</a></li>
+<li><a href="#routes">Routes</a></li>
 <li><a href="#translations">Translations</a></li>
 <li><a href="#views">Views</a></li>
 </ul>
@@ -912,6 +922,21 @@ public<span class="w"> </span>function<span class="w"> </span>register<span clas
 <blockquote>
 <p>{note} This method only merges the first level of the configuration array. If your users partially define a multi-dimensional configuration array, the missing options will not be merged.</p>
 </blockquote>
+<p><a name="routes"></a></p>
+<h3 id="routes">Routes</h3>
+<p>If your package contains routes, you may load them using the <code>loadRoutesFrom</code> method. This method will automatically determine if the application's routes are cached and will not load your routes file if the routes have already been cached:</p>
+<div class="codehilite"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * Perform post-registration booting of services.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return void</span>
+<span class="cm"> */</span><span class="w"></span>
+public<span class="w"> </span>function<span class="w"> </span>boot<span class="o">()</span><span class="w"></span>
+<span class="err">{</span><span class="w"></span>
+<span class="w">    </span><span class="err">$</span>this<span class="o">-&gt;</span>loadRoutesFrom<span class="o">(</span>__DIR__<span class="o">.</span><span class="s">&#39;/routes.php&#39;</span><span class="o">)</span><span class="err">;</span><span class="w"></span>
+<span class="err">}</span><span class="w"></span>
+</pre></div>
+
+
 <p><a name="migrations"></a></p>
 <h3 id="migrations">Migrations</h3>
 <p>If your package contains <a href="../docs/{{version}}/migrations">database migrations</a>, you may use the <code>loadMigrationsFrom</code> method to inform Laravel how to load them. The <code>loadMigrationsFrom</code> method accepts the path to your package's migrations as its only argument:</p>

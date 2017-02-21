@@ -158,15 +158,6 @@
           
             
   <li>
-    <a class="" title="Application testing" href="../application-testing/">
-      Application testing
-    </a>
-    
-  </li>
-
-          
-            
-  <li>
     <a class="" title="Artisan" href="../artisan/">
       Artisan
     </a>
@@ -329,8 +320,8 @@
           
             
   <li>
-    <a class="" title="Elixir" href="../elixir/">
-      Elixir
+    <a class="" title="Dusk" href="../dusk/">
+      Dusk
     </a>
     
   </li>
@@ -473,6 +464,15 @@
           
             
   <li>
+    <a class="" title="Http tests" href="../http-tests/">
+      Http tests
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
     <a class="" title="Installation" href="../installation/">
       Installation
     </a>
@@ -529,6 +529,15 @@
   <li>
     <a class="" title="Migrations" href="../migrations/">
       Migrations
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Mix" href="../mix/">
+      Mix
     </a>
     
   </li>
@@ -813,7 +822,7 @@
 <p><a name="introduction"></a></p>
 <h2 id="introduction">Introduction</h2>
 <p><a href="http://redis.io">Redis</a> is an open source, advanced key-value store. It is often referred to as a data structure server since keys can contain <a href="http://redis.io/topics/data-types#strings">strings</a>, <a href="http://redis.io/topics/data-types#hashes">hashes</a>, <a href="http://redis.io/topics/data-types#lists">lists</a>, <a href="http://redis.io/topics/data-types#sets">sets</a>, and <a href="http://redis.io/topics/data-types#sorted-sets">sorted sets</a>.</p>
-<p>Before using Redis with Laravel, you will either need to install the <code>predis/predis</code> package via Composer:</p>
+<p>Before using Redis with Laravel, you will need to install the <code>predis/predis</code> package via Composer:</p>
 <div class="codehilite"><pre><span></span>composer require predis/predis
 </pre></div>
 
@@ -825,8 +834,6 @@
 <div class="codehilite"><pre><span></span>&#39;redis&#39; =&gt; [
 
     &#39;client&#39; =&gt; &#39;predis&#39;,
-
-    &#39;cluster&#39; =&gt; false,
 
     &#39;default&#39; =&gt; [
         &#39;host&#39; =&gt; env(&#39;REDIS_HOST&#39;, &#39;localhost&#39;),
@@ -840,7 +847,44 @@
 
 
 <p>The default server configuration should suffice for development. However, you are free to modify this array based on your environment. Each Redis server defined in your configuration file is required to have a name, host, and port.</p>
-<p>The <code>cluster</code> option will instruct the Laravel Redis client to perform client-side sharding across your Redis nodes, allowing you to pool nodes and create a large amount of available RAM. However, note that client-side sharding does not handle failover; therefore, is primarily suited for cached data that is available from another primary data store.</p>
+<h4 id="configuring-clusters">Configuring Clusters</h4>
+<p>If your application is utilizing a cluster of Redis servers, you should define these clusters within a <code>clusters</code> key of your Redis configuration:</p>
+<div class="codehilite"><pre><span></span>&#39;redis&#39; =&gt; [
+
+    &#39;client&#39; =&gt; &#39;predis&#39;,
+
+    &#39;clusters&#39; =&gt; [
+        &#39;default&#39; =&gt; [
+            [
+                &#39;host&#39; =&gt; env(&#39;REDIS_HOST&#39;, &#39;localhost&#39;),
+                &#39;password&#39; =&gt; env(&#39;REDIS_PASSWORD&#39;, null),
+                &#39;port&#39; =&gt; env(&#39;REDIS_PORT&#39;, 6379),
+                &#39;database&#39; =&gt; 0,
+            ],
+        ],
+    ],
+
+],
+</pre></div>
+
+
+<p>By default, clusters will perform client-side sharding across your nodes, allowing you to pool nodes and create a large amount of available RAM. However, note that client-side sharding does not handle failover; therefore, is primarily suited for cached data that is available from another primary data store. If you would like to use native Redis clustering, you should specify this in the <code>options</code> key of your Redis configuration:</p>
+<div class="codehilite"><pre><span></span>&#39;redis&#39; =&gt; [
+
+    &#39;client&#39; =&gt; &#39;predis&#39;,
+
+    &#39;options&#39; =&gt; [
+        &#39;cluster&#39; =&gt; &#39;redis&#39;,
+    ],
+
+    &#39;clusters&#39; =&gt; [
+        // ...
+    ],
+
+],
+</pre></div>
+
+
 <p><a name="predis"></a></p>
 <h3 id="predis">Predis</h3>
 <p>In addition to the default <code>host</code>, <code>port</code>, <code>database</code>, and <code>password</code> server configuration options, Predis supports additional <a href="https://github.com/nrk/predis/wiki/Connection-Parameters">connection parameters</a> that may be defined for each of your Redis servers. To utilize these additional configuration options, simply add them to your Redis server configuration in the <code>config/database.php</code> configuration file:</p>
@@ -926,8 +970,8 @@
 </pre></div>
 
 
-<p>This will give you an instance of the default Redis server. If you are not using server clustering, you may pass the server name to the <code>connection</code> method to get a specific server as defined in your Redis configuration:</p>
-<div class="codehilite"><pre><span></span><span class="o">$</span><span class="nt">redis</span> <span class="o">=</span> <span class="nt">Redis</span><span class="p">::</span><span class="nd">connection</span><span class="o">(</span><span class="s1">&#39;other&#39;</span><span class="o">);</span>
+<p>This will give you an instance of the default Redis server. You may also pass the connection or cluster name to the <code>connection</code> method to get a specific server or cluster as defined in your Redis configuration:</p>
+<div class="codehilite"><pre><span></span><span class="o">$</span><span class="nt">redis</span> <span class="o">=</span> <span class="nt">Redis</span><span class="p">::</span><span class="nd">connection</span><span class="o">(</span><span class="s1">&#39;my-connection&#39;</span><span class="o">);</span>
 </pre></div>
 
 

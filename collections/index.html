@@ -158,15 +158,6 @@
           
             
   <li>
-    <a class="" title="Application testing" href="../application-testing/">
-      Application testing
-    </a>
-    
-  </li>
-
-          
-            
-  <li>
     <a class="" title="Artisan" href="../artisan/">
       Artisan
     </a>
@@ -255,6 +246,12 @@
             <li class="anchor">
               <a title="Method Listing" href="#method-listing">
                 Method Listing
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Higher Order Messages" href="#higher-order-messages">
+                Higher Order Messages
               </a>
             </li>
           
@@ -356,8 +353,8 @@
           
             
   <li>
-    <a class="" title="Elixir" href="../elixir/">
-      Elixir
+    <a class="" title="Dusk" href="../dusk/">
+      Dusk
     </a>
     
   </li>
@@ -500,6 +497,15 @@
           
             
   <li>
+    <a class="" title="Http tests" href="../http-tests/">
+      Http tests
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
     <a class="" title="Installation" href="../installation/">
       Installation
     </a>
@@ -556,6 +562,15 @@
   <li>
     <a class="" title="Migrations" href="../migrations/">
       Migrations
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Mix" href="../mix/">
+      Mix
     </a>
     
   </li>
@@ -803,6 +818,7 @@
 </ul>
 </li>
 <li><a href="#available-methods">Available Methods</a></li>
+<li><a href="#higher-order-messages">Higher Order Messages</a></li>
 </ul>
 <p><a name="introduction"></a></p>
 <h2 id="introduction">Introduction</h2>
@@ -876,7 +892,9 @@
 [max](#method-max)
 [merge](#method-merge)
 [min](#method-min)
+[nth](#method-nth)
 [only](#method-only)
+[partition](#method-partition)
 [pipe](#method-pipe)
 [pluck](#method-pluck)
 [pop](#method-pop)
@@ -905,6 +923,7 @@
 [union](#method-union)
 [unique](#method-unique)
 [values](#method-values)
+[when](#method-when)
 [where](#method-where)
 [whereStrict](#method-wherestrict)
 [whereIn](#method-wherein)
@@ -1111,19 +1130,12 @@ $diff-&gt;all();
 
 <p><a name="method-every"></a></p>
 <h4 id="every-collection-method"><code>every()</code> {#collection-method}</h4>
-<p>The <code>every</code> method creates a new collection consisting of every n-th element:</p>
-<div class="codehilite"><pre><span></span>$collection = collect([&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;, &#39;f&#39;]);
+<p>The <code>every</code> method may be used to verify that all elements of a collection pass a given truth test:</p>
+<div class="codehilite"><pre><span></span>collect([1, 2, 3, 4])-&gt;every(function ($value, $key) {
+    return $value &gt; 2;
+});
 
-$collection-&gt;every(4);
-
-// [&#39;a&#39;, &#39;e&#39;]
-</pre></div>
-
-
-<p>You may optionally pass an offset as the second argument:</p>
-<div class="codehilite"><pre><span></span>$collection-&gt;every(4, 1);
-
-// [&#39;b&#39;, &#39;f&#39;]
+// false
 </pre></div>
 
 
@@ -1548,7 +1560,7 @@ $max = collect([1, 2, 3, 4, 5])-&gt;max();
 
 <p><a name="method-merge"></a></p>
 <h4 id="merge-collection-method"><code>merge()</code> {#collection-method}</h4>
-<p>The <code>merge</code> method merges the given array into the original collection. If a string key in the given array matches a string key in the original collection, the given array's value will overwrite the value in the original collection:</p>
+<p>The <code>merge</code> method merges the given array with the original collection. If a string key in the given array matches a string key in the original collection, the given array's value will overwrite the value in the original collection:</p>
 <div class="codehilite"><pre><span></span>$collection = collect([&#39;product_id&#39; =&gt; 1, &#39;price&#39; =&gt; 100]);
 
 $merged = $collection-&gt;merge([&#39;price&#39; =&gt; 200, &#39;discount&#39; =&gt; false]);
@@ -1583,6 +1595,24 @@ $min = collect([1, 2, 3, 4, 5])-&gt;min();
 </pre></div>
 
 
+<p><a name="method-nth"></a></p>
+<h4 id="nth-collection-method"><code>nth()</code> {#collection-method}</h4>
+<p>The <code>nth</code> method creates a new collection consisting of every n-th element:</p>
+<div class="codehilite"><pre><span></span>$collection = collect([&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;, &#39;f&#39;]);
+
+$collection-&gt;nth(4);
+
+// [&#39;a&#39;, &#39;e&#39;]
+</pre></div>
+
+
+<p>You may optionally pass an offset as the second argument:</p>
+<div class="codehilite"><pre><span></span>$collection-&gt;nth(4, 1);
+
+// [&#39;b&#39;, &#39;f&#39;]
+</pre></div>
+
+
 <p><a name="method-only"></a></p>
 <h4 id="only-collection-method"><code>only()</code> {#collection-method}</h4>
 <p>The <code>only</code> method returns the items in the collection with the specified keys:</p>
@@ -1597,6 +1627,17 @@ $filtered-&gt;all();
 
 
 <p>For the inverse of <code>only</code>, see the <a href="#method-except">except</a> method.</p>
+<p><a name="method-partition"></a></p>
+<h4 id="partition-collection-method"><code>partition()</code> {#collection-method}</h4>
+<p>The <code>partition</code> method may be combined with the <code>list</code> PHP function to separate elements that pass a given truth test from those that do not:</p>
+<div class="codehilite"><pre><span></span>$collection = collect([1, 2, 3, 4, 5, 6]);
+
+list($underThree, $aboveThree) = $collection-&gt;partition(function ($i) {
+    return $i &lt; 3;
+});
+</pre></div>
+
+
 <p><a name="method-pipe"></a></p>
 <h4 id="pipe-collection-method"><code>pipe()</code> {#collection-method}</h4>
 <p>The <code>pipe</code> method passes the collection to the given callback and returns the result:</p>
@@ -1664,13 +1705,13 @@ $collection-&gt;all();
 
 
 <p>You may also pass a second argument to set the key of the prepended item:</p>
-<div class="codehilite"><pre><span></span>$collection = collect([&#39;one&#39; =&gt; 1, &#39;two&#39;, =&gt; 2]);
+<div class="codehilite"><pre><span></span>$collection = collect([&#39;one&#39; =&gt; 1, &#39;two&#39; =&gt; 2]);
 
 $collection-&gt;prepend(0, &#39;zero&#39;);
 
 $collection-&gt;all();
 
-// [&#39;zero&#39; =&gt; 0, &#39;one&#39; =&gt; 1, &#39;two&#39;, =&gt; 2]
+// [&#39;zero&#39; =&gt; 0, &#39;one&#39; =&gt; 1, &#39;two&#39; =&gt; 2]
 </pre></div>
 
 
@@ -1726,7 +1767,7 @@ $collection-&gt;random();
 </pre></div>
 
 
-<p>You may optionally pass an integer to <code>random</code> to specify how many items you would like to randomly retrieve. If that integer is more than <code>1</code>, a collection of items is returned:</p>
+<p>You may optionally pass an integer to <code>random</code> to specify how many items you would like to randomly retrieve. A collection of items is always returned when explicitly passing the number of items you wish to receive:</p>
 <div class="codehilite"><pre><span></span>$random = $collection-&gt;random(3);
 
 $random-&gt;all();
@@ -2106,7 +2147,7 @@ $union = $collection-&gt;union([3 =&gt; [&#39;c&#39;], 1 =&gt; [&#39;b&#39;]]);
 
 $union-&gt;all();
 
-// [1 =&gt; [&#39;a&#39;], 2 =&gt; [&#39;b&#39;], [3 =&gt; [&#39;c&#39;]]
+// [1 =&gt; [&#39;a&#39;], 2 =&gt; [&#39;b&#39;], 3 =&gt; [&#39;c&#39;]]
 </pre></div>
 
 
@@ -2184,6 +2225,21 @@ $values-&gt;all();
 </pre></div>
 
 
+<p><a name="method-when"></a></p>
+<h4 id="when-collection-method"><code>when()</code> {#collection-method}</h4>
+<p>The <code>when</code> method will execute the given callback when the first argument given to the method evaluates to <code>true</code>:</p>
+<div class="codehilite"><pre><span></span>$collection = collect([1, 2, 3]);
+
+$collection-&gt;when(true, function ($collection) {
+    return $collection-&gt;push(4);
+});
+
+$collection-&gt;all();
+
+// [1, 2, 3, 4]
+</pre></div>
+
+
 <p><a name="method-where"></a></p>
 <h4 id="where-collection-method"><code>where()</code> {#collection-method}</h4>
 <p>The <code>where</code> method filters the collection by a given key / value pair:</p>
@@ -2248,6 +2304,23 @@ $zipped = $collection-&gt;zip([100, 200]);
 $zipped-&gt;all();
 
 // [[&#39;Chair&#39;, 100], [&#39;Desk&#39;, 200]]
+</pre></div>
+
+
+<p><a name="higher-order-messages"></a></p>
+<h2 id="higher-order-messages">Higher Order Messages</h2>
+<p>Collections also provide support for "higher order messages", which are short-cuts for performing common actions on collections. The collection methods that provide higher order messages are: <code>contains</code>, <code>each</code>, <code>every</code>, <code>filter</code>, <code>first</code>, <code>map</code>, <code>partition</code>, <code>reject</code>, <code>sortBy</code>, <code>sortByDesc</code>, and <code>sum</code>.</p>
+<p>Each higher order message can be accessed as a dynamic property on a collection instance. For instance, let's use the <code>each</code> higher order message to call a method on each object within a collection:</p>
+<div class="codehilite"><pre><span></span><span class="o">$</span><span class="nt">users</span> <span class="o">=</span> <span class="nt">User</span><span class="p">::</span><span class="nd">where</span><span class="o">(</span><span class="s1">&#39;votes&#39;</span><span class="o">,</span> <span class="s1">&#39;&gt;&#39;</span><span class="o">,</span> <span class="nt">500</span><span class="o">)</span><span class="nt">-</span><span class="o">&gt;</span><span class="nt">get</span><span class="o">();</span>
+
+<span class="o">$</span><span class="nt">users-</span><span class="o">&gt;</span><span class="nt">each-</span><span class="o">&gt;</span><span class="nt">markAsVip</span><span class="o">();</span>
+</pre></div>
+
+
+<p>Likewise, we can use the <code>sum</code> higher order message to gather the total number of "votes" for a collection of users:</p>
+<div class="codehilite"><pre><span></span><span class="o">$</span><span class="nt">users</span> <span class="o">=</span> <span class="nt">User</span><span class="p">::</span><span class="nd">where</span><span class="o">(</span><span class="s1">&#39;group&#39;</span><span class="o">,</span> <span class="s1">&#39;Development&#39;</span><span class="o">)</span><span class="nt">-</span><span class="o">&gt;</span><span class="nt">get</span><span class="o">();</span>
+
+<span class="nt">return</span> <span class="o">$</span><span class="nt">users-</span><span class="o">&gt;</span><span class="nt">sum-</span><span class="o">&gt;</span><span class="nt">votes</span><span class="o">;</span>
 </pre></div>
           <aside class="copyright" role="note">
             

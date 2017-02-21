@@ -158,15 +158,6 @@
           
             
   <li>
-    <a class="" title="Application testing" href="../application-testing/">
-      Application testing
-    </a>
-    
-  </li>
-
-          
-            
-  <li>
     <a class="" title="Artisan" href="../artisan/">
       Artisan
     </a>
@@ -329,8 +320,8 @@
           
             
   <li>
-    <a class="" title="Elixir" href="../elixir/">
-      Elixir
+    <a class="" title="Dusk" href="../dusk/">
+      Dusk
     </a>
     
   </li>
@@ -473,6 +464,15 @@
           
             
   <li>
+    <a class="" title="Http tests" href="../http-tests/">
+      Http tests
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
     <a class="" title="Installation" href="../installation/">
       Installation
     </a>
@@ -536,6 +536,15 @@
           
             
   <li>
+    <a class="" title="Mix" href="../mix/">
+      Mix
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
     <a class="" title="Mocking" href="../mocking/">
       Mocking
     </a>
@@ -576,6 +585,12 @@
             <li class="anchor">
               <a title="Mail Notifications" href="#mail-notifications">
                 Mail Notifications
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Markdown Mail Notifications" href="#markdown-mail-notifications">
+                Markdown Mail Notifications
               </a>
             </li>
           
@@ -854,7 +869,12 @@
 <li><a href="#customizing-the-recipient">Customizing The Recipient</a></li>
 <li><a href="#customizing-the-subject">Customizing The Subject</a></li>
 <li><a href="#customizing-the-templates">Customizing The Templates</a></li>
-<li><a href="#error-messages">Error Messages</a></li>
+</ul>
+</li>
+<li><a href="#markdown-mail-notifications">Markdown Mail Notifications</a><ul>
+<li><a href="#generating-the-message">Generating The Message</a></li>
+<li><a href="#writing-the-message">Writing The Message</a></li>
+<li><a href="#customizing-the-components">Customizing The Components</a></li>
 </ul>
 </li>
 <li><a href="#database-notifications">Database Notifications</a><ul>
@@ -880,6 +900,7 @@
 <li><a href="#slack-notifications">Slack Notifications</a><ul>
 <li><a href="#slack-prerequisites">Prerequisites</a></li>
 <li><a href="#formatting-slack-notifications">Formatting Slack Notifications</a></li>
+<li><a href="#slack-attachments">Slack Attachments</a></li>
 <li><a href="#routing-slack-notifications">Routing Slack Notifications</a></li>
 </ul>
 </li>
@@ -902,7 +923,22 @@
 <h2 id="sending-notifications">Sending Notifications</h2>
 <p><a name="using-the-notifiable-trait"></a></p>
 <h3 id="using-the-notifiable-trait">Using The Notifiable Trait</h3>
-<p>Notifications may be sent in two ways: using the <code>notify</code> method of the <code>Notifiable</code> trait or using the <code>Notification</code> <a href="../docs/{{version}}/facades">facade</a>. First, let's examine the <code>Notifiable</code> trait. This trait is used by the default <code>App\User</code> model and contains one method that may be used to send notifications: <code>notify</code>. The <code>notify</code> method expects to receive a notification instance:</p>
+<p>Notifications may be sent in two ways: using the <code>notify</code> method of the <code>Notifiable</code> trait or using the <code>Notification</code> <a href="../docs/{{version}}/facades">facade</a>. First, let's explore using the trait:</p>
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+
+<span class="nx">namespace</span> <span class="nx">App</span><span class="p">;</span>
+
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Notifications</span><span class="err">\</span><span class="nx">Notifiable</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Foundation</span><span class="err">\</span><span class="nx">Auth</span><span class="err">\</span><span class="nx">User</span> <span class="kr">as</span> <span class="nx">Authenticatable</span><span class="p">;</span>
+
+<span class="kr">class</span> <span class="nx">User</span> <span class="kr">extends</span> <span class="nx">Authenticatable</span>
+<span class="p">{</span>
+    <span class="nx">use</span> <span class="nx">Notifiable</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>This trait is utilized by the default <code>App\User</code> model and contains one method that may be used to send notifications: <code>notify</code>. The <code>notify</code> method expects to receive a notification instance:</p>
 <div class="codehilite"><pre><span></span>use App\Notifications\InvoicePaid;
 
 $user-&gt;notify(new InvoicePaid($invoice));
@@ -1006,6 +1042,58 @@ public<span class="w"> </span>function<span class="w"> </span>toMail<span class=
 <blockquote>
 <p>{tip} When sending mail notifications, be sure to set the <code>name</code> value in your <code>config/app.php</code> configuration file. This value will be used in the header and footer of your mail notification messages.</p>
 </blockquote>
+<h4 id="other-notification-formatting-options">Other Notification Formatting Options</h4>
+<p>Instead of defining the "lines" of text in the notification class, you may use the <code>view</code> method to specify a custom template that should be used to render the notification email:</p>
+<div class="codehilite"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * Get the mail representation of the notification.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param  mixed  $notifiable</span>
+<span class="cm"> * @return \Illuminate\Notifications\Messages\MailMessage</span>
+<span class="cm"> */</span><span class="w"></span>
+public<span class="w"> </span>function<span class="w"> </span>toMail<span class="o">(</span><span class="err">$</span>notifiable<span class="o">)</span><span class="w"></span>
+<span class="err">{</span><span class="w"></span>
+<span class="w">    </span><span class="kr">return</span><span class="w"> </span><span class="o">(</span>new<span class="w"> </span>MailMessage<span class="o">)-&gt;</span>view<span class="o">(</span><span class="w"></span>
+<span class="w">        </span><span class="s">&#39;emails.name&#39;</span><span class="o">,</span><span class="w"> </span><span class="err">[</span><span class="s">&#39;invoice&#39;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="err">$</span>this<span class="o">-&gt;</span>invoice<span class="err">]</span><span class="w"></span>
+<span class="w">    </span><span class="o">)</span><span class="err">;</span><span class="w"></span>
+<span class="err">}</span><span class="w"></span>
+</pre></div>
+
+
+<p>In addition, you may return a <a href="../docs/{{version}}/mail">mailable object</a> from the <code>toMail</code> method:</p>
+<div class="codehilite"><pre><span></span>use App\Mail\InvoicePaid as Mailable;
+
+/**
+ * Get the mail representation of the notification.
+ *
+ * @param  mixed  $notifiable
+ * @return Mailable
+ */
+public function toMail($notifiable)
+{
+    return new Mailable($this-&gt;invoice)-&gt;to($this-&gt;user-&gt;email);
+}
+</pre></div>
+
+
+<p><a name="error-messages"></a></p>
+<h4 id="error-messages">Error Messages</h4>
+<p>Some notifications inform users of errors, such as a failed invoice payment. You may indicate that a mail message is regarding an error by calling the <code>error</code> method when building your message. When using the <code>error</code> method on a mail message, the call to action button will be red instead of blue:</p>
+<div class="codehilite"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * Get the mail representation of the notification.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param  mixed  $notifiable</span>
+<span class="cm"> * @return \Illuminate\Notifications\Message</span>
+<span class="cm"> */</span><span class="w"></span>
+public<span class="w"> </span>function<span class="w"> </span>toMail<span class="o">(</span><span class="err">$</span>notifiable<span class="o">)</span><span class="w"></span>
+<span class="err">{</span><span class="w"></span>
+<span class="w">    </span><span class="kr">return</span><span class="w"> </span><span class="o">(</span>new<span class="w"> </span>MailMessage<span class="o">)</span><span class="w"></span>
+<span class="w">                </span><span class="o">-&gt;</span>error<span class="o">()</span><span class="w"></span>
+<span class="w">                </span><span class="o">-&gt;</span>subject<span class="o">(</span><span class="s">&#39;Notification Subject&#39;</span><span class="o">)</span><span class="w"></span>
+<span class="w">                </span><span class="o">-&gt;</span>line<span class="o">(</span><span class="s">&#39;...&#39;</span><span class="o">)</span><span class="err">;</span><span class="w"></span>
+<span class="err">}</span><span class="w"></span>
+</pre></div>
+
+
 <p><a name="customizing-the-recipient"></a></p>
 <h3 id="customizing-the-recipient">Customizing The Recipient</h3>
 <p>When sending notifications via the <code>mail</code> channel, the notification system will automatically look for an <code>email</code> property on your notifiable entity. You may customize which email address is used to deliver the notification by defining a <code>routeNotificationForMail</code> method on the entity:</p>
@@ -1058,25 +1146,92 @@ public<span class="w"> </span>function<span class="w"> </span>toMail<span class=
 </pre></div>
 
 
-<p><a name="error-messages"></a></p>
-<h3 id="error-messages">Error Messages</h3>
-<p>Some notifications inform users of errors, such as a failed invoice payment. You may indicate that a mail message is regarding an error by calling the <code>error</code> method when building your message. When using the <code>error</code> method on a mail message, the call to action button will be red instead of blue:</p>
+<p><a name="markdown-mail-notifications"></a></p>
+<h2 id="markdown-mail-notifications">Markdown Mail Notifications</h2>
+<p>Markdown mail notifications allow you to take advantage of the pre-built templates of mail notifications, while giving you more freedom to write longer, customized messages. Since the messages are written in Markdown, Laravel is able to render beautiful, responsive HTML templates for the messages while also automatically generating a plain-text counterpart.</p>
+<p><a name="generating-the-message"></a></p>
+<h3 id="generating-the-message">Generating The Message</h3>
+<p>To generate a notification with a corresponding Markdown template, you may use the <code>--markdown</code> option of the <code>make:notification</code> Artisan command:</p>
+<div class="codehilite"><pre><span></span>php artisan make:notification InvoicePaid --markdown=mail.invoice.paid
+</pre></div>
+
+
+<p>Like all other mail notifications, notifications that use Markdown templates should define a <code>toMail</code> method on their notification class. However, instead of using the <code>line</code> and <code>action</code> methods to construct the notification, use the <code>markdown</code> method to specify the name of the Markdown template that should be used:</p>
 <div class="codehilite"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * Get the mail representation of the notification.</span>
 <span class="cm"> *</span>
 <span class="cm"> * @param  mixed  $notifiable</span>
-<span class="cm"> * @return \Illuminate\Notifications\Message</span>
+<span class="cm"> * @return \Illuminate\Notifications\Messages\MailMessage</span>
 <span class="cm"> */</span><span class="w"></span>
 public<span class="w"> </span>function<span class="w"> </span>toMail<span class="o">(</span><span class="err">$</span>notifiable<span class="o">)</span><span class="w"></span>
 <span class="err">{</span><span class="w"></span>
+<span class="w">    </span><span class="err">$</span>url<span class="w"> </span><span class="o">=</span><span class="w"> </span>url<span class="o">(</span><span class="s">&#39;/invoice/&#39;</span><span class="o">.</span><span class="err">$</span>this<span class="o">-&gt;</span>invoice<span class="o">-&gt;</span>id<span class="o">)</span><span class="err">;</span><span class="w"></span>
+
 <span class="w">    </span><span class="kr">return</span><span class="w"> </span><span class="o">(</span>new<span class="w"> </span>MailMessage<span class="o">)</span><span class="w"></span>
-<span class="w">                </span><span class="o">-&gt;</span>error<span class="o">()</span><span class="w"></span>
-<span class="w">                </span><span class="o">-&gt;</span>subject<span class="o">(</span><span class="s">&#39;Notification Subject&#39;</span><span class="o">)</span><span class="w"></span>
-<span class="w">                </span><span class="o">-&gt;</span>line<span class="o">(</span><span class="s">&#39;...&#39;</span><span class="o">)</span><span class="err">;</span><span class="w"></span>
+<span class="w">                </span><span class="o">-&gt;</span>subject<span class="o">(</span><span class="s">&#39;Invoice Paid&#39;</span><span class="o">)</span><span class="w"></span>
+<span class="w">                </span><span class="o">-&gt;</span>markdown<span class="o">(</span><span class="s">&#39;mail.invoice.paid&#39;</span><span class="o">,</span><span class="w"> </span><span class="err">[</span><span class="s">&#39;url&#39;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="err">$</span>url<span class="err">]</span><span class="o">)</span><span class="err">;</span><span class="w"></span>
 <span class="err">}</span><span class="w"></span>
 </pre></div>
 
 
+<p><a name="writing-the-message"></a></p>
+<h3 id="writing-the-message">Writing The Message</h3>
+<p>Markdown mail notifications use a combination of Blade components and Markdown syntax which allow you to easily construct notifications while leveraging Laravel's pre-crafted notification components:</p>
+<div class="codehilite"><pre><span></span><span class="p">@</span><span class="n">component</span><span class="p">(</span><span class="err">&#39;</span><span class="n">mail</span><span class="o">::</span><span class="n">message</span><span class="err">&#39;</span><span class="p">)</span>
+<span class="cp"># Invoice Paid</span>
+
+<span class="n">Your</span> <span class="n">invoice</span> <span class="n">has</span> <span class="n">been</span> <span class="n">paid</span><span class="o">!</span>
+
+<span class="p">@</span><span class="n">component</span><span class="p">(</span><span class="err">&#39;</span><span class="n">mail</span><span class="o">::</span><span class="n">button</span><span class="err">&#39;</span><span class="p">,</span> <span class="p">[</span><span class="err">&#39;</span><span class="n">url</span><span class="err">&#39;</span> <span class="o">=&gt;</span> <span class="err">$</span><span class="n">url</span><span class="p">])</span>
+<span class="n">View</span> <span class="n">Invoice</span>
+<span class="p">@</span><span class="n">endcomponent</span>
+
+<span class="n">Thanks</span><span class="p">,</span><span class="o">&lt;</span><span class="n">br</span><span class="o">&gt;</span>
+<span class="p">{{</span> <span class="n">config</span><span class="p">(</span><span class="err">&#39;</span><span class="n">app</span><span class="p">.</span><span class="n">name</span><span class="err">&#39;</span><span class="p">)</span> <span class="p">}}</span>
+<span class="p">@</span><span class="n">endcomponent</span>
+</pre></div>
+
+
+<h4 id="button-component">Button Component</h4>
+<p>The button component renders a centered button link. The component accepts two arguments, a <code>url</code> and an optional <code>color</code>. Supported colors are <code>blue</code>, <code>green</code>, and <code>red</code>. You may add as many button components to a notification as you wish:</p>
+<div class="codehilite"><pre><span></span><span class="p">@</span><span class="n">component</span><span class="p">(</span><span class="err">&#39;</span><span class="n">mail</span><span class="o">::</span><span class="n">button</span><span class="err">&#39;</span><span class="p">,</span> <span class="p">[</span><span class="err">&#39;</span><span class="n">url</span><span class="err">&#39;</span> <span class="o">=&gt;</span> <span class="err">$</span><span class="n">url</span><span class="p">,</span> <span class="err">&#39;</span><span class="n">color</span><span class="err">&#39;</span> <span class="o">=&gt;</span> <span class="err">&#39;</span><span class="n">green</span><span class="err">&#39;</span><span class="p">])</span>
+<span class="n">View</span> <span class="n">Invoice</span>
+<span class="p">@</span><span class="n">endcomponent</span>
+</pre></div>
+
+
+<h4 id="panel-component">Panel Component</h4>
+<p>The panel component renders the given block of text in a panel that has a slightly different background color than the rest of the notification. This allows you to draw attention to a given block of text:</p>
+<div class="codehilite"><pre><span></span><span class="p">@</span><span class="n">component</span><span class="p">(</span><span class="err">&#39;</span><span class="n">mail</span><span class="o">::</span><span class="n">panel</span><span class="err">&#39;</span><span class="p">)</span>
+<span class="n">This</span> <span class="n">is</span> <span class="n">the</span> <span class="n">panel</span> <span class="n">content</span><span class="p">.</span>
+<span class="p">@</span><span class="n">endcomponent</span>
+</pre></div>
+
+
+<h4 id="table-component">Table Component</h4>
+<p>The table component allows you to transform a Markdown table into an HTML table. The component accepts the Markdown table as its content. Table column alignment is supported using the default Markdown table alignment syntax:</p>
+<div class="codehilite"><pre><span></span><span class="p">@</span><span class="n">component</span><span class="p">(</span><span class="err">&#39;</span><span class="n">mail</span><span class="o">::</span><span class="n">table</span><span class="err">&#39;</span><span class="p">)</span>
+<span class="o">|</span> <span class="n">Laravel</span>       <span class="o">|</span> <span class="n">Table</span>         <span class="o">|</span> <span class="n">Example</span>  <span class="o">|</span>
+<span class="o">|</span> <span class="o">-------------</span> <span class="o">|:-------------:|</span> <span class="o">--------:|</span>
+<span class="o">|</span> <span class="n">Col</span> <span class="mi">2</span> <span class="n">is</span>      <span class="o">|</span> <span class="n">Centered</span>      <span class="o">|</span> <span class="err">$</span><span class="mi">10</span>      <span class="o">|</span>
+<span class="o">|</span> <span class="n">Col</span> <span class="mi">3</span> <span class="n">is</span>      <span class="o">|</span> <span class="n">Right</span><span class="o">-</span><span class="n">Aligned</span> <span class="o">|</span> <span class="err">$</span><span class="mi">20</span>      <span class="o">|</span>
+<span class="p">@</span><span class="n">endcomponent</span>
+</pre></div>
+
+
+<p><a name="customizing-the-components"></a></p>
+<h3 id="customizing-the-components">Customizing The Components</h3>
+<p>You may export all of the Markdown notification components to your own application for customization. To export the components, use the <code>vendor:publish</code> Artisan command to publish the <code>laravel-mail</code> asset tag:</p>
+<div class="codehilite"><pre><span></span>php artisan vendor:publish --tag=laravel-mail
+</pre></div>
+
+
+<p>This command will publish the Markdown mail components to the <code>resources/views/vendor/mail</code> directory. The <code>mail</code> directory will contain a <code>html</code> and a <code>markdown</code> directory, each containing their respective representations of every available component. You are free to customize these components however you like.</p>
+<h4 id="customizing-the-css">Customizing The CSS</h4>
+<p>After exporting the components, the <code>resources/views/vendor/mail/html/themes</code> directory will contain a <code>default.css</code> file. You may customize the CSS in this file and your styles will automatically be in-lined within the HTML representations of your Markdown notifications.</p>
+<blockquote>
+<p>{tip} If you would like to build an entirely new theme for the Markdown components, simply write a new CSS file within the <code>html/themes</code> directory and change the <code>theme</code> option of your <code>mail</code> configuration file.</p>
+</blockquote>
 <p><a name="database-notifications"></a></p>
 <h2 id="database-notifications">Database Notifications</h2>
 <p><a name="database-prerequisites"></a></p>
@@ -1168,28 +1323,36 @@ public<span class="w"> </span>function<span class="w"> </span>toArray<span class
 <p>Before broadcasting notifications, you should configure and be familiar with Laravel's <a href="../docs/{{version}}/broadcasting">event broadcasting</a> services. Event broadcasting provides a way to react to server-side fired Laravel events from your JavaScript client.</p>
 <p><a name="formatting-broadcast-notifications"></a></p>
 <h3 id="formatting-broadcast-notifications">Formatting Broadcast Notifications</h3>
-<p>The <code>broadcast</code> channel broadcasts notifications using Laravel's <a href="../docs/{{version}}/broadcasting">event broadcasting</a> services, allowing your JavaScript client to catch notifications in realtime. If a notification supports broadcasting, you should define a <code>toBroadcast</code> or <code>toArray</code> method on the notification class. This method will receive a <code>$notifiable</code> entity and should return a plain PHP array. The returned array will be encoded as JSON and broadcast to your JavaScript client. Let's take a look at an example <code>toArray</code> method:</p>
-<div class="codehilite"><pre><span></span><span class="cm">/**</span>
-<span class="cm"> * Get the array representation of the notification.</span>
-<span class="cm"> *</span>
-<span class="cm"> * @param  mixed  $notifiable</span>
-<span class="cm"> * @return array</span>
-<span class="cm"> */</span><span class="w"></span>
-public<span class="w"> </span>function<span class="w"> </span>toArray<span class="o">(</span><span class="err">$</span>notifiable<span class="o">)</span><span class="w"></span>
-<span class="err">{</span><span class="w"></span>
-<span class="w">    </span><span class="kr">return</span><span class="w"> </span><span class="err">[</span><span class="w"></span>
-<span class="w">        </span><span class="s">&#39;invoice_id&#39;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="err">$</span>this<span class="o">-&gt;</span>invoice<span class="o">-&gt;</span>id<span class="o">,</span><span class="w"></span>
-<span class="w">        </span><span class="s">&#39;amount&#39;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="err">$</span>this<span class="o">-&gt;</span>invoice<span class="o">-&gt;</span>amount<span class="o">,</span><span class="w"></span>
-<span class="w">    </span><span class="err">];</span><span class="w"></span>
-<span class="err">}</span><span class="w"></span>
+<p>The <code>broadcast</code> channel broadcasts notifications using Laravel's <a href="../docs/{{version}}/broadcasting">event broadcasting</a> services, allowing your JavaScript client to catch notifications in realtime. If a notification supports broadcasting, you should define a <code>toBroadcast</code> method on the notification class. This method will receive a <code>$notifiable</code> entity and should return a <code>BroadcastMessage</code> instance. The returned data will be encoded as JSON and broadcast to your JavaScript client. Let's take a look at an example <code>toBroadcast</code> method:</p>
+<div class="codehilite"><pre><span></span>use Illuminate\Notifications\Messages\BroadcastMessage;
+
+/**
+ * Get the broadcastable representation of the notification.
+ *
+ * @param  mixed  $notifiable
+ * @return BroadcastMessage
+ */
+public function toBroadcast($notifiable)
+{
+    return new BroadcastMessage([
+        &#39;invoice_id&#39; =&gt; $this-&gt;invoice-&gt;id,
+        &#39;amount&#39; =&gt; $this-&gt;invoice-&gt;amount,
+    ]);
+}
+</pre></div>
+
+
+<h4 id="broadcast-queue-configuration">Broadcast Queue Configuration</h4>
+<p>All broadcast notifications are queued for broadcasting. If you would like to configure the queue connection or queue name that is used to the queue the broadcast operation, you may use the <code>onConnection</code> and <code>onQueue</code> methods of the <code>BroadcastMessage</code>:</p>
+<div class="codehilite"><pre><span></span>return new BroadcastMessage($data)
+                -&gt;onConnection(&#39;sqs&#39;)
+                -&gt;onQueue(&#39;broadcasts&#39;);
 </pre></div>
 
 
 <blockquote>
 <p>{tip} In addition to the data you specify, broadcast notifications will also contain a <code>type</code> field containing the class name of the notification.</p>
 </blockquote>
-<h4 id="tobroadcast-vs-toarray"><code>toBroadcast</code> Vs. <code>toArray</code></h4>
-<p>The <code>toArray</code> method is also used by the <code>database</code> channel to determine which data to store in your database table. If you would like to have two different array representations for the <code>database</code> and <code>broadcast</code> channels, you should define a <code>toBroadcast</code> method instead of a <code>toArray</code> method.</p>
 <p><a name="listening-for-notifications"></a></p>
 <h3 id="listening-for-notifications">Listening For Notifications</h3>
 <p>Notifications will broadcast on a private channel formatted using a <code>{notifiable}.{id}</code> convention. So, if you are sending a notification to a <code>App\User</code> instance with an ID of <code>1</code>, the notification will be broadcast on the <code>App.User.1</code> private channel. When using <a href="../docs/{{version}}/broadcasting">Laravel Echo</a>, you may easily listen for notifications on a channel using the <code>notification</code> helper method:</p>
@@ -1197,6 +1360,35 @@ public<span class="w"> </span>function<span class="w"> </span>toArray<span class
     .notification((notification) =&gt; {
         console.log(notification.type);
     });
+</pre></div>
+
+
+<h4 id="customizing-the-notification-channel">Customizing The Notification Channel</h4>
+<p>If you would like to customize which channels a notifiable entity receives its broadcast notifications on, you may define a <code>receivesBroadcastNotificationsOn</code> method on the notifiable entity:</p>
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+
+<span class="nx">namespace</span> <span class="nx">App</span><span class="p">;</span>
+
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Notifications</span><span class="err">\</span><span class="nx">Notifiable</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Broadcasting</span><span class="err">\</span><span class="nx">PrivateChannel</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Foundation</span><span class="err">\</span><span class="nx">Auth</span><span class="err">\</span><span class="nx">User</span> <span class="kr">as</span> <span class="nx">Authenticatable</span><span class="p">;</span>
+
+<span class="kr">class</span> <span class="nx">User</span> <span class="kr">extends</span> <span class="nx">Authenticatable</span>
+<span class="p">{</span>
+    <span class="nx">use</span> <span class="nx">Notifiable</span><span class="p">;</span>
+
+    <span class="cm">/**</span>
+<span class="cm">     * The channels the user receives notification broadcasts on.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return array</span>
+<span class="cm">     */</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">receivesBroadcastNotificationsOn</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="k">new</span> <span class="nx">PrivateChannel</span><span class="p">(</span><span class="s1">&#39;users.&#39;</span><span class="p">.</span><span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">id</span><span class="p">),</span>
+        <span class="p">];</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
 
 
@@ -1227,6 +1419,23 @@ public<span class="w"> </span>function<span class="w"> </span>toNexmo<span class
 <span class="err">{</span><span class="w"></span>
 <span class="w">    </span><span class="kr">return</span><span class="w"> </span><span class="o">(</span>new<span class="w"> </span>NexmoMessage<span class="o">)</span><span class="w"></span>
 <span class="w">                </span><span class="o">-&gt;</span>content<span class="o">(</span><span class="s">&#39;Your SMS message content&#39;</span><span class="o">)</span><span class="err">;</span><span class="w"></span>
+<span class="err">}</span><span class="w"></span>
+</pre></div>
+
+
+<h4 id="unicode-content">Unicode Content</h4>
+<p>If your SMS message will contain unicode characters, you should call the <code>unicode</code> method when constructing the <code>NexmoMessage</code> instance:</p>
+<div class="codehilite"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * Get the Nexmo / SMS representation of the notification.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param  mixed  $notifiable</span>
+<span class="cm"> * @return NexmoMessage</span>
+<span class="cm"> */</span><span class="w"></span>
+public<span class="w"> </span>function<span class="w"> </span>toNexmo<span class="o">(</span><span class="err">$</span>notifiable<span class="o">)</span><span class="w"></span>
+<span class="err">{</span><span class="w"></span>
+<span class="w">    </span><span class="kr">return</span><span class="w"> </span><span class="o">(</span>new<span class="w"> </span>NexmoMessage<span class="o">)</span><span class="w"></span>
+<span class="w">                </span><span class="o">-&gt;</span>content<span class="o">(</span><span class="s">&#39;Your unicode message&#39;</span><span class="o">)</span><span class="w"></span>
+<span class="w">                </span><span class="o">-&gt;</span>unicode<span class="o">()</span><span class="err">;</span><span class="w"></span>
 <span class="err">}</span><span class="w"></span>
 </pre></div>
 
@@ -1305,7 +1514,26 @@ public<span class="w"> </span>function<span class="w"> </span>toSlack<span class
 
 <p>In this example we are just sending a single line of text to Slack, which will create a message that looks like the following:</p>
 <p><img src="https://laravel.com/assets/img/basic-slack-notification.png"></p>
-<h4 id="slack-attachments">Slack Attachments</h4>
+<h4 id="customizing-the-sender-recipient">Customizing The Sender &amp; Recipient</h4>
+<p>You may use the <code>from</code> and <code>to</code> methods to customize the sender and recipient. The <code>from</code> method accepts a username and emoji identifier, while the <code>to</code> method accepts a channel or username:</p>
+<div class="codehilite"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * Get the Slack representation of the notification.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param  mixed  $notifiable</span>
+<span class="cm"> * @return SlackMessage</span>
+<span class="cm"> */</span><span class="w"></span>
+public<span class="w"> </span>function<span class="w"> </span>toSlack<span class="o">(</span><span class="err">$</span>notifiable<span class="o">)</span><span class="w"></span>
+<span class="err">{</span><span class="w"></span>
+<span class="w">    </span><span class="kr">return</span><span class="w"> </span><span class="o">(</span>new<span class="w"> </span>SlackMessage<span class="o">)</span><span class="w"></span>
+<span class="w">                </span><span class="o">-&gt;</span>from<span class="o">(</span><span class="s">&#39;Ghost&#39;</span><span class="o">,</span><span class="w"> </span><span class="s">&#39;:ghost:&#39;</span><span class="o">)</span><span class="w"></span>
+<span class="w">                </span><span class="o">-&gt;</span><span class="kr">to</span><span class="o">(</span><span class="s">&#39;#other&#39;</span><span class="o">)</span><span class="w"></span>
+<span class="w">                </span><span class="o">-&gt;</span>content<span class="o">(</span><span class="s">&#39;This will be sent to #other&#39;</span><span class="o">)</span><span class="err">;</span><span class="w"></span>
+<span class="err">}</span><span class="w"></span>
+</pre></div>
+
+
+<p><a name="slack-attachments"></a></p>
+<h3 id="slack-attachments">Slack Attachments</h3>
 <p>You may also add "attachments" to Slack messages. Attachments provide richer formatting options than simple text messages. In this example, we will send an error notification about an exception that occurred in an application, including a link to view more details about the exception:</p>
 <div class="codehilite"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * Get the Slack representation of the notification.</span>
@@ -1359,8 +1587,8 @@ public<span class="w"> </span>function<span class="w"> </span>toSlack<span class
 
 <p>The example above will create a Slack message that looks like the following:</p>
 <p><img src="https://laravel.com/assets/img/slack-fields-attachment.png"></p>
-<h4 id="customizing-the-sender-recipient">Customizing The Sender &amp; Recipient</h4>
-<p>You may use the <code>from</code> and <code>to</code> methods to customize the sender and recipient. The <code>from</code> method accepts a username and emoji identifier, while the <code>to</code> method accepts a channel or username:</p>
+<h4 id="markdown-attachment-content">Markdown Attachment Content</h4>
+<p>If some of your attachment fields contain Markdown, you may use the <code>markdown</code> method to instruct Slack to parse and display the given attachment fields as Markdown formatted text:</p>
 <div class="codehilite"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * Get the Slack representation of the notification.</span>
 <span class="cm"> *</span>
@@ -1369,10 +1597,16 @@ public<span class="w"> </span>function<span class="w"> </span>toSlack<span class
 <span class="cm"> */</span><span class="w"></span>
 public<span class="w"> </span>function<span class="w"> </span>toSlack<span class="o">(</span><span class="err">$</span>notifiable<span class="o">)</span><span class="w"></span>
 <span class="err">{</span><span class="w"></span>
+<span class="w">    </span><span class="err">$</span>url<span class="w"> </span><span class="o">=</span><span class="w"> </span>url<span class="o">(</span><span class="s">&#39;/exceptions/&#39;</span><span class="o">.</span><span class="err">$</span>this<span class="o">-&gt;</span>exception<span class="o">-&gt;</span>id<span class="o">)</span><span class="err">;</span><span class="w"></span>
+
 <span class="w">    </span><span class="kr">return</span><span class="w"> </span><span class="o">(</span>new<span class="w"> </span>SlackMessage<span class="o">)</span><span class="w"></span>
-<span class="w">                </span><span class="o">-&gt;</span>from<span class="o">(</span><span class="s">&#39;Ghost&#39;</span><span class="o">,</span><span class="w"> </span><span class="s">&#39;:ghost:&#39;</span><span class="o">)</span><span class="w"></span>
-<span class="w">                </span><span class="o">-&gt;</span><span class="kr">to</span><span class="o">(</span><span class="s">&#39;#other&#39;</span><span class="o">)</span><span class="w"></span>
-<span class="w">                </span><span class="o">-&gt;</span>content<span class="o">(</span><span class="s">&#39;This will be sent to #other&#39;</span><span class="o">)</span><span class="err">;</span><span class="w"></span>
+<span class="w">                </span><span class="o">-&gt;</span>error<span class="o">()</span><span class="w"></span>
+<span class="w">                </span><span class="o">-&gt;</span>content<span class="o">(</span><span class="s">&#39;Whoops! Something went wrong.&#39;</span><span class="o">)</span><span class="w"></span>
+<span class="w">                </span><span class="o">-&gt;</span>attachment<span class="o">(</span>function<span class="w"> </span><span class="o">(</span><span class="err">$</span>attachment<span class="o">)</span><span class="w"> </span>use<span class="w"> </span><span class="o">(</span><span class="err">$</span>url<span class="o">)</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
+<span class="w">                    </span><span class="err">$</span>attachment<span class="o">-&gt;</span>title<span class="o">(</span><span class="s">&#39;Exception: File Not Found&#39;</span><span class="o">,</span><span class="w"> </span><span class="err">$</span>url<span class="o">)</span><span class="w"></span>
+<span class="w">                               </span><span class="o">-&gt;</span>content<span class="o">(</span><span class="s">&#39;File [background.jpg] was **not found**.&#39;</span><span class="o">)</span><span class="w"></span>
+<span class="w">                               </span><span class="o">-&gt;</span>markdown<span class="o">(</span><span class="err">[</span><span class="s">&#39;title&#39;</span><span class="o">,</span><span class="w"> </span><span class="s">&#39;text&#39;</span><span class="err">]</span><span class="o">)</span><span class="err">;</span><span class="w"></span>
+<span class="w">                </span><span class="err">}</span><span class="o">)</span><span class="err">;</span><span class="w"></span>
 <span class="err">}</span><span class="w"></span>
 </pre></div>
 

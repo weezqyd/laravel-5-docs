@@ -158,15 +158,6 @@
           
             
   <li>
-    <a class="" title="Application testing" href="../application-testing/">
-      Application testing
-    </a>
-    
-  </li>
-
-          
-            
-  <li>
     <a class="" title="Artisan" href="../artisan/">
       Artisan
     </a>
@@ -329,8 +320,8 @@
           
             
   <li>
-    <a class="" title="Elixir" href="../elixir/">
-      Elixir
+    <a class="" title="Dusk" href="../dusk/">
+      Dusk
     </a>
     
   </li>
@@ -473,6 +464,15 @@
           
             
   <li>
+    <a class="" title="Http tests" href="../http-tests/">
+      Http tests
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
     <a class="" title="Installation" href="../installation/">
       Installation
     </a>
@@ -529,6 +529,15 @@
   <li>
     <a class="" title="Migrations" href="../migrations/">
       Migrations
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Mix" href="../mix/">
+      Mix
     </a>
     
   </li>
@@ -652,6 +661,12 @@
             </li>
           
             <li class="anchor">
+              <a title="Laravel 5.4" href="#laravel-54">
+                Laravel 5.4
+              </a>
+            </li>
+          
+            <li class="anchor">
               <a title="Laravel 5.3" href="#laravel-53">
                 Laravel 5.3
               </a>
@@ -690,12 +705,6 @@
             <li class="anchor">
               <a title="Laravel 4.2" href="#laravel-42">
                 Laravel 4.2
-              </a>
-            </li>
-          
-            <li class="anchor">
-              <a title="Laravel 4.1" href="#laravel-41">
-                Laravel 4.1
               </a>
             </li>
           
@@ -835,6 +844,7 @@
           <h1 id="release-notes">Release Notes</h1>
 <ul>
 <li><a href="#support-policy">Support Policy</a></li>
+<li><a href="#laravel-5.4">Laravel 5.4</a></li>
 <li><a href="#laravel-5.3">Laravel 5.3</a></li>
 <li><a href="#laravel-5.2">Laravel 5.2</a></li>
 <li><a href="#laravel-5.1.11">Laravel 5.1.11</a></li>
@@ -842,11 +852,337 @@
 <li><a href="#laravel-5.1">Laravel 5.1</a></li>
 <li><a href="#laravel-5.0">Laravel 5.0</a></li>
 <li><a href="#laravel-4.2">Laravel 4.2</a></li>
-<li><a href="#laravel-4.1">Laravel 4.1</a></li>
 </ul>
 <p><a name="support-policy"></a></p>
 <h2 id="support-policy">Support Policy</h2>
 <p>For LTS releases, such as Laravel 5.1, bug fixes are provided for 2 years and security fixes are provided for 3 years. These releases provide the longest window of support and maintenance. For general releases, bug fixes are provided for 6 months and security fixes are provided for 1 year.</p>
+<p><a name="laravel-5.4"></a></p>
+<h2 id="laravel-54">Laravel 5.4</h2>
+<p>Laravel 5.4 continues the improvements made in Laravel 5.3 by adding support for <a href="../docs/5.4/mail#markdown-mailables">Markdown based emails and notifications</a>, the <a href="../docs/5.4/dusk">Laravel Dusk</a> browser automation and testing framework, Laravel Mix, Blade "components" and "slots", route model binding on broadcast channels, higher order messages for Collections, object-based Eloquent events, job-level "retry" and "timeout" settings, "realtime" facades, improved support for Redis Cluster, custom pivot table models, middleware for request input trimming and cleaning, and more. In addition, the entire codebase of the framework was reviewed and refactored for general cleanliness.</p>
+<blockquote>
+<p>{tip} This documentation summarizes the most notable improvements to the framework; however, more thorough change logs are always available <a href="https://github.com/laravel/framework/blob/5.4/CHANGELOG-5.4.md">on GitHub</a>.</p>
+</blockquote>
+<h3 id="markdown-mail-notifications">Markdown Mail &amp; Notifications</h3>
+<blockquote>
+<p>{video} There is a free <a href="https://laracasts.com/series/whats-new-in-laravel-5-4/episodes/7">video tutorial</a> for this feature available on Laracasts.</p>
+</blockquote>
+<p>Markdown mailable messages allow you to take advantage of the pre-built templates and components of mail notifications in your mailables. Since the messages are written in Markdown, Laravel is able to render beautiful, responsive HTML templates for the messages while also automatically generating a plain-text counterpart. For example, a Markdown email might look something like the following:</p>
+<div class="codehilite"><pre><span></span><span class="p">@</span><span class="n">component</span><span class="p">(</span><span class="err">&#39;</span><span class="n">mail</span><span class="o">::</span><span class="n">message</span><span class="err">&#39;</span><span class="p">)</span>
+<span class="cp"># Order Shipped</span>
+
+<span class="n">Your</span> <span class="n">order</span> <span class="n">has</span> <span class="n">been</span> <span class="n">shipped</span><span class="o">!</span>
+
+<span class="p">@</span><span class="n">component</span><span class="p">(</span><span class="err">&#39;</span><span class="n">mail</span><span class="o">::</span><span class="n">button</span><span class="err">&#39;</span><span class="p">,</span> <span class="p">[</span><span class="err">&#39;</span><span class="n">url</span><span class="err">&#39;</span> <span class="o">=&gt;</span> <span class="err">$</span><span class="n">url</span><span class="p">])</span>
+<span class="n">View</span> <span class="n">Order</span>
+<span class="p">@</span><span class="n">endcomponent</span>
+
+<span class="n">Next</span> <span class="nl">Steps</span><span class="p">:</span>
+
+<span class="o">-</span> <span class="n">Track</span> <span class="n">Your</span> <span class="n">Order</span> <span class="n">On</span> <span class="n">Our</span> <span class="n">Website</span>
+<span class="o">-</span> <span class="n">Pre</span><span class="o">-</span><span class="n">Sign</span> <span class="n">For</span> <span class="n">Delivery</span>
+
+<span class="n">Thanks</span><span class="p">,</span><span class="o">&lt;</span><span class="n">br</span><span class="o">&gt;</span>
+<span class="p">{{</span> <span class="n">config</span><span class="p">(</span><span class="err">&#39;</span><span class="n">app</span><span class="p">.</span><span class="n">name</span><span class="err">&#39;</span><span class="p">)</span> <span class="p">}}</span>
+<span class="p">@</span><span class="n">endcomponent</span>
+</pre></div>
+
+
+<p>Using this simple Markdown template, Laravel is able to generate a responsive HTML email and plain-text counterpart:</p>
+<p><img src="https://laravel.com/assets/img/examples/markdown.png" width="551" height="596"></p>
+<p>To read more about Markdown mail and notifications, check out the full <a href="../docs/5.4/mail">mail</a> and <a href="../docs/5.4/notifications">notification</a> documentation.</p>
+<blockquote>
+<p>{tip} You may export all of the Markdown mail components to your own application for customization. To export the components, use the <code>vendor:publish</code> Artisan command to publish the <code>laravel-mail</code> asset tag.</p>
+</blockquote>
+<h3 id="laravel-dusk">Laravel Dusk</h3>
+<blockquote>
+<p>{video} There is a free <a href="https://laracasts.com/series/whats-new-in-laravel-5-4/episodes/9">video tutorial</a> for this feature available on Laracasts.</p>
+</blockquote>
+<p>Laravel Dusk provides an expressive, easy-to-use browser automation and testing API. By default, Dusk does not require you to install JDK or Selenium on your machine. Instead, Dusk uses a standalone <a href="https://sites.google.com/a/chromium.org/chromedriver/home">ChromeDriver</a> installation. However, you are free to utilize any other Selenium compatible driver you wish.</p>
+<p>Since Dusk operates using a real browser, you are able to easily test and interact with your applications that heavily use JavaScript:</p>
+<div class="codehilite"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * A basic browser test example.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return void</span>
+<span class="cm"> */</span><span class="w"></span>
+public<span class="w"> </span>function<span class="w"> </span>testBasicExample<span class="o">()</span><span class="w"></span>
+<span class="err">{</span><span class="w"></span>
+<span class="w">    </span><span class="err">$</span>user<span class="w"> </span><span class="o">=</span><span class="w"> </span>factory<span class="o">(</span><span class="nl">User</span><span class="o">:</span><span class="err">:</span>class<span class="o">)-&gt;</span>create<span class="o">(</span><span class="err">[</span><span class="w"></span>
+<span class="w">        </span><span class="s">&#39;email&#39;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&#39;taylor@laravel.com&#39;</span><span class="o">,</span><span class="w"></span>
+<span class="w">    </span><span class="err">]</span><span class="o">)</span><span class="err">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="err">$</span>this<span class="o">-&gt;</span>browse<span class="o">(</span>function<span class="w"> </span><span class="o">(</span><span class="err">$</span>browser<span class="o">)</span><span class="w"> </span>use<span class="w"> </span><span class="o">(</span><span class="err">$</span>user<span class="o">)</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
+<span class="w">        </span><span class="err">$</span>browser<span class="o">-&gt;</span>loginAs<span class="o">(</span><span class="err">$</span>user<span class="o">)</span><span class="w"></span>
+<span class="w">                </span><span class="o">-&gt;</span>visit<span class="o">(</span><span class="s">&#39;/home&#39;</span><span class="o">)</span><span class="w"></span>
+<span class="w">                </span><span class="o">-&gt;</span>press<span class="o">(</span><span class="s">&#39;Create Playlist&#39;</span><span class="o">)</span><span class="w"></span>
+<span class="w">                </span><span class="o">-&gt;</span>whenAvailable<span class="o">(</span><span class="s">&#39;.playlist-modal&#39;</span><span class="o">,</span><span class="w"> </span>function<span class="w"> </span><span class="o">(</span><span class="err">$</span>modal<span class="o">)</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
+<span class="w">                    </span><span class="err">$</span>modal<span class="o">-&gt;</span>type<span class="o">(</span><span class="s">&#39;name&#39;</span><span class="o">,</span><span class="w"> </span><span class="s">&#39;My Playlist&#39;</span><span class="o">)</span><span class="w"></span>
+<span class="w">                          </span><span class="o">-&gt;</span>press<span class="o">(</span><span class="s">&#39;Create&#39;</span><span class="o">)</span><span class="err">;</span><span class="w"></span>
+<span class="w">                </span><span class="err">}</span><span class="o">)</span><span class="err">;</span><span class="w"></span>
+
+<span class="w">        </span><span class="err">$</span>browser<span class="o">-&gt;</span>waitForText<span class="o">(</span><span class="s">&#39;Playlist Created&#39;</span><span class="o">)</span><span class="err">;</span><span class="w"></span>
+<span class="w">    </span><span class="err">}</span><span class="o">)</span><span class="err">;</span><span class="w"></span>
+<span class="err">}</span><span class="w"></span>
+</pre></div>
+
+
+<p>For more information on Dusk, consult the full <a href="../docs/5.4/dusk">Dusk documentation</a>.</p>
+<h3 id="laravel-mix">Laravel Mix</h3>
+<blockquote>
+<p>{video} There is a free <a href="https://laracasts.com/series/whats-new-in-laravel-5-4/episodes/3">video tutorial</a> for this feature available on Laracasts.</p>
+</blockquote>
+<p>Laravel Mix is the spiritual successor of Laravel Elixir, and its entirely based on Webpack instead of Gulp. Laravel Mix provides a fluent API for defining Webpack build steps for your Laravel application using several common CSS and JavaScript pre-processors. Through simple method chaining, you can fluently define your asset pipeline. For example:</p>
+<div class="codehilite"><pre><span></span>mix.js(&#39;resources/assets/js/app.js&#39;, &#39;public/js&#39;)
+   .sass(&#39;resources/assets/sass/app.scss&#39;, &#39;public/css&#39;);
+</pre></div>
+
+
+<h3 id="blade-components-slots">Blade Components &amp; Slots</h3>
+<blockquote>
+<p>{video} There is a free <a href="https://laracasts.com/series/whats-new-in-laravel-5-4/episodes/6">video tutorial</a> for this feature available on Laracasts.</p>
+</blockquote>
+<p>Blade components and slots provide similar benefits to sections and layouts; however, some may find the mental model of components and slots easier to understand. First, let's imagine a reusable "alert" component we would like to reuse throughout our application:</p>
+<div class="codehilite"><pre><span></span><span class="c">&lt;!-- /resources/views/alert.blade.php --&gt;</span>
+
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;alert alert-danger&quot;</span><span class="nt">&gt;</span>
+    <span class="cp">{{</span> <span class="err">$</span><span class="nv">slot</span> <span class="cp">}}</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+
+
+<p>The <code>{{ $slot }}</code> variable will contain the content we wish to inject into the component. Now, to construct this component, we can use the <code>@component</code> Blade directive:</p>
+<div class="codehilite"><pre><span></span><span class="p">@</span><span class="n">component</span><span class="p">(</span><span class="err">&#39;</span><span class="n">alert</span><span class="err">&#39;</span><span class="p">)</span>
+    <span class="o">&lt;</span><span class="k">strong</span><span class="o">&gt;</span><span class="n">Whoops</span><span class="o">!&lt;/</span><span class="k">strong</span><span class="o">&gt;</span> <span class="n">Something</span> <span class="n">went</span> <span class="n">wrong</span><span class="o">!</span>
+<span class="p">@</span><span class="n">endcomponent</span>
+</pre></div>
+
+
+<p>Named slots allow you to provide multiple slots into a single component:</p>
+<div class="codehilite"><pre><span></span><span class="c">&lt;!-- /resources/views/alert.blade.php --&gt;</span>
+
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;alert alert-danger&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;alert-title&quot;</span><span class="nt">&gt;</span><span class="cp">{{</span> <span class="err">$</span><span class="nv">title</span> <span class="cp">}}</span><span class="nt">&lt;/div&gt;</span>
+
+    <span class="cp">{{</span> <span class="err">$</span><span class="nv">slot</span> <span class="cp">}}</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+
+
+<p>Named slots may be injected using the <code>@slot</code> directive. Any content is not within a <code>@slot</code> directive will be passed to the component in the <code>$slot</code> variable:</p>
+<div class="codehilite"><pre><span></span><span class="p">@</span><span class="n">component</span><span class="p">(</span><span class="err">&#39;</span><span class="n">alert</span><span class="err">&#39;</span><span class="p">)</span>
+    <span class="p">@</span><span class="n">slot</span><span class="p">(</span><span class="err">&#39;</span><span class="n">title</span><span class="err">&#39;</span><span class="p">)</span>
+        <span class="n">Forbidden</span>
+    <span class="p">@</span><span class="n">endslot</span>
+
+    <span class="n">You</span> <span class="n">are</span> <span class="n">not</span> <span class="n">allowed</span> <span class="n">to</span> <span class="n">access</span> <span class="n">this</span> <span class="n">resource</span><span class="o">!</span>
+<span class="p">@</span><span class="n">endcomponent</span>
+</pre></div>
+
+
+<p>To read more about components and slots, consult the full <a href="../docs/5.4/blade">Blade documentation</a>.</p>
+<h3 id="broadcast-model-binding">Broadcast Model Binding</h3>
+<p>Just like HTTP routes, channel routes may now take advantage of implicit and explicit <a href="../docs/5.4/routing#route-model-binding">route model binding</a>. For example, instead of receiving the string or numeric order ID, you may request an actual <code>Order</code> model instance:</p>
+<div class="codehilite"><pre><span></span>use App\Order;
+
+Broadcast::channel(&#39;order.{order}&#39;, function ($user, Order $order) {
+    return $user-&gt;id === $order-&gt;user_id;
+});
+</pre></div>
+
+
+<p>To read more about broadcast model binding, consult the full <a href="../docs/5.4/broadcasting">event broadcasting</a> documentation.</p>
+<h3 id="collection-higher-order-messages">Collection Higher Order Messages</h3>
+<blockquote>
+<p>{video} There is a free <a href="https://laracasts.com/series/whats-new-in-laravel-5-4/episodes/2">video tutorial</a> for this feature available on Laracasts.</p>
+</blockquote>
+<p>Collections now provide support for "higher order messages", which are short-cuts for performing common actions on collections. The collection methods that provide higher order messages are: <code>contains</code>, <code>each</code>, <code>every</code>, <code>filter</code>, <code>first</code>, <code>map</code>, <code>partition</code>, <code>reject</code>, <code>sortBy</code>, <code>sortByDesc</code>, and <code>sum</code>.</p>
+<p>Each higher order message can be accessed as a dynamic property on a collection instance. For instance, let's use the <code>each</code> higher order message to call a method on each object within a collection:</p>
+<div class="codehilite"><pre><span></span><span class="o">$</span><span class="nt">users</span> <span class="o">=</span> <span class="nt">User</span><span class="p">::</span><span class="nd">where</span><span class="o">(</span><span class="s1">&#39;votes&#39;</span><span class="o">,</span> <span class="s1">&#39;&gt;&#39;</span><span class="o">,</span> <span class="nt">500</span><span class="o">)</span><span class="nt">-</span><span class="o">&gt;</span><span class="nt">get</span><span class="o">();</span>
+
+<span class="o">$</span><span class="nt">users-</span><span class="o">&gt;</span><span class="nt">each-</span><span class="o">&gt;</span><span class="nt">markAsVip</span><span class="o">();</span>
+</pre></div>
+
+
+<p>Likewise, we can use the <code>sum</code> higher order message to gather the total number of "votes" for a collection of users:</p>
+<div class="codehilite"><pre><span></span><span class="o">$</span><span class="nt">users</span> <span class="o">=</span> <span class="nt">User</span><span class="p">::</span><span class="nd">where</span><span class="o">(</span><span class="s1">&#39;group&#39;</span><span class="o">,</span> <span class="s1">&#39;Development&#39;</span><span class="o">)</span><span class="nt">-</span><span class="o">&gt;</span><span class="nt">get</span><span class="o">();</span>
+
+<span class="nt">return</span> <span class="o">$</span><span class="nt">users-</span><span class="o">&gt;</span><span class="nt">sum-</span><span class="o">&gt;</span><span class="nt">votes</span><span class="o">;</span>
+</pre></div>
+
+
+<h3 id="object-based-eloquent-events">Object Based Eloquent Events</h3>
+<blockquote>
+<p>{video} There is a free <a href="https://laracasts.com/series/whats-new-in-laravel-5-4/episodes/10">video tutorial</a> for this feature available on Laracasts.</p>
+</blockquote>
+<p>Eloquent event handlers may now be mapped to event objects. This provides a more intuitive way of handling Eloquent events and makes it easier to test the events. To get started, define an <code>$events</code> property on your Eloquent model that maps various points of the Eloquent model's lifecycle to your own <a href="../docs/5.4/events">event classes</a>:</p>
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+
+<span class="nx">namespace</span> <span class="nx">App</span><span class="p">;</span>
+
+<span class="nx">use</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Events</span><span class="err">\</span><span class="nx">UserSaved</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Events</span><span class="err">\</span><span class="nx">UserDeleted</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Notifications</span><span class="err">\</span><span class="nx">Notifiable</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Foundation</span><span class="err">\</span><span class="nx">Auth</span><span class="err">\</span><span class="nx">User</span> <span class="kr">as</span> <span class="nx">Authenticatable</span><span class="p">;</span>
+
+<span class="kr">class</span> <span class="nx">User</span> <span class="kr">extends</span> <span class="nx">Authenticatable</span>
+<span class="p">{</span>
+    <span class="nx">use</span> <span class="nx">Notifiable</span><span class="p">;</span>
+
+    <span class="cm">/**</span>
+<span class="cm">     * The event map for the model.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @var array</span>
+<span class="cm">     */</span>
+    <span class="kr">protected</span> <span class="nx">$events</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s1">&#39;saved&#39;</span> <span class="o">=&gt;</span> <span class="nx">UserSaved</span><span class="o">::</span><span class="kr">class</span><span class="p">,</span>
+        <span class="s1">&#39;deleted&#39;</span> <span class="o">=&gt;</span> <span class="nx">UserDeleted</span><span class="o">::</span><span class="kr">class</span><span class="p">,</span>
+    <span class="p">];</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<h3 id="job-level-retry-timeout">Job Level Retry &amp; Timeout</h3>
+<p>Previously, queue job "retry" and "timeout" settings could only be configured globally for all jobs on the command line. However, in Laravel 5.4, these settings may be configured on a per-job basis by defining them directly on the job class:</p>
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+
+<span class="nx">namespace</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Jobs</span><span class="p">;</span>
+
+<span class="kr">class</span> <span class="nx">ProcessPodcast</span> <span class="kr">implements</span> <span class="nx">ShouldQueue</span>
+<span class="p">{</span>
+    <span class="cm">/**</span>
+<span class="cm">     * The number of times the job may be attempted.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @var int</span>
+<span class="cm">     */</span>
+    <span class="kr">public</span> <span class="nx">$tries</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+
+    <span class="cm">/**</span>
+<span class="cm">     * The number of seconds the job can run before timing out.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @var int</span>
+<span class="cm">     */</span>
+    <span class="kr">public</span> <span class="nx">$timeout</span> <span class="o">=</span> <span class="mi">120</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>For more information about these settings, consult the full <a href="../docs/5.4/queues">queue documentation</a>.</p>
+<h3 id="request-sanitization-middleware">Request Sanitization Middleware</h3>
+<blockquote>
+<p>{video} There is a free <a href="https://laracasts.com/series/whats-new-in-laravel-5-4/episodes/1">video tutorial</a> for this feature available on Laracasts.</p>
+</blockquote>
+<p>Laravel 5.4 includes two new middleware in the default middleware stack: <code>TrimStrings</code> and <code>ConvertEmptyStringsToNull</code>:</p>
+<div class="codehilite"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * The application&#39;s global HTTP middleware stack.</span>
+<span class="cm"> *</span>
+<span class="cm"> * These middleware are run during every request to your application.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @var array</span>
+<span class="cm"> */</span><span class="w"></span>
+protected<span class="w"> </span><span class="err">$</span>middleware<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">[</span><span class="w"></span>
+<span class="w">    </span><span class="o">\</span>Illuminate<span class="o">\</span>Foundation<span class="o">\</span>Http<span class="o">\</span>Middleware<span class="o">\</span><span class="nl">CheckForMaintenanceMode</span><span class="o">:</span><span class="err">:</span>class<span class="o">,</span><span class="w"></span>
+<span class="w">    </span><span class="o">\</span>Illuminate<span class="o">\</span>Foundation<span class="o">\</span>Http<span class="o">\</span>Middleware<span class="o">\</span><span class="nl">ValidatePostSize</span><span class="o">:</span><span class="err">:</span>class<span class="o">,</span><span class="w"></span>
+<span class="w">    </span><span class="o">\</span>App<span class="o">\</span>Http<span class="o">\</span>Middleware<span class="o">\</span><span class="nl">TrimStrings</span><span class="o">:</span><span class="err">:</span>class<span class="o">,</span><span class="w"></span>
+<span class="w">    </span><span class="o">\</span>Illuminate<span class="o">\</span>Foundation<span class="o">\</span>Http<span class="o">\</span>Middleware<span class="o">\</span><span class="nl">ConvertEmptyStringsToNull</span><span class="o">:</span><span class="err">:</span>class<span class="o">,</span><span class="w"></span>
+<span class="err">];</span><span class="w"></span>
+</pre></div>
+
+
+<p>These middleware will automatically trim request input values and convert any empty strings to <code>null</code>. This helps you normalize the input for every request entering into your application and not have to worry about continually calling the <code>trim</code> function in every route and controller.</p>
+<h3 id="realtime-facades">"Realtime" Facades</h3>
+<blockquote>
+<p>{video} There is a free <a href="https://laracasts.com/series/whats-new-in-laravel-5-4/episodes/8">video tutorial</a> for this feature available on Laracasts.</p>
+</blockquote>
+<p>Previously, only Laravel's own built-in services exposed <a href="../docs/5.4/facades">facades</a>, which provide quick, terse access to their methods via the service container. However, in Laravel 5.4, you may easily convert any of your application's classes into a facade in realtime simply by prefixing the imported class name with <code>Facades</code>. For example, imagine your application contains a class like the following:</p>
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+
+<span class="nx">namespace</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Services</span><span class="p">;</span>
+
+<span class="kr">class</span> <span class="nx">PaymentGateway</span>
+<span class="p">{</span>
+    <span class="kr">protected</span> <span class="nx">$tax</span><span class="p">;</span>
+
+    <span class="cm">/**</span>
+<span class="cm">     * Create a new payment gateway instance.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param  TaxCalculator  $tax</span>
+<span class="cm">     * @return void</span>
+<span class="cm">     */</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">__construct</span><span class="p">(</span><span class="nx">TaxCalculator</span> <span class="nx">$tax</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">tax</span> <span class="o">=</span> <span class="nx">$tax</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cm">/**</span>
+<span class="cm">     * Pay the given amount.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param  int  $amount</span>
+<span class="cm">     * @return void</span>
+<span class="cm">     */</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">pay</span><span class="p">(</span><span class="nx">$amount</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// Pay an amount...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>You may easily use this class as a facade like so:</p>
+<div class="codehilite"><pre><span></span><span class="nt">use</span> <span class="nt">Facades</span><span class="err">\</span> <span class="p">{</span>
+    <span class="err">App\Services\PaymentGateway</span>
+<span class="p">}</span><span class="o">;</span>
+
+<span class="nt">Route</span><span class="p">::</span><span class="nd">get</span><span class="o">(</span><span class="s1">&#39;/pay/{amount}&#39;</span><span class="o">,</span> <span class="nt">function</span> <span class="o">($</span><span class="nt">amount</span><span class="o">)</span> <span class="p">{</span>
+    <span class="n">PaymentGateway</span><span class="p">:</span><span class="o">:</span><span class="nf">pay</span><span class="p">(</span><span class="err">$</span><span class="n">amount</span><span class="p">);</span>
+<span class="p">}</span><span class="o">);</span>
+</pre></div>
+
+
+<p>Of course, if you leverage a realtime facade in this way, you may easily write a test for the interaction using Laravel's <a href="../docs/5.4/mocking">facade mocking capabilities</a>:</p>
+<div class="codehilite"><pre><span></span><span class="nt">PaymentGateway</span><span class="p">::</span><span class="nd">shouldReceive</span><span class="o">(</span><span class="s1">&#39;pay&#39;</span><span class="o">)</span><span class="nt">-</span><span class="o">&gt;</span><span class="nt">with</span><span class="o">(</span><span class="s1">&#39;100&#39;</span><span class="o">);</span>
+</pre></div>
+
+
+<h3 id="custom-pivot-table-models">Custom Pivot Table Models</h3>
+<p>In Laravel 5.3, all "pivot" table models for <code>belongsToMany</code> relationships used the same built-in <code>Pivot</code> model instance. In Laravel 5.4, you may define custom models for your pivot tables. If you would like to define a custom model to represent the intermediate table of your relationship, use the <code>using</code> method when defining the relationship:</p>
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+
+<span class="nx">namespace</span> <span class="nx">App</span><span class="p">;</span>
+
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Database</span><span class="err">\</span><span class="nx">Eloquent</span><span class="err">\</span><span class="nx">Model</span><span class="p">;</span>
+
+<span class="kr">class</span> <span class="nx">Role</span> <span class="kr">extends</span> <span class="nx">Model</span>
+<span class="p">{</span>
+    <span class="cm">/**</span>
+<span class="cm">     * The users that belong to the role.</span>
+<span class="cm">     */</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">users</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">belongsToMany</span><span class="p">(</span><span class="s1">&#39;App\User&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="nx">using</span><span class="p">(</span><span class="s1">&#39;App\UserRole&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<h3 id="improved-redis-cluster-support">Improved Redis Cluster Support</h3>
+<p>Previously, it was not possible to define Redis connections to single hosts and to clusters in the same application. In Laravel 5.4, you may now define Redis connections to multiple single hosts and multiple clusters within the same application. For more information on Redis in Laravel, please consult the full <a href="../docs/5.4/redis">Redis documentation</a>.</p>
+<p><a name="utf8mb4"></a></p>
+<h3 id="migration-default-string-length">Migration Default String Length</h3>
+<p>Laravel 5.4 uses the <code>utf8mb4</code> character set by default, which includes support for storing "emojis" in the database. If you are upgrading your application from Laravel 5.3, you are not required to switch to this character set.</p>
+<p>If you choose to switch to this character set manually and are running a version of MySQL older than the 5.7.7 release, you may need to manually configure the default string length generated by migrations. You may configure this by calling the <code>Schema::defaultStringLength</code> method within your <code>AppServiceProvider</code>:</p>
+<div class="codehilite"><pre><span></span><span class="nt">use</span> <span class="nt">Illuminate</span><span class="err">\</span><span class="nt">Support</span><span class="err">\</span><span class="nt">Facades</span><span class="err">\</span><span class="nt">Schema</span><span class="o">;</span>
+
+<span class="c">/**</span>
+<span class="c"> * Bootstrap any application services.</span>
+<span class="c"> *</span>
+<span class="c"> * @return void</span>
+<span class="c"> */</span>
+<span class="nt">public</span> <span class="nt">function</span> <span class="nt">boot</span><span class="o">()</span>
+<span class="p">{</span>
+    <span class="n">Schema</span><span class="p">:</span><span class="o">:</span><span class="nf">defaultStringLength</span><span class="p">(</span><span class="mi">191</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <p><a name="laravel-5.3"></a></p>
 <h2 id="laravel-53">Laravel 5.3</h2>
 <p>Laravel 5.3 continues the improvements made in Laravel 5.2 by adding a driver based <a href="../docs/5.3/notifications">notification system</a>, robust realtime support via <a href="../docs/5.3/broadcasting">Laravel Echo</a>, painless OAuth2 servers via <a href="../docs/5.3/passport">Laravel Passport</a>, full-text model searching via <a href="../docs/5.3/scout">Laravel Scout</a>, Webpack support in Laravel Elixir, "mailable" objects, explicit separation of <code>web</code> and <code>api</code> routes, Closure based console commands, convenient helpers for storing uploaded files, support for POPO and single-action controllers, improved default frontend scaffolding, and more.</p>
@@ -1498,34 +1834,6 @@ protected<span class="w"> </span><span class="err">$</span>middlewareGroups<span
 <p>A new <code>simplePaginate</code> method was added to the query and Eloquent builder which allows for more efficient queries when using simple "Next" and "Previous" links in your pagination view.</p>
 <h3 id="migration-confirmation">Migration Confirmation</h3>
 <p>In production, destructive migration operations will now ask for confirmation. Commands may be forced to run without any prompts using the <code>--force</code> command.</p>
-<p><a name="laravel-4.1"></a></p>
-<h2 id="laravel-41">Laravel 4.1</h2>
-<h3 id="full-change-list">Full Change List</h3>
-<p>The full change list for this release by running the <code>php artisan changes</code> command from a 4.1 installation, or by <a href="https://github.com/laravel/framework/blob/4.1/src/Illuminate/Foundation/changes.json">viewing the change file on Github</a>. These notes only cover the major enhancements and changes for the release.</p>
-<h3 id="new-ssh-component">New SSH Component</h3>
-<p>An entirely new <code>SSH</code> component has been introduced with this release. This feature allows you to easily SSH into remote servers and run commands. To learn more, consult the <a href="../docs/ssh">SSH component documentation</a>.</p>
-<p>The new <code>php artisan tail</code> command utilizes the new SSH component. For more information, consult the <code>tail</code> <a href="http://laravel.com/docs/ssh#tailing-remote-logs">command documentation</a>.</p>
-<h3 id="boris-in-tinker">Boris In Tinker</h3>
-<p>The <code>php artisan tinker</code> command now utilizes the <a href="https://github.com/d11wtq/boris">Boris REPL</a> if your system supports it. The <code>readline</code> and <code>pcntl</code> PHP extensions must be installed to use this feature. If you do not have these extensions, the shell from 4.0 will be used.</p>
-<h3 id="eloquent-improvements">Eloquent Improvements</h3>
-<p>A new <code>hasManyThrough</code> relationship has been added to Eloquent. To learn how to use it, consult the <a href="../docs/eloquent#has-many-through">Eloquent documentation</a>.</p>
-<p>A new <code>whereHas</code> method has also been introduced to allow <a href="../docs/eloquent#querying-relations">retrieving models based on relationship constraints</a>.</p>
-<h3 id="database-read-write-connections">Database Read / Write Connections</h3>
-<p>Automatic handling of separate read / write connections is now available throughout the database layer, including the query builder and Eloquent. For more information, consult <a href="../docs/database#read-write-connections">the documentation</a>.</p>
-<h3 id="queue-priority">Queue Priority</h3>
-<p>Queue priorities are now supported by passing a comma-delimited list to the <code>queue:listen</code> command.</p>
-<h3 id="failed-queue-job-handling">Failed Queue Job Handling</h3>
-<p>The queue facilities now include automatic handling of failed jobs when using the new <code>--tries</code> switch on <code>queue:listen</code>. More information on handling failed jobs can be found in the <a href="../docs/queues#failed-jobs">queue documentation</a>.</p>
-<h3 id="cache-tags">Cache Tags</h3>
-<p>Cache "sections" have been superseded by "tags". Cache tags allow you to assign multiple "tags" to a cache item, and flush all items assigned to a single tag. More information on using cache tags may be found in the <a href="../docs/cache#cache-tags">cache documentation</a>.</p>
-<h3 id="flexible-password-reminders">Flexible Password Reminders</h3>
-<p>The password reminder engine has been changed to provide greater developer flexibility when validating passwords, flashing status messages to the session, etc. For more information on using the enhanced password reminder engine, <a href="../docs/security#password-reminders-and-reset">consult the documentation</a>.</p>
-<h3 id="improved-routing-engine">Improved Routing Engine</h3>
-<p>Laravel 4.1 features a totally re-written routing layer. The API is the same; however, registering routes is a full 100% faster compared to 4.0. The entire engine has been greatly simplified, and the dependency on Symfony Routing has been minimized to the compiling of route expressions.</p>
-<h3 id="improved-session-engine">Improved Session Engine</h3>
-<p>With this release, we're also introducing an entirely new session engine. Similar to the routing improvements, the new session layer is leaner and faster. We are no longer using Symfony's (and therefore PHP's) session handling facilities, and are using a custom solution that is simpler and easier to maintain.</p>
-<h3 id="doctrine-dbal">Doctrine DBAL</h3>
-<p>If you are using the <code>renameColumn</code> function in your migrations, you will need to add the <code>doctrine/dbal</code> dependency to your <code>composer.json</code> file. This package is no longer included in Laravel by default.</p>
           <aside class="copyright" role="note">
             
             Documentation built with

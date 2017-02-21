@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="no-js ie6"><![endif]-->
+<!--[if IE 7 ]><html class="no-js ie7"><![endif]-->
+<!--[if IE 8 ]><html class="no-js ie8"><![endif]-->
+<!--[if IE 9 ]><html class="no-js ie9"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
+    
+      
+        <title>Mix - Laravel 5.4 Official Documentation</title>
+      
+      
+      
+      
+    
+    <meta property="og:url" content="None">
+    <meta property="og:title" content="Laravel 5.4 Official Documentation">
+    <meta property="og:image" content="None/../">
+    <meta name="apple-mobile-web-app-title" content="Laravel 5.4 Official Documentation">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    
+    <link rel="shortcut icon" type="image/x-icon" href="../assets/images/favicon-e565ddfa3b.ico">
+    <link rel="icon" type="image/x-icon" href="../assets/images/favicon-e565ddfa3b.ico">
+    <style>
+      @font-face {
+      	font-family: 'Icon';
+      	src: url('../assets/fonts/icon.eot?52m981');
+      	src: url('../assets/fonts/icon.eot?#iefix52m981')
+               format('embedded-opentype'),
+      		   url('../assets/fonts/icon.woff?52m981')
+               format('woff'),
+      		   url('../assets/fonts/icon.ttf?52m981')
+               format('truetype'),
+      		   url('../assets/fonts/icon.svg?52m981#icon')
+               format('svg');
+      	font-weight: normal;
+      	font-style: normal;
+      }
+    </style>
+    <link rel="stylesheet" href="../assets/stylesheets/application-a422ff04cc.css">
+    
+      <link rel="stylesheet" href="../assets/stylesheets/palettes-05ab2406df.css">
+    
+    
+      
+      
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,700|Ubuntu+Mono">
+      <style>
+        body, input {
+          font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
+        }
+        pre, code {
+          font-family: 'Ubuntu Mono', 'Courier New', 'Courier', monospace;
+        }
+      </style>
+    
+    
+    <script src="../assets/javascripts/modernizr-4ab42b99fd.js"></script>
+    
+  </head>
+  
+  
+  
+  <body class="palette-primary-teal palette-accent-green">
+    
+    <div class="backdrop">
+      <div class="backdrop-paper"></div>
+    </div>
+    <input class="toggle" type="checkbox" id="toggle-drawer">
+    <input class="toggle" type="checkbox" id="toggle-search">
+    <label class="toggle-button overlay" for="toggle-drawer"></label>
+    <header class="header">
+      <nav aria-label="Header">
+  <div class="bar default">
+    <div class="button button-menu" role="button" aria-label="Menu">
+      <label class="toggle-button icon icon-menu" for="toggle-drawer">
+        <span></span>
+      </label>
+    </div>
+    <div class="stretch">
+      <div class="title">
+        
+          <span class="path">
+            
+          </span>
+        
+        Mix
+      </div>
+    </div>
+    
+    
+    <div class="button button-search" role="button" aria-label="Search">
+      <label class="toggle-button icon icon-search" title="Search" for="toggle-search"></label>
+    </div>
+  </div>
+  <div class="bar search">
+    <div class="button button-close" role="button" aria-label="Close">
+      <label class="toggle-button icon icon-back" for="toggle-search"></label>
+    </div>
+    <div class="stretch">
+      <div class="field">
+        <input class="query" type="text" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck>
+      </div>
+    </div>
+    <div class="button button-reset" role="button" aria-label="Search">
+      <button class="toggle-button icon icon-close" id="reset-search"></button>
+    </div>
+  </div>
+</nav>
+    </header>
+    <main class="main">
+      
+      <div class="drawer">
+        <nav aria-label="Navigation">
+  
+  <a href="/" class="project">
+    <div class="banner">
+      
+      <div class="name">
+        <strong>
+          Laravel 5.4 Official Documentation
+          <span class="version">
+            
+          </span>
+        </strong>
+        
+      </div>
+    </div>
+  </a>
+  <div class="scrollable">
+    <div class="wrapper">
+      
+      <div class="toc">
+        <ul>
+          
+            
+  <li>
+    <a class="" title="Home" href="..">
+      Home
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Apis" href="../apis/">
+      Apis
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Artisan" href="../artisan/">
+      Artisan
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Authentication" href="../authentication/">
+      Authentication
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Authorization" href="../authorization/">
+      Authorization
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Billing" href="../billing/">
+      Billing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Blade" href="../blade/">
+      Blade
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Broadcasting" href="../broadcasting/">
+      Broadcasting
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Cache" href="../cache/">
+      Cache
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Collections" href="../collections/">
+      Collections
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Configuration" href="../configuration/">
+      Configuration
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Container" href="../container/">
+      Container
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Contracts" href="../contracts/">
+      Contracts
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Contributing" href="../contributing/">
+      Contributing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Contributions" href="../contributions/">
+      Contributions
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Controllers" href="../controllers/">
+      Controllers
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Csrf" href="../csrf/">
+      Csrf
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Database testing" href="../database-testing/">
+      Database testing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Database" href="../database/">
+      Database
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Documentation" href="../documentation/">
+      Documentation
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Dusk" href="../dusk/">
+      Dusk
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent collections" href="../eloquent-collections/">
+      Eloquent collections
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent mutators" href="../eloquent-mutators/">
+      Eloquent mutators
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent relationships" href="../eloquent-relationships/">
+      Eloquent relationships
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent serialization" href="../eloquent-serialization/">
+      Eloquent serialization
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Eloquent" href="../eloquent/">
+      Eloquent
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Encryption" href="../encryption/">
+      Encryption
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Envoy" href="../envoy/">
+      Envoy
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Errors" href="../errors/">
+      Errors
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Events" href="../events/">
+      Events
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Facades" href="../facades/">
+      Facades
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Filesystem" href="../filesystem/">
+      Filesystem
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Frontend" href="../frontend/">
+      Frontend
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Hashing" href="../hashing/">
+      Hashing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Helpers" href="../helpers/">
+      Helpers
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Homestead" href="../homestead/">
+      Homestead
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Http tests" href="../http-tests/">
+      Http tests
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Installation" href="../installation/">
+      Installation
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="License" href="../license/">
+      License
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Lifecycle" href="../lifecycle/">
+      Lifecycle
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Localization" href="../localization/">
+      Localization
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Mail" href="../mail/">
+      Mail
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Middleware" href="../middleware/">
+      Middleware
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Migrations" href="../migrations/">
+      Migrations
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="current" title="Mix" href="./">
+      Mix
+    </a>
+    
+      
+        
+      
+      
+        <ul>
+          
+            <li class="anchor">
+              <a title="Introduction" href="#introduction">
+                Introduction
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Installation &amp; Setup" href="#installation-setup">
+                Installation &amp; Setup
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Running Mix" href="#running-mix">
+                Running Mix
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Working With Stylesheets" href="#working-with-stylesheets">
+                Working With Stylesheets
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Working With JavaScript" href="#working-with-javascript">
+                Working With JavaScript
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Copying Files &amp; Directories" href="#copying-files-directories">
+                Copying Files &amp; Directories
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Versioning / Cache Busting" href="#versioning-cache-busting">
+                Versioning / Cache Busting
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Notifications" href="#notifications">
+                Notifications
+              </a>
+            </li>
+          
+        </ul>
+      
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Mocking" href="../mocking/">
+      Mocking
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Notifications" href="../notifications/">
+      Notifications
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Packages" href="../packages/">
+      Packages
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Pagination" href="../pagination/">
+      Pagination
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Passport" href="../passport/">
+      Passport
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Passwords" href="../passwords/">
+      Passwords
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Providers" href="../providers/">
+      Providers
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Queries" href="../queries/">
+      Queries
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Queues" href="../queues/">
+      Queues
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Redirects" href="../redirects/">
+      Redirects
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Redis" href="../redis/">
+      Redis
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Releases" href="../releases/">
+      Releases
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Requests" href="../requests/">
+      Requests
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Responses" href="../responses/">
+      Responses
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Routing" href="../routing/">
+      Routing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Scheduling" href="../scheduling/">
+      Scheduling
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Scout" href="../scout/">
+      Scout
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Seeding" href="../seeding/">
+      Seeding
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Session" href="../session/">
+      Session
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Structure" href="../structure/">
+      Structure
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Testing" href="../testing/">
+      Testing
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Upgrade" href="../upgrade/">
+      Upgrade
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Valet" href="../valet/">
+      Valet
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Validation" href="../validation/">
+      Validation
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Views" href="../views/">
+      Views
+    </a>
+    
+  </li>
+
+          
+        </ul>
+        
+      </div>
+    </div>
+  </div>
+</nav>
+      </div>
+      <article class="article">
+        <div class="wrapper">
+          
+          <h1 id="compiling-assets-laravel-mix">Compiling Assets (Laravel Mix)</h1>
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#installation">Installation &amp; Setup</a></li>
+<li><a href="#running-mix">Running Mix</a></li>
+<li><a href="#working-with-stylesheets">Working With Stylesheets</a><ul>
+<li><a href="#less">Less</a></li>
+<li><a href="#sass">Sass</a></li>
+<li><a href="#plain-css">Plain CSS</a></li>
+<li><a href="#css-source-maps">Source Maps</a></li>
+</ul>
+</li>
+<li><a href="#working-with-scripts">Working With JavaScript</a><ul>
+<li><a href="#code-splitting">Code Splitting</a></li>
+<li><a href="#custom-webpack-configuration">Custom Webpack Configuration</a></li>
+</ul>
+</li>
+<li><a href="#copying-files-and-directories">Copying Files &amp; Directories</a></li>
+<li><a href="#versioning-and-cache-busting">Versioning / Cache Busting</a></li>
+<li><a href="#notifications">Notifications</a></li>
+</ul>
+<p><a name="introduction"></a></p>
+<h2 id="introduction">Introduction</h2>
+<p>Laravel Mix provides a fluent API for defining Webpack build steps for your Laravel application using several common CSS and JavaScript pre-processors. Through simple method chaining, you can fluently define your asset pipeline. For example:</p>
+<div class="codehilite"><pre><span></span>mix.js(&#39;resources/assets/js/app.js&#39;, &#39;public/js&#39;)
+   .sass(&#39;resources/assets/sass/app.scss&#39;, &#39;public/css&#39;);
+</pre></div>
+
+
+<p>If you've ever been confused and overwhelmed about getting started with Webpack and asset compilation, you will love Laravel Mix. However, you are not required to use it while developing your application. Of course, you are free to use any asset pipeline tool you wish, or even none at all.</p>
+<p><a name="installation"></a></p>
+<h2 id="installation-setup">Installation &amp; Setup</h2>
+<h4 id="installing-node">Installing Node</h4>
+<p>Before triggering Mix, you must first ensure that Node.js and NPM are installed on your machine.</p>
+<div class="codehilite"><pre><span></span>node -v
+npm -v
+</pre></div>
+
+
+<p>By default, Laravel Homestead includes everything you need; however, if you aren't using Vagrant, then you can easily install the latest version of Node and NPM using simple graphical installers from <a href="https://nodejs.org/en/download/">their download page</a>.</p>
+<h4 id="laravel-mix">Laravel Mix</h4>
+<p>The only remaining step is to install Laravel Mix. Within a fresh installation of Laravel, you'll find a <code>package.json</code> file in the root of your directory structure. The default <code>package.json</code> file includes everything you need to get started. Think of this like your <code>composer.json</code> file, except it defines Node dependencies instead of PHP. You may install the dependencies it references by running:</p>
+<div class="codehilite"><pre><span></span>npm install
+</pre></div>
+
+
+<p>If you are developing on a Windows system or you are running your VM on a Windows host system, you may need to run the <code>npm install</code> command with the <code>--no-bin-links</code> switch enabled:</p>
+<div class="codehilite"><pre><span></span>npm install --no-bin-links
+</pre></div>
+
+
+<p><a name="running-mix"></a></p>
+<h2 id="running-mix">Running Mix</h2>
+<p>Mix is a configuration layer on top of <a href="https://webpack.js.org">Webpack</a>, so to run your Mix tasks you only need to execute one of the NPM scripts that is included with the default Laravel <code>package.json</code> file:</p>
+<div class="codehilite"><pre><span></span>// Run all Mix tasks...
+npm run dev
+
+// Run all Mix tasks and minify output...
+npm run production
+</pre></div>
+
+
+<h4 id="watching-assets-for-changes">Watching Assets For Changes</h4>
+<p>The <code>npm run watch</code> command will continue running in your terminal and watch all relevant files for changes. Webpack will then automatically recompile your assets when it detects a change:</p>
+<div class="codehilite"><pre><span></span>npm run watch
+</pre></div>
+
+
+<p><a name="working-with-stylesheets"></a></p>
+<h2 id="working-with-stylesheets">Working With Stylesheets</h2>
+<p>The <code>webpack.mix.js</code> file is your entry point for all asset compilation. Think of it as a light configuration wrapper around Webpack. Mix tasks can be chained together to define exactly how your assets should be compiled.</p>
+<p><a name="less"></a></p>
+<h3 id="less">Less</h3>
+<p>The <code>less</code> method may be used to compile <a href="http://lesscss.org/">Less</a> into CSS. Let's compile our primary <code>app.less</code> file to <code>public/css/app.css</code>.</p>
+<div class="codehilite"><pre><span></span>mix.less(&#39;resources/assets/less/app.less&#39;, &#39;public/css&#39;);
+</pre></div>
+
+
+<p>Multiple calls to the <code>less</code> method may be used to compile multiple files:</p>
+<div class="codehilite"><pre><span></span>mix.less(&#39;resources/assets/less/app.less&#39;, &#39;public/css&#39;)
+   .less(&#39;resources/assets/less/admin.less&#39;, &#39;public/css&#39;);
+</pre></div>
+
+
+<p>If you wish to customize the file name of the compiled CSS, you may pass a full file path as the second argument to the <code>less</code> method:</p>
+<div class="codehilite"><pre><span></span>mix.less(&#39;resources/assets/less/app.less&#39;, &#39;public/stylesheets/styles.css&#39;);
+</pre></div>
+
+
+<p><a name="sass"></a></p>
+<h3 id="sass">Sass</h3>
+<p>The <code>sass</code> method allows you to compile <a href="http://sass-lang.com/">Sass</a> into CSS. You may use the method like so:</p>
+<div class="codehilite"><pre><span></span>mix.sass(&#39;resources/assets/sass/app.scss&#39;, &#39;public/css&#39;);
+</pre></div>
+
+
+<p>Again, like the <code>less</code> method, you may compile multiple Sass files into their own respective CSS files and even customize the output directory of the resulting CSS:</p>
+<div class="codehilite"><pre><span></span>mix.sass(&#39;resources/assets/sass/app.sass&#39;, &#39;public/css&#39;)
+   .sass(&#39;resources/assets/sass/admin.sass&#39;, &#39;public/css/admin&#39;);
+</pre></div>
+
+
+<p><a name="plain-css"></a></p>
+<h3 id="plain-css">Plain CSS</h3>
+<p>If you would just like to combine some plain CSS stylesheets into a single file, you may use the <code>combine</code> method. This method also supports concatenating JavaScript files:</p>
+<div class="codehilite"><pre><span></span>mix.combine([
+    &#39;public/css/vendor/normalize.css&#39;,
+    &#39;public/css/vendor/videojs.css&#39;
+], &#39;public/css/all.css&#39;);
+</pre></div>
+
+
+<p><a name="css-source-maps"></a></p>
+<h3 id="source-maps">Source Maps</h3>
+<p>Though disabled by default, source maps may be activated by calling the <code>mix.sourceMaps()</code> method in your <code>webpack.mix.js</code> file. Though it comes with a compile/performance cost, this will provide extra debugging information to your browser's developer tools when using compiled assets.</p>
+<div class="codehilite"><pre><span></span>mix.js(&#39;resources/assets/js/app.js&#39;, &#39;public/js&#39;)
+   .sourceMaps();
+</pre></div>
+
+
+<p><a name="working-with-scripts"></a></p>
+<h2 id="working-with-javascript">Working With JavaScript</h2>
+<p>Mix provides several features to help you work with your JavaScript files, such as compiling ECMAScript 2015, module bundling, minification, and simply concatenating plain JavaScript files. Even better, this all works seamlessly, without requiring an ounce of custom configuration:</p>
+<div class="codehilite"><pre><span></span>mix.js(&#39;resources/assets/js/app.js&#39;, &#39;public/js&#39;);
+</pre></div>
+
+
+<p>With this single line of code, you may now take advantage of:</p>
+<div class="content-list" markdown="1">
+- ES2015 syntax.
+- Compilation of `.vue` files.
+- Minification for production environments.
+</div>
+
+<p><a name="code-splitting"></a></p>
+<h3 id="code-splitting">Code Splitting</h3>
+<p>One potential downside to bundling all application-specific JavaScript with your vendor libraries is that it makes long-term caching more difficult. For example, a single update to your application code will force the browser to re-download all of your vendor libraries even if they haven't changed.</p>
+<p>If you intend to make frequent updates to your application's JavaScript, you should consider extracting all of your vendor libraries into their file. This way, a change to your application code will not affect the caching of your large <code>vendor.js</code> file. Mix's <code>extract</code> method makes this a breeze:</p>
+<div class="codehilite"><pre><span></span>mix.js(&#39;resources/assets/js/app.js&#39;, &#39;public/js&#39;)
+   .extract([&#39;vue&#39;])
+</pre></div>
+
+
+<p>The <code>extract</code> method accepts an array of all libraries or modules that you wish to extract into a <code>vendor.js</code> file. Using the above snippet as an example, Mix will generate the following files:</p>
+<div class="content-list" markdown="1">
+- `public/js/manifest.js`: *The Webpack manifest runtime*
+- `public/js/vendor.js`: *Your vendor libraries*
+- `public/js/app.js`: *Your application code*
+</div>
+
+<p>To avoid JavaScript errors, be sure to load these files in the proper order:</p>
+<div class="codehilite"><pre><span></span><span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">&quot;/js/manifest.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">&quot;/js/vendor.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">&quot;/js/app.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</pre></div>
+
+
+<p><a name="custom-webpack-configuration"></a></p>
+<h3 id="custom-webpack-configuration">Custom Webpack Configuration</h3>
+<p>Behind the scenes, Laravel Mix references a pre-configured <code>webpack.config.js</code> file to get you up and running as quickly as possible. Occasionally, you may need to manually modify this file. You might have a special loader or plugin that needs to be referenced, or maybe you prefer to use Stylus instead of Sass. In such instances, you have two choices:</p>
+<h4 id="merging">Merging</h4>
+<p>Mix provides a useful <code>webpackConfig</code> method that allows you to merge any short Webpack configuration overrides. This is a particularly appealing choice, as it doesn't require you to copy and maintain your own copy of the <code>webpack.config.js</code> file. The <code>webpackConfig</code> method accepts an object, which should contain any <a href="https://webpack.js.org/configuration/">Webpack-specific configuration</a> that you wish to apply.</p>
+<div class="codehilite"><pre><span></span>mix.webpackConfig({
+    resolve: {
+        modules: [
+            path.resolve(__dirname, &#39;vendor/laravel/spark/resources/assets/js&#39;)
+        ]
+    }
+});
+</pre></div>
+
+
+<h4 id="reference-your-own-configuration">Reference Your Own Configuration</h4>
+<p>A second option is to copy Mix's <code>webpack.config.js</code> into your project root.</p>
+<div class="codehilite"><pre><span></span>cp node_modules/laravel-mix/setup/webpack.config.js ./
+</pre></div>
+
+
+<p>Next, you'll need to update the NPM scripts in your <code>package.json</code> to ensure that they no longer reference Mix's configuration file directly. Simply remove the <code>--config="node_modules/laravel-mix/setup/webpack.config.js"</code> entry from the commands. Once this has been done, you may freely modify your configuration file as needed.</p>
+<p><a name="copying-files-and-directories"></a></p>
+<h2 id="copying-files-directories">Copying Files &amp; Directories</h2>
+<p>The <code>copy</code> method may be used to copy files and directories to new locations. This can be useful when a particular asset within your <code>node_modules</code> directory needs to be relocated to your <code>public</code> folder.</p>
+<div class="codehilite"><pre><span></span>mix.copy(&#39;node_modules/foo/bar.css&#39;, &#39;public/css/bar.css&#39;);
+</pre></div>
+
+
+<p><a name="versioning-and-cache-busting"></a></p>
+<h2 id="versioning-cache-busting">Versioning / Cache Busting</h2>
+<p>Many developers suffix their compiled assets with a timestamp or unique token to force browsers to load the fresh assets instead of serving stale copies of the code. Mix can handle this for you using the <code>version</code> method.</p>
+<p>The <code>version</code> method will automatically append a unique hash to the filenames of all compiled files, allowing for more convenient cache busting:</p>
+<div class="codehilite"><pre><span></span>mix.js(&#39;resources/assets/js/app.js&#39;, &#39;public/js&#39;)
+   .version();
+</pre></div>
+
+
+<p>After generating the versioned file, you won't know the exact file name. So, you should use Laravel's global <code>mix</code> function within your <a href="../docs/{{version}}/views">views</a> to load the appropriately hashed asset. The <code>mix</code> function will automatically determine the current name of the hashed file:</p>
+<div class="codehilite"><pre><span></span><span class="x">&lt;link rel=&quot;stylesheet&quot; href=&quot;</span><span class="cp">{{</span> <span class="nv">mix</span><span class="o">(</span><span class="s1">&#39;/css/app.css&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="x">&quot;&gt;</span>
+</pre></div>
+
+
+<p>Because versioned files are usually unnecessary in development, you may wish to instruct the versioning process to only run during <code>npm run production</code>:</p>
+<div class="codehilite"><pre><span></span>mix.js(&#39;resources/assets/js/app.js&#39;, &#39;public/js&#39;);
+
+if (mix.config.inProduction) {
+    mix.version();
+}
+</pre></div>
+
+
+<p><a name="notifications"></a></p>
+<h2 id="notifications">Notifications</h2>
+<p>When available, Mix will automatically display OS notifications for each bundle. This will give you instant feedback, as to whether the compilation was successful or not. However, there may be instances when you'd prefer to disable these notifications. One such example might be triggering Mix on your production server. Notifications may be deactivated, via the <code>disableNotifications</code> method.</p>
+<div class="codehilite"><pre><span></span>mix.disableNotifications();
+</pre></div>
+          <aside class="copyright" role="note">
+            
+            Documentation built with
+            <a href="http://www.mkdocs.org" target="_blank">MkDocs</a>
+            using the
+            <a href="http://squidfunk.github.io/mkdocs-material/" target="_blank">
+              Material
+            </a>
+            theme.
+          </aside>
+          
+            <footer class="footer">
+              
+  <nav class="pagination" aria-label="Footer">
+    <div class="previous">
+      
+        <a href="../migrations/" title="Migrations">
+          <span class="direction">
+            Previous
+          </span>
+          <div class="page">
+            <div class="button button-previous" role="button" aria-label="Previous">
+              <i class="icon icon-back"></i>
+            </div>
+            <div class="stretch">
+              <div class="title">
+                Migrations
+              </div>
+            </div>
+          </div>
+        </a>
+      
+    </div>
+    <div class="next">
+      
+        <a href="../mocking/" title="Mocking">
+          <span class="direction">
+            Next
+          </span>
+          <div class="page">
+            <div class="stretch">
+              <div class="title">
+                Mocking
+              </div>
+            </div>
+            <div class="button button-next" role="button" aria-label="Next">
+              <i class="icon icon-forward"></i>
+            </div>
+          </div>
+        </a>
+      
+    </div>
+  </nav>
+
+            </footer>
+          
+        </div>
+      </article>
+      <div class="results" role="status" aria-live="polite">
+        <div class="scrollable">
+          <div class="wrapper">
+            <div class="meta"></div>
+            <div class="list"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script>
+      var base_url = '..';
+      var repo_id  = '';
+    </script>
+    <script src="../assets/javascripts/application-997097ee0c.js"></script>
+    
+    
+  </body>
+</html>

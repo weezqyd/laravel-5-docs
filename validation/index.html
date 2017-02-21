@@ -158,15 +158,6 @@
           
             
   <li>
-    <a class="" title="Application testing" href="../application-testing/">
-      Application testing
-    </a>
-    
-  </li>
-
-          
-            
-  <li>
     <a class="" title="Artisan" href="../artisan/">
       Artisan
     </a>
@@ -329,8 +320,8 @@
           
             
   <li>
-    <a class="" title="Elixir" href="../elixir/">
-      Elixir
+    <a class="" title="Dusk" href="../dusk/">
+      Dusk
     </a>
     
   </li>
@@ -473,6 +464,15 @@
           
             
   <li>
+    <a class="" title="Http tests" href="../http-tests/">
+      Http tests
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
     <a class="" title="Installation" href="../installation/">
       Installation
     </a>
@@ -529,6 +529,15 @@
   <li>
     <a class="" title="Migrations" href="../migrations/">
       Migrations
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Mix" href="../mix/">
+      Mix
     </a>
     
   </li>
@@ -840,6 +849,7 @@
 <li><a href="#quick-creating-the-controller">Creating The Controller</a></li>
 <li><a href="#quick-writing-the-validation-logic">Writing The Validation Logic</a></li>
 <li><a href="#quick-displaying-the-validation-errors">Displaying The Validation Errors</a></li>
+<li><a href="#a-note-on-optional-fields">A Note On Optional Fields</a></li>
 </ul>
 </li>
 <li><a href="#form-request-validation">Form Request Validation</a><ul>
@@ -986,6 +996,18 @@ public<span class="w"> </span>function<span class="w"> </span>store<span class="
 </pre></div>
 
 
+<p><a name="a-note-on-optional-fields"></a></p>
+<h3 id="a-note-on-optional-fields">A Note On Optional Fields</h3>
+<p>By default, Laravel includes the <code>TrimStrings</code> and <code>ConvertEmptyStringsToNull</code> middleware in your application's global middleware stack. These middleware are listed in the stack by the <code>App\Http\Kernel</code> class. Because of this, you will often need to mark your "optional" request fields as <code>nullable</code> if you do not want the validator to consider <code>null</code> values as invalid. For example:</p>
+<div class="codehilite"><pre><span></span>$this-&gt;validate($request, [
+    &#39;title&#39; =&gt; &#39;required|unique:posts|max:255&#39;,
+    &#39;body&#39; =&gt; &#39;required&#39;,
+    &#39;publish_at&#39; =&gt; &#39;nullable|date&#39;,
+]);
+</pre></div>
+
+
+<p>In this example, we are specifying that the <code>publish_at</code> field may be either <code>null</code> or a valid date representation. If the <code>nullable</code> modifier is not added to the rule definition, the validator would consider <code>null</code> an invalid date.</p>
 <p><a name="quick-customizing-the-flashed-error-format"></a></p>
 <h4 id="customizing-the-flashed-error-format">Customizing The Flashed Error Format</h4>
 <p>If you wish to customize the format of the validation errors that are flashed to the session when validation fails, override the <code>formatValidationErrors</code> on your base controller. Don't forget to import the <code>Illuminate\Contracts\Validation\Validator</code> class at the top of the file:</p>
@@ -1056,6 +1078,25 @@ public<span class="w"> </span>function<span class="w"> </span>store<span class="
 
 
 <p>If validation fails, a redirect response will be generated to send the user back to their previous location. The errors will also be flashed to the session so they are available for display. If the request was an AJAX request, a HTTP response with a 422 status code will be returned to the user including a JSON representation of the validation errors.</p>
+<h4 id="adding-after-hooks-to-form-requests">Adding After Hooks To Form Requests</h4>
+<p>If you would like to add an "after" hook to a form request, you may use the <code>withValidator</code> method. This method receives the fully constructed validator, allowing you to call any of its methods before the validation rules are actually evaluated:</p>
+<div class="codehilite"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * Configure the validator instance.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param  \Illuminate\Validation\Validator  $validator</span>
+<span class="cm"> * @return void</span>
+<span class="cm"> */</span><span class="w"></span>
+public<span class="w"> </span>function<span class="w"> </span>withValidator<span class="o">(</span><span class="err">$</span>validator<span class="o">)</span><span class="w"></span>
+<span class="err">{</span><span class="w"></span>
+<span class="w">    </span><span class="err">$</span>validator<span class="o">-&gt;</span>after<span class="o">(</span>function<span class="w"> </span><span class="o">(</span><span class="err">$</span>validator<span class="o">)</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
+<span class="w">        </span><span class="kr">if</span><span class="w"> </span><span class="o">(</span><span class="err">$</span>this<span class="o">-&gt;</span>somethingElseIsInvalid<span class="o">())</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
+<span class="w">            </span><span class="err">$</span>validator<span class="o">-&gt;</span>errors<span class="o">()-&gt;</span>add<span class="o">(</span><span class="s">&#39;field&#39;</span><span class="o">,</span><span class="w"> </span><span class="s">&#39;Something is wrong with this field!&#39;</span><span class="o">)</span><span class="err">;</span><span class="w"></span>
+<span class="w">        </span><span class="err">}</span><span class="w"></span>
+<span class="w">    </span><span class="err">}</span><span class="o">)</span><span class="err">;</span><span class="w"></span>
+<span class="err">}</span><span class="w"></span>
+</pre></div>
+
+
 <p><a name="authorizing-form-requests"></a></p>
 <h3 id="authorizing-form-requests">Authorizing Form Requests</h3>
 <p>The form request class also contains an <code>authorize</code> method. Within this method, you may check if the authenticated user actually has the authority to update a given resource. For example, you may determine if a user actually owns a blog comment they are attempting to update:</p>
@@ -1312,11 +1353,13 @@ echo $errors-&gt;first(&#39;email&#39;);
 [Accepted](#rule-accepted)
 [Active URL](#rule-active-url)
 [After (Date)](#rule-after)
+[After Or Equal (Date)](#rule-after-or-equal)
 [Alpha](#rule-alpha)
 [Alpha Dash](#rule-alpha-dash)
 [Alpha Numeric](#rule-alpha-num)
 [Array](#rule-array)
 [Before (Date)](#rule-before)
+[Before Or Equal (Date)](#rule-before-or-equal)
 [Between](#rule-between)
 [Boolean](#rule-boolean)
 [Confirmed](#rule-confirmed)
@@ -1380,6 +1423,9 @@ echo $errors-&gt;first(&#39;email&#39;);
 </pre></div>
 
 
+<p><a name="rule-after-or-equal"></a></p>
+<h4 id="after95or95equaldate">after_or_equal:<em>date</em></h4>
+<p>The field under validation must be a value after or equal to the given date. For more information, see the <a href="#rule-after">after</a> rule.</p>
 <p><a name="rule-alpha"></a></p>
 <h4 id="alpha">alpha</h4>
 <p>The field under validation must be entirely alphabetic characters.</p>
@@ -1395,6 +1441,9 @@ echo $errors-&gt;first(&#39;email&#39;);
 <p><a name="rule-before"></a></p>
 <h4 id="beforedate">before:<em>date</em></h4>
 <p>The field under validation must be a value preceding the given date. The dates will be passed into the PHP <code>strtotime</code> function.</p>
+<p><a name="rule-before-or-equal"></a></p>
+<h4 id="before95or95equaldate">before_or_equal:<em>date</em></h4>
+<p>The field under validation must be a value preceding or equal to the given date. The dates will be passed into the PHP <code>strtotime</code> function.</p>
 <p><a name="rule-between"></a></p>
 <h4 id="betweenminmax">between:<em>min</em>,<em>max</em></h4>
 <p>The field under validation must have a size between the given <em>min</em> and <em>max</em>. Strings, numerics, and files are evaluated in the same fashion as the <a href="#rule-size"><code>size</code></a> rule.</p>
@@ -1429,6 +1478,18 @@ echo $errors-&gt;first(&#39;email&#39;);
 <p>Available constraints are: <em>min_width</em>, <em>max_width</em>, <em>min_height</em>, <em>max_height</em>, <em>width</em>, <em>height</em>, <em>ratio</em>.</p>
 <p>A <em>ratio</em> constraint should be represented as width divided by height. This can be specified either by a statement like <code>3/2</code> or a float like <code>1.5</code>:</p>
 <div class="codehilite"><pre><span></span>&#39;avatar&#39; =&gt; &#39;dimensions:ratio=3/2&#39;
+</pre></div>
+
+
+<p>Since this rule requires several arguments, you may use the <code>Rule::dimensions</code> method to fluently construct the rule:</p>
+<div class="codehilite"><pre><span></span>use Illuminate\Validation\Rule;
+
+Validator::make($data, [
+    &#39;avatar&#39; =&gt; [
+        &#39;required&#39;,
+        Rule::dimensions()-&gt;maxWidth(1000)-&gt;maxHeight(500)-&gt;ratio(3 / 2),
+    ],
+]);
 </pre></div>
 
 
@@ -1485,7 +1546,18 @@ Validator::make($data, [
 <p>The file under validation must be an image (jpeg, png, bmp, gif, or svg)</p>
 <p><a name="rule-in"></a></p>
 <h4 id="infoobar">in:<em>foo</em>,<em>bar</em>,...</h4>
-<p>The field under validation must be included in the given list of values.</p>
+<p>The field under validation must be included in the given list of values. Since this rule often requires you to <code>implode</code> an array, the <code>Rule::in</code> method may be used to fluently construct the rule:</p>
+<div class="codehilite"><pre><span></span>use Illuminate\Validation\Rule;
+
+Validator::make($data, [
+    &#39;zones&#39; =&gt; [
+        &#39;required&#39;,
+        Rule::in([&#39;first-zone&#39;, &#39;second-zone&#39;]),
+    ],
+]);
+</pre></div>
+
+
 <p><a name="rule-in-array"></a></p>
 <h4 id="in_arrayanotherfield">in_array:<em>anotherfield</em></h4>
 <p>The field under validation must exist in <em>anotherfield</em>'s values.</p>
@@ -1495,6 +1567,10 @@ Validator::make($data, [
 <p><a name="rule-ip"></a></p>
 <h4 id="ip">ip</h4>
 <p>The field under validation must be an IP address.</p>
+<h4 id="ipv4">ipv4</h4>
+<p>The field under validation must be an IPv4 address.</p>
+<h4 id="ipv6">ipv6</h4>
+<p>The field under validation must be an IPv6 address.</p>
 <p><a name="rule-json"></a></p>
 <h4 id="json">json</h4>
 <p>The field under validation must be a valid JSON string.</p>

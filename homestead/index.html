@@ -158,15 +158,6 @@
           
             
   <li>
-    <a class="" title="Application testing" href="../application-testing/">
-      Application testing
-    </a>
-    
-  </li>
-
-          
-            
-  <li>
     <a class="" title="Artisan" href="../artisan/">
       Artisan
     </a>
@@ -329,8 +320,8 @@
           
             
   <li>
-    <a class="" title="Elixir" href="../elixir/">
-      Elixir
+    <a class="" title="Dusk" href="../dusk/">
+      Dusk
     </a>
     
   </li>
@@ -518,6 +509,15 @@
           
             
   <li>
+    <a class="" title="Http tests" href="../http-tests/">
+      Http tests
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
     <a class="" title="Installation" href="../installation/">
       Installation
     </a>
@@ -574,6 +574,15 @@
   <li>
     <a class="" title="Migrations" href="../migrations/">
       Migrations
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Mix" href="../mix/">
+      Mix
     </a>
     
   </li>
@@ -885,7 +894,7 @@ git clone https://github.com/laravel/homestead.git Homestead
 </pre></div>
 
 
-<p>Once you have cloned the Homestead repository, run the <code>bash init.sh</code> command from the Homestead directory to create the <code>Homestead.yaml</code> configuration file. The <code>Homestead.yaml</code> file will be placed in the <code>~/.homestead</code> hidden directory:</p>
+<p>Once you have cloned the Homestead repository, run the <code>bash init.sh</code> command from the Homestead directory to create the <code>Homestead.yaml</code> configuration file. The <code>Homestead.yaml</code> file will be placed in the Homestead directory:</p>
 <div class="codehilite"><pre><span></span>// Mac / Linux...
 bash init.sh
 
@@ -897,7 +906,7 @@ init.bat
 <p><a name="configuring-homestead"></a></p>
 <h3 id="configuring-homestead">Configuring Homestead</h3>
 <h4 id="setting-your-provider">Setting Your Provider</h4>
-<p>The <code>provider</code> key in your <code>~/.homestead/Homestead.yaml</code> file indicates which Vagrant provider should be used: <code>virtualbox</code>, <code>vmware_fusion</code>, <code>vmware_workstation</code>, or <code>parallels</code>. You may set this to the provider you prefer:</p>
+<p>The <code>provider</code> key in your <code>Homestead.yaml</code> file indicates which Vagrant provider should be used: <code>virtualbox</code>, <code>vmware_fusion</code>, <code>vmware_workstation</code>, or <code>parallels</code>. You may set this to the provider you prefer:</p>
 <div class="codehilite"><pre><span></span><span class="n">provider</span><span class="o">:</span> <span class="n">virtualbox</span>
 </pre></div>
 
@@ -944,7 +953,7 @@ init.bat
 </pre></div>
 
 
-<p>Make sure the IP address listed is the one set in your <code>~/.homestead/Homestead.yaml</code> file. Once you have added the domain to your <code>hosts</code> file and launched the Vagrant box you will be able to access the site via your web browser:</p>
+<p>Make sure the IP address listed is the one set in your <code>Homestead.yaml</code> file. Once you have added the domain to your <code>hosts</code> file and launched the Vagrant box you will be able to access the site via your web browser:</p>
 <div class="codehilite"><pre><span></span>http://homestead.app
 </pre></div>
 
@@ -989,7 +998,8 @@ init.bat
 <h2 id="daily-usage">Daily Usage</h2>
 <p><a name="accessing-homestead-globally"></a></p>
 <h3 id="accessing-homestead-globally">Accessing Homestead Globally</h3>
-<p>Sometimes you may want to <code>vagrant up</code> your Homestead machine from anywhere on your filesystem. You can do this by adding a simple Bash function to your Bash profile. This function will allow you to run any Vagrant command from anywhere on your system and will automatically point that command to your Homestead installation:</p>
+<p>Sometimes you may want to <code>vagrant up</code> your Homestead machine from anywhere on your filesystem. You can do this on Mac / Linux systems by adding a Bash function to your Bash profile. On Windows, you may accomplish this by adding a "batch" file to your <code>PATH</code>. This scripts will allow you to run any Vagrant command from anywhere on your system and will automatically point that command to your Homestead installation:</p>
+<h4 id="mac-linux">Mac / Linux</h4>
 <div class="codehilite"><pre><span></span><span class="kd">function</span> <span class="nx">homestead() {</span>
     <span class="p">(</span> <span class="nx">cd</span> <span class="o">~</span><span class="err">/Homestead &amp;&amp; vagrant $* )</span>
 <span class="p">}</span>
@@ -997,6 +1007,22 @@ init.bat
 
 
 <p>Make sure to tweak the <code>~/Homestead</code> path in the function to the location of your actual Homestead installation. Once the function is installed, you may run commands like <code>homestead up</code> or <code>homestead ssh</code> from anywhere on your system.</p>
+<h4 id="windows">Windows</h4>
+<p>Create a <code>homestead.bat</code> batch file anywhere on your machine with the following contents:</p>
+<div class="codehilite"><pre><span></span>@echo off
+
+set cwd=%cd%
+set homesteadVagrant=C:\Homestead
+
+cd /d %homesteadVagrant% &amp;&amp; vagrant %*
+cd /d %cwd%
+
+set cwd=
+set homesteadVagrant=
+</pre></div>
+
+
+<p>Make sure to tweak the example <code>C:\Homestead</code> path in the script to the actual location of your Homestead installation. After creating the file, add the file location to your <code>PATH</code>. You may then run commands like <code>homestead up</code> or <code>homestead ssh</code> from anywhere on your system.</p>
 <p><a name="connecting-via-ssh"></a></p>
 <h3 id="connecting-via-ssh">Connecting Via SSH</h3>
 <p>You can SSH into your virtual machine by issuing the <code>vagrant ssh</code> terminal command from your Homestead directory.</p>
@@ -1010,7 +1036,22 @@ init.bat
 </blockquote>
 <p><a name="adding-additional-sites"></a></p>
 <h3 id="adding-additional-sites">Adding Additional Sites</h3>
-<p>Once your Homestead environment is provisioned and running, you may want to add additional Nginx sites for your Laravel applications. You can run as many Laravel installations as you wish on a single Homestead environment. To add an additional site, simply add the site to your <code>~/.homestead/Homestead.yaml</code> file and then run the <code>vagrant reload --provision</code> terminal command from your Homestead directory.</p>
+<p>Once your Homestead environment is provisioned and running, you may want to add additional Nginx sites for your Laravel applications. You can run as many Laravel installations as you wish on a single Homestead environment. To add an additional site, simply add the site to your <code>Homestead.yaml</code> file:</p>
+<div class="codehilite"><pre><span></span>sites:
+    - map: homestead.app
+      to: /home/vagrant/Code/Laravel/public
+    - map: another.app
+      to: /home/vagrant/Code/another/public
+</pre></div>
+
+
+<p>If Vagrant is not automatically managing your "hosts" file, you may need to add the new site to that file as well:</p>
+<div class="codehilite"><pre><span></span>192.168.10.10  homestead.app
+192.168.10.10  another.app
+</pre></div>
+
+
+<p>Once the site has been added, run the <code>vagrant reload --provision</code> command from your Homestead directory.</p>
 <p><a name="configuring-cron-schedules"></a></p>
 <h3 id="configuring-cron-schedules">Configuring Cron Schedules</h3>
 <p>Laravel provides a convenient way to <a href="../docs/{{version}}/scheduling">schedule Cron jobs</a> by scheduling a single <code>schedule:run</code> Artisan command to be run every minute. The <code>schedule:run</code> command will examine the job schedule defined in your <code>App\Console\Kernel</code> class to determine which jobs should be run.</p>
@@ -1155,14 +1196,14 @@ init.bat
     </div>
     <div class="next">
       
-        <a href="../installation/" title="Installation">
+        <a href="../http-tests/" title="Http tests">
           <span class="direction">
             Next
           </span>
           <div class="page">
             <div class="stretch">
               <div class="title">
-                Installation
+                Http tests
               </div>
             </div>
             <div class="button button-next" role="button" aria-label="Next">

@@ -158,15 +158,6 @@
           
             
   <li>
-    <a class="" title="Application testing" href="../application-testing/">
-      Application testing
-    </a>
-    
-  </li>
-
-          
-            
-  <li>
     <a class="" title="Artisan" href="../artisan/">
       Artisan
     </a>
@@ -329,8 +320,8 @@
           
             
   <li>
-    <a class="" title="Elixir" href="../elixir/">
-      Elixir
+    <a class="" title="Dusk" href="../dusk/">
+      Dusk
     </a>
     
   </li>
@@ -473,6 +464,15 @@
           
             
   <li>
+    <a class="" title="Http tests" href="../http-tests/">
+      Http tests
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
     <a class="" title="Installation" href="../installation/">
       Installation
     </a>
@@ -529,6 +529,15 @@
   <li>
     <a class="" title="Migrations" href="../migrations/">
       Migrations
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Mix" href="../mix/">
+      Mix
     </a>
     
   </li>
@@ -661,8 +670,20 @@
             </li>
           
             <li class="anchor">
+              <a title="Input Trimming &amp; Normalization" href="#input-trimming-normalization">
+                Input Trimming &amp; Normalization
+              </a>
+            </li>
+          
+            <li class="anchor">
               <a title="Retrieving Input" href="#retrieving-input">
                 Retrieving Input
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Files" href="#files">
+                Files
               </a>
             </li>
           
@@ -797,6 +818,7 @@
 <li><a href="#psr7-requests">PSR-7 Requests</a></li>
 </ul>
 </li>
+<li><a href="#input-trimming-and-normaliation">Input Trimming &amp; Normalization</a></li>
 <li><a href="#retrieving-input">Retrieving Input</a><ul>
 <li><a href="#old-input">Old Input</a></li>
 <li><a href="#cookies">Cookies</a></li>
@@ -931,6 +953,10 @@ Route::get(&#39;/&#39;, function (ServerRequestInterface $request) {
 <blockquote>
 <p>{tip} If you return a PSR-7 response instance from a route or controller, it will automatically be converted back to a Laravel response instance and be displayed by the framework.</p>
 </blockquote>
+<p><a name="input-trimming-and-normaliation"></a></p>
+<h2 id="input-trimming-normalization">Input Trimming &amp; Normalization</h2>
+<p>By default, Laravel includes the <code>TrimStrings</code> and <code>ConvertEmptyStringsToNull</code> middleware in your application's global middleware stack. These middleware are listed in the stack by the <code>App\Http\Kernel</code> class. These middleware will automatically trim all incoming string fields on the request, as well as convert any empty string fields to <code>null</code>. This allows you to not have to worry about these normalization concerns in your routes and controllers.</p>
+<p>If you would like to disable this behavior, you may remove the two middleware from your application's middleware stack by removing them from the <code>$middleware</code> property of your <code>App\Http\Kernel</code> class.</p>
 <p><a name="retrieving-input"></a></p>
 <h2 id="retrieving-input">Retrieving Input</h2>
 <h4 id="retrieving-all-input-data">Retrieving All Input Data</h4>
@@ -979,6 +1005,11 @@ $input = $request-&gt;only(&#39;username&#39;, &#39;password&#39;);
 $input = $request-&gt;except([&#39;credit_card&#39;]);
 
 $input = $request-&gt;except(&#39;credit_card&#39;);
+</pre></div>
+
+
+<p>The <code>only</code> method returns all of the key / value pairs that you request, even if the key is not present on the incoming request. When the key is not present on the request, the value will be <code>null</code>. If you would like to retrieve a portion of input data that is actually present on the request, you may use the <code>intersect</code> method:</p>
+<div class="codehilite"><pre><span></span>$input = $request-&gt;intersect([&#39;username&#39;, &#39;password&#39;]);
 </pre></div>
 
 
@@ -1059,7 +1090,7 @@ return response(&#39;Hello World&#39;)-&gt;cookie($cookie);
 
 
 <p><a name="files"></a></p>
-<h3 id="files">Files</h3>
+<h2 id="files">Files</h2>
 <p><a name="retrieving-uploaded-files"></a></p>
 <h3 id="retrieving-uploaded-files">Retrieving Uploaded Files</h3>
 <p>You may access uploaded files from a <code>Illuminate\Http\Request</code> instance using the <code>file</code> method or using dynamic properties. The <code>file</code> method returns an instance of the <code>Illuminate\Http\UploadedFile</code> class, which extends the PHP <code>SplFileInfo</code> class and provides a variety of methods for interacting with the file:</p>
@@ -1097,7 +1128,7 @@ $extension = $request-&gt;photo-&gt;extension();
 <p><a name="storing-uploaded-files"></a></p>
 <h3 id="storing-uploaded-files">Storing Uploaded Files</h3>
 <p>To store an uploaded file, you will typically use one of your configured <a href="../docs/{{version}}/filesystem">filesystems</a>. The <code>UploadedFile</code> class has a <code>store</code> method which will move an uploaded file to one of your disks, which may be a location on your local filesystem or even a cloud storage location like Amazon S3.</p>
-<p>The <code>store</code> method accepts the path where the file should be stored relative to the filesystem's configured root directory. This path should not contain a file name, since a UUID will automatically be generated to serve as the file name.</p>
+<p>The <code>store</code> method accepts the path where the file should be stored relative to the filesystem's configured root directory. This path should not contain a file name, since a unique ID will automatically be generated to serve as the file name.</p>
 <p>The <code>store</code> method also accepts an optional second argument for the name of the disk that should be used to store the file. The method will return the path of the file relative to the disk's root:</p>
 <div class="codehilite"><pre><span></span>$path = $request-&gt;photo-&gt;store(&#39;images&#39;);
 

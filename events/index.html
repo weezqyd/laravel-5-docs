@@ -158,15 +158,6 @@
           
             
   <li>
-    <a class="" title="Application testing" href="../application-testing/">
-      Application testing
-    </a>
-    
-  </li>
-
-          
-            
-  <li>
     <a class="" title="Artisan" href="../artisan/">
       Artisan
     </a>
@@ -329,8 +320,8 @@
           
             
   <li>
-    <a class="" title="Elixir" href="../elixir/">
-      Elixir
+    <a class="" title="Dusk" href="../dusk/">
+      Dusk
     </a>
     
   </li>
@@ -451,8 +442,8 @@
             </li>
           
             <li class="anchor">
-              <a title="Firing Events" href="#firing-events">
-                Firing Events
+              <a title="Dispatching Events" href="#dispatching-events">
+                Dispatching Events
               </a>
             </li>
           
@@ -524,6 +515,15 @@
           
             
   <li>
+    <a class="" title="Http tests" href="../http-tests/">
+      Http tests
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
     <a class="" title="Installation" href="../installation/">
       Installation
     </a>
@@ -580,6 +580,15 @@
   <li>
     <a class="" title="Migrations" href="../migrations/">
       Migrations
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Mix" href="../mix/">
+      Mix
     </a>
     
   </li>
@@ -832,9 +841,10 @@
 <li><a href="#defining-listeners">Defining Listeners</a></li>
 <li><a href="#queued-event-listeners">Queued Event Listeners</a><ul>
 <li><a href="#manually-accessing-the-queue">Manually Accessing The Queue</a></li>
+<li><a href="#handling-failed-jobs">Handling Failed Jobs</a></li>
 </ul>
 </li>
-<li><a href="#firing-events">Firing Events</a></li>
+<li><a href="#dispatching-events">Dispatching Events</a></li>
 <li><a href="#event-subscribers">Event Subscribers</a><ul>
 <li><a href="#writing-event-subscribers">Writing Event Subscribers</a></li>
 <li><a href="#registering-event-subscribers">Registering Event Subscribers</a></li>
@@ -888,8 +898,8 @@ protected<span class="w"> </span><span class="err">$</span>listen<span class="w"
 
 
 <h4 id="wildcard-event-listeners">Wildcard Event Listeners</h4>
-<p>You may even register listeners using the <code>*</code> as a wildcard parameter, allowing you to catch multiple events on the same listener. Wildcard listeners receive the entire event data array as a single argument:</p>
-<div class="codehilite"><pre><span></span>Event::listen(&#39;event.*&#39;, function (array $data) {
+<p>You may even register listeners using the <code>*</code> as a wildcard parameter, allowing you to catch multiple events on the same listener. Wildcard listeners receive the event name as their first argument, and the entire event data array as their second argument:</p>
+<div class="codehilite"><pre><span></span>Event::listen(&#39;event.*&#39;, function ($eventName, array $data) {
     //
 });
 </pre></div>
@@ -985,6 +995,34 @@ protected<span class="w"> </span><span class="err">$</span>listen<span class="w"
 
 
 <p>That's it! Now, when this listener is called for an event, it will be automatically queued by the event dispatcher using Laravel's <a href="../docs/{{version}}/queues">queue system</a>. If no exceptions are thrown when the listener is executed by the queue, the queued job will automatically be deleted after it has finished processing.</p>
+<h4 id="customizing-the-queue-connection-queue-name">Customizing The Queue Connection &amp; Queue Name</h4>
+<p>If you would like to customize the queue connection and queue name used by an event listener, you may define <code>$connection</code> and <code>$queue</code> properties on your listener class:</p>
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+
+<span class="nx">namespace</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Listeners</span><span class="p">;</span>
+
+<span class="nx">use</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Events</span><span class="err">\</span><span class="nx">OrderShipped</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Contracts</span><span class="err">\</span><span class="nx">Queue</span><span class="err">\</span><span class="nx">ShouldQueue</span><span class="p">;</span>
+
+<span class="kr">class</span> <span class="nx">SendShipmentNotification</span> <span class="kr">implements</span> <span class="nx">ShouldQueue</span>
+<span class="p">{</span>
+    <span class="cm">/**</span>
+<span class="cm">     * The name of the connection the job should be sent to.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @var string|null</span>
+<span class="cm">     */</span>
+    <span class="kr">public</span> <span class="nx">$connection</span> <span class="o">=</span> <span class="s1">&#39;sqs&#39;</span><span class="p">;</span>
+
+    <span class="cm">/**</span>
+<span class="cm">     * The name of the queue the job should be sent to.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @var string|null</span>
+<span class="cm">     */</span>
+    <span class="kr">public</span> <span class="nx">$queue</span> <span class="o">=</span> <span class="s1">&#39;listeners&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <p><a name="manually-accessing-the-queue"></a></p>
 <h3 id="manually-accessing-the-queue">Manually Accessing The Queue</h3>
 <p>If you need to manually access the listener's underlying queue job's <code>delete</code> and <code>release</code> methods, you may do so using the <code>Illuminate\Queue\InteractsWithQueue</code> trait. This trait is imported by default on generated listeners and provides access to these methods:</p>
@@ -1010,9 +1048,37 @@ protected<span class="w"> </span><span class="err">$</span>listen<span class="w"
 </pre></div>
 
 
-<p><a name="firing-events"></a></p>
-<h2 id="firing-events">Firing Events</h2>
-<p>To fire an event, you may pass an instance of the event to the <code>event</code> helper. The helper will dispatch the event to all of its registered listeners. Since the <code>event</code> helper is globally available, you may call it from anywhere in your application:</p>
+<p><a name="handling-failed-jobs"></a></p>
+<h3 id="handling-failed-jobs">Handling Failed Jobs</h3>
+<p>Sometimes your queued event listeners may fail. If queued listener exceeds the maximum number of attempts as defined by your queue worker, the <code>failed</code> method will be called on your listener. The <code>failed</code> method receives the event instance and the exception that caused the failure:</p>
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+
+<span class="nx">namespace</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Listeners</span><span class="p">;</span>
+
+<span class="nx">use</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Events</span><span class="err">\</span><span class="nx">OrderShipped</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Queue</span><span class="err">\</span><span class="nx">InteractsWithQueue</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Contracts</span><span class="err">\</span><span class="nx">Queue</span><span class="err">\</span><span class="nx">ShouldQueue</span><span class="p">;</span>
+
+<span class="kr">class</span> <span class="nx">SendShipmentNotification</span> <span class="kr">implements</span> <span class="nx">ShouldQueue</span>
+<span class="p">{</span>
+    <span class="nx">use</span> <span class="nx">InteractsWithQueue</span><span class="p">;</span>
+
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">handle</span><span class="p">(</span><span class="nx">OrderShipped</span> <span class="nx">$event</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">//</span>
+    <span class="p">}</span>
+
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">failed</span><span class="p">(</span><span class="nx">OrderShipped</span> <span class="nx">$event</span><span class="p">,</span> <span class="nx">$exception</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">//</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p><a name="dispatching-events"></a></p>
+<h2 id="dispatching-events">Dispatching Events</h2>
+<p>To dispatch an event, you may pass an instance of the event to the <code>event</code> helper. The helper will dispatch the event to all of its registered listeners. Since the <code>event</code> helper is globally available, you may call it from anywhere in your application:</p>
 <div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
 <span class="nx">namespace</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Http</span><span class="err">\</span><span class="nx">Controllers</span><span class="p">;</span>
@@ -1042,7 +1108,7 @@ protected<span class="w"> </span><span class="err">$</span>listen<span class="w"
 
 
 <blockquote>
-<p>{tip} When testing, it can be helpful to assert that certain events were fired without actually triggering their listeners. Laravel's <a href="../docs/{{version}}/mocking#mocking-events">built-in testing helpers</a> makes it a cinch.</p>
+<p>{tip} When testing, it can be helpful to assert that certain events were dispatched without actually triggering their listeners. Laravel's <a href="../docs/{{version}}/mocking#mocking-events">built-in testing helpers</a> makes it a cinch.</p>
 </blockquote>
 <p><a name="event-subscribers"></a></p>
 <h2 id="event-subscribers">Event Subscribers</h2>

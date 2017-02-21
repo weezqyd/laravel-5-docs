@@ -158,15 +158,6 @@
           
             
   <li>
-    <a class="" title="Application testing" href="../application-testing/">
-      Application testing
-    </a>
-    
-  </li>
-
-          
-            
-  <li>
     <a class="" title="Artisan" href="../artisan/">
       Artisan
     </a>
@@ -329,8 +320,8 @@
           
             
   <li>
-    <a class="" title="Elixir" href="../elixir/">
-      Elixir
+    <a class="" title="Dusk" href="../dusk/">
+      Dusk
     </a>
     
   </li>
@@ -530,6 +521,15 @@
           
             
   <li>
+    <a class="" title="Http tests" href="../http-tests/">
+      Http tests
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
     <a class="" title="Installation" href="../installation/">
       Installation
     </a>
@@ -586,6 +586,15 @@
   <li>
     <a class="" title="Migrations" href="../migrations/">
       Migrations
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Mix" href="../mix/">
+      Mix
     </a>
     
   </li>
@@ -957,6 +966,17 @@
 <blockquote>
 <p>{note} Remember, if you are using the <code>local</code> driver, all files that should be publicly accessible should be placed in the <code>storage/app/public</code> directory. Furthermore, you should <a href="#the-public-disk">create a symbolic link</a> at <code>public/storage</code> which points to the <code>storage/app/public</code> directory.</p>
 </blockquote>
+<h4 id="local-url-host-customization">Local URL Host Customization</h4>
+<p>If you would like to pre-define the host for files stored on a disk using the <code>local</code> driver, you may add a <code>url</code> option to the disk's configuration array:</p>
+<div class="codehilite"><pre><span></span>&#39;public&#39; =&gt; [
+    &#39;driver&#39; =&gt; &#39;local&#39;,
+    &#39;root&#39; =&gt; storage_path(&#39;app/public&#39;),
+    &#39;url&#39; =&gt; env(&#39;APP_URL&#39;).&#39;/storage&#39;,
+    &#39;visibility&#39; =&gt; &#39;public&#39;,
+],
+</pre></div>
+
+
 <p><a name="file-metadata"></a></p>
 <h3 id="file-metadata">File Metadata</h3>
 <p>In addition to reading and writing files, Laravel can also provide information about the files themselves. For example, the <code>size</code> method may be used to get the size of the file in bytes:</p>
@@ -983,10 +1003,10 @@
 
 
 <h4 id="automatic-streaming">Automatic Streaming</h4>
-<p>If you would like Laravel to automatically manage streaming a given file to your storage location, you may use the <code>putFile</code> or <code>putFileAs</code> method. This method accepts either a <code>Illuminate\Http\File</code> or <code>Illuminate\Http\UploadedFile</code> instance and will automatically stream the file to your desire location:</p>
+<p>If you would like Laravel to automatically manage streaming a given file to your storage location, you may use the <code>putFile</code> or <code>putFileAs</code> method. This method accepts either a <code>Illuminate\Http\File</code> or <code>Illuminate\Http\UploadedFile</code> instance and will automatically stream the file to your desired location:</p>
 <div class="codehilite"><pre><span></span><span class="nt">use</span> <span class="nt">Illuminate</span><span class="err">\</span><span class="nt">Http</span><span class="err">\</span><span class="nt">File</span><span class="o">;</span>
 
-<span class="o">//</span> <span class="nt">Automatically</span> <span class="nt">generate</span> <span class="nt">a</span> <span class="nt">UUID</span> <span class="nt">for</span> <span class="nt">file</span> <span class="nt">name</span><span class="o">...</span>
+<span class="o">//</span> <span class="nt">Automatically</span> <span class="nt">generate</span> <span class="nt">a</span> <span class="nt">unique</span> <span class="nt">ID</span> <span class="nt">for</span> <span class="nt">file</span> <span class="nt">name</span><span class="o">...</span>
 <span class="nt">Storage</span><span class="p">::</span><span class="nd">putFile</span><span class="o">(</span><span class="s1">&#39;photos&#39;</span><span class="o">,</span> <span class="nt">new</span> <span class="nt">File</span><span class="o">(</span><span class="s1">&#39;/path/to/photo&#39;</span><span class="o">));</span>
 
 <span class="o">//</span> <span class="nt">Manually</span> <span class="nt">specify</span> <span class="nt">a</span> <span class="nt">file</span> <span class="nt">name</span><span class="o">...</span>
@@ -994,7 +1014,7 @@
 </pre></div>
 
 
-<p>There are a few important things to note about the <code>putFile</code> method. Note that we only specified a directory name, not a file name. By default, the <code>putFile</code> method will generate a UUID to serve as the file name. The path to the file will be returned by the <code>putFile</code> method so you can store the path, including the generated file name, in your database.</p>
+<p>There are a few important things to note about the <code>putFile</code> method. Note that we only specified a directory name, not a file name. By default, the <code>putFile</code> method will generate a unique ID to serve as the file name. The path to the file will be returned by the <code>putFile</code> method so you can store the path, including the generated file name, in your database.</p>
 <p>The <code>putFile</code> and <code>putFileAs</code> methods also accept an argument to specify the "visibility" of the stored file. This is particularly useful if you are storing the file on a cloud disk such as S3 and would like the file to be publicly accessible:</p>
 <div class="codehilite"><pre><span></span><span class="nt">Storage</span><span class="p">::</span><span class="nd">putFile</span><span class="o">(</span><span class="s1">&#39;photos&#39;</span><span class="o">,</span> <span class="nt">new</span> <span class="nt">File</span><span class="o">(</span><span class="s1">&#39;/path/to/photo&#39;</span><span class="o">),</span> <span class="s1">&#39;public&#39;</span><span class="o">);</span>
 </pre></div>
@@ -1044,7 +1064,7 @@
 </pre></div>
 
 
-<p>There are a few important things to note about this example. Note that we only specified a directory name, not a file name. By default, the <code>store</code> method will generate a UUID to serve as the file name. The path to the file will be returned by the <code>store</code> method so you can store the path, including the generated file name, in your database.</p>
+<p>There are a few important things to note about this example. Note that we only specified a directory name, not a file name. By default, the <code>store</code> method will generate a unique ID to serve as the file name. The path to the file will be returned by the <code>store</code> method so you can store the path, including the generated file name, in your database.</p>
 <p>You may also call the <code>putFile</code> method on the <code>Storage</code> facade to perform the same file manipulation as the example above:</p>
 <div class="codehilite"><pre><span></span><span class="o">$</span><span class="nt">path</span> <span class="o">=</span> <span class="nt">Storage</span><span class="p">::</span><span class="nd">putFile</span><span class="o">(</span><span class="s1">&#39;avatars&#39;</span><span class="o">,</span> <span class="o">$</span><span class="nt">request-</span><span class="o">&gt;</span><span class="nt">file</span><span class="o">(</span><span class="s1">&#39;avatar&#39;</span><span class="o">));</span>
 </pre></div>

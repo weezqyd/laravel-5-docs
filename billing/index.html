@@ -158,15 +158,6 @@
           
             
   <li>
-    <a class="" title="Application testing" href="../application-testing/">
-      Application testing
-    </a>
-    
-  </li>
-
-          
-            
-  <li>
     <a class="" title="Artisan" href="../artisan/">
       Artisan
     </a>
@@ -386,8 +377,8 @@
           
             
   <li>
-    <a class="" title="Elixir" href="../elixir/">
-      Elixir
+    <a class="" title="Dusk" href="../dusk/">
+      Dusk
     </a>
     
   </li>
@@ -530,6 +521,15 @@
           
             
   <li>
+    <a class="" title="Http tests" href="../http-tests/">
+      Http tests
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
     <a class="" title="Installation" href="../installation/">
       Installation
     </a>
@@ -586,6 +586,15 @@
   <li>
     <a class="" title="Migrations" href="../migrations/">
       Migrations
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Mix" href="../mix/">
+      Mix
     </a>
     
   </li>
@@ -871,7 +880,7 @@
 <h2 id="introduction">Introduction</h2>
 <p>Laravel Cashier provides an expressive, fluent interface to <a href="https://stripe.com">Stripe's</a> and <a href="https://www.braintreepayments.com">Braintree's</a> subscription billing services. It handles almost all of the boilerplate subscription billing code you are dreading writing. In addition to basic subscription management, Cashier can handle coupons, swapping subscription, subscription "quantities", cancellation grace periods, and even generate invoice PDFs.</p>
 <blockquote>
-<p>{note} If you're only performing "one-off" charges and do not offer subscriptions. You should not use Cashier. You should use the Stripe and Braintree SDKs directly.</p>
+<p>{note} If you're only performing "one-off" charges and do not offer subscriptions, you should not use Cashier. Instead, use the Stripe and Braintree SDKs directly.</p>
 </blockquote>
 <p><a name="configuration"></a></p>
 <h2 id="configuration">Configuration</h2>
@@ -924,6 +933,7 @@ Schema::create(&#39;subscriptions&#39;, function ($table) {
 <p>Finally, you should configure your Stripe key in your <code>services.php</code> configuration file. You can retrieve your Stripe API keys from the Stripe control panel:</p>
 <div class="codehilite"><pre><span></span>&#39;stripe&#39; =&gt; [
     &#39;model&#39;  =&gt; App\User::class,
+    &#39;key&#39; =&gt; env(&#39;STRIPE_KEY&#39;),
     &#39;secret&#39; =&gt; env(&#39;STRIPE_SECRET&#39;),
 ],
 </pre></div>
@@ -1022,7 +1032,7 @@ Schema::create(&#39;subscriptions&#39;, function ($table) {
 <p>To create a subscription, first retrieve an instance of your billable model, which typically will be an instance of <code>App\User</code>. Once you have retrieved the model instance, you may use the <code>newSubscription</code> method to create the model's subscription:</p>
 <div class="codehilite"><pre><span></span><span class="o">$</span><span class="nt">user</span> <span class="o">=</span> <span class="nt">User</span><span class="p">::</span><span class="nd">find</span><span class="o">(</span><span class="nt">1</span><span class="o">);</span>
 
-<span class="o">$</span><span class="nt">user-</span><span class="o">&gt;</span><span class="nt">newSubscription</span><span class="o">(</span><span class="s1">&#39;main&#39;</span><span class="o">,</span> <span class="s1">&#39;monthly&#39;</span><span class="o">)</span><span class="nt">-</span><span class="o">&gt;</span><span class="nt">create</span><span class="o">($</span><span class="nt">creditCardToken</span><span class="o">);</span>
+<span class="o">$</span><span class="nt">user-</span><span class="o">&gt;</span><span class="nt">newSubscription</span><span class="o">(</span><span class="s1">&#39;main&#39;</span><span class="o">,</span> <span class="s1">&#39;monthly&#39;</span><span class="o">)</span><span class="nt">-</span><span class="o">&gt;</span><span class="nt">create</span><span class="o">($</span><span class="nt">stripeToken</span><span class="o">);</span>
 </pre></div>
 
 
@@ -1030,7 +1040,7 @@ Schema::create(&#39;subscriptions&#39;, function ($table) {
 <p>The <code>create</code> method will begin the subscription as well as update your database with the customer ID and other relevant billing information.</p>
 <h4 id="additional-user-details">Additional User Details</h4>
 <p>If you would like to specify additional customer details, you may do so by passing them as the second argument to the <code>create</code> method:</p>
-<div class="codehilite"><pre><span></span>$user-&gt;newSubscription(&#39;main&#39;, &#39;monthly&#39;)-&gt;create($creditCardToken, [
+<div class="codehilite"><pre><span></span>$user-&gt;newSubscription(&#39;main&#39;, &#39;monthly&#39;)-&gt;create($stripeToken, [
     &#39;email&#39; =&gt; $email,
 ]);
 </pre></div>
@@ -1041,7 +1051,7 @@ Schema::create(&#39;subscriptions&#39;, function ($table) {
 <p>If you would like to apply a coupon when creating the subscription, you may use the <code>withCoupon</code> method:</p>
 <div class="codehilite"><pre><span></span>$user-&gt;newSubscription(&#39;main&#39;, &#39;monthly&#39;)
      -&gt;withCoupon(&#39;code&#39;)
-     -&gt;create($creditCardToken);
+     -&gt;create($stripeToken);
 </pre></div>
 
 
@@ -1183,7 +1193,7 @@ Schema::create(&#39;subscriptions&#39;, function ($table) {
 <p><a name="updating-credit-cards"></a></p>
 <h3 id="updating-credit-cards">Updating Credit Cards</h3>
 <p>The <code>updateCard</code> method may be used to update a customer's credit card information. This method accepts a Stripe token and will assign the new credit card as the default billing source:</p>
-<div class="codehilite"><pre><span></span>$user-&gt;updateCard($creditCardToken);
+<div class="codehilite"><pre><span></span>$user-&gt;updateCard($stripeToken);
 </pre></div>
 
 
@@ -1196,7 +1206,7 @@ Schema::create(&#39;subscriptions&#39;, function ($table) {
 
 <span class="o">$</span><span class="nt">user-</span><span class="o">&gt;</span><span class="nt">newSubscription</span><span class="o">(</span><span class="s1">&#39;main&#39;</span><span class="o">,</span> <span class="s1">&#39;monthly&#39;</span><span class="o">)</span>
             <span class="nt">-</span><span class="o">&gt;</span><span class="nt">trialDays</span><span class="o">(</span><span class="nt">10</span><span class="o">)</span>
-            <span class="nt">-</span><span class="o">&gt;</span><span class="nt">create</span><span class="o">($</span><span class="nt">creditCardToken</span><span class="o">);</span>
+            <span class="nt">-</span><span class="o">&gt;</span><span class="nt">create</span><span class="o">($</span><span class="nt">stripeToken</span><span class="o">);</span>
 </pre></div>
 
 
@@ -1245,7 +1255,7 @@ if ($user-&gt;subscription(&#39;main&#39;)-&gt;onTrial()) {
 <p>Once you are ready to create an actual subscription for the user, you may use the <code>newSubscription</code> method as usual:</p>
 <div class="codehilite"><pre><span></span><span class="o">$</span><span class="nt">user</span> <span class="o">=</span> <span class="nt">User</span><span class="p">::</span><span class="nd">find</span><span class="o">(</span><span class="nt">1</span><span class="o">);</span>
 
-<span class="o">$</span><span class="nt">user-</span><span class="o">&gt;</span><span class="nt">newSubscription</span><span class="o">(</span><span class="s1">&#39;main&#39;</span><span class="o">,</span> <span class="s1">&#39;monthly&#39;</span><span class="o">)</span><span class="nt">-</span><span class="o">&gt;</span><span class="nt">create</span><span class="o">($</span><span class="nt">creditCardToken</span><span class="o">);</span>
+<span class="o">$</span><span class="nt">user-</span><span class="o">&gt;</span><span class="nt">newSubscription</span><span class="o">(</span><span class="s1">&#39;main&#39;</span><span class="o">,</span> <span class="s1">&#39;monthly&#39;</span><span class="o">)</span><span class="nt">-</span><span class="o">&gt;</span><span class="nt">create</span><span class="o">($</span><span class="nt">stripeToken</span><span class="o">);</span>
 </pre></div>
 
 

@@ -158,15 +158,6 @@
           
             
   <li>
-    <a class="" title="Application testing" href="../application-testing/">
-      Application testing
-    </a>
-    
-  </li>
-
-          
-            
-  <li>
     <a class="" title="Artisan" href="../artisan/">
       Artisan
     </a>
@@ -380,8 +371,8 @@
           
             
   <li>
-    <a class="" title="Elixir" href="../elixir/">
-      Elixir
+    <a class="" title="Dusk" href="../dusk/">
+      Dusk
     </a>
     
   </li>
@@ -524,6 +515,15 @@
           
             
   <li>
+    <a class="" title="Http tests" href="../http-tests/">
+      Http tests
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
     <a class="" title="Installation" href="../installation/">
       Installation
     </a>
@@ -580,6 +580,15 @@
   <li>
     <a class="" title="Migrations" href="../migrations/">
       Migrations
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="" title="Mix" href="../mix/">
+      Mix
     </a>
     
   </li>
@@ -894,13 +903,13 @@
 <p>If the redirect path needs custom generation logic you may define a <code>redirectTo</code> method instead of a <code>redirectTo</code> property:</p>
 <div class="codehilite"><pre><span></span>protected function redirectTo()
 {
-    //
+    return &#39;/path&#39;;
 }
 </pre></div>
 
 
 <blockquote>
-<p>{tip} <code>redirectTo</code> method has higher priority than <code>redirectTo</code> attribute.</p>
+<p>{tip} The <code>redirectTo</code> method will take precedence over the <code>redirectTo</code> attribute.</p>
 </blockquote>
 <h4 id="username-customization">Username Customization</h4>
 <p>By default, Laravel uses the <code>email</code> field for authentication. If you would like to customize this, you may define a <code>username</code> method on your <code>LoginController</code>:</p>
