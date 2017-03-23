@@ -4,7 +4,7 @@
     
     <url>
      <loc>/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -12,7 +12,7 @@
     
     <url>
      <loc>/apis/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -20,7 +20,7 @@
     
     <url>
      <loc>/artisan/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -28,7 +28,7 @@
     
     <url>
      <loc>/authentication/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -36,7 +36,7 @@
     
     <url>
      <loc>/authorization/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -44,7 +44,7 @@
     
     <url>
      <loc>/billing/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -52,7 +52,7 @@
     
     <url>
      <loc>/blade/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -60,7 +60,7 @@
     
     <url>
      <loc>/broadcasting/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -68,7 +68,7 @@
     
     <url>
      <loc>/cache/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -76,7 +76,7 @@
     
     <url>
      <loc>/collections/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -84,7 +84,7 @@
     
     <url>
      <loc>/configuration/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -92,7 +92,7 @@
     
     <url>
      <loc>/container/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -100,7 +100,7 @@
     
     <url>
      <loc>/contracts/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -108,7 +108,7 @@
     
     <url>
      <loc>/contributing/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -116,7 +116,7 @@
     
     <url>
      <loc>/contributions/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -124,7 +124,7 @@
     
     <url>
      <loc>/controllers/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -132,7 +132,7 @@
     
     <url>
      <loc>/csrf/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -140,7 +140,7 @@
     
     <url>
      <loc>/database-testing/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -148,7 +148,7 @@
     
     <url>
      <loc>/database/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -156,7 +156,7 @@
     
     <url>
      <loc>/documentation/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -164,7 +164,7 @@
     
     <url>
      <loc>/dusk/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -172,7 +172,7 @@
     
     <url>
      <loc>/eloquent-collections/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -180,7 +180,7 @@
     
     <url>
      <loc>/eloquent-mutators/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -188,7 +188,7 @@
     
     <url>
      <loc>/eloquent-relationships/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -196,7 +196,7 @@
     
     <url>
      <loc>/eloquent-serialization/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -204,7 +204,7 @@
     
     <url>
      <loc>/eloquent/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -212,7 +212,7 @@
     
     <url>
      <loc>/encryption/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -220,7 +220,7 @@
     
     <url>
      <loc>/envoy/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -228,7 +228,7 @@
     
     <url>
      <loc>/errors/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -236,7 +236,7 @@
     
     <url>
      <loc>/events/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -244,7 +244,7 @@
     
     <url>
      <loc>/facades/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -252,7 +252,7 @@
     
     <url>
      <loc>/filesystem/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -260,7 +260,7 @@
     
     <url>
      <loc>/frontend/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -268,7 +268,7 @@
     
     <url>
      <loc>/hashing/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -276,7 +276,7 @@
     
     <url>
      <loc>/helpers/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -284,7 +284,7 @@
     
     <url>
      <loc>/homestead/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -292,7 +292,7 @@
     
     <url>
      <loc>/http-tests/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -300,7 +300,7 @@
     
     <url>
      <loc>/installation/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -308,7 +308,7 @@
     
     <url>
      <loc>/license/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -316,7 +316,7 @@
     
     <url>
      <loc>/lifecycle/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -324,7 +324,7 @@
     
     <url>
      <loc>/localization/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -332,7 +332,7 @@
     
     <url>
      <loc>/mail/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -340,7 +340,7 @@
     
     <url>
      <loc>/middleware/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -348,7 +348,7 @@
     
     <url>
      <loc>/migrations/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -356,7 +356,7 @@
     
     <url>
      <loc>/mix/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -364,7 +364,7 @@
     
     <url>
      <loc>/mocking/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -372,7 +372,7 @@
     
     <url>
      <loc>/notifications/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -380,7 +380,7 @@
     
     <url>
      <loc>/packages/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -388,7 +388,7 @@
     
     <url>
      <loc>/pagination/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -396,7 +396,7 @@
     
     <url>
      <loc>/passport/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -404,7 +404,7 @@
     
     <url>
      <loc>/passwords/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -412,7 +412,7 @@
     
     <url>
      <loc>/providers/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -420,7 +420,7 @@
     
     <url>
      <loc>/queries/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -428,7 +428,7 @@
     
     <url>
      <loc>/queues/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -436,7 +436,7 @@
     
     <url>
      <loc>/redirects/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -444,7 +444,7 @@
     
     <url>
      <loc>/redis/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -452,7 +452,7 @@
     
     <url>
      <loc>/releases/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -460,7 +460,7 @@
     
     <url>
      <loc>/requests/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -468,7 +468,7 @@
     
     <url>
      <loc>/responses/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -476,7 +476,7 @@
     
     <url>
      <loc>/routing/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -484,7 +484,7 @@
     
     <url>
      <loc>/scheduling/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -492,7 +492,7 @@
     
     <url>
      <loc>/scout/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -500,7 +500,7 @@
     
     <url>
      <loc>/seeding/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -508,7 +508,7 @@
     
     <url>
      <loc>/session/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -516,7 +516,7 @@
     
     <url>
      <loc>/structure/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -524,7 +524,7 @@
     
     <url>
      <loc>/testing/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -532,7 +532,7 @@
     
     <url>
      <loc>/upgrade/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -540,7 +540,7 @@
     
     <url>
      <loc>/valet/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -548,7 +548,7 @@
     
     <url>
      <loc>/validation/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -556,7 +556,7 @@
     
     <url>
      <loc>/views/</loc>
-     <lastmod>2017-02-21</lastmod>
+     <lastmod>2017-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     

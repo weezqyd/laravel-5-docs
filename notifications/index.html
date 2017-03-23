@@ -1532,6 +1532,23 @@ public<span class="w"> </span>function<span class="w"> </span>toSlack<span class
 </pre></div>
 
 
+<p>You may also use an image as your logo instead of an emoji:</p>
+<div class="codehilite"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * Get the Slack representation of the notification.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param  mixed  $notifiable</span>
+<span class="cm"> * @return SlackMessage</span>
+<span class="cm"> */</span><span class="w"></span>
+public<span class="w"> </span>function<span class="w"> </span>toSlack<span class="o">(</span><span class="err">$</span>notifiable<span class="o">)</span><span class="w"></span>
+<span class="err">{</span><span class="w"></span>
+<span class="w">    </span><span class="kr">return</span><span class="w"> </span><span class="o">(</span>new<span class="w"> </span>SlackMessage<span class="o">)</span><span class="w"></span>
+<span class="w">                </span><span class="o">-&gt;</span>from<span class="o">(</span><span class="s">&#39;Laravel&#39;</span><span class="o">)</span><span class="w"></span>
+<span class="w">                </span><span class="o">-&gt;</span>image<span class="o">(</span><span class="s">&#39;https://laravel.com/favicon.png&#39;</span><span class="o">)</span><span class="w"></span>
+<span class="w">                </span><span class="o">-&gt;</span>content<span class="o">(</span><span class="s">&#39;This will display the Laravel logo next to the message&#39;</span><span class="o">)</span><span class="err">;</span><span class="w"></span>
+<span class="err">}</span><span class="w"></span>
+</pre></div>
+
+
 <p><a name="slack-attachments"></a></p>
 <h3 id="slack-attachments">Slack Attachments</h3>
 <p>You may also add "attachments" to Slack messages. Attachments provide richer formatting options than simple text messages. In this example, we will send an error notification about an exception that occurred in an application, including a link to view more details about the exception:</p>

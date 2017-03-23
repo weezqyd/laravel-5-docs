@@ -1112,6 +1112,11 @@ $browser-&gt;value(&#39;selector&#39;, &#39;value&#39;);
 </pre></div>
 
 
+<p>You may select a random option by omitting the second parameter:</p>
+<div class="codehilite"><pre><span></span>$browser-&gt;select(&#39;size&#39;);
+</pre></div>
+
+
 <h4 id="checkboxes">Checkboxes</h4>
 <p>To "check" a checkbox field, you may use the <code>check</code> method. Like many other input related methods, a full CSS selector is not required. If an exact selector match can't be found, Dusk will search for a checkbox with a matching <code>name</code> attribute:</p>
 <div class="codehilite"><pre><span></span>$browser-&gt;check(&#39;terms&#39;);
@@ -1319,6 +1324,14 @@ $browser-&gt;waitUntil(&#39;App.data.servers.length &gt; 0&#39;, 1);
 <tr>
 <td><code>$browser-&gt;assertNotChecked($field)</code></td>
 <td>Assert the given checkbox is not checked.</td>
+</tr>
+<tr>
+<td><code>$browser-&gt;assertRadioSelected($field, $value)</code></td>
+<td>Assert the given radio field is selected.</td>
+</tr>
+<tr>
+<td><code>$browser-&gt;assertRadioNotSelected($field, $value)</code></td>
+<td>Assert the given radio field is not selected.</td>
 </tr>
 <tr>
 <td><code>$browser-&gt;assertSelected($field, $value)</code></td>

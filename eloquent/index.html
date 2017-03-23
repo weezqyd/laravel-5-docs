@@ -1556,7 +1556,7 @@ $flight-&gt;history()-&gt;forceDelete();
 <h2 id="events">Events</h2>
 <p>Eloquent models fire several events, allowing you to hook into the following points in a model's lifecycle: <code>creating</code>, <code>created</code>, <code>updating</code>, <code>updated</code>, <code>saving</code>, <code>saved</code>, <code>deleting</code>, <code>deleted</code>, <code>restoring</code>, <code>restored</code>. Events allow you to easily execute code each time a specific model class is saved or updated in the database.</p>
 <p>Whenever a new model is saved for the first time, the <code>creating</code> and <code>created</code> events will fire. If a model already existed in the database and the <code>save</code> method is called, the <code>updating</code> / <code>updated</code> events will fire. However, in both cases, the <code>saving</code> / <code>saved</code> events will fire.</p>
-<p>To get started, define an <code>$events</code> property on your Eloquent model that maps various points of the Eloquent model's lifecycle to your own <a href="../docs/{{version}}/events">event classes</a>:</p>
+<p>To get started, define a <code>$dispatchesEvents</code> property on your Eloquent model that maps various points of the Eloquent model's lifecycle to your own <a href="../docs/{{version}}/events">event classes</a>:</p>
 <div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
 <span class="nx">namespace</span> <span class="nx">App</span><span class="p">;</span>
@@ -1575,7 +1575,7 @@ $flight-&gt;history()-&gt;forceDelete();
 <span class="cm">     *</span>
 <span class="cm">     * @var array</span>
 <span class="cm">     */</span>
-    <span class="kr">protected</span> <span class="nx">$events</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="kr">protected</span> <span class="nx">$dispatchesEvents</span> <span class="o">=</span> <span class="p">[</span>
         <span class="s1">&#39;saved&#39;</span> <span class="o">=&gt;</span> <span class="nx">UserSaved</span><span class="o">::</span><span class="kr">class</span><span class="p">,</span>
         <span class="s1">&#39;deleted&#39;</span> <span class="o">=&gt;</span> <span class="nx">UserDeleted</span><span class="o">::</span><span class="kr">class</span><span class="p">,</span>
     <span class="p">];</span>
