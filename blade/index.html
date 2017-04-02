@@ -996,7 +996,7 @@
 
 
 <blockquote>
-<p>{note} Blade <code>{{ }}</code> statements are automatically sent through PHP's <code>htmlentities</code> function to prevent XSS attacks.</p>
+<p>{note} Blade <code>{{ }}</code> statements are automatically sent through PHP's <code>htmlspecialchars</code> function to prevent XSS attacks.</p>
 </blockquote>
 <h4 id="echoing-data-if-it-exists">Echoing Data If It Exists</h4>
 <p>Sometimes you may wish to echo a variable, but you aren't sure if the variable has been set. You can do this using PHP's null coalescing operator:</p>
@@ -1006,7 +1006,7 @@
 
 <p>In this example, if the <code>$name</code> variable exists, its value will be displayed. However, if it does not exist, the word <code>Default</code> will be displayed.</p>
 <h4 id="displaying-unescaped-data">Displaying Unescaped Data</h4>
-<p>By default, Blade <code>{{ }}</code> statements are automatically sent through PHP's <code>htmlentities</code> function to prevent XSS attacks. If you do not want your data to be escaped, you may use the following syntax:</p>
+<p>By default, Blade <code>{{ }}</code> statements are automatically sent through PHP's <code>htmlspecialchars</code> function to prevent XSS attacks. If you do not want your data to be escaped, you may use the following syntax:</p>
 <div class="codehilite"><pre><span></span>Hello, {!! $name !!}.
 </pre></div>
 

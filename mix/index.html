@@ -858,7 +858,7 @@
 </li>
 <li><a href="#working-with-scripts">Working With JavaScript</a><ul>
 <li><a href="#vendor-extraction">Vendor Extraction</a></li>
-<li><a href="#react-support">React</a></li>
+<li><a href="#react">React</a></li>
 <li><a href="#vanilla-js">Vanilla JS</a></li>
 <li><a href="#custom-webpack-configuration">Custom Webpack Configuration</a></li>
 </ul>
@@ -962,7 +962,7 @@ npm run production
 
 
 <p>Additional <a href="https://github.com/sass/node-sass#options">Node-Sass plug-in options</a> may be provided as the third argument:</p>
-<div class="codehilite"><pre><span></span>mix.sass(&#39;resources/assets/less/app.less&#39;, &#39;public/css&#39;, {
+<div class="codehilite"><pre><span></span>mix.sass(&#39;resources/assets/sass/app.sass&#39;, &#39;public/css&#39;, {
     precision: 5
 });
 </pre></div>
@@ -971,7 +971,7 @@ npm run production
 <p><a name="stylus"></a></p>
 <h3 id="stylus">Stylus</h3>
 <p>Similar to Less and Sass, the <code>stylus</code> method allows you to compile <a href="http://stylus-lang.com/">Stylus</a> into CSS:</p>
-<div class="codehilite"><pre><span></span>mix.stylus(&#39;resources/assets/sass/app.scss&#39;, &#39;public/css&#39;);
+<div class="codehilite"><pre><span></span>mix.stylus(&#39;resources/assets/stylus/app.styl&#39;, &#39;public/css&#39;);
 </pre></div>
 
 
@@ -1066,7 +1066,7 @@ npm run production
 <p><a name="vendor-extraction"></a></p>
 <h3 id="vendor-extraction">Vendor Extraction</h3>
 <p>One potential downside to bundling all application-specific JavaScript with your vendor libraries is that it makes long-term caching more difficult. For example, a single update to your application code will force the browser to re-download all of your vendor libraries even if they haven't changed.</p>
-<p>If you intend to make frequent updates to your application's JavaScript, you should consider extracting all of your vendor libraries into their file. This way, a change to your application code will not affect the caching of your large <code>vendor.js</code> file. Mix's <code>extract</code> method makes this a breeze:</p>
+<p>If you intend to make frequent updates to your application's JavaScript, you should consider extracting all of your vendor libraries into their own file. This way, a change to your application code will not affect the caching of your large <code>vendor.js</code> file. Mix's <code>extract</code> method makes this a breeze:</p>
 <div class="codehilite"><pre><span></span>mix.js(&#39;resources/assets/js/app.js&#39;, &#39;public/js&#39;)
    .extract([&#39;vue&#39;])
 </pre></div>
@@ -1093,7 +1093,7 @@ npm run production
 </pre></div>
 
 
-<p>Behind the scenes, React will download and include the appropriate <code>babel-preset-react</code> Babel plug-in.</p>
+<p>Behind the scenes, Mix will download and include the appropriate <code>babel-preset-react</code> Babel plug-in.</p>
 <p><a name="vanilla-js"></a></p>
 <h3 id="vanilla-js">Vanilla JS</h3>
 <p>Similar to combining stylesheets with <code>mix.styles()</code>, you may also combine and minify any number of JavaScript files with the <code>scripts()</code> method:</p>
@@ -1111,7 +1111,7 @@ npm run production
 <p><a name="custom-webpack-configuration"></a></p>
 <h3 id="custom-webpack-configuration">Custom Webpack Configuration</h3>
 <p>Behind the scenes, Laravel Mix references a pre-configured <code>webpack.config.js</code> file to get you up and running as quickly as possible. Occasionally, you may need to manually modify this file. You might have a special loader or plug-in that needs to be referenced, or maybe you prefer to use Stylus instead of Sass. In such instances, you have two choices:</p>
-<h4 id="merging">Merging</h4>
+<h4 id="merging-custom-configuration">Merging Custom Configuration</h4>
 <p>Mix provides a useful <code>webpackConfig</code> method that allows you to merge any short Webpack configuration overrides. This is a particularly appealing choice, as it doesn't require you to copy and maintain your own copy of the <code>webpack.config.js</code> file. The <code>webpackConfig</code> method accepts an object, which should contain any <a href="https://webpack.js.org/configuration/">Webpack-specific configuration</a> that you wish to apply.</p>
 <div class="codehilite"><pre><span></span>mix.webpackConfig({
     resolve: {
@@ -1123,6 +1123,8 @@ npm run production
 </pre></div>
 
 
+<h4 id="custom-configuration-files">Custom Configuration Files</h4>
+<p>If you would like completely customize your Webpack configuration, copy the <code>node_modules/laravel-mix/setup/webpack.config.js</code> file to your project's root directory. Next, point all of the <code>--config</code> references in your <code>package.json</code> file to the newly copied configuration file. If you choose to take this approach to customization, any future upstream updates to Mix's <code>webpack.config.js</code> must be manually merged into your customized file.</p>
 <p><a name="copying-files-and-directories"></a></p>
 <h2 id="copying-files-directories">Copying Files &amp; Directories</h2>
 <p>The <code>copy</code> method may be used to copy files and directories to new locations. This can be useful when a particular asset within your <code>node_modules</code> directory needs to be relocated to your <code>public</code> folder.</p>

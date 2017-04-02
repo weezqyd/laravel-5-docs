@@ -850,7 +850,7 @@
 <p>When using the <code>database</code> session driver, you will need to create a table to contain the session items. Below is an example <code>Schema</code> declaration for the table:</p>
 <div class="codehilite"><pre><span></span>Schema::create(&#39;sessions&#39;, function ($table) {
     $table-&gt;string(&#39;id&#39;)-&gt;unique();
-    $table-&gt;integer(&#39;user_id&#39;)-&gt;nullable();
+    $table-&gt;unsignedInteger(&#39;user_id&#39;)-&gt;nullable();
     $table-&gt;string(&#39;ip_address&#39;, 45)-&gt;nullable();
     $table-&gt;text(&#39;user_agent&#39;)-&gt;nullable();
     $table-&gt;text(&#39;payload&#39;);

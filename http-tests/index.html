@@ -480,6 +480,30 @@
               </a>
             </li>
           
+            <li class="anchor">
+              <a title="Session / Authentication" href="#session-authentication">
+                Session / Authentication
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Testing JSON APIs" href="#testing-json-apis">
+                Testing JSON APIs
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Testing File Uploads" href="#testing-file-uploads">
+                Testing File Uploads
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Available Assertions" href="#available-assertions">
+                Available Assertions
+              </a>
+            </li>
+          
         </ul>
       
     
@@ -798,6 +822,7 @@
 <li><a href="#introduction">Introduction</a></li>
 <li><a href="#session-and-authentication">Session / Authentication</a></li>
 <li><a href="#testing-json-apis">Testing JSON APIs</a></li>
+<li><a href="#testing-file-uploads">Testing File Uploads</a></li>
 <li><a href="#available-assertions">Available Assertions</a></li>
 </ul>
 <p><a name="introduction"></a></p>
@@ -831,7 +856,7 @@
 
 <p>The <code>get</code> method makes a <code>GET</code> request into the application, while the <code>assertStatus</code> method asserts that the returned response should have the given HTTP status code. In addition to this simple assertion, Laravel also contains a variety of assertions for inspecting the response headers, content, JSON structure, and more.</p>
 <p><a name="session-and-authentication"></a></p>
-<h3 id="session-authentication">Session / Authentication</h3>
+<h2 id="session-authentication">Session / Authentication</h2>
 <p>Laravel provides several helpers for working with the session during HTTP testing. First, you may set the session data to a given array using the <code>withSession</code> method. This is useful for loading the session with data before issuing a request to your application:</p>
 <div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
@@ -859,7 +884,7 @@
 
         <span class="nx">$response</span> <span class="o">=</span> <span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">actingAs</span><span class="p">(</span><span class="nx">$user</span><span class="p">)</span>
                          <span class="o">-&gt;</span><span class="nx">withSession</span><span class="p">([</span><span class="s1">&#39;foo&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;bar&#39;</span><span class="p">])</span>
-                         <span class="o">-&gt;</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+                         <span class="o">-&gt;</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">);</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -871,7 +896,7 @@
 
 
 <p><a name="testing-json-apis"></a></p>
-<h3 id="testing-json-apis">Testing JSON APIs</h3>
+<h2 id="testing-json-apis">Testing JSON APIs</h2>
 <p>Laravel also provides several helpers for testing JSON APIs and their responses. For example, the <code>json</code>, <code>get</code>, <code>post</code>, <code>put</code>, <code>patch</code>, and <code>delete</code> methods may be used to issue requests with various HTTP verbs. You may also easily pass data and headers to these methods. To get started, let's write a test to make a <code>POST</code> request to <code>/user</code> and assert that the expected data was returned:</p>
 <div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
@@ -925,8 +950,53 @@
 </pre></div>
 
 
+<p><a name="testing-file-uploads"></a></p>
+<h2 id="testing-file-uploads">Testing File Uploads</h2>
+<p>The <code>Illuminate\Http\UploadedFile</code> class provides a <code>fake</code> method which may be used to generate dummy files or images for testing. This, combined with the <code>Storage</code> facade's <code>fake</code> method greatly simplifies the testing of file uploads. For example, you may combine these two features to easily test an avatar upload form:</p>
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+
+<span class="nx">namespace</span> <span class="nx">Tests</span><span class="err">\</span><span class="nx">Feature</span><span class="p">;</span>
+
+<span class="nx">use</span> <span class="nx">Tests</span><span class="err">\</span><span class="nx">TestCase</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Http</span><span class="err">\</span><span class="nx">UploadedFile</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Support</span><span class="err">\</span><span class="nx">Facades</span><span class="err">\</span><span class="nx">Storage</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Foundation</span><span class="err">\</span><span class="nx">Testing</span><span class="err">\</span><span class="nx">WithoutMiddleware</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Foundation</span><span class="err">\</span><span class="nx">Testing</span><span class="err">\</span><span class="nx">DatabaseMigrations</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Foundation</span><span class="err">\</span><span class="nx">Testing</span><span class="err">\</span><span class="nx">DatabaseTransactions</span><span class="p">;</span>
+
+<span class="kr">class</span> <span class="nx">ExampleTest</span> <span class="kr">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">testAvatarUpload</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nx">Storage</span><span class="o">::</span><span class="nx">fake</span><span class="p">(</span><span class="s1">&#39;avatars&#39;</span><span class="p">);</span>
+
+        <span class="nx">$response</span> <span class="o">=</span> <span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">json</span><span class="p">(</span><span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="s1">&#39;/avatar&#39;</span><span class="p">,</span> <span class="p">[</span>
+            <span class="s1">&#39;avatar&#39;</span> <span class="o">=&gt;</span> <span class="nx">UploadedFile</span><span class="o">::</span><span class="nx">fake</span><span class="p">()</span><span class="o">-&gt;</span><span class="nx">image</span><span class="p">(</span><span class="s1">&#39;avatar.jpg&#39;</span><span class="p">)</span>
+        <span class="p">]);</span>
+
+        <span class="c1">// Assert the file was stored...</span>
+        <span class="nx">Storage</span><span class="o">::</span><span class="nx">disk</span><span class="p">(</span><span class="s1">&#39;avatars&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="nx">assertExists</span><span class="p">(</span><span class="s1">&#39;avatar.jpg&#39;</span><span class="p">);</span>
+
+        <span class="c1">// Assert a file does not exist...</span>
+        <span class="nx">Storage</span><span class="o">::</span><span class="nx">disk</span><span class="p">(</span><span class="s1">&#39;avatars&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="nx">assertMissing</span><span class="p">(</span><span class="s1">&#39;missing.jpg&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<h4 id="fake-file-customization">Fake File Customization</h4>
+<p>When creating files using the <code>fake</code> method, you may specify the width, height, and size of the image in order to better test your validation rules:</p>
+<div class="codehilite"><pre><span></span><span class="nt">UploadedFile</span><span class="p">::</span><span class="nd">fake</span><span class="o">()</span><span class="nt">-</span><span class="o">&gt;</span><span class="nt">image</span><span class="o">(</span><span class="s1">&#39;avatar.jpg&#39;</span><span class="o">,</span> <span class="o">$</span><span class="nt">width</span><span class="o">,</span> <span class="o">$</span><span class="nt">height</span><span class="o">)</span><span class="nt">-</span><span class="o">&gt;</span><span class="nt">size</span><span class="o">(</span><span class="nt">100</span><span class="o">);</span>
+</pre></div>
+
+
+<p>In addition to creating images, you may create files of any other type using the <code>create</code> method:</p>
+<div class="codehilite"><pre><span></span><span class="nt">UploadedFile</span><span class="p">::</span><span class="nd">fake</span><span class="o">()</span><span class="nt">-</span><span class="o">&gt;</span><span class="nt">create</span><span class="o">(</span><span class="s1">&#39;document.pdf&#39;</span><span class="o">,</span> <span class="o">$</span><span class="nt">sizeInKilobytes</span><span class="o">);</span>
+</pre></div>
+
+
 <p><a name="available-assertions"></a></p>
-<h3 id="available-assertions">Available Assertions</h3>
+<h2 id="available-assertions">Available Assertions</h2>
 <p>Laravel provides a variety of custom assertion methods for your <a href="https://phpunit.de/">PHPUnit</a> tests. These assertions may be accessed on the response that is returned from the <code>json</code>, <code>get</code>, <code>post</code>, <code>put</code>, and <code>delete</code> test methods:</p>
 <table>
 <thead>

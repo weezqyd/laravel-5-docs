@@ -829,7 +829,7 @@
 <p>Laravel's command scheduler allows you to fluently and expressively define your command schedule within Laravel itself. When using the scheduler, only a single Cron entry is needed on your server. Your task schedule is defined in the <code>app/Console/Kernel.php</code> file's <code>schedule</code> method. To help you get started, a simple example is defined within the method.</p>
 <h3 id="starting-the-scheduler">Starting The Scheduler</h3>
 <p>When using the scheduler, you only need to add the following Cron entry to your server. If you do not know how to add Cron entries to your server, consider using a service such as <a href="https://forge.laravel.com">Laravel Forge</a> which can manage the Cron entries for you:</p>
-<div class="codehilite"><pre><span></span>* * * * * php /path/to/artisan schedule:run &gt;&gt; /dev/null 2&gt;&amp;1
+<div class="codehilite"><pre><span></span>* * * * * php /path-to-your-project/artisan schedule:run &gt;&gt; /dev/null 2&gt;&amp;1
 </pre></div>
 
 

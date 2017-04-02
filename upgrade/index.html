@@ -854,7 +854,7 @@
 
 
 <h3 id="bootstrappers">Bootstrappers</h3>
-<p>If you are manually overriding the <code>$bootstrappers</code> array on your HTTP or Console kernel, you should rename the <code>DetectEnvironment</code> entry to <code>LoadEnvironmentVariables</code>.</p>
+<p>If you are manually overriding the <code>$bootstrappers</code> array on your HTTP or Console kernel, you should rename the <code>DetectEnvironment</code> entry to <code>LoadEnvironmentVariables</code> and remove <code>ConfigureLogging</code>.</p>
 <h3 id="broadcasting">Broadcasting</h3>
 <h4 id="channel-model-binding">Channel Model Binding</h4>
 <p>When defining channel name placeholders in Laravel 5.3, the <code>*</code> character is used. In Laravel 5.4, you should define these placeholders using <code>{foo}</code> style placeholders, like routes:</p>
@@ -932,7 +932,7 @@ Connection::resolverFor(&#39;driver-name&#39;, function ($connection, $database,
 
 
 <h4 id="fetch-mode">Fetch Mode</h4>
-<p>Laravel no longer includes the ability to customize the PDO "fetch mode" from your configuration files. Instead, <code>PDO::FETCH_OBJ</code> is always used. If you will still like to customize the fetch mode for your application you may listen for the new <code>Illuminate\Database\Events\StatementPrepared</code> event:</p>
+<p>Laravel no longer includes the ability to customize the PDO "fetch mode" from your configuration files. Instead, <code>PDO::FETCH_OBJ</code> is always used. If you would still like to customize the fetch mode for your application you may listen for the new <code>Illuminate\Database\Events\StatementPrepared</code> event:</p>
 <div class="codehilite"><pre><span></span>Event::listen(StatementPrepared::class, function ($event) {
     $event-&gt;statement-&gt;setFetchMode(...);
 });
@@ -1076,6 +1076,7 @@ Connection::resolverFor(&#39;driver-name&#39;, function ($connection, $database,
 <p>The <code>getUri</code> method of the <code>Illuminate\Routing\Route</code> class has been removed. You should use the <code>uri</code> method instead.</p>
 <p>The <code>getMethods</code> method of the <code>Illuminate\Routing\Route</code> class has been removed. You should use the <code>methods</code> method instead.</p>
 <p>The <code>getParameter</code> method of the <code>Illuminate\Routing\Route</code> class has been removed. You should use the <code>parameter</code> method instead.</p>
+<p>The <code>getPath</code> method of the <code>Illuminate\Routing\Route</code> class has been removed. You should use the <code>uri</code> method instead.</p>
 <h3 id="sessions">Sessions</h3>
 <h4 id="symfony-compatibility">Symfony Compatibility</h4>
 <p>Laravel's session handlers no longer implements Symfony's <code>SessionInterface</code>. Implementing this interface required us to implement extraneous features that were not needed by the framework. Instead, a new <code>Illuminate\Contracts\Session\Session</code> interface has been defined and may be used instead. The following code changes should also be applied:</p>
@@ -1084,15 +1085,15 @@ Connection::resolverFor(&#39;driver-name&#39;, function ($connection, $database,
 <p>All calls to the <code>$request-&gt;setSession()</code> method should be changed to <code>setLaravelSession()</code>.</p>
 <h3 id="testing">Testing</h3>
 <p>Laravel 5.4's testing layer has been re-written to be simpler and lighter out of the box. If you would like to continue using the testing layer present in Laravel 5.3, you may install the <code>laravel/browser-kit-testing</code> <a href="https://github.com/laravel/browser-kit-testing">package</a> into your application. This package provides full compatibility with the Laravel 5.3 testing layer. In fact, you can run the Laravel 5.4 testing layer side-by-side with the Laravel 5.3 testing layer.</p>
-<h4 id="running-laravel-53-54-tests-in-a-single-application">Running Laravel 5.3 &amp; 5.4 Tests In A Single Application</h4>
-<p>Before getting started, you should add the <code>Tests</code> namespace to your <code>composer.json</code> file's <code>autoload-dev</code> block. This will allow Laravel to autoload any new tests you generate using the Laravel 5.4 test generators:</p>
+<p>In order to allow Laravel to autoload any new tests you generate using the Laravel 5.4 test generators, you should add the <code>Tests</code> namespace to your <code>composer.json</code> file's <code>autoload-dev</code> block:</p>
 <div class="codehilite"><pre><span></span>&quot;psr-4&quot;: {
     &quot;Tests\\&quot;: &quot;tests/&quot;
 }
 </pre></div>
 
 
-<p>Next, install the <code>laravel/browser-kit-testing</code> package:</p>
+<h4 id="running-laravel-53-54-tests-in-a-single-application">Running Laravel 5.3 &amp; 5.4 Tests In A Single Application</h4>
+<p>First install the <code>laravel/browser-kit-testing</code> package:</p>
 <div class="codehilite"><pre><span></span>composer require laravel/browser-kit-testing
 </pre></div>
 

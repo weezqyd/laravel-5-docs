@@ -655,6 +655,12 @@
         <ul>
           
             <li class="anchor">
+              <a title="Versioning Scheme" href="#versioning-scheme">
+                Versioning Scheme
+              </a>
+            </li>
+          
+            <li class="anchor">
               <a title="Support Policy" href="#support-policy">
                 Support Policy
               </a>
@@ -843,6 +849,7 @@
           
           <h1 id="release-notes">Release Notes</h1>
 <ul>
+<li><a href="#versioning-scheme">Versioning Scheme</a></li>
 <li><a href="#support-policy">Support Policy</a></li>
 <li><a href="#laravel-5.4">Laravel 5.4</a></li>
 <li><a href="#laravel-5.3">Laravel 5.3</a></li>
@@ -853,6 +860,14 @@
 <li><a href="#laravel-5.0">Laravel 5.0</a></li>
 <li><a href="#laravel-4.2">Laravel 4.2</a></li>
 </ul>
+<p><a name="versioning-scheme"></a></p>
+<h2 id="versioning-scheme">Versioning Scheme</h2>
+<p>Laravel's versioning scheme maintains the following convention: <code>paradigm.minor.patch</code>. Minor framework releases are released every six months (January and July), while patch releases may be released as often as every week. Patch releases should <strong>never</strong> contain breaking changes.</p>
+<p>When referencing the Laravel framework or it's components from your application or package, you should always use a version constraint such as <code>5.4.*</code>, since minor releases of Laravel do include breaking changes. However, we strive to always ensure you may update to a new minor release in one day or less.</p>
+<p>Paradigm shifting releases are separated by many years and represent fundamental shifts in the framework's architecture and conventions. Currently, there is no paradigm shifting release under development.</p>
+<h4 id="why-doesnt-laravel-use-semantic-versioning">Why Doesn't Laravel Use Semantic Versioning?</h4>
+<p>On one hand, all optional components of Laravel (Cashier, Dusk, Valet, Socialite, etc.) <strong>do</strong> use semantic versioning. However, the Laravel framework itself does not. The reason for this is because semantic versioning is a "reductionist" way of determining if two pieces of code are compatible. Even when using semantic versioning, you still must install the upgraded package and run your automated test suite to know if anything is <em>actually</em> incompatible with your code base.</p>
+<p>So, instead, the Laravel framework uses a versioning scheme that is more communicative of the actual scope of the release. Furthermore, since patch releases <strong>never</strong> contain intentional breaking changes, you should never receive a breaking change as long as your version constraints follow the <code>paradigm.minor.*</code> convention.</p>
 <p><a name="support-policy"></a></p>
 <h2 id="support-policy">Support Policy</h2>
 <p>For LTS releases, such as Laravel 5.1, bug fixes are provided for 2 years and security fixes are provided for 3 years. These releases provide the longest window of support and maintenance. For general releases, bug fixes are provided for 6 months and security fixes are provided for 1 year.</p>

@@ -920,6 +920,8 @@
 <p>When using Pusher and <a href="#installing-laravel-echo">Laravel Echo</a>, you should specify <code>pusher</code> as your desired broadcaster when instantiating the Echo instance in your <code>resources/assets/js/bootstrap.js</code> file:</p>
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">Echo</span> <span class="nn">from</span> <span class="s2">&quot;laravel-echo&quot;</span>
 
+<span class="n">window</span><span class="o">.</span><span class="n">Pusher</span> <span class="o">=</span> <span class="n">require</span><span class="p">(</span><span class="s1">&#39;pusher-js&#39;</span><span class="p">);</span>
+
 <span class="n">window</span><span class="o">.</span><span class="n">Echo</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Echo</span><span class="p">({</span>
     <span class="n">broadcaster</span><span class="p">:</span> <span class="s1">&#39;pusher&#39;</span><span class="p">,</span>
     <span class="n">key</span><span class="p">:</span> <span class="s1">&#39;your-pusher-key&#39;</span>

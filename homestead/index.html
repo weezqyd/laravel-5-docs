@@ -501,6 +501,12 @@
               </a>
             </li>
           
+            <li class="anchor">
+              <a title="Provider Specific Settings" href="#provider-specific-settings">
+                Provider Specific Settings
+              </a>
+            </li>
+          
         </ul>
       
     
@@ -841,11 +847,16 @@
 <li><a href="#adding-additional-sites">Adding Additional Sites</a></li>
 <li><a href="#configuring-cron-schedules">Configuring Cron Schedules</a></li>
 <li><a href="#ports">Ports</a></li>
+<li><a href="#sharing-your-environment">Sharing Your Environment</a></li>
 </ul>
 </li>
 <li><a href="#network-interfaces">Network Interfaces</a></li>
 <li><a href="#updating-homestead">Updating Homestead</a></li>
 <li><a href="#old-versions">Old Versions</a></li>
+<li><a href="#provider-specific-settings">Provider Specific Settings</a><ul>
+<li><a href="#provider-specific-virtualbox">VirtualBox</a></li>
+</ul>
+</li>
 </ul>
 <p><a name="introduction"></a></p>
 <h2 id="introduction">Introduction</h2>
@@ -871,6 +882,8 @@
 <li>Redis</li>
 <li>Memcached</li>
 <li>Beanstalkd</li>
+<li>Mailhog</li>
+<li>ngrok</li>
 </ul>
 <p><a name="installation-and-setup"></a></p>
 <h2 id="installation-setup">Installation &amp; Setup</h2>
@@ -891,6 +904,14 @@
 <div class="codehilite"><pre><span></span>cd ~
 
 git clone https://github.com/laravel/homestead.git Homestead
+</pre></div>
+
+
+<p>You should check out a tagged version of Homestead since the <code>master</code> branch may not always be stable. You can find the latest stable version on the <a href="https://github.com/laravel/homestead/releases">Github Release Page</a>:</p>
+<div class="codehilite"><pre><span></span>cd Homestead
+
+// Clone the desired release...
+git checkout v4.0.5
 </pre></div>
 
 
@@ -998,7 +1019,7 @@ init.bat
 <h2 id="daily-usage">Daily Usage</h2>
 <p><a name="accessing-homestead-globally"></a></p>
 <h3 id="accessing-homestead-globally">Accessing Homestead Globally</h3>
-<p>Sometimes you may want to <code>vagrant up</code> your Homestead machine from anywhere on your filesystem. You can do this on Mac / Linux systems by adding a Bash function to your Bash profile. On Windows, you may accomplish this by adding a "batch" file to your <code>PATH</code>. This scripts will allow you to run any Vagrant command from anywhere on your system and will automatically point that command to your Homestead installation:</p>
+<p>Sometimes you may want to <code>vagrant up</code> your Homestead machine from anywhere on your filesystem. You can do this on Mac / Linux systems by adding a Bash function to your Bash profile. On Windows, you may accomplish this by adding a "batch" file to your <code>PATH</code>. These scripts will allow you to run any Vagrant command from anywhere on your system and will automatically point that command to your Homestead installation:</p>
 <h4 id="mac-linux">Mac / Linux</h4>
 <div class="codehilite"><pre><span></span><span class="kd">function</span> <span class="nx">homestead() {</span>
     <span class="p">(</span> <span class="nx">cd</span> <span class="o">~</span><span class="err">/Homestead &amp;&amp; vagrant $* )</span>
@@ -1052,6 +1073,17 @@ set homesteadVagrant=
 
 
 <p>Once the site has been added, run the <code>vagrant reload --provision</code> command from your Homestead directory.</p>
+<p><a name="site-types"></a></p>
+<h4 id="site-types">Site Types</h4>
+<p>Homestead supports several types of sites which allow you to easily run projects that are not based on Laravel. For example, we may easily add a Symfony application to Homestead using the <code>symfony2</code> site type:</p>
+<div class="codehilite"><pre><span></span>sites:
+    - map: symfony2.app
+      to: /home/vagrant/Code/Symfony/public
+      type: symfony2
+</pre></div>
+
+
+<p>The available site types are: <code>apache</code>, <code>laravel</code> (the default), <code>proxy</code>, <code>silverstripe</code>, <code>statamic</code>, and <code>symfony2</code>.</p>
 <p><a name="configuring-cron-schedules"></a></p>
 <h3 id="configuring-cron-schedules">Configuring Cron Schedules</h3>
 <p>Laravel provides a convenient way to <a href="../docs/{{version}}/scheduling">schedule Cron jobs</a> by scheduling a single <code>schedule:run</code> Artisan command to be run every minute. The <code>schedule:run</code> command will examine the job schedule defined in your <code>App\Console\Kernel</code> class to determine which jobs should be run.</p>
@@ -1073,6 +1105,7 @@ set homesteadVagrant=
 <li><strong>HTTPS:</strong> 44300 &rarr; Forwards To 443</li>
 <li><strong>MySQL:</strong> 33060 &rarr; Forwards To 3306</li>
 <li><strong>Postgres:</strong> 54320 &rarr; Forwards To 5432</li>
+<li><strong>Mailhog:</strong> 8025 &rarr; Forwards To 8025</li>
 </ul>
 <h4 id="forwarding-additional-ports">Forwarding Additional Ports</h4>
 <p>If you wish, you may forward additional ports to the Vagrant box, as well as specify their protocol:</p>
@@ -1085,6 +1118,22 @@ set homesteadVagrant=
 </pre></div>
 
 
+<p><a name="sharing-your-environment"></a></p>
+<h3 id="sharing-your-environment">Sharing Your Environment</h3>
+<p>Sometimes you may wish to share what you're currently working on with coworkers or a  client. Vagrant has a built-in way to support this via <code>vagrant share</code>; however, this will not work if you have multiple sites configured in your <code>Homestead.yaml</code> file.</p>
+<p>To solve this problem, Homestead includes its own <code>share</code> command. To get started, SSH into your Homestead machine via <code>vagrant ssh</code> and run <code>share homestead.app</code>. This will share the <code>homestead.app</code> site from your <code>Homestead.yaml</code> configuration file. Of course, you may substitute any of your other configured sites for <code>homestead.app</code>:</p>
+<div class="codehilite"><pre><span></span>share homestead.app
+</pre></div>
+
+
+<p>After running the command, you will see an Ngrok screen appear which contains the activity log and the publicly accessible URLs for the shared site. If you would like to specify a custom region, subdomain, or other Ngrok runtime option, you may add them to your <code>share</code> command:</p>
+<div class="codehilite"><pre><span></span>share homestead.app -region=eu -subdomain=laravel
+</pre></div>
+
+
+<blockquote>
+<p>{note} Remember, Vagrant is inherently insecure and you are exposing your virtual machine to the Internet when running the <code>share</code> command.</p>
+</blockquote>
 <p><a name="network-interfaces"></a></p>
 <h2 id="network-interfaces">Network Interfaces</h2>
 <p>The <code>networks</code> property of the <code>Homestead.yaml</code> configures network interfaces for your Homestead environment. You may configure as many interfaces as necessary:</p>
@@ -1161,6 +1210,14 @@ set homesteadVagrant=
 </tr>
 </tbody>
 </table>
+<p><a name="provider-specific-settings"></a></p>
+<h2 id="provider-specific-settings">Provider Specific Settings</h2>
+<p><a name="provider-specific-virtualbox"></a></p>
+<h3 id="virtualbox">VirtualBox</h3>
+<p>By default, Homestead configures the <code>natdnshostresolver</code> setting to <code>on</code>. This allows Homestead to use your host operating system's DNS settings. If you would like to override this behavior, add the following lines to your <code>Homestead.yaml</code> file:</p>
+<div class="codehilite"><pre><span></span><span class="n">provider</span><span class="o">:</span> <span class="n">virtualbox</span>
+<span class="n">natdnshostresolver</span><span class="o">:</span> <span class="n">off</span>
+</pre></div>
           <aside class="copyright" role="note">
             
             Documentation built with

@@ -592,6 +592,12 @@
             </li>
           
             <li class="anchor">
+              <a title="Storage Fake" href="#storage-fake">
+                Storage Fake
+              </a>
+            </li>
+          
+            <li class="anchor">
               <a title="Facades" href="#facades">
                 Facades
               </a>
@@ -837,6 +843,7 @@
 <li><a href="#mail-fake">Mail Fake</a></li>
 <li><a href="#notification-fake">Notification Fake</a></li>
 <li><a href="#queue-fake">Queue Fake</a></li>
+<li><a href="#storage-fake">Storage Fake</a></li>
 <li><a href="#mocking-facades">Facades</a></li>
 </ul>
 <p><a name="introduction"></a></p>
@@ -1027,6 +1034,40 @@
 
         <span class="c1">// Assert a job was not pushed...</span>
         <span class="nx">Queue</span><span class="o">::</span><span class="nx">assertNotPushed</span><span class="p">(</span><span class="nx">AnotherJob</span><span class="o">::</span><span class="kr">class</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p><a name="storage-fake"></a></p>
+<h2 id="storage-fake">Storage Fake</h2>
+<p>The <code>Storage</code> facade's <code>fake</code> method allows you to easily generate a fake disk that, combined with the file generation utilities of the <code>UploadedFile</code> class, greatly simplifies the testing of file uploads. For example:</p>
+<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+
+<span class="nx">namespace</span> <span class="nx">Tests</span><span class="err">\</span><span class="nx">Feature</span><span class="p">;</span>
+
+<span class="nx">use</span> <span class="nx">Tests</span><span class="err">\</span><span class="nx">TestCase</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Http</span><span class="err">\</span><span class="nx">UploadedFile</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Support</span><span class="err">\</span><span class="nx">Facades</span><span class="err">\</span><span class="nx">Storage</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Foundation</span><span class="err">\</span><span class="nx">Testing</span><span class="err">\</span><span class="nx">WithoutMiddleware</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Foundation</span><span class="err">\</span><span class="nx">Testing</span><span class="err">\</span><span class="nx">DatabaseMigrations</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Foundation</span><span class="err">\</span><span class="nx">Testing</span><span class="err">\</span><span class="nx">DatabaseTransactions</span><span class="p">;</span>
+
+<span class="kr">class</span> <span class="nx">ExampleTest</span> <span class="kr">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">testAvatarUpload</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nx">Storage</span><span class="o">::</span><span class="nx">fake</span><span class="p">(</span><span class="s1">&#39;avatars&#39;</span><span class="p">);</span>
+
+        <span class="nx">$response</span> <span class="o">=</span> <span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">json</span><span class="p">(</span><span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="s1">&#39;/avatar&#39;</span><span class="p">,</span> <span class="p">[</span>
+            <span class="s1">&#39;avatar&#39;</span> <span class="o">=&gt;</span> <span class="nx">UploadedFile</span><span class="o">::</span><span class="nx">fake</span><span class="p">()</span><span class="o">-&gt;</span><span class="nx">image</span><span class="p">(</span><span class="s1">&#39;avatar.jpg&#39;</span><span class="p">)</span>
+        <span class="p">]);</span>
+
+        <span class="c1">// Assert the file was stored...</span>
+        <span class="nx">Storage</span><span class="o">::</span><span class="nx">disk</span><span class="p">(</span><span class="s1">&#39;avatars&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="nx">assertExists</span><span class="p">(</span><span class="s1">&#39;avatar.jpg&#39;</span><span class="p">);</span>
+
+        <span class="c1">// Assert a file does not exist...</span>
+        <span class="nx">Storage</span><span class="o">::</span><span class="nx">disk</span><span class="p">(</span><span class="s1">&#39;avatars&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="nx">assertMissing</span><span class="p">(</span><span class="s1">&#39;missing.jpg&#39;</span><span class="p">);</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>

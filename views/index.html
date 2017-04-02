@@ -899,7 +899,7 @@ if (View::exists(&#39;emails.customer&#39;)) {
 <p><a name="view-composers"></a></p>
 <h2 id="view-composers">View Composers</h2>
 <p>View composers are callbacks or class methods that are called when a view is rendered. If you have data that you want to be bound to a view each time that view is rendered, a view composer can help you organize that logic into a single location.</p>
-<p>For this example, let's register the view composers within a <a href="../docs/{{version}}/providers">service provider</a>. We'll use the <code>View</code> facade to access the underlying <code>Illuminate\Contracts\View\Factory</code> contract implementation. Remember, Laravel does not include a default directory for view composers. You are free to organize them however you wish. For example, you could create an <code>App\Http\ViewComposers</code> directory:</p>
+<p>For this example, let's register the view composers within a <a href="../docs/{{version}}/providers">service provider</a>. We'll use the <code>View</code> facade to access the underlying <code>Illuminate\Contracts\View\Factory</code> contract implementation. Remember, Laravel does not include a default directory for view composers. You are free to organize them however you wish. For example, you could create an <code>app/Http/ViewComposers</code> directory:</p>
 <div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 
 <span class="nx">namespace</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Providers</span><span class="p">;</span>

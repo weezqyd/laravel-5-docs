@@ -366,6 +366,12 @@
               </a>
             </li>
           
+            <li class="anchor">
+              <a title="Continuous Integration" href="#continuous-integration">
+                Continuous Integration
+              </a>
+            </li>
+          
         </ul>
       
     
@@ -858,6 +864,11 @@
 <li><a href="#page-methods">Page Methods</a></li>
 </ul>
 </li>
+<li><a href="#continuous-integration">Continuous Integration</a><ul>
+<li><a href="#running-tests-on-travis-ci">Travis CI</a></li>
+<li><a href="#running-tests-on-circle-ci">CircleCI</a></li>
+</ul>
+</li>
 </ul>
 <p><a name="introduction"></a></p>
 <h2 id="introduction">Introduction</h2>
@@ -869,7 +880,7 @@
 </pre></div>
 
 
-<p>Once Dusk is installed, you should register the <code>Laravel\Dusk\DuskServiceProvider</code> service provider. You should register the provider within the <code>register</code> method of your <code>AppServiceProvider</code> in order to limit the environments in which Dusk is available, since it exposes the ability to login as other users:</p>
+<p>Once Dusk is installed, you should register the <code>Laravel\Dusk\DuskServiceProvider</code> service provider. You should register the provider within the <code>register</code> method of your <code>AppServiceProvider</code> in order to limit the environments in which Dusk is available, since it exposes the ability to log in as other users:</p>
 <div class="codehilite"><pre><span></span><span class="nt">use</span> <span class="nt">Laravel</span><span class="err">\</span><span class="nt">Dusk</span><span class="err">\</span><span class="nt">DuskServiceProvider</span><span class="o">;</span>
 
 <span class="c">/**</span>
@@ -1173,6 +1184,14 @@ $browser-&gt;uncheck(&#39;terms&#39;);
 </pre></div>
 
 
+<p>Or, you may drag an element in a single direction:</p>
+<div class="codehilite"><pre><span></span>$browser-&gt;dragLeft(&#39;.selector&#39;, 10);
+$browser-&gt;dragRight(&#39;.selector&#39;, 10);
+$browser-&gt;dragUp(&#39;.selector&#39;, 10);
+$browser-&gt;dragDown(&#39;.selector&#39;, 10);
+</pre></div>
+
+
 <p><a name="scoping-selectors"></a></p>
 <h3 id="scoping-selectors">Scoping Selectors</h3>
 <p>Sometimes you may wish to perform several operations while scoping all of the operations within a given selector. For example, you may wish to assert that some text exists only within a table and then click a button within that table. You may use the <code>with</code> method to accomplish this. All operations performed within the callback given to the <code>with</code> method will be scoped to the original selector:</p>
@@ -1272,6 +1291,14 @@ $browser-&gt;waitUntil(&#39;App.data.servers.length &gt; 0&#39;, 1);
 <tr>
 <td><code>$browser-&gt;assertPathIs('/home')</code></td>
 <td>Assert the current path matches the given path.</td>
+</tr>
+<tr>
+<td><code>$browser-&gt;assertQueryStringHas($name, $value)</code></td>
+<td>Assert the given query string parameter is present and has a given value.</td>
+</tr>
+<tr>
+<td><code>$browser-&gt;assertQueryStringMissing($name)</code></td>
+<td>Assert the given query string parameter is missing.</td>
 </tr>
 <tr>
 <td><code>$browser-&gt;assertHasCookie($name)</code></td>
@@ -1489,6 +1516,42 @@ public<span class="w"> </span>static<span class="w"> </span>function<span class=
 $browser-&gt;visit(new Dashboard)
         -&gt;createPlaylist(&#39;My Playlist&#39;)
         -&gt;assertSee(&#39;My Playlist&#39;);
+</pre></div>
+
+
+<p><a name="continuous-integration"></a></p>
+<h2 id="continuous-integration">Continuous Integration</h2>
+<p><a name="running-tests-on-travis-ci"></a></p>
+<h3 id="travis-ci">Travis CI</h3>
+<p>To run your Dusk tests on Travis CI, we will need to use the "sudo-enabled" Ubuntu 14.04 (Trusty) environment. Since Travis CI is not a graphical environment, we will need to take some extra steps in order to launch a Chrome browser. In addition, we will use <code>php artisan serve</code> to launch PHP's built-in web server:</p>
+<div class="codehilite"><pre><span></span><span class="n">sudo</span><span class="o">:</span> <span class="n">required</span>
+<span class="n">dist</span><span class="o">:</span> <span class="n">trusty</span>
+
+<span class="n">before_script</span><span class="o">:</span>
+    <span class="o">-</span> <span class="n">export</span> <span class="n">DISPLAY</span><span class="o">=:</span><span class="mf">99.0</span>
+    <span class="o">-</span> <span class="n">sh</span> <span class="o">-</span><span class="n">e</span> <span class="sr">/etc/init.d/x</span><span class="n">vfb</span> <span class="n">start</span>
+    <span class="o">-</span> <span class="o">./</span><span class="n">vendor</span><span class="sr">/laravel/dusk/bin/</span><span class="n">chromedriver</span><span class="o">-</span><span class="n">linux</span> <span class="o">&amp;</span>
+    <span class="o">-</span> <span class="n">cp</span> <span class="o">.</span><span class="na">env</span><span class="o">.</span><span class="na">testing</span> <span class="o">.</span><span class="na">env</span>
+    <span class="o">-</span> <span class="n">php</span> <span class="n">artisan</span> <span class="n">serve</span> <span class="o">&amp;</span>
+
+<span class="n">script</span><span class="o">:</span>
+    <span class="o">-</span> <span class="n">php</span> <span class="n">artisan</span> <span class="n">dusk</span>
+</pre></div>
+
+
+<p><a name="running-tests-on-circle-ci"></a></p>
+<h3 id="circleci">CircleCI</h3>
+<p>If you are using CircleCI to run your Dusk tests, you may use this configuration file as a starting point. Like TravisCI, we will use the <code>php artisan serve</code> command to launch PHP's built-in web server:</p>
+<div class="codehilite"><pre><span></span><span class="n">test</span><span class="o">:</span>
+    <span class="n">pre</span><span class="o">:</span>
+        <span class="o">-</span> <span class="s2">&quot;./vendor/laravel/dusk/bin/chromedriver-linux&quot;</span><span class="o">:</span>
+            <span class="n">background</span><span class="o">:</span> <span class="kc">true</span>
+        <span class="o">-</span> <span class="n">cp</span> <span class="o">.</span><span class="na">env</span><span class="o">.</span><span class="na">testing</span> <span class="o">.</span><span class="na">env</span>
+        <span class="o">-</span> <span class="s2">&quot;php artisan serve&quot;</span><span class="o">:</span>
+            <span class="n">background</span><span class="o">:</span> <span class="kc">true</span>
+
+    <span class="kd">override</span><span class="o">:</span>
+        <span class="o">-</span> <span class="n">php</span> <span class="n">artisan</span> <span class="n">dusk</span>
 </pre></div>
           <aside class="copyright" role="note">
             

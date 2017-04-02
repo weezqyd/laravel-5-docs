@@ -1070,7 +1070,7 @@ public<span class="w"> </span>function<span class="w"> </span>toMail<span class=
  */
 public function toMail($notifiable)
 {
-    return new Mailable($this-&gt;invoice)-&gt;to($this-&gt;user-&gt;email);
+    return (new Mailable($this-&gt;invoice))-&gt;to($this-&gt;user-&gt;email);
 }
 </pre></div>
 
@@ -1621,7 +1621,7 @@ public<span class="w"> </span>function<span class="w"> </span>toSlack<span class
 <span class="w">                </span><span class="o">-&gt;</span>content<span class="o">(</span><span class="s">&#39;Whoops! Something went wrong.&#39;</span><span class="o">)</span><span class="w"></span>
 <span class="w">                </span><span class="o">-&gt;</span>attachment<span class="o">(</span>function<span class="w"> </span><span class="o">(</span><span class="err">$</span>attachment<span class="o">)</span><span class="w"> </span>use<span class="w"> </span><span class="o">(</span><span class="err">$</span>url<span class="o">)</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
 <span class="w">                    </span><span class="err">$</span>attachment<span class="o">-&gt;</span>title<span class="o">(</span><span class="s">&#39;Exception: File Not Found&#39;</span><span class="o">,</span><span class="w"> </span><span class="err">$</span>url<span class="o">)</span><span class="w"></span>
-<span class="w">                               </span><span class="o">-&gt;</span>content<span class="o">(</span><span class="s">&#39;File [background.jpg] was **not found**.&#39;</span><span class="o">)</span><span class="w"></span>
+<span class="w">                               </span><span class="o">-&gt;</span>content<span class="o">(</span><span class="s">&#39;File [background.jpg] was *not found*.&#39;</span><span class="o">)</span><span class="w"></span>
 <span class="w">                               </span><span class="o">-&gt;</span>markdown<span class="o">(</span><span class="err">[</span><span class="s">&#39;title&#39;</span><span class="o">,</span><span class="w"> </span><span class="s">&#39;text&#39;</span><span class="err">]</span><span class="o">)</span><span class="err">;</span><span class="w"></span>
 <span class="w">                </span><span class="err">}</span><span class="o">)</span><span class="err">;</span><span class="w"></span>
 <span class="err">}</span><span class="w"></span>

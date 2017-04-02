@@ -860,11 +860,13 @@
 <div id="collection-method-list" markdown="1">
 
 [all](#method-all)
+[average](#method-average)
 [avg](#method-avg)
 [chunk](#method-chunk)
 [collapse](#method-collapse)
 [combine](#method-combine)
 [contains](#method-contains)
+[containsStrict](#method-containsstrict)
 [count](#method-count)
 [diff](#method-diff)
 [diffKeys](#method-diffkeys)
@@ -884,14 +886,17 @@
 [implode](#method-implode)
 [intersect](#method-intersect)
 [isEmpty](#method-isempty)
+[isNotEmpty](#method-isnotempty)
 [keyBy](#method-keyby)
 [keys](#method-keys)
 [last](#method-last)
 [map](#method-map)
 [mapWithKeys](#method-mapwithkeys)
 [max](#method-max)
+[median](#method-median)
 [merge](#method-merge)
 [min](#method-min)
+[mode](#method-mode)
 [nth](#method-nth)
 [only](#method-only)
 [partition](#method-partition)
@@ -917,17 +922,21 @@
 [split](#method-split)
 [sum](#method-sum)
 [take](#method-take)
+[tap](#method-tap)
 [toArray](#method-toarray)
 [toJson](#method-tojson)
 [transform](#method-transform)
 [union](#method-union)
 [unique](#method-unique)
+[uniqueStrict](#method-uniquestrict)
 [values](#method-values)
 [when](#method-when)
 [where](#method-where)
 [whereStrict](#method-wherestrict)
 [whereIn](#method-wherein)
 [whereInStrict](#method-whereinstrict)
+[whereNotIn](#method-wherenotin)
+[whereNotInStrict](#method-wherenotinstrict)
 [zip](#method-zip)
 
 </div>
@@ -953,24 +962,19 @@
 </pre></div>
 
 
+<p><a name="method-average"></a></p>
+<h4 id="average-collection-method"><code>average()</code> {#collection-method}</h4>
+<p>Alias for the <a href="#method-avg"><code>avg</code></a> method.</p>
 <p><a name="method-avg"></a></p>
 <h4 id="avg-collection-method"><code>avg()</code> {#collection-method}</h4>
-<p>The <code>avg</code> method returns the average of all items in the collection:</p>
-<div class="codehilite"><pre><span></span>collect([1, 2, 3, 4, 5])-&gt;avg();
+<p>The <code>avg</code> method returns the <a href="https://en.wikipedia.org/wiki/Average">average value</a> of a given key:</p>
+<div class="codehilite"><pre><span></span>$average = collect([[&#39;foo&#39; =&gt; 10], [&#39;foo&#39; =&gt; 10], [&#39;foo&#39; =&gt; 20], [&#39;foo&#39; =&gt; 40]])-&gt;avg(&#39;foo&#39;);
 
-// 3
-</pre></div>
+// 20
 
+$average = collect([1, 1, 2, 4])-&gt;avg();
 
-<p>If the collection contains nested arrays or objects, you should pass a key to use for determining which values to calculate the average:</p>
-<div class="codehilite"><pre><span></span>$collection = collect([
-    [&#39;name&#39; =&gt; &#39;JavaScript: The Good Parts&#39;, &#39;pages&#39; =&gt; 176],
-    [&#39;name&#39; =&gt; &#39;JavaScript: The Definitive Guide&#39;, &#39;pages&#39; =&gt; 1096],
-]);
-
-$collection-&gt;avg(&#39;pages&#39;);
-
-// 636
+// 2
 </pre></div>
 
 
@@ -1062,6 +1066,10 @@ $collection-&gt;contains(function ($value, $key) {
 </pre></div>
 
 
+<p>The <code>contains</code> method uses "loose" comparisons when checking item values, meaning a string with an integer value will be considered equal to an integer of the same value. Use the <a href="#method-containsstrict"><code>containsStrict</code></a> method to filter using "strict" comparisons.</p>
+<p><a name="method-containsstrict"></a></p>
+<h4 id="containsstrict-collection-method"><code>containsStrict()</code> {#collection-method}</h4>
+<p>This method has the same signature as the <a href="#method-contains"><code>contains</code></a> method; however, all values are compared using "strict" comparisons.</p>
 <p><a name="method-count"></a></p>
 <h4 id="count-collection-method"><code>count()</code> {#collection-method}</h4>
 <p>The <code>count</code> method returns the total number of items in the collection:</p>
@@ -1425,6 +1433,15 @@ $intersect-&gt;all();
 </pre></div>
 
 
+<p><a name="method-isnotempty"></a></p>
+<h4 id="isnotempty-collection-method"><code>isNotEmpty()</code> {#collection-method}</h4>
+<p>The <code>isNotEmpty</code> method returns <code>true</code> if the collection is not empty; otherwise, <code>false</code> is returned:</p>
+<div class="codehilite"><pre><span></span>collect([])-&gt;isNotEmpty();
+
+// false
+</pre></div>
+
+
 <p><a name="method-keyby"></a></p>
 <h4 id="keyby-collection-method"><code>keyBy()</code> {#collection-method}</h4>
 <p>The <code>keyBy</code> method keys the collection by the given key. If multiple items have the same key, only the last one will appear in the new collection:</p>
@@ -1558,9 +1575,22 @@ $max = collect([1, 2, 3, 4, 5])-&gt;max();
 </pre></div>
 
 
+<p><a name="method-median"></a></p>
+<h4 id="median-collection-method"><code>median()</code> {#collection-method}</h4>
+<p>The <code>median</code> method returns the <a href="https://en.wikipedia.org/wiki/Median">median value</a> of a given key:</p>
+<div class="codehilite"><pre><span></span>$median = collect([[&#39;foo&#39; =&gt; 10], [&#39;foo&#39; =&gt; 10], [&#39;foo&#39; =&gt; 20], [&#39;foo&#39; =&gt; 40]])-&gt;median(&#39;foo&#39;);
+
+// 15
+
+$median = collect([1, 1, 2, 4])-&gt;median();
+
+// 1.5
+</pre></div>
+
+
 <p><a name="method-merge"></a></p>
 <h4 id="merge-collection-method"><code>merge()</code> {#collection-method}</h4>
-<p>The <code>merge</code> method merges the given array with the original collection. If a string key in the given array matches a string key in the original collection, the given array's value will overwrite the value in the original collection:</p>
+<p>The <code>merge</code> method merges the given array or collection with the original collection. If a string key in the given items matches a string key in the original collection, the given items's value will overwrite the value in the original collection:</p>
 <div class="codehilite"><pre><span></span>$collection = collect([&#39;product_id&#39; =&gt; 1, &#39;price&#39; =&gt; 100]);
 
 $merged = $collection-&gt;merge([&#39;price&#39; =&gt; 200, &#39;discount&#39; =&gt; false]);
@@ -1571,7 +1601,7 @@ $merged-&gt;all();
 </pre></div>
 
 
-<p>If the given array's keys are numeric, the values will be appended to the end of the collection:</p>
+<p>If the given items's keys are numeric, the values will be appended to the end of the collection:</p>
 <div class="codehilite"><pre><span></span>$collection = collect([&#39;Desk&#39;, &#39;Chair&#39;]);
 
 $merged = $collection-&gt;merge([&#39;Bookcase&#39;, &#39;Door&#39;]);
@@ -1592,6 +1622,19 @@ $merged-&gt;all();
 $min = collect([1, 2, 3, 4, 5])-&gt;min();
 
 // 1
+</pre></div>
+
+
+<p><a name="method-mode"></a></p>
+<h4 id="mode-collection-method"><code>mode()</code> {#collection-method}</h4>
+<p>The <code>mode</code> method returns the <a href="https://en.wikipedia.org/wiki/Mode_(statistics)">mode value</a> of a given key:</p>
+<div class="codehilite"><pre><span></span>$mode = collect([[&#39;foo&#39; =&gt; 10], [&#39;foo&#39; =&gt; 10], [&#39;foo&#39; =&gt; 20], [&#39;foo&#39; =&gt; 40]])-&gt;mode(&#39;foo&#39;);
+
+// [10]
+
+$mode = collect([1, 1, 2, 4])-&gt;mode();
+
+// [1]
 </pre></div>
 
 
@@ -1838,7 +1881,7 @@ $collection-&gt;search(4);
 </pre></div>
 
 
-<p>The search is done using a "loose" comparison, meaning a string with an integer value will be considered equal to an integer of the same value. To use strict comparison, pass <code>true</code> as the second argument to the method:</p>
+<p>The search is done using a "loose" comparison, meaning a string with an integer value will be considered equal to an integer of the same value. To use "strict" comparison, pass <code>true</code> as the second argument to the method:</p>
 <div class="codehilite"><pre><span></span>$collection-&gt;search(&#39;4&#39;, true);
 
 // false
@@ -1878,7 +1921,7 @@ $shuffled = $collection-&gt;shuffle();
 
 $shuffled-&gt;all();
 
-// [3, 2, 5, 1, 4] // (generated randomly)
+// [3, 2, 5, 1, 4] - (generated randomly)
 </pre></div>
 
 
@@ -1904,7 +1947,7 @@ $slice-&gt;all();
 </pre></div>
 
 
-<p>The returned slice will preserve keys by default. If you do not wish to preserve the original keys, you can use the <code>values</code> method to reindex them.</p>
+<p>The returned slice will preserve keys by default. If you do not wish to preserve the original keys, you can use the <a href="#method-values"><code>values</code></a> method to reindex them.</p>
 <p><a name="method-sort"></a></p>
 <h4 id="sort-collection-method"><code>sort()</code> {#collection-method}</h4>
 <p>The <code>sort</code> method sorts the collection. The sorted collection keeps the original array keys, so in this example we'll use the <a href="#method-values"><code>values</code></a> method to reset the keys to consecutively numbered indexes:</p>
@@ -2091,6 +2134,20 @@ $chunk-&gt;all();
 </pre></div>
 
 
+<p><a name="method-tap"></a></p>
+<h4 id="tap-collection-method"><code>tap()</code> {#collection-method}</h4>
+<p>The <code>tap</code> method passes the collection to the given callback, allowing you to "tap" into the collection at a specific point and do something with the items while not affecting the collection itself:</p>
+<div class="codehilite"><pre><span></span><span class="nt">collect</span><span class="o">(</span><span class="cp">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="cp">]</span><span class="o">)</span>
+    <span class="nt">-</span><span class="o">&gt;</span><span class="nt">sort</span><span class="o">()</span>
+    <span class="nt">-</span><span class="o">&gt;</span><span class="nt">tap</span><span class="o">(</span><span class="nt">function</span> <span class="o">($</span><span class="nt">collection</span><span class="o">)</span> <span class="p">{</span>
+        <span class="n">Log</span><span class="p">:</span><span class="o">:</span><span class="nf">debug</span><span class="p">(</span><span class="s1">&#39;Values after sorting&#39;</span><span class="p">,</span> <span class="err">$</span><span class="n">collection</span><span class="o">-</span><span class="err">&gt;</span><span class="nf">values</span><span class="p">()</span><span class="o">-</span><span class="err">&gt;</span><span class="nf">toArray</span><span class="p">());</span>
+    <span class="p">}</span><span class="o">)</span>
+    <span class="nt">-</span><span class="o">&gt;</span><span class="nt">shift</span><span class="o">();</span>
+
+<span class="o">//</span> <span class="nt">1</span>
+</pre></div>
+
+
 <p><a name="method-toarray"></a></p>
 <h4 id="toarray-collection-method"><code>toArray()</code> {#collection-method}</h4>
 <p>The <code>toArray</code> method converts the collection into a plain PHP <code>array</code>. If the collection's values are <a href="../docs/{{version}}/eloquent">Eloquent</a> models, the models will also be converted to arrays:</p>
@@ -2111,7 +2168,7 @@ $collection-&gt;toArray();
 </blockquote>
 <p><a name="method-tojson"></a></p>
 <h4 id="tojson-collection-method"><code>toJson()</code> {#collection-method}</h4>
-<p>The <code>toJson</code> method converts the collection into JSON:</p>
+<p>The <code>toJson</code> method converts the collection into a JSON serialized string:</p>
 <div class="codehilite"><pre><span></span>$collection = collect([&#39;name&#39; =&gt; &#39;Desk&#39;, &#39;price&#39; =&gt; 200]);
 
 $collection-&gt;toJson();
@@ -2204,6 +2261,10 @@ $unique-&gt;values()-&gt;all();
 </pre></div>
 
 
+<p>The <code>unique</code> method uses "loose" comparisons when checking item values, meaning a string with an integer value will be considered equal to an integer of the same value. Use the <a href="#method-uniquestrict"><code>uniqueStrict</code></a> method to filter using "strict" comparisons.</p>
+<p><a name="method-uniquestrict"></a></p>
+<h4 id="uniquestrict-collection-method"><code>uniqueStrict()</code> {#collection-method}</h4>
+<p>This method has the same signature as the <a href="#method-unique"><code>unique</code></a> method; however, all values are compared using "strict" comparisons.</p>
 <p><a name="method-values"></a></p>
 <h4 id="values-collection-method"><code>values()</code> {#collection-method}</h4>
 <p>The <code>values</code> method returns a new collection with the keys reset to consecutive integers:</p>
@@ -2255,21 +2316,21 @@ $filtered = $collection-&gt;where(&#39;price&#39;, 100);
 $filtered-&gt;all();
 
 /*
-[
-    [&#39;product&#39; =&gt; &#39;Chair&#39;, &#39;price&#39; =&gt; 100],
-    [&#39;product&#39; =&gt; &#39;Door&#39;, &#39;price&#39; =&gt; 100],
-]
+    [
+        [&#39;product&#39; =&gt; &#39;Chair&#39;, &#39;price&#39; =&gt; 100],
+        [&#39;product&#39; =&gt; &#39;Door&#39;, &#39;price&#39; =&gt; 100],
+    ]
 */
 </pre></div>
 
 
-<p>The <code>where</code> method uses loose comparisons when checking item values. Use the <a href="#method-wherestrict"><code>whereStrict</code></a> method to filter using "strict" comparisons.</p>
+<p>The <code>where</code> method uses "loose" comparisons when checking item values, meaning a string with an integer value will be considered equal to an integer of the same value. Use the <a href="#method-wherestrict"><code>whereStrict</code></a> method to filter using "strict" comparisons.</p>
 <p><a name="method-wherestrict"></a></p>
 <h4 id="wherestrict-collection-method"><code>whereStrict()</code> {#collection-method}</h4>
 <p>This method has the same signature as the <a href="#method-where"><code>where</code></a> method; however, all values are compared using "strict" comparisons.</p>
 <p><a name="method-wherein"></a></p>
 <h4 id="wherein-collection-method"><code>whereIn()</code> {#collection-method}</h4>
-<p>The <code>whereIn</code> method filters the collection by a given key / value contained within the given array.</p>
+<p>The <code>whereIn</code> method filters the collection by a given key / value contained within the given array:</p>
 <div class="codehilite"><pre><span></span>$collection = collect([
     [&#39;product&#39; =&gt; &#39;Desk&#39;, &#39;price&#39; =&gt; 200],
     [&#39;product&#39; =&gt; &#39;Chair&#39;, &#39;price&#39; =&gt; 100],
@@ -2282,18 +2343,45 @@ $filtered = $collection-&gt;whereIn(&#39;price&#39;, [150, 200]);
 $filtered-&gt;all();
 
 /*
-[
-    [&#39;product&#39; =&gt; &#39;Bookcase&#39;, &#39;price&#39; =&gt; 150],
-    [&#39;product&#39; =&gt; &#39;Desk&#39;, &#39;price&#39; =&gt; 200],
-]
+    [
+        [&#39;product&#39; =&gt; &#39;Bookcase&#39;, &#39;price&#39; =&gt; 150],
+        [&#39;product&#39; =&gt; &#39;Desk&#39;, &#39;price&#39; =&gt; 200],
+    ]
 */
 </pre></div>
 
 
-<p>The <code>whereIn</code> method uses "loose" comparisons when checking item values. Use the <a href="#method-whereinstrict"><code>whereInStrict</code></a> method to filter using strict comparisons.</p>
+<p>The <code>whereIn</code> method uses "loose" comparisons when checking item values, meaning a string with an integer value will be considered equal to an integer of the same value. Use the <a href="#method-whereinstrict"><code>whereInStrict</code></a> method to filter using "strict" comparisons.</p>
 <p><a name="method-whereinstrict"></a></p>
 <h4 id="whereinstrict-collection-method"><code>whereInStrict()</code> {#collection-method}</h4>
-<p>This method has the same signature as the <a href="#method-wherein"><code>whereIn</code></a> method; however, all values are compared using strict comparisons.</p>
+<p>This method has the same signature as the <a href="#method-wherein"><code>whereIn</code></a> method; however, all values are compared using "strict" comparisons.</p>
+<p><a name="method-wherenotin"></a></p>
+<h4 id="wherenotin-collection-method"><code>whereNotIn()</code> {#collection-method}</h4>
+<p>The <code>whereNotIn</code> method filters the collection by a given key / value not contained within the given array:</p>
+<div class="codehilite"><pre><span></span>$collection = collect([
+    [&#39;product&#39; =&gt; &#39;Desk&#39;, &#39;price&#39; =&gt; 200],
+    [&#39;product&#39; =&gt; &#39;Chair&#39;, &#39;price&#39; =&gt; 100],
+    [&#39;product&#39; =&gt; &#39;Bookcase&#39;, &#39;price&#39; =&gt; 150],
+    [&#39;product&#39; =&gt; &#39;Door&#39;, &#39;price&#39; =&gt; 100],
+]);
+
+$filtered = $collection-&gt;whereNotIn(&#39;price&#39;, [150, 200]);
+
+$filtered-&gt;all();
+
+/*
+    [
+        [&#39;product&#39; =&gt; &#39;Chair&#39;, &#39;price&#39; =&gt; 100],
+        [&#39;product&#39; =&gt; &#39;Door&#39;, &#39;price&#39; =&gt; 100],
+    ]
+*/
+</pre></div>
+
+
+<p>The <code>whereNotIn</code> method uses "loose" comparisons when checking item values, meaning a string with an integer value will be considered equal to an integer of the same value. Use the <a href="#method-wherenotinstrict"><code>whereNotInStrict</code></a> method to filter using "strict" comparisons.</p>
+<p><a name="method-wherenotinstrict"></a></p>
+<h4 id="wherenotinstrict-collection-method"><code>whereNotInStrict()</code> {#collection-method}</h4>
+<p>This method has the same signature as the <a href="#method-wherenotin"><code>whereNotIn</code></a> method; however, all values are compared using "strict" comparisons.</p>
 <p><a name="method-zip"></a></p>
 <h4 id="zip-collection-method"><code>zip()</code> {#collection-method}</h4>
 <p>The <code>zip</code> method merges together the values of the given array with the values of the original collection at the corresponding index:</p>

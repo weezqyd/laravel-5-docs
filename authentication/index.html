@@ -1224,7 +1224,7 @@ RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 
 <span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Support</span><span class="err">\</span><span class="nx">Facades</span><span class="err">\</span><span class="nx">Auth</span><span class="p">;</span>
 <span class="nx">use</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Extensions</span><span class="err">\</span><span class="nx">RiakUserProvider</span><span class="p">;</span>
-<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Support</span><span class="err">\</span><span class="nx">ServiceProvider</span><span class="p">;</span>
+<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Foundation</span><span class="err">\</span><span class="nx">Support</span><span class="err">\</span><span class="nx">Providers</span><span class="err">\</span><span class="nx">AuthServiceProvider</span> <span class="kr">as</span> <span class="nx">ServiceProvider</span><span class="p">;</span>
 
 <span class="kr">class</span> <span class="nx">AuthServiceProvider</span> <span class="kr">extends</span> <span class="nx">ServiceProvider</span>
 <span class="p">{</span>

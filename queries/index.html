@@ -1282,7 +1282,7 @@ where exists (
 
 <p><a name="json-where-clauses"></a></p>
 <h3 id="json-where-clauses">JSON Where Clauses</h3>
-<p>Laravel also supports querying JSON column types on databases that provide support for JSON column types. Currently, this includes MySQL 5.7 and Postgres. To query a JSON column, use the <code>-&gt;</code> operator:</p>
+<p>Laravel also supports querying JSON column types on databases that provide support for JSON column types. Currently, this includes MySQL 5.7, MariaDB 10.2.3, and Postgres. To query a JSON column, use the <code>-&gt;</code> operator:</p>
 <div class="codehilite"><pre><span></span>$users = DB::table(&#39;users&#39;)
                 -&gt;where(&#39;options-&gt;language&#39;, &#39;en&#39;)
                 -&gt;get();

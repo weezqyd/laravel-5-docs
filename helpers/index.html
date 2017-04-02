@@ -878,6 +878,7 @@
 [array_sort](#method-array-sort)
 [array_sort_recursive](#method-array-sort-recursive)
 [array_where](#method-array-where)
+[array_wrap](#method-array-wrap)
 [head](#method-head)
 [last](#method-last)
 </div>
@@ -903,6 +904,7 @@
 [class_basename](#method-class-basename)
 [e](#method-e)
 [ends_with](#method-ends-with)
+[kebab_case](#method-kebab-case)
 [snake_case](#method-snake-case)
 [str_limit](#method-str-limit)
 [starts_with](#method-starts-with)
@@ -1248,9 +1250,20 @@ $array = array_where($array, function ($value, $key) {
 </pre></div>
 
 
+<p><a name="method-array-wrap"></a></p>
+<h4 id="array_wrap-collection-method"><code>array_wrap()</code> {#collection-method}</h4>
+<p>The <code>array_wrap</code> function will wrap the given value in an array. If the given value is already an array it will not be changed:</p>
+<div class="codehilite"><pre><span></span>$string = &#39;Laravel&#39;;
+
+$array = array_wrap($string);
+
+// [0 =&gt; &#39;Laravel&#39;]
+</pre></div>
+
+
 <p><a name="method-head"></a></p>
 <h4 id="head-collection-method"><code>head()</code> {#collection-method}</h4>
-<p>The <code>head</code> function simply returns the first element in the given array:</p>
+<p>The <code>head</code> function returns the first element in the given array:</p>
 <div class="codehilite"><pre><span></span>$array = [100, 200, 300];
 
 $first = head($array);
@@ -1358,7 +1371,7 @@ $path = storage_path(&#39;app/file.txt&#39;);
 
 <p><a name="method-e"></a></p>
 <h4 id="e-collection-method"><code>e()</code> {#collection-method}</h4>
-<p>The <code>e</code> function runs <code>htmlspecialchars</code> over the given string:</p>
+<p>The <code>e</code> function runs PHP's <code>htmlspecialchars</code> function with the <code>double_encode</code> option set to <code>false</code>:</p>
 <div class="codehilite"><pre><span></span>echo e(&#39;<span class="nt">&lt;html&gt;</span>foo<span class="nt">&lt;/html&gt;</span>&#39;);
 
 // <span class="ni">&amp;lt;</span>html<span class="ni">&amp;gt;</span>foo<span class="ni">&amp;lt;</span>/html<span class="ni">&amp;gt;</span>
@@ -1371,6 +1384,15 @@ $path = storage_path(&#39;app/file.txt&#39;);
 <div class="codehilite"><pre><span></span>$value = ends_with(&#39;This is my name&#39;, &#39;name&#39;);
 
 // true
+</pre></div>
+
+
+<p><a name="method-kebab-case"></a></p>
+<h4 id="kebab_case-collection-method"><code>kebab_case()</code> {#collection-method}</h4>
+<p>The <code>kebab_case</code> function converts the given string to <code>kebab-case</code>:</p>
+<div class="codehilite"><pre><span></span>$value = kebab_case(&#39;fooBar&#39;);
+
+// foo-bar
 </pre></div>
 
 
