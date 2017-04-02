@@ -887,102 +887,106 @@
 <p>{tip} For greater code reuse, it is good practice to keep your console commands light and let them defer to application services to accomplish their tasks. In the example below, note that we inject a service class to do the "heavy lifting" of sending the e-mails.</p>
 </blockquote>
 <p>Let's take a look at an example command. Note that we are able to inject any dependencies we need into the command's constructor. The Laravel <a href="../docs/{{version}}/container">service container</a> will automatically inject all dependencies type-hinted in the constructor:</p>
-<div class="codehilite"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+<div class="codehilite"><pre><span></span><span class="x">    </span><span class="cp">&lt;?php</span>
 
-<span class="nx">namespace</span> <span class="nx">App</span><span class="err">\</span><span class="nx">Console</span><span class="err">\</span><span class="nx">Commands</span><span class="p">;</span>
+    <span class="k">namespace</span> <span class="nx">App\Console\Commands</span><span class="p">;</span>
 
-<span class="nx">use</span> <span class="nx">App</span><span class="err">\</span><span class="nx">User</span><span class="p">;</span>
-<span class="nx">use</span> <span class="nx">App</span><span class="err">\</span><span class="nx">DripEmailer</span><span class="p">;</span>
-<span class="nx">use</span> <span class="nx">Illuminate</span><span class="err">\</span><span class="nx">Console</span><span class="err">\</span><span class="nx">Command</span><span class="p">;</span>
+    <span class="k">use</span> <span class="nx">App\User</span><span class="p">;</span>
+    <span class="k">use</span> <span class="nx">App\DripEmailer</span><span class="p">;</span>
+    <span class="k">use</span> <span class="nx">Illuminate\Console\Command</span><span class="p">;</span>
 
-<span class="kr">class</span> <span class="nx">SendEmails</span> <span class="kr">extends</span> <span class="nx">Command</span>
-<span class="p">{</span>
-    <span class="cm">/**</span>
-<span class="cm">     * The name and signature of the console command.</span>
-<span class="cm">     *</span>
-<span class="cm">     * @var string</span>
-<span class="cm">     */</span>
-    <span class="kr">protected</span> <span class="nx">$signature</span> <span class="o">=</span> <span class="s1">&#39;email:send {user}&#39;</span><span class="p">;</span>
-
-    <span class="cm">/**</span>
-<span class="cm">     * The console command description.</span>
-<span class="cm">     *</span>
-<span class="cm">     * @var string</span>
-<span class="cm">     */</span>
-    <span class="kr">protected</span> <span class="nx">$description</span> <span class="o">=</span> <span class="s1">&#39;Send drip e-mails to a user&#39;</span><span class="p">;</span>
-
-    <span class="cm">/**</span>
-<span class="cm">     * The drip e-mail service.</span>
-<span class="cm">     *</span>
-<span class="cm">     * @var DripEmailer</span>
-<span class="cm">     */</span>
-    <span class="kr">protected</span> <span class="nx">$drip</span><span class="p">;</span>
-
-    <span class="cm">/**</span>
-<span class="cm">     * Create a new command instance.</span>
-<span class="cm">     *</span>
-<span class="cm">     * @param  DripEmailer  $drip</span>
-<span class="cm">     * @return void</span>
-<span class="cm">     */</span>
-    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">__construct</span><span class="p">(</span><span class="nx">DripEmailer</span> <span class="nx">$drip</span><span class="p">)</span>
+    <span class="k">class</span> <span class="nc">SendEmails</span> <span class="k">extends</span> <span class="nx">Command</span>
     <span class="p">{</span>
-        <span class="nx">parent</span><span class="o">::</span><span class="nx">__construct</span><span class="p">();</span>
+        <span class="sd">/**</span>
+<span class="sd">         * The name and signature of the console command.</span>
+<span class="sd">         *</span>
+<span class="sd">         * @var string</span>
+<span class="sd">         */</span>
+        <span class="k">protected</span> <span class="nv">$signature</span> <span class="o">=</span> <span class="s1">&#39;email:send {user}&#39;</span><span class="p">;</span>
 
-        <span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">drip</span> <span class="o">=</span> <span class="nx">$drip</span><span class="p">;</span>
-    <span class="p">}</span>
+        <span class="sd">/**</span>
+<span class="sd">         * The console command description.</span>
+<span class="sd">         *</span>
+<span class="sd">         * @var string</span>
+<span class="sd">         */</span>
+        <span class="k">protected</span> <span class="nv">$description</span> <span class="o">=</span> <span class="s1">&#39;Send drip e-mails to a user&#39;</span><span class="p">;</span>
 
-    <span class="cm">/**</span>
-<span class="cm">     * Execute the console command.</span>
-<span class="cm">     *</span>
-<span class="cm">     * @return mixed</span>
-<span class="cm">     */</span>
-    <span class="kr">public</span> <span class="kd">function</span> <span class="nx">handle</span><span class="p">()</span>
-    <span class="p">{</span>
-        <span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">drip</span><span class="o">-&gt;</span><span class="nx">send</span><span class="p">(</span><span class="nx">User</span><span class="o">::</span><span class="nx">find</span><span class="p">(</span><span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">argument</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">)));</span>
+        <span class="sd">/**</span>
+<span class="sd">         * The drip e-mail service.</span>
+<span class="sd">         *</span>
+<span class="sd">         * @var DripEmailer</span>
+<span class="sd">         */</span>
+        <span class="k">protected</span> <span class="nv">$drip</span><span class="p">;</span>
+
+        <span class="sd">/**</span>
+<span class="sd">         * Create a new command instance.</span>
+<span class="sd">         *</span>
+<span class="sd">         * @param  DripEmailer  $drip</span>
+<span class="sd">         * @return void</span>
+<span class="sd">         */</span>
+        <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nx">DripEmailer</span> <span class="nv">$drip</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">parent</span><span class="o">::</span><span class="na">__construct</span><span class="p">();</span>
+
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">drip</span> <span class="o">=</span> <span class="nv">$drip</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="sd">/**</span>
+<span class="sd">         * Execute the console command.</span>
+<span class="sd">         *</span>
+<span class="sd">         * @return mixed</span>
+<span class="sd">         */</span>
+        <span class="k">public</span> <span class="k">function</span> <span class="nf">handle</span><span class="p">()</span>
+        <span class="p">{</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">drip</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">(</span><span class="nx">User</span><span class="o">::</span><span class="na">find</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">argument</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">)));</span>
+        <span class="p">}</span>
     <span class="p">}</span>
-<span class="p">}</span>
 </pre></div>
 
 
 <p><a name="closure-commands"></a></p>
 <h3 id="closure-commands">Closure Commands</h3>
 <p>Closure based commands provide an alternative to defining console commands as classes. In the same way that route Closures are an alternative to controllers, think of command Closures as an alternative to command classes. Within the <code>commands</code> method of your <code>app/Console/Kernel.php</code> file, Laravel loads the <code>routes/console.php</code> file:</p>
-<div class="codehilite"><pre><span></span><span class="cm">/**</span>
-<span class="cm"> * Register the Closure based commands for the application.</span>
-<span class="cm"> *</span>
-<span class="cm"> * @return void</span>
-<span class="cm"> */</span><span class="w"></span>
-protected<span class="w"> </span>function<span class="w"> </span>commands<span class="o">()</span><span class="w"></span>
-<span class="err">{</span><span class="w"></span>
-<span class="w">    </span>require<span class="w"> </span>base_path<span class="o">(</span><span class="s">&#39;routes/console.php&#39;</span><span class="o">)</span><span class="err">;</span><span class="w"></span>
-<span class="err">}</span><span class="w"></span>
+<div class="codehilite"><pre><span></span><span class="x">    </span><span class="cp">&lt;?php</span>
+        <span class="sd">/**</span>
+<span class="sd">         * Register the Closure based commands for the application.</span>
+<span class="sd">         *</span>
+<span class="sd">         * @return void</span>
+<span class="sd">         */</span>
+        <span class="k">protected</span> <span class="k">function</span> <span class="nf">commands</span><span class="p">()</span>
+        <span class="p">{</span>
+            <span class="k">require</span> <span class="nx">base_path</span><span class="p">(</span><span class="s1">&#39;routes/console.php&#39;</span><span class="p">);</span>
+        <span class="p">}</span>
 </pre></div>
 
 
 <p>Even though this file does not define HTTP routes, it defines console based entry points (routes) into your application. Within this file, you may define all of your Closure based routes using the <code>Artisan::command</code> method. The <code>command</code> method accepts two arguments: the <a href="#defining-input-expectations">command signature</a> and a Closure which receives the commands arguments and options:</p>
-<div class="codehilite"><pre><span></span><span class="x">Artisan::command(&#39;build </span><span class="cp">{</span><span class="nf">project</span><span class="cp">}</span><span class="x">&#39;, function ($project) </span><span class="cp">{</span>
-    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">info</span><span class="o">(</span><span class="s2">&quot;Building {$project}!&quot;</span><span class="o">);</span>
-<span class="cp">}</span><span class="x">);</span>
+<div class="codehilite"><pre><span></span><span class="x">    </span><span class="cp">&lt;?php</span>
+        <span class="nx">Artisan</span><span class="o">::</span><span class="na">command</span><span class="p">(</span><span class="s1">&#39;build {project}&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$project</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">info</span><span class="p">(</span><span class="s2">&quot;Building </span><span class="si">{</span><span class="nv">$project</span><span class="si">}</span><span class="s2">!&quot;</span><span class="p">);</span>
+        <span class="p">});</span>
 </pre></div>
 
 
 <p>The Closure is bound to the underlying command instance, so you have full access to all of the helper methods you would typically be able to access on a full command class.</p>
 <h4 id="type-hinting-dependencies">Type-Hinting Dependencies</h4>
 <p>In addition to receiving your command's arguments and options, command Closures may also type-hint additional dependencies that you would like resolved out of the <a href="../docs/{{version}}/container">service container</a>:</p>
-<div class="codehilite"><pre><span></span><span class="nt">use</span> <span class="nt">App</span><span class="err">\</span><span class="nt">User</span><span class="o">;</span>
-<span class="nt">use</span> <span class="nt">App</span><span class="err">\</span><span class="nt">DripEmailer</span><span class="o">;</span>
+<div class="codehilite"><pre><span></span><span class="x">    </span><span class="cp">&lt;?php</span>
+        <span class="k">use</span> <span class="nx">App\User</span><span class="p">;</span>
+        <span class="k">use</span> <span class="nx">App\DripEmailer</span><span class="p">;</span>
 
-<span class="nt">Artisan</span><span class="p">::</span><span class="nd">command</span><span class="o">(</span><span class="s1">&#39;email:send {user}&#39;</span><span class="o">,</span> <span class="nt">function</span> <span class="o">(</span><span class="nt">DripEmailer</span> <span class="o">$</span><span class="nt">drip</span><span class="o">,</span> <span class="o">$</span><span class="nt">user</span><span class="o">)</span> <span class="p">{</span>
-    <span class="err">$drip-&gt;send(</span><span class="n">User</span><span class="p">:</span><span class="o">:</span><span class="nf">find</span><span class="p">(</span><span class="err">$</span><span class="n">user</span><span class="p">));</span>
-<span class="p">}</span><span class="o">);</span>
+        <span class="nx">Artisan</span><span class="o">::</span><span class="na">command</span><span class="p">(</span><span class="s1">&#39;email:send {user}&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">DripEmailer</span> <span class="nv">$drip</span><span class="p">,</span> <span class="nv">$user</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$drip</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">(</span><span class="nx">User</span><span class="o">::</span><span class="na">find</span><span class="p">(</span><span class="nv">$user</span><span class="p">));</span>
+        <span class="p">});</span>
 </pre></div>
 
 
 <h4 id="closure-command-descriptions">Closure Command Descriptions</h4>
 <p>When defining a Closure based command, you may use the <code>describe</code> method to add a description to the command. This description will be displayed when you run the <code>php artisan list</code> or <code>php artisan help</code> commands:</p>
-<div class="codehilite"><pre><span></span><span class="x">Artisan::command(&#39;build </span><span class="cp">{</span><span class="nf">project</span><span class="cp">}</span><span class="x">&#39;, function ($project) </span><span class="cp">{</span>
-    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">info</span><span class="o">(</span><span class="s2">&quot;Building {$project}!&quot;</span><span class="o">);</span>
-<span class="cp">}</span><span class="x">)-&gt;describe(&#39;Build the project&#39;);</span>
+<div class="codehilite"><pre><span></span><span class="x">    </span><span class="cp">&lt;?php</span>
+        <span class="nx">Artisan</span><span class="o">::</span><span class="na">command</span><span class="p">(</span><span class="s1">&#39;build {project}&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$project</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">info</span><span class="p">(</span><span class="s2">&quot;Building </span><span class="si">{</span><span class="nv">$project</span><span class="si">}</span><span class="s2">!&quot;</span><span class="p">);</span>
+        <span class="p">})</span><span class="o">-&gt;</span><span class="na">describe</span><span class="p">(</span><span class="s1">&#39;Build the project&#39;</span><span class="p">);</span>
 </pre></div>
 
 
@@ -992,12 +996,13 @@ protected<span class="w"> </span>function<span class="w"> </span>commands<span c
 <p><a name="arguments"></a></p>
 <h3 id="arguments">Arguments</h3>
 <p>All user supplied arguments and options are wrapped in curly braces. In the following example, the command defines one <strong>required</strong> argument: <code>user</code>:</p>
-<div class="codehilite"><pre><span></span><span class="c">/**</span>
-<span class="c"> * The name and signature of the console command.</span>
-<span class="c"> *</span>
-<span class="c"> * @var string</span>
-<span class="c"> */</span>
-<span class="nt">protected</span> <span class="o">$</span><span class="nt">signature</span> <span class="o">=</span> <span class="s1">&#39;email:send {user}&#39;</span><span class="o">;</span>
+<div class="codehilite"><pre><span></span><span class="x">    </span><span class="cp">&lt;?php</span>
+        <span class="sd">/**</span>
+<span class="sd">         * The name and signature of the console command.</span>
+<span class="sd">         *</span>
+<span class="sd">         * @var string</span>
+<span class="sd">         */</span>
+        <span class="k">protected</span> <span class="nv">$signature</span> <span class="o">=</span> <span class="s1">&#39;email:send {user}&#39;</span><span class="p">;</span>
 </pre></div>
 
 
@@ -1013,12 +1018,13 @@ email:send {user=foo}
 <p><a name="options"></a></p>
 <h3 id="options">Options</h3>
 <p>Options, like arguments, are another form of user input. Options are prefixed by two hyphens (<code>--</code>) when they are specified on the command line. There are two types of options: those that receive a value and those that don't. Options that don't receive a value serve as a boolean "switch". Let's take a look at an example of this type of option:</p>
-<div class="codehilite"><pre><span></span><span class="c">/**</span>
-<span class="c"> * The name and signature of the console command.</span>
-<span class="c"> *</span>
-<span class="c"> * @var string</span>
-<span class="c"> */</span>
-<span class="nt">protected</span> <span class="o">$</span><span class="nt">signature</span> <span class="o">=</span> <span class="s1">&#39;email:send {user} {--queue}&#39;</span><span class="o">;</span>
+<div class="codehilite"><pre><span></span><span class="x">    </span><span class="cp">&lt;?php</span>
+        <span class="sd">/**</span>
+<span class="sd">         * The name and signature of the console command.</span>
+<span class="sd">         *</span>
+<span class="sd">         * @var string</span>
+<span class="sd">         */</span>
+        <span class="k">protected</span> <span class="nv">$signature</span> <span class="o">=</span> <span class="s1">&#39;email:send {user} {--queue}&#39;</span><span class="p">;</span>
 </pre></div>
 
 
@@ -1030,12 +1036,13 @@ email:send {user=foo}
 <p><a name="options-with-values"></a></p>
 <h4 id="options-with-values">Options With Values</h4>
 <p>Next, let's take a look at an option that expects a value. If the user must specify a value for an option, suffix the option name with a <code>=</code> sign:</p>
-<div class="codehilite"><pre><span></span><span class="c">/**</span>
-<span class="c"> * The name and signature of the console command.</span>
-<span class="c"> *</span>
-<span class="c"> * @var string</span>
-<span class="c"> */</span>
-<span class="nt">protected</span> <span class="o">$</span><span class="nt">signature</span> <span class="o">=</span> <span class="s1">&#39;email:send {user} {--queue=}&#39;</span><span class="o">;</span>
+<div class="codehilite"><pre><span></span><span class="x">    </span><span class="cp">&lt;?php</span>
+        <span class="sd">/**</span>
+<span class="sd">         * The name and signature of the console command.</span>
+<span class="sd">         *</span>
+<span class="sd">         * @var string</span>
+<span class="sd">         */</span>
+        <span class="k">protected</span> <span class="nv">$signature</span> <span class="o">=</span> <span class="s1">&#39;email:send {user} {--queue=}&#39;</span><span class="p">;</span>
 </pre></div>
 
 
